@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="generic.css" />
+    <title>Creating filters</title>
+  </head>
+  <body>
+    <h1>Creating filters</h1>
+    <p>To set up a new filter, create an XML document using the schema &#x2018;filter.xsd&#x2019;.</p>
+    <p>Filters consist of a title, optional lists of excluded and inherited filters, and a list of elements. Each element specifies a particular tag and, optionally, a map of attribute keys and values.</p>
+    <p>Here is a sample filter definition:</p>
+    <pre>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;filter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="filter.xsd"&gt;
+  &lt;title&gt;WordprocessingML&lt;/title&gt;
+  &lt;element&gt;urn:schemas-microsoft-com:office:office:DocumentProperties&lt;/element&gt;
+  &lt;element&gt;urn:schemas-microsoft-com:office:office:CustomDocumentProperties&lt;/element&gt;
+  &lt;element&gt;http://schemas.microsoft.com/office/word/2003/wordml:binData&lt;/element&gt;
+  &lt;element&gt;http://schemas.microsoft.com/office/word/2003/wordml:delText&lt;/element&gt;
+  &lt;element&gt;http://schemas.microsoft.com/office/word/2003/wordml:docPr&lt;/element&gt;
+  &lt;element&gt;http://schemas.microsoft.com/office/word/2003/wordml:fldData&lt;/element&gt;
+  &lt;element&gt;http://schemas.microsoft.com/office/word/2003/wordml:fonts&lt;/element&gt;
+  &lt;element&gt;http://schemas.microsoft.com/office/word/2003/wordml:instrText&lt;/element&gt;
+  &lt;element&gt;http://schemas.microsoft.com/office/word/2003/wordml:lists&lt;/element&gt;
+  &lt;element&gt;http://schemas.microsoft.com/office/word/2003/wordml:shapeDefaults&lt;/element&gt;
+  &lt;element&gt;http://schemas.microsoft.com/office/word/2003/wordml:styles&lt;/element&gt;
+&lt;/filter&gt;</pre>
+    <p>Filter processing is namespace aware (hence the long element names).</p>
+  </body>
+</html>

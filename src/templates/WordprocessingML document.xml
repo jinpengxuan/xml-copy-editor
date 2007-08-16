@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?mso-application progid="Word.Document"?>
+<w:wordDocument
+  xmlns:w="http://schemas.microsoft.com/office/word/2003/wordml"
+  xmlns:v="urn:schemas-microsoft-com:vml"
+  xmlns:w10="urn:schemas-microsoft-com:office:word"
+  xmlns:sl="http://schemas.microsoft.com/schemaLibrary/2003/core"
+  xmlns:aml="http://schemas.microsoft.com/aml/2001/core"
+  xmlns:wx="http://schemas.microsoft.com/office/word/2003/auxHint"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://schemas.microsoft.com/office/word/2003/wordml http://rep.oio.dk/microsoft.com/officeschemas/xsds/WordprocessingML_Schemas/wordnet.xsd">
+  <w:body>
+    <w:p>
+      <w:r>
+        <w:t></w:t>
+      </w:r>
+    </w:p>
+  </w:body>
+</w:wordDocument>

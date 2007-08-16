@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ruleset.xsd">
+  <title>Punctuation</title>
+  <rule>
+    <report>1–2</report>
+    <regex>
+      <find>\b(\d+)(?:-|—)(\d+)\b</find>
+      <replace tentative="true">\1–\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>13–14</report>
+    <regex>
+      <find>\b(\d*)(1)(\d)–(\d)\b</find>
+      <replace>\1\2\3–\2\4</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>leave space after comma, semicolon and colon</report>
+    <regex>
+      <find>([,;:])([a-z]+)</find>
+      <replace>\1 \2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>one space only after punctuation marks</report>
+    <regex>
+      <find>([\.;:]) {2,}(\w+)</find>
+      <replace>\1 \2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>no space before comma, semicolon and colon</report>
+    <regex>
+      <find> ([,;:])</find>
+      <replace>\1</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>use en-rule between spaces</report>
+    <regex>
+      <find> (?:-|—) </find>
+      <replace> – </replace>
+    </regex>
+  </rule>
+</ruleset>
+

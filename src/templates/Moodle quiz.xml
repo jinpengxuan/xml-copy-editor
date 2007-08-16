@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE quiz PUBLIC "-//Moodle XML//DTD" "moodle_xml.dtd">
+<quiz>
+  <question type="multichoice">
+    <name>
+      <text>Name</text>
+    </name>
+    <questiontext format="html">
+      <text>Question</text>
+    </questiontext>
+    <image/>
+    <generalfeedback>
+      <text/>
+    </generalfeedback>
+    <defaultgrade>1</defaultgrade>
+    <penalty>0.1</penalty>
+    <hidden>0</hidden>
+    <shuffleanswers>1</shuffleanswers>
+    <single>true</single>
+    <shuffleanswers>true</shuffleanswers>
+    <correctfeedback>
+      <text/>
+    </correctfeedback>
+    <partiallycorrectfeedback>
+      <text/>
+    </partiallycorrectfeedback>
+    <incorrectfeedback>
+      <text/>
+    </incorrectfeedback>
+    <answer fraction="0">
+      <text>Option A</text>
+      <feedback>
+        <text>
+          </text>
+      </feedback>
+    </answer>
+    <answer fraction="0">
+      <text>Option B</text>
+      <feedback>
+        <text>
+          </text>
+      </feedback>
+    </answer>
+    <answer fraction="0">
+      <text>Option C</text>
+      <feedback>
+        <text>
+          </text>
+      </feedback>
+    </answer>
+    <answer fraction="100">
+      <text>Option D</text>
+      <feedback>
+        <text>
+          </text>
+      </feedback>
+    </answer>
+  </question>
+</quiz>

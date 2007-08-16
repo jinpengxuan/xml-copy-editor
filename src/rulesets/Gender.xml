@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ruleset.xsd">
+  <title>Gender</title>
+  <rule>
+    <report>author, mayor, manager, poet</report>
+    <regex>
+      <find>\b((?:auth|may)or|manager|poet)ess\b</find>
+      <replace tentative="true">\1</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>actor, sculptor</report>
+    <regex>
+      <find>\b(act|sculpt)ress\b</find>
+      <replace adjustcase="true" tentative="true">\1or</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>flight attendant (not stewardess)</report>
+    <regex>
+      <find>\bstewardesse?(s?)\b</find>
+      <replace adjustcase="true" tentative="true">flight attendant\1</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>phrases to avoid</report>
+    <regex>
+      <find>\b(?:best man for the job|man in the street|man to man|no man's land|one[- ]man show|every man for himself)\b</find>
+      <replace tentative="true">---</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>chair (not chairman), firefighter (not fireman), etc.</report>
+    <regex>
+      <find>\b(?:air(?:|craft)|anchor|bar|boat|business|chair|congress|council|door|dust|Dutch|English|French|fire|fresh|lay|mail|middle|militia|milk|news(?:|paper)|police|post|press|spokes|Ulster|weather)m[ae]n\b</find>
+      <replace tentative="true">---</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>fair play (not sportsmanship), skill (not craftsmanship), etc.</report>
+    <regex>
+      <find>\b(?:brink|crafts|draughts|horse|pen|sea|show|sports|works)manship\b</find>
+      <replace tentative="true">---</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>fair (not sportsmanlike)</report>
+    <regex>
+      <find>\b(?:|un)sportsmanlike\b</find>
+      <replace tentative="true">---</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>humankind</report>
+    <regex>
+      <find>\b(mankind)\b</find>
+      <replace adjustcase="true" tentative="true">hu\1</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>artificial (not man-made)</report>
+    <regex>
+      <find>\bman-made\b</find>
+      <replace adjustcase="true" tentative="true">artificial</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>working hours (not manhours), etc.</report>
+    <regex>
+      <find>\bman(?:hours|hunt|power)\b</find>
+      <replace tentative="true">---</replace>
+    </regex>
+  </rule>
+</ruleset>
+
+

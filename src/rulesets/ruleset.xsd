@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+<!-- ruleset -->
+  <xs:element name="ruleset">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="title" type="xs:string"/>
+        <xs:element name="copyright" type="xs:string" minOccurs="0"/>
+        <xs:element name="exclude" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element name="include" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element ref="rule" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+<!-- rule -->
+  <xs:element name="rule">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="report" type="xs:string"/>
+        <xs:choice>
+          <xs:element ref="regex"/>
+          <xs:element ref="dictionary"/>
+        </xs:choice>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+<!-- regex -->
+  <xs:element name="regex">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="find"/>
+        <xs:element ref="replace"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+<!-- find -->
+  <xs:element name="find">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute name="matchcase" type="xs:boolean" use="optional" default="false"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+<!-- replace -->
+  <xs:element name="replace">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute name="adjustcase" type="xs:boolean" use="optional" default="false"/>
+          <xs:attribute name="tentative" type="xs:boolean" use="optional" default="false"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+<!-- dictionary -->
+  <xs:element name="dictionary">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="term" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+<!-- term -->
+  <xs:element name="term">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute name="passive" type="xs:boolean" use="optional" default="false"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
+

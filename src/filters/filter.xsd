@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+<!-- filter -->
+  <xs:element name="filter">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="title" type="xs:string"/>
+        <xs:element name="copyright" type="xs:string" minOccurs="0"/>
+        <xs:element name="exclude" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element name="include" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element ref="element" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+<!-- element -->
+  <xs:element name="element">
+    <xs:complexType mixed="true">
+      <xs:sequence>
+        <xs:element ref="attribute" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+<!-- attribute -->
+  <xs:element name="attribute">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="key" type="xs:string"/>
+        <xs:element name="value" type="xs:string" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
+

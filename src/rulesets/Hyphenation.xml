@@ -1,0 +1,455 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ruleset.xsd">
+  <title>Hyphenation</title>
+  <rule>
+    <report>a carefully phrased statement</report>
+    <regex>
+      <find>\b([a-z]+)(?&lt;![^a-z]al|assemb|bel|bul|fol|hol|ita|jel|ju|monopo|[^a-z]ral|sici|tel)(ly)-([a-z]+e[dn]|done|made)\b</find>
+      <replace>\1\2 \3</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>address bar</report>
+    <regex>
+      <find>\b(address)-?(bars?)\b</find>
+      <replace>\1 \2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>avant-garde</report>
+    <regex>
+      <find>\b(avant) ?(garde)\b</find>
+      <replace>\1-\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>by-law</report>
+    <regex>
+      <find>\b(by)(law)\b</find>
+      <replace>\1-\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>cooperation, coordination</report>
+    <regex>
+      <find>\b(co)[- ](o(?:perat(?:e|ion)|rdination))\b</find>
+      <replace>\1\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>postmodern</report>
+    <regex>
+      <find>\b(post)[- ](modern(?:|ism|isms|ist|ists))\b</find>
+      <replace>\1\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>precursor</report>
+    <regex>
+      <find>\b(pre)[- ](cursors?)\b</find>
+      <replace>\1\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>by-product</report>
+    <regex>
+      <find>\b(by)(product)\b</find>
+      <replace>\1-\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>case study</report>
+    <regex>
+      <find>\b(case)-?(stud(?:y|ies))\b</find>
+      <replace>\1 \2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>CD-ROM</report>
+    <regex>
+      <find>\bcd ?rom(s?)\b</find>
+      <replace>CD-ROM\1</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>coexist</report>
+    <regex>
+      <find>\b(co)[- ](exist(?:|ed|ence|ing))\b</find>
+      <replace>\1\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>cooperate, coordinate</report>
+    <regex>
+      <find>\b(co)[- ]((?:operat|ordinat)(?:ed|er|es|e|ing))\b</find>
+      <replace>\1\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>counterculture, counterproductive</report>
+    <regex>
+      <find>\b(counter)-(productive|cultur(?:al(?:|ly)|e))\b</find>
+      <replace>\1\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>cross-reference</report>
+    <regex>
+      <find>\b(cross) ?(referenc(?:e|ed|es|ing))\b</find>
+      <replace>\1-\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>data bank</report>
+    <regex>
+      <find>\b(data)-?(banks?)\b</find>
+      <replace>\1 \2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>database</report>
+    <regex>
+      <find>\b(data)[- ](bases?)\b</find>
+      <replace>\1\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>day school</report>
+    <regex>
+      <find>\b(day)-?(schools?)\b</find>
+      <replace>\1 \2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>double-click</report>
+    <regex>
+      <find>\b(double) ?(click(?:|ed?|ing|s))\b</find>
+      <replace>\1-\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>DVD-ROM</report>
+    <regex>
+      <find>\bdvd ?rom(s?)\b</find>
+      <replace>DVD-ROM\1</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>home page, web page</report>
+    <regex>
+      <find>\b(home|web)-?(pages?)\b</find>
+      <replace>\1 \2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>hypertext</report>
+    <regex>
+      <find>\b(hyper)[- ](text)\b</find>
+      <replace>\1\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>interdisciplinary, multidisciplinary</report>
+    <regex>
+      <find>\b(inter|multi)[- ]((?:disciplinar)y)\b</find>
+      <replace>\1\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>internet, intranet</report>
+    <regex>
+      <find>\b(int(?:er|ra))-(net)\b</find>
+      <replace>\1\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>lifetime</report>
+    <regex>
+      <find>\b(life)-(times?)\b</find>
+      <replace>\1\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>menu bar, navigation bar</report>
+    <regex>
+      <find>\b(menu|navigation)-?(bar)\b</find>
+      <replace>\1 \2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>micro-organism</report>
+    <regex>
+      <find>\b(micro) ?(organisms?)\b</find>
+      <replace>\1-\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>midday, midway</report>
+    <regex>
+      <find>\b(mid)[- ]((?:d|w)ay)\b</find>
+      <replace>\1\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>misinform</report>
+    <regex>
+      <find>\b(mis)[- ](inform(?:|e(?:d|r)|ing|s))\b</find>
+      <replace>\1\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>misspelling</report>
+    <regex>
+      <find>\b(mis)[- ](spel(?:led|ling|t))\b</find>
+      <replace>\1\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>multicultural</report>
+    <regex>
+      <find>\b(multi)[- ](cultural(?:|ism))\b</find>
+      <replace>\1\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>multi-ethnic</report>
+    <regex>
+      <find>\b(multi) ?(ethnic)\b</find>
+      <replace>\1-\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>nevertheless</report>
+    <regex>
+      <find>\b(never)[- ](the)[- ](less)\b</find>
+      <replace>\1\2\3</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>no one</report>
+    <regex>
+      <find>\b(no)-?(one)\b</find>
+      <replace>\1 \2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>nobody</report>
+    <regex>
+      <find>\b(no)-(body)\b</find>
+      <replace>\1\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>none the less</report>
+    <regex>
+      <find>\b(none)-?(the)-?(less)\b</find>
+      <replace>\1 \2 \3</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>notebook</report>
+    <regex>
+      <find>\b(note)-(books?)\b</find>
+      <replace>\1\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>offline, online</report>
+    <regex>
+      <find>\b(off|on)-(line)\b</find>
+      <replace>\1\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>offprint</report>
+    <regex>
+      <find>\b(off)-(prints?)\b</find>
+      <replace>\1\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>overestimate</report>
+    <regex>
+      <find>\b(over)-(estimat(?:e|ed|ing))\b</find>
+      <replace>\1\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>postwar, prewar</report>
+    <regex>
+      <find>\b(post|pre)[- ](war)\b</find>
+      <replace>\1\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>pre-date</report>
+    <regex>
+      <find>\b(pre) ?(date)\b</find>
+      <replace>\1-\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>pre-eminent, pre-empt</report>
+    <regex>
+      <find>\b(pre) ?(em(?:inent|pt(?:|ed|ing|s|ive)))\b</find>
+      <replace>\1-\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>prerequisite</report>
+    <regex>
+      <find>\b(pre)-(requisites?)\b</find>
+      <replace>\1\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>reappraise</report>
+    <regex>
+      <find>\b(re)-(apprais(?:al|als|e|ed|ed|ing))\b</find>
+      <replace>\1\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>rearrange</report>
+    <regex>
+      <find>\b(re)-(arrang(?:e|ed|ements?|ing))\b</find>
+      <replace>\1\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>re-enact</report>
+    <regex>
+      <find>\b(re) ?(enact(?:|ed|ing|ment))\b</find>
+      <replace>\1-\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>re-examine</report>
+    <regex>
+      <find>\b(re) ?(examin(?:e|ed|ing))\b</find>
+      <replace>\1-\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>reread, rework</report>
+    <regex>
+      <find>\b(re)-((?:read|work)(?:|ed|ing|s))\b</find>
+      <replace>\1\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>retell</report>
+    <regex>
+      <find>\b(re)-(t(?:ell(?:|ing|s)|old))\b</find>
+      <replace>\1\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>reuse</report>
+    <regex>
+      <find>\b(re)-(us(?:able|ed?|ing))\b</find>
+      <replace>\1\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>sociocultural</report>
+    <regex>
+      <find>\b(socio)[- ](cultural(?:|ly))\b</find>
+      <replace>\1\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>socio-economic</report>
+    <regex>
+      <find>\b(socio) ?(economic)\b</find>
+      <replace>\1-\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>subculture</report>
+    <regex>
+      <find>\b(sub)[- ](cultur(?:al|e|es))\b</find>
+      <replace>\1\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>subsection, subtitle</report>
+    <regex>
+      <find>\b(sub)-((?:section|title)s?)\b</find>
+      <replace>\1\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>taskbar, toolbar</report>
+    <regex>
+      <find>\b(?:task|tool)[- ]bars?\b</find>
+      <replace adjustcase="true"/>
+    </regex>
+  </rule>
+  <rule>
+    <report>textbook</report>
+    <regex>
+      <find>\b(text)-(books?)\b</find>
+      <replace>\1\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>timetable</report>
+    <regex>
+      <find>\b(time)-(tabl(?:es?|ed|ing))\b</find>
+      <replace>\1\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>today</report>
+    <regex>
+      <find>\b(?&lt;!day-)(to)-(day)\b</find>
+      <replace>\1\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>turning point</report>
+    <regex>
+      <find>\b(turning)-?(points?)\b</find>
+      <replace>\1 \2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>vice versa</report>
+    <regex>
+      <find>\b(vice)-?(versa)\b</find>
+      <replace>\1 \2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>website</report>
+    <regex>
+      <find>\b(web)[- ](sites?)\b</find>
+      <replace>\1\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>workload, workplace</report>
+    <regex>
+      <find>\b(work)-((?:load|place)s?)\b</find>
+      <replace>\1\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>world view</report>
+    <regex>
+      <find>\b(world)-?(views?)\b</find>
+      <replace>\1 \2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>worldwide</report>
+    <regex>
+      <find>\b(world)-(wide)\b</find>
+      <replace>\1\2</replace>
+    </regex>
+  </rule>
+</ruleset>
+
+
+

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ruleset.xsd">
+  <title>Query</title>
+  <rule>
+    <report>unresolved</report>
+    <regex>
+      <find>\?\?+</find>
+      <replace tentative="true">---</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>word containing question mark</report>
+    <regex>
+      <find>(\w+)?\?\w+</find>
+      <replace tentative="true">---</replace>
+    </regex>
+  </rule>
+</ruleset>
+
+

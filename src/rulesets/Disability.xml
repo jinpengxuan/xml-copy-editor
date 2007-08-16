@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ruleset.xsd">
+  <title>Disability</title>
+  <rule>
+    <report>words to avoid</report>
+    <regex>
+      <find>\b(?:crippl(?:e[ds]?|ing)feeble[- ]?minded|handicapped|idiots?|luna(?:cy|tics?)|mad(?:|wo)m[ae]n)\b</find>
+      <replace tentative="true">---</replace>
+    </regex>
+  </rule>
+</ruleset>
+
+

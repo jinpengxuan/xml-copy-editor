@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<filter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="filter.xsd">
+  <title>OpenDocument</title>
+  <element>http://openoffice.org/2000/office:document-styles</element>
+  <element>http://openoffice.org/2000/office:drawing</element>
+  <element>http://openoffice.org/2000/office:image</element>
+  <element>http://openoffice.org/2000/office:meta</element>
+  <element>http://openoffice.org/2000/office:script</element>
+  <element>http://openoffice.org/2000/office:settings</element>
+  <element>http://openoffice.org/2000/style:style</element>
+</filter>

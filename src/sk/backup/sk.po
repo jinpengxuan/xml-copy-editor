@@ -1,0 +1,1702 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: XML Copy Editor\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2007-01-13 11:42+0000\n"
+"PO-Revision-Date: 2007-01-13 19:52+0100\n"
+"Last-Translator: Viliam Búr <viliam@bur.sk>\n"
+"Language-Team: Viliam Búr <viliam@bur.sk>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Slovak\n"
+"X-Poedit-Country: SLOVAKIA\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"Plural-Forms: nplurals=3; plural= (n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
+
+#: xmlcopyeditorcopy.h:2
+msgid "All files (*.*)|*.*|XML (*.xml)|*.xml|XHTML (*.html)|*.html|DTD (*.dtd)|*.dtd|XML Schema (*.xsd)|*.xsd|RELAX NG grammar (*.rng)|*.rng|XSL (*.xsl)|*.xsl"
+msgstr "Všetky súbory (*.*)|*.*|XML (*.xml)|*.xml|XHTML (*.html)|*.html|DTD (*.dtd)|*.dtd|XML Schema (*.xsd)|*.xsd|gramatika RELAX NG (*.rng)|*.rng|XSL (*.xsl)|*.xsl"
+
+#: xmlcopyeditorcopy.h:3
+msgid "Copyright © 2005-2007 Gerald Schmidt <gnschmidt@users.sourceforge.net>"
+msgstr "Copyright © 2005-2007 Gerald Schmidt <gnschmidt@users.sourceforge.net>"
+
+#: xmlcopyeditorcopy.h:4
+msgid ""
+"\n"
+"XML Copy Editor is free software released under the GNU\n"
+"General Public License.\n"
+"\n"
+"Many thanks are due to Tim van Niekerk, Matt Smigielski,\n"
+"David Scholl, Jan Merka, Marcus Bingenheimer, Roberto\n"
+"Rosselli Del Turco, Ken Zalewski, C.J. Meidlinger,\n"
+"Thomas Zajic and Viliam Búr."
+msgstr ""
+"\n"
+"XML Copy Editor je slobodný softvér uverejnený pod\n"
+"Všeobecnou verejnou licenciou GNU.\n"
+"\n"
+"Veľa vďaky patrí: Tim van Niekerk, Matt Smigielski,\n"
+"David Scholl, Jan Merka, Marcus Bingenheimer, Roberto\n"
+"Rosselli Del Turco, Ken Zalewski, C.J. Meidlinger,\n"
+"Thomas Zajic a Viliam Búr."
+
+#: aboutdialog.cpp:29
+msgid "OK"
+msgstr "OK"
+
+#: associatedialog.cpp:55
+#: mypropertysheet.cpp:125
+#: mypropertysheet.cpp:141
+msgid "Browse"
+msgstr "Nalistuj"
+
+#: associatedialog.cpp:103
+msgid "Provides a space for you to type the path of the file"
+msgstr "Poskytne miesto, kam môžete napísať cestu k súboru"
+
+#: associatedialog.cpp:107
+msgid "Opens a standard file dialog"
+msgstr "Otvorí štandardný súborový dialóg"
+
+#: associatedialog.cpp:111
+msgid "Provides a space for you to type additional information"
+msgstr "Poskytne miesto, kam môžete napísať ďalšie informácie"
+
+#: associatedialog.cpp:115
+msgid "Closes this dialog without making any changes"
+msgstr "Zavrie tento dialóg, žiadne zmeny sa nevykonajú"
+
+#: associatedialog.cpp:119
+msgid "Selects the file specified"
+msgstr "Vyberie zadaný súbor"
+
+#: associatedialog.cpp:141
+msgid "|All files (*.*)|*.*"
+msgstr "|Všetky súbory (*.*)|*.*"
+
+#: associatedialog.cpp:144
+msgid "Select "
+msgstr "Označ "
+
+#: findreplacepanel.cpp:15
+msgid "Find:"
+msgstr "Nájdi:"
+
+#: findreplacepanel.cpp:26
+msgid "Replace with:"
+msgstr "Nahraď:"
+
+#: findreplacepanel.cpp:39
+msgid "Find Next"
+msgstr "Nájdi ďalšie"
+
+#: globalreplacedialog.cpp:30
+#: globalreplacedialog.cpp:111
+msgid "Global Find and Replace"
+msgstr "Globálne nájdenie a nahradenie"
+
+#: globalreplacedialog.cpp:36
+msgid "&Find what: "
+msgstr "&Nájdi čo: "
+
+#: globalreplacedialog.cpp:38
+msgid "Replace with: "
+msgstr "Nahraď: "
+
+#: globalreplacedialog.cpp:54
+msgid "&Regular expressions"
+msgstr "&Pravidlové výrazy"
+
+#: globalreplacedialog.cpp:58
+msgid "&Match case"
+msgstr "Rozlišuj &veľké a malé"
+
+#: globalreplacedialog.cpp:62
+msgid "R&eplace in all open documents"
+msgstr "N&ahraď vo všetkých otvorených dokumentoch"
+
+#: globalreplacedialog.cpp:107
+msgid "Cannot compile regular expression '"
+msgstr "Neviem skompilovať pravidlový výraz '"
+
+#: globalreplacedialog.cpp:126
+msgid "Provides a space for you to type the text you want to find"
+msgstr "Poskytne miesto, kam môžete napísať text, ktorý chcete nájsť"
+
+#: globalreplacedialog.cpp:130
+msgid "Provides a space for you to type the text you want to replace the text you typed in Find what"
+msgstr "Poskytne miesto, kam môžete napísať text, ktorým chcete nahradiť nájdený text"
+
+#: globalreplacedialog.cpp:134
+msgid "Finds only text with lowercase and uppercase letters as specified in Find what"
+msgstr "Nájde iba text, kde aj veľké a malé písmená zodpovedajú hľadanému textu"
+
+#: globalreplacedialog.cpp:138
+msgid "Extends the scope to all open documents"
+msgstr "Rozšíri rozsah hľadania na všetky otvorené dokumenty"
+
+#: globalreplacedialog.cpp:142
+msgid "Interprets the text specified in Find what as a regular expression"
+msgstr "Interpretuje text zadaný na hľadanie ako pravidlový výraz (regular expression)"
+
+#: globalreplacedialog.cpp:146
+msgid "Finds all instances of the text specified in Find what and replaces them with the text in Replace with"
+msgstr "Nájde všetky výskyty hľadaného textu a nahradí ich textom zadaným na nahradenie"
+
+#: globalreplacedialog.cpp:150
+msgid "Closes the dialog box without saving any changes you have made"
+msgstr "Zavrie dialógové okno, a neuloží žiadne zmeny, ktoré ste urobili"
+
+#: mynotebook.cpp:70
+#: xmlcopyeditor.cpp:4735
+msgid "Close"
+msgstr "Zavri"
+
+#: mynotebook.cpp:71
+msgid "Close all"
+msgstr "Zavri všetky"
+
+#: mypropertysheet.cpp:53
+msgid "&Tag completion"
+msgstr "&Uzavretie značiek"
+
+#: mypropertysheet.cpp:56
+msgid "&Folding"
+msgstr "&Zabalenie"
+
+#: mypropertysheet.cpp:59
+msgid "&Highlight current line"
+msgstr "Vy&svieť aktuálny riadok"
+
+#: mypropertysheet.cpp:62
+msgid "&Indentation guides"
+msgstr "Čiary na &odsadenie"
+
+#: mypropertysheet.cpp:65
+msgid "&Always insert closing tag"
+msgstr "Vždy vkladaj &koncovú značku"
+
+#: mypropertysheet.cpp:69
+msgid "&Line numbers"
+msgstr "Čísla &riadkov"
+
+#: mypropertysheet.cpp:72
+msgid "L&ock hidden tags"
+msgstr "&Zamkni skryté značky"
+
+#: mypropertysheet.cpp:75
+msgid "&Proportional font"
+msgstr "&Proporcionálne písmo"
+
+#: mypropertysheet.cpp:78
+msgid "&Validate as you type"
+msgstr "&Validuj počas písania"
+
+#: mypropertysheet.cpp:81
+msgid "Va&riable highlight in tag free view"
+msgstr "&Premenlivé podfarbenie v zobrazení bez značiek"
+
+#: mypropertysheet.cpp:84
+msgid "&Wrap lines"
+msgstr "&Zalamuj riadky"
+
+#: mypropertysheet.cpp:115
+msgid "Application directory"
+msgstr "Adresár aplikácie"
+
+#: mypropertysheet.cpp:131
+#: xmlcopyeditor.cpp:4472
+#: xmlcopyeditor.cpp:4839
+#: xmlcopyeditor.cpp:4843
+msgid "Browser"
+msgstr "Prezerač"
+
+#: mypropertysheet.cpp:148
+msgid "Language (restart required)"
+msgstr "Jazyk (vyžaduje reštart)"
+
+#: mypropertysheet.cpp:175
+msgid "&Enable network access for DTD validation"
+msgstr "&Umožni prístup na sieť kvôli validácii DTD"
+
+#: mypropertysheet.cpp:178
+msgid "E&xpand internal entities on open"
+msgstr "E&xpanduj vnútorné entity pri otvorení"
+
+#: mypropertysheet.cpp:181
+msgid "&One application instance only"
+msgstr "Iba &jedna inštancia aplikácie"
+
+#: mypropertysheet.cpp:184
+msgid "Re&member layout on close"
+msgstr "Za&pamätaj rozloženie pri zatvorení"
+
+#: mypropertysheet.cpp:187
+msgid "&Remember open tabs on close"
+msgstr "&Zapamätaj otvorené záložky pri zatvorení"
+
+#: mypropertysheet.cpp:190
+msgid "Re&tain undo history on save"
+msgstr "&Udržiavaj históriu editovania aj po uložení"
+
+#: mypropertysheet.cpp:194
+msgid "&Save UTF-8 byte order mark"
+msgstr "Ulož značku poradia &bytov v UTF-8"
+
+#: mypropertysheet.cpp:198
+msgid "S&how full path on frame"
+msgstr "Ukáž v ráme celú cestu"
+
+#: mypropertysheet.cpp:203
+msgid "&Use Microsoft rebar control (restart required)"
+msgstr "Použi ovládač rebar od &Microsoftu (treba reštartovať)"
+
+#: mypropertysheet.cpp:237
+msgid "General"
+msgstr "Všeobecné"
+
+#: mypropertysheet.cpp:238
+msgid "Editor"
+msgstr "Editor"
+
+#: mypropertysheet.cpp:263
+msgid "Cannot access application directory"
+msgstr "Neviem otvoriť adresár aplikácie"
+
+#: mypropertysheet.cpp:263
+#: xmlcopyeditor.cpp:2152
+msgid "Options"
+msgstr "Možnosti"
+
+#: styledialog.cpp:42
+#: xmlcopyeditor.cpp:4846
+#: xmlcopyeditor.cpp:4850
+msgid "Spelling and Style"
+msgstr "Pravopis a štýl"
+
+#: styledialog.cpp:78
+msgid "&Report"
+msgstr "&Správa"
+
+#: styledialog.cpp:96
+msgid "No."
+msgstr "Č."
+
+#: styledialog.cpp:97
+#: styledialog.cpp:99
+msgid "Context"
+msgstr "Kontext"
+
+#: styledialog.cpp:98
+msgid "Match"
+msgstr "Nájdené"
+
+#: styledialog.cpp:100
+msgid "Suggestion"
+msgstr "Odporúčané"
+
+#: styledialog.cpp:101
+msgid "Rule"
+msgstr "Pravidlo"
+
+#: styledialog.cpp:102
+msgid "Action"
+msgstr "Akcia"
+
+#: styledialog.cpp:110
+#: xmlcopyeditor.cpp:4705
+msgid "&Edit"
+msgstr "&Edituj"
+
+#: styledialog.cpp:118
+msgid "&Web report"
+msgstr "Správa na &web"
+
+#: styledialog.cpp:126
+msgid "We&b summary"
+msgstr "&Zhrnutie na web"
+
+#: styledialog.cpp:134
+msgid "&Change all"
+msgstr "Zmeň &všetko"
+
+#: styledialog.cpp:142
+msgid "&Ignore all"
+msgstr "&Ignoruj všetko"
+
+#: styledialog.cpp:150
+msgid "C&ancel"
+msgstr "&Storno"
+
+#: styledialog.cpp:198
+msgid "(No rule sets found)"
+msgstr "(Nenašli sa množiny pravidiel)"
+
+#: styledialog.cpp:204
+#: xmlcopyeditor.cpp:565
+msgid "(No filter)"
+msgstr "(Bez filtra)"
+
+#: styledialog.cpp:227
+msgid "(No filters found)"
+msgstr "(Nenašli sa filtre)"
+
+#: styledialog.cpp:271
+#: styledialog.cpp:301
+#: styledialog.cpp:585
+#: styledialog.cpp:590
+msgid "Ignore"
+msgstr "Ignoruj"
+
+#: styledialog.cpp:285
+msgid "Ignore once"
+msgstr "Ignoruj raz"
+
+#: styledialog.cpp:287
+msgid "Ignore all"
+msgstr "Ignoruj všetko"
+
+#: styledialog.cpp:289
+msgid "Change once"
+msgstr "Zmeň raz"
+
+#: styledialog.cpp:290
+msgid "Change all"
+msgstr "Zmeň všetko"
+
+#: styledialog.cpp:293
+msgid "New suggestion..."
+msgstr "Nové odporúčanie..."
+
+#: styledialog.cpp:316
+#: styledialog.cpp:349
+msgid "Creating report..."
+msgstr "Vytváram správu..."
+
+#: styledialog.cpp:354
+msgid "Cannot create report: "
+msgstr "Neviem vytvoriť správu: "
+
+#: styledialog.cpp:391
+#, c-format
+msgid "%i match"
+msgid_plural "%i matches"
+msgstr[0] "%i nájdených"
+msgstr[1] "%i nájdené"
+msgstr[2] "%i nájdené"
+
+#: styledialog.cpp:414
+msgid "No items selected"
+msgstr "Nie je nič označené"
+
+#: styledialog.cpp:590
+#: styledialog.cpp:618
+msgid "Change"
+msgstr "Zmeň"
+
+#: styledialog.cpp:743
+msgid "Enter new suggestion:"
+msgstr "Zadajte nové odporúčanie:"
+
+#: styledialog.cpp:744
+msgid "New Suggestion"
+msgstr "Nové odporúčanie"
+
+#: wxFlatNotebook.cpp:1539
+#, c-format
+msgid "Old Page Index = %i"
+msgstr "Index starej stránky = %i"
+
+#: wxFlatNotebook.cpp:1544
+#, c-format
+msgid "OnDropTarget: index by HitTest = %i"
+msgstr ""
+
+#: xmlcopyeditor.cpp:288
+#: xmlcopyeditor.cpp:1092
+#: xmlcopyeditor.cpp:1181
+#: xmlcopyeditor.cpp:1349
+#: xmlcopyeditor.cpp:1371
+msgid "XML Copy Editor"
+msgstr "XML Copy Editor"
+
+#: xmlcopyeditor.cpp:304
+#: xmlcopyeditor.cpp:368
+msgid "(unknown error)"
+msgstr "(neznáma chyba)"
+
+#: xmlcopyeditor.cpp:306
+msgid "XML Copy Editor has encountered the following error and needs to close: "
+msgstr "XML Copy Editor narazil na nasledujúcu chybu a potrebuje zavrieť: "
+
+#: xmlcopyeditor.cpp:313
+#: xmlcopyeditor.cpp:316
+#: xmlcopyeditor.cpp:333
+#: xmlcopyeditor.cpp:338
+#: xmlcopyeditor.cpp:377
+#: xmlcopyeditor.cpp:397
+#: xmlcopyeditor.cpp:409
+#: xmlcopyeditor.cpp:415
+#: xmlcopyeditor.cpp:444
+msgid "Error"
+msgstr "Chyba"
+
+#: xmlcopyeditor.cpp:332
+#: xmlcopyeditor.cpp:337
+msgid "XML Copy Editor has encountered an error and needs to close."
+msgstr "XML Copy Editor narazil na chybu a potrebuje zavrieť."
+
+#: xmlcopyeditor.cpp:354
+#: xmlcopyeditor.cpp:433
+msgid "The operating system has turned down a request for additional memory"
+msgstr "Operačný systém zamietol požiadavku na pridelenie ďalšej pamäte"
+
+#: xmlcopyeditor.cpp:355
+#: xmlcopyeditor.cpp:434
+#: xmlcopyeditor.cpp:2702
+msgid "Out of memory"
+msgstr "Málo pamäte"
+
+#: xmlcopyeditor.cpp:370
+msgid "The following error has occurred: "
+msgstr "Stala sa nasledujúca chyba: "
+
+#: xmlcopyeditor.cpp:372
+msgid ""
+".\n"
+"\n"
+"Select \"Abort\" to exit, \"Retry\" to close this window and \"Ignore\" to continue."
+msgstr ""
+".\n"
+"\n"
+"Zvoľte \"Abort\" na ukončenie, \"Retry\" na zavretie tohoto okna, a \"Ignore\" na pokračovanie."
+
+#: xmlcopyeditor.cpp:404
+msgid "XML Copy Editor has encountered an error and needs to close"
+msgstr "XML Copy Editor narazil na chybu a potrebuje zavrieť"
+
+#: xmlcopyeditor.cpp:563
+#: xmlcopyeditor.cpp:615
+msgid "Default dictionary and style"
+msgstr "Štandardný slovník a štýl"
+
+#: xmlcopyeditor.cpp:616
+msgid "No filter"
+msgstr "Bez filtra"
+
+#: xmlcopyeditor.cpp:721
+#: xmlcopyeditor.cpp:729
+msgid "Current Element"
+msgstr "Aktuálny prvok"
+
+#: xmlcopyeditor.cpp:722
+#: xmlcopyeditor.cpp:728
+msgid "Insert Element"
+msgstr "Vlož prvok"
+
+#: xmlcopyeditor.cpp:723
+#: xmlcopyeditor.cpp:727
+msgid "Insert Sibling"
+msgstr "Vlož súrodenca"
+
+#: xmlcopyeditor.cpp:724
+#: xmlcopyeditor.cpp:726
+msgid "Insert Entity"
+msgstr "Vlož entitu"
+
+#: xmlcopyeditor.cpp:769
+msgid "Replace"
+msgstr "Nahraď"
+
+#: xmlcopyeditor.cpp:774
+#: xmlcopyeditor.cpp:1813
+msgid "Find"
+msgstr "Nájdi"
+
+#: xmlcopyeditor.cpp:781
+msgid "Cannot open application directory: see Tools, Options..., General"
+msgstr "Neviem otvoriť adresár aplikácie: viď Nástroje, Možnosti..., Všeobecné"
+
+#: xmlcopyeditor.cpp:998
+msgid "Unknown command line switch (expecting 'w' or 's')"
+msgstr "Neznámy parameter príkazového riadku (očakávam 'w' alebo 's')"
+
+#: xmlcopyeditor.cpp:1007
+msgid "Command line processing incomplete: no file specified"
+msgstr "Neúplné spracovanie príkazového riadku: nie je zadaný súbor"
+
+#: xmlcopyeditor.cpp:1096
+msgid "Gerald Schmidt (development) <gnschmidt@users.sourceforge.net>"
+msgstr "Gerald Schmidt (vývoj) <gnschmidt@users.sourceforge.net>"
+
+#: xmlcopyeditor.cpp:1097
+msgid "Matt Smigielski (testing) <alectrus@users.sourceforge.net>"
+msgstr "Matt Smigielski (testovanie) <alectrus@users.sourceforge.net>"
+
+#: xmlcopyeditor.cpp:1098
+msgid "Viliam Búr (Slovak) <viliam@bur.sk>"
+msgstr "Viliam Búr (Slovenčina) <viliam@bur.sk>"
+
+#: xmlcopyeditor.cpp:1128
+msgid "Parse in progress..."
+msgstr "Prebieha parsovanie..."
+
+#: xmlcopyeditor.cpp:1149
+msgid "well-formed"
+msgstr "dobre-formovaný"
+
+#: xmlcopyeditor.cpp:1180
+msgid "Do you want to save the changes to "
+msgstr "Chcete uložiť zmeny v "
+
+#: xmlcopyeditor.cpp:1301
+#: xmlcopyeditor.cpp:1303
+msgid "Attributes hidden"
+msgstr "Skryté atribúty"
+
+#: xmlcopyeditor.cpp:1308
+#: xmlcopyeditor.cpp:1310
+msgid "Tags hidden"
+msgstr "Skryté značky"
+
+#: xmlcopyeditor.cpp:1323
+#: xmlcopyeditor.cpp:1325
+msgid "Tags locked"
+msgstr "Zamknuté značky"
+
+#: xmlcopyeditor.cpp:1385
+#: xmlcopyeditor.cpp:1387
+msgid "Modified"
+msgstr "Zmenené"
+
+#: xmlcopyeditor.cpp:1420
+#, c-format
+msgid "Ln %i Col %i"
+msgstr "Ria %i Stĺ %i"
+
+#: xmlcopyeditor.cpp:1608
+msgid "Cannot open clipboard"
+msgstr "Neviem otvoriť schránku"
+
+#: xmlcopyeditor.cpp:1613
+msgid "Cannot paste as new document: no text on clipboard"
+msgstr "Neviem vložiť ako nový dokument: v schránke nie je text"
+
+#: xmlcopyeditor.cpp:1673
+#: xmlcopyeditor.cpp:2356
+#, c-format
+msgid "%i replacement made"
+msgid_plural "%i replacements made"
+msgstr[0] "%i bolo nahradených"
+msgstr[1] "%i bolo nahradené"
+msgstr[2] "%i boli nahradené"
+
+#: xmlcopyeditor.cpp:1708
+msgid "Preparing Print Preview..."
+msgstr "Pripravujem ukážku tlače..."
+
+#: xmlcopyeditor.cpp:1729
+msgid "Preparing to print..."
+msgstr "Pripravujem tlač..."
+
+#: xmlcopyeditor.cpp:1820
+#: xmlcopyeditor.cpp:1851
+#: xmlcopyeditor.cpp:1945
+msgid "This functionality requires Microsoft Windows"
+msgstr "Táto funkcionalita vyžaduje Microsoft Windows"
+
+#: xmlcopyeditor.cpp:1826
+msgid "Import Microsoft Word Document"
+msgstr "Importujem dokument programu Microsoft Word"
+
+#: xmlcopyeditor.cpp:1860
+#, c-format
+msgid "Cannot open %s for import"
+msgstr "Neviem otvoriť %s na import"
+
+#: xmlcopyeditor.cpp:1870
+msgid "Import in progress..."
+msgstr "Prebieha import..."
+
+#: xmlcopyeditor.cpp:1878
+msgid "(lossless conversion requires version 2003 or later)"
+msgstr "(bezstratová konverzia vyžaduje verziu 2003 alebo novšiu)"
+
+#: xmlcopyeditor.cpp:1885
+#: xmlcopyeditor.cpp:2002
+msgid "Cannot start Microsoft Word"
+msgstr "Neviem spustiť Microsoft Word"
+
+#: xmlcopyeditor.cpp:1889
+#: xmlcopyeditor.cpp:2006
+msgid "A more recent version of Microsoft Word is required"
+msgstr "Potrebujem novšiu verziu programu Microsoft Word"
+
+#: xmlcopyeditor.cpp:1896
+#, c-format
+msgid "Microsoft Word cannot save %s as XML"
+msgstr "Microsoft Word nemôže uložiť %s ako XML"
+
+#: xmlcopyeditor.cpp:1901
+msgid "Microsoft Word cannot save this document as WordprocessingML "
+msgstr "Microsoft Word nemôže uložiť tento dokument ako WordprocessingML "
+
+#: xmlcopyeditor.cpp:1909
+msgid "Opening imported file..."
+msgstr "Otváram importovaný súbor..."
+
+#: xmlcopyeditor.cpp:1926
+msgid "Cannot open imported file"
+msgstr "Neviem otvoriť importovaný súbor"
+
+#: xmlcopyeditor.cpp:1978
+msgid "Export Microsoft Word Document"
+msgstr "Exportujem dokument programu Microsoft Word"
+
+#: xmlcopyeditor.cpp:1995
+msgid "Export in progress..."
+msgstr "Prebieha export..."
+
+#: xmlcopyeditor.cpp:2009
+#, c-format
+msgid "Microsoft Word cannot save %s"
+msgstr "Microsoft Word nevie uložiť %s"
+
+#: xmlcopyeditor.cpp:2037
+msgid "Cannot save temporary file"
+msgstr "Neviem uložiť dočasný súbor"
+
+#: xmlcopyeditor.cpp:2053
+msgid "Cannot read temporary file"
+msgstr "Neviem načítať dočasný súbor"
+
+#: xmlcopyeditor.cpp:2215
+msgid "Enter line number:"
+msgstr "Zadajte číslo riadku:"
+
+#: xmlcopyeditor.cpp:2216
+msgid "Go To"
+msgstr "Choď na"
+
+#: xmlcopyeditor.cpp:2225
+#, c-format
+msgid "'%s' is not a valid line number"
+msgstr "'%s' nie je platné číslo riadku"
+
+#: xmlcopyeditor.cpp:2268
+msgid "Find and Replace"
+msgstr "Nájdi a nahraď"
+
+#: xmlcopyeditor.cpp:2346
+msgid "Cannot replace: "
+msgstr "Neviem nahradiť: "
+
+#: xmlcopyeditor.cpp:2383
+msgid "XML document (*.xml)"
+msgstr "Dokument XML (*.xml)"
+
+#: xmlcopyeditor.cpp:2422
+msgid "Choose a document type:"
+msgstr "Vyberte si typ dokumentu:"
+
+#: xmlcopyeditor.cpp:2422
+msgid "New Document"
+msgstr "Nový dokument"
+
+#: xmlcopyeditor.cpp:2459
+#, c-format
+msgid "Document%i"
+msgstr "Document%i"
+
+#: xmlcopyeditor.cpp:2517
+msgid "Open Large Document"
+msgstr "Otvor veľký dokument"
+
+#: xmlcopyeditor.cpp:2517
+#: xmlcopyeditor.cpp:4820
+#: xmlcopyeditor.cpp:4822
+msgid "Open"
+msgstr "Otvor"
+
+#: xmlcopyeditor.cpp:2543
+#: xmlcopyeditor.cpp:2575
+#: xmlcopyeditor.cpp:2763
+#, c-format
+msgid "Cannot open %s"
+msgstr "Neviem otvoriť %s"
+
+#: xmlcopyeditor.cpp:2551
+#: xmlcopyeditor.cpp:3047
+#, c-format
+msgid "%s is already open"
+msgstr "%s je už otvorený"
+
+#: xmlcopyeditor.cpp:2669
+#, c-format
+msgid "Using local encoding because %s is neither valid UTF-8 nor well-formed XML: %s"
+msgstr "Používam miestne nastavenie, pretože %s nie je platné UTF-8 ani dobre formované XML: %s"
+
+#: xmlcopyeditor.cpp:2701
+msgid "Do you want to open "
+msgstr "Chcete otvoriť "
+
+#: xmlcopyeditor.cpp:2701
+msgid " in large document mode?"
+msgstr " v režime veľkého dokumentu?"
+
+#: xmlcopyeditor.cpp:2907
+msgid "Opening spelling and style check in read-only mode: "
+msgstr "Otváram kontrolu pravopisu a štýlu v režime iba na čítanie: "
+
+#: xmlcopyeditor.cpp:2937
+msgid "Edited document empty"
+msgstr "Editovaný dokument je prázdny"
+
+#: xmlcopyeditor.cpp:3032
+msgid "Save As"
+msgstr "Ulož ako"
+
+#: xmlcopyeditor.cpp:3243
+#: xmlcopyeditor.cpp:3339
+#: xmlcopyeditor.cpp:3429
+msgid "Cannot save temporary copy for validation; please save or discard changes"
+msgstr "Neviem uložiť dočasnú kópiu na validáciu; prosím uložte alebo zrušte zmeny"
+
+#: xmlcopyeditor.cpp:3253
+msgid "DTD validation in progress..."
+msgstr "Prebieha validácia DTD..."
+
+#: xmlcopyeditor.cpp:3277
+#: xmlcopyeditor.cpp:3372
+#: xmlcopyeditor.cpp:3462
+#: xmlcopyeditor.cpp:3498
+msgid "valid"
+msgstr "validný"
+
+#: xmlcopyeditor.cpp:3299
+msgid "Select RELAX NG grammar"
+msgstr "Vyberte si gramatiku RELAX NG"
+
+#: xmlcopyeditor.cpp:3300
+#: xmlcopyeditor.cpp:3658
+#: xmlcopyeditor.cpp:5155
+msgid "Choose a file:"
+msgstr "Vyberte si súbor:"
+
+#: xmlcopyeditor.cpp:3301
+msgid "RELAX NG grammar"
+msgstr "Gramatika RELAX NG"
+
+#: xmlcopyeditor.cpp:3347
+msgid "RELAX NG validation in progress..."
+msgstr "Prebieha validácia RELAX NG..."
+
+#: xmlcopyeditor.cpp:3455
+msgid "Validation in progress..."
+msgstr "Prebieha validácia..."
+
+#: xmlcopyeditor.cpp:3465
+msgid "MSXML validation failed (version 4.0 or later required)"
+msgstr "Zlyhala validácia MSXML (potrebujem verziu 4.0 alebo vyššie)"
+
+#: xmlcopyeditor.cpp:3475
+msgid "Validation error"
+msgstr "Chyba validácie"
+
+#: xmlcopyeditor.cpp:3544
+msgid "Enter XPath:"
+msgstr "Zadajte XPath:"
+
+#: xmlcopyeditor.cpp:3545
+msgid "Evaluate XPath"
+msgstr "Vyhodnoť XPath"
+
+#: xmlcopyeditor.cpp:3581
+msgid "Cannot evaluate XPath"
+msgstr "Neviem vyhodnotiť XPath"
+
+#: xmlcopyeditor.cpp:3592
+msgid "No matching nodes found"
+msgstr "Nenašiel sa zodpovedajúci uzol"
+
+#: xmlcopyeditor.cpp:3644
+#, c-format
+msgid "Cannot open stylesheet %s"
+msgstr "Neviem otvoriť stylesheet %s"
+
+#: xmlcopyeditor.cpp:3657
+msgid "Select stylesheet"
+msgstr "Vyberte stylesheet"
+
+#: xmlcopyeditor.cpp:3659
+#: xmlcopyeditor.cpp:5128
+msgid "XSL stylesheet"
+msgstr "Stylesheet XSL"
+
+#: xmlcopyeditor.cpp:3723
+msgid "XSL transformation in progress..."
+msgstr "Prebieha transformácia XSL..."
+
+#: xmlcopyeditor.cpp:3732
+msgid "Cannot transform: "
+msgstr "Neviem transformovať: "
+
+#: xmlcopyeditor.cpp:3740
+msgid "Output document empty"
+msgstr "Výstupný dokument je prázdny"
+
+#: xmlcopyeditor.cpp:3767
+msgid "Pretty-printing in progress..."
+msgstr "Prebieha pekná tlač..."
+
+#: xmlcopyeditor.cpp:3786
+msgid "Cannot pretty-print: "
+msgstr "Neviem pekne vytlačiť: "
+
+#: xmlcopyeditor.cpp:3799
+msgid "Pretty-print unsuccessful: output document empty"
+msgstr "Nepodarila sa pekná tlač: výstupný dokument je prázdny"
+
+#: xmlcopyeditor.cpp:3834
+msgid "Choose an encoding:"
+msgstr "Vyberte si kódovanie:"
+
+#: xmlcopyeditor.cpp:3834
+msgid "Encoding"
+msgstr "Kódovanie"
+
+#: xmlcopyeditor.cpp:3857
+msgid "Cannot set encoding: "
+msgstr "Neviem nastaviť kódovanie: "
+
+#: xmlcopyeditor.cpp:3866
+msgid "Cannot set encoding (cannot open temporary file)"
+msgstr "Neviem nastaviť kódovanie (neviem otvoriť dočasný súbor)"
+
+#: xmlcopyeditor.cpp:3877
+msgid "Cannot set encoding (cannot parse temporary file)"
+msgstr "Neviem nastaviť kódovanie (neviem parsovať dočasný súbor)"
+
+#: xmlcopyeditor.cpp:4023
+msgid "Cannot open in browser: no browser defined (see Tools, Options..., General)"
+msgstr "Neviem otvoriť v prezerači: nie je definovaný prezerač (viď Nástroje, Možnosti..., Všeobecné)"
+
+#: xmlcopyeditor.cpp:4031
+#, c-format
+msgid "Cannot open in browser: %s not found (see Tools, Options..., General)"
+msgstr "Neviem otvoriť prezerač: nenašiel som %s (viď Nástroje, Možnosti..., Všeobecné)"
+
+#: xmlcopyeditor.cpp:4077
+#, c-format
+msgid "Cannot find '%s'"
+msgstr "Neviem nájsť '%s'"
+
+#: xmlcopyeditor.cpp:4132
+msgid ""
+"File has been modified by another application.\n"
+"Do you want to proceed?"
+msgstr ""
+"Iná aplikácia zmenila súbor.\n"
+"Chcete pokračovať?"
+
+#: xmlcopyeditor.cpp:4133
+msgid "Confirmation"
+msgstr "Potvrdenie"
+
+#: xmlcopyeditor.cpp:4165
+#, c-format
+msgid "Encoding should be one of %s (file saved in default encoding UTF-8)"
+msgstr "Kódovanie by malo byť jedno z %s (súbor je štandardne uložený v kódovaní UTF-8)"
+
+#: xmlcopyeditor.cpp:4210
+#, c-format
+msgid "Cannot save document in %s: %s (saved in default encoding UTF-8)"
+msgstr "Neviem uložiť dokument v %s: %s (uložené v štandardnom kódovaní UTF-8)"
+
+#: xmlcopyeditor.cpp:4225
+#: xmlcopyeditor.cpp:4235
+#, c-format
+msgid "Cannot save %s"
+msgstr "Neviem uložiť %s"
+
+#: xmlcopyeditor.cpp:4241
+#, c-format
+msgid "Memory low: %s saved in large document mode"
+msgstr "Málo pamäte: %s uložený v režime veľkého dokumentu"
+
+#: xmlcopyeditor.cpp:4294
+msgid "MB"
+msgstr "MB"
+
+#: xmlcopyeditor.cpp:4299
+msgid "KB"
+msgstr "KB"
+
+#: xmlcopyeditor.cpp:4304
+msgid "byte"
+msgid_plural "bytes"
+msgstr[0] "bajtov"
+msgstr[1] "bajt"
+msgstr[2] "bajty"
+
+#: xmlcopyeditor.cpp:4312
+#, c-format
+msgid "%g %s saved"
+msgstr "%g %s uložených"
+
+#: xmlcopyeditor.cpp:4341
+msgid "&Undo\tCtrl+Z"
+msgstr "&Späť\tCtrl+Z"
+
+#: xmlcopyeditor.cpp:4341
+msgid "Undo"
+msgstr "Späť"
+
+#: xmlcopyeditor.cpp:4345
+msgid "&Redo\tCtrl+Y"
+msgstr "&Znova\tCtrl+Y"
+
+#: xmlcopyeditor.cpp:4345
+msgid "Redo"
+msgstr "Znova"
+
+#: xmlcopyeditor.cpp:4349
+msgid "&Cut\tCtrl+X"
+msgstr "&Vystrihni\tCtrl+X"
+
+#: xmlcopyeditor.cpp:4349
+msgid "Cut"
+msgstr "Vystrihni"
+
+#: xmlcopyeditor.cpp:4353
+msgid "C&opy\tCtrl+C"
+msgstr "&Kopíruj\tCtrl+C"
+
+#: xmlcopyeditor.cpp:4353
+msgid "Copy"
+msgstr "Kopíruj"
+
+#: xmlcopyeditor.cpp:4357
+msgid "&Paste\tCtrl+V"
+msgstr "V&lož\tCtrl+V"
+
+#: xmlcopyeditor.cpp:4357
+msgid "Paste"
+msgstr "Vlož"
+
+#: xmlcopyeditor.cpp:4364
+msgid "P&aste As New Document"
+msgstr "Vlož &ako nový dokument"
+
+#: xmlcopyeditor.cpp:4365
+msgid "Paste As New Document"
+msgstr "Vlož ako nový dokument"
+
+#: xmlcopyeditor.cpp:4369
+msgid "&Find...\tCtrl+F"
+msgstr "&Nájdi...\tCtrl+F"
+
+#: xmlcopyeditor.cpp:4369
+msgid "Find..."
+msgstr "Nájdi..."
+
+#: xmlcopyeditor.cpp:4373
+msgid "F&ind Again\tF3"
+msgstr "Ná&jdi ďalšie\tF3"
+
+#: xmlcopyeditor.cpp:4373
+msgid "Find Again"
+msgstr "Nájdi ďalšie"
+
+#: xmlcopyeditor.cpp:4377
+msgid "&Replace...\tCtrl+R"
+msgstr "N&ahraď...\tCtrl+R"
+
+#: xmlcopyeditor.cpp:4377
+msgid "Replace..."
+msgstr "Nahraď..."
+
+#: xmlcopyeditor.cpp:4384
+msgid "&Global Replace...\tCtrl+Shift+R"
+msgstr "&Globálne nahraď...\tCtrl+Shift+R"
+
+#: xmlcopyeditor.cpp:4385
+msgid "Global Replace..."
+msgstr "Globálne nahraď..."
+
+#: xmlcopyeditor.cpp:4389
+msgid "G&o To...\tCtrl+G"
+msgstr "&Choď na...\tCtrl+G"
+
+#: xmlcopyeditor.cpp:4389
+msgid "Go To..."
+msgstr "Choď na..."
+
+#: xmlcopyeditor.cpp:4410
+msgid "Increase\tCtrl++"
+msgstr "Zväčši\tCtrl++"
+
+#: xmlcopyeditor.cpp:4410
+msgid "Increase"
+msgstr "Zväčši"
+
+#: xmlcopyeditor.cpp:4412
+msgid "Decrease\tCtrl+-"
+msgstr "Zmenši\tCtrl+-"
+
+#: xmlcopyeditor.cpp:4412
+msgid "Decrease"
+msgstr "Zmenši"
+
+#: xmlcopyeditor.cpp:4414
+msgid "Normal\tCtrl+0"
+msgstr "Normálne\tCtrl+0"
+
+#: xmlcopyeditor.cpp:4414
+msgid "Normal"
+msgstr "Normálne"
+
+#: xmlcopyeditor.cpp:4419
+msgid "&Default"
+msgstr "Š&tandardné"
+
+#: xmlcopyeditor.cpp:4419
+msgid "Default"
+msgstr "Štandardné"
+
+#: xmlcopyeditor.cpp:4422
+msgid "D&efault (light tags)"
+msgstr "Štandardné (&svetlé značky)"
+
+#: xmlcopyeditor.cpp:4423
+msgid "Default (light tags)"
+msgstr "Štandardné (svetlé značky)"
+
+#: xmlcopyeditor.cpp:4426
+msgid "&Blue background, white text"
+msgstr "&Modré pozadie, biely text"
+
+#: xmlcopyeditor.cpp:4427
+msgid "Blue background, white text"
+msgstr "Modré pozadie, biely text"
+
+#: xmlcopyeditor.cpp:4430
+msgid "&None"
+msgstr "Ž&iadne"
+
+#: xmlcopyeditor.cpp:4431
+msgid "None"
+msgstr "Žiadne"
+
+#: xmlcopyeditor.cpp:4470
+msgid "&Previous Document\tCtrl+PgUp"
+msgstr "&Predchádzajúci dokument\tCtrl+PgUp"
+
+#: xmlcopyeditor.cpp:4470
+msgid "Previous Document"
+msgstr "Predchádzajúci dokument"
+
+#: xmlcopyeditor.cpp:4471
+msgid "&Next Document\tCtrl+PgDn"
+msgstr "&Nasledujúci dokument\tCtrl+PgDn"
+
+#: xmlcopyeditor.cpp:4471
+msgid "Next Document"
+msgstr "Nasledujúci dokument"
+
+#: xmlcopyeditor.cpp:4472
+msgid "&Browser\tCtrl+B"
+msgstr "&Prezerač\tCtrl+B"
+
+#: xmlcopyeditor.cpp:4476
+msgid "&Show Tags and Attributes\tCtrl+T"
+msgstr "&Ukáž značky a atribúty\tCtrl+T"
+
+#: xmlcopyeditor.cpp:4476
+msgid "Show Tags and Attributes"
+msgstr "Ukáž značky a atribúty"
+
+#: xmlcopyeditor.cpp:4479
+msgid "&Hide Attributes Only\tCtrl+Shift+A"
+msgstr "&Skry atribúty\tCtrl+Shift+A"
+
+#: xmlcopyeditor.cpp:4479
+msgid "Hide Attributes Only"
+msgstr "Skry atribúty"
+
+#: xmlcopyeditor.cpp:4482
+msgid "H&ide Tags and Attributes\tCtrl+Shift+T"
+msgstr "Skry &značky a atribúty\tCtrl+Shift+T"
+
+#: xmlcopyeditor.cpp:4482
+msgid "Hide Tags and Attributes"
+msgstr "Skry značky a atribúty"
+
+#: xmlcopyeditor.cpp:4501
+msgid "&Toggle Fold"
+msgstr "&Zmeň zbalenie"
+
+#: xmlcopyeditor.cpp:4501
+msgid "Toggle Fold"
+msgstr "Zmeň zbalenie"
+
+#: xmlcopyeditor.cpp:4503
+msgid "&Fold Tags\tCtrl+Shift+F"
+msgstr "&Zbaľ značky\tCtrl+Shift+F"
+
+#: xmlcopyeditor.cpp:4503
+msgid "Fold Tags"
+msgstr "Zbaľ značky"
+
+#: xmlcopyeditor.cpp:4505
+msgid "&Unfold Tags\tCtrl+Shift+U"
+msgstr "&Rozbaľ značky\tCtrl+Shift+U"
+
+#: xmlcopyeditor.cpp:4507
+msgid "&Color Scheme"
+msgstr "&Farebná schéma"
+
+#: xmlcopyeditor.cpp:4509
+msgid "&Text Size"
+msgstr "Veľkosť &textu"
+
+#: xmlcopyeditor.cpp:4514
+msgid "S&how Current Element Pane"
+msgstr "Ukáž panel aktuálneho &elementu"
+
+#: xmlcopyeditor.cpp:4515
+msgid "Show Current ElementPane"
+msgstr "Ukáž panel aktuálneho elementu"
+
+#: xmlcopyeditor.cpp:4518
+msgid "Sh&ow Toolbar"
+msgstr "Ukáž &nástrojovú lištu"
+
+#: xmlcopyeditor.cpp:4518
+msgid "Show Toolbar"
+msgstr "Ukáž nástrojovú lištu"
+
+#: xmlcopyeditor.cpp:4521
+msgid "C&lose Message Pane\tAlt+C"
+msgstr "Zavri panel &správ\tAlt+C"
+
+#: xmlcopyeditor.cpp:4521
+msgid "Close Message Pane"
+msgstr "Zavri panel správ"
+
+#: xmlcopyeditor.cpp:4525
+msgid "&Element...\tCtrl+I"
+msgstr "&Element...\tCtrl+I"
+
+#: xmlcopyeditor.cpp:4525
+msgid "Element..."
+msgstr "Element..."
+
+#: xmlcopyeditor.cpp:4526
+msgid "&Sibling...\tCtrl+Shift+I"
+msgstr "&Súrodenec...\tCtrl+Shift+I"
+
+#: xmlcopyeditor.cpp:4526
+msgid "Sibling..."
+msgstr "Súrodenec..."
+
+#: xmlcopyeditor.cpp:4527
+msgid "&Entity...\tCtrl+E"
+msgstr "&Entita...\tCtrl+E"
+
+#: xmlcopyeditor.cpp:4527
+msgid "Entity..."
+msgstr "Entita..."
+
+#: xmlcopyeditor.cpp:4529
+msgid "&Twin\tCtrl+Enter"
+msgstr "&Dvojča\tCtrl+Enter"
+
+#: xmlcopyeditor.cpp:4529
+msgid "Twin"
+msgstr "Dvojča"
+
+#: xmlcopyeditor.cpp:4533
+msgid "&DTD\tF4"
+msgstr "&DTD\tF4"
+
+#: xmlcopyeditor.cpp:4533
+msgid "DTD"
+msgstr "DTD"
+
+#: xmlcopyeditor.cpp:4535
+msgid "&XML Schema\tF5"
+msgstr "&XML Schema\tF5"
+
+#: xmlcopyeditor.cpp:4535
+#: xmlcopyeditor.cpp:5114
+msgid "XML Schema"
+msgstr "XML Schema"
+
+#: xmlcopyeditor.cpp:4538
+msgid "&RELAX NG...\tF6"
+msgstr "&RELAX NG...\tF6"
+
+#: xmlcopyeditor.cpp:4538
+msgid "RELAX NG..."
+msgstr "RELAX NG..."
+
+#: xmlcopyeditor.cpp:4541
+msgid "&Public DTD..."
+msgstr "&Verejné DTD..."
+
+#: xmlcopyeditor.cpp:4541
+msgid "Public DTD..."
+msgstr "Verejné DTD..."
+
+#: xmlcopyeditor.cpp:4542
+msgid "&System DTD..."
+msgstr "&Systémové DTD..."
+
+#: xmlcopyeditor.cpp:4542
+msgid "System DTD..."
+msgstr "Systémové DTD..."
+
+#: xmlcopyeditor.cpp:4543
+msgid "&XML Schema..."
+msgstr "&XML Schema..."
+
+#: xmlcopyeditor.cpp:4543
+msgid "XML Schema..."
+msgstr "XML Schema..."
+
+#: xmlcopyeditor.cpp:4545
+msgid "XS&L stylesheet..."
+msgstr "XS&L štýl..."
+
+#: xmlcopyeditor.cpp:4545
+msgid "XSL stylesheet..."
+msgstr "XSL štýl..."
+
+#: xmlcopyeditor.cpp:4560
+#: xmlcopyeditor.cpp:4571
+#, c-format
+msgid "\tCtrl+%i"
+msgstr "\tCtrl+%i"
+
+#: xmlcopyeditor.cpp:4580
+msgid "&XSL Transform...\tF8"
+msgstr "&XSL Transformácia...\tF8"
+
+#: xmlcopyeditor.cpp:4581
+msgid "XSL Transform..."
+msgstr "XSL Transformácia..."
+
+#: xmlcopyeditor.cpp:4585
+msgid "&DocBook to HTML\tAlt+1"
+msgstr "&DocBook na HTML\tAlt+1"
+
+#: xmlcopyeditor.cpp:4585
+msgid "DocBook to HTML"
+msgstr "DocBook na HTML"
+
+#: xmlcopyeditor.cpp:4588
+msgid "&DocBook to XHTML\tAlt+2"
+msgstr "&DocBook na XHTML\tAlt+2"
+
+#: xmlcopyeditor.cpp:4588
+msgid "DocBook to XHTML"
+msgstr "DocBook na XHTML"
+
+#: xmlcopyeditor.cpp:4591
+msgid "D&ocBook to XSL-FO\tAlt+3"
+msgstr "D&ocBook na XSL-FO\tAlt+3"
+
+#: xmlcopyeditor.cpp:4591
+msgid "DocBook to XSL-FO"
+msgstr "DocBook na XSL-FO"
+
+#: xmlcopyeditor.cpp:4594
+msgid "&TEI to HTML\tAlt+4"
+msgstr "&TEI na HTML\tAlt+4"
+
+#: xmlcopyeditor.cpp:4594
+msgid "TEI to HTML"
+msgstr "TEI na HTML"
+
+#: xmlcopyeditor.cpp:4597
+msgid "T&EI to LaTeX\tAlt+5"
+msgstr "T&EI na LaTeX\tAlt+5"
+
+#: xmlcopyeditor.cpp:4597
+msgid "TEI to LaTeX"
+msgstr "TEI na LaTeX"
+
+#: xmlcopyeditor.cpp:4600
+msgid "TE&I to XHTML\tAlt+6"
+msgstr "TE&I na XHTML\tAlt+6"
+
+#: xmlcopyeditor.cpp:4600
+msgid "TEI to XHTML"
+msgstr "TEI na XHTML"
+
+#: xmlcopyeditor.cpp:4603
+msgid "TEI to &XSL-FO\tAlt+7"
+msgstr "TEI na &XSL-FO\tAlt+7"
+
+#: xmlcopyeditor.cpp:4603
+msgid "TEI to XSL-FO"
+msgstr "TEI na XSL-FO"
+
+#: xmlcopyeditor.cpp:4609
+msgid "&Check Well-formedness\tF2"
+msgstr "&Skontroluj dobrú formovanosť\tF2"
+
+#: xmlcopyeditor.cpp:4609
+msgid "Check Well-formedness"
+msgstr "Skontroluj dobrú formovanosť"
+
+#: xmlcopyeditor.cpp:4612
+msgid "&Validate"
+msgstr "&Validuj"
+
+#: xmlcopyeditor.cpp:4617
+msgid "&Associate"
+msgstr "&Asociuj"
+
+#: xmlcopyeditor.cpp:4620
+msgid "&XSL"
+msgstr "&XSL"
+
+#: xmlcopyeditor.cpp:4623
+msgid "&Evaluate XPath...\tF9"
+msgstr "&Vyhodnoť XPath...\tF9"
+
+#: xmlcopyeditor.cpp:4624
+msgid "Evaluate XPath..."
+msgstr "Vyhodnoť XPath..."
+
+#: xmlcopyeditor.cpp:4629
+msgid "&Pretty-print\tF11"
+msgstr "&Pekná tlač\tF11"
+
+#: xmlcopyeditor.cpp:4629
+msgid "Pretty-print"
+msgstr "Pekná tlač"
+
+#: xmlcopyeditor.cpp:4633
+msgid "&Lock Tags\tCtrl+L"
+msgstr "&Zamkni značky\tCtrl+L"
+
+#: xmlcopyeditor.cpp:4634
+#: xmlcopyeditor.cpp:4854
+#: xmlcopyeditor.cpp:4857
+msgid "Lock Tags"
+msgstr "Zamkni značky"
+
+#: xmlcopyeditor.cpp:4639
+msgid "E&ncoding..."
+msgstr "&Kódovanie..."
+
+#: xmlcopyeditor.cpp:4639
+msgid "Encoding..."
+msgstr "Kódovanie..."
+
+#: xmlcopyeditor.cpp:4648
+msgid "&Spelling and Style...\tF7"
+msgstr "&Pravopis a štýl...\tF7"
+
+#: xmlcopyeditor.cpp:4649
+msgid "Spelling and Style..."
+msgstr "Pravopis a štýl..."
+
+#: xmlcopyeditor.cpp:4656
+msgid "&Word Count"
+msgstr "Počet &slov"
+
+#: xmlcopyeditor.cpp:4657
+msgid "Word Count"
+msgstr "Počet slov"
+
+#: xmlcopyeditor.cpp:4664
+msgid "&Options..."
+msgstr "&Možnosti..."
+
+#: xmlcopyeditor.cpp:4665
+msgid "Options..."
+msgstr "Možnosti..."
+
+#: xmlcopyeditor.cpp:4678
+msgid "&XML Copy Editor Help\tF1"
+msgstr "&Návod k XML Copy Editor\tF1"
+
+#: xmlcopyeditor.cpp:4678
+msgid "Help"
+msgstr "Návod"
+
+#: xmlcopyeditor.cpp:4682
+msgid "&Home Page"
+msgstr "&Domovská stránka"
+
+#: xmlcopyeditor.cpp:4682
+msgid "Home Page"
+msgstr "Domovská stránka"
+
+#: xmlcopyeditor.cpp:4685
+msgid "&Forum"
+msgstr "&Fórum"
+
+#: xmlcopyeditor.cpp:4685
+msgid "Forum"
+msgstr "Fórum"
+
+#: xmlcopyeditor.cpp:4689
+msgid "&About XML Copy Editor"
+msgstr "&O programe XML Copy Editor"
+
+#: xmlcopyeditor.cpp:4689
+msgid "About"
+msgstr "O programe"
+
+#: xmlcopyeditor.cpp:4693
+msgid "&Download Source"
+msgstr "&Stiahni zdroj"
+
+#: xmlcopyeditor.cpp:4693
+msgid "Download Source"
+msgstr "Stiahni zdroj"
+
+#: xmlcopyeditor.cpp:4704
+msgid "&File"
+msgstr "&Súbor"
+
+#: xmlcopyeditor.cpp:4706
+msgid "&View"
+msgstr "&Pohľad"
+
+#: xmlcopyeditor.cpp:4707
+msgid "&Insert"
+msgstr "&Vlož"
+
+#: xmlcopyeditor.cpp:4708
+msgid "&XML"
+msgstr "&XML"
+
+#: xmlcopyeditor.cpp:4709
+msgid "&Tools"
+msgstr "&Nástroje"
+
+#: xmlcopyeditor.cpp:4710
+msgid "&Help"
+msgstr "&Návod"
+
+#: xmlcopyeditor.cpp:4725
+msgid "&New...\tCtrl+N"
+msgstr "&Nový...\tCtrl+N"
+
+#: xmlcopyeditor.cpp:4725
+msgid "New..."
+msgstr "Nový..."
+
+#: xmlcopyeditor.cpp:4728
+msgid "&Open...\tCtrl+O"
+msgstr "&Otvor...\tCtrl+O"
+
+#: xmlcopyeditor.cpp:4728
+msgid "Open..."
+msgstr "Otvor..."
+
+#: xmlcopyeditor.cpp:4732
+msgid "O&pen Large Document...\tCtrl+Shift+O"
+msgstr "Otvor &veľký dokument...\tCtrl+Shift+O"
+
+#: xmlcopyeditor.cpp:4732
+msgid "Open Large Document..."
+msgstr "Otvor veľký dokument..."
+
+#: xmlcopyeditor.cpp:4735
+msgid "&Close\tCtrl+W"
+msgstr "&Zavri\tCtrl+W"
+
+#: xmlcopyeditor.cpp:4738
+msgid "C&lose All"
+msgstr "Zav&ri všetko"
+
+#: xmlcopyeditor.cpp:4738
+msgid "Close All"
+msgstr "Zavri všetko"
+
+#: xmlcopyeditor.cpp:4741
+msgid "&Save\tCtrl+S"
+msgstr "&Ulož\tCtrl+S"
+
+#: xmlcopyeditor.cpp:4741
+#: xmlcopyeditor.cpp:4825
+#: xmlcopyeditor.cpp:4829
+msgid "Save"
+msgstr "Ulož"
+
+#: xmlcopyeditor.cpp:4745
+msgid "S&ave As...\tF12"
+msgstr "Ulož &ako...\tF12"
+
+#: xmlcopyeditor.cpp:4745
+msgid "Save As..."
+msgstr "Ulož ako..."
+
+#: xmlcopyeditor.cpp:4748
+msgid "&Revert"
+msgstr "Znovu&načítaj"
+
+#: xmlcopyeditor.cpp:4748
+msgid "Revert"
+msgstr "Znovunačítaj"
+
+#: xmlcopyeditor.cpp:4751
+msgid "Pa&ge Setup..."
+msgstr "Nastavenie s&tránky..."
+
+#: xmlcopyeditor.cpp:4751
+msgid "Page Setup..."
+msgstr "Nastavenie stránky..."
+
+#: xmlcopyeditor.cpp:4754
+msgid "P&rint Preview..."
+msgstr "Ná&hľad tlače..."
+
+#: xmlcopyeditor.cpp:4754
+msgid "Print Preview..."
+msgstr "Náhľad tlače..."
+
+#: xmlcopyeditor.cpp:4757
+msgid "Pr&int...\tCtrl+P"
+msgstr "&Tlač...\tCtrl+P"
+
+#: xmlcopyeditor.cpp:4757
+msgid "Print..."
+msgstr "Tlač..."
+
+#: xmlcopyeditor.cpp:4761
+msgid "I&mport Microsoft Word Document..."
+msgstr "&Importuj dokument programu Microsoft Word..."
+
+#: xmlcopyeditor.cpp:4765
+msgid "&Export Microsoft Word Document..."
+msgstr "&Exportuj dokument programu Microsoft Word..."
+
+#: xmlcopyeditor.cpp:4769
+msgid "E&xit"
+msgstr "&Koniec"
+
+#: xmlcopyeditor.cpp:4769
+msgid "Exit"
+msgstr "Koniec"
+
+#: xmlcopyeditor.cpp:4815
+#: xmlcopyeditor.cpp:4817
+msgid "New"
+msgstr "Nový"
+
+#: xmlcopyeditor.cpp:4832
+#: xmlcopyeditor.cpp:4836
+msgid "Print"
+msgstr "Tlač"
+
+#: xmlcopyeditor.cpp:4901
+msgid "Information"
+msgstr "Informácia"
+
+#: xmlcopyeditor.cpp:4904
+msgid "Warning"
+msgstr "Varovanie"
+
+#: xmlcopyeditor.cpp:4907
+msgid "Stopped"
+msgstr "Zastavený"
+
+#: xmlcopyeditor.cpp:4910
+msgid "Question"
+msgstr "Otázka"
+
+#: xmlcopyeditor.cpp:4913
+msgid "Message"
+msgstr "Správa"
+
+#: xmlcopyeditor.cpp:4969
+#, c-format
+msgid "%s is %s"
+msgstr "%s je %s"
+
+#: xmlcopyeditor.cpp:4994
+msgid "Document has been modified: save or discard changes"
+msgstr "Dokument bol zmenený: ulož alebo zahoď zmeny"
+
+#: xmlcopyeditor.cpp:5055
+msgid "Encoding should be one of "
+msgstr "Kódovanie by malo byť jedno z "
+
+#: xmlcopyeditor.cpp:5102
+msgid "Public DTD"
+msgstr "Verejné DTD"
+
+#: xmlcopyeditor.cpp:5108
+msgid "System DTD"
+msgstr "Systémové DTD"
+
+#: xmlcopyeditor.cpp:5146
+#, c-format
+msgid "Cannot associate %s: %s"
+msgstr "Neviem asociovať %s: %s"
+
+#: xmlcopyeditor.cpp:5154
+#, c-format
+msgid "Associate %s"
+msgstr "Asociuj %s"
+
+#: xmlcopyeditor.cpp:5162
+msgid "Choose a public identifier:"
+msgstr "Vyberte si verejný identifikátor:"
+
+#: xmlcopyeditor.cpp:5309
+#, c-format
+msgid "Cannot count words: %s"
+msgstr "Neviem spočítať slová: %s"
+
+#: xmlcopyeditor.cpp:5317
+#, c-format
+msgid "%s contains %i word"
+msgid_plural "%s contains %i words"
+msgstr[0] "%s obsahuje %i slov"
+msgstr[1] "%s obsahuje %i slovo"
+msgstr[2] "%s obsahuje %i slová"
+
+#: xmlctrl.cpp:191
+#: xmlctrl.cpp:296
+msgid "Delete tag?"
+msgstr "Vymazať značku?"
+
+#: xmlctrl.cpp:192
+#: xmlctrl.cpp:223
+#: xmlctrl.cpp:297
+#: xmlctrl.cpp:328
+msgid "Tags Locked"
+msgstr "Značky zamknuté"
+
+#: xmlctrl.cpp:222
+#: xmlctrl.cpp:327
+msgid "Delete entity reference?"
+msgstr "Vymazať odkaz na entitu?"
+
+#~ msgid "UTF-8, UTF-16, UTF-16LE, UTF-16BE, ISO-8859-1, US-ASCII"
+#~ msgstr "UTF-8, UTF-16, UTF-16LE, UTF-16BE, ISO-8859-1, US-ASCII"
+#~ msgid "1.0.8.7"
+#~ msgstr "1.0.8.7"
+#~ msgid "Change '"
+#~ msgstr "Zmeň '"
+#~ msgid "' to '"
+#~ msgstr "' na '"
+#~ msgid "' throughout"
+#~ msgstr "' všade"
+

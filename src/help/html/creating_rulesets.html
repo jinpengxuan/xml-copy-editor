@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="generic.css" />
+    <title>Creating rules</title>
+  </head>
+  <body>
+    <h1>Creating rules</h1>
+    <p>To create a new rule set, create an XML document using the XML Schema &#x2018;ruleset.xsd&#x2019;.</p>
+    <p>Rule sets consist of a title, an optional copyright notice, optional lists of excluded and inherited house styles, and a list of rules. Rules are of two kinds. In most cases, each rule specifies a report string (e.g. &#x2018;Words to avoid&#x2019;) and a regular expression matching a phrase or spelling discouraged by the rule, plus a suggested replacement string.</p>
+    <p>Alternatively, rules can contain dictionaries. If at least one dictionary is selected, all words not found in the dictionary are reported as matches.</p>
+    <p>Files that are stored in the &#x2018;rulesets&#x2019; directory are available from the left-hand drop-down menu in the Spelling and Style dialog.</p>
+    <p>Here is a sample rule set file:</p>
+    <pre>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="ruleset.xsd"&gt;
+  &lt;title&gt;Repetition&lt;/title&gt;
+  &lt;rule&gt;
+    &lt;report&gt;one word&lt;/report&gt;
+    &lt;regex&gt;
+      &lt;find&gt;\b(\w+) \1\b&lt;/find&gt;
+      &lt;replace tentative="true"&gt;\1&lt;/replace&gt;
+    &lt;/regex&gt;
+  &lt;/rule&gt;
+  &lt;rule&gt;
+    &lt;report&gt;two words&lt;/report&gt;
+    &lt;regex&gt;
+      &lt;find&gt;\b(\w+ \w+) \1\b&lt;/find&gt;
+      &lt;replace tentative="true"&gt;\1&lt;/replace&gt;
+    &lt;/regex&gt;
+  &lt;/rule&gt;
+&lt;/ruleset&gt;
+</pre>
+    <p>Rule sets are typically based on a hierarchy of modules (e.g. the default style inherits Commonwealth, Ise, Gender, etc.).</p>
+    <p>Exclusions can be used to block specific modules (e.g. to combine the default module for Commonwealth spelling with -ize/-yse rather than -ise spelling).</p>
+    <p>If available, &#x2018;Default dictionary and style&#x2019; is selected at start-up.</p>
+  </body>
+</html>

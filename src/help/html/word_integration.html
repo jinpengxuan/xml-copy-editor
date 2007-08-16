@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="generic.css" />
+    <title>Microsoft Word integration</title>
+  </head>
+  <body>
+    <h1>Microsoft Word integration</h1>
+    <p>To launch XML Copy Editor from Microsoft Word, you can use a simple macro. The following macro will open the active document in XML Copy Editor and display the Spelling and Style dialog:</p>
+    <p><pre>Sub xmlcopyeditor()
+  On Error GoTo ErrorHandler
+  
+  Dim cmd As String
+  Dim app As String
+  Dim switch As String
+  Dim doc As String
+  Dim ruleset As String
+  Dim filter As String
+  Dim applicationDir As String
+  
+  app = Chr(34) _
+    &amp; "C:\Program Files\XML Copy Editor\xmlcopyeditor.exe" _
+    &amp; Chr(34)
+  
+  If Application.Documents.Count &lt;&gt; 0 Then
+    If ActiveDocument.Path &lt;&gt; "" Then
+      switch = "-ws"
+      doc = Chr(34) _
+        &amp; ActiveDocument.Path _
+        &amp; Application.PathSeparator _
+        &amp; ActiveDocument.Name &amp; Chr(34)
+      ruleset = Chr(34) _
+        &amp; "Default dictionary and style" _
+        &amp; Chr(34)
+      filter = Chr(34) _
+        &amp; "WordprocessingML" _
+        &amp; Chr(34)
+    End If
+  End If
+  
+  cmd = app &amp; " " _
+    &amp; switch &amp; " " _
+    &amp; doc &amp; " " _
+    &amp; ruleset &amp; " " _
+    &amp; filter
+    
+  Shell cmd, vbNormalFocus
+  On Error GoTo 0
+  Exit Sub
+
+ErrorHandler:
+  MsgBox "Unable to open XML Copy Editor"
+End Sub</pre></p>
+  </body>
+</html>

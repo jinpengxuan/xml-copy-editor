@@ -1,0 +1,30 @@
+body, p, h1, h2, h3, h4, h5, h6, td, div, ol, ul {
+  font-family: "Arial", "Helvetica", sans-serif;
+}
+
+p, li {
+  font-size: smaller;
+}
+
+.linkstyle A:hover {
+	font-weight: bold;
+	color: firebrick;
+	text-decoration: none;
+}
+
+A:active {
+	font-weight: bold;
+	text-decoration: none;
+}
+
+A:link { 
+	font-weight: bold;
+	color: cornflowerblue;
+	text-decoration: none;
+}
+
+A:visited {
+	font-weight: bold;
+	color: cornflowerblue;
+	text-decoration: none;
+}

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topicMap PUBLIC "ISO/IEC 13250-3:2005//DTD XML Topic Maps (XTM) 2.0//EN" "xtm2.dtd">
+<topicMap xmlns="http://www.topicmaps.org/xtm/" version="2.0">
+  <topic id="example">
+    <subjectIdentifier href=""/>
+    <instanceOf>
+      <topicRef href=""/>
+    </instanceOf>
+    <name>
+      <value></value>
+    </name>
+    <occurrence>
+      <type>
+        <topicRef href=""/>
+      </type>
+      <resourceData></resourceData>
+    </occurrence>
+  </topic>
+</topicMap>

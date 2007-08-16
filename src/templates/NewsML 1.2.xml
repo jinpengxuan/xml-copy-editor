@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE NewsML PUBLIC "urn:newsml:iptc.org:20021018:NewsMLv1.2:1" "http://www.iptc.org/NewsML/DTD/NewsML_1.2.dtd">
+<NewsML Version="1.2">
+  <Catalog/>
+  <TopicSet FormalName=""/>
+  <NewsEnvelope><DateAndTime></DateAndTime></NewsEnvelope>
+  <NewsItem>
+    <Identification>
+      <NewsIdentifier>
+        <ProviderId/>
+        <DateId/>
+        <NewsItemId/>
+        <RevisionId Update="" PreviousRevision="">
+        </RevisionId>
+        <PublicIdentifier/>
+      </NewsIdentifier>
+    </Identification>
+    <NewsManagement>
+      <NewsItemType FormalName=""/>
+      <FirstCreated/>
+      <ThisRevisionCreated/>
+      <Status FormalName=""/>
+    </NewsManagement>
+  </NewsItem>
+</NewsML>

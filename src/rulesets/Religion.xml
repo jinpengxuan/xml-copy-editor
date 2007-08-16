@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ruleset.xsd">
+  <title>Religion</title>
+  <rule>
+    <report>Buddhism</report>
+    <regex>
+      <find matchcase="true">\bb(uddh(?:is[mt]))\b</find>
+      <replace tentative="true">B\1</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>Christianity</report>
+    <regex>
+      <find matchcase="true">\bc(hristian(?:|ity|s))\b</find>
+      <replace tentative="true">C\1</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>Hinduism</report>
+    <regex>
+      <find matchcase="true">\bh(indu(?:|ism|s))\b</find>
+      <replace tentative="true">H\1</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>Islam</report>
+    <regex>
+      <find matchcase="true">\bi(slam(?:|ic|is[mt]))\b</find>
+      <replace tentative="true">I\1</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>Judaism</report>
+    <regex>
+      <find matchcase="true">\bj(udai(?:c|sm))\b</find>
+      <replace tentative="true">J\1</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>Rastafarianism</report>
+    <regex>
+      <find matchcase="true">\br(astafarian(?:|ism|s))\b</find>
+      <replace tentative="true">R\1</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>Sikhism</report>
+    <regex>
+      <find matchcase="true">\bs(ikh(?:|ism))\b</find>
+      <replace tentative="true">S\1</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>Muslim</report>
+    <regex>
+      <find>\bmohammedan\b</find>
+      <replace tentative="true">Muslim</replace>
+    </regex>
+  </rule>
+</ruleset>
+

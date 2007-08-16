@@ -1,0 +1,15 @@
+[OPTIONS]
+Binary Index=No
+Compatibility=1.1 or later
+Compiled file=xmlcopyeditor.chm
+Contents file=Table of Contents.hhc
+Default Font=@Arial Unicode MS,8,0
+Default topic=html\features.html
+Display compile progress=No
+Full-text search=Yes
+Language=0x809 English (United Kingdom)
+Title=XML Copy Editor Help
+
+
+[INFOTYPES]
+

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ruleset.xsd">
+  <title>Default dictionary and style</title>
+  <include>Default style.xml</include>
+  <include>Default dictionary.xml</include>
+</ruleset>
+

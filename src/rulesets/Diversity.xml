@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ruleset.xsd">
+  <title>Diversity</title>
+  <include>disability.xml</include>
+  <include>ethnicity.xml</include>
+  <include>gender.xml</include>
+  <include>postcolonial.xml</include>
+  <include>religion.xml</include>
+</ruleset>

@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ruleset.xsd">
+  <title>Contractions</title>
+  <rule>
+    <report>she would (not she’d)</report>
+    <regex>
+      <find>\b(s?he|it|that|they|we|what|who)(?:'|’)(d)\b</find>
+      <replace adjustcase="true" tentative="true">\1 woul\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>she will (not she’ll)</report>
+    <regex>
+      <find>\b(s?he|it|that|they|we|what|who)(?:'|’)(ll)\b</find>
+      <replace adjustcase="true" tentative="true">\1 wi\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>she is (not she’s)</report>
+    <regex>
+      <find>\b(s?he|it|that|what|who)(?:'|’)(s)\b</find>
+      <replace adjustcase="true" tentative="true">\1 i\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>we are (not we’re)</report>
+    <regex>
+      <find>\b(we|you|they)(?:'|’)(re)\b</find>
+      <replace adjustcase="true" tentative="true">\1 a\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>are not (not aren’t)</report>
+    <regex>
+      <find>\b(\w+)(?&lt;!ca|sha|wo)(n)(?:'|’)(t)\b</find>
+      <replace adjustcase="true" tentative="true">\1 \2o\3</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>cannot (not can’t)</report>
+    <regex>
+      <find>\b(can)(?:'|’)(t)\b</find>
+      <replace adjustcase="true" tentative="true">\1no\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>shall not (not shan’t)</report>
+    <regex>
+      <find>\b(sha)(n)(?:'|’)(t)\b</find>
+      <replace adjustcase="true" tentative="true">\1ll \2o\3</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>will not (not won’t)</report>
+    <regex>
+      <find>\b(w)(o)(n)(?:'|’)(t)\b</find>
+      <replace adjustcase="true" tentative="true">\1ill \3\2\4</replace>
+    </regex>
+  </rule>
+</ruleset>
+
+
+
+

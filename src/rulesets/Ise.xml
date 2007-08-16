@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ruleset.xsd">
+  <title>-ise</title>
+  <rule>
+    <report>-ise/-yse</report>
+    <regex>
+      <find>\b([a-z]+)(?:(?&lt;=emphas|fantas)|(?&lt;!ba|ma|pr|se|s))([iy])z(a(?:bl[ey]|tion(?:|al(?:|ly)|s))|es?|ed|ers?|ing)\b</find>
+      <replace adjustcase="true">\1\2s\3</replace>
+    </regex>
+  </rule>
+</ruleset>
+

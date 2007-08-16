@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ruleset.xsd">
+  <title>Ethnicity</title>
+  <rule>
+    <report>Inuit</report>
+    <regex>
+      <find>\beskimo(s?)\b</find>
+      <replace adjustcase="true" tentative="true">Inuit\1</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>Native American</report>
+    <regex>
+      <find>\b:red indian(s?)\b</find>
+      <replace tentative="true">Native American\1</replace>
+    </regex>
+  </rule>
+</ruleset>
+

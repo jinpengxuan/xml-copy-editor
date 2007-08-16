@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ruleset.xsd">
+  <title>Post-colonial</title>
+  <rule>
+    <report>Mumbai (not Bombay)</report>
+    <regex>
+      <find>\bBombay\b</find>
+      <replace tentative="true">Mumbai</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>Chennai (not Madras)</report>
+    <regex>
+      <find>\bMadras\b</find>
+      <replace tentative="true">Chennai</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>Thiruvananthapuram (not Trivandrum)</report>
+    <regex>
+      <find>\bTrivandrum\b</find>
+      <replace tentative="true">Thiruvananthapuram</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>Kozhikode (not Calicut)</report>
+    <regex>
+      <find>\bCalicut\b</find>
+      <replace tentative="true">Kozhikode</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>Kochi (not Cochin)</report>
+    <regex>
+      <find>\bCochin\b</find>
+      <replace tentative="true">Kochi</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>Koyamutthoor (not Coimbatore)</report>
+    <regex>
+      <find>\bCoimbatore\b</find>
+      <replace tentative="true">Koyamutthoor</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>Puduchchery (not Pondicherry)</report>
+    <regex>
+      <find>\bPondicherry\b</find>
+      <replace tentative="true">Puduchchery</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>Kolkata (not Calcutta)</report>
+    <regex>
+      <find>\bCalcutta\b</find>
+      <replace tentative="true">Kolkata</replace>
+    </regex>
+  </rule>
+</ruleset>
+

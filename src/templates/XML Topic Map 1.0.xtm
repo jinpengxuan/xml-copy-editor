@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topicMap PUBLIC "-//TopicMaps.Org//DTD XML Topic Map (XTM) 1.0//EN" "xtm1.dtd">
+<topicMap xmlns="http://www.topicmaps.org/xtm/1.0/" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <topic id="example">
+    <instanceOf>
+      <topicRef xlink:href=""/>
+    </instanceOf>
+    <baseName>
+      <baseNameString/>
+    </baseName>
+    <occurrence>
+      <instanceOf>
+        <topicRef xlink:href=""/>
+      </instanceOf>
+      <resourceRef xlink:href=""/>
+    </occurrence>
+  </topic>
+</topicMap>

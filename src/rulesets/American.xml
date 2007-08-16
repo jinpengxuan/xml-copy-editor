@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ruleset.xsd">
+  <title>American spelling</title>
+  <include>Ize.xml</include>
+  <rule>
+    <report>acknowledgment, judgment</report>
+    <regex>
+      <find>\b((?:acknowle|ju)dg)e(ments?)\b</find>
+      <replace>\1\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>eon</report>
+    <regex>
+      <find>\ba(eons?)\b</find>
+      <replace adjustcase="true">\1</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>esthetic, feces, hemoglobin</report>
+    <regex>
+      <find>\b(|f|h)a(esthetic|eces|emoglobin)\b</find>
+      <replace>\1\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>aluminum</report>
+    <regex>
+      <find>\b(alumin)i(um)\b</find>
+      <replace>\1\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>ameba, diarrhea, fetus, esophagus</report>
+    <regex>
+      <find>\b(|am|diarrh|f)o(e(?:a|tus|sophag(?:i|us)))\b</find>
+      <replace>\1\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>analog, catalog, dialog</report>
+    <regex>
+      <find>\b((?:ana|cata|dia)log)ue(s?)\b</find>
+      <replace>\1\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>anesthesia</report>
+    <regex>
+      <find>\b(an)a(esthe(?:sia|tic))\b</find>
+      <replace>\1\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>annex, ax, furor, glycerin</report>
+    <regex>
+      <find>\b(annex|ax|furor|glycerin)e\b</find>
+      <replace>\1</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>appall, distill, enroll, fulfill, instill</report>
+    <regex>
+      <find>\b((appa|disti|enro|fulfi|insti)l)\b</find>
+      <replace adjustcase="true">\1l</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>archeology</report>
+    <regex>
+      <find>\b(arch)a(eolog(?:ical(|ly)|ists?|y))\b</find>
+      <replace>\1\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>armor, color, etc.</report>
+    <regex>
+      <find>\b((?:arm|col|fl?av|hon|hum|lab|neighb|splend)o)u(r(?:|abl[ey]|ed|hood|ing|s))\b</find>
+      <replace>\1\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>artifact</report>
+    <regex>
+      <find>\b(art)e(facts?)\b</find>
+      <replace adjustcase="true">\1i\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>channeling, leveling, etc.</report>
+    <regex>
+      <find>\b((?:cance|channe|counce|disheve|equa|leve|riva|signa|trave)l)l(ed|ers?|ing|or)\b</find>
+      <replace>\1\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>carburetor</report>
+    <regex>
+      <find>\b(carburet)t(ors?)\b</find>
+      <replace>\1\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>center</report>
+    <regex>
+      <find>([a-z]*cent)re\b</find>
+      <replace adjustcase="true">\1er\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>centered</report>
+    <regex>
+      <find>([a-z]*cent)re(d)\b</find>
+      <replace adjustcase="true">\1ere\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>centering</report>
+    <regex>
+      <find>\b(cent)(ring)\b</find>
+      <replace adjustcase="true">\1e\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>connexion, inflexion, reflexion</report>
+    <regex>
+      <find>\b((?:conn|infl|refl)e)ct(ions?)\b</find>
+      <replace adjustcase="true">\1x\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>cozy</report>
+    <regex>
+      <find>\b(co)s(ie(?:r|st)|y)\b</find>
+      <replace adjustcase="true">\1z\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>defense, offense, pretense</report>
+    <regex>
+      <find>\b((?:defe|offe|prete)n)c(e(?:|less|s))\b</find>
+      <replace adjustcase="true">\1s\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>Fall</report>
+    <regex>
+      <find matchcase="true">\bAutumn\b</find>
+      <replace>Fall</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>fiber, saber, specter, theater</report>
+    <regex>
+      <find>\b((?:(?:fi|sa)b|spect|theat))re(s?)\b</find>
+      <replace adjustcase="true">\1er\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>fontanel</report>
+    <regex>
+      <find>\b(fontanel)le\b</find>
+      <replace>\1</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>glamor, savior</report>
+    <regex>
+      <find>\b((?:glam|savi)o)u(r[a-z]*)\b</find>
+      <replace>\1\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>good-by</report>
+    <regex>
+      <find>\b(good-by)e\b</find>
+      <replace>\1</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>gray</report>
+    <regex>
+      <find>\b(gr)e(ys?)\b</find>
+      <replace adjustcase="true">\1a\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>jail</report>
+    <regex>
+      <find>\bg(a)o(l)(s?)</find>
+      <replace adjustcase="true">j\1i\2\3</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>jewelry</report>
+    <regex>
+      <find>\b(jewel)le(ry)\b</find>
+      <replace>\1\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>jeweled</report>
+    <regex>
+      <find>\b(jewel)l(ed)\b</find>
+      <replace>\1\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>kidnaper, worshiper</report>
+    <regex>
+      <find>\b((?:kidna|worshi)p)p(ed|er|ing)\b</find>
+      <replace>\1\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>license</report>
+    <regex>
+      <find>\b(licen)c(e(?:|e|d))\b</find>
+      <replace adjustcase="true">\1s\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>meter, centimeter, kilometer, millimeter</report>
+    <regex>
+      <find>\b((?:|centi|kilo|milli)met)re(s?)\b</find>
+      <replace adjustcase="true">\1er\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>maneuver</report>
+    <regex>
+      <find>\b(man)oe(uv)re(|[ds])\b</find>
+      <replace adjustcase="true">\1e\2er\3</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>maneuvering</report>
+    <regex>
+      <find>\b(man)oe(uv)(ring)\b</find>
+      <replace adjustcase="true">\1e\2e\3</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>mold</report>
+    <regex>
+      <find>\b(mo)u(ld(?:|ed|ing|s))\b</find>
+      <replace>\1\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>plow</report>
+    <regex>
+      <find>\b(plo)ugh(|ed|ing|s)\b</find>
+      <replace adjustcase="true">\1w\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>mustache</report>
+    <regex>
+      <find>\b(m)o(ustaches?)\b</find>
+      <replace>\1\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>pajamas</report>
+    <regex>
+      <find>\b(p)y(jama(?:|s))\b</find>
+      <replace adjustcase="true">\1a\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>practice</report>
+    <regex>
+      <find>\b(practi)s(e(?:|d)|ing)\b</find>
+      <replace>\1c\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>railroad</report>
+    <regex>
+      <find>\b(rail)way(s?)\b</find>
+      <replace adjustcase="true">\1road\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>skeptical</report>
+    <regex>
+      <find>\b(s)c(eptic(?:|ism|s|al))\b</find>
+      <replace adjustcase="true">\1k\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>skillful, willful</report>
+    <regex>
+      <find>\b((?:|un)(?:ski|wi)l)(ful(?:|ly))\b</find>
+      <replace adjustcase="true">\1l\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>sulfur</report>
+    <regex>
+      <find>\b(sul)ph(ate|ite|ur(?:|etted))\b</find>
+      <replace adjustcase="true">\1f\2</replace>
+    </regex>
+  </rule>
+  <rule>
+    <report>woolen</report>
+    <regex>
+      <find>\b(wool)l(en)\b</find>
+      <replace>\1\2</replace>
+    </regex>
+  </rule>
+</ruleset>
+

@@ -1,0 +1,1793 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: XML Copy Editor 1.0.9.5\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2007-05-21 09:51+0800\n"
+"PO-Revision-Date: 2007-05-21 10:04+0800\n"
+"Last-Translator: SHiNE CsyFeK <csyfek@gmail.com>\n"
+"Language-Team: SHiNE CsyFeK <csyfek@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"X-Poedit-Language: Chinese\n"
+"X-Poedit-Country: CHINA\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#: xmlcopyeditorcopy.h:2
+msgid "All files (*.*)|*.*|XML (*.xml)|*.xml|XHTML (*.html)|*.html|DTD (*.dtd)|*.dtd|XML Schema (*.xsd)|*.xsd|RELAX NG grammar (*.rng)|*.rng|XSL (*.xsl)|*.xsl"
+msgstr "所有文件(*.*)|*.*|XML (*.xml)|*.xml|XHTML (*.html)|*.html|DTD (*.dtd)|*.dtd|XML Schema (*.xsd)|*.xsd|RELAX NG grammar (*.rng)|*.rng|XSL (*.xsl)|*.xsl"
+
+#: xmlcopyeditorcopy.h:3
+msgid "Copyright © 2005-2007 Gerald Schmidt <gnschmidt@users.sourceforge.net>"
+msgstr "版权所有 © 2005-2007 Gerald Schmidt <gnschmidt@users.sourceforge.net>"
+
+#: xmlcopyeditorcopy.h:4
+msgid ""
+"\n"
+"XML Copy Editor is free software released under the GNU\n"
+"General Public License.\n"
+"\n"
+"Many thanks are due to Tim van Niekerk, Matt Smigielski,\n"
+"David Scholl, Jan Merka, Marcus Bingenheimer, Roberto\n"
+"Rosselli Del Turco, Ken Zalewski, C.J. Meidlinger,\n"
+"Thomas Zajic, Viliam Búr, David Håsäther, François\n"
+"Badier, Thomas Wenzel, Roger Sperberg, SHiNE CsyFeK,\n"
+"HSU PICHAN, YANG SHUFUN, CHENG PAULIAN and\n"
+"CHUANG KUO-PING."
+msgstr ""
+"\n"
+"XML Copy Editor 是在 GNU 通用公共许可证下发布的自由软件.\n"
+"\n"
+"衷心感谢 Tim van Niekerk, Matt Smigielski,\n"
+"David Scholl, Jan Merka, Marcus Bingenheimer, Roberto\n"
+"Rosselli Del Turco, Ken Zalewski, C.J. Meidlinger,\n"
+"Thomas Zajic, Viliam Búr, David Håsäther, François\n"
+"Badier, Thomas Wenzel, Roger Sperberg, SHiNE CsyFeK,\n"
+"HSU PICHAN, YANG SHUFUN, CHENG PAULIAN and\n"
+"CHUANG KUO-PING."
+
+#: aboutdialog.cpp:29
+msgid "OK"
+msgstr "确定"
+
+#: associatedialog.cpp:55
+#: mypropertysheet.cpp:149
+#: mypropertysheet.cpp:165
+msgid "Browse"
+msgstr "浏览"
+
+#: associatedialog.cpp:103
+msgid "Provides a space for you to type the path of the file"
+msgstr "提供一个空白栏让您输入该文件的路径"
+
+#: associatedialog.cpp:107
+msgid "Opens a standard file dialog"
+msgstr "打开一个标准的文件对话框"
+
+#: associatedialog.cpp:111
+msgid "Provides a space for you to type additional information"
+msgstr "提供一个空白栏让您输入额外的信息"
+
+#: associatedialog.cpp:115
+msgid "Closes this dialog without making any changes"
+msgstr "关闭这个对话框而不作任何改变"
+
+#: associatedialog.cpp:119
+msgid "Selects the file specified"
+msgstr "选择指定的文件"
+
+#: associatedialog.cpp:141
+msgid "|All files (*.*)|*.*"
+msgstr "|所有文件 (*.*)|*.*"
+
+#: associatedialog.cpp:144
+msgid "Select "
+msgstr "选择"
+
+#: commandpanel.cpp:26
+#: commandpanel.cpp:159
+msgid "{path}"
+msgstr "{路径}"
+
+#: commandpanel.cpp:27
+#: commandpanel.cpp:160
+msgid "{name}"
+msgstr "{名称}"
+
+#: commandpanel.cpp:28
+#: commandpanel.cpp:161
+msgid "{extension}"
+msgstr "{扩展名}"
+
+#: commandpanel.cpp:29
+#: commandpanel.cpp:158
+msgid "{fullpath}"
+msgstr "{完整路径}"
+
+#: commandpanel.cpp:49
+msgid "&Run"
+msgstr "运行(&R)"
+
+#: commandpanel.cpp:57
+msgid "&Wait"
+msgstr "等待(&W)"
+
+#: commandpanel.cpp:63
+msgid "Output options"
+msgstr "输出选项"
+
+#: commandpanel.cpp:68
+msgid "I&gnore"
+msgstr "忽略(&g)"
+
+#: commandpanel.cpp:74
+msgid "I&nsert"
+msgstr "插入(&n)"
+
+#: commandpanel.cpp:79
+msgid "New &document"
+msgstr "新文档(&d)"
+
+#: commandpanel.cpp:100
+msgid "Variables"
+msgstr "变量"
+
+#: findreplacepanel.cpp:27
+msgid "Find:"
+msgstr "查找:"
+
+#: findreplacepanel.cpp:28
+#: findreplacepanel.cpp:29
+msgid " "
+msgstr ""
+
+#: findreplacepanel.cpp:41
+msgid "Replace with:"
+msgstr "替换为:"
+
+#: findreplacepanel.cpp:53
+msgid "Find &Next"
+msgstr "查找下一个(&N)"
+
+#: findreplacepanel.cpp:60
+msgid "&Replace"
+msgstr "替换(&R)"
+
+#: findreplacepanel.cpp:67
+msgid "Replace &All"
+msgstr "全部替换(&A)"
+
+#: findreplacepanel.cpp:75
+#: globalreplacedialog.cpp:58
+msgid "&Match case"
+msgstr "匹配大小写(&M)"
+
+#: findreplacepanel.cpp:82
+msgid "Re&gex"
+msgstr "正则表达式(&g)"
+
+#: globalreplacedialog.cpp:30
+#: globalreplacedialog.cpp:111
+msgid "Global Find and Replace"
+msgstr "全局搜索并替换"
+
+#: globalreplacedialog.cpp:36
+msgid "&Find what: "
+msgstr "查找内容(&F):"
+
+#: globalreplacedialog.cpp:38
+msgid "Replace with: "
+msgstr "替换为:"
+
+#: globalreplacedialog.cpp:54
+msgid "&Regex"
+msgstr "正则表达式(&R)"
+
+#: globalreplacedialog.cpp:62
+msgid "R&eplace in all open documents"
+msgstr "在所有打开的文件中替换(&e)"
+
+#: globalreplacedialog.cpp:107
+msgid "Cannot compile regular expression '"
+msgstr "不能够识别正则表达式 '"
+
+#: globalreplacedialog.cpp:126
+msgid "Provides a space for you to type the text you want to find"
+msgstr "提供一个空白栏让您输入您想查找的文本"
+
+#: globalreplacedialog.cpp:130
+msgid "Provides a space for you to type the text you want to replace the text you typed in Find what"
+msgstr "提供一个空白栏来输入新的文本以替换刚才在“查找内容”中输入的文本"
+
+#: globalreplacedialog.cpp:134
+msgid "Finds only text with lowercase and uppercase letters as specified in Find what"
+msgstr "仅在“查找内容”中查找符合指定的大小写字母的文本"
+
+#: globalreplacedialog.cpp:138
+msgid "Extends the scope to all open documents"
+msgstr "扩展范围到所有已打开的文档"
+
+#: globalreplacedialog.cpp:142
+msgid "Interprets the text specified in Find what as a regular expression"
+msgstr "把“查找内容”中的文本作为正则表达式来解释"
+
+#: globalreplacedialog.cpp:146
+msgid "Finds all instances of the text specified in Find what and replaces them with the text in Replace with"
+msgstr "在\"查找内容\"中查找所有该文本的实例并以\"替换\"中的文本替换它们"
+
+#: globalreplacedialog.cpp:150
+msgid "Closes the dialog box without saving any changes you have made"
+msgstr "关闭对话框时不保存您所作的任何改变"
+
+#: mynotebook.cpp:65
+#: xmlcopyeditor.cpp:4936
+msgid "Close"
+msgstr "关闭"
+
+#: mynotebook.cpp:66
+msgid "Close all"
+msgstr "全部关闭"
+
+#: mypropertysheet.cpp:53
+msgid "Font"
+msgstr "字体"
+
+#: mypropertysheet.cpp:68
+msgid "I&ntelligent backspace/delete"
+msgstr "智能的退格/删除(&n)"
+
+#: mypropertysheet.cpp:71
+msgid "&Tag completion"
+msgstr "标签补全(&T)"
+
+#: mypropertysheet.cpp:74
+msgid "&Folding"
+msgstr "折叠(&F)"
+
+#: mypropertysheet.cpp:77
+msgid "&Highlight current line"
+msgstr "高亮当前行(&H)"
+
+#: mypropertysheet.cpp:80
+msgid "&Indentation guides"
+msgstr "缩进辅助线(&I)"
+
+#: mypropertysheet.cpp:83
+msgid "&Always insert closing tag"
+msgstr "总是插入关闭标签(&A)"
+
+#: mypropertysheet.cpp:87
+msgid "&Line numbers"
+msgstr "行号(&L)"
+
+#: mypropertysheet.cpp:90
+msgid "L&ock hidden tags"
+msgstr "锁定隐藏的标签(&L)"
+
+#: mypropertysheet.cpp:93
+msgid "&White space visible"
+msgstr "空白字符可见(&W)"
+
+#: mypropertysheet.cpp:96
+msgid "&Validate as you type"
+msgstr "验证您所输入的内容(&V)"
+
+#: mypropertysheet.cpp:99
+msgid "Va&riable highlight in tag free view"
+msgstr "在隐藏标签视图中高亮变量(&r)"
+
+#: mypropertysheet.cpp:139
+msgid "Application directory"
+msgstr "应用程序目录"
+
+#: mypropertysheet.cpp:155
+#: xmlcopyeditor.cpp:4660
+#: xmlcopyeditor.cpp:5040
+#: xmlcopyeditor.cpp:5044
+msgid "Browser"
+msgstr "浏览"
+
+#: mypropertysheet.cpp:172
+msgid "Language (restart required)"
+msgstr "语言 (需要重新启动)"
+
+#: mypropertysheet.cpp:210
+msgid "&Enable network access for DTD validation"
+msgstr "允许访问网络来进行 DTD 验证(&E)"
+
+#: mypropertysheet.cpp:213
+msgid "E&xpand internal entities on open"
+msgstr "打开时展开内部的实体(&x)"
+
+#: mypropertysheet.cpp:216
+msgid "&One application instance only"
+msgstr "只允许一个应用程序实例(&O)"
+
+#: mypropertysheet.cpp:219
+msgid "Re&member layout on close"
+msgstr "关闭时记住版面布局(&m)"
+
+#: mypropertysheet.cpp:222
+msgid "&Remember open tabs on close"
+msgstr "关闭时记住已打开的标签(&R)"
+
+#: mypropertysheet.cpp:225
+msgid "Re&tain undo history on save"
+msgstr "保存时保留撤销历史(&t)"
+
+#: mypropertysheet.cpp:229
+msgid "&Save UTF-8 byte order mark"
+msgstr "保存 UTF-8 字节顺序标记(&S)"
+
+#: mypropertysheet.cpp:233
+msgid "S&how full path on frame"
+msgstr "在框架上显示完整路径(&h)"
+
+#: mypropertysheet.cpp:238
+msgid "&Use Microsoft rebar control (restart required)"
+msgstr "使用 Microsoft 可升降工具栏(需要重新启动)"
+
+#: mypropertysheet.cpp:272
+msgid "General"
+msgstr "常规"
+
+#: mypropertysheet.cpp:273
+msgid "Editor"
+msgstr "编辑器"
+
+#: mypropertysheet.cpp:298
+msgid "Cannot access application directory"
+msgstr "不能访问应用程序目录"
+
+#: mypropertysheet.cpp:298
+#: xmlcopyeditor.cpp:2256
+msgid "Options"
+msgstr "选项"
+
+#: styledialog.cpp:42
+#: xmlcopyeditor.cpp:5047
+#: xmlcopyeditor.cpp:5051
+msgid "Spelling and Style"
+msgstr "拼写和风格"
+
+#: styledialog.cpp:78
+msgid "&Report"
+msgstr "报告(&R)"
+
+#: styledialog.cpp:96
+msgid "No."
+msgstr "No."
+
+#: styledialog.cpp:97
+#: styledialog.cpp:99
+msgid "Context"
+msgstr "上下文"
+
+#: styledialog.cpp:98
+msgid "Match"
+msgstr "匹配"
+
+#: styledialog.cpp:100
+msgid "Suggestion"
+msgstr "建议"
+
+#: styledialog.cpp:101
+msgid "Rule"
+msgstr "规则"
+
+#: styledialog.cpp:102
+msgid "Action"
+msgstr "动作"
+
+#: styledialog.cpp:110
+#: xmlcopyeditor.cpp:4906
+msgid "&Edit"
+msgstr "编辑(&E)"
+
+#: styledialog.cpp:118
+msgid "&Printable report"
+msgstr "可打印的报告(&P)"
+
+#: styledialog.cpp:126
+msgid "Pr&intable summary"
+msgstr "可打印的摘要(&i)"
+
+#: styledialog.cpp:134
+msgid "&Change all"
+msgstr "改变所有(&C)"
+
+#: styledialog.cpp:142
+msgid "I&gnore all"
+msgstr "忽略所有(&g)"
+
+#: styledialog.cpp:150
+msgid "C&ancel"
+msgstr "取消(&a)"
+
+#: styledialog.cpp:198
+msgid "(No rule sets found)"
+msgstr "(没有找到合符规则的集合)"
+
+#: styledialog.cpp:204
+#: xmlcopyeditor.cpp:613
+msgid "(No filter)"
+msgstr "(不过滤)"
+
+#: styledialog.cpp:227
+msgid "(No filters found)"
+msgstr "(没有找到过滤器)"
+
+#: styledialog.cpp:271
+#: styledialog.cpp:301
+#: styledialog.cpp:573
+#: styledialog.cpp:578
+msgid "Ignore"
+msgstr "忽略"
+
+#: styledialog.cpp:285
+msgid "Ignore once"
+msgstr "忽略一次"
+
+#: styledialog.cpp:287
+msgid "Ignore all"
+msgstr "忽略所有"
+
+#: styledialog.cpp:289
+msgid "Change once"
+msgstr "改变一次"
+
+#: styledialog.cpp:290
+msgid "Change all"
+msgstr "改变所有"
+
+#: styledialog.cpp:293
+msgid "New suggestion..."
+msgstr "新建议..."
+
+#: styledialog.cpp:316
+#: styledialog.cpp:349
+msgid "Creating report..."
+msgstr "正在生成报告..."
+
+#: styledialog.cpp:354
+msgid "Cannot create report: "
+msgstr "不能生成报告:"
+
+#: styledialog.cpp:387
+#, c-format
+msgid "%i match"
+msgid_plural "%i matches"
+msgstr[0] "%i 项匹配"
+msgstr[1] "%i 项匹配"
+
+#: styledialog.cpp:402
+msgid "No items selected"
+msgstr "没有项目被选择"
+
+#: styledialog.cpp:578
+#: styledialog.cpp:606
+msgid "Change"
+msgstr "改变"
+
+#: styledialog.cpp:731
+msgid "Enter new suggestion:"
+msgstr "输入新的建议:"
+
+#: styledialog.cpp:732
+msgid "New Suggestion"
+msgstr "新建议"
+
+#: xmlcopyeditor.cpp:313
+#: xmlcopyeditor.cpp:1151
+#: xmlcopyeditor.cpp:1245
+#: xmlcopyeditor.cpp:1420
+#: xmlcopyeditor.cpp:1445
+msgid "XML Copy Editor"
+msgstr "XML Copy Editor"
+
+#: xmlcopyeditor.cpp:329
+#: xmlcopyeditor.cpp:393
+msgid "(unknown error)"
+msgstr "(未知错误)"
+
+#: xmlcopyeditor.cpp:331
+msgid "XML Copy Editor has encountered the following error and needs to close: "
+msgstr "XML Copy Editor 遇到如下错误并需要关闭:"
+
+#: xmlcopyeditor.cpp:338
+#: xmlcopyeditor.cpp:341
+#: xmlcopyeditor.cpp:358
+#: xmlcopyeditor.cpp:363
+#: xmlcopyeditor.cpp:402
+#: xmlcopyeditor.cpp:422
+#: xmlcopyeditor.cpp:434
+#: xmlcopyeditor.cpp:440
+#: xmlcopyeditor.cpp:469
+msgid "Error"
+msgstr "错误"
+
+#: xmlcopyeditor.cpp:357
+#: xmlcopyeditor.cpp:362
+#: xmlcopyeditor.cpp:429
+msgid "XML Copy Editor has encountered an error and needs to close."
+msgstr "XML Copy Editor 遇到一个错误并需要关闭."
+
+#: xmlcopyeditor.cpp:379
+#: xmlcopyeditor.cpp:458
+msgid "The operating system has turned down a request for additional memory"
+msgstr "操作系统已经拒绝额外内存的请求"
+
+#: xmlcopyeditor.cpp:380
+#: xmlcopyeditor.cpp:459
+#: xmlcopyeditor.cpp:2827
+msgid "Out of memory"
+msgstr "内存不足"
+
+#: xmlcopyeditor.cpp:395
+msgid "The following error has occurred: "
+msgstr "出现如下的错误:"
+
+#: xmlcopyeditor.cpp:397
+msgid ""
+".\n"
+"\n"
+"Select \"Abort\" to exit, \"Retry\" to close this window and \"Ignore\" to continue."
+msgstr ""
+".\n"
+"\n"
+"选择\"中止\"来退出,\"重试\"来关闭这个窗口,\"忽略\"以继续."
+
+#: xmlcopyeditor.cpp:611
+#: xmlcopyeditor.cpp:662
+msgid "Default dictionary and style"
+msgstr "默认字典和风格"
+
+#: xmlcopyeditor.cpp:663
+msgid "No filter"
+msgstr "不用过滤"
+
+#: xmlcopyeditor.cpp:782
+#: xmlcopyeditor.cpp:790
+msgid "Current Element"
+msgstr "当前元素"
+
+#: xmlcopyeditor.cpp:783
+#: xmlcopyeditor.cpp:789
+msgid "Insert Element"
+msgstr "插入元素"
+
+#: xmlcopyeditor.cpp:784
+#: xmlcopyeditor.cpp:788
+msgid "Insert Sibling"
+msgstr "插入兄弟节点"
+
+#: xmlcopyeditor.cpp:785
+#: xmlcopyeditor.cpp:787
+msgid "Insert Entity"
+msgstr "插入实体"
+
+#: xmlcopyeditor.cpp:851
+msgid "Cannot open application directory: see Tools, Options..., General"
+msgstr "不能打开应用程序目录: 检查\"工具\",\"选项...\",\"常规\""
+
+#: xmlcopyeditor.cpp:1057
+msgid "Unknown command line switch (expecting 'w' or 's')"
+msgstr "未知的命令行开关(预期为 'w' 或 's')"
+
+#: xmlcopyeditor.cpp:1066
+msgid "Command line processing incomplete: no file specified"
+msgstr "命令行补全未完成: 没有指定的文件"
+
+#: xmlcopyeditor.cpp:1155
+msgid "Gerald Schmidt (development) <gnschmidt@users.sourceforge.net>"
+msgstr "Gerald Schmidt (开发) <gnschmidt@users.sourceforge.net>"
+
+#: xmlcopyeditor.cpp:1156
+msgid "Matt Smigielski (testing) <alectrus@users.sourceforge.net>"
+msgstr "Matt Smigielski (测试) <alectrus@users.sourceforge.net>"
+
+#: xmlcopyeditor.cpp:1157
+msgid "Viliam Búr (Slovak) <viliam@bur.sk>"
+msgstr "Viliam Búr (斯洛伐克语) <viliam@bur.sk>"
+
+#: xmlcopyeditor.cpp:1158
+msgid "David Håsäther (Swedish) <hasather@gmail.com>"
+msgstr "David Håsäther (瑞典语) <hasather@gmail.com>"
+
+#: xmlcopyeditor.cpp:1159
+msgid "François Badier (French) <frabad@gmail.com>"
+msgstr "François Badier (法语) <frabad@gmail.com>"
+
+#: xmlcopyeditor.cpp:1160
+msgid "Thomas Wenzel (German) <thowen@users.sourceforge.net>"
+msgstr "Thomas Wenzel (德语) <thowen@users.sourceforge.net>"
+
+#: xmlcopyeditor.cpp:1161
+msgid "SHiNE CsyFeK (Chinese Simplified) <csyfek@gmail.com>"
+msgstr "SHiNE CsyFeK (简体中文) <csyfek@gmail.com>"
+
+#: xmlcopyeditor.cpp:1162
+msgid "HSU PICHAN, YANG SHUFUN, CHENG PAULIAN, CHUANG KUO-PING, Marcus Bingenheimer (Chinese Traditional)"
+msgstr "HSU PICHAN, YANG SHUFUN, CHENG PAULIAN, CHUANG KUO-PING, Marcus Bingenheimer (繁体中文)"
+
+#: xmlcopyeditor.cpp:1192
+msgid "Parse in progress..."
+msgstr "分析中..."
+
+#: xmlcopyeditor.cpp:1213
+msgid "well-formed"
+msgstr "格式良好的"
+
+#: xmlcopyeditor.cpp:1244
+msgid "Do you want to save the changes to "
+msgstr "您想要保存改变到"
+
+#: xmlcopyeditor.cpp:1372
+#: xmlcopyeditor.cpp:1374
+msgid "Attributes hidden"
+msgstr "隐藏属性"
+
+#: xmlcopyeditor.cpp:1379
+#: xmlcopyeditor.cpp:1381
+msgid "Tags hidden"
+msgstr "隐藏标签"
+
+#: xmlcopyeditor.cpp:1394
+#: xmlcopyeditor.cpp:1396
+msgid "Tags locked"
+msgstr "锁定标签"
+
+#: xmlcopyeditor.cpp:1459
+#: xmlcopyeditor.cpp:1461
+msgid "Modified"
+msgstr "已修改"
+
+#: xmlcopyeditor.cpp:1494
+#, c-format
+msgid "Ln %i Col %i"
+msgstr "行 %i 列 %i"
+
+#: xmlcopyeditor.cpp:1698
+msgid "Cannot open clipboard"
+msgstr "不能打开剪贴板"
+
+#: xmlcopyeditor.cpp:1703
+msgid "Cannot paste as new document: no text on clipboard"
+msgstr "不能粘贴为新文档: 剪贴板上没有文本"
+
+#: xmlcopyeditor.cpp:1788
+#: xmlcopyeditor.cpp:2478
+#, c-format
+msgid "%i replacement made"
+msgid_plural "%i replacements made"
+msgstr[0] "%i 项被替换"
+msgstr[1] "%i 项被替换"
+
+#: xmlcopyeditor.cpp:1814
+msgid "Preparing Print Preview..."
+msgstr "正在准备打印预览..."
+
+#: xmlcopyeditor.cpp:1835
+msgid "Preparing to print..."
+msgstr "准备打印..."
+
+#: xmlcopyeditor.cpp:1894
+#: xmlcopyeditor.cpp:1914
+msgid "Find"
+msgstr "查找"
+
+#: xmlcopyeditor.cpp:1921
+#: xmlcopyeditor.cpp:1952
+#: xmlcopyeditor.cpp:2046
+msgid "This functionality requires Microsoft Windows"
+msgstr "这项功能需要 Microsoft Windows"
+
+#: xmlcopyeditor.cpp:1927
+msgid "Import Microsoft Word Document"
+msgstr "导入 Microsoft Word 文档"
+
+#: xmlcopyeditor.cpp:1961
+#, c-format
+msgid "Cannot open %s for import"
+msgstr "不能打开 %s 以导入"
+
+#: xmlcopyeditor.cpp:1971
+msgid "Import in progress..."
+msgstr "导入中..."
+
+#: xmlcopyeditor.cpp:1979
+msgid "(lossless conversion requires version 2003 or later)"
+msgstr "(无损转换需要2003或其后的版本)"
+
+#: xmlcopyeditor.cpp:1986
+#: xmlcopyeditor.cpp:2103
+msgid "Cannot start Microsoft Word"
+msgstr "不能启动 Microsoft Word"
+
+#: xmlcopyeditor.cpp:1990
+#: xmlcopyeditor.cpp:2107
+msgid "A more recent version of Microsoft Word is required"
+msgstr "需要更新版本的 Microsoft Word"
+
+#: xmlcopyeditor.cpp:1997
+#, c-format
+msgid "Microsoft Word cannot save %s as XML"
+msgstr "Microsoft Word 不能保存 %s 为 XML"
+
+#: xmlcopyeditor.cpp:2002
+msgid "Microsoft Word cannot save this document as WordprocessingML "
+msgstr "Microsoft Word 不能保存这个文档为 WordprocessingML "
+
+#: xmlcopyeditor.cpp:2010
+msgid "Opening imported file..."
+msgstr "正在打开导入的文件..."
+
+#: xmlcopyeditor.cpp:2027
+msgid "Cannot open imported file"
+msgstr "不能打开导入的文件"
+
+#: xmlcopyeditor.cpp:2079
+msgid "Export Microsoft Word Document"
+msgstr "导出 Microsoft Word 文档"
+
+#: xmlcopyeditor.cpp:2096
+msgid "Export in progress..."
+msgstr "导出中..."
+
+#: xmlcopyeditor.cpp:2110
+#, c-format
+msgid "Microsoft Word cannot save %s"
+msgstr "Microsoft Word 不能保存 %s"
+
+#: xmlcopyeditor.cpp:2139
+msgid "Cannot save temporary file"
+msgstr "不能保存临时文件"
+
+#: xmlcopyeditor.cpp:2317
+msgid "Enter line number:"
+msgstr "输入行号:"
+
+#: xmlcopyeditor.cpp:2318
+msgid "Go To"
+msgstr "转到"
+
+#: xmlcopyeditor.cpp:2327
+#, c-format
+msgid "'%s' is not a valid line number"
+msgstr "'%s' 不是一个有效的行号"
+
+#: xmlcopyeditor.cpp:2356
+msgid "Replace"
+msgstr "替换"
+
+#: xmlcopyeditor.cpp:2377
+msgid "Find and Replace"
+msgstr "查找并替换"
+
+#: xmlcopyeditor.cpp:2468
+msgid "Cannot replace: "
+msgstr "不能替换:"
+
+#: xmlcopyeditor.cpp:2499
+msgid "XML document (*.xml)"
+msgstr "XML 文档 (*.xml)"
+
+#: xmlcopyeditor.cpp:2540
+msgid "Choose a document type:"
+msgstr "选择一项文档类型:"
+
+#: xmlcopyeditor.cpp:2540
+msgid "New Document"
+msgstr "新文档"
+
+#: xmlcopyeditor.cpp:2582
+#, c-format
+msgid "Document%i"
+msgstr "文档 %i"
+
+#: xmlcopyeditor.cpp:2640
+msgid "Open Large Document"
+msgstr "打开大型文档"
+
+#: xmlcopyeditor.cpp:2640
+#: xmlcopyeditor.cpp:5021
+#: xmlcopyeditor.cpp:5023
+msgid "Open"
+msgstr "打开"
+
+#: xmlcopyeditor.cpp:2666
+#: xmlcopyeditor.cpp:2698
+#: xmlcopyeditor.cpp:2888
+#, c-format
+msgid "Cannot open %s"
+msgstr "不能打开 %s"
+
+#: xmlcopyeditor.cpp:2674
+#: xmlcopyeditor.cpp:3174
+#, c-format
+msgid "%s is already open"
+msgstr "%s 已经打开"
+
+#: xmlcopyeditor.cpp:2794
+#, c-format
+msgid "Using local encoding because %s is neither valid UTF-8 nor well-formed XML: %s"
+msgstr "使用本地编码是因为 %s 既不是有效的 UTF-8 编码,也不是形式良好的 XML: %s"
+
+#: xmlcopyeditor.cpp:2826
+msgid "Do you want to open "
+msgstr "您想要打开"
+
+#: xmlcopyeditor.cpp:2826
+msgid " in large document mode?"
+msgstr "以大型文档的方式?"
+
+#: xmlcopyeditor.cpp:3032
+msgid "Opening spelling and style check in read-only mode: "
+msgstr "正在以只读模式打开拼写和风格检查:"
+
+#: xmlcopyeditor.cpp:3062
+msgid "Edited document empty"
+msgstr "编辑中的文档被清空"
+
+#: xmlcopyeditor.cpp:3159
+msgid "Save As"
+msgstr "另存为"
+
+#: xmlcopyeditor.cpp:3362
+#: xmlcopyeditor.cpp:3458
+#: xmlcopyeditor.cpp:3548
+msgid "Cannot save temporary copy for validation; please save or discard changes"
+msgstr "不能保存临时副本以验证;请保存或者忽略改变"
+
+#: xmlcopyeditor.cpp:3372
+msgid "DTD validation in progress..."
+msgstr "DTD验证中..."
+
+#: xmlcopyeditor.cpp:3396
+#: xmlcopyeditor.cpp:3491
+#: xmlcopyeditor.cpp:3575
+#: xmlcopyeditor.cpp:3611
+msgid "valid"
+msgstr "有效的"
+
+#: xmlcopyeditor.cpp:3418
+msgid "Select RELAX NG grammar"
+msgstr "选择 RELAX NG 语法"
+
+#: xmlcopyeditor.cpp:3419
+#: xmlcopyeditor.cpp:3770
+#: xmlcopyeditor.cpp:5355
+msgid "Choose a file:"
+msgstr "选择一个文件:"
+
+#: xmlcopyeditor.cpp:3420
+msgid "RELAX NG grammar"
+msgstr "RELAX NG 语法"
+
+#: xmlcopyeditor.cpp:3466
+msgid "RELAX NG validation in progress..."
+msgstr "RELAX NG 验证中..."
+
+#: xmlcopyeditor.cpp:3568
+msgid "Validation in progress..."
+msgstr "验证中..."
+
+#: xmlcopyeditor.cpp:3578
+msgid "MSXML validation failed (version 4.0 or later required)"
+msgstr "MSXML 验证失败(需要4.0甚至更高的版本)"
+
+#: xmlcopyeditor.cpp:3588
+msgid "Validation error"
+msgstr "验证错误"
+
+#: xmlcopyeditor.cpp:3657
+msgid "Enter XPath:"
+msgstr "输入 XPath:"
+
+#: xmlcopyeditor.cpp:3658
+msgid "Evaluate XPath"
+msgstr "鉴定 XPath"
+
+#: xmlcopyeditor.cpp:3694
+msgid "Cannot evaluate XPath"
+msgstr "不能鉴定 XPath"
+
+#: xmlcopyeditor.cpp:3705
+msgid "No matching nodes found"
+msgstr "没有找到匹配的结点"
+
+#: xmlcopyeditor.cpp:3756
+#, c-format
+msgid "Cannot open stylesheet %s"
+msgstr "不能打开样式表 %s"
+
+#: xmlcopyeditor.cpp:3769
+msgid "Select stylesheet"
+msgstr "选择样式表"
+
+#: xmlcopyeditor.cpp:3771
+#: xmlcopyeditor.cpp:5328
+msgid "XSLT stylesheet"
+msgstr "XSLT 样式表"
+
+#: xmlcopyeditor.cpp:3825
+msgid "XSL transformation in progress..."
+msgstr "XSL 转换中..."
+
+#: xmlcopyeditor.cpp:3834
+msgid "Cannot transform: "
+msgstr "不能转换:"
+
+#: xmlcopyeditor.cpp:3842
+msgid "Output document empty"
+msgstr "输出文档被清空"
+
+#: xmlcopyeditor.cpp:3872
+msgid "Pretty-printing in progress..."
+msgstr "整齐打印中..."
+
+#: xmlcopyeditor.cpp:3891
+msgid "Cannot pretty-print: "
+msgstr "不能整齐打印:"
+
+#: xmlcopyeditor.cpp:3902
+msgid "Pretty-print unsuccessful: output document empty"
+msgstr "整齐打印不成功:输出文档被清空"
+
+#: xmlcopyeditor.cpp:3948
+msgid "Choose an encoding:"
+msgstr "选择一种编码:"
+
+#: xmlcopyeditor.cpp:3948
+msgid "Encoding"
+msgstr "编码"
+
+#: xmlcopyeditor.cpp:3971
+#: xmlcopyeditor.cpp:4013
+msgid "Cannot set encoding: "
+msgstr "不能设置编码:"
+
+#: xmlcopyeditor.cpp:3980
+#: xmlcopyeditor.cpp:4022
+msgid "Cannot set encoding (cannot open temporary file)"
+msgstr "不能设置编码(不能打开临时文件)"
+
+#: xmlcopyeditor.cpp:3991
+#: xmlcopyeditor.cpp:4033
+msgid "Cannot set encoding (cannot parse temporary file)"
+msgstr "不能设置编码(不能分析临时文件)"
+
+#: xmlcopyeditor.cpp:4203
+msgid "Cannot open in browser: no browser defined (see Tools, Options..., General)"
+msgstr "不能在浏览器中打开: 没有预定的浏览器(检查\"工具\",\"选项...\",\"常规\")"
+
+#: xmlcopyeditor.cpp:4211
+#, c-format
+msgid "Cannot open in browser: %s not found (see Tools, Options..., General)"
+msgstr "不能在浏览器中打开: 没有找到 %s (检查\"工具\",\"选项...\",\"常规\")"
+
+#: xmlcopyeditor.cpp:4276
+#, c-format
+msgid "Cannot find '%s'"
+msgstr "未能找到 '%s'"
+
+#: xmlcopyeditor.cpp:4339
+msgid ""
+"File has been modified by another application.\n"
+"Do you want to proceed?"
+msgstr ""
+"文件已被另一个程序修改.\n"
+"您想要继续吗?"
+
+#: xmlcopyeditor.cpp:4340
+msgid "Confirmation"
+msgstr "确认"
+
+#: xmlcopyeditor.cpp:4372
+#, c-format
+msgid "Encoding should be one of %s (file saved in default encoding UTF-8)"
+msgstr "编码应为 %s 之一(文件默认以 UTF-8 编码保存)"
+
+#: xmlcopyeditor.cpp:4417
+#, c-format
+msgid "Cannot save document in %s: %s (saved in default encoding UTF-8)"
+msgstr "不能以 %s 保存文档: %s (以默认编码 UTF-8 保存)"
+
+#: xmlcopyeditor.cpp:4432
+#: xmlcopyeditor.cpp:4442
+#, c-format
+msgid "Cannot save %s"
+msgstr "不能保存 %s"
+
+#: xmlcopyeditor.cpp:4448
+#, c-format
+msgid "Memory low: %s saved in large document mode"
+msgstr "内存快要耗尽: %s 以大型文档模式保存"
+
+#: xmlcopyeditor.cpp:4501
+msgid "MB"
+msgstr ""
+
+#: xmlcopyeditor.cpp:4506
+msgid "kB"
+msgstr ""
+
+#: xmlcopyeditor.cpp:4510
+msgid "byte"
+msgid_plural "bytes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: xmlcopyeditor.cpp:4518
+#, c-format
+msgid "%g %s saved"
+msgstr "%g %s 已保存"
+
+#: xmlcopyeditor.cpp:4547
+msgid "&Undo\tCtrl+Z"
+msgstr "撤销(&U)\tCtrl+Z"
+
+#: xmlcopyeditor.cpp:4547
+msgid "Undo"
+msgstr "撤销"
+
+#: xmlcopyeditor.cpp:4551
+msgid "&Redo\tCtrl+Y"
+msgstr "重做(&R)\tCtrl+Y"
+
+#: xmlcopyeditor.cpp:4551
+msgid "Redo"
+msgstr "重做"
+
+#: xmlcopyeditor.cpp:4555
+msgid "&Cut\tCtrl+X"
+msgstr "剪切(&C)\tCtrl+X"
+
+#: xmlcopyeditor.cpp:4555
+msgid "Cut"
+msgstr "剪切"
+
+#: xmlcopyeditor.cpp:4559
+msgid "C&opy\tCtrl+C"
+msgstr "复制(&o)\tCtrl+C"
+
+#: xmlcopyeditor.cpp:4559
+msgid "Copy"
+msgstr "复制"
+
+#: xmlcopyeditor.cpp:4563
+msgid "&Paste\tCtrl+V"
+msgstr "粘贴(&P)\tCtrl+V"
+
+#: xmlcopyeditor.cpp:4563
+msgid "Paste"
+msgstr "粘贴"
+
+#: xmlcopyeditor.cpp:4570
+msgid "P&aste As New Document"
+msgstr "粘贴为新文档(&a)"
+
+#: xmlcopyeditor.cpp:4571
+msgid "Paste As New Document"
+msgstr "粘贴为新文档"
+
+#: xmlcopyeditor.cpp:4575
+msgid "&Find...\tCtrl+F"
+msgstr "查找(&F)...\tCtrl+F"
+
+#: xmlcopyeditor.cpp:4575
+msgid "Find..."
+msgstr "查找..."
+
+#: xmlcopyeditor.cpp:4579
+msgid "F&ind Again\tF3"
+msgstr "重新查找(&i)\tF3"
+
+#: xmlcopyeditor.cpp:4579
+msgid "Find Again"
+msgstr "重新查找"
+
+#: xmlcopyeditor.cpp:4583
+msgid "&Replace...\tCtrl+R"
+msgstr "替换(&R)...\tCtrl+R"
+
+#: xmlcopyeditor.cpp:4583
+msgid "Replace..."
+msgstr "替换..."
+
+#: xmlcopyeditor.cpp:4590
+msgid "&Global Replace...\tCtrl+Shift+R"
+msgstr "全局替换(&G)...\tCtrl+Shift+R"
+
+#: xmlcopyeditor.cpp:4591
+msgid "Global Replace..."
+msgstr "全局替换..."
+
+#: xmlcopyeditor.cpp:4595
+msgid "G&o To...\tCtrl+G"
+msgstr "转到(G&)...\tCtrl+G"
+
+#: xmlcopyeditor.cpp:4595
+msgid "Go To..."
+msgstr "转到..."
+
+#: xmlcopyeditor.cpp:4616
+msgid "Increase\tCtrl+U"
+msgstr "增加\tCtrl+U"
+
+#: xmlcopyeditor.cpp:4616
+msgid "Increase"
+msgstr "增加"
+
+#: xmlcopyeditor.cpp:4618
+msgid "Decrease\tCtrl+D"
+msgstr "减少\tCtrl+D"
+
+#: xmlcopyeditor.cpp:4618
+msgid "Decrease"
+msgstr "减少"
+
+#: xmlcopyeditor.cpp:4620
+msgid "Normal\tCtrl+0"
+msgstr "普通\tCtrl+0"
+
+#: xmlcopyeditor.cpp:4620
+msgid "Normal"
+msgstr "普通"
+
+#: xmlcopyeditor.cpp:4625
+msgid "&Default"
+msgstr "默认(&D)"
+
+#: xmlcopyeditor.cpp:4625
+msgid "Default"
+msgstr "默认"
+
+#: xmlcopyeditor.cpp:4628
+msgid "&Blue background, white text"
+msgstr "蓝色背景,白色字体(&B)"
+
+#: xmlcopyeditor.cpp:4629
+msgid "Blue background, white text"
+msgstr "蓝色背景,白色字体"
+
+#: xmlcopyeditor.cpp:4632
+msgid "&Light"
+msgstr "淡色的(&L)"
+
+#: xmlcopyeditor.cpp:4633
+msgid "Light"
+msgstr "淡色的"
+
+#: xmlcopyeditor.cpp:4636
+msgid "&None"
+msgstr "不使用(&N)"
+
+#: xmlcopyeditor.cpp:4637
+msgid "None"
+msgstr "不使用"
+
+#: xmlcopyeditor.cpp:4658
+msgid "&Previous Document\tCtrl+PgUp"
+msgstr "前一个文档(&P)\tCtrl+PgUp"
+
+#: xmlcopyeditor.cpp:4658
+msgid "Previous Document"
+msgstr "前一个文档"
+
+#: xmlcopyeditor.cpp:4659
+msgid "&Next Document\tCtrl+PgDn"
+msgstr "后一个文档(&N)\tCtrl+PgDn"
+
+#: xmlcopyeditor.cpp:4659
+msgid "Next Document"
+msgstr "后一个文档"
+
+#: xmlcopyeditor.cpp:4660
+msgid "&Browser\tCtrl+B"
+msgstr "浏览器(&B)\tCtrl+B"
+
+#: xmlcopyeditor.cpp:4664
+msgid "&Show Tags and Attributes\tCtrl+T"
+msgstr "显示标签和属性(&S)\tCtrl+T"
+
+#: xmlcopyeditor.cpp:4664
+msgid "Show Tags and Attributes"
+msgstr "显示标签和属性"
+
+#: xmlcopyeditor.cpp:4667
+msgid "&Hide Attributes Only\tCtrl+Shift+A"
+msgstr "仅隐藏属性(&H)\tCtrl+Shift+A"
+
+#: xmlcopyeditor.cpp:4667
+msgid "Hide Attributes Only"
+msgstr "仅隐藏属性"
+
+#: xmlcopyeditor.cpp:4670
+msgid "H&ide Tags and Attributes\tCtrl+Shift+T"
+msgstr "隐藏标签和属性(&i)\tCtrl+Shift+T"
+
+#: xmlcopyeditor.cpp:4670
+msgid "Hide Tags and Attributes"
+msgstr "隐藏标签和属性"
+
+#: xmlcopyeditor.cpp:4689
+msgid "&Toggle Fold"
+msgstr "切换折叠(&T)"
+
+#: xmlcopyeditor.cpp:4689
+msgid "Toggle Fold"
+msgstr "切换折叠"
+
+#: xmlcopyeditor.cpp:4691
+msgid "&Fold Tags\tCtrl+Shift+F"
+msgstr "折叠标签(&F)\tCtrl+Shift+F"
+
+#: xmlcopyeditor.cpp:4691
+msgid "Fold Tags"
+msgstr "折叠标签"
+
+#: xmlcopyeditor.cpp:4693
+msgid "&Unfold Tags\tCtrl+Shift+U"
+msgstr "展开标签(&U)\tCtrl+Shift+U"
+
+#: xmlcopyeditor.cpp:4696
+msgid "&Wrap Words\tCtrl+W"
+msgstr "文字自动换行(&W)\tCtrl+W"
+
+#: xmlcopyeditor.cpp:4698
+msgid "&Color Scheme"
+msgstr "配色方案(&C)"
+
+#: xmlcopyeditor.cpp:4699
+msgid "&Text Size"
+msgstr "字体大小(&T)"
+
+#: xmlcopyeditor.cpp:4704
+msgid "S&how Current Element Pane"
+msgstr "显示当前元素窗格(&h)"
+
+#: xmlcopyeditor.cpp:4705
+msgid "Show Current ElementPane"
+msgstr "显示当前元素窗格"
+
+#: xmlcopyeditor.cpp:4708
+msgid "Sh&ow Toolbar"
+msgstr "显示工具栏(&o)"
+
+#: xmlcopyeditor.cpp:4708
+msgid "Show Toolbar"
+msgstr "显示工具栏"
+
+#: xmlcopyeditor.cpp:4711
+msgid "C&lose Message/Find/Command Panes\tAlt+C"
+msgstr "关闭消息/查找/命令窗格(&l)\tAlt+C"
+
+#: xmlcopyeditor.cpp:4711
+msgid "Close Message/Find/Command Panes"
+msgstr "关闭消息/查找/命令窗格"
+
+#: xmlcopyeditor.cpp:4715
+msgid "&Element...\tCtrl+I"
+msgstr "元素(&E)...\tCtrl+I"
+
+#: xmlcopyeditor.cpp:4715
+msgid "Element..."
+msgstr "元素..."
+
+#: xmlcopyeditor.cpp:4716
+msgid "&Sibling...\tCtrl+Shift+I"
+msgstr "兄弟结点(&S)...\tCtrl+Shift+I"
+
+#: xmlcopyeditor.cpp:4716
+msgid "Sibling..."
+msgstr "兄弟结点..."
+
+#: xmlcopyeditor.cpp:4717
+msgid "&Entity...\tCtrl+E"
+msgstr "实体(&E)...\tCtrl+E"
+
+#: xmlcopyeditor.cpp:4717
+msgid "Entity..."
+msgstr "实体..."
+
+#: xmlcopyeditor.cpp:4719
+msgid "&Twin\tCtrl+Enter"
+msgstr "孪生结点(&T)\tCtrl+Enter"
+
+#: xmlcopyeditor.cpp:4719
+msgid "Twin"
+msgstr "孪生结点"
+
+#: xmlcopyeditor.cpp:4721
+msgid "S&ymbol..."
+msgstr "特殊符号(&y)..."
+
+#: xmlcopyeditor.cpp:4721
+msgid "Symbol..."
+msgstr "特殊符号..."
+
+#: xmlcopyeditor.cpp:4725
+msgid "&DTD\tF4"
+msgstr "DTD(&D)\tF4"
+
+#: xmlcopyeditor.cpp:4725
+msgid "DTD"
+msgstr "DTD"
+
+#: xmlcopyeditor.cpp:4727
+msgid "&XML Schema\tF5"
+msgstr "XML Schema(&X)\tF5"
+
+#: xmlcopyeditor.cpp:4727
+#: xmlcopyeditor.cpp:5322
+msgid "XML Schema"
+msgstr "XML Schema"
+
+#: xmlcopyeditor.cpp:4730
+msgid "&RELAX NG...\tF6"
+msgstr "RELAX NG(&R)...\tF6"
+
+#: xmlcopyeditor.cpp:4730
+msgid "RELAX NG..."
+msgstr "RELAX NG..."
+
+#: xmlcopyeditor.cpp:4733
+msgid "&Public DTD..."
+msgstr "公共 DTD(&P)..."
+
+#: xmlcopyeditor.cpp:4733
+msgid "Public DTD..."
+msgstr "公共 DTD..."
+
+#: xmlcopyeditor.cpp:4734
+msgid "&System DTD..."
+msgstr "系统 DTD(&S)..."
+
+#: xmlcopyeditor.cpp:4734
+msgid "System DTD..."
+msgstr "系统 DTD..."
+
+#: xmlcopyeditor.cpp:4735
+msgid "&XML Schema..."
+msgstr "XML Schema(&X)..."
+
+#: xmlcopyeditor.cpp:4735
+msgid "XML Schema..."
+msgstr "XML Schema..."
+
+#: xmlcopyeditor.cpp:4736
+msgid "XS&LT stylesheet..."
+msgstr "XSLT 样式表(&L)..."
+
+#: xmlcopyeditor.cpp:4736
+msgid "XSLT stylesheet..."
+msgstr "XSLT 样式表..."
+
+#: xmlcopyeditor.cpp:4751
+#: xmlcopyeditor.cpp:4762
+#, c-format
+msgid "\tCtrl+%i"
+msgstr "\tCtrl+%i"
+
+#: xmlcopyeditor.cpp:4771
+msgid "&XSL Transform...\tF8"
+msgstr "XSL 转换(&X)...\tF8"
+
+#: xmlcopyeditor.cpp:4772
+msgid "XSL Transform..."
+msgstr "XSL 转换..."
+
+#: xmlcopyeditor.cpp:4776
+msgid "&DocBook to HTML\tAlt+1"
+msgstr "DocBook 转为 HTML(&D)\tAlt+1"
+
+#: xmlcopyeditor.cpp:4776
+msgid "DocBook to HTML"
+msgstr "DocBook 转为 HTML"
+
+#: xmlcopyeditor.cpp:4779
+msgid "&DocBook to XHTML\tAlt+2"
+msgstr "DocBook 转为 XHTML(&D)\tAlt+2"
+
+#: xmlcopyeditor.cpp:4779
+msgid "DocBook to XHTML"
+msgstr "DocBook 转为 XHTML"
+
+#: xmlcopyeditor.cpp:4782
+msgid "D&ocBook to XSL-FO\tAlt+3"
+msgstr "DocBook 转为 XSL-FO(&o)\tAlt+3"
+
+#: xmlcopyeditor.cpp:4782
+msgid "DocBook to XSL-FO"
+msgstr "DocBook 转为 XSL-FO"
+
+#: xmlcopyeditor.cpp:4785
+msgid "&TEI to HTML\tAlt+4"
+msgstr "TEI 转为 HTML(&T)\tAlt+4"
+
+#: xmlcopyeditor.cpp:4785
+msgid "TEI to HTML"
+msgstr "TEI 转为 HTML"
+
+#: xmlcopyeditor.cpp:4788
+msgid "T&EI to LaTeX\tAlt+5"
+msgstr "TEI 转为 LaTeX(&E)\tAlt+5"
+
+#: xmlcopyeditor.cpp:4788
+msgid "TEI to LaTeX"
+msgstr "TEI 转为 LaTeX"
+
+#: xmlcopyeditor.cpp:4791
+msgid "TE&I to XHTML\tAlt+6"
+msgstr "TEI 转为 XHTML(&I)\tAlt+6"
+
+#: xmlcopyeditor.cpp:4791
+msgid "TEI to XHTML"
+msgstr "TEI 转为 XHTML"
+
+#: xmlcopyeditor.cpp:4794
+msgid "TEI to &XSL-FO\tAlt+7"
+msgstr "TEI 转为 XSL-FO(&X)\tAlt+7"
+
+#: xmlcopyeditor.cpp:4794
+msgid "TEI to XSL-FO"
+msgstr "TEI 转为 XSL-FO"
+
+#: xmlcopyeditor.cpp:4800
+msgid "&Check Well-formedness\tF2"
+msgstr "检查是否形式良好(&C)\tF2"
+
+#: xmlcopyeditor.cpp:4800
+msgid "Check Well-formedness"
+msgstr "检查是否形式良好"
+
+#: xmlcopyeditor.cpp:4803
+msgid "&Validate"
+msgstr "验证(&V)"
+
+#: xmlcopyeditor.cpp:4808
+msgid "&Associate"
+msgstr "关联(&A)"
+
+#: xmlcopyeditor.cpp:4811
+msgid "&XSLT"
+msgstr "XSLT(&X)"
+
+#: xmlcopyeditor.cpp:4814
+msgid "&Evaluate XPath...\tF9"
+msgstr "鉴定 XPath(&E)...\tF9"
+
+#: xmlcopyeditor.cpp:4815
+msgid "Evaluate XPath..."
+msgstr "鉴定 XPath..."
+
+#: xmlcopyeditor.cpp:4820
+msgid "&Pretty-print\tF11"
+msgstr "整齐打印(&P)\tF11"
+
+#: xmlcopyeditor.cpp:4820
+msgid "Pretty-print"
+msgstr "整齐打印"
+
+#: xmlcopyeditor.cpp:4824
+msgid "&Lock Tags\tCtrl+L"
+msgstr "锁定标签(&L)\tCtrl+L"
+
+#: xmlcopyeditor.cpp:4825
+#: xmlcopyeditor.cpp:5055
+#: xmlcopyeditor.cpp:5058
+msgid "Lock Tags"
+msgstr "锁定标签"
+
+#: xmlcopyeditor.cpp:4830
+msgid "E&ncoding..."
+msgstr "编码(&n)..."
+
+#: xmlcopyeditor.cpp:4830
+msgid "Encoding..."
+msgstr "编码..."
+
+#: xmlcopyeditor.cpp:4839
+msgid "&Spelling and Style...\tF7"
+msgstr "拼写和风格(&S)...\tF7"
+
+#: xmlcopyeditor.cpp:4840
+msgid "Spelling and Style..."
+msgstr "拼写和风格..."
+
+#: xmlcopyeditor.cpp:4847
+msgid "&Word Count"
+msgstr "字词统计(&W)"
+
+#: xmlcopyeditor.cpp:4848
+msgid "Word Count"
+msgstr "字词统计"
+
+#: xmlcopyeditor.cpp:4855
+msgid "&Command\tCtrl+Alt+C"
+msgstr "命令(&C)\tCtrl+Alt+C"
+
+#: xmlcopyeditor.cpp:4856
+msgid "Command"
+msgstr "命令"
+
+#: xmlcopyeditor.cpp:4863
+msgid "&Options..."
+msgstr "选项(&O)..."
+
+#: xmlcopyeditor.cpp:4864
+msgid "Options..."
+msgstr "选项..."
+
+#: xmlcopyeditor.cpp:4879
+msgid "&XML Copy Editor Help\tF1"
+msgstr "XML Copy Editor 帮助(&X)\tF1"
+
+#: xmlcopyeditor.cpp:4879
+msgid "Help"
+msgstr "帮助"
+
+#: xmlcopyeditor.cpp:4883
+msgid "&Home Page"
+msgstr "主页(&H)"
+
+#: xmlcopyeditor.cpp:4883
+msgid "Home Page"
+msgstr "主页"
+
+#: xmlcopyeditor.cpp:4886
+msgid "&Forum"
+msgstr "论坛(&F)"
+
+#: xmlcopyeditor.cpp:4886
+msgid "Forum"
+msgstr "论坛"
+
+#: xmlcopyeditor.cpp:4890
+msgid "&About XML Copy Editor"
+msgstr "关于 XML Copy Editor(&A)"
+
+#: xmlcopyeditor.cpp:4890
+msgid "About"
+msgstr "关于"
+
+#: xmlcopyeditor.cpp:4894
+msgid "&Download Source"
+msgstr "下载源代码(&D)"
+
+#: xmlcopyeditor.cpp:4894
+msgid "Download Source"
+msgstr "下载源代码"
+
+#: xmlcopyeditor.cpp:4905
+msgid "&File"
+msgstr "文件(&F)"
+
+#: xmlcopyeditor.cpp:4907
+msgid "&View"
+msgstr "查看(&V)"
+
+#: xmlcopyeditor.cpp:4908
+msgid "&Insert"
+msgstr "插入(&I)"
+
+#: xmlcopyeditor.cpp:4909
+msgid "&XML"
+msgstr "XML(&X)"
+
+#: xmlcopyeditor.cpp:4910
+msgid "&Tools"
+msgstr "工具(&T)"
+
+#: xmlcopyeditor.cpp:4911
+msgid "&Help"
+msgstr "帮助(&H)"
+
+#: xmlcopyeditor.cpp:4926
+msgid "&New...\tCtrl+N"
+msgstr "新建(&N)...\tCtrl+N"
+
+#: xmlcopyeditor.cpp:4926
+msgid "New..."
+msgstr "新建..."
+
+#: xmlcopyeditor.cpp:4929
+msgid "&Open...\tCtrl+O"
+msgstr "打开(&O)...\tCtrl+O"
+
+#: xmlcopyeditor.cpp:4929
+msgid "Open..."
+msgstr "打开..."
+
+#: xmlcopyeditor.cpp:4933
+msgid "O&pen Large Document...\tCtrl+Shift+O"
+msgstr "打开大型文档(&p)...\tCtrl+Shift+O"
+
+#: xmlcopyeditor.cpp:4933
+msgid "Open Large Document..."
+msgstr "打开大型文档..."
+
+#: xmlcopyeditor.cpp:4936
+msgid "&Close\tCtrl+F4"
+msgstr "关闭(&C)\tCtrl+F4"
+
+#: xmlcopyeditor.cpp:4939
+msgid "C&lose All"
+msgstr "关闭全部(&l)"
+
+#: xmlcopyeditor.cpp:4939
+msgid "Close All"
+msgstr "关闭全部"
+
+#: xmlcopyeditor.cpp:4942
+msgid "&Save\tCtrl+S"
+msgstr "保存(&S)\tCtrl+S"
+
+#: xmlcopyeditor.cpp:4942
+#: xmlcopyeditor.cpp:5026
+#: xmlcopyeditor.cpp:5030
+msgid "Save"
+msgstr "保存"
+
+#: xmlcopyeditor.cpp:4946
+msgid "S&ave As...\tF12"
+msgstr "另存为(&a)...\tF12"
+
+#: xmlcopyeditor.cpp:4946
+msgid "Save As..."
+msgstr "另存为..."
+
+#: xmlcopyeditor.cpp:4949
+msgid "&Revert"
+msgstr "恢复(&R)"
+
+#: xmlcopyeditor.cpp:4949
+msgid "Revert"
+msgstr "恢复"
+
+#: xmlcopyeditor.cpp:4952
+msgid "Pa&ge Setup..."
+msgstr "页面设置(&g)..."
+
+#: xmlcopyeditor.cpp:4952
+msgid "Page Setup..."
+msgstr "页面设置..."
+
+#: xmlcopyeditor.cpp:4955
+msgid "P&rint Preview..."
+msgstr "打印预览(&r)..."
+
+#: xmlcopyeditor.cpp:4955
+msgid "Print Preview..."
+msgstr "打印预览..."
+
+#: xmlcopyeditor.cpp:4958
+msgid "Pr&int...\tCtrl+P"
+msgstr "打印(&i)...\tCtrl+P"
+
+#: xmlcopyeditor.cpp:4958
+msgid "Print..."
+msgstr "打印..."
+
+#: xmlcopyeditor.cpp:4962
+msgid "I&mport Microsoft Word Document..."
+msgstr "导入 Microsoft Word 文档(&m)..."
+
+#: xmlcopyeditor.cpp:4966
+msgid "&Export Microsoft Word Document..."
+msgstr "导出 Microsoft Word 文档(&E)..."
+
+#: xmlcopyeditor.cpp:4970
+msgid "E&xit"
+msgstr "退出(&x)"
+
+#: xmlcopyeditor.cpp:4970
+msgid "Exit"
+msgstr "退出"
+
+#: xmlcopyeditor.cpp:5016
+#: xmlcopyeditor.cpp:5018
+msgid "New"
+msgstr "新建"
+
+#: xmlcopyeditor.cpp:5033
+#: xmlcopyeditor.cpp:5037
+msgid "Print"
+msgstr "打印"
+
+#: xmlcopyeditor.cpp:5101
+msgid "Information"
+msgstr "信息"
+
+#: xmlcopyeditor.cpp:5104
+msgid "Warning"
+msgstr "警告"
+
+#: xmlcopyeditor.cpp:5107
+msgid "Stopped"
+msgstr "停止"
+
+#: xmlcopyeditor.cpp:5110
+msgid "Question"
+msgstr "问题"
+
+#: xmlcopyeditor.cpp:5113
+msgid "Message"
+msgstr "消息"
+
+#: xmlcopyeditor.cpp:5169
+#, c-format
+msgid "%s is %s"
+msgstr "%s 是 %s"
+
+#: xmlcopyeditor.cpp:5194
+msgid "Document has been modified: save or discard changes"
+msgstr "文档已经更改:保存还是忽略改变呢"
+
+#: xmlcopyeditor.cpp:5255
+msgid "Encoding should be one of "
+msgstr "编码应为如下的一种:"
+
+#: xmlcopyeditor.cpp:5310
+msgid "Public DTD"
+msgstr "公共 DTD"
+
+#: xmlcopyeditor.cpp:5316
+msgid "System DTD"
+msgstr "系统 DTD"
+
+#: xmlcopyeditor.cpp:5346
+#, c-format
+msgid "Cannot associate %s: %s"
+msgstr "不能关联 %s: %s"
+
+#: xmlcopyeditor.cpp:5354
+#, c-format
+msgid "Associate %s"
+msgstr "关联 %s"
+
+#: xmlcopyeditor.cpp:5362
+msgid "Choose a public identifier:"
+msgstr "选择一个公共标识符:"
+
+#: xmlcopyeditor.cpp:5509
+#, c-format
+msgid "Cannot count words: %s"
+msgstr "不能统计字词: %s"
+
+#: xmlcopyeditor.cpp:5517
+#, c-format
+msgid "%s contains %i word"
+msgid_plural "%s contains %i words"
+msgstr[0] "%s 包含 %i 个字词"
+msgstr[1] "%s 包含 %i 个字词"
+
+#: xmlctrl.cpp:191
+#: xmlctrl.cpp:326
+msgid "Delete tag?"
+msgstr "删除标签吗?"
+
+#: xmlctrl.cpp:192
+#: xmlctrl.cpp:223
+#: xmlctrl.cpp:327
+#: xmlctrl.cpp:358
+msgid "Tags Locked"
+msgstr "标签已锁定"
+
+#: xmlctrl.cpp:222
+#: xmlctrl.cpp:357
+msgid "Delete entity reference?"
+msgstr "删除实体参考吗?"
+
+#~ msgid "%s %s %s %s"
+#~ msgstr "%s %s %s %s"
+#~ msgid "XML Copy Editor has encountered an error and needs to close"
+#~ msgstr "XML Copy Editor 遇到一个错误并需要关闭"
+

@@ -1,0 +1,30 @@
+<!ELEMENT answer (#PCDATA | feedback | fraction | text | tolerance)*>
+<!ATTLIST answer
+	fraction CDATA #IMPLIED
+>
+<!ELEMENT correctfeedback (text)>
+<!ELEMENT defaultgrade (#PCDATA)>
+<!ELEMENT feedback (text)>
+<!ELEMENT fraction (#PCDATA)>
+<!ELEMENT generalfeedback (text)>
+<!ELEMENT hidden (#PCDATA)>
+<!ELEMENT image EMPTY>
+<!ELEMENT incorrectfeedback (text)>
+<!ELEMENT name (text)>
+<!ELEMENT partiallycorrectfeedback (text)>
+<!ELEMENT penalty (#PCDATA)>
+<!ELEMENT question (name | questiontext | image | generalfeedback | defaultgrade | penalty | hidden | shuffleanswers | answer | subquestion | single | correctfeedback | incorrectfeedback | partiallycorrectfeedback | usecase)+>
+<!ATTLIST question
+	type (multichoice|truefalse|shortanswer|match|cloze|essay|numerical|description) #REQUIRED
+>
+<!ELEMENT questiontext (text)>
+<!ATTLIST questiontext
+	format (moodle_auto_format|html|plain_text|markdown) #REQUIRED
+>
+<!ELEMENT quiz (question+)>
+<!ELEMENT shuffleanswers (#PCDATA)>
+<!ELEMENT single (#PCDATA)>
+<!ELEMENT subquestion (text, answer)>
+<!ELEMENT text (#PCDATA)>
+<!ELEMENT tolerance (#PCDATA)>
+<!ELEMENT usecase (#PCDATA)>

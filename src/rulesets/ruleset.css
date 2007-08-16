@@ -1,0 +1,68 @@
+/* Use Times New Roman for default font */
+$DOCUMENT
+{
+  font-family: "Times New Roman";
+  font-size: 12pt;
+  margin-top: 5px;
+  margin-left: 5px;
+}
+
+$COMMENT {
+  display: block;
+  color: purple;
+  white-space: pre;
+}
+
+$PROCINS {
+  color: black;
+  background-color: #c0c0c0;
+}
+
+ruleset {
+  display: block;
+}
+
+rule {
+  display: block;
+}
+
+regex {
+  display: block;
+}
+
+find {
+  display: block;
+}
+
+replace {
+  display: block;
+}
+
+dictionary {
+  display: block;
+}
+
+term {
+  display: block;
+}
+
+title {
+  display: block;
+}
+
+copyright {
+  display: block;
+}
+
+exclude {
+  display: block;
+}
+
+include {
+  display: block;
+}
+
+report {
+  display: block;
+}
+
