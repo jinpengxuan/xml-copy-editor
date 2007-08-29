@@ -215,6 +215,10 @@ MyApp::MyApp() : checker(NULL), server(NULL), connection(NULL),
       break;
     case wxLANGUAGE_FRENCH:
       systemLocale = wxLANGUAGE_FRENCH;
+      break;
+    case wxLANGUAGE_UKRAINIAN:
+      systemLocale = wxLANGUAGE_UKRAINIAN;
+      break;
     default:
       systemLocale = wxLANGUAGE_ENGLISH_US;
       break;
@@ -1179,6 +1183,7 @@ void MyFrame::OnAbout(wxCommandEvent& WXUNUSED(event))
   info.AddTranslator(_("Thomas Wenzel (German) <thowen@users.sourceforge.net>"));
   info.AddTranslator(_("SHiNE CsyFeK (Chinese Simplified) <csyfek@gmail.com>"));
   info.AddTranslator(_("HSU PICHAN, YANG SHUFUN, CHENG PAULIAN, CHUANG KUO-PING, Marcus Bingenheimer (Chinese Traditional)"));
+  info.AddTranslator(_("Serhij Dubyk <dubyk@library.lviv.ua>"));
   info.SetLicense(ABOUT_LICENSE);
   info.SetDescription(ABOUT_DESCRIPTION);
   wxAboutBox(info);
