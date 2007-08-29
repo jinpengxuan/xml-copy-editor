@@ -4220,7 +4220,7 @@ void MyFrame::OnHome(wxCommandEvent& event)
 
 void MyFrame::OnDownloadSource(wxCommandEvent& event)
 {
-  navigate(_T("https://sourceforge.net/project/showfiles.php?group_id=141776")); 
+  navigate(_T("http://xml-copy-editor.svn.sourceforge.net/viewvc/xml-copy-editor/")); 
 }
 
 void MyFrame::OnToolbarVisible(wxCommandEvent& event)
@@ -5196,7 +5196,7 @@ MyMenuBar *MyFrame::getMenuBar()
   aboutItem->SetBitmap(wxNullBitmap);
   wxMenuItem *downloadSourceItem =
     new wxMenuItem(NULL, ID_DOWNLOAD_SOURCE,
-    _("&Download Source"), _("Download Source"));
+    _("&Browse Source"), _("Browse Source"));
   downloadSourceItem->SetBitmap(wxNullBitmap);
   helpMenu->Append(helpItem);
   helpMenu->AppendSeparator();
