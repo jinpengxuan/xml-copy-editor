@@ -510,7 +510,3004 @@ MyFrame::MyFrame(
   mainBook(0),
   restoreFocusToNotebook(false)
 {
- saveRawUtf8(
+  manager.SetManagedWindow(this);
+  
+  lastPos = 0;
+  htmlReport = NULL;
+  lastDoc = NULL;
+  
+  wxString defaultFont = 
+#ifdef __WXMSW__  
+  _T("Arial");
+#else
+  _T("Bitstream Vera Sans");
+#endif
+
+#ifdef __WXMSW__
+  coolBar = NULL;
+#endif
+
+  bool findMatchCase;
+
+  // fetch configuration
+  if (config) // config found
+  {
+    history.Load(*config);
+    properties.insertCloseTag =
+      config->Read(_T("insertCloseTag"), true);
+    properties.completion = 
+      config->Read(_T("completion"), true);
+    properties.number =
+      config->Read(_T("number"), true);
+    properties.fold =
+      config->Read(_T("fold"), true);
+    properties.currentLine =
+      config->Read(_T("currentLine"), true);
+    properties.highlightSyntax =
+      config->Read(_T("highlightSyntax"), true);
+    properties.whitespaceVisible =
+      config->Read(_T("whitespaceVisible"), true);
+    properties.indentLines =
+      config->Read(_T("indentLines"), true);
+    properties.toggleLineBackground =
+      config->Read(_T("toggleLineBackground"), true);
+    properties.protectHiddenElements =
+      config->Read(_T("protectHiddenElements"), true);
+    properties.deleteWholeTag =
+      config->Read(_T("deleteWholeTag"), true);
+    properties.validateAsYouType =
+      config->Read(_T("validateAsYouType"), true);
+    properties.font =
+      config->Read(_T("font"), defaultFont);
+    findRegex =
+      config->Read(_T("findRegex"), true);
+    xpathExpression =
+      config->Read(_T("xpathExpression"), wxEmptyString);
+    lastXslStylesheet =
+      config->Read(_T("lastXslStylesheet"), wxEmptyString);
+    lastRelaxNGSchema =
+      config->Read(_T("lastRelaxNGSchema"), wxEmptyString);
+
+    lastXslStylesheet.Replace(_T(" "), _T("%20"), true);
+    lastRelaxNGSchema.Replace(_T(" "), _T("%20"), true);  
+   
+    applicationDir =
+      config->Read(_T("applicationDir"), wxEmptyString);
+    if (applicationDir.empty())
+    {
+#ifdef __WXMSW__
+      applicationDir =
+        config->Read(_T("InstallPath"), wxGetCwd());
+#else
+      applicationDir = GetLinuxAppDir::run();
+#endif
+    }
+    browserCommand = 
+      config->Read(_T("browserCommand"), wxEmptyString);
+    
+    // if default value != true, type as long int
+    long valZoom, longFalse;
+    longFalse = false;
+    valZoom = 0;
+    frameWidth = frameHeight = framePosX = framePosY = 0;
+
+    properties.wrap =
+      config->Read(_T("wrap"), longFalse);
+
+    properties.zoom =
+      config->Read(_T("zoom"), valZoom);
+
+    properties.colorScheme = config->Read(_T("colorScheme"), COLOR_SCHEME_DEFAULT);
+
+    globalReplaceAllDocuments =
+      config->Read(_T("globalReplaceAllDocuments"), longFalse);
+    showFullPathOnFrame =
+      config->Read(_T("showFullPathOnFrame"), longFalse);
+    findMatchCase =
+      config->Read(_T("findMatchCase"), longFalse);
+
+    commandSync = config->Read(_T("commandSync"), longFalse);
+    commandOutput = config->Read(_T("commandOutput"), ID_COMMAND_OUTPUT_IGNORE);
+    commandString = config->Read(_T("commandString"), wxEmptyString);
+
+    ruleSetPreset =
+      config->Read(_T("ruleSetPreset"), _("Default dictionary and style"));
+    filterPreset =
+      config->Read(_T("filterPreset"), _("(No filter)"));
+    findData.SetFindString(config->Read(_T("findReplaceFind"), _T("")));
+    findData.SetReplaceString(config->Read(_T("findReplaceReplace"), _T("")));
+
+    toolbarVisible =
+      config->Read(_T("toolbarVisible"), true);
+    protectTags = config->Read(_T("protectTags"), longFalse);
+    visibilityState = config->Read(_T("visibilityState"), ID_SHOW_TAGS);
+   
+    framePosX = config->Read(_T("framePosX"), framePosX);
+    framePosY = config->Read(_T("framePosY"), framePosY);
+    frameWidth = config->Read(_T("frameWidth"), frameWidth);
+    frameHeight = config->Read(_T("frameHeight"), frameHeight);
+    rememberOpenTabs = config->Read(_T("rememberOpenTabs"), true);
+    libxmlNetAccess = config->Read(_T("libxmlNetAccess"), longFalse);
+    openTabsOnClose = config->Read(_T("openTabsOnClose"), _T(""));
+    notebookStyle = config->Read(_T("notebookStyle"), ID_NOTEBOOK_STYLE_VC8_COLOR);
+    saveBom = config->Read(_T("saveBom"), true);
+    unlimitedUndo = config->Read(_T("unlimitedUndo"), true);
+    layout = config->Read(_T("layout"), wxEmptyString);
+    restoreLayout = config->Read(_T("restoreLayout"), true);
+    showLocationPane = config->Read(_T("showLocationPane"), true);
+    showInsertChildPane = config->Read(_T("showInsertChildPane"), true);
+    showInsertSiblingPane = config->Read(_T("showInsertSiblingPane"), true);
+    showInsertEntityPane = config->Read(_T("showInsertEntityPane"), true);
+    expandInternalEntities = config->Read(_T("expandInternalEntities"), true);
+
+#ifdef __WXMSW__
+    useCoolBar = config->Read(_T("useCoolBar"), true);
+#endif
+  }
+  else // config not found
+  {
+    properties.insertCloseTag =
+      properties.completion =
+      properties.currentLine =
+      properties.indentLines = 
+      properties.protectHiddenElements = 
+      properties.toggleLineBackground = 
+      properties.deleteWholeTag = 
+      properties.highlightSyntax = true;
+    properties.font = defaultFont;
+    properties.wrap = properties.whitespaceVisible = false;
+    properties.zoom = 0;
+    properties.colorScheme = COLOR_SCHEME_DEFAULT;
+#ifdef __WXMSW__
+    applicationDir = wxGetCwd();
+#else
+    applicationDir = GetLinuxAppDir::run();//getLinuxApplicationDir();
+#endif
+    ruleSetPreset = _("Default dictionary and style");
+    filterPreset = _("No filter");
+    xpathExpression = lastXslStylesheet = lastRelaxNGSchema = wxEmptyString;
+    findRegex = true;
+    findMatchCase = globalReplaceAllDocuments =
+      showFullPathOnFrame = false;
+    toolbarVisible = true;
+    protectTags = false;
+    visibilityState = SHOW_TAGS;
+    framePosX = framePosY = frameWidth = frameHeight = 0;
+    rememberOpenTabs = true;
+    libxmlNetAccess = false;
+    openTabsOnClose = wxEmptyString;
+    browserCommand = wxEmptyString;
+    notebookStyle = ID_NOTEBOOK_STYLE_VC8_COLOR;
+    saveBom = unlimitedUndo = true;
+    layout = wxEmptyString;
+    restoreLayout = true;
+    showLocationPane = true;
+    showInsertChildPane = true;
+    showInsertSiblingPane = true;
+    showInsertEntityPane = true;
+    expandInternalEntities = true;
+    properties.validateAsYouType = true;
+    
+    commandSync = false;
+    commandOutput = ID_COMMAND_OUTPUT_IGNORE;
+    commandString = wxEmptyString;
+    
+#ifdef __WXMSW__
+    useCoolBar = true;
+#endif
+  }
+
+  largeFileProperties.completion = false;
+  largeFileProperties.fold = false;
+  largeFileProperties.whitespaceVisible = false;
+  largeFileProperties.wrap = false;
+  largeFileProperties.indentLines = false;
+  largeFileProperties.protectHiddenElements = false;
+  largeFileProperties.toggleLineBackground = false;
+  largeFileProperties.toggleLineBackground = false;
+  largeFileProperties.insertCloseTag = false;
+  largeFileProperties.deleteWholeTag = false;
+  largeFileProperties.highlightSyntax = false;
+  largeFileProperties.validateAsYouType = false;
+  largeFileProperties.number = properties.number;
+  largeFileProperties.currentLine = properties.currentLine;
+  largeFileProperties.font = properties.font;
+  largeFileProperties.zoom = 0;
+  largeFileProperties.colorScheme = COLOR_SCHEME_NONE;
+
+  updatePaths();
+  loadBitmaps();
+
+  size_t findFlags = 0;
+  findFlags |= wxFR_DOWN;
+
+  if (findMatchCase)
+    findFlags |= wxFR_MATCHCASE; 
+
+  findData.SetFlags(findFlags);
+
+  if (browserCommand.empty())
+  {
+#ifdef __WXMSW__
+    browserCommand = binDir + _T("navigate.exe");
+#else
+    browserCommand = getLinuxBrowser();
+#endif
+  }
+
+  // initialise document count for tab labels
+  documentCount = 1;
+  
+  SetIcon(wxICON(appicon));
+  
+  CreateStatusBar();
+  wxStatusBar *status = GetStatusBar();
+  int widths[] = { -24, -6, -6, -6, -8 };
+  status->SetFieldsCount(5);
+  status->SetStatusWidths(5, widths);
+  
+  if (!frameWidth ||
+    !frameHeight ||
+    frameWidth < 0 ||
+    frameHeight < 0 ||
+    framePosX < 0 ||
+    framePosY < 0)
+  {
+#ifdef __WXMSW__
+    Maximize();
+#else
+    SetSize(50, 50, 640, 480);
+#endif
+  }
+  else
+  {
+    SetSize(framePosX, framePosY, frameWidth, frameHeight);
+  }
+
+  stylePosition = aboutPosition = wxDefaultPosition;
+  styleSize = wxSize(720, 540);
+
+#ifdef __WXMSW__
+  useCoolBarOnStart = useCoolBar;  
+#endif
+  
+  showTopBars(toolbarVisible);
+  
+  long style = wxAUI_NB_TOP |
+    wxAUI_NB_TAB_SPLIT |
+    wxAUI_NB_TAB_MOVE |
+    wxAUI_NB_WINDOWLIST_BUTTON |
+    wxAUI_NB_CLOSE_ON_ALL_TABS |
+    wxNO_BORDER;
+
+  mainBook = new MyNotebook(
+    this,
+    ID_NOTEBOOK,
+    wxDefaultPosition,
+    wxDefaultSize,
+    style);
+
+  manager.AddPane(mainBook, wxAuiPaneInfo().CenterPane()
+    .PaneBorder(false).Name(_T("documentPane")));
+  manager.GetPane(mainBook).dock_proportion = 10;
+  
+  // add insert child panes
+  locationPanel = new LocationPanel(this, ID_LOCATION_PANEL);
+  insertChildPanel = new InsertPanel(this, ID_INSERT_CHILD_PANEL,
+    INSERT_PANEL_TYPE_CHILD);
+  insertSiblingPanel = new InsertPanel(this, ID_INSERT_SIBLING_PANEL,
+    INSERT_PANEL_TYPE_SIBLING);
+  insertEntityPanel = new InsertPanel(this, ID_INSERT_ENTITY_PANEL,
+    INSERT_PANEL_TYPE_ENTITY);
+
+#ifdef __WXMSW__
+  manager.AddPane((wxWindow *)locationPanel, wxRIGHT, _("Current Element")); 
+  manager.AddPane((wxWindow *)insertChildPanel, wxRIGHT, _("Insert Element"));  
+  manager.AddPane((wxWindow *)insertSiblingPanel, wxRIGHT, _("Insert Sibling"));
+  manager.AddPane((wxWindow *)insertEntityPanel, wxRIGHT, _("Insert Entity"));
+#else
+  manager.AddPane((wxWindow *)insertEntityPanel, wxRIGHT, _("Insert Entity"));
+  manager.AddPane((wxWindow *)insertSiblingPanel, wxRIGHT, _("Insert Sibling"));
+  manager.AddPane((wxWindow *)insertChildPanel, wxRIGHT, _("Insert Element"));  
+  manager.AddPane((wxWindow *)locationPanel, wxRIGHT, _("Current Element")); 
+#endif
+
+  manager.GetPane(locationPanel).Name(_T("locationPane")).Show(
+    (restoreLayout) ? showLocationPane : true).DestroyOnClose(false).PinButton(true);
+  manager.GetPane(locationPanel).dock_proportion = 1;
+
+  manager.GetPane(insertChildPanel).Name(_T("insertChildPane")).Show(
+    (restoreLayout) ? showInsertChildPane : true).DestroyOnClose(false).PinButton(true);
+  manager.GetPane(insertChildPanel).dock_proportion = 1;
+
+  manager.GetPane(insertSiblingPanel).Name(_T("insertSiblingPane")).Show(
+      (restoreLayout) ? showInsertSiblingPane : true).DestroyOnClose(false).PinButton(true);
+  manager.GetPane(insertSiblingPanel).dock_proportion = 1;
+
+  manager.GetPane(insertEntityPanel).Name(_T("insertEntityPane")).Show(
+      (restoreLayout) ? showInsertEntityPane : true).DestroyOnClose(false).PinButton(true);
+  manager.GetPane(insertEntityPanel).dock_proportion = 1;
+
+  // add (hidden) message pane
+  htmlReport = new MyHtmlPane(
+    this,
+		ID_VALIDATION_PANE,
+		wxDefaultPosition,
+		wxSize(-1, 48));
+#ifndef __WXMSW__
+  const int sizeArray[] = { 8, 9, 10, 11, 12, 13, 14 }; 
+  htmlReport->SetFonts(wxEmptyString, wxEmptyString, sizeArray);
+#endif
+  htmlReport->SetBorders(0);
+  manager.AddPane(htmlReport, wxAuiPaneInfo().Movable().Bottom()
+    .Hide().Name(_T("messagePane"))
+    .DestroyOnClose(false).Layer(1));
+  manager.GetPane(htmlReport).dock_proportion = 1;
+
+#ifdef NEWFINDREPLACE
+  findReplacePanel = new FindReplacePanel(
+    this,
+    ID_FIND_REPLACE_PANEL,
+    &findData,
+    true,
+    findRegex);
+
+  manager.AddPane(
+    (wxWindow *)findReplacePanel,
+    wxAuiPaneInfo().Bottom().Hide().Caption(wxEmptyString).
+      DestroyOnClose(false).Layer(2));
+#endif
+
+  commandPanel = new CommandPanel(
+    this,
+    wxID_ANY,
+    commandString, // tbd
+    commandSync, // tbd
+    commandOutput // tbd
+  );
+  manager.AddPane(
+    (wxWindow *)commandPanel,
+    wxAuiPaneInfo().Bottom().Hide().Caption(_T("Command")).DestroyOnClose(false).Layer(3));
+
+  if (!wxFileName::DirExists(applicationDir))
+    GetStatusBar()->SetStatusText(_("Cannot open application directory: see Tools, Options..., General"));
+
+  // handle command line and, on Windows, MS Word integration
+  handleCommandLineFlag = (wxTheApp->argc > 1) ? true : false;
+
+  if (rememberOpenTabs && !openTabsOnClose.empty())
+    openRememberedTabs();
+  else
+  {
+    if (!handleCommandLineFlag)
+      newDocument(wxEmptyString);
+  }
+  
+#ifdef __WXMSW__
+  DragAcceptFiles(true); // currently Windows only
+#endif
+
+  XmlDoc *doc = getActiveDocument();
+  insertEntityPanel->update(doc); // NULL is ok
+
+  manager.Update();
+  
+/*
+  defaultLayout = manager.SavePerspective();
+
+  // restore layout if req'd
+  if (restoreLayout && !layout.empty())
+  {
+    if (!manager.LoadPerspective(layout, true))
+      manager.LoadPerspective(defaultLayout, true);
+  }
+*/
+}
+
+MyFrame::~MyFrame()
+{
+  std::vector<wxString>::iterator it;
+  for (it = tempFileVector.begin(); it != tempFileVector.end(); it++)
+    wxRemoveFile(*it);
+
+  layout = manager.SavePerspective();
+  if (!config)
+    return;
+  history.Save(*config);
+  config->Write(_T("insertCloseTag"), properties.insertCloseTag);
+  config->Write(_T("completion"), properties.completion);
+  config->Write(_T("number"), properties.number);
+  config->Write(_T("fold"), properties.fold);
+  config->Write(_T("currentLine"), properties.currentLine);
+  config->Write(_T("whitespaceVisible"), properties.whitespaceVisible);
+  config->Write(_T("wrap"), properties.wrap);
+  config->Write(_T("indentLines"), properties.indentLines);
+  config->Write(_T("zoom"), properties.zoom);
+  config->Write(_T("colorScheme"), properties.colorScheme);
+  config->Write(_T("protectHiddenElements"), properties.protectHiddenElements);
+  config->Write(_T("toggleLineBackground"), properties.toggleLineBackground);
+  config->Write(_T("deleteWholeTag"), properties.deleteWholeTag);
+  config->Write(_T("validateAsYouType"), properties.validateAsYouType);
+  config->Write(_T("font"), properties.font);
+  config->Write(_T("highlightSyntax"), properties.highlightSyntax);
+  config->Write(_T("applicationDir"), applicationDir);
+  config->Write(_T("ruleSetPreset"), ruleSetPreset);
+  config->Write(_T("filterPreset"), filterPreset);
+  config->Write(_T("xpathExpression"), xpathExpression);
+  config->Write(_T("findReplaceFind"), findData.GetFindString());
+  config->Write(_T("findReplaceReplace"), findData.GetReplaceString());
+  config->Write(_T("globalReplaceAllDocuments"), globalReplaceAllDocuments);
+  config->Write(_T("showFullPathOnFrame"), showFullPathOnFrame);
+  config->Write(_T("toolbarVisible"), toolbarVisible);
+  config->Write(_T("protectTags"), protectTags);
+  config->Write(_T("visibilityState"), visibilityState);
+  config->Write(_T("browserCommand"), browserCommand);
+  config->Write(_T("layout"), layout);
+  config->Write(_T("showLocationPane"), manager.GetPane(locationPanel).IsShown());
+  config->Write(_T("showInsertChildPane"), manager.GetPane(insertChildPanel).IsShown());
+  config->Write(_T("showInsertSiblingPane"), manager.GetPane(insertSiblingPanel).IsShown());
+  config->Write(_T("showInsertEntityPane"), manager.GetPane(insertEntityPanel).IsShown());
+  config->Write(_T("expandInternalEntities"), expandInternalEntities);
+  config->Write(_T("findRegex"), findReplacePanel->getRegex());
+  config->Write(_T("findMatchCase"), (findData.GetFlags()) & wxFR_MATCHCASE);
+  config->Write(_T("commandSync"), commandPanel->getSync());
+  config->Write(_T("commandOutput"), commandPanel->getOutput());
+  config->Write(_T("commandString"), commandPanel->getCommand());
+  
+#ifdef __WXMSW__
+  config->Write(_T("useCoolBar"), useCoolBar);
+#endif
+
+  config->Write(_T("restoreLayout"), restoreLayout);
+
+
+  config->Write(_T("lastXslStylesheet"), lastXslStylesheet);
+  config->Write(_T("lastRelaxNGSchema"), lastRelaxNGSchema);
+
+  GetPosition(&framePosX, &framePosY);
+  config->Write(_T("framePosX"), framePosX);
+  config->Write(_T("framePosY"), framePosY);
+  GetSize(&frameWidth, &frameHeight);
+  config->Write(_T("frameWidth"), frameWidth);
+  config->Write(_T("frameHeight"), frameHeight);
+
+  config->Write(_T("rememberOpenTabs"), rememberOpenTabs);
+  config->Write(_T("openTabsOnClose"), openTabsOnClose);
+  config->Write(_T("libxmlNetAccess"), libxmlNetAccess);
+  
+  config->Write(_T("singleInstanceCheck"), singleInstanceCheck);
+  config->Write(_T("lang"), lang);
+  config->Write(_T("notebookStyle"), notebookStyle);
+  config->Write(_T("saveBom"), saveBom);
+  config->Write(_T("unlimitedUndo"), unlimitedUndo);
+  manager.UnInit();
+}
+
+wxString MyFrame::getLinuxBrowser()
+{
+  wxString s;
+  const int stringArrayLen = 9;
+  wxString stringArray[stringArrayLen];
+  stringArray[0] = _T("/usr/bin/firefox");
+  stringArray[1] = _T("/usr/bin/mozilla");
+  stringArray[2] = _T("/usr/bin/opera");
+  stringArray[3] = _T("/usr/bin/dillo");
+  stringArray[4] = _T("/opt/gnome/bin/epiphany");
+  stringArray[5] = _T("/opt/gnome/bin/galeon");
+  stringArray[6] = _T("/opt/kde/bin/konqueror");
+  stringArray[7] = _T("/opt/mozilla/bin/firefox");
+  stringArray[8] = wxEmptyString; // empty option is safe
+
+  for (int i = 0; i < stringArrayLen; i++)
+  {
+    s = stringArray[i];
+    if (wxFileName::FileExists(s))
+      break;
+  }
+  return s;
+}
+
+void MyFrame::showTopBars(bool b)
+{
+#ifdef __WXMSW__
+  if (useCoolBarOnStart)
+  {
+    if (coolBar)
+    {
+      manager.DetachPane(coolBar);
+      manager.Update();
+      coolBar->ShowBand(1, b);
+      manager.AddPane(coolBar, wxAuiPaneInfo().Top().CaptionVisible(false).Name(_T("coolBar")));
+    }
+    else
+    {
+      toolBar = getToolBar();
+      SetToolBar(NULL);
+      if (toolBar && protectTags)
+        toolBar->ToggleTool(ID_PROTECT_TAGS, protectTags);
+      menuBar = getMenuBar();
+      coolBar = new wxCoolBar(this, -1);
+      coolBar->AddBand(menuBar, false, wxEmptyString, true);
+      coolBar->AddBand(toolBar, true, wxEmptyString, true);
+      coolBar->ShowBand(1, b);
+      manager.AddPane(coolBar, wxAuiPaneInfo().Top().CaptionVisible(false).Name(_T("coolBar")));
+    }
+    return;
+  }
+#endif
+  if (!menuBar)
+  {
+    SetToolBar(NULL);
+    menuBar = getMenuBar();
+    SetMenuBar(menuBar);
+  }
+  if (b)
+  {
+    if (!toolBar)
+      toolBar = getToolBar();
+    SetToolBar(toolBar);
+  }
+  else
+  {
+    SetToolBar(NULL);
+    delete toolBar;
+    toolBar = NULL;
+  }
+}
+
+void MyFrame::handleCommandLine()
+{
+	bool wordFlag, styleFlag;
+  wordFlag = styleFlag = false;
+	wxChar c;
+	
+	int m_argc = wxTheApp->argc;
+	wxChar **m_argv = wxTheApp->argv;
+	
+	while ((--m_argc > 0 && (*++m_argv)[0] == L'-') != 0)
+	{
+		while ((c = *++m_argv[0]) != 0)
+		{
+			switch (c)
+			{
+				case L'w':
+					wordFlag = true;
+					break;
+				case L's':
+					styleFlag = true;
+					break;
+				default:
+          messagePane(_("Unknown command line switch (expecting 'w' or 's')"),
+            CONST_STOP);
+          return;
+			}
+    }
+	}
+
+  if (!(*m_argv))
+  {
+    messagePane(_("Command line processing incomplete: no file specified"),
+      CONST_STOP);
+    return;
+  }
+  
+  wxString fileName;
+
+  // no flags specified or not Windows
+#ifdef __WXMSW__
+  if (!styleFlag && !wordFlag)
+#endif
+  {
+    for (; *m_argv; ++m_argv)
+    {
+      fileName = wxString(*m_argv, wxConvLocal, wcslen(*m_argv));
+      fileName = PathResolver::run(fileName);
+      if (isOpen(fileName))
+        continue;
+      else if (!openFile(fileName))
+        break;
+    }
+    return;
+  }
+
+  // options only available on Windows
+  fileName = wxString(*m_argv, wxConvLocal, wcslen(*m_argv));
+  
+  // fetch as many parameters as possible
+  for (;;)
+  {
+    ++m_argv; 
+    if (!(*m_argv))
+      break;
+    ruleSetPreset = wxString(*m_argv, wxConvLocal, wcslen(*m_argv));
+    
+    ++m_argv;
+    if (!(*m_argv))
+      break;
+    filterPreset = wxString(*m_argv, wxConvLocal, wcslen(*m_argv));
+
+    ++m_argv;
+    if (!(*m_argv))
+      break;
+    applicationDir = wxString(*m_argv, wxConvLocal, wcslen(*m_argv));
+    updatePaths();
+
+    break;
+  }
+  if (wordFlag)
+    importMSWord(fileName);
+  else
+    openFile(fileName);
+
+  if (styleFlag && !ruleSetPreset.empty() && !filterPreset.empty())
+  {
+    wxCommandEvent e;
+    OnSpelling(e);
+  }
+}
+
+bool MyFrame::isOpen(const wxString& fileName)
+{
+  return (openFileSet.find(fileName) != openFileSet.end());
+}
+
+void MyFrame::activateTab(const wxString& fileName)
+{
+  int pageCount = mainBook->GetPageCount();
+  XmlDoc *currentDoc;
+  for (int i = 0; i < pageCount; ++i)
+  {
+    currentDoc = (XmlDoc *)mainBook->GetPage(i);
+    if (!currentDoc)
+      break;
+    if (currentDoc->getFullFileName() == fileName)
+    {
+      mainBook->SetSelection(i);
+      break;
+    }
+  }
+}
+
+void MyFrame::OnAbout(wxCommandEvent& WXUNUSED(event))
+{
+  wxAboutDialogInfo info;
+  info.SetName(_("XML Copy Editor"));
+  info.SetWebSite(_T("http://xml-copy-editor.sourceforge.net"));
+  info.SetVersion(ABOUT_VERSION);
+  info.SetCopyright(ABOUT_COPYRIGHT);
+  info.AddDeveloper(_("Gerald Schmidt (development) <gnschmidt@users.sourceforge.net>"));
+  info.AddDeveloper(_("Matt Smigielski (testing) <alectrus@users.sourceforge.net>"));
+  info.AddTranslator(_("Viliam Búr (Slovak) <viliam@bur.sk>"));
+  info.AddTranslator(_("David Håsäther (Swedish) <hasather@gmail.com>"));
+  info.AddTranslator(_("François Badier (French) <frabad@gmail.com>"));
+  info.AddTranslator(_("Thomas Wenzel (German) <thowen@users.sourceforge.net>"));
+  info.AddTranslator(_("SHiNE CsyFeK (Chinese Simplified) <csyfek@gmail.com>"));
+  info.AddTranslator(_("HSU PICHAN, YANG SHUFUN, CHENG PAULIAN, CHUANG KUO-PING, Marcus Bingenheimer (Chinese Traditional)"));
+  info.AddTranslator(_("Serhij Dubyk <dubyk@library.lviv.ua>"));
+  info.SetLicense(ABOUT_LICENSE);
+  info.SetDescription(ABOUT_DESCRIPTION);
+  wxAboutBox(info);
+  XmlDoc *doc;
+  if ((doc = getActiveDocument()) == NULL)
+    return;
+  doc->SetFocus();
+}
+
+void MyFrame::OnCheckWellformedness(wxCommandEvent& event)
+{
+  statusProgress(wxEmptyString);
+  XmlDoc *doc;
+  if ((doc = getActiveDocument()) == NULL)
+    return;
+
+  std::string utf8Buffer;
+  getRawText(doc, utf8Buffer);
+  if (utf8Buffer.empty())
+    return;
+
+  // handle unusual encodings
+  if (!XmlEncodingHandler::setUtf8(utf8Buffer))
+  {
+    encodingMessage();
+    return;
+  }
+
+  doc->clearErrorIndicators();
+  statusProgress(_("Parse in progress..."));
+
+  // check for well-formedness
+  auto_ptr<WrapExpat> we(new WrapExpat());
+  if (!we->parse(utf8Buffer.c_str()))
+  {
+    std::string error = we->getLastError();
+    wxString werror = wxString(error.c_str(), wxConvUTF8, error.size());
+    statusProgress(wxEmptyString);
+    messagePane(werror, CONST_WARNING);
+    std::pair<int, int> posPair = we->getErrorPosition();
+    --(posPair.first);
+    int cursorPos =
+      doc->PositionFromLine(posPair.first);
+    doc->SetSelection(cursorPos, cursorPos);
+
+    doc->setErrorIndicator(posPair.first, posPair.second);
+    return;
+  }
+
+  statusProgress(wxEmptyString);
+  documentOk(_("well-formed"));
+}
+
+void MyFrame::OnPageClosing(wxAuiNotebookEvent& event)//wxNotebookEvent& event)//wxFlatNotebookEvent& event)
+{
+  deletePageVetoed = false;
+
+  if (insertChildPanel && insertSiblingPanel && locationPanel)
+  {
+    insertChildPanel->update(NULL, wxEmptyString);
+    insertSiblingPanel->update(NULL, wxEmptyString);
+    locationPanel->update();
+    manager.Update();
+  }
+
+  XmlDoc *doc;
+  doc = (XmlDoc *)mainBook->GetPage(event.GetSelection());
+  if (!doc)
+    return;
+  
+  statusProgress(wxEmptyString);
+  closePane();
+  
+  if (doc->GetModify())//CanUndo())
+  {
+    int selection;
+    wxString fileName;
+    if ((selection = mainBook->GetSelection()) != -1)
+      fileName = doc->getShortFileName();
+       
+    int answer = wxMessageBox(
+      _("Do you want to save the changes to ") + fileName + _T("?"),
+      _("XML Copy Editor"),
+      wxYES_NO | wxCANCEL | wxICON_QUESTION,
+      this);
+
+    if (answer == wxCANCEL)
+    {
+      event.Veto();
+      deletePageVetoed = true;
+      return;
+    }
+    else if (answer == wxYES)
+    {
+      wxCommandEvent event;
+      OnSave(event);
+    }
+  }
+  statusProgress(wxEmptyString);
+  
+  openFileSet.erase(doc->getFullFileName());
+  event.Skip();
+}
+
+void MyFrame::OnClose(wxCommandEvent& WXUNUSED(event))
+{
+  closeActiveDocument();
+}
+
+void MyFrame::OnCloseAll(wxCommandEvent& WXUNUSED(event))
+{
+  if (!mainBook)
+    return;
+  openTabsOnClose = wxEmptyString;
+
+  // retain tab order
+  if (rememberOpenTabs && !openFileSet.empty())
+  {
+    XmlDoc *doc;
+    wxString fullPath;
+    size_t maxTabs = mainBook->GetPageCount();
+    for (size_t i = 0; i < maxTabs; ++i)
+    {
+      doc = (XmlDoc *)mainBook->GetPage(i);
+      if (doc)
+      {
+        fullPath = doc->getFullFileName();
+        if (!fullPath.empty())
+        {
+          openTabsOnClose.Append(fullPath);
+          openTabsOnClose.Append(_T("|"));
+        }
+      }
+    } 
+  }
+
+  while (closeActiveDocument())
+    ;
+}
+
+void MyFrame::OnClosePane(wxCommandEvent& WXUNUSED(event))
+{
+  closePane();
+  //closeFindReplacePane();
+  //closeCommandPane();
+  
+  XmlDoc *doc = getActiveDocument();
+  if (doc)
+    doc->SetFocus();
+}
+
+void MyFrame::closePane()
+{
+  if (!htmlReport)
+    return;
+  manager.GetPane(htmlReport).Hide();
+  manager.Update();
+
+  XmlDoc *doc;
+  if ((doc = getActiveDocument()) == NULL)
+    return;
+  doc->SetFocus();
+}
+
+void MyFrame::closeFindReplacePane()
+{
+  if (manager.GetPane(findReplacePanel).IsShown())
+    manager.GetPane(findReplacePanel).Hide();
+  manager.Update();
+}
+
+void MyFrame::closeCommandPane()
+{
+  if (manager.GetPane(commandPanel).IsShown())
+    manager.GetPane(commandPanel).Hide();
+  manager.Update();
+}
+
+bool MyFrame::panelHasFocus()
+{
+  XmlDoc *doc = getActiveDocument();
+  return (!doc || (FindFocus() != (wxWindow *)doc));
+}
+
+void MyFrame::OnCut(wxCommandEvent& event)
+{
+  if (panelHasFocus())
+  {
+    event.Skip();
+    return;
+  }
+
+  XmlDoc *doc;
+  if ((doc = getActiveDocument()) == NULL)
+    return;
+
+  if (protectTags)
+    doc->adjustSelection();
+
+  doc->Cut();
+  doc->setValidationRequired(true);
+}
+
+void MyFrame::OnCopy(wxCommandEvent& event)
+{
+  if (panelHasFocus())
+  {
+    event.Skip();
+    return;
+  }
+
+  XmlDoc *doc;
+  if ((doc = getActiveDocument()) == NULL)
+    return;
+  doc->Copy();
+}
+
+void MyFrame::OnPaste(wxCommandEvent& event)
+{
+  if (panelHasFocus())
+  {
+    event.Skip();
+    return;
+  }
+  XmlDoc *doc;
+  if ((doc = getActiveDocument()) == NULL)
+    return;
+
+  // this has to be handled here to override Scintilla's default Ctrl+V support
+  if (protectTags)
+  {
+    if (!wxTheClipboard->Open() || !wxTheClipboard->IsSupported(wxDF_TEXT))
+      return;
+    wxTextDataObject data;
+    wxTheClipboard->GetData(data);
+    wxString buffer = data.GetText();
+    xmliseWideTextNode(buffer);
+    doc->adjustCursor();
+    doc->AddText(buffer);
+  }
+  else
+    doc->Paste();
+
+  /*
+  XmlDoc *doc;
+  doc = getActiveDocument();
+  if (doc && protectTags)
+    doc->adjustCursor();
+
+  doc->setValidationRequired(true);
+  event.Skip(); // new
+  */
+}
+
+void MyFrame::OnIdle(wxIdleEvent& event)
+{
+  wxStatusBar *status = GetStatusBar();
+  if (!status)
+    return;
+
+  // update attributes hidden field even if no document loaded
+  wxString currentHiddenStatus = status->GetStatusText(STATUS_HIDDEN);
+  if (visibilityState == HIDE_ATTRIBUTES)
+  {
+    if (currentHiddenStatus != _("Attributes hidden"))
+      status->SetStatusText(
+        _("Attributes hidden"),
+        STATUS_HIDDEN);
+  }
+  else if (visibilityState == HIDE_TAGS)
+  {
+    if (currentHiddenStatus != _("Tags hidden"))
+      status->SetStatusText(
+        _("Tags hidden"),
+        STATUS_HIDDEN);
+  }
+  else
+  {
+    if (!currentHiddenStatus.empty())
+      status->SetStatusText(wxEmptyString, STATUS_HIDDEN);
+  }
+
+  // update protected field even if no document loaded
+  wxString currentProtectedStatus = status->GetStatusText(STATUS_PROTECTED);
+  if (protectTags)
+  {
+    if (currentProtectedStatus != _("Tags locked"))
+      status->SetStatusText(
+        _("Tags locked"),
+        STATUS_PROTECTED);
+  }
+  else
+  {
+    if (!currentProtectedStatus.empty())
+      status->SetStatusText(wxEmptyString, STATUS_PROTECTED);
+  }
+
+  // check if document loaded
+  wxString frameTitle = GetTitle();
+
+  XmlDoc *doc;
+  if ((doc = getActiveDocument()) == NULL)
+  {
+    if (lastDoc != NULL)
+    {
+      lastDoc = NULL;
+      status->SetStatusText(wxEmptyString, STATUS_MODIFIED);
+      status->SetStatusText(wxEmptyString, STATUS_POSITION);
+      locationPanel->update(NULL, wxEmptyString);
+      insertChildPanel->update(NULL, wxEmptyString);
+      insertSiblingPanel->update(NULL, wxEmptyString);
+      insertEntityPanel->update(NULL, wxEmptyString);
+      wxString minimal = _("XML Copy Editor");
+      if (frameTitle != minimal)
+        SetTitle(minimal);
+
+      closeFindReplacePane();
+
+      event.Skip();
+      manager.Update();
+    }
+    return;
+  }
+  
+  if (restoreFocusToNotebook)
+  {
+    doc->SetFocus();
+    restoreFocusToNotebook = false;
+  }
+
+  wxString docTitle;
+  if (doc->getFullFileName().empty() || !showFullPathOnFrame)
+    docTitle = doc->getShortFileName();
+  else
+    docTitle = doc->getFullFileName();
+
+  docTitle += _T(" - ");
+  docTitle += _("XML Copy Editor");
+  
+  if (frameTitle != docTitle)
+    SetTitle(docTitle);
+
+  // update modified field
+  if (!mainBook)
+    return;
+  int index = mainBook->GetSelection();
+
+  wxString currentModifiedStatus = status->GetStatusText(STATUS_MODIFIED);
+  wxString currentTabLabel = mainBook->GetPageText(index);
+  if (doc->GetModify())
+  {
+    if (currentModifiedStatus != _("Modified"))
+    {
+      status->SetStatusText(_("Modified"), STATUS_MODIFIED);
+      
+      if (!(currentTabLabel.Mid(0, 1) == _T("*")))
+      {
+        currentTabLabel.Prepend(_T("*"));
+        mainBook->SetPageText(index, currentTabLabel);
+      }
+    }
+  }
+  else
+  {
+    if (!currentModifiedStatus.empty())
+    {
+      status->SetStatusText(_T(""), STATUS_MODIFIED);
+
+      if (currentTabLabel.Mid(0, 1) == _T("*"))
+      {
+        currentTabLabel.Remove(0, 1);
+        mainBook->SetPageText(index, currentTabLabel);
+      }
+    }
+  }
+
+  // update coordinates field
+  std::pair<int, int> myControlCoordinates;
+  int current = doc->GetCurrentPos();
+  myControlCoordinates.first = doc->LineFromPosition(current) + 1;
+  myControlCoordinates.second = doc->GetColumn(current) + 1;
+
+  if (myControlCoordinates != controlCoordinates)
+  {
+    wxString coordinates;
+    coordinates.Printf(
+      _("Ln %i Col %i"),
+      myControlCoordinates.first,
+      myControlCoordinates.second);
+    GetStatusBar()->SetStatusText(coordinates, STATUS_POSITION);
+    controlCoordinates = myControlCoordinates;
+  }
+  
+  // update parent element field
+  wxString parent, grandparent;
+  if (current == lastPos && doc == lastDoc)
+    return;
+
+  lastPos = current;
+  lastDoc = doc;
+
+
+  // don't try to find parent if pane is not shown
+  if (!manager.GetPane(insertChildPanel).IsShown() && !properties.validateAsYouType)
+    return;
+
+  int parentCloseAngleBracket = -1;
+  if (!doc->canInsertAt(current))
+      parent = grandparent = wxEmptyString;
+  else
+  {
+    parentCloseAngleBracket = doc->getParentCloseAngleBracket(current);
+    parent = doc->getLastElementName(parentCloseAngleBracket);
+  }
+  
+  if (!parent.empty() && properties.validateAsYouType && doc->getValidationRequired())
+  {
+    // tbd: limit to parent element
+    doc->shallowValidate(doc->LineFromPosition(current), true);
+  }
+  
+
+  if (parent == lastParent)
+    return;
+  lastParent = parent;
+
+  bool mustUpdate = false;
+  if (locationPanel && insertChildPanel && insertEntityPanel)
+  {
+    locationPanel->update(doc, parent);
+    insertChildPanel->update(doc, parent);
+    insertEntityPanel->update(doc);    
+    mustUpdate = true;
+  }
+
+  if (parent.empty())
+  {
+    if (insertSiblingPanel)
+      insertSiblingPanel->update(doc, wxEmptyString);
+    if (mustUpdate)
+      manager.Update();
+    return;
+  }
+
+  if (!manager.GetPane(insertSiblingPanel).IsShown())
+  {
+    if (mustUpdate)
+      manager.Update();
+    return;
+  }
+
+  // try to fetch grandparent if necessary/possible
+  if (!parent.empty() && parentCloseAngleBracket != -1)
+  {
+    int grandParentCloseAngleBracket;
+    grandParentCloseAngleBracket =
+      doc->getParentCloseAngleBracket(
+        doc->getTagStartPos(parentCloseAngleBracket));
+    grandparent = doc->getLastElementName(grandParentCloseAngleBracket);
+
+    if (insertSiblingPanel)
+      insertSiblingPanel->update(doc, parent, grandparent);
+    if (grandparent != lastGrandparent)
+    {
+      mustUpdate = true;
+      lastGrandparent = grandparent;
+    }
+
+  }
+  if (mustUpdate)
+    manager.Update();
+}
+
+void MyFrame::OnInsertChild(wxCommandEvent& event)
+{
+  if (!insertChildPanel)
+    return;
+
+  wxAuiPaneInfo info = manager.GetPane(insertChildPanel);
+  if (!info.IsOk())
+  {
+    return;
+  }
+  if (!info.IsShown())
+  {
+    manager.GetPane(insertChildPanel).Show(true);
+    manager.Update();
+  } 
+  insertChildPanel->setEditFocus();
+}
+
+void MyFrame::OnInsertSibling(wxCommandEvent& event)
+{
+  if (!insertSiblingPanel)
+    return;
+
+  wxAuiPaneInfo info = manager.GetPane(insertSiblingPanel);
+  if (!info.IsOk())
+  {
+    return;
+  }
+
+  if (!info.IsShown())
+  {
+    manager.GetPane(insertSiblingPanel).Show(true);
+    manager.Update();
+  }
+  insertSiblingPanel->setEditFocus();
+}
+
+void MyFrame::OnInsertEntity(wxCommandEvent& event)
+{
+  if (!insertEntityPanel)
+    return;
+
+  wxAuiPaneInfo info = manager.GetPane(insertEntityPanel);
+  if (!info.IsOk())
+  {
+    return;
+  }
+
+  if (!info.IsShown())
+  {
+    manager.GetPane(insertEntityPanel).Show(true);
+    manager.Update();
+  }
+  insertEntityPanel->setEditFocus();
+}
+
+void MyFrame::OnInsertSymbol(wxCommandEvent& event)
+{
+  XmlDoc *doc;
+  if ((doc = getActiveDocument()) == NULL)
+    return;
+  wxSymbolPickerDialog dlg(_T("*"), wxEmptyString, properties.font, this);
+
+  if (dlg.ShowModal() == wxID_OK)
+  {
+    if (dlg.HasSelection())
+    {
+      doc->AddText(dlg.GetSymbol());
+    }
+  }
+}
+
+void MyFrame::OnInsertTwin(wxCommandEvent& event)
+{
+  XmlDoc *doc;
+  if ((doc = getActiveDocument()) == NULL)
+    return;
+
+  wxString parent = doc->getParent();
+  if (!doc->insertSibling(parent, parent))
+  {
+    wxString msg;
+    msg.Printf(_T("Cannot insert twin '%s'"), parent.c_str());
+    messagePane(msg, CONST_STOP);
+  }
+  doc->setValidationRequired(true);
+  doc->SetFocus();
+}
+
+void MyFrame::OnPasteNewDocument(wxCommandEvent& event)
+{
+  if (!wxTheClipboard->Open())
+  {
+    messagePane(_("Cannot open clipboard"), CONST_STOP);
+    return;
+  }
+  if (!wxTheClipboard->IsSupported(wxDF_TEXT))
+  {
+    messagePane(_("Cannot paste as new document: no text on clipboard"), CONST_STOP);
+    return;
+  }
+  wxTextDataObject data;
+  wxTheClipboard->GetData(data);
+
+  wxString buffer = data.GetText();
+  xmliseWideTextNode(buffer);
+
+  buffer.Prepend(_T("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<root>"));
+  buffer.Append(_T("</root>\n"));
+
+  newDocument(buffer);
+}
+
+void MyFrame::OnDialogFind(wxFindDialogEvent& event)
+{
+  findAgain(event.GetFindString(), event.GetFlags());
+}
+
+void MyFrame::OnDialogReplace(wxFindDialogEvent& event)
+{
+  statusProgress(wxEmptyString);
+  XmlDoc *doc;
+  if ((doc = getActiveDocument()) == NULL)
+    return;
+
+  int regexWidth = 0;
+  if (findReplacePanel->getRegex())
+  {
+    regexWidth = doc->ReplaceTargetRE(event.GetReplaceString());
+    //doc->SetTargetStart(newLocation + regexWidth);
+  }
+  else
+  {
+    doc->ReplaceTarget(event.GetReplaceString());
+    //doc->SetTargetStart(newLocation + event.GetReplaceString().size());
+  }
+  /*
+  if (doc->GetSelectionStart() != doc->GetSelectionEnd())
+    doc->ReplaceSelection(event.GetReplaceString());
+  */
+  OnDialogFind(event);
+}
+
+void MyFrame::OnDialogReplaceAll(wxFindDialogEvent& event)
+{
+  statusProgress(wxEmptyString);
+  XmlDoc *doc;
+  if ((doc = getActiveDocument()) == NULL)
+    return;
+
+  int flags = 0;
+  if (event.GetFlags() & wxFR_WHOLEWORD)
+    flags |= wxSTC_FIND_WHOLEWORD;
+  if (event.GetFlags() & wxFR_MATCHCASE)
+    flags |= wxSTC_FIND_MATCHCASE;
+  if (findReplacePanel->getRegex())
+    flags |= wxSTC_FIND_REGEXP;
+
+  doc->SetTargetStart(0);
+  doc->SetTargetEnd(doc->GetLength());
+  doc->SetSearchFlags(flags);
+  
+  int newLocation, replacementCount, regexWidth;
+  newLocation = replacementCount = regexWidth = 0;
+  
+  while ((newLocation = doc->SearchInTarget(event.GetFindString())) != -1)
+  {
+    if (findReplacePanel->getRegex())
+    {
+      regexWidth = doc->ReplaceTargetRE(event.GetReplaceString());
+      doc->SetTargetStart(newLocation + regexWidth);
+    }
+    else
+    {
+      doc->ReplaceTarget(event.GetReplaceString());
+      doc->SetTargetStart(newLocation + event.GetReplaceString().size());
+    }
+    doc->SetTargetEnd(doc->GetLength());
+    ++replacementCount;
+  }
+  wxString msg;
+  
+  msg.Printf(
+    ngettext(L"%i replacement made", L"%i replacements made", replacementCount),
+    replacementCount);
+  statusProgress(msg);
+}
+
+void MyFrame::OnPrintSetup(wxCommandEvent &WXUNUSED(event))
+{
+  if (!htmlPrinting.get())
+    return;
+  htmlPrinting->PageSetup();
+}
+
+void MyFrame::OnPrintPreview(wxCommandEvent &WXUNUSED(event))
+{
+  XmlDoc *doc;
+  if (!htmlPrinting.get() || (doc = getActiveDocument()) == NULL)
+    return;
+  wxString shortFileName, header;
+  shortFileName = doc->getShortFileName();
+  if (!shortFileName.empty())
+    header = shortFileName + _T(" ");
+  header += _T("(@PAGENUM@/@PAGESCNT@)<hr>");
+  
+  htmlPrinting->SetHeader(
+    header,
+    wxPAGE_ALL);
+  statusProgress(_("Preparing Print Preview..."));
+  wxString htmlBuffer = getHtmlBuffer();
+  statusProgress(wxEmptyString);
+  if (!(htmlPrinting->PreviewText(htmlBuffer)))
+    ;
+}
+
+void MyFrame::OnPrint(wxCommandEvent &WXUNUSED(event))
+{
+  XmlDoc *doc;
+  if (!htmlPrinting.get() || (doc = getActiveDocument()) == NULL)
+    return;
+  wxString shortFileName, header;
+  shortFileName = doc->getShortFileName();
+  if (!shortFileName.empty())
+    header = shortFileName + _T(" ");
+  header += _T("(@PAGENUM@/@PAGESCNT@)<hr>");
+  
+  htmlPrinting->SetHeader(
+    header,
+    wxPAGE_ALL);
+  statusProgress(_("Preparing to print..."));
+  wxString htmlBuffer = getHtmlBuffer();
+  statusProgress(wxEmptyString);
+  if (!(htmlPrinting->PrintText(htmlBuffer)))
+    ;
+}
+
+wxString MyFrame::getHtmlBuffer()
+{
+  XmlDoc *doc;
+  if ((doc = getActiveDocument()) == NULL)
+    return _T("<html><head></head><body></body></html>");
+  wxString buffer, htmlBuffer;
+  buffer = doc->GetText();
+  size_t size = buffer.size();
+  htmlBuffer.reserve(size * 2);
+
+  htmlBuffer = _T("<html><body><p>");
+  bool startOfLine = true;
+  for (size_t i = 0; i < size; ++i)
+  {
+    wchar_t c = buffer[i];
+    switch (c)
+    {
+      case L' ':
+        htmlBuffer += (startOfLine) ? _T("&nbsp;") : _T(" ");
+        break;
+      case L'\t':
+        htmlBuffer += _T("&nbsp;&nbsp;");
+        break;
+      case L'<':
+        htmlBuffer += _T("&lt;");
+        startOfLine = false;
+        break;
+      case L'>':
+        htmlBuffer += _T("&gt;");
+        startOfLine = false;
+        break;
+      case L'\n':
+        htmlBuffer += _T("<br>");
+        startOfLine = true;
+        break;
+      case L'&':
+        htmlBuffer + _T("&amp");
+        startOfLine = false;
+        break;
+      default:
+        htmlBuffer += c;
+        startOfLine = false;
+        break;
+    }
+  }
+  htmlBuffer += _T("</p></body></html>");
+  return htmlBuffer;
+}
+
+void MyFrame::OnFind(wxCommandEvent& WXUNUSED(event))
+{
+#ifdef NEWFINDREPLACE
+  manager.GetPane(findReplacePanel).Caption(_("Find"));
+  bool visible = manager.GetPane(findReplacePanel).IsShown();
+  if (!visible)
+  {
+    manager.GetPane(findReplacePanel).Show();
+  }
+  manager.Update(); 
+  findReplacePanel->refresh();
+  findReplacePanel->setReplaceVisible(false);
+  findReplacePanel->focusOnFind();
+  return;
+#endif
+
+  if (findDialog.get())
+  {
+    findDialog = std::auto_ptr<wxFindReplaceDialog>(0);
+  }
+  findDialog = (std::auto_ptr<wxFindReplaceDialog>(new wxFindReplaceDialog(
+    this,
+    &findData,
+    _("Find"))));
+  findDialog->Show();
+}
+
+void MyFrame::OnImportMSWord(wxCommandEvent& event)
+{
+#ifndef __WXMSW__
+  messagePane(_("This functionality requires Microsoft Windows"));
+  return;
+#endif
+
+  std::auto_ptr<wxFileDialog> fd(new wxFileDialog(
+    this,
+    _("Import Microsoft Word Document"),
+    _T(""),
+    _T(""),
+    _T("Microsoft Word (*.doc)|*.doc"),
+    wxOPEN | wxFILE_MUST_EXIST | wxCHANGE_DIR
+/*
+#ifdef __WXMSW__
+    | wxHIDE_READONLY
+#endif
+*/
+       ));
+  if (fd->ShowModal() == wxID_CANCEL)
+    return;
+
+  wxString path = fd->GetPath();
+  
+  if (path == _T(""))
+    return;
+
+  importMSWord(path);
+}
+
+void MyFrame::importMSWord(const wxString& path)
+{
+#ifndef __WXMSW__
+  messagePane(_("This functionality requires Microsoft Windows"));
+  return;
+#endif
+
+  WrapTempFileName tempFileName(_T("")), swapFileName(_T(""));
+  wxString completeSwapFileName = swapFileName.wideName() + _T(".doc");
+  if (!wxCopyFile(path, completeSwapFileName, true))
+  {
+    wxString message;
+    message.Printf(_("Cannot open %s for import"), path.c_str());
+    messagePane(message, CONST_STOP);
+    return;
+  }
+
+  wxString cmd = binDir +
+    _T("doc2xml.exe \"") +
+    completeSwapFileName + _T("\" \"") +
+    tempFileName.wideName() + _T("\"");
+
+  statusProgress(_("Import in progress..."));
+  int result = wxExecute(cmd, wxEXEC_SYNC);
+
+  wxRemoveFile(completeSwapFileName); // necessary because .doc extension added
+
+  statusProgress(wxEmptyString);
+  wxString message;
+  wxString versionMessage(
+    _("(lossless conversion requires version 2003 or later)"));
+  
+  switch (result)
+  {
+    case 0:
+      break;
+    case 1:
+      messagePane(_("Cannot start Microsoft Word"), CONST_STOP);
+      return;
+    case 2:
+      messagePane(
+        _("A more recent version of Microsoft Word is required"), CONST_STOP);
+      return;
+    case 3:
+      message.Printf(_T("Microsoft Word cannot open %s"), path.c_str());
+      messagePane(message + path, CONST_STOP);
+      return;
+    case 4:
+      message.Printf(_("Microsoft Word cannot save %s as XML"), path.c_str());
+      messagePane(message, CONST_STOP);
+      return;
+    case 5:
+      messagePane(
+        _("Microsoft Word cannot save this document as WordprocessingML ") +
+        versionMessage,
+        CONST_INFO);
+      break;
+    default:
+      break;
+  }
+
+  statusProgress(_("Opening imported file..."));
+  std::string buffer;
+  
+  wxString displayBuffer;
+  
+  if (result != 5) // Word 2003 or later
+  {
+    std::auto_ptr<WrapLibxml> prettyPrinter(new WrapLibxml(libxmlNetAccess));
+    prettyPrinter->parse(tempFileName.name(), true);
+    buffer = prettyPrinter->getOutput();
+    displayBuffer = wxString(buffer.c_str(), wxConvUTF8, buffer.size());
+  }
+  else // earlier versions
+  {
+    if (!ReadFile::run(tempFileName.name(), buffer))
+    {
+      statusProgress(wxEmptyString);
+      messagePane(_("Cannot open imported file"), CONST_STOP);
+      return;
+    }
+    displayBuffer = wxString(buffer.c_str(), wxConvUTF8, buffer.size());
+    displayBuffer.Remove(0, 1); // remove byte order mark
+    xmliseWideTextNode(displayBuffer);
+
+    displayBuffer.Prepend(
+      _T("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<root>"));
+    displayBuffer.Append(_T("</root>\n"));
+  }
+
+  newDocument(displayBuffer, tempFileName.wideName());
+  statusProgress(wxEmptyString);
+}
+
+void MyFrame::OnExportMSWord(wxCommandEvent& event)
+{
+#ifndef __WXMSW__
+  messagePane(_("This functionality requires Microsoft Windows"));
+  return;
+#endif
+  statusProgress(wxEmptyString);
+
+  // fetch document contents
+  XmlDoc *doc;
+  if ((doc = getActiveDocument()) == NULL)
+    return;
+
+  WrapTempFileName wtfn(_T(""));
+  wxString sourceFileName = doc->getFullFileName();
+
+  if (sourceFileName.empty())  
+  {
+    sourceFileName = wtfn.wideName();
+    std::fstream ofs(wtfn.name().c_str());
+    if (!ofs)
+      return;
+    
+    std::string utf8Buffer;
+    getRawText(doc, utf8Buffer);
+    ofs << utf8Buffer;
+    ofs.close();
+  }
+  else if (doc->GetModify())//CanUndo())
+  {
+    modifiedMessage();
+    return;
+  }
+  
+  std::auto_ptr<wxFileDialog> fd(new wxFileDialog(
+    this,
+    _("Export Microsoft Word Document"),
+    _T(""),
+    _T(""),
+    _T("Microsoft Word (*.doc)|*.doc"),
+    wxSAVE | wxOVERWRITE_PROMPT));
+  fd->ShowModal();
+
+  wxString path = fd->GetPath();
+  
+  if (path == _T(""))
+    return;
+
+  wxString cmd = binDir +
+    _T("xml2doc.exe -v \"") +
+    sourceFileName + _T("\" \"") +
+    path + _T("\"");
+
+  statusProgress(_("Export in progress..."));
+  int result = wxExecute(cmd, wxEXEC_SYNC);
+  statusProgress(wxEmptyString);
+  wxString message;
+  switch (result)
+  {
+    case 1:
+      messagePane(_("Cannot start Microsoft Word"), CONST_STOP);
+      return;
+    case 2:
+      messagePane(
+        _("A more recent version of Microsoft Word is required"), CONST_STOP);
+      return;
+    case 3:
+      message.Printf(_("Microsoft Word cannot save %s"), path.c_str());
+      messagePane(message, CONST_STOP);
+      return;
+    case 0:
+      break;
+    default:
+      break;
+  }
+}
+
+void MyFrame::OnBrowser(wxCommandEvent& WXUNUSED(event))
+{
+  statusProgress(wxEmptyString);
+
+  // fetch document contents
+  XmlDoc *doc;
+  if ((doc = getActiveDocument()) == NULL)
+    return;
+
+  wxString sourceFileName = doc->getFullFileName();
+  WrapTempFileName wtfn(sourceFileName, _T(".html"));
+
+  if (sourceFileName.empty() || doc->GetModify())  
+  {
+    sourceFileName = wtfn.wideName();
+
+    std::ofstream ofs((const char *)wtfn.name().c_str());
+    if (!ofs)
+    {
+      messagePane(_("Cannot save temporary file"), CONST_STOP);
+      return;
+    }
+
+    std::string utf8Buffer;
+    getRawText(doc, utf8Buffer);
+    ofs << utf8Buffer;
+    ofs.close();
+
+    // keep files until application closes
+    tempFileVector.push_back(sourceFileName);
+    tempFileVector.push_back(wtfn.originalWideName());
+    wtfn.setKeepFiles(true);
+  }
+
+  navigate(sourceFileName);
+}
+
+void MyFrame::OnHelp(wxCommandEvent& event)
+{
+#ifdef __WXMSW__
+  wxString cmd = _T("hh.exe \"") + helpDir + _T("xmlcopyeditor.chm\"");
+  wxExecute(cmd);
+#else
+  wxString helpFileName = helpDir + _T("xmlcopyeditor.hhp");
+  helpController->AddBook(wxFileName(helpFileName));
+  helpController->DisplayContents();
+#endif
+}
+
+void MyFrame::OnColorScheme(wxCommandEvent& event)
+{
+  int id = event.GetId();
+  switch (id)
+  {
+    case ID_COLOR_SCHEME_DEFAULT:
+      properties.colorScheme = COLOR_SCHEME_DEFAULT;
+      break;
+    case ID_COLOR_SCHEME_DEFAULT_BACKGROUND:
+      properties.colorScheme = COLOR_SCHEME_DEFAULT_BACKGROUND;
+      break;
+    case ID_COLOR_SCHEME_REDUCED_GLARE:
+      properties.colorScheme = COLOR_SCHEME_REDUCED_GLARE;
+      break;
+    case ID_COLOR_SCHEME_NONE:
+      properties.colorScheme = COLOR_SCHEME_NONE;
+      break;
+    default:
+      return;      
+  }
+  colorSchemeMenu->Check(id, true);
+
+  XmlDoc *doc;
+  if ((doc = getActiveDocument()) == NULL)
+    return;
+
+  properties.zoom = doc->GetZoom(); // ensure temp changes to font size are kept
+
+  applyEditorProperties(false);
+  doc->SetFocus();
+}
+
+void MyFrame::OnFontSmaller(wxCommandEvent& event)
+{
+  XmlDoc *doc;
+  if ((doc = getActiveDocument()) == NULL)
+    return;
+  doc->ZoomOut();
+  properties.zoom = doc->GetZoom();
+  applyEditorProperties(true);
+  doc->SetFocus();
+}
+
+void MyFrame::OnFontMedium(wxCommandEvent& event)
+{
+  XmlDoc *doc;
+  if ((doc = getActiveDocument()) == NULL)
+    return;
+  doc->SetZoom(0);
+  properties.zoom = doc->GetZoom();
+  applyEditorProperties(true);
+  doc->SetFocus();
+}
+
+void MyFrame::OnFontLarger(wxCommandEvent& event)
+{
+  XmlDoc *doc;
+  if ((doc = getActiveDocument()) == NULL)
+    return;
+  doc->ZoomIn();
+  properties.zoom = doc->GetZoom();
+  applyEditorProperties(true);
+  doc->SetFocus();
+}
+
+void MyFrame::OnOptions(wxCommandEvent& WXUNUSED(event))
+{
+  // ensure font size does not change after
+  XmlDoc *doc = getActiveDocument();
+  if (doc)
+  {
+    properties.zoom = doc->GetZoom();
+  }
+
+  wxString title(_("Options"));
+  std::auto_ptr<MyPropertySheet> mpsd(new MyPropertySheet(
+    this,
+    properties,
+    applicationDir,
+    browserCommand,
+    rememberOpenTabs,
+    libxmlNetAccess,
+    singleInstanceCheck,
+    saveBom,
+    unlimitedUndo,
+    restoreLayout,
+    expandInternalEntities,
+    showFullPathOnFrame,
+    lang,
+#ifdef __WXMSW__
+    useCoolBar,
+#endif
+    wxID_ANY,
+    title));
+  if (mpsd->ShowModal() == wxID_OK)
+  {
+    properties = mpsd->getProperties();
+    applyEditorProperties();
+    applicationDir = mpsd->getApplicationDir();
+    browserCommand = mpsd->getBrowserCommand();
+    rememberOpenTabs = mpsd->getRememberOpenTabs();
+    libxmlNetAccess = mpsd->getLibxmlNetAccess();
+    singleInstanceCheck = mpsd->getSingleInstanceCheck();
+    saveBom = mpsd->getSaveBom();
+    unlimitedUndo = mpsd->getUnlimitedUndo();
+    restoreLayout = mpsd->getRestoreLayout();
+    expandInternalEntities = mpsd->getExpandInternalEntities();
+    showFullPathOnFrame = mpsd->getShowFullPathOnFrame();
+    lang = mpsd->getLang();
+#ifdef __WXMSW__
+    useCoolBar = mpsd->getUseCoolBar();
+#endif
+    updatePaths();
+  }
+  if (doc)
+     doc->SetFocus();
+}
+
+void MyFrame::OnHistoryFile(wxCommandEvent& event)
+{
+  wxString f(history.GetHistoryFile(event.GetId() - wxID_FILE1));
+  if (!f.empty())
+    openFile(f);
+}
+
+void MyFrame::OnGoto(wxCommandEvent& WXUNUSED(event))
+{
+  statusProgress(wxEmptyString);
+
+  XmlDoc *doc;
+  if ((doc = getActiveDocument()) == NULL)
+    return;
+
+  wxTextEntryDialog *dlg = new wxTextEntryDialog(
+    this,
+    _("Enter line number:"),
+    _("Go To"));
+  int ret = dlg->ShowModal();
+  if (ret == wxID_CANCEL)
+    return;
+  wxString val = dlg->GetValue();
+  long line;
+  if (!val.ToLong(&line) || line < 1)
+  {
+    wxString msg;
+    msg.Printf(_("'%s' is not a valid line number"), val.c_str());
+    messagePane(msg, CONST_STOP);
+    return;
+  }
+  --line;
+  doc->GotoLine((int)line);
+  doc->SetFocus();
+}
+
+void MyFrame::OnFindAgain(wxCommandEvent& event)
+{
+  //findAgain(findData.GetFindString(), findData.GetFlags());
+  findReplacePanel->OnFindNext(event);
+}
+
+void MyFrame::OnCommand(wxCommandEvent& WXUNUSED(event))
+{
+  bool visible = manager.GetPane(commandPanel).IsShown();
+  if (!visible)
+  {
+    manager.GetPane(commandPanel).Show(); 
+  }
+  manager.Update();
+  commandPanel->focusOnCommand();
+}
+
+void MyFrame::OnFindReplace(wxCommandEvent& WXUNUSED(event))
+{
+#ifdef NEWFINDREPLACE
+  manager.GetPane(findReplacePanel).Caption(_("Replace"));
+  bool visible = manager.GetPane(findReplacePanel).IsShown();
+  if (!visible)
+  {
+    manager.GetPane(findReplacePanel).Show();
+  }
+  manager.Update();
+  findReplacePanel->refresh();
+  findReplacePanel->setReplaceVisible(true);
+  findReplacePanel->focusOnFind();
+  return;
+#endif
+
+  
+  if (findDialog.get())
+  {
+    findDialog = std::auto_ptr<wxFindReplaceDialog>(0);
+  }
+  findDialog = std::auto_ptr<wxFindReplaceDialog>(new wxFindReplaceDialog(
+    this,
+    &findData,
+    _("Find and Replace"),
+    wxFR_REPLACEDIALOG));
+  findDialog->Show();
+}
+
+void MyFrame::OnGlobalReplace(wxCommandEvent& event)
+{
+  XmlDoc *doc;
+  if ((doc = getActiveDocument()) == NULL)
+    return;
+
+  size_t flags = findData.GetFlags();
+  std::auto_ptr<GlobalReplaceDialog> grd(new GlobalReplaceDialog(
+    this,
+    findData.GetFindString(),
+    findData.GetReplaceString(),
+    flags & wxFR_MATCHCASE,
+    globalReplaceAllDocuments,
+    findRegex));
+  int res = grd->ShowModal();
+  
+  flags = 0;
+  flags |= wxFR_DOWN;
+  if (grd->getMatchCase())
+    flags |= wxFR_MATCHCASE;
+  findRegex = grd->getRegex();
+  globalReplaceAllDocuments = grd->getAllDocuments();
+
+  findData.SetFindString(grd->getFindString());
+  findData.SetReplaceString(grd->getReplaceString());
+  findData.SetFlags(flags);
+  findReplacePanel->setRegex(findRegex);
+  findReplacePanel->setMatchCase(flags & wxFR_MATCHCASE);
+  findReplacePanel->refresh();
+  
+  if (res != wxID_OK)
+  {
+    return;
+  }
+
+  int globalMatchCount, pageCount;
+  globalMatchCount = 0;
+  pageCount = mainBook->GetPageCount();
+  XmlDoc *currentDoc = getActiveDocument();
+  if (!currentDoc)
+    return;
+
+  for (int i = 0; i < pageCount; ++i)
+  {
+    std::string bufferUtf8;
+    if (!globalReplaceAllDocuments)
+    {
+      getRawText(currentDoc, bufferUtf8);
+    }
+    else
+    {
+      currentDoc = (XmlDoc *)mainBook->GetPage(i);
+      if (!currentDoc)
+        return;
+      getRawText(currentDoc, bufferUtf8);
+    }
+  
+    size_t flags = findData.GetFlags();
+    if (!findRegex)
+    {
+      std::string findUtf8, replaceUtf8;
+      findUtf8 =findData.GetFindString().mb_str(wxConvUTF8);
+      replaceUtf8 = findData.GetReplaceString().mb_str(wxConvUTF8);
+      globalMatchCount += Replace::run(
+        bufferUtf8,
+        findUtf8,
+        replaceUtf8,
+        flags & wxFR_MATCHCASE);
+      currentDoc->SetTextRaw(bufferUtf8.c_str());
+    }
+    else
+    {
+      try {
+        std::auto_ptr<WrapRegex> wr(new WrapRegex(
+          (const char *)findData.GetFindString().mb_str(wxConvUTF8),
+          flags & wxFR_MATCHCASE,
+          (const char *)findData.GetReplaceString().mb_str(wxConvUTF8)));
+          
+        int matchCount;
+        std::string outputBuffer = wr->replaceGlobal(bufferUtf8, &matchCount);
+        globalMatchCount += matchCount;
+        currentDoc->SetTextRaw(outputBuffer.c_str());
+      }
+      catch (std::exception& e)
+      {
+        wxString wideError = wxString(e.what(), wxConvUTF8, strlen(e.what()));
+        messagePane(_("Cannot replace: ") + wideError, CONST_STOP);
+        return;
+      }
+    }
+    if (!globalReplaceAllDocuments)
+      break;
+  }
+  wxString msg;
+  
+  msg.Printf(
+    ngettext(L"%i replacement made", L"%i replacements made", globalMatchCount),
+    globalMatchCount);
+
+  statusProgress(msg);
+}
+
+void MyFrame::OnFrameClose(wxCloseEvent& event)
+{
+  wxCommandEvent e;
+  OnCloseAll(e);
+  if (mainBook->GetPageCount())
+  {
+    event.Veto();
+    return;
+  }
+  event.Skip();
+}
+
+void MyFrame::OnNew(wxCommandEvent& WXUNUSED(event))
+{
+  wxString defaultSelection, typeSelection, templateFile;
+  defaultSelection = _("XML document (*.xml)");
+  wxArrayString templateArray;
+  if (wxFileName::DirExists(templateDir))
+  {
+    wxString templateMask, name, extension, entry;
+    templateMask = templateDir + wxFileName::GetPathSeparator() + _T("*.*");
+    templateFile = wxFindFirstFile(templateMask, wxFILE);
+    wxFileName fn;
+  
+    if (!templateFile.empty())
+    {
+      fn.Assign(templateFile);
+      name = fn.GetName();
+      extension = fn.GetExt();
+      
+      entry.Printf(_T("%s (*.%s)"), name.c_str(), extension.c_str());
+      templateArray.Add(entry);
+      
+      for (;;)
+      {
+        templateFile = wxFindNextFile();
+        if (templateFile.empty())
+          break;
+        fn.Assign(templateFile);
+        name = fn.GetName();
+        extension = fn.GetExt();
+        
+        entry.Printf(_T("%s (*.%s)"), name.c_str(), extension.c_str());
+        templateArray.Add(entry);
+      }
+    }
+    templateArray.Sort();
+    templateArray.Insert(defaultSelection, 0);
+
+    const int arraySize = templateArray.GetCount();
+
+    wxString choiceArray[arraySize + 1];
+    for (int i = 0; i < arraySize; ++i)
+      *(choiceArray + i) = templateArray.Item(i);
+    
+    wxSingleChoiceDialog scd(
+      this, _("Choose a document type:"), _("New Document"), arraySize, choiceArray);
+    if (scd.ShowModal() == wxID_CANCEL)
+    {
+      XmlDoc *doc = getActiveDocument();
+      if (doc)
+        doc->SetFocus();
+      return;
+    }
+    typeSelection = scd.GetStringSelection();
+  }
+
+  if (typeSelection == defaultSelection)
+  {
+    wxString emptyString(_T(""));
+    newDocument(emptyString);
+    return;
+  }
+  
+  typeSelection.Replace(_T(" (*"), wxEmptyString);
+  typeSelection.Replace(_T(")"), wxEmptyString);
+  templateFile = templateDir + typeSelection;
+  std::string templateFileLocal, buffer;
+  templateFileLocal = templateFile.mb_str(wxConvLocal);
+  ReadFile::run(templateFileLocal, buffer);
+  wxString documentContents = wxString(buffer.c_str(), wxConvUTF8, buffer.size());
+  
+  newDocument(documentContents,
+    wxString(templateFileLocal.c_str(), wxConvUTF8, templateFileLocal.size()));
+}
+
+void MyFrame::newDocument(const wxString& s, const wxString& path, bool canSave)
+{
+  std::string bufferUtf8 = (const char *)s.mb_str(wxConvUTF8);
+  std::string pathUtf8 = (const char *)path.mb_str(wxConvUTF8);
+  newDocument(bufferUtf8, pathUtf8, canSave); 
+}
+
+void MyFrame::newDocument(const std::string& s, const std::string& path, bool canSave)
+{
+  XmlDoc *doc;
+  
+  wxString documentLabel;
+  documentLabel.Printf(_("Document%i"), documentCount++);
+  
+  std::string auxPath = getAuxPath(path);
+
+  Freeze();
+  doc = (s.empty()) ?
+    new XmlDoc(
+      mainBook,
+      properties,
+      &protectTags,
+      visibilityState,
+      FILE_TYPE_XML,
+      wxID_ANY,
+      NULL, 0 // new: NULL pointer leads to default document
+      )
+    : new XmlDoc(
+    mainBook,
+    properties,
+    &protectTags,
+    visibilityState,
+    FILE_TYPE_XML,
+    wxID_ANY,
+    s.c_str(), // modified
+    s.size(), // new
+    catalogPath,
+    path,
+    auxPath);
+  mainBook->AddPage((wxWindow *)doc, documentLabel, true);
+  Thaw();
+
+  mainBook->Refresh();
+  if (properties.completion)
+    doc->updatePromptMaps();
+  doc->setShortFileName(documentLabel);
+  doc->SetFocus();
+  manager.Update();
+  locationPanel->update(doc, wxEmptyString);
+  insertChildPanel->update(doc, wxEmptyString);
+  insertSiblingPanel->update(doc, wxEmptyString);
+  insertEntityPanel->update(doc);
+  if (properties.validateAsYouType)
+    doc->shallowValidate();
+}
+
+void MyFrame::OnOpen(wxCommandEvent& event)
+{
+  bool largeFile;
+  largeFile = (event.GetId() == ID_OPEN_LARGE_FILE);
+
+  wxString defaultFile, defaultDir;
+  XmlDoc *doc;
+  if ((doc = getActiveDocument()) != NULL)
+  {
+    defaultFile = doc->getFullFileName();
+    if (!defaultFile.empty())
+    {
+      wxFileName fn(defaultFile);
+      defaultDir = fn.GetPath();
+    }
+  }
+
+  wxFileDialog *fd = new wxFileDialog(
+    this,
+    (largeFile) ? _("Open Large Document") : _("Open"),
+    defaultDir,
+    wxEmptyString,
+    FILE_FILTER,
+    wxOPEN | wxMULTIPLE | wxFILE_MUST_EXIST | wxCHANGE_DIR
+  );
+
+
+  if (fd->ShowModal() == wxID_CANCEL)
+    return;
+
+  wxArrayString paths;
+  fd->GetPaths(paths);
+  size_t count = paths.Count();
+  if (!count)
+    return;
+  for (size_t i = 0; i < count; ++i)
+    if (!openFile(paths[i], largeFile))
+      break;
+}
+
+bool MyFrame::openFile(const wxString& fileName, bool largeFile)
+{
+  if (!wxFileName::FileExists(fileName))
+  {
+    wxString message;
+    message.Printf(_("Cannot open %s"), fileName.c_str());
+    messagePane(message, CONST_STOP);
+    return false;
+  }
+
+  if (openFileSet.count(fileName))
+  {
+    wxString message;
+    message.Printf(_("%s is already open"), fileName.c_str());
+    statusProgress(message);
+    activateTab(fileName);
+    return false; 
+  }
+
+  wxString directory, name, extension;
+  wxFileName::SplitPath(fileName, NULL, &directory, &name, &extension);
+
+  if (!extension.empty())
+  {
+    name += _T(".");
+    name += extension;
+  }
+
+  wxString wideError;
+  std::string buffer;
+  pair<int, int> posPair;
+  XmlDoc *doc;
+  
+  int type = getFileType(fileName);
+  std::string auxPath = getAuxPath((const char *)fileName.mb_str(wxConvLocal));
+
+  char *docBuffer = 0;
+  size_t docBufferLen = 0;
+  bool fileEmpty = false;
+
+  statusProgress(_T("Opening file..."));
+  //wxMemoryMappedFile *memorymap = NULL;
+  BinaryFile *binaryfile = NULL;
+  
+  try {
+    binaryfile = new BinaryFile((const char *)fileName.mb_str(wxConvLocal));
+/*
+    memorymap = new wxMemoryMappedFile(
+      fileName,
+      true, // readOnly
+      true // fread
+    );
+*/
+    
+  }
+/*
+  catch (wxMemoryMappedFileEmptyException&)
+  {
+    fileEmpty = true;
+  }
+*/
+  catch (...)
+  {
+    wxString message;
+    message.Printf(_("Cannot open %s"), fileName.c_str());
+    messagePane(message, CONST_STOP);
+    statusProgress(wxEmptyString);
+    return false;
+  }
+
+  bool isUtf8 = false;
+
+  if (!fileEmpty)
+  {
+    docBuffer = (char *)binaryfile->getData();//memorymap->GetStream();
+    docBufferLen = binaryfile->getDataLen();//memorymap->GetMapSize();
+  }
+  else
+  {
+    docBuffer = NULL;
+    docBufferLen = 0;
+    isUtf8 = true;
+  }
+
+  statusProgress(wxEmptyString);
+
+  char *iconvBuffer = 0;
+  size_t iconvBufferLen = 0;
+
+  char *finalBuffer;
+  size_t finalBufferLen;
+
+  // adjust for UTF-8 BOM
+  if (docBuffer &&
+    (unsigned char)docBuffer[0] == 0xEF &&
+    (unsigned char)docBuffer[1] == 0xBB &&
+    (unsigned char)docBuffer[2] == 0xBF)
+  {
+    docBuffer += 3;
+    docBufferLen -= 3;
+    isUtf8 = true;
+  }
+
+  // no UTF-8 BOM found
+  std::string encoding;
+  if (!isUtf8 || !binaryfile->getDataLen())
+  {
+    XmlEncodingSpy es;
+    es.parse(docBuffer, docBufferLen);
+    encoding = es.getEncoding();
+    if (encoding == "UTF-8" || encoding == "US-ASCII") // US-ASCII is a subset of UTF-8
+      isUtf8 = true;
+  }
+
+  // convert buffer if not UTF-8
+  if (isUtf8)
+  {
+    finalBuffer = docBuffer;
+    finalBufferLen = docBufferLen;
+  }
+  else
+  {
+    // clear any other BOMs
+    
+    if (docBuffer && // UTF-32 BE
+      (unsigned char)docBuffer[0] == 0x00 &&
+      (unsigned char)docBuffer[1] == 0x00 &&
+      (unsigned char)docBuffer[2] == 0xFE &&
+      (unsigned char)docBuffer[3] == 0xFF)
+    {
+      docBuffer += 4;
+      docBufferLen -= 4;
+    }    
+    if (docBuffer && // UTF-32 LE
+      (unsigned char)docBuffer[0] == 0xFF &&
+      (unsigned char)docBuffer[1] == 0xFE &&
+      (unsigned char)docBuffer[2] == 0x00 &&
+      (unsigned char)docBuffer[3] == 0x00)
+    {
+      docBuffer += 4;
+      docBufferLen -= 4;
+    }    
+
+    if (docBuffer && //UTF-16 BE
+      (unsigned char)docBuffer[0] == 0xFE &&
+      (unsigned char)docBuffer[1] == 0xFF)
+    {
+      docBuffer += 2;
+      docBufferLen -= 2;
+    }
+    if (docBuffer && //UTF-16 LE
+      (unsigned char)docBuffer[0] == 0xFF &&
+      (unsigned char)docBuffer[1] == 0xFE)
+    {
+      docBuffer += 2;
+      docBufferLen -= 2;
+    }
+
+    if (!encoding.size()) // Expat couldn't parse file (e.g. UTF-32)
+    {
+      encoding = getApproximateEncoding(docBuffer, docBufferLen);
+    }
+
+    wxString wideEncoding = wxString(
+      encoding.c_str(),
+      wxConvLocal,
+      encoding.size());
+    iconv_t cd = iconv_open("UTF-8", encoding.c_str());
+    if (cd == (iconv_t)-1)
+    {
+      wxString message;
+      message.Printf(_("Cannot open %s: unknown encoding %s"), 
+        fileName.c_str(),
+        wideEncoding.c_str());
+      messagePane(message, CONST_STOP);
+      delete binaryfile;//memorymap;
+      return false;
+	  };
+
+    int iconvLenMultiplier = 4; // worst case scenario
+    if (encoding == "ISO-8859-1" ||
+      encoding == "UTF-16" ||
+      encoding == "UTF-16BE" ||
+      encoding == "UTF-16LE")
+    {
+      iconvLenMultiplier = 2;
+    }
+    else if (encoding == "UTF-32" ||
+      encoding == "UTF-32BE" ||
+      encoding == "UTF-32LE")
+    {
+      iconvLenMultiplier = 1;
+    }
+
+    size_t iconvBufferLeft, docBufferLeft;
+    iconvBufferLen = iconvBufferLeft = docBufferLen * iconvLenMultiplier + 1;
+    docBufferLeft = docBufferLen;
+  	iconvBuffer = new char[iconvBufferLen];
+  	finalBuffer = iconvBuffer; // iconvBuffer will be incremented by iconv
+  	size_t nconv;
+
+    nconv = iconv(
+      cd,
+#ifdef __WXMSW__
+      (const char **)
+#endif
+      &docBuffer,
+      &docBufferLeft,
+      &iconvBuffer,
+      &iconvBufferLeft);
+
+    *iconvBuffer = '\0';
+
+    iconv_close(cd);
+
+	if (nconv == (size_t)-1)
+	{
+      wxString message;
+      message.Printf(_("Cannot open %s: conversion from encoding %s failed"),
+        fileName.c_str(),
+        wideEncoding.c_str());
+      messagePane(message, CONST_STOP);
+      delete[] finalBuffer;
+      delete binaryfile; //delete memorymap;
+      return false;
+    }
+    finalBufferLen = iconvBufferLen - iconvBufferLeft;
+  }
+
+  statusProgress(_("Creating document view..."));
+  Freeze();
+  doc = new XmlDoc(
+    mainBook,
+    (largeFile) ? largeFileProperties: properties,
+    &protectTags,
+    visibilityState,
+    (!binaryfile->getDataLen()) ? FILE_TYPE_XML : type,
+    wxID_ANY,
+    finalBuffer,
+    finalBufferLen,
+    catalogPath,
+    (const char *)fileName.mb_str(wxConvLocal),
+    auxPath);
+#ifdef __WXMSW__
+  doc->SetUndoCollection(false);
+  doc->SetUndoCollection(true);
+#endif
+
+  doc->setFullFileName(fileName);
+  doc->setShortFileName(name);
+  doc->setDirectory(directory);
+  openFileSet.insert(fileName);
+  history.AddFileToHistory(fileName);
+  updateFileMenu();
+  wxFileName ofn(fileName);
+  doc->setLastModified(ofn.GetModificationTime());
+   
+  mainBook->AddPage((wxWindow *)doc, name, _T(""));
+  Thaw();
+  statusProgress(wxEmptyString);
+
+  mainBook->Refresh();
+
+  wxFileName fn(fileName);
+  doc->setLastModified(fn.GetModificationTime());
+  doc->SetFocus();
+    
+  if (type != FILE_TYPE_XML || !binaryfile->getDataLen())
+  {
+    delete binaryfile;//memorymap;
+    return true;
+  }
+
+  // NOW parse the document, but don't create a UTF-8 copy
+  statusProgress(_T("Parsing document..."));
+  std::auto_ptr<WrapExpat> we(new WrapExpat());
+
+  bool optimisedParseSuccess = false;
+    
+  // omit XML declaration
+  if (!isUtf8 && finalBufferLen &&
+    finalBuffer[0] == '<' &&
+    finalBuffer[1] == '?' &&
+    finalBuffer[2] == 'x' &&
+    finalBuffer[3] == 'm' &&
+    finalBuffer[4] == 'l')
+  {
+    for (; *finalBuffer && finalBufferLen; finalBuffer++ && finalBufferLen--)
+    {
+      if (*finalBuffer == '>')
+      {
+        finalBuffer++;
+        finalBufferLen--;
+        break; 
+      }
+    }      
+  }
+
+  if (finalBuffer)
+  {
+    optimisedParseSuccess = we->parse(finalBuffer, finalBufferLen);
+    statusProgress(wxEmptyString);
+  }
+    
+  // NOW update prompt maps if necessary
+  if (!largeFile && (properties.completion || properties.validateAsYouType))
+  {
+    statusProgress(_T("Compiling autocompletion lists..."));
+    doc->updatePromptMaps(finalBuffer, finalBufferLen);
+    statusProgress(wxEmptyString);
+  }
+
+  if (!largeFile && (properties.validateAsYouType && doc->getDtdFound()))
+  {
+    statusProgress(_T("Validating document..."));
+    doc->shallowValidate(finalBuffer, finalBufferLen);
+    statusProgress(wxEmptyString);
+  }
+
+  if (!optimisedParseSuccess)
+  {
+    std::string error = we->getLastError();
+    wideError = wxString(error.c_str(), wxConvUTF8, error.size());
+    posPair = we->getErrorPosition();
+    --(posPair.first);
+    messagePane(wideError, CONST_WARNING);
+
+    int newPosition = doc->PositionFromLine(posPair.first);
+    doc->SetSelection(newPosition, newPosition);
+    doc->SetFocus();
+  }
+  else
+  {
+    closePane(); 
+  }
+  delete binaryfile; //delete memorymap;
+  return true;
+}
+
+std::string MyFrame::getApproximateEncoding(char *docBuffer,
+  size_t docBufferLen)
+{
+  std::string line, encoding;
+  char *it;
+  size_t i;
+
+  // grab first line
+  for (
+    i = 0, it = docBuffer;
+    i < docBufferLen && *it != '\n' && i < BUFSIZ;
+    i++, it++)
+  {
+    if (*it)
+      line += *it;
+  }
+
+  std::pair<int, int> limits = XmlEncodingHandler::getEncodingValueLimits(line);
+  
+  if (limits.first == -1 || limits.second == -1)
+    return "";
+
+  return line.substr(limits.first, limits.second);
+}
+
+void MyFrame::OnToggleFold(wxCommandEvent& WXUNUSED(event))
+{
+  XmlDoc *doc;
+  if ((doc = getActiveDocument()) == NULL)
+    return;
+  doc->toggleFold();
+}
+
+void MyFrame::OnFoldAll(wxCommandEvent& WXUNUSED(event))
+{
+  XmlDoc *doc;
+  if ((doc = getActiveDocument()) == NULL)
+    return;
+  doc->foldAll();
+  doc->SetFocus();
+}
+
+void MyFrame::OnUnfoldAll(wxCommandEvent& WXUNUSED(event))
+{
+  XmlDoc *doc;
+  if ((doc = getActiveDocument()) == NULL)
+    return;
+  doc->unfoldAll();
+  doc->SetFocus();
+}
+
+
+void MyFrame::OnQuit(wxCommandEvent& WXUNUSED(event))
+{
+  Close(true);
+}
+
+void MyFrame::OnUndo(wxCommandEvent& WXUNUSED(event))
+{
+  XmlDoc *doc;
+  if ((doc = getActiveDocument()) == NULL)
+    return;
+  doc->Undo();
+  doc->setValidationRequired(true);
+  doc->SetFocus();
+}
+
+void MyFrame::OnRedo(wxCommandEvent& WXUNUSED(event))
+{
+  XmlDoc *doc;
+  if ((doc = getActiveDocument()) == NULL)
+    return;
+  doc->Redo();  
+  doc->setValidationRequired(true);
+  doc->SetFocus();
+}
+
+void MyFrame::OnRevert(wxCommandEvent& WXUNUSED(event))
+{
+  XmlDoc *doc;
+  if ((doc = getActiveDocument()) == NULL)
+    return;
+    
+  while (doc->GetModify())
+  {
+    if (!doc->CanUndo())
+      return;
+    doc->Undo();
+    doc->setValidationRequired(true);
+  }
+  doc->SetFocus();
+}
+
+void MyFrame::OnSpelling(wxCommandEvent& WXUNUSED(event))
+{
+  XmlDoc *doc;
+  if ((doc = getActiveDocument()) == NULL)
+    return;
+
+  statusProgress(wxEmptyString);
+  closePane();
+
+#ifdef __WXMSW__
+  doc->SetUndoCollection(false);
+  doc->SetUndoCollection(true);
+#endif
+
+  
+  std::string rawBufferUtf8;
+  getRawText(doc, rawBufferUtf8);
+
+  // handle unusual encodings
+  if (!XmlEncodingHandler::setUtf8(rawBufferUtf8))
+  {
+    encodingMessage();
+    return;
+  }
+
+  WrapTempFileName tempFileName(doc->getFullFileName());
+
+  ofstream rawBufferStream(tempFileName.name().c_str());
+  if (!rawBufferStream)
+    return;
+
+  rawBufferStream << rawBufferUtf8;
+  rawBufferStream.close();
+
+  auto_ptr<WrapLibxml> wl(new WrapLibxml(libxmlNetAccess, catalogPath));
+
+  bool success = wl->parse(tempFileName.name(), true);
+  
+  std::string bufferParameterUtf8;
+
+  if (!success)
+  {
+    statusProgress(wxEmptyString);
+    std::string error = wl->getLastError();
+    wxString wideError = wxString(error.c_str(), wxConvUTF8, error.size());
+    wideError.Prepend(_("Opening spelling and style check in read-only mode: "));
+    messagePane(wideError, CONST_WARNING);
+
+    if (!ReadFile::run(tempFileName.name(), bufferParameterUtf8))
+      return;
+    std::auto_ptr<WrapExpat> we(new WrapExpat());
+    bufferParameterUtf8 = we->xmliseTextNode(bufferParameterUtf8);
+    bufferParameterUtf8.insert(0, "<root>");
+    bufferParameterUtf8 += "</root>";
+  }
+  else { bufferParameterUtf8 = wl->getOutput(); }
+
+  auto_ptr<StyleDialog> sd(new StyleDialog(
+    this,
+    wxICON(appicon),
+    bufferParameterUtf8,
+    doc->getShortFileName(),
+    ruleSetDir,
+    filterDir,
+    browserCommand,
+    ruleSetPreset,
+    filterPreset,
+    (success) ? false : true,
+    stylePosition,
+    styleSize));
+
+  if (sd->ShowModal() == wxID_OK)
+  {
+    std::string bufferUtf8 = sd->getEditedString();
+    if (bufferUtf8.empty())
+      messagePane(_("Edited document empty"), CONST_STOP);
+    else
+      doc->SetTextRaw(bufferUtf8.c_str());
+  }
+  // update presets if report has been created (even if followed by cancel)
+  ruleSetPreset = sd->getRuleSetPreset();
+  filterPreset = sd->getFilterPreset();
+
+#ifdef __WXMSW__
+  stylePosition = sd->getPosition();
+  styleSize = sd->getSize();
+#endif
+}
+
+void MyFrame::OnPreviousDocument(wxCommandEvent& WXUNUSED(event))
+{
+  if (!getActiveDocument())
+    return;
+
+  statusProgress(wxEmptyString);
+  closePane();
+
+  int currentSelection = mainBook->GetSelection();
+  if (currentSelection < 1)
+    return;
+  mainBook->SetSelection(--currentSelection);
+  XmlDoc *doc = getActiveDocument();
+  if (doc)
+    doc->SetFocus();
+}
+
+void MyFrame::OnNextDocument(wxCommandEvent& WXUNUSED(event))
+{
+  if (!getActiveDocument())
+    return;
+
+  statusProgress(wxEmptyString);
+  closePane();
+
+  int currentSelection = mainBook->GetSelection();
+  int maxSelection = mainBook->GetPageCount();
+  if (currentSelection >= (maxSelection - 1))
+    return;
+  mainBook->SetSelection(++currentSelection);
+  XmlDoc *doc = getActiveDocument();
+  if (doc)
+    doc->SetFocus();
+}
+
+void MyFrame::OnSave(wxCommandEvent& event)
+{
+  save();
+}
+
+void MyFrame::save()
+{
+  XmlDoc *doc;
+  if ((doc = getActiveDocument()) == NULL)
+    return;
+
+/*
+  if (!doc->GetModify())
+    return;
+*/
+
+  wxString fileName;
+  if ((fileName = doc->getFullFileName()) == _T(""))
+  {
+    wxCommandEvent event;
+    OnSaveAs(event);
+    return;
+  }
+  
+  if (!saveFile(doc, fileName, true))
+    ; // handle messages in saveFile
+}
+
+void MyFrame::OnSaveAs(wxCommandEvent& event)
+{
+  saveAs();
+}
+
+void MyFrame::saveAs()
+{
+  XmlDoc *doc;
+  if ((doc = getActiveDocument()) == NULL)
+    return;
+
+  wxString defaultFile, defaultDir;
+  defaultFile = doc->getFullFileName();
+  if (!defaultFile.empty())
+  {
+    wxFileName fn(defaultFile);
+    defaultDir = fn.GetPath();
+  }
+  auto_ptr<wxFileDialog> fd(new wxFileDialog(
+    this,
+    _("Save As"),
+    defaultDir,
+    defaultFile,
+    FILE_FILTER,
+    wxSAVE | wxOVERWRITE_PROMPT));
+  if (fd->ShowModal() == wxID_CANCEL)
+    return;
+
+  wxString path = fd->GetPath();
+
+  if (
+    openFileSet.count(path) &&
+    path != doc->getFullFileName())
+  {
+    wxString message;
+    message.Printf(_("%s is already open"), path.c_str());
+    messagePane(message, CONST_STOP);
+    return;
+  }
+
+  wxString name = fd->GetFilename();
+  wxString directory;
+  wxFileName::SplitPath(path, &directory, NULL, NULL);
+  if (path == _T(""))
+    return;
+
+  if (!saveFile(doc, path, false))
+    return;
+  
+  // if already named, remove from set of open files
+  openFileSet.erase(doc->getFullFileName());
+  
+  doc->setFullFileName(path);
+  doc->setShortFileName(name);
+  doc->setDirectory(directory);
+
+  history.AddFileToHistory(path); // update history
+  updateFileMenu();
+
+  int selection;
+  if ((selection = mainBook->GetSelection()) == -1)
+    return;
+  mainBook->SetPageText(selection, name);
+}
+
+void MyFrame::OnUpdateCloseAll(wxUpdateUIEvent& event)
+{
+  event.Enable(mainBook->GetPageCount() > 1);
+}
+
+void MyFrame::OnUpdateCutCopy(wxUpdateUIEvent& event)
+{
+  XmlDoc *doc;
+  if ((doc = getActiveDocument()) == NULL)
+  {
+    event.Enable(false);
+    return;
+  }
+  event.Enable(true);
+}
+
+void MyFrame::OnUpdateLocationPaneVisible(wxUpdateUIEvent& event)
+{
+  if (!viewMenu)
+    return; 
+  wxAuiPaneInfo info = manager.GetPane(locationPanel);
+  event.Check(info.IsShown());
+}
+
+void MyFrame::OnUpdateSavedOnly(wxUpdateUIEvent& event)
+{
+  XmlDoc *doc;
+  if ((doc = getActiveDocument()) == NULL)
+  {
+    event.Enable(false);
+    return;
+  }
+  event.Enable(
+    (doc->getFullFileName().empty()) ? false : true);
+}
+
+void MyFrame::OnUpdateDocRange(wxUpdateUIEvent& event)
+{
+  XmlDoc *doc;
+  if ((doc = getActiveDocument()) == NULL)
+  {
+    event.Enable(false);
+    return;
+  }
+  event.Enable(true);
+}
+
+void MyFrame::OnUpdateReplaceRange(wxUpdateUIEvent& event)
+{
+  XmlDoc *doc;
+  if ((doc = getActiveDocument()) == NULL) // || protectTags)
+  { 
+    event.Enable(false);
+    return;
+  }
+  event.Enable(true);
+}
+
+void MyFrame::OnUpdateFindAgain(wxUpdateUIEvent& event)
+{
+  if (!getActiveDocument() || findData.GetFindString().empty())
+  {
+    event.Enable(false);
+    return;
+  }
+  event.Enable(true);
+}
+
+void MyFrame::OnUpdateSaveUndo(wxUpdateUIEvent& event)
+{
+  XmlDoc *doc;
+  if ((doc = getActiveDocument()) == NULL)
+  {
+    event.Enable(false);
+    return;
+  }
+  //event.Enable((doc->CanUndo()) ? true : false);
+  event.Enable((doc->GetModify()) ? true : false);
+}
+
+void MyFrame::OnUpdateRedo(wxUpdateUIEvent& event)
+{
+  XmlDoc *doc;
+  if ((doc = getActiveDocument()) == NULL)
+  {
+    event.Enable(false);
+    return;
+  }
+  event.Enable(doc->CanRedo());
+}
+
+void MyFrame::OnUpdatePaste(wxUpdateUIEvent& event)
+{
+  XmlDoc *doc;
+  if ((doc = getActiveDocument()) == NULL)
+  {
+    event.Enable(false);
+    return;
+  }
+  event.Enable(true);  
+}
+
+void MyFrame::OnUpdatePreviousDocument(wxUpdateUIEvent& event)
+{
+  if (!getActiveDocument())
+  {
+    event.Enable(false);
+    return;
+  }
+  int currentDocument = mainBook->GetSelection();
+  event.Enable((currentDocument < 1) ? false : true);
+}
+
+void MyFrame::OnUpdateNextDocument(wxUpdateUIEvent& event)
+{
+  if (!getActiveDocument())
+  {
+    event.Enable(false);
+    return;
+  }
+  int currentDocument = mainBook->GetSelection();
+  int maxDocument = mainBook->GetPageCount();
+  event.Enable((currentDocument >= (maxDocument - 1)) ? false : true);
+}
+
+void MyFrame::OnUpdateClosePane(wxUpdateUIEvent& event)
+{
+  wxAuiPaneInfo i1, i2, i3;
+  i1 = manager.GetPane(htmlReport);
+  i2 = manager.GetPane(findReplacePanel);
+  i3 = manager.GetPane(commandPanel);
+  event.Enable(i1.IsShown() || i2.IsShown() || i3.IsShown());
+}
+
+void MyFrame::OnValidateDTD(wxCommandEvent& event)
+{
+  statusProgress(wxEmptyString);
+  
+  // fetch document contents
+  XmlDoc *doc;
+  if ((doc = getActiveDocument()) == NULL)
+    return;
+
+  updatePaths(); // needed to ensure catalog is available
+
+  wxString fname = doc->getFullFileName();
+
+  WrapTempFileName wtfn(fname);
+  if (fname.empty() || doc->GetModify())
+  {
+    wxString wideBuffer = doc->GetText();
+    
+    std::string buffer = (const char *)wideBuffer.mb_str(wxConvUTF8);
+    if (!saveRawUtf8(
       wtfn.name(),
       buffer))
     {
@@ -1735,7 +4732,7 @@ bool MyFrame::saveFile(XmlDoc *doc, wxString& fileName, bool checkLastModified)
       if (answer == wxCANCEL || answer == wxNO)
         return false;
 
-      bool success = saveRawUtf8(fileNameLocal, utf8Buffer, false, isXml);
+      bool success = saveRawUtf8(fileNameLocal, utf8Buffer, true, isXml);
       if (success)
       {
         bytes = utf8Buffer.size();
@@ -2973,3 +5970,4 @@ void MyFrame::setStrictScrolling(bool b)
   doc->SetYCaretPolicy((b) ? (wxSTC_CARET_STRICT | wxSTC_CARET_SLOP) : wxSTC_CARET_EVEN,
     (b) ? 10 : 0);
 }
+
