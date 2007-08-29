@@ -4546,13 +4546,13 @@ bool MyFrame::saveFile(XmlDoc *doc, wxString& fileName, bool checkLastModified)
     // raw file conditions
     if (doc->getType() == FILE_TYPE_BINARY)
     {
-      success = saveRawUtf8(fileNameLocal, utf8Buffer, true);
+      success = saveRawUtf8(fileNameLocal, utf8Buffer, true, isXml);
       if (success)
         bytes = utf8Buffer.size();
     }
     else if (!isXml && encoding.empty())
     {
-      success = saveRawUtf8(fileNameLocal, utf8Buffer, false);
+      success = saveRawUtf8(fileNameLocal, utf8Buffer, true, isXml);
       if (success)
         bytes = utf8Buffer.size();
     }
@@ -4568,7 +4568,7 @@ bool MyFrame::saveFile(XmlDoc *doc, wxString& fileName, bool checkLastModified)
           ;
         messagePane(werror, CONST_WARNING);
       }
-      success = saveRawUtf8(fileNameLocal, utf8Buffer);
+      success = saveRawUtf8(fileNameLocal, utf8Buffer, true, isXml);
       if (success)
         bytes = utf8Buffer.size();
     }
@@ -4584,7 +4584,7 @@ bool MyFrame::saveFile(XmlDoc *doc, wxString& fileName, bool checkLastModified)
         iconv_t cd = iconv_open(encoding.c_str(), "UTF-8");
         if (cd == (iconv_t)-1)
         {
-          success = saveRawUtf8(fileNameLocal, utf8Buffer);
+          success = saveRawUtf8(fileNameLocal, utf8Buffer, false, isXml);
           if (success)
           {
             bytes = utf8Buffer.size();
@@ -4652,7 +4652,7 @@ bool MyFrame::saveFile(XmlDoc *doc, wxString& fileName, bool checkLastModified)
           if (nconv == (size_t)-1) // conversion failed
           {
             delete[] finalBuffer;
-            success = saveRawUtf8(fileNameLocal, utf8Buffer);
+            success = saveRawUtf8(fileNameLocal, utf8Buffer, false, isXml);
             if (success)
             {
               bytes = utf8Buffer.size();
@@ -4698,7 +4698,7 @@ bool MyFrame::saveFile(XmlDoc *doc, wxString& fileName, bool checkLastModified)
         int result = wl->saveEncodingFromFile(sourceFileName.name(), fileNameLocal, encoding);
         if (result == -1)
         {
-          success = saveRawUtf8(fileNameLocal, utf8Buffer);
+          success = saveRawUtf8(fileNameLocal, utf8Buffer, false, isXml);
           if (success)
           {
             std::string libxmlError = wl->getLastError();
@@ -4732,7 +4732,7 @@ bool MyFrame::saveFile(XmlDoc *doc, wxString& fileName, bool checkLastModified)
       if (answer == wxCANCEL || answer == wxNO)
         return false;
 
-      bool success = saveRawUtf8(fileNameLocal, utf8Buffer);
+      bool success = saveRawUtf8(fileNameLocal, utf8Buffer, false, isXml);
       if (success)
       {
         bytes = utf8Buffer.size();
