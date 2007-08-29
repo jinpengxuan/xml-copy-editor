@@ -20,6 +20,7 @@ enum langIndex {
   INDEX_GERMAN,
   INDEX_SLOVAK,
   INDEX_SWEDISH,
+  INDEX_UKRAINIAN
 };
 
 class MyPropertySheet : public wxPropertySheetDialog

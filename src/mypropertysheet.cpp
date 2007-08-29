@@ -101,12 +101,6 @@ MyPropertySheet::MyPropertySheet(
     new wxCheckBox(editorPanel, wxID_ANY, _("Va&riable highlight in tag free view"));
   toggleLineBackgroundBox->SetValue(properties.toggleLineBackground);
 
-  /*
-  wrapBox =
-    new wxCheckBox(editorPanel, wxID_ANY, _("Wra&p lines"));
-  wrapBox->SetValue(properties.wrap);
-  */
-
   col1sizer->Add(insertCloseTagBox, 0, wxALL | wxALIGN_LEFT, 5);
   col1sizer->Add(foldBox, 0, wxALL | wxALIGN_LEFT, 5);
   col1sizer->Add(currentLineBox, 0, wxALL | wxALIGN_LEFT, 5);
@@ -183,6 +177,7 @@ MyPropertySheet::MyPropertySheet(
   languageBox->Insert(_T("German"), INDEX_GERMAN);
   languageBox->Insert(_T("Slovak"), INDEX_SLOVAK);
   languageBox->Insert(_T("Swedish"), INDEX_SWEDISH);
+  languageBox->Insert(_T("Ukrainian"), INDEX_UKRAINIAN);
   
   switch (lang)
   {
@@ -204,8 +199,12 @@ MyPropertySheet::MyPropertySheet(
     case wxLANGUAGE_CHINESE_TRADITIONAL:
       languageBox->SetSelection(INDEX_CHINESE_TRADITIONAL);
       break;
+    case wxLANGUAGE_UKRAINIAN:
+      languageBox->SetSelection(INDEX_UKRAINIAN);
+      break;
     default:
       languageBox->SetSelection(INDEX_ENGLISH_US); 
+      break;
   }
   
   libxmlNetAccessBox = new wxCheckBox(
@@ -338,6 +337,9 @@ void MyPropertySheet::OnOk(wxCommandEvent& e)
       break;
     case INDEX_SWEDISH:
       lang = wxLANGUAGE_SWEDISH;
+      break;
+    case INDEX_UKRAINIAN:
+      lang = wxLANGUAGE_UKRAINIAN;
       break;
     default:
       lang = wxLANGUAGE_ENGLISH_US;
