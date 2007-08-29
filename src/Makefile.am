@@ -25,7 +25,7 @@ xmlcopyeditor_SOURCES = xmlcopyeditor.cpp associatedialog.cpp casehandler.cpp \
 	xmlparseschemans.cpp xmlshallowvalidator.cpp wrapxerces.cpp \
 	findreplacepanel.cpp xmlschemaparser.cpp commandpanel.cpp \
 	binaryfile.cpp xmlencodingspy.cpp \
-	rulesets filters png rng xpm templates dtd copying help tei sk sv fr de \
+	rulesets filters png rng xpm templates dtd copying help tei sk sv fr de uk_UA \
 	zh_CN zh_TW en_us docbook xmlcopyeditor.spec xmlcopyeditor.png custom.xpm \
 	xmlcopyeditor.desktop
 xmlcopyeditor_LDFLAGS = $(WX_LIBS) \
@@ -74,6 +74,7 @@ nobase_xmlcopyeditor_DATA = png/*.png \
 	de/messages.mo \
         zh_CN/messages.mo \
         zh_TW/messages.mo \
+	uk_UA/messages.mo \
         en_us/messages.po
 
 pixmap_DATA = xmlcopyeditor.png
