@@ -7,6 +7,11 @@
       <name>Ivan A Derzhanski</name>
       <email>iad@math.bas.bg</email>
     </code>
+    <code xml:lang="uk">
+      <desc>Ukrainian</desc>
+      <name>Serhij Dubyk</name>
+      <email>dubyk@library.lviv.ua</email>
+    </code>
     <code xml:lang="tr">
       <desc>Turkish</desc>
       <name>Ivan A Derzhanski</name>
@@ -113,6 +118,7 @@
     <text xml:lang="th">รหัสวิชา</text>
     <text xml:lang="nl">Tekstcoderingsinitiatief</text>
     <text xml:lang="ru">Инициатива по кодированию текстов</text>
+    <text xml:lang="uk">Ініціатива по кодуванню текстів</text>
     <text xml:lang="tr">Metin Kodlaması Girişimi</text>
     <text xml:lang="bg">Инициатива за кодиране на текстове</text>
     <text xml:lang="el">Πρωτοβουλία για την Κωδικοποίησης Κειμενών</text>
@@ -136,6 +142,7 @@
     <text xml:lang="th">คุณสมบัติ</text>
     <text xml:lang="nl">Attributen</text>
     <text xml:lang="ru">Атрибуты</text>
+    <text xml:lang="uk">Атрибути</text>
     <text xml:lang="tr">Öznitelikler</text>
     <text xml:lang="bg">Атрибути</text>
     <text xml:lang="el">Χαρακτηριστικά</text>
@@ -159,6 +166,7 @@
     <text xml:lang="th">ชั้นเรียน</text>
     <text xml:lang="nl">Klasse</text>
     <text xml:lang="ru">Класс</text>
+    <text xml:lang="uk">Клас</text>
     <text xml:lang="tr">Sınıf</text>
     <text xml:lang="bg">Клас</text>
     <text xml:lang="el">Κλάση</text>
@@ -182,6 +190,7 @@
     <text xml:lang="th">หมายเลขชั้นเรียน</text>
     <text xml:lang="nl">Gedefinieerde klassen</text>
     <text xml:lang="ru">Описанные классы</text>
+    <text xml:lang="uk">Описані класи</text>
     <text xml:lang="tr">Tanımlı sınıflar</text>
     <text xml:lang="bg">Описани класове</text>
     <text xml:lang="el">Οριζόμενες κλάσες</text>
@@ -205,6 +214,7 @@
     <text xml:lang="th">ชนิดของข้อมูล</text>
     <text xml:lang="nl">Datatype</text>
     <text xml:lang="ru">Тип данных</text>
+    <text xml:lang="uk">Тип даних</text>
     <text xml:lang="tr">Veri Türü</text>
     <text xml:lang="bg">Тип данни</text>
     <text xml:lang="el">Τύπος δεδομένων</text>
@@ -228,6 +238,7 @@
     <text xml:lang="th">คำประกาศ</text>
     <text xml:lang="nl">Declaratie</text>
     <text xml:lang="ru">Описание</text>
+    <text xml:lang="uk">Опис</text>   
     <text xml:lang="tr">Bildirim</text>
     <text xml:lang="bg">Декларация</text>
     <text xml:lang="el">Δήλωση</text>
@@ -251,6 +262,7 @@
     <text xml:lang="th">ค่าตั้งเริ่มต้น</text>
     <text xml:lang="nl">Defaultwaarde</text>
     <text xml:lang="ru">Величина по умолчанию</text>
+    <text xml:lang="uk">Величина за умовчанням</text>
     <text xml:lang="tr">Varsayılan</text>
     <text xml:lang="bg">Стойност по подразбиране</text>
     <text xml:lang="el">Προεπιλεγμένη τιμή</text>
@@ -273,6 +285,7 @@
     <text xml:lang="hi">mUla</text>
     <text xml:lang="nl">Element</text>
     <text xml:lang="ru">Элемент</text>
+    <text xml:lang="uk">Елемент</text>
     <text xml:lang="tr">Öğe</text>
     <text xml:lang="bg">Елемент</text>
     <text xml:lang="el">Στοιχείο</text>
@@ -296,6 +309,7 @@
     <text xml:lang="th">ระบุเนื้อหา</text>
     <text xml:lang="nl">Gedefinieerde elementen</text>
     <text xml:lang="ru">Описанные элементы</text>
+    <text xml:lang="uk">Описані елементи</text>
     <text xml:lang="tr">Tanımlı öğeler</text>
     <text xml:lang="bg">Описани елементи</text>
     <text xml:lang="el">Οριζόμενα στοιχεία</text>
@@ -319,6 +333,7 @@
     <text xml:lang="th">ตัวอย่าง</text>
     <text xml:lang="nl">Voorbeeld</text>
     <text xml:lang="ru">Пример</text>
+    <text xml:lang="uk">Приклад</text>
     <text xml:lang="tr">Örnek</text>
     <text xml:lang="bg">Пример</text>
     <text xml:lang="el">Παράδειγμα</text>
@@ -341,6 +356,7 @@
     <text xml:lang="th">คุณสมบัติโดยรวมและที่เทียบโอนมา</text>
     <text xml:lang="nl">Globale attributen en attributen geërfd van</text>
     <text xml:lang="ru">Глобальные атрибуты и атрибуты, унаследованные от</text>
+    <text xml:lang="uk">Глобальні атрибути і атрибути, успадковані від</text>
     <text xml:lang="tr">Genel ve ~'dan kalıtsal öznitelikler</text>
     <text xml:lang="bg">Глобални атрибути и атрибути, наследени от</text>
     <text xml:lang="el">Χαρακτηριστικά καθολικά και κληρονομικά από</text>
@@ -364,6 +380,7 @@
     <text xml:lang="th">คุณสมบัติโดยรวมเท่านั้น</text>
     <text xml:lang="nl">Enkel globale attributen</text>
     <text xml:lang="ru">Только глобальные атрибуты</text>
+    <text xml:lang="uk">Лише глобальні атрибути</text>
     <text xml:lang="tr">Sadece genel öznitelikler</text>
     <text xml:lang="bg">Само глобални атрибути</text>
     <text xml:lang="el">Μόνο καθολικά χαρακτηριστικά</text>
@@ -387,6 +404,7 @@
     <text xml:lang="th">คุณสมบัติโดยรวมเพิ่มเติม</text>
     <text xml:lang="nl">Naast de globale attributen</text>
     <text xml:lang="ru">Вдобавок к глобальным атрибутам</text>
+    <text xml:lang="uk">Додатково до глобальних атрибутів</text>
     <text xml:lang="tr">Genel özniteliklerden başka</text>
     <text xml:lang="bg">Освен глобалните атрибути</text>
     <text xml:lang="el">Πλήν των καθολικών χαρακτηριστικών</text>
@@ -410,6 +428,7 @@
     <text xml:lang="th">คุณสมบัติโดยรวมและที่เทียบโอนมาเพิ่มเติม</text>
     <text xml:lang="nl">Naast de globale attributen en de attributen geërfd van</text>
     <text xml:lang="ru">Вдобавок к глобальным атрибутам и атрибутам, унаследованным от</text>
+    <text xml:lang="uk">Додатково до глобальних атрибутів та атрибутів, успадкованих від</text>
     <text xml:lang="tr">Genel ve ~'dan kalıtsal özniteliklerden başka</text>
     <text xml:lang="bg">Освен глобалните атрибути и атрибутите, наследени от</text>
     <text xml:lang="el">Πλήν τωνχαρακτηριστικών καθολικών και κληρονομικών από</text>
@@ -433,6 +452,7 @@
     <text xml:lang="th">คุณค่าทางกฎหมายคือ</text>
     <text xml:lang="nl">Geldige waarden zijn</text>
     <text xml:lang="ru">Разрешенные величины:</text>
+    <text xml:lang="uk">Дозволені величини:</text>
     <text xml:lang="tr">Geçerli değerler:</text>
     <text xml:lang="bg">Разрешените стойности са</text>
     <text xml:lang="el">Οι νόμιμες τιμές είναι</text>
@@ -455,6 +475,7 @@
     <text xml:lang="th">โคร</text>
     <text xml:lang="nl">Gedefinieerde macro's</text>
     <text xml:lang="ru">Определенные макросы</text>
+    <text xml:lang="uk">Певні макроси</text>
     <text xml:lang="tr">Tanımlı makrolar</text>
     <text xml:lang="bg">Дефинирани макроси</text>
     <text xml:lang="el">Οριζόμενες μακροεντολές</text>
@@ -478,6 +499,7 @@
     <text xml:lang="th">ต้องได้รับการอนุมัติเมื่อสมัครเรียน</text>
     <text xml:lang="nl">Verplicht indien van toepassing</text>
     <text xml:lang="ru">Обязательный, если применим</text>
+    <text xml:lang="uk">Обов'язковий, якщо застосовний</text>
     <text xml:lang="tr">Uygulanabilirse zorunlu</text>
     <text xml:lang="bg">Задължителен, ако е приложим</text>
     <text xml:lang="el">Υποχρεωτικός αν είναι εφαρμόσιμος</text>
@@ -501,6 +523,7 @@
     <text xml:lang="th">สมาชิก</text>
     <text xml:lang="nl">Leden</text>
     <text xml:lang="ru">Члены</text>
+    <text xml:lang="uk">Члени</text>
     <text xml:lang="tr">Üyeler</text>
     <text xml:lang="bg">Членове</text>
     <text xml:lang="el">Μέλη</text>
@@ -523,6 +546,7 @@
     <text xml:lang="th">หลักสูตรการศึกษา</text>
     <text xml:lang="nl">Module</text>
     <text xml:lang="ru">Модуль</text>
+    <text xml:lang="uk">Модуль</text>
     <text xml:lang="tr">Modül</text>
     <text xml:lang="bg">Модул</text>
     <text xml:lang="el">Στοιχείο</text>
@@ -546,6 +570,7 @@
     <text xml:lang="th">หมายเหตุ</text>
     <text xml:lang="nl">Opmerking</text>
     <text xml:lang="ru">Примечание</text>
+    <text xml:lang="uk">Примітка</text>
     <text xml:lang="tr">Not</text>
     <text xml:lang="bg">Забележка</text>
     <text xml:lang="el">Σχόλιο</text>
@@ -569,6 +594,7 @@
     <text xml:lang="th">ตัวเลือก</text>
     <text xml:lang="nl">Optioneel</text>
     <text xml:lang="ru">Факультативный</text>
+    <text xml:lang="uk">Факультативний</text>
     <text xml:lang="tr">Seçmeli</text>
     <text xml:lang="bg">Незадължителен</text>
     <text xml:lang="el">Προαιρετικός</text>
@@ -592,6 +618,7 @@
     <text xml:lang="th">คำแนะนำ</text>
     <text xml:lang="nl">Aanbevolen</text>
     <text xml:lang="ru">Рекомендуемый</text>
+    <text xml:lang="uk">Рекомендований</text>
     <text xml:lang="tr">Önerilen</text>
     <text xml:lang="bg">Препоръчителен</text>
     <text xml:lang="el">Συστημένος</text>
@@ -615,6 +642,7 @@
     <text xml:lang="th">ต้องการข้อมูล</text>
     <text xml:lang="nl">Verplicht</text>
     <text xml:lang="ru">Обязательный</text>
+    <text xml:lang="uk">Обов'язковий</text>
     <text xml:lang="tr">Gerekli</text>
     <text xml:lang="bg">Задължителен</text>
     <text xml:lang="el">Απαραίτητος</text>
@@ -638,6 +666,7 @@
     <text xml:lang="th">ต้องการข้อมูลเมื่อสมัคร</text>
     <text xml:lang="nl">Verplicht indien van toepassing</text>
     <text xml:lang="ru">Обязательный, если применим</text>
+    <text xml:lang="uk">Обов'язковий, якщо застосовний</text>
     <text xml:lang="tr">Uygulanabilirse gereken</text>
     <text xml:lang="bg">Задължителен, където е приложим</text>
     <text xml:lang="el">Απαραίτητος αν είναι εφαρμόσιμος</text>
@@ -661,6 +690,7 @@
     <text xml:lang="th">รวมค่าตัวอย่าง</text>
     <text xml:lang="nl">Voorbeeldwaarden zijn onder meer</text>
     <text xml:lang="ru">Примерные величины включают</text>
+    <text xml:lang="uk">Зразкові величини включають</text>
     <text xml:lang="tr">Örnek değerler arasında</text>
     <text xml:lang="bg">Примерните стойности включват</text>
     <text xml:lang="el">Οι δειγματικές τιμές συμπεριλαμβάνουν</text>
@@ -683,6 +713,7 @@
     <text xml:lang="th">สถานะ</text>
     <text xml:lang="nl">Status</text>
     <text xml:lang="ru">Состояние</text>
+    <text xml:lang="uk">Стан</text>
     <text xml:lang="tr">Durum</text>
     <text xml:lang="bg">Състояние</text>
     <text xml:lang="el">Κατάσταση</text>
@@ -705,6 +736,7 @@
     <text xml:lang="th">รวมค่าแนะนำ</text>
     <text xml:lang="nl">Voorgestelde waarden</text>
     <text xml:lang="ru">Рекомендуемые величины включают</text>
+    <text xml:lang="uk">Рекомендовані величини включають</text>
     <text xml:lang="tr">Önerilen değerler arasında</text>
     <text xml:lang="bg">Препоръчваните стойности включват</text>
     <text xml:lang="el">Οι συστημένες τιμές συμπεριλαμβάνουν</text>
@@ -727,6 +759,7 @@
     <text xml:lang="hi">guNa</text>
     <text xml:lang="nl">Waarden</text>
     <text xml:lang="ru">Величины</text>
+    <text xml:lang="uk">Величини</text>
     <text xml:lang="tr">Değerler</text>
     <text xml:lang="bg">Стойности</text>
     <text xml:lang="el">Τιμές</text>
@@ -750,6 +783,7 @@
     <text xml:lang="th">รวมถึง</text>
     <text xml:lang="nl">zijn onder meer</text>
     <text xml:lang="ru">включить</text>
+    <text xml:lang="uk">включити</text>
     <text xml:lang="tr">içer</text>
     <text xml:lang="bg">включи</text>
     <text xml:lang="el">ενσωμάτωσης</text>
@@ -773,6 +807,7 @@
     <text xml:lang="th">ภาคผนวก</text>
     <text xml:lang="nl">Appendix</text>
     <text xml:lang="ru">Приложение</text>
+    <text xml:lang="uk">Додаток</text>
     <text xml:lang="tr">Ek</text>
     <text xml:lang="bg">Приложение</text>
     <text xml:lang="el">Παράρτημα</text>
@@ -796,6 +831,7 @@
     <text xml:lang="th">ผู้แต่ง</text>
     <text xml:lang="nl">Auteur</text>
     <text xml:lang="ru">Автор</text>
+    <text xml:lang="uk">Автор</text>
     <text xml:lang="tr">Yazar</text>
     <text xml:lang="bg">Автор</text>
     <text xml:lang="el">Δημιουργός</text>
@@ -819,6 +855,7 @@
     <text xml:lang="th">บรรณานุกรม</text>
     <text xml:lang="nl">Bibliografie</text>
     <text xml:lang="ru">Библиография</text>
+    <text xml:lang="uk">Бібліографія</text>
     <text xml:lang="tr">Bibliyografya</text>
     <text xml:lang="bg">Литература</text>
     <text xml:lang="el">Βιβλιογραφία</text>
@@ -841,6 +878,7 @@
     <text xml:lang="th">บทในเอกสารนี้</text>
     <text xml:lang="nl">Onderdelen van dit document:</text>
     <text xml:lang="ru">Разделы в этом документе:</text>
+    <text xml:lang="uk">Розділи в цьому документі:</text>
     <text xml:lang="tr">Bu belgenin bölümleri:</text>
     <text xml:lang="bg">Раздели в този документ:</text>
     <text xml:lang="el">Τμήματα αυτού του εγγράφου:</text>
@@ -863,6 +901,7 @@
     <text xml:lang="th">เนื้อหา</text>
     <text xml:lang="nl">Inhoud</text>
     <text xml:lang="ru">Оглавление</text>
+    <text xml:lang="uk">Зміст</text>
     <text xml:lang="tr">İçerik</text>
     <text xml:lang="bg">Съдържание</text>
     <text xml:lang="el">Περιεχόμενα</text>
@@ -886,6 +925,7 @@
     <text xml:lang="th">วันที่</text>
     <text xml:lang="nl">Datum</text>
     <text xml:lang="ru">Дата</text>
+    <text xml:lang="uk">Дата</text>
     <text xml:lang="tr">Tarih</text>
     <text xml:lang="bg">Дата</text>
     <text xml:lang="el">Ημερομηνία</text>
@@ -909,6 +949,7 @@
     <text xml:lang="th">ตอบกลับ</text>
     <text xml:lang="nl">Feedback</text>
     <text xml:lang="ru">Отзывы</text>
+    <text xml:lang="uk">Відгуки</text>
     <text xml:lang="tr">Geri besleme</text>
     <text xml:lang="bg">Коментари</text>
     <text xml:lang="el">Γνώμες</text>
@@ -932,6 +973,7 @@
     <text xml:lang="th">ภาพ</text>
     <text xml:lang="nl">Afbeelding</text>
     <text xml:lang="ru">Фигура</text>
+    <text xml:lang="uk">Фігура</text>
     <text xml:lang="tr">Şekil</text>
     <text xml:lang="bg">Фигура</text>
     <text xml:lang="el">Σχήμα</text>
@@ -955,6 +997,7 @@
     <text xml:lang="th">ภาพ</text>
     <text xml:lang="nl">Afbeeldingen</text>
     <text xml:lang="ru">Фигуры</text>
+    <text xml:lang="uk">Фігури</text>
     <text xml:lang="tr">Şekiller</text>
     <text xml:lang="bg">Фигури</text>
     <text xml:lang="el">Σχήματα</text>
@@ -978,6 +1021,7 @@
     <text xml:lang="th">ต่อไป</text>
     <text xml:lang="nl">Volgende</text>
     <text xml:lang="ru">Следующий</text>
+    <text xml:lang="uk">Наступний</text>
     <text xml:lang="tr">Sonraki</text>
     <text xml:lang="bg">Следващ</text>
     <text xml:lang="el">Επόμενος</text>
@@ -1001,6 +1045,7 @@
     <text xml:lang="th">หมายเหตุ</text>
     <text xml:lang="nl">Opmerkingen</text>
     <text xml:lang="ru">Примечания</text>
+    <text xml:lang="uk">Примітки</text>
     <text xml:lang="tr">Notlar</text>
     <text xml:lang="bg">Забележки</text>
     <text xml:lang="el">Σχόλια</text>
@@ -1023,6 +1068,7 @@
     <text xml:lang="hi">Purva"</text>
     <text xml:lang="nl">Vorige</text>
     <text xml:lang="ru">Предыдущий</text>
+    <text xml:lang="uk">Попередній</text>
     <text xml:lang="tr">Önceki</text>
     <text xml:lang="bg">Предходен</text>
     <text xml:lang="el">Προηγούμενος</text>
@@ -1046,6 +1092,7 @@
     <text xml:lang="th">ทบทวน</text>
     <text xml:lang="nl">herzien</text>
     <text xml:lang="ru">Пересмотрено</text>
+    <text xml:lang="uk">Переглянуто</text>
     <text xml:lang="tr">Düzeltilmiş</text>
     <text xml:lang="bg">Променено</text>
     <text xml:lang="el">Μετάβλητο</text>
@@ -1069,6 +1116,7 @@
     <text xml:lang="th">ค้นหา</text>
     <text xml:lang="nl">Zoeken</text>
     <text xml:lang="ru">Поиск</text>
+    <text xml:lang="uk">Пошук</text>
     <text xml:lang="tr">Ara</text>
     <text xml:lang="bg">Търси</text>
     <text xml:lang="el">Ψάχνε</text>
@@ -1092,6 +1140,7 @@
     <text xml:lang="th">ตาราง</text>
     <text xml:lang="nl">Tabel</text>
     <text xml:lang="ru">Таблица</text>
+    <text xml:lang="uk">Таблиця</text>
     <text xml:lang="tr">Tablo</text>
     <text xml:lang="bg">Таблица</text>
     <text xml:lang="el">Πίνακας</text>
@@ -1115,6 +1164,7 @@
     <text xml:lang="th">คาราง</text>
     <text xml:lang="nl">Tabellen</text>
     <text xml:lang="ru">Таблицы</text>
+    <text xml:lang="uk">Таблиці</text>
     <text xml:lang="tr">Tablolar</text>
     <text xml:lang="bg">Таблици</text>
     <text xml:lang="el">Πίνακες</text>
@@ -1138,6 +1188,7 @@
     <text xml:lang="th">สารบัญ</text>
     <text xml:lang="nl">Inhoud</text>
     <text xml:lang="ru">Оглавление</text>
+    <text xml:lang="uk">Зміст</text>
     <text xml:lang="tr">İçerik</text>
     <text xml:lang="bg">Съдържание</text>
     <text xml:lang="el">Περιεχόμενα</text>
@@ -1161,6 +1212,7 @@
     <text xml:lang="th">ไปข้างบน</text>
     <text xml:lang="nl">Hoger</text>
     <text xml:lang="ru">Вверх</text>
+    <text xml:lang="uk">Вгору</text>
     <text xml:lang="tr">Yukarı</text>
     <text xml:lang="bg">Нагоре</text>
     <text xml:lang="el">Ανω</text>
