@@ -1066,6 +1066,8 @@ void MyFrame::handleCommandLine()
 	
 	while ((--m_argc > 0 && (*++m_argv)[0] == L'-') != 0)
 	{
+		wxString wideVersion(ABOUT_VERSION);
+		std::string version = (const char *)wideVersion.mb_str(wxConvUTF8);
 		while ((c = *++m_argv[0]) != 0)
 		{
 			switch (c)
@@ -1076,8 +1078,18 @@ void MyFrame::handleCommandLine()
 				case L's':
 					styleFlag = true;
 					break;
+				case L'-':
+					if (*++m_argv[0] == L'v')
+					{	
+                                        	std::cout << version.c_str() << std::endl;
+					}
+					else
+					{
+						std::cout << "Usage: xmlcopyeditor [-ws --version --help] [<file>] [<file2>]" << std::endl;
+					}
+					exit(0);
 				default:
-          messagePane(_("Unknown command line switch (expecting 'w' or 's')"),
+          messagePane(_("Unknown command line switch (expecting 'w', 's', --version or --help)"),
             CONST_STOP);
           return;
 			}
