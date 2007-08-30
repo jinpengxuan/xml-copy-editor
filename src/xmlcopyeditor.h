@@ -305,7 +305,7 @@ class MyFrame : public wxFrame
     void messagePane(const wxString& s, int iconType = CONST_INFO);
 
     // public to allow IPC access
-    bool openFile(const wxString& fileName, bool largeFile = false);
+    bool openFile(wxString& fileName, bool largeFile = false);
     bool isOpen(const wxString& fileName);
     void activateTab(const wxString& fileName);
   private:

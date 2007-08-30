@@ -41,7 +41,7 @@ bool MyServerConnection::OnPoke(
     return false;
   if (item == (wxString)IPC_NO_FILE) { ; }
   else if (frame->isOpen(item)) { frame->activateTab(item); }
-  else { frame->openFile(item); }
+  else { frame->openFile((wxString&)item); }
   frame->Raise();
   return true;
 }

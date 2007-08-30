@@ -1085,7 +1085,7 @@ void MyFrame::handleCommandLine()
 					}
 					else
 					{
-						std::cout << "Usage: xmlcopyeditor [-ws --version --help] [<file>] [<file2>]" << std::endl;
+						std::cout << "Usage: xmlcopyeditor [--version --help -ws] [<file>] [<file2>]" << std::endl << "Options -w (import Microsoft Word document) and -s (open Spelling and style check) are provided for integration with Microsoft Office and only available on Windows" << std::endl; 
 					}
 					exit(0);
 				default:
@@ -2717,8 +2717,18 @@ void MyFrame::OnOpen(wxCommandEvent& event)
       break;
 }
 
-bool MyFrame::openFile(const wxString& fileName, bool largeFile)
+bool MyFrame::openFile(wxString& fileName, bool largeFile) 
 {
+#ifndef __WXMSW__
+  // truncate string up to file:/ portion added by GNOME
+  wxString filePrefix = _T("file:");
+  int index = fileName.Find(filePrefix.c_str());
+  if (index != -1)
+  {
+    fileName = fileName.Mid((size_t)index + filePrefix.Length());
+  }
+#endif
+
   if (!wxFileName::FileExists(fileName))
   {
     wxString message;
