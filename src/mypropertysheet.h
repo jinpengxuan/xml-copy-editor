@@ -7,51 +7,51 @@
 #include "xmlctrl.h"
 
 enum {
-  APPLICATION_DIR_BROWSE,
-  BROWSER_COMMAND_BROWSE,
-  FONT_BROWSE
+    APPLICATION_DIR_BROWSE,
+    BROWSER_COMMAND_BROWSE,
+    FONT_BROWSE
 };
 
 enum langIndex {
-  INDEX_CHINESE_SIMPLIFIED = 0,
-  INDEX_CHINESE_TRADITIONAL,
-  INDEX_ENGLISH_US,
-  INDEX_FRENCH,
-  INDEX_GERMAN,
-  INDEX_SLOVAK,
-  INDEX_SWEDISH,
-  INDEX_UKRAINIAN
+    INDEX_CHINESE_SIMPLIFIED = 0,
+    INDEX_CHINESE_TRADITIONAL,
+    INDEX_ENGLISH_US,
+    INDEX_FRENCH,
+    INDEX_GERMAN,
+    INDEX_SLOVAK,
+    INDEX_SWEDISH,
+    INDEX_UKRAINIAN
 };
 
 class MyPropertySheet : public wxPropertySheetDialog
 {
-  public:
-    MyPropertySheet(
-      wxWindow *parent,
-      XmlCtrlProperties& propertiesParameter,
-      wxString& applicationDirParameter,
-      wxString& browserCommandParameter,
-      bool rememberOpenTabsParameter,
-      bool libxmlNetAccess,
-      bool singleInstanceCheck,
-      bool saveBom,
-      bool unlimitedUndo,
-      bool restoreLayout,
-      bool expandInternalEntities,
-      bool showFullPathOnFrame,
-      int lang,
+public:
+    MyPropertySheet (
+        wxWindow *parent,
+        XmlCtrlProperties& propertiesParameter,
+        wxString& applicationDirParameter,
+        wxString& browserCommandParameter,
+        bool rememberOpenTabsParameter,
+        bool libxmlNetAccess,
+        bool singleInstanceCheck,
+        bool saveBom,
+        bool unlimitedUndo,
+        bool restoreLayout,
+        bool expandInternalEntities,
+        bool showFullPathOnFrame,
+        int lang,
 #ifdef __WXMSW__
-      bool useCoolBar,
-#endif      
-      wxWindowID id = wxID_ANY,
-      wxString title = _T(""),
-      const wxPoint& position = wxDefaultPosition,
-      const wxSize& size = wxDefaultSize,
-      long style = wxDEFAULT_DIALOG_STYLE);
+        bool useCoolBar,
+#endif
+        wxWindowID id = wxID_ANY,
+        wxString title = _T ( "" ),
+        const wxPoint& position = wxDefaultPosition,
+        const wxSize& size = wxDefaultSize,
+        long style = wxDEFAULT_DIALOG_STYLE );
     ~MyPropertySheet();
-    void OnOk(wxCommandEvent& e);
-    void OnBrowserCommandBrowse(wxCommandEvent& e);
-    void OnApplicationDirBrowse(wxCommandEvent& e);
+    void OnOk ( wxCommandEvent& e );
+    void OnBrowserCommandBrowse ( wxCommandEvent& e );
+    void OnApplicationDirBrowse ( wxCommandEvent& e );
     XmlCtrlProperties getProperties();
     wxString getApplicationDir();
     wxString getBrowserCommand();
@@ -67,48 +67,48 @@ class MyPropertySheet : public wxPropertySheetDialog
     bool getUseCoolBar();
 #endif
     int getLang();
-  private:
+private:
     int lang;
     wxCheckBox *completionBox,
-      *currentLineBox,
-      *foldBox,
-      *numberBox,
-      *whitespaceVisibleBox,
-      //*wrapBox,
-      *indentLinesBox,
-      *deleteWholeTagBox,
-      *rememberOpenTabsBox,
-      *libxmlNetAccessBox,
-      *singleInstanceCheckBox,
-      *saveBomBox,
-      *protectHiddenElementsBox,
-      *toggleLineBackgroundBox,
-      *validateAsYouTypeBox,
-      *fullPathBox,
-      *highlightSyntaxBox,
+    *currentLineBox,
+    *foldBox,
+    *numberBox,
+    *whitespaceVisibleBox,
+    //*wrapBox,
+    *indentLinesBox,
+    *deleteWholeTagBox,
+    *rememberOpenTabsBox,
+    *libxmlNetAccessBox,
+    *singleInstanceCheckBox,
+    *saveBomBox,
+    *protectHiddenElementsBox,
+    *toggleLineBackgroundBox,
+    *validateAsYouTypeBox,
+    *fullPathBox,
+    *highlightSyntaxBox,
 #ifdef __WXMSW__
-      *useCoolBarBox,
+    *useCoolBarBox,
 #endif
-      *unlimitedUndoBox,
-      *restoreLayoutBox,
-      *expandInternalEntitiesBox,
-      *insertCloseTagBox;
+    *unlimitedUndoBox,
+    *restoreLayoutBox,
+    *expandInternalEntitiesBox,
+    *insertCloseTagBox;
     wxChoice *languageBox, *fontBox;
     wxTextCtrl *applicationDirEdit, *browserCommandEdit;
     XmlCtrlProperties properties;
     wxString applicationDir, browserCommand;
     bool singleInstanceCheck,
-      rememberOpenTabs,
-      libxmlNetAccess,
-      saveBom,
+    rememberOpenTabs,
+    libxmlNetAccess,
+    saveBom,
 #ifdef __WXMSW__
-      useCoolBar,
-#endif      
-      unlimitedUndo,
-      restoreLayout,
-      expandInternalEntities,
-      showFullPathOnFrame,
-      insertCloseTag;
+    useCoolBar,
+#endif
+    unlimitedUndo,
+    restoreLayout,
+    expandInternalEntities,
+    showFullPathOnFrame,
+    insertCloseTag;
     DECLARE_EVENT_TABLE()
 };
 

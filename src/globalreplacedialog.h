@@ -6,32 +6,33 @@
 
 class GlobalReplaceDialog : public wxDialog
 {
-  public:
-    GlobalReplaceDialog(
-      wxWindow *parent,
-      const wxString& findParameter = _T(""),
-      const wxString& replaceParameter = _T(""),
-      bool matchCaseParameter = false,
-      bool allDocumentsParameter = false,
-      bool regexParameter = true);
+public:
+    GlobalReplaceDialog (
+        wxWindow *parent,
+        const wxString& findParameter = _T ( "" ),
+        const wxString& replaceParameter = _T ( "" ),
+        bool matchCaseParameter = false,
+        bool allDocumentsParameter = false,
+        bool regexParameter = true );
     ~GlobalReplaceDialog();
-    void OnOk(wxCommandEvent& e);
-    void OnContextHelp(wxHelpEvent& e);
-    void OnUpdateOk(wxUpdateUIEvent& event);
+    void OnOk ( wxCommandEvent& e );
+    void OnContextHelp ( wxHelpEvent& e );
+    void OnUpdateOk ( wxUpdateUIEvent& event );
     wxString getFindString();
     wxString getReplaceString();
     bool getRegex();
     bool getAllDocuments();
     bool getMatchCase();
-    enum constants {
-      ID_FIND,
-      ID_REPLACE,
-      ID_REGEX,
-      ID_MATCHCASE,
-      ID_ALLDOCUMENTS
+    enum constants
+    {
+        ID_FIND,
+        ID_REPLACE,
+        ID_REGEX,
+        ID_MATCHCASE,
+        ID_ALLDOCUMENTS
     };
-      
-  private:
+
+private:
     wxTextCtrl *findCtrl, *replaceCtrl;
     wxStaticText *findLabel, *replaceLabel;
     wxCheckBox *matchCaseBox, *allDocumentsBox, *regexBox;

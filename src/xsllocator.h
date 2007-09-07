@@ -7,26 +7,26 @@
 
 struct XslLocatorData : public ParserData
 {
-  std::string xslLocation;
-  XML_Parser parser;
+    std::string xslLocation;
+    XML_Parser parser;
 };
 
 class XslLocator : public WrapExpat
 {
-  public:
+public:
     XslLocator();
     virtual ~XslLocator();
     std::string getXslLocation();
-  private:
+private:
     std::auto_ptr<XslLocatorData> d;
-    static void XMLCALL starthandler(
-      void *data,
-      const XML_Char *el,
-      const XML_Char **attr);
-    static void XMLCALL processingInstructionHandler(
-      void *userData,
-      const XML_Char *target,
-      const XML_Char *data);
+    static void XMLCALL starthandler (
+        void *data,
+        const XML_Char *el,
+        const XML_Char **attr );
+    static void XMLCALL processingInstructionHandler (
+        void *userData,
+        const XML_Char *target,
+        const XML_Char *data );
 };
 
 #endif

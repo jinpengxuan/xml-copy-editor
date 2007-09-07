@@ -6,17 +6,17 @@
 
 class AboutDialog : public wxDialog
 {
-  public:
-    AboutDialog(
-      wxWindow *parent,
-      const wxString& title,
-      const wxString& path,
-      const wxString& hyperlink,
-      wxPoint positionParameter);
+public:
+    AboutDialog (
+        wxWindow *parent,
+        const wxString& title,
+        const wxString& path,
+        const wxString& hyperlink,
+        wxPoint positionParameter );
     ~AboutDialog();
-    void OnOk(wxCommandEvent& e);
+    void OnOk ( wxCommandEvent& e );
     wxPoint getPosition();
-  private:
+private:
     wxPoint position;
     wxHtmlWindow *html;
     wxButton *button;

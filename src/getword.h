@@ -5,10 +5,10 @@
 
 class GetWord
 {
-  public:
-    static char *run(char **s, size_t *len);
-  private:
-    static bool isWordCharacter(char *s, size_t *bytes);
+public:
+    static char *run ( char **s, size_t *len );
+private:
+    static bool isWordCharacter ( char *s, size_t *bytes );
 };
 
 #endif

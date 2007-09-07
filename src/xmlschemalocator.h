@@ -7,22 +7,22 @@
 
 struct SchemaLocatorData
 {
-  std::string schemaLocation;
-  XML_Parser parser;
+    std::string schemaLocation;
+    XML_Parser parser;
 };
 
 class XmlSchemaLocator : public WrapExpat
 {
-  public:
+public:
     XmlSchemaLocator();
     virtual ~XmlSchemaLocator();
     std::string getSchemaLocation();
-  private:
+private:
     std::auto_ptr<SchemaLocatorData> d;
-    static void XMLCALL starthandler(
-      void *data,
-      const XML_Char *el,
-      const XML_Char **attr);
+    static void XMLCALL starthandler (
+        void *data,
+        const XML_Char *el,
+        const XML_Char **attr );
 };
 
 #endif

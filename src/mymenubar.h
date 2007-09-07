@@ -8,10 +8,10 @@
 
 class MyMenuBar : public wxMenuBar
 {
-  public:
-    MyMenuBar(long style = 0);
-  private:
+public:
+    MyMenuBar ( long style = 0 );
+private:
     DECLARE_EVENT_TABLE()
 };
 
-#endif 
+#endif

@@ -16,33 +16,33 @@ extern MyClientConnection *client_connection;
 
 class MyServerConnection : public wxConnection
 {
-  public:
+public:
     MyServerConnection();
     ~MyServerConnection();
-    bool OnPoke(const wxString& topic, const wxString& item, wxChar *data, int size, wxIPCFormat format);
-    bool OnStartAdvise(const wxString& topic, const wxString& item);
+    bool OnPoke ( const wxString& topic, const wxString& item, wxChar *data, int size, wxIPCFormat format );
+    bool OnStartAdvise ( const wxString& topic, const wxString& item );
 };
 
 class MyClientConnection: public wxConnection
 {
-  public:
+public:
     MyClientConnection();
-    bool OnAdvise(const wxString& topic, const wxString& item, wxChar *data, int size, wxIPCFormat format);
+    bool OnAdvise ( const wxString& topic, const wxString& item, wxChar *data, int size, wxIPCFormat format );
     bool OnDisconnect();
 };
 
 class MyClient: public wxClient
 {
-  public:
+public:
     MyClient();
     wxConnectionBase *OnMakeConnection();
 };
 
 class MyServer: public wxServer
 {
-  public:
+public:
     MyServer();
-    wxConnectionBase *OnAcceptConnection(const wxString& topic);
+    wxConnectionBase *OnAcceptConnection ( const wxString& topic );
 };
 
 #endif

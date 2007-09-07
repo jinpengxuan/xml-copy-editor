@@ -6,12 +6,12 @@
 
 class BinaryFile
 {
-  public:
-    BinaryFile(const char *fname);
+public:
+    BinaryFile ( const char *fname );
     ~BinaryFile();
     const char *getData();
     size_t getDataLen();
-  private:
+private:
     char *m_data;
     size_t m_dataLen;
 };

@@ -7,8 +7,8 @@
 
 class ReadFile
 {
-  public:
-    static bool run(std::string fname, std::string &buffer);
+public:
+    static bool run ( std::string fname, std::string &buffer );
 };
 
 #endif

@@ -6,24 +6,47 @@
 
 class ParserData
 {
-  public:
-    ParserData() { count = 0; }
-    ~ParserData() { }
-    void push(const std::string& s) { stack.push_back(s); }
-    void pop() { stack.pop_back(); }
-    void setState(int i) { state = i; ++count; }
-    int getState() { return state; }
-    int getCount() { return count; }
-    std::vector<std::string> getStack() { return stack; }
+public:
+    ParserData()
+    {
+        count = 0;
+    }
+    ~ParserData()
+    { }
+    void push ( const std::string& s )
+    {
+        stack.push_back ( s );
+    }
+    void pop()
+    {
+        stack.pop_back();
+    }
+    void setState ( int i )
+    {
+        state = i;
+        ++count;
+    }
+    int getState()
+    {
+        return state;
+    }
+    int getCount()
+    {
+        return count;
+    }
+    std::vector<std::string> getStack()
+    {
+        return stack;
+    }
     std::string getElement()
     {
-      return (stack.empty()) ? "" : stack.at(stack.size() - 1);
+        return ( stack.empty() ) ? "" : stack.at ( stack.size() - 1 );
     }
     std::string getParent()
     {
-      return (stack.size() < 2) ? "" : stack.at(stack.size() - 2);
+        return ( stack.size() < 2 ) ? "" : stack.at ( stack.size() - 2 );
     }
-  private:
+private:
     int state, count;
     std::vector<std::string> stack;
 };

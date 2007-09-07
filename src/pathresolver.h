@@ -6,13 +6,13 @@
 
 class PathResolver
 {
-  public:
-    static wxString run(
-      const wxString& path,
-      const wxString& anchor = wxEmptyString);
-    static std::string run(
+public:
+    static wxString run (
+        const wxString& path,
+        const wxString& anchor = wxEmptyString );
+    static std::string run (
         const std::string& path,
-        const std::string& anchor = "");
+        const std::string& anchor = "" );
 };
 
 #endif

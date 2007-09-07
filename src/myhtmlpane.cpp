@@ -1,17 +1,16 @@
 #include "myhtmlpane.h"
 #include "xmlcopyeditor.h"
 
-BEGIN_EVENT_TABLE(MyHtmlPane, wxHtmlWindow)
-  EVT_LEFT_DCLICK(MyHtmlPane::OnLeftDoubleClick)
+BEGIN_EVENT_TABLE ( MyHtmlPane, wxHtmlWindow )
+EVT_LEFT_DCLICK ( MyHtmlPane::OnLeftDoubleClick )
 END_EVENT_TABLE()
 
-MyHtmlPane::MyHtmlPane(
-  wxWindow *parent,
-  wxWindowID id,
-  const wxPoint& position,
-  const wxSize& size) : wxHtmlWindow(parent, id, position, size)
-{
-}
+MyHtmlPane::MyHtmlPane (
+    wxWindow *parent,
+    wxWindowID id,
+    const wxPoint& position,
+    const wxSize& size ) : wxHtmlWindow ( parent, id, position, size )
+{}
 
 /*
 void MyHtmlPane::OnCellClicked(
@@ -33,4 +32,5 @@ void MyHtmlPane::OnCellClicked(
 }
 */
 
-void MyHtmlPane::OnLeftDoubleClick(wxMouseEvent& WXUNUSED(event)) { }
+void MyHtmlPane::OnLeftDoubleClick ( wxMouseEvent& WXUNUSED ( event ) )
+{ }

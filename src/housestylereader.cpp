@@ -6,133 +6,132 @@
 
 using namespace std;
 
-HouseStyleReader::HouseStyleReader(
-  map<string, map<string, set<string> > > &m
-) : WrapExpat(true), ud(new HouseStyleReaderData())
+HouseStyleReader::HouseStyleReader (
+    map<string, map<string, set<string> > > &m
+    ) : WrapExpat ( true ), ud ( new HouseStyleReaderData() )
 {
-  ud->setState(STATE_UNKNOWN);
-  ud->depth = ud->cutoffDepth = 0;
-  ud->filterActive = false;
-  ud->filterMap = m;
-  
-  XML_SetUserData(p, ud.get());
-  XML_SetElementHandler(p, start, end);
-  XML_SetCharacterDataHandler(p, characterdata);
-  XML_SetCdataSectionHandler(p, cdatastart, cdataend);
+    ud->setState ( STATE_UNKNOWN );
+    ud->depth = ud->cutoffDepth = 0;
+    ud->filterActive = false;
+    ud->filterMap = m;
+
+    XML_SetUserData ( p, ud.get() );
+    XML_SetElementHandler ( p, start, end );
+    XML_SetCharacterDataHandler ( p, characterdata );
+    XML_SetCdataSectionHandler ( p, cdatastart, cdataend );
 }
 
 HouseStyleReader::~HouseStyleReader()
+{}
+
+void HouseStyleReader::getNodeVector ( vector<pair<string, unsigned> > &v )
 {
+    v = ud->nodevector;
 }
 
-void HouseStyleReader::getNodeVector(vector<pair<string, unsigned> > &v)
+void XMLCALL HouseStyleReader::start ( void *data, const XML_Char *el, const XML_Char **attr )
 {
-  v = ud->nodevector;
-}
+    HouseStyleReaderData *ud;
+    ud = ( HouseStyleReaderData * ) data;
+    ud->setState ( STATE_ON_START );
+    ++ ( ud->depth );
 
-void XMLCALL HouseStyleReader::start(void *data, const XML_Char *el, const XML_Char **attr)
-{
-  HouseStyleReaderData *ud;
-  ud = (HouseStyleReaderData *)data;
-  ud->setState(STATE_ON_START);
-  ++(ud->depth);
-     
-  if (ud->textnode.size())
-  {
-   if (!ud->filterActive)
-     ud->nodevector.push_back(make_pair(ud->textnode, ud->getCount()));
-   ud->textnode = "";
-  }
-
-  if (!ud->filterActive && ud->filterMap.find(el) != ud->filterMap.end())
-  {
-    map<string, set<string> > attributeMap;
-    attributeMap = ud->filterMap[el];
-
-    // no attribute keys/values specified
-    if (attributeMap.empty())
+    if ( ud->textnode.size() )
     {
-      ud->filterActive = true;
-      ud->cutoffDepth = ud->depth; 
+        if ( !ud->filterActive )
+            ud->nodevector.push_back ( make_pair ( ud->textnode, ud->getCount() ) );
+        ud->textnode = "";
     }
 
-    // examine attribute keys/values
-    else
+    if ( !ud->filterActive && ud->filterMap.find ( el ) != ud->filterMap.end() )
     {
+        map<string, set<string> > attributeMap;
+        attributeMap = ud->filterMap[el];
 
-      for (; *attr; attr += 2)
-      {
-        char *key, *value;
-        key = (char *)*attr;
-        value = (char *)*(attr + 1);
-        set<string> valueSet;
-        valueSet = attributeMap[key];
-
-        if (attributeMap.find(key) != attributeMap.end())
+        // no attribute keys/values specified
+        if ( attributeMap.empty() )
         {
-          if (valueSet.count(value))
-          {
             ud->filterActive = true;
             ud->cutoffDepth = ud->depth;
-          }
         }
-      }
+
+        // examine attribute keys/values
+        else
+        {
+
+            for ( ; *attr; attr += 2 )
+            {
+                char *key, *value;
+                key = ( char * ) *attr;
+                value = ( char * ) * ( attr + 1 );
+                set<string> valueSet;
+                valueSet = attributeMap[key];
+
+                if ( attributeMap.find ( key ) != attributeMap.end() )
+                {
+                    if ( valueSet.count ( value ) )
+                    {
+                        ud->filterActive = true;
+                        ud->cutoffDepth = ud->depth;
+                    }
+                }
+            }
+        }
+        ud->cutoffDepth = ud->depth;
     }
-    ud->cutoffDepth = ud->depth;
-  }
 }
 
-void XMLCALL HouseStyleReader::end(void *data, const XML_Char *el)
+void XMLCALL HouseStyleReader::end ( void *data, const XML_Char *el )
 {
-  HouseStyleReaderData *ud;
-  ud = (HouseStyleReaderData *)data;
-  
-  ud->setState(STATE_ON_END);
-  --(ud->depth);
-  if (ud->textnode.size())
-  {
-    if (!ud->filterActive)
-      ud->nodevector.push_back(make_pair(ud->textnode, ud->getCount()));
-    ud->textnode = "";
-  }
-  if (ud->filterActive && ud->depth < ud->cutoffDepth)
-  {
-    ud->cutoffDepth = 0;
-    ud->filterActive = false;
-  }
+    HouseStyleReaderData *ud;
+    ud = ( HouseStyleReaderData * ) data;
+
+    ud->setState ( STATE_ON_END );
+    -- ( ud->depth );
+    if ( ud->textnode.size() )
+    {
+        if ( !ud->filterActive )
+            ud->nodevector.push_back ( make_pair ( ud->textnode, ud->getCount() ) );
+        ud->textnode = "";
+    }
+    if ( ud->filterActive && ud->depth < ud->cutoffDepth )
+    {
+        ud->cutoffDepth = 0;
+        ud->filterActive = false;
+    }
 }
 
-void XMLCALL HouseStyleReader::characterdata(void *data, const XML_Char *s, int len)
+void XMLCALL HouseStyleReader::characterdata ( void *data, const XML_Char *s, int len )
 {
- HouseStyleReaderData *ud;
- ud = (HouseStyleReaderData *)data;
- ud->textnode.append(s, len);
+    HouseStyleReaderData *ud;
+    ud = ( HouseStyleReaderData * ) data;
+    ud->textnode.append ( s, len );
 }
 
-void XMLCALL HouseStyleReader::cdatastart(void *data)
+void XMLCALL HouseStyleReader::cdatastart ( void *data )
 {
-  HouseStyleReaderData *ud;
-  ud = (HouseStyleReaderData *)data;
-  ud->setState(STATE_ON_CDATA_START);
+    HouseStyleReaderData *ud;
+    ud = ( HouseStyleReaderData * ) data;
+    ud->setState ( STATE_ON_CDATA_START );
 
-  if (ud->textnode.size())
-  {
-      if (!ud->filterActive)
-        ud->nodevector.push_back(make_pair(ud->textnode, ud->getCount()));
-      ud->textnode = "";
-  }
+    if ( ud->textnode.size() )
+    {
+        if ( !ud->filterActive )
+            ud->nodevector.push_back ( make_pair ( ud->textnode, ud->getCount() ) );
+        ud->textnode = "";
+    }
 }
 
-void XMLCALL HouseStyleReader::cdataend(void *data)
+void XMLCALL HouseStyleReader::cdataend ( void *data )
 {
-  HouseStyleReaderData *ud;
-  ud = (HouseStyleReaderData *)data;
-  ud->setState(STATE_ON_CDATA_END);
+    HouseStyleReaderData *ud;
+    ud = ( HouseStyleReaderData * ) data;
+    ud->setState ( STATE_ON_CDATA_END );
 
-  if (ud->textnode.size())
-  {
-      if (!ud->filterActive)
-        ud->nodevector.push_back(make_pair(ud->textnode, ud->getCount()));
-      ud->textnode = "";
-  }
+    if ( ud->textnode.size() )
+    {
+        if ( !ud->filterActive )
+            ud->nodevector.push_back ( make_pair ( ud->textnode, ud->getCount() ) );
+        ud->textnode = "";
+    }
 }

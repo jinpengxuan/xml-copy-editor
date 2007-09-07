@@ -9,12 +9,12 @@ class XmlDoc;
 
 class LocationPanel : public wxPanel
 {
-  public:
-    LocationPanel(wxWindow *parent, int id);
-    void update(
-      XmlDoc *docParameter = NULL,
-      const wxString& parent = wxEmptyString);
-  private:
+public:
+    LocationPanel ( wxWindow *parent, int id );
+    void update (
+        XmlDoc *docParameter = NULL,
+        const wxString& parent = wxEmptyString );
+private:
     MyFrame *parentWindow;
     XmlDoc *doc;
     wxBoxSizer *sizer;

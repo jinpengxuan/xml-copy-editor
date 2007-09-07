@@ -3,43 +3,43 @@
 
 using namespace std;
 
-Rule::Rule(
-  const string& pattern,
-  bool matchCase,
-  const string& replace,
-  const int arrayLength) : WrapRegex(
-  pattern,
-  matchCase,
-  replace,
-  arrayLength)
+Rule::Rule (
+    const string& pattern,
+    bool matchCase,
+    const string& replace,
+    const int arrayLength ) : WrapRegex (
+                pattern,
+                matchCase,
+                replace,
+                arrayLength )
 { }
 
 bool Rule::getAdjustCaseAttribute()
 {
-  return adjustCaseAttribute;
+    return adjustCaseAttribute;
 }
 
 bool Rule::getTentativeAttribute()
 {
-  return tentativeAttribute;
+    return tentativeAttribute;
 }
 
 string Rule::getReport()
 {
-  return reportString;
+    return reportString;
 }
 
-void Rule::setAdjustCaseAttribute(bool b)
+void Rule::setAdjustCaseAttribute ( bool b )
 {
-  adjustCaseAttribute = b;
+    adjustCaseAttribute = b;
 }
 
-void Rule::setTentativeAttribute(bool b)
+void Rule::setTentativeAttribute ( bool b )
 {
-  tentativeAttribute = b;
+    tentativeAttribute = b;
 }
 
-void Rule::setReport(string &s)
+void Rule::setReport ( string &s )
 {
-  reportString = s;
+    reportString = s;
 }

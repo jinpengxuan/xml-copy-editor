@@ -7,27 +7,30 @@
 
 struct EncodingData : public ParserData
 {
-  std::string encoding;
-  XML_Parser p;
+    std::string encoding;
+    XML_Parser p;
 };
 
 class XmlEncodingSpy : public WrapExpat
 {
-  public:
+public:
     XmlEncodingSpy();
     virtual ~XmlEncodingSpy();
-    std::string getEncoding() { return d->encoding; }
-  private:
+    std::string getEncoding()
+    {
+        return d->encoding;
+    }
+private:
     std::auto_ptr<EncodingData> d;
-    static void XMLCALL xmldeclhandler(
-      void *data, 
-      const XML_Char *version, 
-      const XML_Char *encoding,
-      int standalone);
-  static void XMLCALL start(
-    void *data,
-    const XML_Char *el,
-    const XML_Char **attr);
+    static void XMLCALL xmldeclhandler (
+        void *data,
+        const XML_Char *version,
+        const XML_Char *encoding,
+        int standalone );
+    static void XMLCALL start (
+        void *data,
+        const XML_Char *el,
+        const XML_Char **attr );
 };
 
 #endif

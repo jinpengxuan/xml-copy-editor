@@ -12,21 +12,21 @@ using namespace std;
 
 class Spellcheck
 {
-  public:
-    Spellcheck(
-      boost::shared_ptr<StringSet<char> > dictionaryParameter,
-      boost::shared_ptr<StringSet<char> > passiveDictionaryParameter);
+public:
+    Spellcheck (
+        boost::shared_ptr<StringSet<char> > dictionaryParameter,
+        boost::shared_ptr<StringSet<char> > passiveDictionaryParameter );
     ~Spellcheck();
-    inline bool checkWord(string &s);
-    void checkString(
-      string &s,
-      vector<ContextMatch> &v,
-      int contextRange);
-    string getSuggestion(string &s);
-  private:
+    inline bool checkWord ( string &s );
+    void checkString (
+        string &s,
+        vector<ContextMatch> &v,
+        int contextRange );
+    string getSuggestion ( string &s );
+private:
     boost::shared_ptr<StringSet<char> > dictionary, passiveDictionary;
-    bool checkWord(char *s, size_t len);
-    char *getWord(char **s, size_t *len);
-    inline bool isWordCharacter(char *s, size_t *bytes);
+    bool checkWord ( char *s, size_t len );
+    char *getWord ( char **s, size_t *len );
+    inline bool isWordCharacter ( char *s, size_t *bytes );
 };
 #endif

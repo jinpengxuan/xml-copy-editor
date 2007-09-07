@@ -6,21 +6,21 @@
 
 struct WordCountData : public ParserData
 {
-  std::string buffer;
-  size_t wordCount;
+    std::string buffer;
+    size_t wordCount;
 };
 
 class XmlWordCount : public WrapExpat
 {
-  public:
+public:
     XmlWordCount();
     virtual ~XmlWordCount();
-    
+
     int getWordCount();
-  private:
+private:
     std::auto_ptr<WordCountData> wcd;
-    static void XMLCALL characterdata(void *data, const XML_Char *s, int len);
-    static void XMLCALL end(void *data, const XML_Char *el);
+    static void XMLCALL characterdata ( void *data, const XML_Char *s, int len );
+    static void XMLCALL end ( void *data, const XML_Char *el );
 };
-      
+
 #endif

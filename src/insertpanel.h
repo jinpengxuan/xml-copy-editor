@@ -6,29 +6,29 @@
 #include "xmlcopyeditor.h"
 
 enum {
-  INSERT_PANEL_TYPE_CHILD = 0,
-  INSERT_PANEL_TYPE_SIBLING,
-  INSERT_PANEL_TYPE_ENTITY
+    INSERT_PANEL_TYPE_CHILD = 0,
+    INSERT_PANEL_TYPE_SIBLING,
+    INSERT_PANEL_TYPE_ENTITY
 };
 
 class InsertPanel : public wxPanel
 {
-  public:
-    InsertPanel(
-      wxWindow *parent,
-      int id,
-      int type = INSERT_PANEL_TYPE_CHILD);
-    void update(
-      XmlDoc *doc,
-      const wxString& parent = wxEmptyString,
-      const wxString& grandparent = wxEmptyString);
-    void OnEnter(wxCommandEvent& event);
-    void OnDoubleClick(wxCommandEvent& event);
-    void OnListSelection(wxCommandEvent& event);
+public:
+    InsertPanel (
+        wxWindow *parent,
+        int id,
+        int type = INSERT_PANEL_TYPE_CHILD );
+    void update (
+        XmlDoc *doc,
+        const wxString& parent = wxEmptyString,
+        const wxString& grandparent = wxEmptyString );
+    void OnEnter ( wxCommandEvent& event );
+    void OnDoubleClick ( wxCommandEvent& event );
+    void OnListSelection ( wxCommandEvent& event );
     void setEditFocus();
-    void OnSize(wxSizeEvent& e);
+    void OnSize ( wxSizeEvent& e );
     void adjustSize();
-  private:
+private:
     MyFrame *parentWindow;
     int type;
     wxBoxSizer *sizer;
@@ -36,8 +36,8 @@ class InsertPanel : public wxPanel
     wxListBox *list;
     wxString parent, grandparent, lastParent;
     XmlDoc *doc, *lastDoc;
-    
-    void handleChoice(const wxString& choice);
+
+    void handleChoice ( const wxString& choice );
     DECLARE_EVENT_TABLE()
 };
 

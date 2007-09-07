@@ -1,6 +1,6 @@
 #ifndef WRAP_XERCES
 #define WRAP_XERCES
-#define XERCES_TMPLSINC 
+#define XERCES_TMPLSINC
 
 #include <string>
 #include <utility>
@@ -11,22 +11,28 @@ using namespace xercesc;
 
 class WrapXerces
 {
-  public:
+public:
     WrapXerces();
     ~WrapXerces();
-    bool validate(const std::string& fileName);
+    bool validate ( const std::string& fileName );
     std::string getLastError();
     std::pair<int, int> getErrorPosition();
-  private:
+private:
     std::string lastError;
     std::pair<int, int> errorPosition;
 };
 
 class MySAX2Handler : public DefaultHandler
 {
-  public:
-    void error(const SAXParseException& e) { throw e; }
-    void warning(const SAXParseException& e) { throw e; }
+public:
+    void error ( const SAXParseException& e )
+    {
+        throw e;
+    }
+    void warning ( const SAXParseException& e )
+    {
+        throw e;
+    }
 };
 
 #endif

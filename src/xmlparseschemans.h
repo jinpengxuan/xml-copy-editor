@@ -8,22 +8,25 @@
 
 struct ParseSchemaNsData : public ParserData
 {
-  std::vector<std::pair<std::string, std::string> > attributeVector;
-  XML_Parser p;
+    std::vector<std::pair<std::string, std::string> > attributeVector;
+    XML_Parser p;
 };
 
 class XmlParseSchemaNs : public WrapExpat
 {
-  public:
+public:
     XmlParseSchemaNs();
     virtual ~XmlParseSchemaNs();
-    std::vector<std::pair<std::string, std::string> > getAttributeVector() { return d->attributeVector; }
-  private:
+    std::vector<std::pair<std::string, std::string> > getAttributeVector()
+    {
+        return d->attributeVector;
+    }
+private:
     std::auto_ptr<ParseSchemaNsData> d;
-    static void XMLCALL start(
-      void *data,
-      const XML_Char *el,
-      const XML_Char **attr);
+    static void XMLCALL start (
+        void *data,
+        const XML_Char *el,
+        const XML_Char **attr );
 };
 
 #endif

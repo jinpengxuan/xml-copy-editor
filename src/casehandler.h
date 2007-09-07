@@ -7,11 +7,11 @@ using namespace std;
 
 class CaseHandler
 {
-  public:
+public:
     CaseHandler();
     ~CaseHandler();
-    static string lowerCase(string &s);
-    static void adjustCase(string &buffer, string &comparison);
+    static string lowerCase ( string &s );
+    static void adjustCase ( string &buffer, string &comparison );
 };
 
 #endif

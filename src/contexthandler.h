@@ -7,7 +7,7 @@ using namespace std;
 
 class ContextMatch
 {
-  public:
+public:
     string prelog;
     string match;
     string postlog;
@@ -20,12 +20,12 @@ class ContextMatch
 
 class ContextHandler
 {
-  public:
-    static ContextMatch getContext(
-      char *s,
-      int len,
-      char *origin,
-      int context);  
+public:
+    static ContextMatch getContext (
+        char *s,
+        int len,
+        char *origin,
+        int context );
 };
 
 #endif

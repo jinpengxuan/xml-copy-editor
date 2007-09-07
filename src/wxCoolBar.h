@@ -24,17 +24,17 @@ class wxCoolBarMSW;
 
 class wxCoolBar : public wxPanel
 {
-    DECLARE_CLASS( wxCoolBar )
+    DECLARE_CLASS ( wxCoolBar )
     DECLARE_EVENT_TABLE()
 public:
     wxCoolBar();
     ~wxCoolBar();
-    wxCoolBar(wxWindow* parent, wxWindowID id, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = 0, const wxString& name = wxPanelNameStr);
-    void AddBand(wxWindow* win, bool newLine = false, wxString label = wxEmptyString, bool gripperAlways = false);
-    void ShowBand(unsigned index, bool show);
+    wxCoolBar ( wxWindow* parent, wxWindowID id, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = 0, const wxString& name = wxPanelNameStr );
+    void AddBand ( wxWindow* win, bool newLine = false, wxString label = wxEmptyString, bool gripperAlways = false );
+    void ShowBand ( unsigned index, bool show );
 protected:
-    bool Create(wxWindow* parent, wxWindowID id, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = 0, const wxString& name = wxPanelNameStr);
-    void OnSizeChanged(wxSizeEvent& event);
+    bool Create ( wxWindow* parent, wxWindowID id, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = 0, const wxString& name = wxPanelNameStr );
+    void OnSizeChanged ( wxSizeEvent& event );
     //void OnEraseBG(wxEraseEvent& event);
     //void OnEraseBandBG(wxEraseEvent & event);
     wxBoxSizer* m_sizerv;
@@ -46,20 +46,20 @@ protected:
 #ifdef __WXMSW__
 class wxCoolBarMSW : public wxControl
 {
-    DECLARE_CLASS( wxCoolBarMSW )
+    DECLARE_CLASS ( wxCoolBarMSW )
     DECLARE_EVENT_TABLE()
 public:
     wxCoolBarMSW();
     ~wxCoolBarMSW();
-    wxCoolBarMSW(wxWindow* parent, wxWindowID id, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = 0, const wxString& name = wxPanelNameStr);
-    void AddBand(wxWindow* win, bool newLine = false, wxString label = wxEmptyString, bool gripperAlways = false);
+    wxCoolBarMSW ( wxWindow* parent, wxWindowID id, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = 0, const wxString& name = wxPanelNameStr );
+    void AddBand ( wxWindow* win, bool newLine = false, wxString label = wxEmptyString, bool gripperAlways = false );
 //protected:
-    bool Create(wxWindow* parent, wxWindowID id, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = 0, const wxString& name = wxPanelNameStr);
+    bool Create ( wxWindow* parent, wxWindowID id, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = 0, const wxString& name = wxPanelNameStr );
     wxSize DoGetBestSize() const;
-    void ShowBand(unsigned index, bool show);
-    void OnSizeChanged(wxSizeEvent& event);
-    void OnEraseBG(wxEraseEvent& event);
-    void OnEraseBandBG(wxEraseEvent & event);
+    void ShowBand ( unsigned index, bool show );
+    void OnSizeChanged ( wxSizeEvent& event );
+    void OnEraseBG ( wxEraseEvent& event );
+    void OnEraseBandBG ( wxEraseEvent & event );
 };
 
 struct menuentry
@@ -67,8 +67,8 @@ struct menuentry
     int startx, endx, accel;
 };
 
-WX_DECLARE_OBJARRAY(menuentry, menulist);
-WX_DECLARE_OBJARRAY(wxAcceleratorEntry, AccelArray);
+WX_DECLARE_OBJARRAY ( menuentry, menulist );
+WX_DECLARE_OBJARRAY ( wxAcceleratorEntry, AccelArray );
 
 class wxCoolMenuBarMSW : public wxControl
 {
@@ -77,50 +77,50 @@ class wxCoolMenuBarMSW : public wxControl
 public:
     wxCoolMenuBarMSW();
     ~wxCoolMenuBarMSW();
-    wxCoolMenuBarMSW(wxWindow* parent, wxWindowID id, wxMenuBar* menubar);
-    void ShowBand(unsigned index, bool show);
+    wxCoolMenuBarMSW ( wxWindow* parent, wxWindowID id, wxMenuBar* menubar );
+    void ShowBand ( unsigned index, bool show );
 protected:
     menulist m_list;
-    bool Create(wxWindow* parent, wxWindowID id);
-    void OnMouseDown(wxMouseEvent &event);
-    void OnMouseMove(wxMouseEvent &event);
-    void OnMouseLeave(wxMouseEvent &event);
+    bool Create ( wxWindow* parent, wxWindowID id );
+    void OnMouseDown ( wxMouseEvent &event );
+    void OnMouseMove ( wxMouseEvent &event );
+    void OnMouseLeave ( wxMouseEvent &event );
     void OpenMenu();
-    void OnPaint(wxPaintEvent& WXUNUSED(event) );
-    int HitTest(int x, int y);
+    void OnPaint ( wxPaintEvent& WXUNUSED ( event ) );
+    int HitTest ( int x, int y );
     bool IsInSubMenu();
     bool IsSubMenu();
     wxMenuBar* m_menubar;
-    static LRESULT CALLBACK MenuInputFilter(int nCode, WPARAM wParam, LPARAM lParam);
-    bool OnMenuInput(MSG* pMsg);
+    static LRESULT CALLBACK MenuInputFilter ( int nCode, WPARAM wParam, LPARAM lParam );
+    bool OnMenuInput ( MSG* pMsg );
     wxTopLevelWindow* GetParentFrame();
     HWND GetParentFrameHWND();
     int nextMenu, popedMenu, spotted, counter;
     HMENU selectedMenuHandle;
     bool SelectedIsSubMenu;
     wxPoint m_lastpt;
-    static LRESULT CALLBACK FrameInputFilter(int nCode, WPARAM wParam, LPARAM lParam);
-    void OnFrameActivate(wxActivateEvent& event);
-    int GetAccelPos(wxString& string);
-    int GetAccelKey(wxString& string);
+    static LRESULT CALLBACK FrameInputFilter ( int nCode, WPARAM wParam, LPARAM lParam );
+    void OnFrameActivate ( wxActivateEvent& event );
+    int GetAccelPos ( wxString& string );
+    int GetAccelKey ( wxString& string );
     void UpdateFrameAccels();
     wxColour fontcolour;
 };
 
 #endif
-    //__WXMSW__
+//__WXMSW__
 
 #ifndef __WXMSW__
 class wxCoolBand : public wxPanel
 {
-    DECLARE_CLASS( wxCoolBand )
+    DECLARE_CLASS ( wxCoolBand )
     DECLARE_EVENT_TABLE()
 public:
     wxCoolBand();
     ~wxCoolBand();
-    wxCoolBand(wxWindow* parent, wxWindowID id, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = 0, const wxString& name = wxPanelNameStr);
+    wxCoolBand ( wxWindow* parent, wxWindowID id, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = 0, const wxString& name = wxPanelNameStr );
 protected:
-    bool Create(wxWindow* parent, wxWindowID id, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = 0, const wxString& name = wxPanelNameStr);
+    bool Create ( wxWindow* parent, wxWindowID id, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = 0, const wxString& name = wxPanelNameStr );
     wxBoxSizer* m_sizerv;
 };
 
@@ -128,20 +128,20 @@ protected:
 
 class wxCoolLabel : public wxControl
 {
-    DECLARE_CLASS( wxCoolLabel )
+    DECLARE_CLASS ( wxCoolLabel )
     DECLARE_EVENT_TABLE()
 public:
     wxCoolLabel();
     ~wxCoolLabel();
-    wxCoolLabel(wxWindow* parent, wxWindowID id = -1, const wxString& label = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = 0);
-    bool Create(wxWindow* parent, wxWindowID id = -1, const wxString& label = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = 0);
-    void SetLabel(const wxString& label);
-    bool SetFont(const wxFont& font);
+    wxCoolLabel ( wxWindow* parent, wxWindowID id = -1, const wxString& label = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = 0 );
+    bool Create ( wxWindow* parent, wxWindowID id = -1, const wxString& label = wxEmptyString, const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxDefaultSize, long style = 0 );
+    void SetLabel ( const wxString& label );
+    bool SetFont ( const wxFont& font );
 private:
-    void OnPaint(wxPaintEvent& event);
+    void OnPaint ( wxPaintEvent& event );
     wxSize DoGetBestSize() const;
-};    
+};
 
 
 #endif
-    // _WXCOOLBAR_H_
+// _WXCOOLBAR_H_

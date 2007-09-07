@@ -15,72 +15,78 @@
 
 enum
 {
-  ID_STYLE_TABLE = wxID_HIGHEST + 100,
-  ID_STYLE_COMBO_RULESET,
-  ID_STYLE_COMBO_FILTER,
-  ID_STYLE_REPORT,
-  ID_MENU_IGNORE_ONCE,
-  ID_MENU_IGNORE_ALL,
-  ID_MENU_CHANGE_ONCE,
-  ID_MENU_CHANGE_ALL,
-  ID_MENU_NEW_SUGGESTION,
-  ID_MENU_APPLY_SUGGESTION_ALL,
-  // disabled unless table contains items
-  ID_STYLE_EDIT,
-  ID_STYLE_WEB_REPORT,
-  ID_STYLE_WEB_SUMMARY,
-  ID_STYLE_IGNORE_ALL,
-  ID_STYLE_CHANGE_ALL,
+    ID_STYLE_TABLE = wxID_HIGHEST + 100,
+    ID_STYLE_COMBO_RULESET,
+    ID_STYLE_COMBO_FILTER,
+    ID_STYLE_REPORT,
+    ID_MENU_IGNORE_ONCE,
+    ID_MENU_IGNORE_ALL,
+    ID_MENU_CHANGE_ONCE,
+    ID_MENU_CHANGE_ALL,
+    ID_MENU_NEW_SUGGESTION,
+    ID_MENU_APPLY_SUGGESTION_ALL,
+    // disabled unless table contains items
+    ID_STYLE_EDIT,
+    ID_STYLE_WEB_REPORT,
+    ID_STYLE_WEB_SUMMARY,
+    ID_STYLE_IGNORE_ALL,
+    ID_STYLE_CHANGE_ALL,
 };
 
 struct SortData
 {
-  int column;
-  wxListCtrl *table;
+    int column;
+    wxListCtrl *table;
 };
 
 class StyleDialog : public wxDialog
 {
-  public:
-    StyleDialog(
-      wxWindow *parent,
-      wxIcon icon,
-      const std::string& bufferParameterUtf8,
-      const wxString& fileNameParameter,
-      const wxString& ruleSetDirectoryParameter,
-      const wxString& filterDirectoryParameter,
-      const wxString& browserParameter,
-      const wxString& ruleSetPresetParameter,
-      const wxString& filterPresetParameter,
-      bool readOnlyParameter = false,
-      wxPoint position = wxDefaultPosition,
-      wxSize size = wxSize(720, 540));
+public:
+    StyleDialog (
+        wxWindow *parent,
+        wxIcon icon,
+        const std::string& bufferParameterUtf8,
+        const wxString& fileNameParameter,
+        const wxString& ruleSetDirectoryParameter,
+        const wxString& filterDirectoryParameter,
+        const wxString& browserParameter,
+        const wxString& ruleSetPresetParameter,
+        const wxString& filterPresetParameter,
+        bool readOnlyParameter = false,
+        wxPoint position = wxDefaultPosition,
+        wxSize size = wxSize ( 720, 540 ) );
     ~StyleDialog();
 
-    void OnColumnClick(wxListEvent& event);
-    void OnItemRightClick(wxListEvent& event);
-    void OnItemActivated(wxListEvent& event);
-    void OnReport(wxCommandEvent& event);
-    void OnStyleEdit(wxCommandEvent& event);
-    void OnStyleWebReport(wxCommandEvent& event);
-    void OnStyleWebSummary(wxCommandEvent& event);
-    void OnStyleChangeAll(wxCommandEvent& event);
-    void OnStyleIgnoreAll(wxCommandEvent& event);
-    void OnMenuChangeOnce(wxCommandEvent& event);
-    void OnMenuChangeAll(wxCommandEvent& event);
-    void OnMenuIgnoreOnce(wxCommandEvent& event);
-    void OnMenuIgnoreAll(wxCommandEvent& event);
-    void OnCancel(wxCommandEvent& event);
-    void OnMenuNewSuggestion(wxCommandEvent& event);
-    void OnMenuApplySuggestionAll(wxCommandEvent& event);
-    void OnUpdateTableRange(wxUpdateUIEvent& event);
-    void styleSetIgnoreAll(bool ignore);
+    void OnColumnClick ( wxListEvent& event );
+    void OnItemRightClick ( wxListEvent& event );
+    void OnItemActivated ( wxListEvent& event );
+    void OnReport ( wxCommandEvent& event );
+    void OnStyleEdit ( wxCommandEvent& event );
+    void OnStyleWebReport ( wxCommandEvent& event );
+    void OnStyleWebSummary ( wxCommandEvent& event );
+    void OnStyleChangeAll ( wxCommandEvent& event );
+    void OnStyleIgnoreAll ( wxCommandEvent& event );
+    void OnMenuChangeOnce ( wxCommandEvent& event );
+    void OnMenuChangeAll ( wxCommandEvent& event );
+    void OnMenuIgnoreOnce ( wxCommandEvent& event );
+    void OnMenuIgnoreAll ( wxCommandEvent& event );
+    void OnCancel ( wxCommandEvent& event );
+    void OnMenuNewSuggestion ( wxCommandEvent& event );
+    void OnMenuApplySuggestionAll ( wxCommandEvent& event );
+    void OnUpdateTableRange ( wxUpdateUIEvent& event );
+    void styleSetIgnoreAll ( bool ignore );
     std::string getEditedString();
-    wxString getRuleSetPreset() { return ruleSetPreset; }
-    wxString getFilterPreset() { return filterPreset; }
+    wxString getRuleSetPreset()
+    {
+        return ruleSetPreset;
+    }
+    wxString getFilterPreset()
+    {
+        return filterPreset;
+    }
     wxPoint getPosition();
     wxSize getSize();
-  private:
+private:
     int indexForContextMenu;
     wxPoint framePosition;
     wxSize frameSize;
@@ -93,22 +99,22 @@ class StyleDialog : public wxDialog
     wxString ruleSetPreset, filterPreset;
     vector<ContextMatch> matchVector;
     bool readOnly;
-    bool isIgnore(int item);
-    void setIgnore(int item, bool ignore);
-    std::string flatWhiteSpace(std::string& s);
-    static bool elementAndOffsetCompareFunction(
-      ContextMatch m1,
-      ContextMatch m2);
-    static bool reportCompareFunction(ContextMatch m1, ContextMatch m2);
+    bool isIgnore ( int item );
+    void setIgnore ( int item, bool ignore );
+    std::string flatWhiteSpace ( std::string& s );
+    static bool elementAndOffsetCompareFunction (
+        ContextMatch m1,
+        ContextMatch m2 );
+    static bool reportCompareFunction ( ContextMatch m1, ContextMatch m2 );
 
-    static int wxCALLBACK MyCompareFunction(
-      long item1,
-      long item2,
-      long sortData);
-    void getAllMatches(vector<ContextMatch> &v);
-    void getSelectedMatches(vector<ContextMatch> &v);
+    static int wxCALLBACK MyCompareFunction (
+        long item1,
+        long item2,
+        long sortData );
+    void getAllMatches ( vector<ContextMatch> &v );
+    void getSelectedMatches ( vector<ContextMatch> &v );
     void updateSizeInformation();
-    static wxString getTextByColumn(wxListCtrl *table, long index, int col);  
+    static wxString getTextByColumn ( wxListCtrl *table, long index, int col );
     DECLARE_EVENT_TABLE()
 };
 

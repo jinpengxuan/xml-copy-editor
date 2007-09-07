@@ -5,8 +5,8 @@
 
 class GetLinuxAppDir
 {
-  public:
-    static wxString run(); 
+public:
+    static wxString run();
 };
 
 #endif
