@@ -224,8 +224,8 @@ xmlcopyeditor_SOURCES = xmlcopyeditor.cpp associatedialog.cpp casehandler.cpp \
 	xmlparseschemans.cpp xmlshallowvalidator.cpp wrapxerces.cpp \
 	findreplacepanel.cpp xmlschemaparser.cpp commandpanel.cpp \
 	binaryfile.cpp xmlencodingspy.cpp \
-	rulesets filters png rng xpm templates dtd copying help tei sk sv fr de \
-	zh_CN zh_TW en_us docbook xmlcopyeditor.spec xmlcopyeditor.png custom.xpm \
+	rulesets filters png rng xpm templates copying help po \
+	xmlcopyeditor.spec xmlcopyeditor.png custom.xpm \
 	xmlcopyeditor.desktop
 
 xmlcopyeditor_LDFLAGS = $(WX_LIBS) \
@@ -238,24 +238,8 @@ nobase_xmlcopyeditor_DATA = png/*.png \
 	rng/*.rnc \
 	rng/exclude/*.rng \
 	rng/modules/*.rng \
-        tei/*.* \
-	tei/common/*.* \
-	tei/html/*.* \
-	tei/latex/*.* \
-	tei/odds/*.* \
-	tei/fo/*.* \
-	tei/slides/*.* \
-	tei/xhtml/*.* \
-	docbook/VERSION \
-	docbook/html/*.* \
-	docbook/xhtml/*.* \
-	docbook/fo/*.* \
-	docbook/common/*.* \
-	docbook/highlighting/*.* \
-	docbook/lib/*.* \
 	xpm/*.xpm \
 	templates/*.* \
-	dtd/*.* \
 	help/*.* help/html/*.* \
 	copying/*.txt copying/boost_shared_ptr/* \
 	copying/Expat/* copying/libxml2/* copying/libxslt/* \
@@ -265,16 +249,15 @@ nobase_xmlcopyeditor_DATA = png/*.png \
 	copying/wxStyledTextCtrl/* copying/Ximian_OpenOffice_icons/* \
 	copying/wxStEditor/* \
 	copying/xmlcopyeditor/* \
-	copying/wxAUI/* \
 	copying/Apache/LICENSE-2.0 \
 	copying/Apache/LICENSE-2_files/* \
-	sk/messages.mo \
-	sv/messages.mo \
-	fr/messages.mo \
-	de/messages.mo \
-        zh_CN/messages.mo \
-        zh_TW/messages.mo \
-        en_us/messages.po
+	po/sk/messages.mo \
+	po/sv/messages.mo \
+	po/fr/messages.mo \
+	po/de/messages.mo \
+        po/zh_CN/messages.mo \
+        po/zh_TW/messages.mo \
+        po/en_us/messages.po
 
 pixmap_DATA = xmlcopyeditor.png
 applications_DATA = xmlcopyeditor.desktop
