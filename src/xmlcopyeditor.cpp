@@ -253,7 +253,8 @@ MyApp::MyApp() : checker ( NULL ), server ( NULL ), connection ( NULL ),
     wxLocale::AddCatalogLookupPathPrefix ( poDir );
 #endif
 
-    myLocale.AddCatalog ( _T ( "messages" ) );
+    if ( !myLocale.AddCatalog ( _T ( "messages" ) ) )
+      ;
 
 #ifdef __LINUX__
     {
