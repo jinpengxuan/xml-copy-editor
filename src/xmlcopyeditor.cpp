@@ -1215,6 +1215,7 @@ void MyFrame::OnAbout ( wxCommandEvent& WXUNUSED ( event ) )
     info.SetCopyright ( ABOUT_COPYRIGHT );
     info.AddDeveloper ( _ ( "Gerald Schmidt (development) <gnschmidt@users.sourceforge.net>" ) );
     info.AddDeveloper ( _ ( "Matt Smigielski (testing) <alectrus@users.sourceforge.net>" ) );
+    info.AddDeveloper ( _ ( "Justin Dearing (development) <j-pimp@users.sourceforge.net>" ) );
     info.AddTranslator ( _ ( "Viliam Búr (Slovak) <viliam@bur.sk>" ) );
     info.AddTranslator ( _ ( "David Håsäther (Swedish) <hasather@gmail.com>" ) );
     info.AddTranslator ( _ ( "François Badier (French) <frabad@gmail.com>" ) );
