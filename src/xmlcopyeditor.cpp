@@ -3326,11 +3326,6 @@ void MyFrame::save()
     if ( ( doc = getActiveDocument() ) == NULL )
         return;
 
-    /*
-      if (!doc->GetModify())
-        return;
-    */
-
     wxString fileName;
     if ( ( fileName = doc->getFullFileName() ) == _T ( "" ) )
     {
@@ -4204,68 +4199,9 @@ void MyFrame::OnEncoding ( wxCommandEvent& event )
         return;
     }
 
-    /*
-      if (wl->getLastError().empty())
-      {
-        doc->SetTextRaw(xur->getBuffer().c_str());
-      }
-      else
-      {
-        std::string err = wl->getLastError();
-        wxString wideErr;
-        wideErr = _("Cannot set encoding: ");
-        wideErr += wxString(err.c_str(), wxConvUTF8, err.size());
-
-        messagePane(wideErr, CONST_STOP);
-      }
-    */
     doc->SetTextRaw ( xur->getBuffer().c_str() );
     doc->SetFocus();
 }
-
-/*
-std::string MyFrame::getEncodedBuffer(
-  const std::string& bufferUtf8,
-  const std::string& encodingUtf8)
-{
-  WrapTempFileName tempFileName(_T(""));
-
-  std::auto_ptr<WrapLibxml> wl(new WrapLibxml(libxmlNetAccess));
-  int res;
-
-  // change to saveEncodingFromFile?
-  res = wl->saveEncoding(bufferUtf8, tempFileName.name(), encodingUtf8);
-  if (res == -1)
-  {
-    std::string error = wl->getLastError();
-    wxString wideError = wxString(error.c_str(), wxConvUTF8, error.size());
-    wideError.Prepend(_("Cannot set encoding: "));
-    messagePane(wideError, CONST_STOP);
-    return "";
-  }
-
-  std::string newBuffer;
-  bool success = ReadFile::run(tempFileName.name(), newBuffer);
-  if (!success)
-  {
-    messagePane(_("Cannot set encoding (cannot open temporary file)"),
-      CONST_STOP);
-    return "";
-  }
-
-  std::auto_ptr<XmlUtf8Reader> xur(new XmlUtf8Reader(
-    false,
-    expandInternalEntities,
-    newBuffer.size()));
-  if (!xur->parse(newBuffer))
-  {
-    messagePane(_("Cannot set encoding (cannot parse temporary file)"),
-      CONST_STOP);
-    return "";
-  }
-  return xur->getBuffer().c_str();
-}
-*/
 
 void MyFrame::OnHome ( wxCommandEvent& event )
 {
@@ -4603,12 +4539,27 @@ bool MyFrame::saveFile ( XmlDoc *doc, wxString& fileName, bool checkLastModified
             success = saveRawUtf8 ( fileNameLocal, utf8Buffer, true, isXml );
             if ( success )
                 bytes = utf8Buffer.size();
+            else
+            {
+                wxString message;
+                message.Printf ( _ ( "Cannot save %s" ), fileName.c_str() );
+                messagePane ( message, CONST_STOP );
+                return false;
+            }
+                
         }
         else if ( !isXml && encoding.empty() )
         {
             success = saveRawUtf8 ( fileNameLocal, utf8Buffer, true, isXml );
             if ( success )
                 bytes = utf8Buffer.size();
+            else
+            {
+                wxString message;
+                message.Printf ( _ ( "Cannot save %s" ), fileName.c_str() );
+                messagePane ( message, CONST_STOP );
+                return false;
+            }
         }
         else if ( encoding == "UTF-8" )
         {
@@ -4625,6 +4576,13 @@ bool MyFrame::saveFile ( XmlDoc *doc, wxString& fileName, bool checkLastModified
             success = saveRawUtf8 ( fileNameLocal, utf8Buffer, true, isXml );
             if ( success )
                 bytes = utf8Buffer.size();
+            else
+            {
+                wxString message;
+                message.Printf ( _ ( "Cannot save %s" ), fileName.c_str() );
+                messagePane ( message, CONST_STOP );
+                return false;
+            }
         }
         else
         {
@@ -4650,7 +4608,12 @@ bool MyFrame::saveFile ( XmlDoc *doc, wxString& fileName, bool checkLastModified
                         messagePane ( message, CONST_WARNING );
                     }
                     else
+                    {
+                        wxString message;
+                        message.Printf ( _ ( "Cannot save %s" ), fileName.c_str() );
+                        messagePane ( message, CONST_STOP );
                         return false;
+                    }
                 }
                 else
                 {
@@ -4719,6 +4682,9 @@ bool MyFrame::saveFile ( XmlDoc *doc, wxString& fileName, bool checkLastModified
                         }
                         else
                         {
+                            wxString message;
+                            message.Printf ( _ ( "Cannot save %s" ), fileName.c_str() );
+                            messagePane ( message, CONST_STOP );
                             return false;
                         }
                     }
@@ -4730,6 +4696,9 @@ bool MyFrame::saveFile ( XmlDoc *doc, wxString& fileName, bool checkLastModified
                         if ( !ofs )
                         {
                             delete[] finalBuffer;
+                            wxString message;
+                            message.Printf ( _ ( "Cannot save %s" ), fileName.c_str() );
+                            messagePane ( message, CONST_STOP );
                             return false;
                         }
 
@@ -4767,6 +4736,13 @@ bool MyFrame::saveFile ( XmlDoc *doc, wxString& fileName, bool checkLastModified
                         msg.Printf ( _ ( "Cannot save document in %s: %s (saved in default encoding UTF-8)" ),
                                      wideEncoding.c_str(), wideError.c_str() );
                         messagePane ( msg, CONST_INFO );
+                    }
+                    else
+                    {
+                        wxString message;
+                        message.Printf ( _ ( "Cannot save %s" ), fileName.c_str() );
+                        messagePane ( message, CONST_STOP );
+                        return false;
                     }
                 }
                 else
