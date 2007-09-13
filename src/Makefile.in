@@ -244,9 +244,9 @@ nobase_xmlcopyeditor_DATA = png/*.png \
 	copying/*.txt copying/boost_shared_ptr/* \
 	copying/Expat/* copying/libxml2/* copying/libxslt/* \
 	copying/PCRE/* copying/Scintilla/* \
-	copying/Spell_Checker_Oriented_Word_Lists/* \
+	copying/scowl/* \
 	copying/wxCoolBar/* \
-	copying/wxStyledTextCtrl/* copying/Ximian_OpenOffice_icons/* \
+	copying/wxStyledTextCtrl/* copying/ximian/* \
 	copying/wxStEditor/* \
 	copying/xmlcopyeditor/* \
 	copying/Apache/LICENSE-2.0 \
