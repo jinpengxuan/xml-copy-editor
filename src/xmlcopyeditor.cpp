@@ -267,15 +267,15 @@ MyApp::MyApp() : checker ( NULL ), server ( NULL ), connection ( NULL ),
     wxLocale::AddCatalogLookupPathPrefix ( wxT ( "." ) );
     wxLocale::AddCatalogLookupPathPrefix ( wxT ( ".." ) );
 
-#ifdef __LINUX__
+#ifndef __WXMSW__
     wxString poDir = GetLinuxAppDir::run() + wxFileName::GetPathSeparator() + _T ( "po" );
     wxLocale::AddCatalogLookupPathPrefix ( poDir );
 #endif
 
     if ( !myLocale.AddCatalog ( _T ( "messages" ) ) )
-      ;
+        ;
 
-#ifdef __LINUX__
+#ifndef __WXMSW__
     {
         wxLogNull noLog;
         myLocale.AddCatalog ( _T ( "fileutils" ) );
