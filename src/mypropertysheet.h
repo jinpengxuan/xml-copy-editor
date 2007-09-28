@@ -59,9 +59,6 @@ public:
         bool expandInternalEntities,
         bool showFullPathOnFrame,
         int lang,
-#ifdef __WXMSW__
-        bool useCoolBar,
-#endif
         wxWindowID id = wxID_ANY,
         wxString title = _T ( "" ),
         const wxPoint& position = wxDefaultPosition,
@@ -82,9 +79,6 @@ public:
     bool getRestoreLayout();
     bool getExpandInternalEntities();
     bool getShowFullPathOnFrame();
-#ifdef __WXMSW__
-    bool getUseCoolBar();
-#endif
     int getLang();
 private:
     int lang;
@@ -93,7 +87,6 @@ private:
     *foldBox,
     *numberBox,
     *whitespaceVisibleBox,
-    //*wrapBox,
     *indentLinesBox,
     *deleteWholeTagBox,
     *rememberOpenTabsBox,
@@ -105,9 +98,6 @@ private:
     *validateAsYouTypeBox,
     *fullPathBox,
     *highlightSyntaxBox,
-#ifdef __WXMSW__
-    *useCoolBarBox,
-#endif
     *unlimitedUndoBox,
     *restoreLayoutBox,
     *expandInternalEntitiesBox,
@@ -120,9 +110,6 @@ private:
     rememberOpenTabs,
     libxmlNetAccess,
     saveBom,
-#ifdef __WXMSW__
-    useCoolBar,
-#endif
     unlimitedUndo,
     restoreLayout,
     expandInternalEntities,

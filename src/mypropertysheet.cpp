@@ -45,9 +45,6 @@ MyPropertySheet::MyPropertySheet (
     bool expandInternalEntitiesParameter,
     bool showFullPathOnFrameParameter,
     int lang,
-#ifdef __WXMSW__
-    bool useCoolBarParameter,
-#endif
     wxWindowID id,
     wxString title,
     const wxPoint& position,
@@ -253,12 +250,6 @@ MyPropertySheet::MyPropertySheet (
                       generalPanel, wxID_ANY, _ ( "S&how full path on frame" ) );
     fullPathBox->SetValue ( showFullPathOnFrameParameter );
 
-#ifdef __WXMSW__
-    useCoolBarBox = new wxCheckBox (
-                        generalPanel, wxID_ANY, _ ( "&Use Microsoft rebar control (restart required)" ) );
-    useCoolBarBox->SetValue ( useCoolBarParameter );
-#endif
-
     hsizer->Add ( applicationDirEdit, 0, wxALL | wxALIGN_LEFT, 0 );
     hsizer->Add ( browse, 0, wxLEFT | wxALIGN_LEFT, 5 );
     hsizerBrowser->Add ( browserCommandEdit, 0, wxALL | wxALIGN_LEFT, 0 );
@@ -275,13 +266,10 @@ MyPropertySheet::MyPropertySheet (
     vsizerCheckbox1->Add ( expandInternalEntitiesBox, 0, wxALL | wxALIGN_LEFT, 5 );
     vsizerCheckbox1->Add ( singleInstanceCheckBox, 0, wxALL | wxALIGN_LEFT, 5 );
     vsizerCheckbox1->Add ( restoreLayoutBox, 0, wxALL | wxALIGN_LEFT, 5 );
-    vsizerCheckbox1->Add ( rememberOpenTabsBox, 0, wxALL | wxALIGN_LEFT, 5 );
+    vsizerCheckbox2->Add ( rememberOpenTabsBox, 0, wxALL | wxALIGN_LEFT, 5 );
     vsizerCheckbox2->Add ( unlimitedUndoBox, 0, wxALL | wxALIGN_LEFT, 5 );
     vsizerCheckbox2->Add ( saveBomBox, 0, wxALL | wxALIGN_LEFT, 5 );
     vsizerCheckbox2->Add ( fullPathBox, 0, wxALL | wxALIGN_LEFT, 5 );
-#ifdef __WXMSW__
-    vsizerCheckbox2->Add ( useCoolBarBox, 0, wxALL | wxALIGN_LEFT, 5 );
-#endif
     hsizerCheckboxes->Add ( vsizerCheckbox1, 0, wxALL | wxALIGN_LEFT, 0 );
     hsizerCheckboxes->Add ( vsizerCheckbox2, 0, wxALL | wxALIGN_LEFT, 0 );
     vsizer->Add ( hsizerCheckboxes, 0, wxALL | wxALIGN_LEFT, 5 );
@@ -333,9 +321,6 @@ void MyPropertySheet::OnOk ( wxCommandEvent& e )
     unlimitedUndo = unlimitedUndoBox->GetValue();
     expandInternalEntities = expandInternalEntitiesBox->GetValue();
     showFullPathOnFrame = fullPathBox->GetValue();
-#ifdef __WXMSW__
-    useCoolBar = useCoolBarBox->GetValue();
-#endif
 
     int languageChoice = languageBox->GetSelection();
     switch ( languageChoice )
@@ -421,13 +406,6 @@ bool MyPropertySheet::getUnlimitedUndo()
 {
     return unlimitedUndo;
 }
-
-#ifdef __WXMSW__
-bool MyPropertySheet::getUseCoolBar()
-{
-    return useCoolBar;
-}
-#endif
 
 int MyPropertySheet::getLang()
 {
