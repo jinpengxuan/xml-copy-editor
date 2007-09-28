@@ -53,13 +53,7 @@
 #include "xmlencodinghandler.h"
 #include "myipc.h"
 #include "xmlcopyeditorcopy.h"
-#include "mytoolbar.h"
-#include "mymenubar.h"
 #include <wx/aui/framemanager.h>
-
-#ifdef __WXMSW__
-#include "wxcoolbar.h"
-#endif
 
 enum
 {
@@ -342,8 +336,8 @@ private:
     std::auto_ptr<wxHtmlHelpController> helpController;
 
     wxBoxSizer *frameSizer;
-    MyMenuBar *menuBar;
-    MyToolBar *toolBar;
+    wxMenuBar *menuBar;
+    wxToolBar *toolBar;
     LocationPanel *locationPanel;
     InsertPanel *insertChildPanel, *insertSiblingPanel, *insertEntityPanel;
 
@@ -460,9 +454,6 @@ private:
     wxFileHistory history;
     wxFindReplaceData findData;
     XmlCtrlProperties properties, largeFileProperties;
-#ifdef __WXMSW__
-    wxCoolBar *coolBar;
-#endif
 
     // member functions
     bool panelHasFocus();
@@ -470,7 +461,6 @@ private:
         XmlDoc *doc,
         wxString& fileName,
         bool checkLastModified = true );
-    bool xpThemeActive();
     int getFileType ( const wxString& fileName );
     long getNotebookStyleMask();
     wxString getLinuxBrowser();
@@ -502,8 +492,8 @@ private:
         bool isXml = true );
     void removeUtf8Bom ( std::string& buffer );
     std::string getAuxPath ( const std::string& fileName );
-    MyMenuBar *getMenuBar();
-    MyToolBar *getToolBar();
+    wxMenuBar *getMenuBar();
+    wxToolBar *getToolBar();
 
     DECLARE_EVENT_TABLE()
 };

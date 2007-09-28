@@ -60,9 +60,7 @@
 #include "findreplacepanel.h"
 #endif
 
-#ifdef __WXMSW__
-#include <wx/msw/uxtheme.h>
-#else
+#ifndef __WXMSW__
 #include "wrapxerces.h"
 #include "xpm/appicon.xpm"
 #endif
@@ -546,10 +544,6 @@ MyFrame::MyFrame (
         _T ( "Bitstream Vera Sans" );
 #endif
 
-#ifdef __WXMSW__
-    coolBar = NULL;
-#endif
-
     bool findMatchCase;
 
     // fetch configuration
@@ -663,9 +657,6 @@ MyFrame::MyFrame (
         showInsertEntityPane = config->Read ( _T ( "showInsertEntityPane" ), true );
         expandInternalEntities = config->Read ( _T ( "expandInternalEntities" ), true );
 
-#ifdef __WXMSW__
-        useCoolBar = config->Read ( _T ( "useCoolBar" ), true );
-#endif
     }
     else // config not found
     {
@@ -715,9 +706,6 @@ MyFrame::MyFrame (
         commandOutput = ID_COMMAND_OUTPUT_IGNORE;
         commandString = wxEmptyString;
 
-#ifdef __WXMSW__
-        useCoolBar = true;
-#endif
     }
 
     largeFileProperties.completion = false;
@@ -789,10 +777,6 @@ MyFrame::MyFrame (
 
     stylePosition = aboutPosition = wxDefaultPosition;
     styleSize = wxSize ( 720, 540 );
-
-#ifdef __WXMSW__
-    useCoolBarOnStart = useCoolBar;
-#endif
 
     showTopBars ( toolbarVisible );
 
@@ -980,10 +964,6 @@ MyFrame::~MyFrame()
     config->Write ( _T ( "commandOutput" ), commandPanel->getOutput() );
     config->Write ( _T ( "commandString" ), commandPanel->getCommand() );
 
-#ifdef __WXMSW__
-    config->Write ( _T ( "useCoolBar" ), useCoolBar );
-#endif
-
     config->Write ( _T ( "restoreLayout" ), restoreLayout );
 
 
@@ -1035,32 +1015,6 @@ wxString MyFrame::getLinuxBrowser()
 
 void MyFrame::showTopBars ( bool b )
 {
-#ifdef __WXMSW__
-    if ( useCoolBarOnStart )
-    {
-        if ( coolBar )
-        {
-            manager.DetachPane ( coolBar );
-            manager.Update();
-            coolBar->ShowBand ( 1, b );
-            manager.AddPane ( coolBar, wxAuiPaneInfo().Top().CaptionVisible ( false ).Name ( _T ( "coolBar" ) ) );
-        }
-        else
-        {
-            toolBar = getToolBar();
-            SetToolBar ( NULL );
-            if ( toolBar && protectTags )
-                toolBar->ToggleTool ( ID_PROTECT_TAGS, protectTags );
-            menuBar = getMenuBar();
-            coolBar = new wxCoolBar ( this, -1 );
-            coolBar->AddBand ( menuBar, false, wxEmptyString, true );
-            coolBar->AddBand ( toolBar, true, wxEmptyString, true );
-            coolBar->ShowBand ( 1, b );
-            manager.AddPane ( coolBar, wxAuiPaneInfo().Top().CaptionVisible ( false ).Name ( _T ( "coolBar" ) ) );
-        }
-        return;
-    }
-#endif
     if ( !menuBar )
     {
         SetToolBar ( NULL );
@@ -2349,9 +2303,6 @@ void MyFrame::OnOptions ( wxCommandEvent& WXUNUSED ( event ) )
                                               expandInternalEntities,
                                               showFullPathOnFrame,
                                               lang,
-#ifdef __WXMSW__
-                                              useCoolBar,
-#endif
                                               wxID_ANY,
                                               title ) );
     if ( mpsd->ShowModal() == wxID_OK )
@@ -2369,9 +2320,6 @@ void MyFrame::OnOptions ( wxCommandEvent& WXUNUSED ( event ) )
         expandInternalEntities = mpsd->getExpandInternalEntities();
         showFullPathOnFrame = mpsd->getShowFullPathOnFrame();
         lang = mpsd->getLang();
-#ifdef __WXMSW__
-        useCoolBar = mpsd->getUseCoolBar();
-#endif
         updatePaths();
     }
     if ( doc )
@@ -4217,14 +4165,7 @@ void MyFrame::OnToolbarVisible ( wxCommandEvent& event )
 {
     if ( !viewMenu )
         return;
-#ifdef __WXMSW__
-    if ( useCoolBarOnStart )
-        toolbarVisible = ( viewMenu->IsChecked ( ID_TOOLBAR_VISIBLE ) ) ? false : true;
-    else
-        toolbarVisible = ( toolbarVisible ) ? false : true;
-#else
     toolbarVisible = ( toolbarVisible ) ? false : true;
-#endif
     viewMenu->Check ( ID_TOOLBAR_VISIBLE, toolbarVisible );
     showTopBars ( toolbarVisible );
     manager.Update();
@@ -4274,15 +4215,7 @@ void MyFrame::OnProtectTags ( wxCommandEvent& event )
 {
     if ( !xmlMenu )
         return;
-#ifdef __WXMSW__
-    if ( useCoolBarOnStart )
-        protectTags = ( xmlMenu->IsChecked ( ID_PROTECT_TAGS ) ) ? false : true;
-    else
-
-        protectTags = ( protectTags ) ? false : true;
-#else
     protectTags = ( protectTags ) ? false : true;
-#endif
     if ( xmlMenu )
         xmlMenu->Check ( ID_PROTECT_TAGS, protectTags );
     if ( toolBar )
@@ -4856,21 +4789,12 @@ void MyFrame::displaySavedStatus ( int bytes )
     statusProgress ( msg );
 }
 
-bool MyFrame::xpThemeActive()
-{
-#ifndef __WXMSW__
-    return false;
-#else
-    return ( wxUxThemeEngine::Get() && wxUxThemeEngine::Get()->IsThemeActive() );
-#endif
-}
-
 bool MyFrame::getHandleCommandLineFlag()
 {
     return handleCommandLineFlag;
 }
 
-MyMenuBar *MyFrame::getMenuBar()
+wxMenuBar *MyFrame::getMenuBar()
 {
     fileMenu = new wxMenu; // use class-wide data member
     updateFileMenu ( false );
@@ -5236,7 +5160,7 @@ MyMenuBar *MyFrame::getMenuBar()
     helpMenu->AppendSeparator();
     helpMenu->Append ( aboutItem );
 
-    MyMenuBar *menuBar = new MyMenuBar ( wxMB_DOCKABLE );
+    wxMenuBar *menuBar = new wxMenuBar ( wxMB_DOCKABLE );
     menuBar->Append ( fileMenu, _ ( "&File" ) );
     menuBar->Append ( editMenu, _ ( "&Edit" ) );
     menuBar->Append ( viewMenu, _ ( "&View" ) );
@@ -5328,9 +5252,9 @@ void MyFrame::updateFileMenu ( bool deleteExisting )
     fileMenu->Append ( exitItem );
 }
 
-MyToolBar *MyFrame::getToolBar()
+wxToolBar *MyFrame::getToolBar()
 {
-    MyToolBar *myToolBar = new MyToolBar (
+    wxToolBar *toolBar = new wxToolBar (
                                this,
                                ID_TOOLBAR,
                                wxDefaultPosition,
@@ -5344,40 +5268,40 @@ MyToolBar *MyFrame::getToolBar()
 #else
     w = h = 24;
 #endif
-    myToolBar->SetToolBitmapSize ( wxSize ( w, h ) );
+    toolBar->SetToolBitmapSize ( wxSize ( w, h ) );
 
-    myToolBar->AddTool (
+    toolBar->AddTool (
         wxID_NEW,
         _ ( "New" ),
         newBitmap,
         _ ( "New" ) );
-    myToolBar->AddTool (
+    toolBar->AddTool (
         wxID_OPEN,
         _ ( "Open" ),
         openBitmap,
         _ ( "Open" ) );
-    myToolBar->AddTool (
+    toolBar->AddTool (
         wxID_SAVE,
         _ ( "Save" ),
         saveBitmap,
         wxNullBitmap,
         wxITEM_NORMAL,
         _ ( "Save" ) );
-    myToolBar->AddTool (
+    toolBar->AddTool (
         ID_PRINT,
         _ ( "Print" ),
         printBitmap,
         wxNullBitmap,
         wxITEM_NORMAL,
         _ ( "Print" ) );
-    myToolBar->AddTool (
+    toolBar->AddTool (
         ID_BROWSER,
         _ ( "Browser" ),
         internetBitmap,
         wxNullBitmap,
         wxITEM_NORMAL,
         _ ( "Browser" ) );
-    myToolBar->AddTool (
+    toolBar->AddTool (
         ID_SPELL,
         _ ( "Spelling and Style" ),
         spellingBitmap,
@@ -5385,17 +5309,17 @@ MyToolBar *MyFrame::getToolBar()
         wxITEM_NORMAL,
         _ ( "Spelling and Style" ) );
 
-    myToolBar->AddCheckTool (
+    toolBar->AddCheckTool (
         ID_PROTECT_TAGS,
         _ ( "Lock Tags" ),
         hyperlinkBitmap,
         wxNullBitmap,
         _ ( "Lock Tags" ) );
-    myToolBar->ToggleTool (
+    toolBar->ToggleTool (
         ID_PROTECT_TAGS, protectTags );
 
-    myToolBar->Realize();
-    return myToolBar;
+    toolBar->Realize();
+    return toolBar;
 }
 
 XmlDoc *MyFrame::getActiveDocument()
@@ -5407,11 +5331,6 @@ XmlDoc *MyFrame::getActiveDocument()
 
 void MyFrame::addSafeSeparator ( wxToolBar *toolBar )
 {
-    if ( xpThemeActive() )
-    {
-        toolBar->AddSeparator();
-        return;
-    }
     wxStaticText *staticControl = new wxStaticText (
                                       toolBar,
                                       wxID_ANY,
@@ -5911,6 +5830,8 @@ void MyFrame::loadBitmaps()
     helpBitmap = wxBITMAP ( stock_help_16 );
 #else
     // toolbar icons
+
+
     newBitmap.LoadFile ( pngDir + _T ( "stock_new.png" ), wxBITMAP_TYPE_PNG );
     openBitmap.LoadFile ( pngDir + _T ( "stock_open.png" ), wxBITMAP_TYPE_PNG );
     saveBitmap.LoadFile ( pngDir + _T ( "stock_save.png" ), wxBITMAP_TYPE_PNG );
