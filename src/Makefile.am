@@ -21,7 +21,7 @@ xmlcopyeditor_SOURCES = xmlcopyeditor.cpp associatedialog.cpp casehandler.cpp \
 	xmlassociatexsl.cpp xmlctrl.cpp xmldoc.cpp xmlencodinghandler.cpp xmlfilterreader.cpp \
 	xmlpromptgenerator.cpp xmlrulereader.cpp xmlschemalocator.cpp xmlutf8reader.cpp xsllocator.cpp \
 	wrapexpat.cpp mypropertysheet.cpp rule.cpp housestylewriter.cpp myipc.cpp aboutdialog.cpp pathresolver.cpp mynotebook.cpp \
-	insertpanel.cpp mytoolbar.cpp mymenubar.cpp xmlwordcount.cpp getword.cpp locationpanel.cpp catalogresolver.cpp getlinuxappdir.cpp \
+	insertpanel.cpp xmlwordcount.cpp getword.cpp locationpanel.cpp catalogresolver.cpp getlinuxappdir.cpp \
 	xmlparseschemans.cpp xmlshallowvalidator.cpp wrapxerces.cpp \
 	findreplacepanel.cpp xmlschemaparser.cpp commandpanel.cpp \
 	binaryfile.cpp xmlencodingspy.cpp \
@@ -45,7 +45,6 @@ nobase_xmlcopyeditor_DATA = png/*.png \
 	copying/Expat/* copying/libxml2/* copying/libxslt/* \
 	copying/PCRE/* copying/Scintilla/* \
 	copying/scowl/* \
-	copying/wxCoolBar/* \
 	copying/wxStyledTextCtrl/* copying/ximian/* \
 	copying/wxStEditor/* \
 	copying/xmlcopyeditor/* \

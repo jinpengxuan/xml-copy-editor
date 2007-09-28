@@ -69,8 +69,8 @@ am_xmlcopyeditor_OBJECTS = xmlcopyeditor.$(OBJEXT) \
 	mypropertysheet.$(OBJEXT) rule.$(OBJEXT) \
 	housestylewriter.$(OBJEXT) myipc.$(OBJEXT) \
 	aboutdialog.$(OBJEXT) pathresolver.$(OBJEXT) \
-	mynotebook.$(OBJEXT) insertpanel.$(OBJEXT) mytoolbar.$(OBJEXT) \
-	mymenubar.$(OBJEXT) xmlwordcount.$(OBJEXT) getword.$(OBJEXT) \
+	mynotebook.$(OBJEXT) insertpanel.$(OBJEXT) \
+	xmlwordcount.$(OBJEXT) getword.$(OBJEXT) \
 	locationpanel.$(OBJEXT) catalogresolver.$(OBJEXT) \
 	getlinuxappdir.$(OBJEXT) xmlparseschemans.$(OBJEXT) \
 	xmlshallowvalidator.$(OBJEXT) wrapxerces.$(OBJEXT) \
@@ -245,7 +245,6 @@ nobase_xmlcopyeditor_DATA = png/*.png \
 	copying/Expat/* copying/libxml2/* copying/libxslt/* \
 	copying/PCRE/* copying/Scintilla/* \
 	copying/scowl/* \
-	copying/wxCoolBar/* \
 	copying/wxStyledTextCtrl/* copying/ximian/* \
 	copying/wxStEditor/* \
 	copying/xmlcopyeditor/* \
