@@ -5832,12 +5832,15 @@ void MyFrame::loadBitmaps()
     helpBitmap = wxBITMAP ( stock_help_16 );
 #else
     // toolbar icons
+    newBitmap = wxArtProvider::GetBitmap ( wxART_NEW, wxART_TOOLBAR );
+    openBitmap = wxArtProvider::GetBitmap ( wxART_FILE_OPEN, wxART_TOOLBAR );
+    saveBitmap = wxArtProvider::GetBitmap ( wxART_FILE_SAVE, wxART_TOOLBAR );
+    printBitmap = wxArtProvider::GetBitmap ( wxART_PRINT, wxART_TOOLBAR );
+    spellingBitmap = wxArtProvider::GetBitmap ( _T("gtk-spell-check"), wxART_TOOLBAR );
 
-    newBitmap = wxArtProvider::GetBitmap ( wxART_NEW, wxART_TOOLBAR);
-    openBitmap = wxArtProvider::GetBitmap ( wxART_FILE_OPEN, wxART_TOOLBAR);
-    saveBitmap = wxArtProvider::GetBitmap ( wxART_FILE_SAVE, wxART_TOOLBAR);
-    printBitmap = wxArtProvider::GetBitmap ( wxART_PRINT, wxART_TOOLBAR);
-    spellingBitmap = wxArtProvider::GetBitmap ( _T("gtk-spell-check"), wxART_TOOLBAR);
+    // no stock icons for the following
+    internetBitmap.LoadFile ( pngDir + _T ( "stock_internet.png" ), wxBITMAP_TYPE_PNG );
+    hyperlinkBitmap.LoadFile ( pngDir + _T ( "stock_hyperlink.png" ), wxBITMAP_TYPE_PNG );
 
     // menu icons
     new16Bitmap = wxNullBitmap;
