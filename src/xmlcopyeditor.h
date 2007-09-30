@@ -98,6 +98,7 @@ enum
     ID_NOTEBOOK_STYLE_VC8_COLOR,
     ID_DOWNLOAD_SOURCE,
     ID_OPEN_LARGE_FILE,
+    ID_RELOAD,
     ID_WRAP_WORDS,
     // IDs to be activated only if a document is open
     ID_FIND,
@@ -243,6 +244,7 @@ public:
     void OnQuit ( wxCommandEvent& event );
     void OnSave ( wxCommandEvent& event );
     void OnSaveAs ( wxCommandEvent& event );
+    void OnReload ( wxCommandEvent& event );
     void OnUndo ( wxCommandEvent& event );
     void OnRedo ( wxCommandEvent& event );
     void OnSpelling ( wxCommandEvent& event );
@@ -267,6 +269,7 @@ public:
     void OnUpdatePaste ( wxUpdateUIEvent& event );
     void OnUpdateDocRange ( wxUpdateUIEvent& event );
     void OnUpdateReplaceRange ( wxUpdateUIEvent& event );
+    void OnUpdateReload ( wxUpdateUIEvent& event );
     void OnUpdateLocationPaneVisible ( wxUpdateUIEvent& event );
     void OnValidateDTD ( wxCommandEvent& event );
     void OnValidateRelaxNG ( wxCommandEvent& event );
@@ -323,7 +326,8 @@ public:
     // public to allow IPC access
     bool openFile ( wxString& fileName, bool largeFile = false );
     bool isOpen ( const wxString& fileName );
-    void activateTab ( const wxString& fileName );
+    bool activateTab ( const wxString& fileName );
+    void reloadTab();
 private:
     wxAuiManager manager;
     wxConfig *config; // owned by MyApp

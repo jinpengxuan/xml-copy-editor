@@ -84,6 +84,7 @@ EVT_MENU ( wxID_NEW, MyFrame::OnNew )
 EVT_MENU ( wxID_OPEN, MyFrame::OnOpen )
 EVT_MENU ( wxID_SAVE, MyFrame::OnSave )
 EVT_MENU ( wxID_SAVEAS, MyFrame::OnSaveAs )
+EVT_MENU ( ID_RELOAD, MyFrame::OnReload )
 EVT_MENU ( wxID_UNDO, MyFrame::OnUndo )
 EVT_MENU ( wxID_REDO, MyFrame::OnRedo )
 EVT_MENU ( wxID_REVERT, MyFrame::OnRevert )
@@ -163,6 +164,7 @@ EVT_UPDATE_UI_RANGE ( ID_FIND, ID_EXPORT_MSWORD, MyFrame::OnUpdateDocRange )
 EVT_UPDATE_UI ( ID_PREVIOUS_DOCUMENT, MyFrame::OnUpdatePreviousDocument )
 EVT_UPDATE_UI ( ID_NEXT_DOCUMENT, MyFrame::OnUpdateNextDocument )
 EVT_UPDATE_UI ( ID_HIDE_PANE, MyFrame::OnUpdateClosePane )
+EVT_UPDATE_UI ( ID_RELOAD, MyFrame::OnUpdateReload )
 EVT_IDLE ( MyFrame::OnIdle )
 EVT_AUINOTEBOOK_PAGE_CLOSE ( wxID_ANY, MyFrame::OnPageClosing )
 #ifdef __WXMSW__
@@ -1149,7 +1151,7 @@ bool MyFrame::isOpen ( const wxString& fileName )
     return ( openFileSet.find ( fileName ) != openFileSet.end() );
 }
 
-void MyFrame::activateTab ( const wxString& fileName )
+bool MyFrame::activateTab ( const wxString& fileName )
 {
     int pageCount = mainBook->GetPageCount();
     XmlDoc *currentDoc;
@@ -1161,9 +1163,10 @@ void MyFrame::activateTab ( const wxString& fileName )
         if ( currentDoc->getFullFileName() == fileName )
         {
             mainBook->SetSelection ( i );
-            break;
+            return true;
         }
     }
+    return false;
 }
 
 void MyFrame::OnAbout ( wxCommandEvent& WXUNUSED ( event ) )
@@ -3297,6 +3300,22 @@ void MyFrame::save()
         ; // handle messages in saveFile
 }
 
+void MyFrame::OnReload ( wxCommandEvent& event )
+{
+    reloadTab();
+}
+
+void MyFrame::reloadTab()
+{
+    XmlDoc *doc;
+    if ( ( doc = getActiveDocument() ) == NULL )
+        return;
+    wxString fileName = doc->getFullFileName();
+
+    if ( closeActiveDocument() )
+      openFile(fileName);
+}
+
 void MyFrame::OnSaveAs ( wxCommandEvent& event )
 {
     saveAs();
@@ -3365,6 +3384,17 @@ void MyFrame::saveAs()
 void MyFrame::OnUpdateCloseAll ( wxUpdateUIEvent& event )
 {
     event.Enable ( mainBook->GetPageCount() > 1 );
+}
+
+void MyFrame::OnUpdateReload ( wxUpdateUIEvent& event )
+{
+    XmlDoc *doc;
+    if ( ( doc = getActiveDocument() ) == NULL )
+    {
+        event.Enable ( false );
+        return;
+    }
+    event.Enable ( !doc->getFullFileName().empty() ); 
 }
 
 void MyFrame::OnUpdateCutCopy ( wxUpdateUIEvent& event )
@@ -5213,6 +5243,7 @@ void MyFrame::updateFileMenu ( bool deleteExisting )
         new wxMenuItem ( NULL, ID_OPEN_LARGE_FILE,
                          _ ( "O&pen Large Document...\tCtrl+Shift+O" ), _ ( "Open Large Document..." ) );
     openLargeFileItem->SetBitmap ( wxNullBitmap );
+
     wxMenuItem *closeItem =
         new wxMenuItem ( NULL, wxID_CLOSE, _ ( "&Close\tCtrl+F4" ), _ ( "Close" ) );
     closeItem->SetBitmap ( wxNullBitmap );
@@ -5226,6 +5257,9 @@ void MyFrame::updateFileMenu ( bool deleteExisting )
     wxMenuItem *saveAsItem =
         new wxMenuItem ( NULL, wxID_SAVEAS, _ ( "S&ave As...\tF12" ), _ ( "Save As..." ) );
     saveAsItem->SetBitmap ( wxNullBitmap );
+    wxMenuItem *reloadItem =
+      new wxMenuItem ( NULL, ID_RELOAD, _ ( "&Reload" ), _ ( "Reload" ) );
+    reloadItem->SetBitmap ( wxNullBitmap );
     wxMenuItem *revertItem =
         new wxMenuItem ( NULL, wxID_REVERT, _ ( "&Revert" ), _ ( "Revert" ) );
     revertItem->SetBitmap ( wxNullBitmap );
@@ -5233,10 +5267,10 @@ void MyFrame::updateFileMenu ( bool deleteExisting )
         new wxMenuItem ( NULL, ID_PRINT_SETUP, _ ( "Pa&ge Setup..." ), _ ( "Page Setup..." ) );
     printSetupItem->SetBitmap ( wxNullBitmap );
     wxMenuItem *printPreviewItem =
-        new wxMenuItem ( NULL, ID_PRINT_PREVIEW, _ ( "P&rint Preview..." ), _ ( "Print Preview..." ) );
+        new wxMenuItem ( NULL, ID_PRINT_PREVIEW, _ ( "Pr&int Preview..." ), _ ( "Print Preview..." ) );
     printPreviewItem->SetBitmap ( printPreviewBitmap );
     wxMenuItem *printItem =
-        new wxMenuItem ( NULL, ID_PRINT, _ ( "Pr&int...\tCtrl+P" ), _ ( "Print..." ) );
+        new wxMenuItem ( NULL, ID_PRINT, _ ( "Pri&nt...\tCtrl+P" ), _ ( "Print..." ) );
     printItem->SetBitmap ( print16Bitmap );
     wxMenuItem *importMSWordItem =
         new wxMenuItem (
@@ -5259,6 +5293,8 @@ void MyFrame::updateFileMenu ( bool deleteExisting )
     fileMenu->Append ( closeAllItem );
     fileMenu->Append ( saveItem );
     fileMenu->Append ( saveAsItem );
+    fileMenu->AppendSeparator();
+    fileMenu->Append ( reloadItem );
     fileMenu->Append ( revertItem );
     fileMenu->AppendSeparator();
     fileMenu->Append ( printSetupItem );
