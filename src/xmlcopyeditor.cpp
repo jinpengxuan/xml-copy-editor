@@ -52,6 +52,8 @@
 #include <wx/aui/auibook.h>
 #include <wx/richtext/richtextsymboldlg.h>
 #include <wx/textctrl.h>
+#include <wx/artprov.h>
+#include <wx/stockitem.h>
 #include <iconv.h>
 
 #define ngettext wxGetTranslation
@@ -5831,30 +5833,26 @@ void MyFrame::loadBitmaps()
 #else
     // toolbar icons
 
-
-    newBitmap.LoadFile ( pngDir + _T ( "stock_new.png" ), wxBITMAP_TYPE_PNG );
-    openBitmap.LoadFile ( pngDir + _T ( "stock_open.png" ), wxBITMAP_TYPE_PNG );
-    saveBitmap.LoadFile ( pngDir + _T ( "stock_save.png" ), wxBITMAP_TYPE_PNG );
-    printBitmap.LoadFile ( pngDir + _T ( "stock_print.png" ), wxBITMAP_TYPE_PNG );
-    spellingBitmap.LoadFile ( pngDir + _T ( "stock_spellcheck.png" ), wxBITMAP_TYPE_PNG );
-    internetBitmap.LoadFile ( pngDir + _T ( "stock_internet.png" ), wxBITMAP_TYPE_PNG );
-    hyperlinkBitmap.LoadFile ( pngDir + _T ( "stock_hyperlink.png" ), wxBITMAP_TYPE_PNG );
-    filtersBitmap.LoadFile ( pngDir + _T ( "stock_filters.png" ), wxBITMAP_TYPE_PNG );
+    newBitmap = wxArtProvider::GetBitmap ( wxART_NEW, wxART_TOOLBAR);
+    openBitmap = wxArtProvider::GetBitmap ( wxART_FILE_OPEN, wxART_TOOLBAR);
+    saveBitmap = wxArtProvider::GetBitmap ( wxART_FILE_SAVE, wxART_TOOLBAR);
+    printBitmap = wxArtProvider::GetBitmap ( wxART_PRINT, wxART_TOOLBAR);
+    spellingBitmap = wxArtProvider::GetBitmap ( _T("gtk-spell-check"), wxART_TOOLBAR);
 
     // menu icons
-    new16Bitmap.LoadFile ( pngDir + _T ( "stock_new-16.png" ), wxBITMAP_TYPE_PNG );
-    open16Bitmap.LoadFile ( pngDir + _T ( "stock_open-16.png" ), wxBITMAP_TYPE_PNG );
-    save16Bitmap.LoadFile ( pngDir + _T ( "stock_save-16.png" ), wxBITMAP_TYPE_PNG );
-    printPreviewBitmap.LoadFile ( pngDir + _T ( "stock_print_preview.png" ), wxBITMAP_TYPE_PNG );
-    print16Bitmap.LoadFile ( pngDir + _T ( "stock_print-16.png" ), wxBITMAP_TYPE_PNG );
-    undo16Bitmap.LoadFile ( pngDir + _T ( "stock_undo-16.png" ), wxBITMAP_TYPE_PNG );
-    redo16Bitmap.LoadFile ( pngDir + _T ( "stock_redo-16.png" ), wxBITMAP_TYPE_PNG );
-    cutBitmap.LoadFile ( pngDir + _T ( "stock_cut-16.png" ), wxBITMAP_TYPE_PNG );
-    copyBitmap.LoadFile ( pngDir + _T ( "stock_copy-16.png" ), wxBITMAP_TYPE_PNG );
-    pasteBitmap.LoadFile ( pngDir + _T ( "stock_paste-16.png" ), wxBITMAP_TYPE_PNG );
-    findBitmap.LoadFile ( pngDir + _T ( "stock_find-16.png" ), wxBITMAP_TYPE_PNG );
-    spelling16Bitmap.LoadFile ( pngDir + _T ( "stock_spellcheck-16.png" ), wxBITMAP_TYPE_PNG );
-    helpBitmap.LoadFile ( pngDir + _T ( "stock_help-16.png" ), wxBITMAP_TYPE_PNG );
+    new16Bitmap = wxNullBitmap;
+    open16Bitmap = wxNullBitmap;
+    save16Bitmap = wxNullBitmap;
+    printPreviewBitmap = wxNullBitmap;
+    print16Bitmap = wxNullBitmap;
+    undo16Bitmap = wxNullBitmap;
+    redo16Bitmap = wxNullBitmap;
+    cutBitmap = wxNullBitmap;
+    copyBitmap = wxNullBitmap;
+    pasteBitmap = wxNullBitmap;
+    findBitmap = wxNullBitmap;
+    spelling16Bitmap = wxNullBitmap;
+    helpBitmap = wxNullBitmap;
 #endif
 }
 
