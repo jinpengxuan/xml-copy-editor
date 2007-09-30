@@ -64,7 +64,8 @@ bool MyServerConnection::OnPoke (
     }
     else if ( frame->isOpen ( item ) )
     {
-        frame->activateTab ( item );
+        if (frame->activateTab ( item ) )
+          frame->reloadTab();
     }
     else
     {
