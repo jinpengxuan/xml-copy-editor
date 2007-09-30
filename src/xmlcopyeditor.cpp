@@ -882,7 +882,11 @@ MyFrame::MyFrame (
         wxAuiPaneInfo().Bottom().Hide().Caption ( _T ( "Command" ) ).DestroyOnClose ( false ).Layer ( 3 ) );
 
     if ( !wxFileName::DirExists ( applicationDir ) )
+#ifdef __WXMSW__
         GetStatusBar()->SetStatusText ( _ ( "Cannot open application directory: see Tools, Options..., General" ) );
+#else
+	GetStatusBar()->SetStatusText ( _ ( "Cannot open application directory: see Edit, Preferences..., General" ) );
+#endif
 
     // handle command line and, on Windows, MS Word integration
     handleCommandLineFlag = ( wxTheApp->argc > 1 ) ? true : false;
@@ -2290,7 +2294,12 @@ void MyFrame::OnOptions ( wxCommandEvent& WXUNUSED ( event ) )
         properties.zoom = doc->GetZoom();
     }
 
-    wxString title ( _ ( "Options" ) );
+    wxString title
+#ifdef __WXMSW__
+      ( _ ( "Options" ) );
+#else
+      ( _ ( "Preferences" ) );
+#endif
     std::auto_ptr<MyPropertySheet> mpsd ( new MyPropertySheet (
                                               this,
                                               properties,
@@ -4856,6 +4865,8 @@ wxMenuBar *MyFrame::getMenuBar()
         new wxMenuItem ( NULL, ID_GOTO, _ ( "G&o To...\tCtrl+G" ), _ ( "Go To..." ) );
     gotoItem->SetBitmap ( wxNullBitmap );
 
+
+
     editMenu->Append ( undoItem );
     editMenu->Append ( redoItem );
     editMenu->AppendSeparator();
@@ -4870,6 +4881,13 @@ wxMenuBar *MyFrame::getMenuBar()
     editMenu->Append ( globalReplaceItem );
     editMenu->AppendSeparator();
     editMenu->Append ( gotoItem );
+
+#ifndef __WXMSW__
+    wxMenuItem *preferencesItem =
+        new wxMenuItem ( NULL, ID_OPTIONS, _ ( "Pr&eferences..." ), _ ( "Preferences..." ) );
+    editMenu->AppendSeparator();
+    editMenu->Append ( preferencesItem );
+#endif
 
     // font size menu
     wxMenu *fontSizeMenu = new wxMenu;
@@ -5117,6 +5135,13 @@ wxMenuBar *MyFrame::getMenuBar()
             _ ( "Command" ) );
     commandItem->SetBitmap ( wxNullBitmap );
 
+    toolsMenu->Append ( spellingItem );
+    toolsMenu->Append ( wordCountItem );
+    toolsMenu->AppendSeparator();
+    toolsMenu->Append ( commandItem );
+    toolsMenu->AppendSeparator();
+
+#ifdef __WXMSW__
     wxMenuItem *optionsItem =
         new wxMenuItem (
             NULL,
@@ -5124,13 +5149,8 @@ wxMenuBar *MyFrame::getMenuBar()
             _ ( "&Options..." ),
             _ ( "Options..." ) );
     optionsItem->SetBitmap ( wxNullBitmap );
-
-    toolsMenu->Append ( spellingItem );
-    toolsMenu->Append ( wordCountItem );
-    toolsMenu->AppendSeparator();
-    toolsMenu->Append ( commandItem );
-    toolsMenu->AppendSeparator();
     toolsMenu->Append ( optionsItem );
+#endif
 
     // help menu
     wxMenu *helpMenu = new wxMenu;
