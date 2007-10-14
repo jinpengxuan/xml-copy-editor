@@ -59,8 +59,8 @@ XmlCtrl::XmlCtrl (
         basePath ( basePathParameter ),
         auxPath ( auxPathParameter )
 {
-    SetEOLMode ( wxSTC_EOL_LF );
-    SetPasteConvertEndings ( true ); // essential to avoid double-spaced paste
+    //SetEOLMode ( wxSTC_EOL_LF );
+    //SetPasteConvertEndings ( true );
 
     currentMaxLine = 1;
     validationRequired = dtdFound = false;
@@ -1969,7 +1969,7 @@ bool XmlCtrl::shallowValidate ( int maxLine, bool segmentOnly )
         parentStartAngleBracket,
         memory;
         current = GetCurrentPos();
-        line = LineFromPosition ( current );//PositionFromLine(current);
+        line = LineFromPosition ( current );
 
         // try to include next line
         lineEnd = GetLineEndPosition ( line + 1 );
@@ -2022,29 +2022,6 @@ bool XmlCtrl::shallowValidate ( int maxLine, bool segmentOnly )
 
     return shallowValidate ( bufferUtf8.c_str(), bufferUtf8.size(), startLine,
                              maxLine, columnOffset, segmentOnly );
-    /*
-      bool res = validator->parse(bufferUtf8, (segmentOnly) ? false : true);
-      if (!validator->getOverrideFailure() && (!res || !validator->isValid()))
-      {
-        std::vector<std::pair<int, int> > positionVector = validator->getPositionVector();
-
-        if (res == XML_STATUS_ERROR)
-        {
-          positionVector.push_back(validator->getErrorPosition());
-        }
-
-        std::vector<std::pair<int, int> >::iterator it;
-        for (it = positionVector.begin(); it != positionVector.end(); it++)
-        {
-          int line, column;
-          line = (it->first - 1) + startLine;
-          column = it->second + columnOffset;
-          setErrorIndicator(line, column);
-        }
-        return false;
-      }
-      return true;
-    */
 }
 
 bool XmlCtrl::shallowValidate ( const char *buffer,

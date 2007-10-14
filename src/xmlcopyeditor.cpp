@@ -4760,7 +4760,10 @@ bool MyFrame::saveFile ( XmlDoc *doc, wxString& fileName, bool checkLastModified
     doc->SetSavePoint();
 
     if ( properties.validateAsYouType && isXml )
+    {
+        doc->clearErrorIndicators();
         doc->shallowValidate ( utf8Buffer.c_str(), utf8Buffer.size() );
+    }
 
     if ( !unlimitedUndo )
         doc->EmptyUndoBuffer();
@@ -4894,8 +4897,6 @@ wxMenuBar *MyFrame::getMenuBar()
     wxMenuItem *gotoItem =
         new wxMenuItem ( NULL, ID_GOTO, _ ( "G&o To...\tCtrl+G" ), _ ( "Go To..." ) );
     gotoItem->SetBitmap ( wxNullBitmap );
-
-
 
     editMenu->Append ( undoItem );
     editMenu->Append ( redoItem );
@@ -5169,9 +5170,9 @@ wxMenuBar *MyFrame::getMenuBar()
     toolsMenu->Append ( wordCountItem );
     toolsMenu->AppendSeparator();
     toolsMenu->Append ( commandItem );
-    toolsMenu->AppendSeparator();
 
 #ifdef __WXMSW__
+    toolsMenu->AppendSeparator();
     wxMenuItem *optionsItem =
         new wxMenuItem (
             NULL,
