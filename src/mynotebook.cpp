@@ -23,7 +23,7 @@
 
 BEGIN_EVENT_TABLE ( MyNotebook, wxAuiNotebook )
 EVT_LEFT_DOWN ( MyNotebook::OnLeftDown )
-//EVT_MIDDLE_DOWN(MyNotebook::OnMiddleDown)
+EVT_MIDDLE_DOWN(MyNotebook::OnMiddleDown)
 EVT_RIGHT_DOWN ( MyNotebook::OnRightDown )
 EVT_MENU ( ID_MENU_CLOSE, MyNotebook::OnMenuClose )
 EVT_MENU ( ID_MENU_CLOSE_ALL, MyNotebook::OnMenuCloseAll )

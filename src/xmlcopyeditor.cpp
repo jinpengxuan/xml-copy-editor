@@ -62,8 +62,8 @@
 #include "findreplacepanel.h"
 #endif
 
-#ifndef __WXMSW__
 #include "wrapxerces.h"
+#ifndef __WXMSW__
 #include "xpm/appicon.xpm"
 #endif
 
@@ -142,6 +142,10 @@ EVT_MENU_RANGE (
     ID_COLOR_SCHEME_DEFAULT,
     ID_COLOR_SCHEME_NONE,
     MyFrame::OnColorScheme )
+EVT_MENU_RANGE (
+    ID_SPLIT_TAB_TOP,
+    ID_SPLIT_TAB_LEFT,
+    MyFrame::OnSplitTab )
 EVT_UPDATE_UI_RANGE ( ID_REPLACE, ID_GLOBAL_REPLACE, MyFrame::OnUpdateReplaceRange )
 EVT_FIND ( wxID_ANY, MyFrame::OnDialogFind )
 EVT_FIND_NEXT ( wxID_ANY, MyFrame::OnDialogFind )
@@ -152,6 +156,7 @@ EVT_UPDATE_UI ( ID_LOCATION_PANE_VISIBLE, MyFrame::OnUpdateLocationPaneVisible )
 EVT_UPDATE_UI ( wxID_CLOSE, MyFrame::OnUpdateDocRange )
 EVT_UPDATE_UI ( wxID_SAVEAS, MyFrame::OnUpdateDocRange )
 EVT_UPDATE_UI ( wxID_CLOSE_ALL, MyFrame::OnUpdateCloseAll )
+// EVT_UPDATE_UI_RANGE ( ID_SPLIT_TAB_TOP, ID_SPLIT_TAB_LEFT, MyFrame::OnUpdateCloseAll )
 EVT_UPDATE_UI ( wxID_REVERT, MyFrame::OnUpdateSaveUndo )
 EVT_UPDATE_UI ( wxID_SAVE, MyFrame::OnUpdateDocRange ) // always allow save if doc present
 EVT_UPDATE_UI ( wxID_UNDO, MyFrame::OnUpdateSaveUndo )
@@ -2223,6 +2228,57 @@ void MyFrame::OnHelp ( wxCommandEvent& event )
 #endif
 }
 
+void MyFrame::OnSplitTab ( wxCommandEvent& event )
+{
+    int id = event.GetId();
+    XmlDoc *doc = getActiveDocument();
+    if ( !doc )
+        return;
+    wxString fileName = doc->getFullFileName();
+
+    // mainBook->GetSelection() is currently unreliable, so fetch by title
+
+/*
+    int pageCount = mainBook->GetPageCount();
+    XmlDoc *currentDoc;
+    int currentSelection = -1;
+    for ( int i = 0; i < pageCount; ++i )
+    {
+        currentDoc = ( XmlDoc * ) mainBook->GetPage ( i );
+        if ( !currentDoc )
+            break;
+        if ( currentDoc->getFullFileName() == fileName )
+        {
+            currentSelection = i;
+        }
+    }
+    if ( currentSelection == -1 )
+        return;
+*/
+    int currentSelection, direction;
+    currentSelection = mainBook->GetSelection();
+    direction = wxAUI_NB_RIGHT;
+    switch ( id )
+    {
+    ID_SPLIT_TAB_TOP:
+        direction = wxAUI_NB_TOP;
+        break;
+    ID_SPLIT_TAB_RIGHT:
+        direction = wxAUI_NB_RIGHT;
+        break;
+    ID_SPLIT_TAB_BOTTOM:
+        direction = wxAUI_NB_BOTTOM;
+        break;
+    ID_SPLIT_TAB_LEFT:
+        direction = wxAUI_NB_LEFT;
+        break;
+    default:
+        direction = wxAUI_NB_RIGHT;
+        break;
+    }
+    mainBook->Split(currentSelection, direction);
+}
+
 void MyFrame::OnColorScheme ( wxCommandEvent& event )
 {
     int id = event.GetId();
@@ -3747,6 +3803,7 @@ void MyFrame::OnValidateSchema ( wxCommandEvent& event )
 
     std::string error;
     wxString wideError;
+/*
 #ifdef __WXMSW__
     // separate WrapTempFileName for output log
     WrapTempFileName tempFileName ( _T ( "" ) );
@@ -3784,6 +3841,7 @@ void MyFrame::OnValidateSchema ( wxCommandEvent& event )
     doc->SetFocus();
     return;
 #else
+*/
     std::auto_ptr<WrapXerces> validator ( new WrapXerces() );
     std::string fileNameLocal = ( const char * ) fileName.mb_str ( wxConvLocal );
     if ( !validator->validate ( fileNameLocal ) )
@@ -3830,8 +3888,8 @@ void MyFrame::OnValidateSchema ( wxCommandEvent& event )
 
     statusProgress(wxEmptyString);
     documentOk(_("valid"));
-    */
-#endif
+*/
+//#endif
 }
 
 void MyFrame::OnXPath ( wxCommandEvent& event )
@@ -4218,11 +4276,7 @@ void MyFrame::OnWrapWords ( wxCommandEvent& event )
         return;
 
     bool wrapWords;
-#ifdef __WXMSW__
-    wrapWords = ( viewMenu->IsChecked ( ID_WRAP_WORDS ) ) ? false : true;
-#else
     wrapWords = ( properties.wrap ) ? false : true;
-#endif
 
     viewMenu->Check ( ID_WRAP_WORDS, wrapWords );
     properties.wrap = wrapWords;
@@ -4447,6 +4501,7 @@ bool MyFrame::closeActiveDocument()
     insertChildPanel->update ( NULL, wxEmptyString );
     insertSiblingPanel->update ( NULL, wxEmptyString );
 
+/*
     // workaround -- wxAuiNotebook: send virtual close event? DeletePage doesn't generate one
     wxAuiNotebookEvent e;
     e.SetSelection ( selection );
@@ -4456,10 +4511,10 @@ bool MyFrame::closeActiveDocument()
 
     mainBook->DeletePage ( selection );
     return true;
-
-    // was:
-    // mainBook->DeletePage(selection);
-    // return (!deletePageVetoed);
+*/
+    // fixed betw. 2.8.0 and 2.8.6, so from v. 1.1.0.3, this is once more:
+    mainBook->DeletePage(selection);
+    return (!deletePageVetoed);
 }
 
 bool MyFrame::saveFile ( XmlDoc *doc, wxString& fileName, bool checkLastModified )
@@ -4964,9 +5019,20 @@ wxMenuBar *MyFrame::getMenuBar()
         break;
     }
 
+    /* WAIT FOR AUI LIBRARY TO SUPPORT THIS - currently always splits left
+    wxMenu *splitTabMenu = new wxMenu;
+    splitTabMenu->Append ( ID_SPLIT_TAB_TOP, _ ( "&Top" ), _ ( "Top" ));
+    splitTabMenu->Append ( ID_SPLIT_TAB_RIGHT, _ ( "&Right" ), _ ( "Right" ));
+    splitTabMenu->Append ( ID_SPLIT_TAB_BOTTOM, _ ( "&Bottom" ), _ ( "Bottom" ));
+    splitTabMenu->Append ( ID_SPLIT_TAB_LEFT, _ ( "&Left" ), _ ( "Left" ));
+    */
+
     viewMenu = new wxMenu; // use class-wide data member
     viewMenu->Append ( ID_PREVIOUS_DOCUMENT, _ ( "&Previous Document\tCtrl+PgUp" ), _ ( "Previous Document" ) );
     viewMenu->Append ( ID_NEXT_DOCUMENT, _ ( "&Next Document\tCtrl+PgDn" ), _ ( "Next Document" ) );
+
+    //viewMenu->Append ( wxID_ANY, _ ( "&Split Tab" ), splitTabMenu );
+    
     viewMenu->Append ( ID_BROWSER, _ ( "&Browser\tCtrl+B" ), _ ( "Browser" ) );
     viewMenu->AppendSeparator();
     viewMenu->AppendRadioItem (
@@ -5405,13 +5471,13 @@ void MyFrame::statusProgress ( const wxString& s )
     status->SetStatusText ( s, 0 );
 }
 
-void MyFrame::messagePane ( const wxString& s, int iconType )
+void MyFrame::messagePane ( const wxString& s, int iconType, bool forcePane )
 {
     wxString paneTitle;
     switch ( iconType )
     {
     case ( CONST_INFO ) :
-                    if ( s.Length() < 50 ) // magic no. necessary?
+                    if ( !forcePane && s.Length() < 50 ) // magic no. necessary?
             {
                 statusProgress ( s );
                 return;
@@ -5845,7 +5911,7 @@ void MyFrame::OnWordCount ( wxCommandEvent& event )
         ngettext ( L"%s contains %i word", L"%s contains %i words", count ),
         doc->getShortFileName().c_str(), count );
 
-    messagePane ( msg, CONST_INFO );
+    messagePane ( msg, CONST_INFO, true );
     doc->SetFocus();
 }
 

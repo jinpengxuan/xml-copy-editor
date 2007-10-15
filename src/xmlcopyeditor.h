@@ -101,6 +101,10 @@ enum
     ID_RELOAD,
     ID_WRAP_WORDS,
     // IDs to be activated only if a document is open
+    ID_SPLIT_TAB_TOP,
+    ID_SPLIT_TAB_RIGHT,
+    ID_SPLIT_TAB_BOTTOM,
+    ID_SPLIT_TAB_LEFT,
     ID_FIND,
     ID_FIND_AGAIN,
     ID_GOTO,
@@ -223,6 +227,7 @@ public:
     void OnGlobalReplace ( wxCommandEvent& event );
     void OnWordCount ( wxCommandEvent& event );
     void OnFeedback ( wxCommandEvent& event );
+    void OnSplitTab ( wxCommandEvent& event );
     void OnFontSmaller ( wxCommandEvent& event );
     void OnFontMedium ( wxCommandEvent& event );
     void OnFontLarger ( wxCommandEvent& event );
@@ -321,7 +326,9 @@ public:
     void statusProgress ( const wxString& s );
 
     // public to allow InsertPanel access
-    void messagePane ( const wxString& s, int iconType = CONST_INFO );
+    void messagePane ( const wxString& s,
+        int iconType = CONST_INFO,
+        bool forcePane = false );
 
     // public to allow IPC access
     bool openFile ( wxString& fileName, bool largeFile = false );
