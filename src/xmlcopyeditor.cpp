@@ -5078,7 +5078,7 @@ wxMenuBar *MyFrame::getMenuBar()
     viewMenu->AppendCheckItem (
         ID_LOCATION_PANE_VISIBLE,
         _ ( "S&how Current Element Pane" ),
-        _ ( "Show Current ElementPane" ) );
+        _ ( "Show Current Element Pane" ) );
     viewMenu->Check ( ID_LOCATION_PANE_VISIBLE, false );
     viewMenu->AppendCheckItem (
         ID_TOOLBAR_VISIBLE, _ ( "Sh&ow Toolbar" ), _ ( "Show Toolbar" ) );
