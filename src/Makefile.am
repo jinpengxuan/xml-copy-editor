@@ -39,7 +39,16 @@ nobase_xmlcopyeditor_DATA = png/*.png \
 	rng/exclude/*.rng \
 	rng/modules/*.rng \
 	xpm/*.xpm \
-	templates/* \
+	templates/*.xml \
+	templates/*.dtd \
+	templates/*.xsl \
+	templates/*.rss \
+	templates/*.html \
+	templates/*.xtm \
+	templates/*.xsd \
+	templates/*.rng \
+	templates/*.lzx \
+	templates/*.xlf \
 	help/*.* help/html/*.* \
 	copying/*.txt copying/boost_shared_ptr/* \
 	copying/Expat/* copying/libxml2/* copying/libxslt/* \
