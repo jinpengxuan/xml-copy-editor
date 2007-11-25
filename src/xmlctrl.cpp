@@ -1728,8 +1728,25 @@ void XmlCtrl::toggleFold()
         return;
     line = LineFromPosition ( pos );
     level = GetFoldLevel ( line );
-    if ( XMLCTRL_HASBIT ( level, wxSTC_FOLDLEVELHEADERFLAG ) )
-        ToggleFold ( line );
+
+    for ( int iterator = line; iterator > 0; iterator--)
+    {
+      if (iterator != line)
+      {
+        GotoLine ( iterator );
+	level = GetFoldLevel ( iterator );
+      }
+
+      if ( XMLCTRL_HASBIT ( level, wxSTC_FOLDLEVELHEADERFLAG ) )
+      {
+        ToggleFold ( iterator );
+        break;
+      }
+    }
+         
+// was previously (changed so cursor doesn't have to be in headline):
+//    if ( XMLCTRL_HASBIT ( level, wxSTC_FOLDLEVELHEADERFLAG ) )
+//        ToggleFold ( line );
 }
 
 // adapted from wxSTEdit (c) 2005 John Labenski, Otto Wyss
