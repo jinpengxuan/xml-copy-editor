@@ -5062,7 +5062,7 @@ wxMenuBar *MyFrame::getMenuBar()
     }
     viewMenu->AppendSeparator();
     viewMenu->Append (
-        ID_TOGGLE_FOLD, _ ( "&Toggle Fold" ), _ ( "Toggle Fold" ) );
+        ID_TOGGLE_FOLD, _ ( "&Toggle Fold\tCtrl+Alt+T" ), _ ( "Toggle Fold" ) );
     viewMenu->Append (
         ID_FOLD_ALL, _ ( "&Fold Tags\tCtrl+Shift+F" ), _ ( "Fold Tags" ) );
     viewMenu->Append (
