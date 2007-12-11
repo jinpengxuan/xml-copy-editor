@@ -115,7 +115,7 @@ EVT_MENU ( ID_BROWSER, MyFrame::OnBrowser )
 EVT_MENU ( ID_REPLACE, MyFrame::OnFindReplace )
 EVT_MENU ( ID_GLOBAL_REPLACE, MyFrame::OnGlobalReplace )
 EVT_MENU ( ID_CHECK_WELLFORMED, MyFrame::OnCheckWellformedness )
-EVT_MENU ( ID_VALIDATE_DTD, MyFrame::OnValidateDTD )
+//EVT_MENU ( ID_VALIDATE_DTD, MyFrame::OnValidateDTD )
 EVT_MENU ( ID_VALIDATE_RELAX_NG, MyFrame::OnValidateRelaxNG )
 EVT_MENU ( ID_VALIDATE_W3C_SCHEMA, MyFrame::OnValidateSchema )
 EVT_MENU ( ID_XPATH, MyFrame::OnXPath )
@@ -245,6 +245,9 @@ MyApp::MyApp() : checker ( NULL ), server ( NULL ), connection ( NULL ),
     case wxLANGUAGE_UKRAINIAN:
         systemLocale = wxLANGUAGE_UKRAINIAN;
         break;
+    case wxLANGUAGE_ITALIAN:
+	systemLocale = wxLANGUAGE_ITALIAN;
+	break;
     default:
         systemLocale = wxLANGUAGE_ENGLISH_US;
         break;
@@ -3582,6 +3585,7 @@ void MyFrame::OnUpdateClosePane ( wxUpdateUIEvent& event )
     event.Enable ( i1.IsShown() || i2.IsShown() || i3.IsShown() );
 }
 
+/*
 void MyFrame::OnValidateDTD ( wxCommandEvent& event )
 {
     statusProgress ( wxEmptyString );
@@ -3616,7 +3620,7 @@ void MyFrame::OnValidateDTD ( wxCommandEvent& event )
     std::string fnameLocal = ( const char * ) fname.mb_str ( wxConvLocal );
 
     doc->clearErrorIndicators();
-    statusProgress ( _ ( "DTD validation in progress..." ) );
+    statusProgress ( _ ( "DTD Validation in progress..." ) );
 
     auto_ptr<WrapLibxml> wl ( new WrapLibxml ( libxmlNetAccess, catalogPath ) );
 
@@ -3642,6 +3646,7 @@ void MyFrame::OnValidateDTD ( wxCommandEvent& event )
     statusProgress ( wxEmptyString );
     documentOk ( _ ( "valid" ) );
 }
+*/
 
 void MyFrame::OnValidateRelaxNG ( wxCommandEvent& event )
 {
@@ -3762,21 +3767,6 @@ void MyFrame::OnValidateSchema ( wxCommandEvent& event )
     if ( ( doc = getActiveDocument() ) == NULL )
         return;
 
-    /*
-      // schema location required
-      std::auto_ptr<XmlSchemaLocator> xsl(new XmlSchemaLocator());
-      std::string utf8Buffer;
-      getRawText(doc, utf8Buffer);
-      XmlEncodingHandler::setUtf8(utf8Buffer, true);
-      xsl->parse(utf8Buffer);
-      std::string utf8Location = xsl->getSchemaLocation();
-      if (utf8Location.empty())
-      {
-        messagePane(_("No XML Schema found"), CONST_STOP);
-        return;
-      }
-    */
-
     wxString fileName;
     std::string tempFileNameLocal;
     fileName = doc->getFullFileName();
@@ -3799,53 +3789,17 @@ void MyFrame::OnValidateSchema ( wxCommandEvent& event )
         fileName = wtfn.wideName();
     }
 
+    statusProgress ( _ ( "Validation in progress..." ) );
     doc->clearErrorIndicators();
 
     std::string error;
     wxString wideError;
-/*
-#ifdef __WXMSW__
-    // separate WrapTempFileName for output log
-    WrapTempFileName tempFileName ( _T ( "" ) );
 
-    wxString cmd = binDir +
-                   _T ( "validate.exe \"" ) +
-                   fileName + _T ( "\" \"" ) +
-                   tempFileName.wideName() + _T ( "\"" );
-
-    statusProgress ( _ ( "Validation in progress..." ) );
-    int result = wxExecute ( cmd, wxEXEC_SYNC );
-    statusProgress ( wxEmptyString );
-
-    switch ( result )
-    {
-    case 0:
-        documentOk ( _ ( "valid" ) );
-        break;
-    case 1:
-        messagePane ( _ ( "MSXML validation failed (version 4.0 or later required)" ), CONST_STOP );
-        break;
-    case 2:
-        if ( ReadFile::run ( tempFileName.name(), error ) )
-        {
-            wideError = wxString ( error.c_str(), wxConvLocal, error.size() );
-            messagePane ( wideError, CONST_WARNING );
-            // tbd: extract line & column numbers; use error indicators
-        }
-        else
-            messagePane ( _ ( "Validation error" ), CONST_WARNING );
-        break;
-    default:
-        break;
-    }
-    doc->SetFocus();
-    return;
-#else
-*/
     std::auto_ptr<WrapXerces> validator ( new WrapXerces() );
     std::string fileNameLocal = ( const char * ) fileName.mb_str ( wxConvLocal );
     if ( !validator->validate ( fileNameLocal ) )
     {
+	statusProgress ( wxEmptyString );
         error = validator->getLastError();
         wideError = wxString ( error.c_str(), wxConvUTF8, error.size() );
         messagePane ( wideError, CONST_WARNING );
@@ -3858,37 +3812,6 @@ void MyFrame::OnValidateSchema ( wxCommandEvent& event )
     }
     else
         documentOk ( _ ( "valid" ) );
-
-    /*
-    // handle relative locations
-    schemaPath = PathResolver::run(schemaPath, fileName);
-
-    statusProgress(_("XML Schema validation in progress..."));
-
-    auto_ptr<WrapLibxml> wl(new WrapLibxml(libxmlNetAccess, catalogPath));
-    std::string schemaFileNameLocal = (const char *)schemaPath.mb_str(wxConvLocal);
-    std::string fileNameLocal = (const char *)fileName.mb_str(wxConvLocal);
-    if (!wl->validateW3CSchema(schemaFileNameLocal, fileNameLocal))
-    {
-    std::string error = wl->getLastError();
-    wxString wideError = wxString(error.c_str(), wxConvUTF8, error.size());
-    statusProgress(wxEmptyString);
-
-    std::pair<int, int> posPair = wl->getErrorPosition();
-    --(posPair.first);
-
-    int cursorPos =
-    doc->PositionFromLine(posPair.first - 1);
-    doc->SetSelection(cursorPos, cursorPos);
-    doc->setErrorIndicator(posPair.first - 1, posPair.second);
-
-    messagePane(wideError, CONST_WARNING);
-    return;
-    }
-
-    statusProgress(wxEmptyString);
-    documentOk(_("valid"));
-*/
 //#endif
 }
 
@@ -5098,9 +5021,11 @@ wxMenuBar *MyFrame::getMenuBar()
 
     // validation menu
     wxMenu *validationMenu = new wxMenu;
+/*
     validationMenu->Append ( ID_VALIDATE_DTD, _ ( "&DTD\tF4" ), _ ( "DTD" ) );
+*/
     validationMenu->Append (
-        ID_VALIDATE_W3C_SCHEMA, _ ( "&XML Schema\tF5" ), _ ( "XML Schema" ) );
+        ID_VALIDATE_W3C_SCHEMA, _ ( "&DTD/XML Schema\tF5" ), _ ( "DTD/XML Schema" ) );
     validationMenu->AppendSeparator();
     validationMenu->Append (
         ID_VALIDATE_RELAX_NG, _ ( "&RELAX NG...\tF6" ), _ ( "RELAX NG..." ) );
