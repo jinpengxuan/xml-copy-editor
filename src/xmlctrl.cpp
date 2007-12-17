@@ -2113,7 +2113,7 @@ void XmlCtrl::setErrorIndicator ( int line, int column )
 
 void XmlCtrl::clearErrorIndicators ( int maxLine )
 {
-    if ( maxLine < 1 )
+    if ( maxLine < 0 )
         return;
 
     int documentLength = GetLength();
