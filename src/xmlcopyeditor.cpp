@@ -142,10 +142,12 @@ EVT_MENU_RANGE (
     ID_COLOR_SCHEME_DEFAULT,
     ID_COLOR_SCHEME_NONE,
     MyFrame::OnColorScheme )
+/*
 EVT_MENU_RANGE (
     ID_SPLIT_TAB_TOP,
     ID_SPLIT_TAB_LEFT,
     MyFrame::OnSplitTab )
+*/
 EVT_UPDATE_UI_RANGE ( ID_REPLACE, ID_GLOBAL_REPLACE, MyFrame::OnUpdateReplaceRange )
 EVT_FIND ( wxID_ANY, MyFrame::OnDialogFind )
 EVT_FIND_NEXT ( wxID_ANY, MyFrame::OnDialogFind )
@@ -2264,6 +2266,7 @@ void MyFrame::OnSplitTab ( wxCommandEvent& event )
     direction = wxAUI_NB_RIGHT;
     switch ( id )
     {
+/*
     ID_SPLIT_TAB_TOP:
         direction = wxAUI_NB_TOP;
         break;
@@ -2276,6 +2279,7 @@ void MyFrame::OnSplitTab ( wxCommandEvent& event )
     ID_SPLIT_TAB_LEFT:
         direction = wxAUI_NB_LEFT;
         break;
+*/
     default:
         direction = wxAUI_NB_RIGHT;
         break;
