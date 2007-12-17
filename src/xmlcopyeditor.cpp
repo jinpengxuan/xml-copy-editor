@@ -1194,6 +1194,7 @@ void MyFrame::OnAbout ( wxCommandEvent& WXUNUSED ( event ) )
     info.AddTranslator ( _ ( "SHiNE CsyFeK (Chinese Simplified) <csyfek@gmail.com>" ) );
     info.AddTranslator ( _ ( "HSU PICHAN, YANG SHUFUN, CHENG PAULIAN, CHUANG KUO-PING, Marcus Bingenheimer (Chinese Traditional)" ) );
     info.AddTranslator ( _ ( "Serhij Dubyk (Ukrainian) <dubyk@library.lviv.ua>" ) );
+    info.AddTranslator ( _ ( "Antonio Angelo (Italian) <aangelo@users.sourceforge.net>" ) );
     info.SetLicense ( ABOUT_LICENSE );
     info.SetDescription ( ABOUT_DESCRIPTION );
     wxAboutBox ( info );
