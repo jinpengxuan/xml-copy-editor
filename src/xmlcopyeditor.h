@@ -409,8 +409,6 @@ private:
     lastParent,
     lastGrandparent,
     commandString;
-    //wxTextCtrl *stderrControl;
-    //wxStreamToTextRedirector *redirector;
     bool globalReplaceAllDocuments,
     toolbarVisible,
     protectTags,
@@ -461,7 +459,9 @@ private:
     internetBitmap,
     internetGrBitmap,
     hyperlinkBitmap,
-    filtersBitmap;
+    filtersBitmap,
+    checkWellformedBitmap,
+    checkValidBitmap;
     wxFileHistory history;
     wxFindReplaceData findData;
     XmlCtrlProperties properties, largeFileProperties;
