@@ -5313,11 +5313,11 @@ wxToolBar *MyFrame::getToolBar()
                                wxTB_HORIZONTAL |
                                wxTB_DOCKABLE );
     int w, h;
-#ifdef __WXMSW__
+//#ifdef __WXMSW__
     w = saveBitmap.GetWidth(), h = saveBitmap.GetHeight();
-#else
-    w = h = 24;
-#endif
+//#else
+//    w = h = 24;
+//#endif
     toolBar->SetToolBitmapSize ( wxSize ( w, h ) );
 
     toolBar->AddTool (
@@ -5344,6 +5344,20 @@ wxToolBar *MyFrame::getToolBar()
         wxNullBitmap,
         wxITEM_NORMAL,
         _ ( "Print" ) );
+    toolBar->AddTool (
+	ID_CHECK_WELLFORMED,
+	_ ( "Check Well-formedness" ),
+	checkWellformedBitmap,
+	wxNullBitmap,
+	wxITEM_NORMAL,
+	_ ( "Check Well-formedness" ) );
+    toolBar->AddTool (
+	ID_VALIDATE_W3C_SCHEMA,
+	_ ( "Validate" ),
+	checkValidBitmap,
+	wxNullBitmap,
+	wxITEM_NORMAL,
+	_ ( "Validate" ) );
     toolBar->AddTool (
         ID_BROWSER,
         _ ( "Browser" ),
@@ -5402,11 +5416,13 @@ void MyFrame::messagePane ( const wxString& s, int iconType, bool forcePane )
     switch ( iconType )
     {
     case ( CONST_INFO ) :
+/*
                     if ( !forcePane && s.Length() < 50 ) // magic no. necessary?
             {
                 statusProgress ( s );
                 return;
             }
+*/
         paneTitle = _ ( "Information" );
         break;
     case ( CONST_WARNING ) :
@@ -5863,6 +5879,8 @@ void MyFrame::loadBitmaps()
     internetBitmap = wxBITMAP ( stock_internet );
     hyperlinkBitmap = wxBITMAP ( stock_hyperlink );
     filtersBitmap = wxBITMAP ( stock_filters );
+    checkWellformedBitmap = wxNullBitmap;
+    checkValidBitmap = wxNullBitmap;
 
     // menu icons
     new16Bitmap = wxBITMAP ( stock_new_16 );
@@ -5889,6 +5907,8 @@ void MyFrame::loadBitmaps()
     // no stock icons for the following
     internetBitmap.LoadFile ( pngDir + _T ( "stock_internet.png" ), wxBITMAP_TYPE_PNG );
     hyperlinkBitmap.LoadFile ( pngDir + _T ( "stock_hyperlink.png" ), wxBITMAP_TYPE_PNG );
+    checkWellformedBitmap.LoadFile ( pngDir + _T ( "stock_calc-accept.png" ), wxBITMAP_TYPE_PNG );
+    checkValidBitmap.LoadFile ( pngDir + _T ( "stock_calc-accept-green.png" ), wxBITMAP_TYPE_PNG );
 
     // menu icons
     new16Bitmap = wxNullBitmap;
