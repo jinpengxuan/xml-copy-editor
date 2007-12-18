@@ -3590,7 +3590,6 @@ void MyFrame::OnUpdateClosePane ( wxUpdateUIEvent& event )
     event.Enable ( i1.IsShown() || i2.IsShown() || i3.IsShown() );
 }
 
-/*
 void MyFrame::OnValidateDTD ( wxCommandEvent& event )
 {
     statusProgress ( wxEmptyString );
@@ -3651,7 +3650,6 @@ void MyFrame::OnValidateDTD ( wxCommandEvent& event )
     statusProgress ( wxEmptyString );
     documentOk ( _ ( "valid" ) );
 }
-*/
 
 void MyFrame::OnValidateRelaxNG ( wxCommandEvent& event )
 {
@@ -3771,6 +3769,17 @@ void MyFrame::OnValidateSchema ( wxCommandEvent& event )
     XmlDoc *doc;
     if ( ( doc = getActiveDocument() ) == NULL )
         return;
+
+    // branch: if no XML Schema found, use LibXML DTD parser instead
+    // so the catalog is read - switch when Xerces-C implements
+    // XMLCatalogResolver
+    std::string rawBuffer, schemaLocation;
+    getRawText ( doc, rawBuffer );
+    auto_ptr<XmlSchemaLocator> xsl (new XmlSchemaLocator() );
+    xsl->parse ( rawBuffer.c_str() );
+    if ( ( xsl->getSchemaLocation() ) . empty() )
+       OnValidateDTD ( event );
+    // end of branch
 
     wxString fileName;
     std::string tempFileNameLocal;
@@ -5417,6 +5426,7 @@ void MyFrame::statusProgress ( const wxString& s )
 
 void MyFrame::messagePane ( const wxString& s, int iconType, bool forcePane )
 {
+    statusProgress ( wxEmptyString );
     wxString paneTitle;
     switch ( iconType )
     {
@@ -5884,8 +5894,8 @@ void MyFrame::loadBitmaps()
     internetBitmap = wxBITMAP ( stock_internet );
     hyperlinkBitmap = wxBITMAP ( stock_hyperlink );
     filtersBitmap = wxBITMAP ( stock_filters );
-    checkWellformedBitmap = wxNullBitmap;
-    checkValidBitmap = wxNullBitmap;
+    checkWellformedBitmap = wxBITMAP ( stock_calc-accept );
+    checkValidBitmap = wxBITMAP ( stock_calc-accept-green );
 
     // menu icons
     new16Bitmap = wxBITMAP ( stock_new_16 );
