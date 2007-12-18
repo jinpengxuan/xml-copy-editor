@@ -3773,13 +3773,17 @@ void MyFrame::OnValidateSchema ( wxCommandEvent& event )
     // branch: if no XML Schema found, use LibXML DTD parser instead
     // so the catalog is read - switch when Xerces-C implements
     // XMLCatalogResolver
-    std::string rawBuffer, schemaLocation;
-    getRawText ( doc, rawBuffer );
-    auto_ptr<XmlSchemaLocator> xsl (new XmlSchemaLocator() );
-    xsl->parse ( rawBuffer.c_str() );
-    if ( ( xsl->getSchemaLocation() ) . empty() )
-       OnValidateDTD ( event );
-    // end of branch
+    {
+      std::string rawBuffer, schemaLocation;
+      getRawText ( doc, rawBuffer );
+      auto_ptr<XmlSchemaLocator> xsl (new XmlSchemaLocator() );
+      xsl->parse ( rawBuffer.c_str() );
+      if ( ( xsl->getSchemaLocation() ) . empty() )
+      {
+         OnValidateDTD ( event );
+	 return;
+      }
+    }
 
     wxString fileName;
     std::string tempFileNameLocal;
