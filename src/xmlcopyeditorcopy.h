@@ -41,5 +41,5 @@
 "License along with this program; if not, write to the Free\n"\
 "Software Foundation, Inc., 59 Temple Place, Suite 330,\n"\
 "Boston, MA 02111-1307 USA.")
-#define ABOUT_VERSION _T("1.1.0.4")
+#define ABOUT_VERSION _T("1.1.0.5")
 #define XMLCE_VAR _T("XMLCE_VAR")
