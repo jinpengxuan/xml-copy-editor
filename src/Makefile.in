@@ -74,7 +74,7 @@ am_xmlcopyeditor_OBJECTS = xmlcopyeditor.$(OBJEXT) \
 	locationpanel.$(OBJEXT) catalogresolver.$(OBJEXT) \
 	getlinuxappdir.$(OBJEXT) xmlparseschemans.$(OBJEXT) \
 	xmlshallowvalidator.$(OBJEXT) wrapxerces.$(OBJEXT) \
-	findreplacepanel.$(OBJEXT) xmlschemaparser.$(OBJEXT) \
+	findreplacepanel.$(OBJEXT) \
 	commandpanel.$(OBJEXT) binaryfile.$(OBJEXT) \
 	xmlencodingspy.$(OBJEXT)
 xmlcopyeditor_OBJECTS = $(am_xmlcopyeditor_OBJECTS)
@@ -223,7 +223,7 @@ xmlcopyeditor_SOURCES = xmlcopyeditor.cpp associatedialog.cpp casehandler.cpp \
 	wrapexpat.cpp mypropertysheet.cpp rule.cpp housestylewriter.cpp myipc.cpp aboutdialog.cpp pathresolver.cpp mynotebook.cpp \
 	insertpanel.cpp xmlwordcount.cpp getword.cpp locationpanel.cpp catalogresolver.cpp getlinuxappdir.cpp \
 	xmlparseschemans.cpp xmlshallowvalidator.cpp wrapxerces.cpp \
-	findreplacepanel.cpp xmlschemaparser.cpp commandpanel.cpp \
+	findreplacepanel.cpp commandpanel.cpp \
 	binaryfile.cpp xmlencodingspy.cpp \
 	rulesets filters png rng xpm templates copying help po \
 	xmlcopyeditor.spec xmlcopyeditor.png custom.xpm \
@@ -378,7 +378,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xmlpromptgenerator.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xmlrulereader.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xmlschemalocator.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xmlschemaparser.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xmlshallowvalidator.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xmlutf8reader.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xmlwordcount.Po@am__quote@
