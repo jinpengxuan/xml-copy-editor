@@ -27,7 +27,6 @@
 #include "getword.h"
 #include "pathresolver.h"
 #include "catalogresolver.h"
-#include "xmlschemaparser.h"
 
 // Xerces-C req'd for Schema parsing
 #define XERCES_TMPLSINC
