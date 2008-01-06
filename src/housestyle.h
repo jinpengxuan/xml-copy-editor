@@ -1,17 +1,17 @@
-/* 
+/*
  * Copyright 2005-2007 Gerald Schmidt.
- * 
+ *
  * This file is part of Xml Copy Editor.
- * 
+ *
  * Xml Copy Editor is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; version 2 of the License.
- * 
+ *
  * Xml Copy Editor is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with Xml Copy Editor; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
@@ -36,45 +36,45 @@
 
 class HouseStyle
 {
-public:
-    HouseStyle (
-        const std::string& bufferParameter,
-        const std::string& ruleDirectoryParameter,
-        const std::string& ruleFileParameter,
-        const std::string& filterDirectoryParameter,
-        const std::string& filterFileParameter,
-        const std::string& pathSeparatorParameter,
-        int contextRangeParameter );
-    ~HouseStyle();
-    bool createReport();
-    std::string getLastError();
-    std::vector<ContextMatch> getMatchVector();
-private:
-    std::string
-    buffer,
-    ruleDirectory,
-    ruleFile,
-    filterDirectory,
-    filterFile,
-    pathSeparator,
-    error;
-    int contextRange;
-    boost::shared_ptr<std::vector<boost::shared_ptr<Rule> > > ruleVector;
-    std::map<std::string, std::map<std::string, std::set<std::string> > >
-        filterMap;
-    std::vector<ContextMatch> matchVector;
-    boost::shared_ptr<StringSet<char> > dictionary, passiveDictionary;
-    void collectFilter (
-        std::string& fileName,
-        std::set<std::string>& excludeSet,
-            int *filterCount );
-    void collectRules (
-        string& fileName,
-        boost::shared_ptr<std::vector<boost::shared_ptr<Rule> > > ruleVector,
-        std::set<string>& excludeSet,
-            int *ruleCount );
-    int updateFilter();
-    int updateRules();
+	public:
+		HouseStyle (
+		    const std::string& bufferParameter,
+		    const std::string& ruleDirectoryParameter,
+		    const std::string& ruleFileParameter,
+		    const std::string& filterDirectoryParameter,
+		    const std::string& filterFileParameter,
+		    const std::string& pathSeparatorParameter,
+		    int contextRangeParameter );
+		~HouseStyle();
+		bool createReport();
+		std::string getLastError();
+		std::vector<ContextMatch> getMatchVector();
+	private:
+		std::string
+		buffer,
+		ruleDirectory,
+		ruleFile,
+		filterDirectory,
+		filterFile,
+		pathSeparator,
+		error;
+		int contextRange;
+		boost::shared_ptr<std::vector<boost::shared_ptr<Rule> > > ruleVector;
+		std::map<std::string, std::map<std::string, std::set<std::string> > >
+		filterMap;
+		std::vector<ContextMatch> matchVector;
+		boost::shared_ptr<StringSet<char> > dictionary, passiveDictionary;
+		void collectFilter (
+		    std::string& fileName,
+		    std::set<std::string>& excludeSet,
+		    int *filterCount );
+		void collectRules (
+		    string& fileName,
+		    boost::shared_ptr<std::vector<boost::shared_ptr<Rule> > > ruleVector,
+		    std::set<string>& excludeSet,
+		    int *ruleCount );
+		int updateFilter();
+		int updateRules();
 };
 
 #endif
