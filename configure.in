@@ -1,5 +1,5 @@
 AC_INIT(src/xmlcopyeditor.cpp)
-AM_INIT_AUTOMAKE(xmlcopyeditor, 1.1.0.5)
+AM_INIT_AUTOMAKE(xmlcopyeditor, 1.1.0.6)
 
 AC_PROG_CXX
 AC_PROG_INSTALL
@@ -53,6 +53,10 @@ AC_SUBST(WX_LIBS)
 # Check pcre is available
 AC_CHECK_HEADER(pcre.h, ,
 	AC_MSG_ERROR([PCRE headers not found]))
+
+# Check ASPELL is available
+AC_CHECK_HEADER(aspell.h, ,
+	AC_MSG_ERROR([Aspell headers not found]))
 
 # Check boost::shared_ptr is available
 AC_LANG(C++)

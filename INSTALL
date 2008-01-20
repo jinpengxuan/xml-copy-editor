@@ -1,12 +1,12 @@
-How to build wxWidgets
-==========================================
+How to build wxWidgets (if your distribution doesn't package wxGTK-2.8.x)
+=========================================================================
 
 Download wxGTK-2.8.0 (or higher) from 
 <http://sourceforge.net/project/showfiles.php?group_id=9863&package_id=14076> and unpack.
 
-$ cd wxGTK-2.8.0 
-$ mkdir buildstatic
-$ cd buildstatic
+$ cd wxGTK-2.8.* 
+$ mkdir build
+$ cd build
 $ ../configure --enable-unicode
 $ make
 $ [as root] make install
@@ -14,7 +14,20 @@ $ cd contrib/src/stc
 $ make
 $ [as root] make install 
 
-NB If you wish to distribute the program in binary form, you may wish to add the flag --disable-shared to the call to configure.
+Q: Will wxGTK-2.6.x work?
+A: Unfortunately not. The program relies on a number of features (notably the docking library wxAUI) that were not available in a stable build of wxGTK until version 2.8.0.
+
+Compiling XML Copy Editor
+=========================
+
+To compile the program, do the following:
+$ tar -xf xmlcopyeditor*.tar.gz
+$ cd xmlcopyeditor*
+$ ./configure
+$ make
+$ sudo make install
+
+That's it! The program should install to /usr/local.
 
 Installing XML Copy Editor
 ==========================
@@ -22,26 +35,6 @@ Installing XML Copy Editor
 At first startup, the application tries to locate its data files in /usr/local/share/xmlcopyeditor or, failing that, /usr/share/xmlcopyeditor. If icons, the About page, and so on are not available at runtime, it is likely that the application was unable to find the application directory. You can correct it in the General Pane of the Options dialog under Tools or simply change the applicationDir entry in .xmlcopyeditor, which you can find in your home directory after running the application for the first time.
 
 If you have any questions, please do not hesitate to contact gnschmidt@users.sourceforge.net.
-
-Fedora Core 5/6 installation
-==========================
-
-A binary rpm is available for fc5 users (which also works on fc6), but the build should run without errors using the Makefiles provided. A copy of xmlcopyeditor.spec can be found in the src directory. All suggestions welcome. If you are using Fedora Core 4, you can follow a link from the home page to a separately produced binary rpm.
-
-Arch Linux installation
-=======================
-
-David Scholl has kindly prepared a build script for Arch Linux. See http://aur.archlinux.org/packages.php?do_Details=1&ID=6283 for details.
-
-Ubuntu and Slackware
-====================
-
-There are binary packages for both Ubuntu and Slackware Linux. Please follow the links on the home page.
-
-Other distributions
-===================
-
-If you find that you need to tweak the Makefiles, please consider getting in touch so others can benefit from your effort.
 
 Basic Installation
 ==================
