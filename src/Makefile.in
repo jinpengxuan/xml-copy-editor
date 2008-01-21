@@ -57,7 +57,7 @@ am_xmlcopyeditor_OBJECTS = xmlcopyeditor.$(OBJEXT) \
 	contexthandler.$(OBJEXT) globalreplacedialog.$(OBJEXT) \
 	housestyle.$(OBJEXT) housestylereader.$(OBJEXT) \
 	myhtmlpane.$(OBJEXT) nocasecompare.$(OBJEXT) \
-	readfile.$(OBJEXT) replace.$(OBJEXT) spellcheck.$(OBJEXT) \
+	readfile.$(OBJEXT) replace.$(OBJEXT) \
 	styledialog.$(OBJEXT) wraplibxml.$(OBJEXT) wrapregex.$(OBJEXT) \
 	wraptempfilename.$(OBJEXT) xmlassociatedtd.$(OBJEXT) \
 	xmlassociatexsd.$(OBJEXT) xmlassociatexsl.$(OBJEXT) \
@@ -74,7 +74,7 @@ am_xmlcopyeditor_OBJECTS = xmlcopyeditor.$(OBJEXT) \
 	locationpanel.$(OBJEXT) catalogresolver.$(OBJEXT) \
 	getlinuxappdir.$(OBJEXT) xmlparseschemans.$(OBJEXT) \
 	xmlshallowvalidator.$(OBJEXT) wrapxerces.$(OBJEXT) \
-	findreplacepanel.$(OBJEXT) \
+	findreplacepanel.$(OBJEXT) wrapaspell.$(OBJEXT) \
 	commandpanel.$(OBJEXT) binaryfile.$(OBJEXT) \
 	xmlencodingspy.$(OBJEXT)
 xmlcopyeditor_OBJECTS = $(am_xmlcopyeditor_OBJECTS)
@@ -216,7 +216,7 @@ applicationsdir = /usr/share/applications
 xmlcopyeditor_SOURCES = xmlcopyeditor.cpp associatedialog.cpp casehandler.cpp \
 	contexthandler.cpp globalreplacedialog.cpp housestyle.cpp \
 	housestylereader.cpp myhtmlpane.cpp nocasecompare.cpp readfile.cpp \
-	replace.cpp spellcheck.cpp styledialog.cpp wraplibxml.cpp \
+	replace.cpp styledialog.cpp wraplibxml.cpp \
 	wrapregex.cpp wraptempfilename.cpp xmlassociatedtd.cpp xmlassociatexsd.cpp \
 	xmlassociatexsl.cpp xmlctrl.cpp xmldoc.cpp xmlencodinghandler.cpp xmlfilterreader.cpp \
 	xmlpromptgenerator.cpp xmlrulereader.cpp xmlschemalocator.cpp xmlutf8reader.cpp xsllocator.cpp \
@@ -224,13 +224,13 @@ xmlcopyeditor_SOURCES = xmlcopyeditor.cpp associatedialog.cpp casehandler.cpp \
 	insertpanel.cpp xmlwordcount.cpp getword.cpp locationpanel.cpp catalogresolver.cpp getlinuxappdir.cpp \
 	xmlparseschemans.cpp xmlshallowvalidator.cpp wrapxerces.cpp \
 	findreplacepanel.cpp commandpanel.cpp \
-	binaryfile.cpp xmlencodingspy.cpp \
+	binaryfile.cpp xmlencodingspy.cpp wrapaspell.cpp \
 	rulesets filters png rng xpm templates copying help po \
 	xmlcopyeditor.spec xmlcopyeditor.png custom.xpm \
 	xmlcopyeditor.desktop
 
 xmlcopyeditor_LDFLAGS = $(WX_LIBS) \
-	-lexpat -lxslt -lxml2 -lpcre -lxerces-c
+	-lexpat -lxslt -lxml2 -lpcre -lxerces-c -laspell
 
 nobase_xmlcopyeditor_DATA = png/*.png \
 	rulesets/*.* \
@@ -249,6 +249,7 @@ nobase_xmlcopyeditor_DATA = png/*.png \
 	copying/wxStyledTextCtrl/* copying/ximian/* \
 	copying/wxStEditor/* \
 	copying/xmlcopyeditor/* \
+	copying/Aspell/* \
 	copying/Apache/LICENSE-2.0 \
 	copying/Apache/LICENSE-2_files/* \
 	po/sk/messages.mo \
@@ -358,7 +359,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/readfile.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/replace.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/rule.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/spellcheck.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/styledialog.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/wrapexpat.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/wraplibxml.Po@am__quote@

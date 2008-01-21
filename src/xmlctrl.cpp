@@ -59,9 +59,6 @@ XmlCtrl::XmlCtrl (
 		basePath ( basePathParameter ),
 		auxPath ( auxPathParameter )
 {
-	//SetEOLMode ( wxSTC_EOL_LF );
-	//SetPasteConvertEndings ( true );
-
 	currentMaxLine = 1;
 	validationRequired = grammarFound = false;
 
@@ -107,7 +104,7 @@ XmlCtrl::XmlCtrl (
 	applyVisibilityState ( visibilityState );
 	lineBackgroundState = BACKGROUND_STATE_NORMAL;
 
-	for ( int i = 0; i < wxSTC_INDIC_MAX; ++i ) // start from 1 to disable faulty default indication
+	for ( int i = 0; i < wxSTC_INDIC_MAX; ++i ) 
 		IndicatorSetStyle ( i, wxSTC_INDIC_HIDDEN );
 	IndicatorSetStyle ( 2, wxSTC_INDIC_SQUIGGLE );
 	IndicatorSetForeground ( 0, *wxRED );
@@ -202,7 +199,6 @@ void XmlCtrl::handleBackspace ( wxKeyEvent& event )
 
 	// tag
 	int limitStyle = getLexerStyleAt ( limitPos );
-	//limitStyle &= ~wxSTC_INDIC2_MASK;
 	if ( GetCharAt ( limitPos ) == '>' &&
 	        ( limitStyle == wxSTC_H_TAG ||
 	          limitStyle == wxSTC_H_TAGUNKNOWN ||
@@ -230,7 +226,7 @@ void XmlCtrl::handleBackspace ( wxKeyEvent& event )
 		        GetCharAt ( limitPos ) != '<';
 		        limitPos-- )
 			;
-		SetSelection ( currentPos, limitPos );//(limitPos, currentPos);
+		SetSelection ( currentPos, limitPos );
 		if ( *protectTags )
 		{
 			SetReadOnly ( true ); // needed to prevent erroneous BS insertion by control
@@ -250,8 +246,8 @@ void XmlCtrl::handleBackspace ( wxKeyEvent& event )
 		DeleteBack();
 		return;
 	}
-	// entity reference
 
+	// entity reference
 	else if ( GetCharAt ( limitPos ) == ';' && getLexerStyleAt ( limitPos ) == wxSTC_H_ENTITY )
 	{
 		// delete entity to left of caret
@@ -437,7 +433,6 @@ void XmlCtrl::handleOpenAngleBracket ( wxKeyEvent& event )
 
 	// exit conditions based on style
 	int style = getLexerStyleAt ( pos );
-	//style &= ~wxSTC_INDIC2_MASK;
 	switch ( style )
 	{
 		case wxSTC_H_DOUBLESTRING:
@@ -611,7 +606,6 @@ void XmlCtrl::handleSpace ( wxKeyEvent& event )
 	}
 
 	int style = getLexerStyleAt ( pos - 1 );
-	//style &= ~wxSTC_INDIC2_MASK;
 
 	char c = GetCharAt ( pos - 1 );
 
@@ -748,8 +742,7 @@ void XmlCtrl::OnKeyPressed ( wxKeyEvent& event )
 	if ( *protectTags )
 		SetOvertype ( false );
 
-	//bool autoindent;
-	int pos, iteratorPos, maxPos; // omitted startPos, line, newPos
+	int pos, iteratorPos, maxPos;
 	char c;
 	wxString s;
 	switch ( event.GetKeyCode() )
@@ -995,7 +988,6 @@ int XmlCtrl::getParentCloseAngleBracket ( int pos, int range )
 	{
 		int type, style;
 		style = getLexerStyleAt ( iteratorPos );
-		//style &= ~wxSTC_INDIC2_MASK;
 
 		if ( GetCharAt ( iteratorPos ) == '>' &&
 		        ( style == wxSTC_H_TAG ||
@@ -1015,7 +1007,6 @@ int XmlCtrl::getParentCloseAngleBracket ( int pos, int range )
 								case ( TAG_TYPE_ERROR ) :
 										break;
 			}
-			//(isCloseTag(iteratorPos)) ? ++depth : --depth;
 			if ( !depth )
 				return iteratorPos;
 		}
@@ -1058,6 +1049,7 @@ void XmlCtrl::updatePromptMaps ( const char *buffer, size_t bufferLen )
 {
 	attributeMap.clear();
 	elementMap.clear();
+	elementStructureMap.clear();
 	std::auto_ptr<XmlPromptGenerator> xpg ( new XmlPromptGenerator (
 	                                            catalogPath,
 	                                            basePath,
@@ -1066,8 +1058,10 @@ void XmlCtrl::updatePromptMaps ( const char *buffer, size_t bufferLen )
 	xpg->getAttributeMap ( attributeMap );
 	xpg->getRequiredAttributeMap ( requiredAttributeMap );
 	xpg->getElementMap ( elementMap );
+	xpg->getElementStructureMap ( elementStructureMap );
 	xpg->getEntitySet ( entitySet );
 	grammarFound = xpg->getGrammarFound();
+	entitySet.insert ( "amp" );
 	entitySet.insert ( "apos" );
 	entitySet.insert ( "quot" );
 	entitySet.insert ( "lt" );
@@ -1264,7 +1258,6 @@ bool XmlCtrl::canInsertAt ( int pos )
 		return false;
 
 	int style = getLexerStyleAt ( pos );
-	//style &= ~wxSTC_INDIC2_MASK;
 	switch ( style )
 	{
 		case wxSTC_H_TAG:
@@ -1285,7 +1278,6 @@ bool XmlCtrl::canInsertAt ( int pos )
 bool XmlCtrl::canMoveRightAt ( int pos )
 {
 	int style = getLexerStyleAt ( pos );
-	//style &= ~wxSTC_INDIC2_MASK;
 	switch ( style )
 	{
 		case wxSTC_H_DEFAULT:
@@ -1300,7 +1292,6 @@ bool XmlCtrl::canMoveLeftAt ( int pos )
 		return false;
 
 	int style = getLexerStyleAt ( pos - 1 );
-	//style &= ~wxSTC_INDIC2_MASK;
 	switch ( style )
 	{
 		case wxSTC_H_DEFAULT:
@@ -1743,10 +1734,6 @@ void XmlCtrl::toggleFold()
 			break;
 		}
 	}
-
-// was previously (changed so cursor doesn't have to be in headline):
-//    if ( XMLCTRL_HASBIT ( level, wxSTC_FOLDLEVELHEADERFLAG ) )
-//        ToggleFold ( line );
 }
 
 // adapted from wxSTEdit (c) 2005 John Labenski, Otto Wyss
@@ -1835,7 +1822,6 @@ bool XmlCtrl::insertChild ( const wxString& child )
 	{
 		if ( !canInsertAt ( start ) )
 			return false;
-		//tag = _T("<") + child + _T(">");
 		offset = openTag.Length();
 
 		wxString tag;
@@ -1847,9 +1833,6 @@ bool XmlCtrl::insertChild ( const wxString& child )
 	}
 	if ( *protectTags )
 		adjustSelection();
-	//wxString openTag, closeTag;
-	//openTag = _T("<") + child + _T(">");
-	//closeTag = _T("</") + child + _T(">");
 	offset = openTag.Length();
 	if ( start > end )
 	{
@@ -1956,6 +1939,28 @@ void XmlCtrl::toggleLineBackground()
 std::set<std::string> XmlCtrl::getEntitySet()
 {
 	return entitySet;
+}
+
+std::set<std::string> XmlCtrl::getAttributes ( const wxString& parent )
+{
+	std::set<std::string> retVal;
+	return retVal;
+}
+
+std::string XmlCtrl::getElementStructure ( const wxString& element )
+{
+	std::string stdElement, ret;
+	stdElement = element.mb_str ( wxConvUTF8);
+	
+	if ( elementStructureMap.find ( stdElement ) == elementStructureMap.end() )
+	{
+		ret = "";
+	}
+	else
+	{
+		ret = elementStructureMap[stdElement];
+	}
+	return ret;
 }
 
 bool XmlCtrl::shallowValidate ( int maxLine, bool segmentOnly )

@@ -16,7 +16,7 @@ applicationsdir = /usr/share/applications
 xmlcopyeditor_SOURCES = xmlcopyeditor.cpp associatedialog.cpp casehandler.cpp \
 	contexthandler.cpp globalreplacedialog.cpp housestyle.cpp \
 	housestylereader.cpp myhtmlpane.cpp nocasecompare.cpp readfile.cpp \
-	replace.cpp spellcheck.cpp styledialog.cpp wraplibxml.cpp \
+	replace.cpp styledialog.cpp wraplibxml.cpp \
 	wrapregex.cpp wraptempfilename.cpp xmlassociatedtd.cpp xmlassociatexsd.cpp \
 	xmlassociatexsl.cpp xmlctrl.cpp xmldoc.cpp xmlencodinghandler.cpp xmlfilterreader.cpp \
 	xmlpromptgenerator.cpp xmlrulereader.cpp xmlschemalocator.cpp xmlutf8reader.cpp xsllocator.cpp \
@@ -24,12 +24,12 @@ xmlcopyeditor_SOURCES = xmlcopyeditor.cpp associatedialog.cpp casehandler.cpp \
 	insertpanel.cpp xmlwordcount.cpp getword.cpp locationpanel.cpp catalogresolver.cpp getlinuxappdir.cpp \
 	xmlparseschemans.cpp xmlshallowvalidator.cpp wrapxerces.cpp \
 	findreplacepanel.cpp commandpanel.cpp \
-	binaryfile.cpp xmlencodingspy.cpp \
+	binaryfile.cpp xmlencodingspy.cpp wrapaspell.cpp \
 	rulesets filters png rng xpm templates copying help po \
 	docbook xmlcopyeditor.spec xmlcopyeditor.png custom.xpm \
 	xmlcopyeditor.desktop
 xmlcopyeditor_LDFLAGS = $(WX_LIBS) \
-	-lexpat -lxslt -lxml2 -lpcre -lxerces-c
+	-lexpat -lxslt -lxml2 -lpcre -lxerces-c -laspell
 
 nobase_xmlcopyeditor_DATA = png/*.png \
 	rulesets/*.* \
@@ -57,6 +57,7 @@ nobase_xmlcopyeditor_DATA = png/*.png \
 	copying/wxStyledTextCtrl/* copying/ximian/* \
 	copying/wxStEditor/* \
 	copying/xmlcopyeditor/* \
+	copying/Aspell/* \
 	copying/Apache/LICENSE-2.0 \
 	copying/Apache/LICENSE-2_files/* \
 	po/sk/messages.mo \

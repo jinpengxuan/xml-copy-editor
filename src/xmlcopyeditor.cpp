@@ -115,13 +115,13 @@ BEGIN_EVENT_TABLE ( MyFrame, wxFrame )
 	EVT_MENU ( ID_REPLACE, MyFrame::OnFindReplace )
 	EVT_MENU ( ID_GLOBAL_REPLACE, MyFrame::OnGlobalReplace )
 	EVT_MENU ( ID_CHECK_WELLFORMED, MyFrame::OnCheckWellformedness )
-	//EVT_MENU ( ID_VALIDATE_DTD, MyFrame::OnValidateDTD )
 	EVT_MENU ( ID_VALIDATE_RELAX_NG, MyFrame::OnValidateRelaxNG )
 	EVT_MENU ( ID_VALIDATE_W3C_SCHEMA, MyFrame::OnValidateSchema )
 	EVT_MENU ( ID_XPATH, MyFrame::OnXPath )
 	EVT_MENU_RANGE ( ID_XSLT, ID_XSLT_WORDML_DOCBOOK, MyFrame::OnXslt )
 	EVT_MENU ( ID_PRETTYPRINT, MyFrame::OnPrettyPrint )
 	EVT_MENU ( ID_ENCODING, MyFrame::OnEncoding )
+	EVT_MENU ( ID_STYLE, MyFrame::OnSpelling )
 	EVT_MENU ( ID_SPELL, MyFrame::OnSpelling )
 	EVT_MENU ( ID_FONT_SMALLER, MyFrame::OnFontSmaller )
 	EVT_MENU ( ID_FONT_NORMAL, MyFrame::OnFontMedium )
@@ -280,7 +280,7 @@ MyApp::MyApp() : checker ( NULL ), server ( NULL ), connection ( NULL ),
 	wxLocale::AddCatalogLookupPathPrefix ( wxT ( ".." ) );
 
 #ifndef __WXMSW__
-	wxString poDir = GetLinuxAppDir::run() + wxFileName::GetPathSeparator() + _T ( "po" );
+	wxString poDir = GetLinuxAppDir::run() + wxFileName::GetPathSeparator() + _T ( "po" ) + wxFileName::GetPathSeparator();
 	wxLocale::AddCatalogLookupPathPrefix ( poDir );
 #endif
 
@@ -642,7 +642,10 @@ MyFrame::MyFrame (
 		commandString = config->Read ( _T ( "commandString" ), wxEmptyString );
 
 		ruleSetPreset =
-		    config->Read ( _T ( "ruleSetPreset" ), _ ( "Default dictionary and style" ) );
+		    config->Read ( _T ( "ruleSetPreset" ), _ ( "Default style" ) );
+		dictionaryPreset = 
+		    config->Read ( _T ( "dictionaryPreset" ), _ ( "en_US" ) );
+		
 		filterPreset =
 		    config->Read ( _T ( "filterPreset" ), _ ( "(No filter)" ) );
 		findData.SetFindString ( config->Read ( _T ( "findReplaceFind" ), _T ( "" ) ) );
@@ -691,7 +694,8 @@ MyFrame::MyFrame (
 #else
 		applicationDir = GetLinuxAppDir::run();//getLinuxApplicationDir();
 #endif
-		ruleSetPreset = _ ( "Default dictionary and style" );
+		ruleSetPreset = _ ( "Default style" );
+		dictionaryPreset = _ ( "en_US" );
 		filterPreset = _ ( "No filter" );
 		xpathExpression = lastXslStylesheet = lastRelaxNGSchema = wxEmptyString;
 		findRegex = true;
@@ -960,6 +964,7 @@ MyFrame::~MyFrame()
 	config->Write ( _T ( "highlightSyntax" ), properties.highlightSyntax );
 	config->Write ( _T ( "applicationDir" ), applicationDir );
 	config->Write ( _T ( "ruleSetPreset" ), ruleSetPreset );
+	config->Write ( _T ( "dictionaryPreset" ), dictionaryPreset );
 	config->Write ( _T ( "filterPreset" ), filterPreset );
 	config->Write ( _T ( "xpathExpression" ), xpathExpression );
 	config->Write ( _T ( "findReplaceFind" ), findData.GetFindString() );
@@ -1208,7 +1213,7 @@ void MyFrame::OnAbout ( wxCommandEvent& WXUNUSED ( event ) )
 
 void MyFrame::OnCheckWellformedness ( wxCommandEvent& event )
 {
-	statusProgress ( wxEmptyString );
+    statusProgress ( wxEmptyString );
 	XmlDoc *doc;
 	if ( ( doc = getActiveDocument() ) == NULL )
 		return;
@@ -1799,17 +1804,11 @@ void MyFrame::OnDialogReplace ( wxFindDialogEvent& event )
 	if ( findReplacePanel->getRegex() )
 	{
 		regexWidth = doc->ReplaceTargetRE ( event.GetReplaceString() );
-		//doc->SetTargetStart(newLocation + regexWidth);
 	}
 	else
 	{
 		doc->ReplaceTarget ( event.GetReplaceString() );
-		//doc->SetTargetStart(newLocation + event.GetReplaceString().size());
 	}
-	/*
-	if (doc->GetSelectionStart() != doc->GetSelectionEnd())
-	  doc->ReplaceSelection(event.GetReplaceString());
-	*/
 	OnDialogFind ( event );
 }
 
@@ -1943,7 +1942,7 @@ wxString MyFrame::getHtmlBuffer()
 				startOfLine = true;
 				break;
 			case L'&':
-				htmlBuffer + _T ( "&amp" );
+				htmlBuffer + _T ( "&amp;" );
 				startOfLine = false;
 				break;
 			default:
@@ -3214,7 +3213,7 @@ void MyFrame::OnRevert ( wxCommandEvent& WXUNUSED ( event ) )
 	doc->SetFocus();
 }
 
-void MyFrame::OnSpelling ( wxCommandEvent& WXUNUSED ( event ) )
+void MyFrame::OnSpelling ( wxCommandEvent& event )
 {
 	XmlDoc *doc;
 	if ( ( doc = getActiveDocument() ) == NULL )
@@ -3228,6 +3227,10 @@ void MyFrame::OnSpelling ( wxCommandEvent& WXUNUSED ( event ) )
 	doc->SetUndoCollection ( true );
 #endif
 
+	int id, type;
+	id = event.GetId();
+	type = (id == ID_STYLE) ? ID_TYPE_STYLE : ID_TYPE_SPELL;
+		
 
 	std::string rawBufferUtf8;
 	getRawText ( doc, rawBufferUtf8 );
@@ -3259,7 +3262,7 @@ void MyFrame::OnSpelling ( wxCommandEvent& WXUNUSED ( event ) )
 		statusProgress ( wxEmptyString );
 		std::string error = wl->getLastError();
 		wxString wideError = wxString ( error.c_str(), wxConvUTF8, error.size() );
-		wideError.Prepend ( _ ( "Opening spelling and style check in read-only mode: " ) );
+		wideError.Prepend ( _ ( "Checking document in read-only mode: " ) );
 		messagePane ( wideError, CONST_WARNING );
 
 		if ( !ReadFile::run ( tempFileName.name(), bufferParameterUtf8 ) )
@@ -3282,8 +3285,9 @@ void MyFrame::OnSpelling ( wxCommandEvent& WXUNUSED ( event ) )
 	                               ruleSetDir,
 	                               filterDir,
 	                               browserCommand,
-	                               ruleSetPreset,
+				       ( type == ID_TYPE_SPELL ) ? dictionaryPreset : ruleSetPreset,
 	                               filterPreset,
+					type,
 	                               ( success ) ? false : true,
 	                               stylePosition,
 	                               styleSize ) );
@@ -3296,10 +3300,16 @@ void MyFrame::OnSpelling ( wxCommandEvent& WXUNUSED ( event ) )
 		else
 			doc->SetTextRaw ( bufferUtf8.c_str() );
 	}
+	
 	// update presets if report has been created (even if followed by cancel)
-	ruleSetPreset = sd->getRuleSetPreset();
-	filterPreset = sd->getFilterPreset();
-
+	if (type == ID_TYPE_STYLE)
+	{
+		ruleSetPreset = sd->getRuleSetPreset();
+		filterPreset = sd->getFilterPreset();
+	}
+	else
+		dictionaryPreset = sd->getRuleSetPreset();
+		
 #ifdef __WXMSW__
 	stylePosition = sd->getPosition();
 	styleSize = sd->getSize();
@@ -5087,6 +5097,7 @@ wxMenuBar *MyFrame::getMenuBar()
 	}
 
 	// xsl menu
+	/*
 	wxMenu *xslMenu = new wxMenu;
 	xslMenu->Append ( ID_XSLT, _ ( "&XSL Transform...\tF8" ),
 	                  _ ( "XSL Transform..." ) );
@@ -5112,6 +5123,7 @@ wxMenuBar *MyFrame::getMenuBar()
 	xslMenu->Append (
 	    ID_XSLT_TEI_FO,
 	    _ ( "TEI to &XSL-FO\tAlt+7" ), _ ( "TEI to XSL-FO" ) );
+	*/
 
 	// xml menu
 	xmlMenu = new wxMenu; // use class-wide data member
@@ -5128,7 +5140,8 @@ wxMenuBar *MyFrame::getMenuBar()
 	    _ ( "&Associate" ),
 	    associateMenu );
 	xmlMenu->AppendSeparator();
-	xmlMenu->Append ( wxID_ANY, _ ( "&XSLT" ), xslMenu );
+	xmlMenu->Append ( ID_XSLT, _ ( "&XSL Transform...\tF8" ),
+	                  _ ( "XSL Transform..." ) );
 	xmlMenu->Append (
 	    ID_XPATH,
 	    _ ( "&Evaluate XPath...\tF9" ),
@@ -5156,9 +5169,17 @@ wxMenuBar *MyFrame::getMenuBar()
 	    new wxMenuItem (
 	    NULL,
 	    ID_SPELL,
-	    _ ( "&Spelling and Style...\tF7" ),
-	    _ ( "Spelling and Style..." ) );
+	    _ ( "&Spelling...\tF7" ),
+	    _ ( "Spelling..." ) );
 	spellingItem->SetBitmap ( spelling16Bitmap );
+	
+	wxMenuItem *styleItem = 
+	    new wxMenuItem (
+	    NULL,
+	    ID_STYLE,
+	    _ ( "&Style...\tShift+F7" ),
+	    _ ( "Style..." ) );
+	styleItem->SetBitmap ( wxNullBitmap );
 
 	wxMenuItem *wordCountItem =
 	    new wxMenuItem (
@@ -5177,6 +5198,7 @@ wxMenuBar *MyFrame::getMenuBar()
 	commandItem->SetBitmap ( wxNullBitmap );
 
 	toolsMenu->Append ( spellingItem );
+	toolsMenu->Append ( styleItem );
 	toolsMenu->Append ( wordCountItem );
 	toolsMenu->AppendSeparator();
 	toolsMenu->Append ( commandItem );
@@ -5386,11 +5408,11 @@ wxToolBar *MyFrame::getToolBar()
 	    _ ( "Browser" ) );
 	toolBar->AddTool (
 	    ID_SPELL,
-	    _ ( "Spelling and Style" ),
+	    _ ( "Spelling" ),
 	    spellingBitmap,
 	    wxNullBitmap,
 	    wxITEM_NORMAL,
-	    _ ( "Spelling and Style" ) );
+	    _ ( "Spelling" ) );
 
 	toolBar->AddCheckTool (
 	    ID_PROTECT_TAGS,

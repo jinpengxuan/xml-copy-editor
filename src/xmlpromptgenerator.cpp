@@ -50,6 +50,7 @@ XmlPromptGenerator::XmlPromptGenerator (
 	XML_SetUserData ( p, d.get() );
 	d->p = p;
 	d->catalogPath = catalogPath;
+	d->basePath = basePath;
 	d->auxPath = auxPath;
 	d->elementDeclRecurseLevel = 0;
 	d->isRootElement = true;
@@ -164,6 +165,12 @@ void XmlPromptGenerator::getEntitySet (
     std::set<std::string> &entitySet )
 {
 	entitySet = d->entitySet;
+}
+
+void XmlPromptGenerator::getElementStructureMap (
+    std::map<std::string, std::string> &elementStructureMap )
+{
+	elementStructureMap = d->elementStructureMap;
 }
 
 // handlers for DOCTYPE handling
@@ -303,10 +310,15 @@ int XMLCALL XmlPromptGenerator::externalentityrefhandler (
 	{
 		Replace::run ( stdSystemId, "file://", "", false );
 		Replace::run ( stdSystemId, "%20", " ", false );
+
+#ifdef __WXMSW__
+       Replace::run ( stdSystemId, "/C:/", "C:\\", false );
+       Replace::run ( stdSystemId, "/", "\\", false );
+#endif
 	}
 	else
 	{
-		if (systemId )
+		if ( systemId )
 			stdSystemId = systemId;
 		if ( base )
 		{
@@ -317,7 +329,7 @@ int XMLCALL XmlPromptGenerator::externalentityrefhandler (
 			}
 		}
 	}
-		
+
 	if ( !stdSystemId.empty() )
 	{
 		ReadFile::run ( stdSystemId, buffer );
@@ -396,7 +408,10 @@ void XmlPromptGenerator::handleSchema (
 	{
 		return;
 	}
-	std::string schemaPath = PathResolver::run ( path, d->auxPath );
+	
+
+	std::string schemaPath = PathResolver::run ( path, ( d->auxPath.empty() ) ? d->basePath : d->auxPath);
+
 
 	try
 	{
@@ -417,7 +432,8 @@ void XmlPromptGenerator::handleSchema (
 	if ( !rootGrammar )
 	{
 		delete parser;
-		return;
+		XMLPlatformUtils::Terminate();
+        return;
 	}
 
 	SchemaGrammar* grammar = ( SchemaGrammar* ) rootGrammar;
@@ -427,7 +443,7 @@ void XmlPromptGenerator::handleSchema (
 	{
 		delete grammar;
 		delete parser;
-		
+		XMLPlatformUtils::Terminate();		
 		return;
 	}
 
@@ -451,7 +467,11 @@ void XmlPromptGenerator::handleSchema (
 		{
 			size_t len;
 			char *s, *word;
+			std::string structure;
 			s = ( char * ) XMLString::transcode ( fmtCntModel );
+
+			structure = s;
+			d->elementStructureMap.insert ( make_pair ( element, structure ) );
 	
 			while ( ( word = GetWord::run ( &s, &len ) ) != NULL )
 			{
@@ -500,6 +520,9 @@ void XmlPromptGenerator::handleSchema (
 				d->attributeMap.insert( make_pair ( element, attributeMap ) );
 		}
 	}
+    delete parser;
+	XMLPlatformUtils::Terminate();
 }
+
 
 

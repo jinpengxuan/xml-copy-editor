@@ -32,8 +32,9 @@ struct PromptGeneratorData : public ParserData
 	attributeMap;
 	std::map<std::string, std::set<std::string> > elementMap;
 	std::map<std::string, std::set<std::string> > requiredAttributeMap;
+	std::map<std::string, std::string> elementStructureMap;
 	std::set<std::string> entitySet;
-	std::string catalogPath, auxPath, rootElement;
+	std::string catalogPath, basePath, auxPath, rootElement;
 	int elementDeclRecurseLevel;
 	bool isRootElement, grammarFound;
 	unsigned attributeValueCutoff;
@@ -58,6 +59,8 @@ class XmlPromptGenerator : public WrapExpat
 		void getEntitySet (
 		    std::set<std::string> &entitySet );
 		bool getGrammarFound();
+		void getElementStructureMap (
+		    std::map<std::string, std::string> &elementStructureMap );
 	private:
 		std::auto_ptr<PromptGeneratorData> d;
 		static void XMLCALL starthandler (

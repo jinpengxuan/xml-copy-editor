@@ -101,6 +101,7 @@ void InsertPanel::update (
 		list->Clear();
 		lastDoc = doc;
 		std::set<std::string> entitySet = doc->getEntitySet();
+		entitySet.insert ( "amp" );
 		entitySet.insert ( "apos" );
 		entitySet.insert ( "gt" );
 		entitySet.insert ( "lt" );

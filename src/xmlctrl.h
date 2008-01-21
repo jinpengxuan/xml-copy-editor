@@ -98,7 +98,6 @@ class XmlCtrl: public wxStyledTextCtrl
 		    int visibilityStateParameter = SHOW_TAGS,
 		    int typeParameter = FILE_TYPE_XML,
 		    wxWindowID id = wxID_ANY,
-		    //const std::string& buffer = DEFAULT_XML_DECLARATION_UTF8,
 		    const char *buffer = NULL,
 		    size_t bufferLen = 0,
 		    const std::string& catalogPath = "",
@@ -136,6 +135,8 @@ class XmlCtrl: public wxStyledTextCtrl
 		wxString getLastElementName ( int pos );
 		std::set<wxString> getChildren ( const wxString& parent );
 		std::set<std::string> getEntitySet();
+		std::set<std::string> getAttributes ( const wxString& parent );
+		std::string getElementStructure ( const wxString& parent );
 		bool canInsertAt ( int pos );
 		int getTagStartPos ( int pos );
 		void toggleLineBackground();
@@ -162,6 +163,7 @@ class XmlCtrl: public wxStyledTextCtrl
 		std::map<std::string, std::set<std::string> > requiredAttributeMap;
 		std::map<std::string, std::set<std::string> > elementMap;
 		std::set<std::string> entitySet;
+		std::map<std::string, std::string> elementStructureMap;
 		std::string catalogPath, basePath, auxPath;
 		XmlCtrlProperties properties;
 		wxString getLastAttributeName ( int pos );

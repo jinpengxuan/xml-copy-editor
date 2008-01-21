@@ -139,6 +139,7 @@ enum
 	ID_PRETTYPRINT,
 	ID_ENCODING,
 	ID_SPELL,
+	ID_STYLE,
 	ID_FONT_SMALLER,
 	ID_FONT_NORMAL,
 	ID_FONT_LARGER,
@@ -253,6 +254,7 @@ class MyFrame : public wxFrame
 		void OnUndo ( wxCommandEvent& event );
 		void OnRedo ( wxCommandEvent& event );
 		void OnSpelling ( wxCommandEvent& event );
+		//void OnStyle ( wxCommandEvent& event );
 		void OnPreviousDocument ( wxCommandEvent& event );
 		void OnNextDocument ( wxCommandEvent& event );
 		void OnOptions ( wxCommandEvent& event );
@@ -384,6 +386,7 @@ class MyFrame : public wxFrame
 		wxSize styleSize;
 		wxString applicationDir,
 		ruleSetPreset,
+		dictionaryPreset,
 		filterPreset,
 		ruleSetDir,
 		filterDir,

@@ -34,11 +34,12 @@ class LocationPanel : public wxPanel
 		    XmlDoc *docParameter = NULL,
 		    const wxString& parent = wxEmptyString );
 	private:
+		void indentStructure ( std::string& structure );
 		MyFrame *parentWindow;
 		XmlDoc *doc;
 		wxBoxSizer *sizer;
 		wxTextCtrl *edit;
-		//wxListBox *list;
+		wxStyledTextCtrl *structureEdit;
 		wxString parent;
 
 		DECLARE_EVENT_TABLE()

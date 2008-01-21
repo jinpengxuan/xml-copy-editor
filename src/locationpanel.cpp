@@ -47,28 +47,23 @@ LocationPanel::LocationPanel ( wxWindow *parentWindowParameter, int id ) :
 	boldFont.SetWeight ( wxFONTWEIGHT_BOLD );
 	edit->SetFont ( boldFont );
 
-	/*
-	  wxStaticText *label = new wxStaticText(
+	structureEdit = new wxStyledTextCtrl (
 	    this,
 	    wxID_ANY,
-	    _("Attributes"),
 	    wxDefaultPosition,
 	    wxDefaultSize);
-
-	  list = new wxListBox(
-	    this,
-	    wxID_ANY,
-	    wxDefaultPosition,
-	    wxDefaultSize,
-	    0,
-	    NULL,
-	    wxLB_SORT | wxLB_HSCROLL);
-	*/
+	for (int i = 0 ; i < 3; i++ )
+		structureEdit->SetMarginWidth ( i, 0 );
+	structureEdit->SetReadOnly ( true );
+	//structureEdit->SetWrapMode ( wxSTC_WRAP_WORD );
+	//structureEdit->SetWrapVisualFlags ( wxSTC_WRAPVISUALFLAG_START );
+	structureEdit->SetTabWidth ( 2 );
+	structureEdit->SetIndentationGuides ( true );
 
 	sizer->Add ( edit, 0, wxGROW | wxTOP, 0 );
-	//sizer->Add(label, 0, wxGROW | wxTOP, 10);
-	//sizer->Add(list, 0, wxGROW | wxTOP, 0);
+	sizer->Add ( structureEdit, 0, wxGROW | wxTOP, 0 );
 	sizer->Layout();
+	structureEdit->Show ( false );
 }
 
 void LocationPanel::update (
@@ -78,8 +73,109 @@ void LocationPanel::update (
 	doc = docParameter;
 	parent = parentParameter;
 	wxString previous = edit->GetValue();
+
+	if ( !doc )
+	{
+        edit->SetValue ( wxEmptyString );
+		structureEdit->Show ( false );
+		return;
+	}
+	else
+	{
+		std::string structure = doc->getElementStructure ( parent );
+		
+		if (!structure.empty () )
+		{
+			indentStructure( structure );
+			structureEdit->Show ( true );
+			wxString wideStructure = wxString ( structure.c_str(), wxConvUTF8, structure.size() );
+			structureEdit->SetReadOnly ( false );
+			structureEdit->SetText ( wideStructure );
+			structureEdit->SetReadOnly ( true );
+
+			wxSize clientSize = GetClientSize();
+			wxSize editSize = edit->GetSize();
+			wxSize structureSize =
+				wxSize ( clientSize.GetWidth(), clientSize.GetHeight() - editSize.GetHeight() );
+
+			if ( clientSize.IsFullySpecified() && editSize.IsFullySpecified() )
+			structureEdit->SetSize ( structureSize );
+			structureEdit->Update();
+		}
+		else
+		{
+			structureEdit->Show ( false );
+		}
+	}
+	
 	if ( parentParameter == previous )
 		return;
 	previous = parentParameter;
 	edit->SetValue ( parent );
+	
+}
+
+void LocationPanel::indentStructure ( std::string& structure )
+{
+	std::string indented;
+	char *s = (char *) structure.c_str();
+	int indent = 0;
+	char *indentMark = "\t";
+
+	int count = 0;
+	bool justSeenContent = false;
+	for ( ; *s; s++, count++)
+	{
+		if (*s == '(')
+		{
+			if ( count && justSeenContent )
+			{
+				indented += '\n';
+			}
+			else if (!justSeenContent)
+				indented += *s;
+			for ( int i = 0; i < indent; i++ )
+			{
+				indented += indentMark;
+			}
+			if (justSeenContent)
+				indented += *s;
+
+			indent++;
+
+			indented += '\n';
+		
+			for (int i = 0; indent && i < indent; i++)
+				indented += indentMark;				
+			justSeenContent = false;
+		}
+		else if (*s == ')')
+		{
+			if ( justSeenContent )
+			{
+				indented += '\n';
+			}
+			indent--;
+			for (int i = 0; indent && i < indent; i++)
+				indented += indentMark;
+			indented += *s;
+			indented += '\n';
+			if (*( s + 1 ) && *(s + 1) != ')' )
+			{
+				for (int i = 0; i < indent; i++)
+					indented += indentMark;
+			}
+			justSeenContent = false;
+		}
+		else
+		{
+            if ( *s == '|' && justSeenContent)
+               indented += ' ';
+			indented += *s;
+			if ( *s == ',' || *s == '|' )
+			   indented += ' ';
+			justSeenContent = true;
+		}
+	}
+	structure = indented;
 }
