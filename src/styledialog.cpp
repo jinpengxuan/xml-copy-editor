@@ -18,9 +18,14 @@
  */
 
 #include <wx/intl.h>
+#include "aspell.h"
 #include "styledialog.h"
 #include "nocasecompare.h"
 #define ngettext wxGetTranslation
+
+#ifdef __WXMSW__
+       #include "aspellpaths.h"
+#endif
 
 BEGIN_EVENT_TABLE ( StyleDialog, wxDialog )
 	EVT_BUTTON ( ID_STYLE_REPORT, StyleDialog::OnReport )
@@ -52,13 +57,14 @@ StyleDialog::StyleDialog (
     const wxString& browserParameter,
     const wxString& ruleSetPresetParameter,
     const wxString& filterPresetParameter,
+    int typeParameter,
     bool readOnlyParameter,
     wxPoint position,
     wxSize size )
 		: wxDialog (
 		    parent,
 		    wxID_ANY,
-		    wxString ( _ ( "Spelling and Style" ) ),
+		    wxString ( ( typeParameter == ID_TYPE_STYLE) ? _ ( "Style" ) : _ ( "Spelling" ) ),
 		    position,
 		    size,
 		    wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER | wxMAXIMIZE_BOX ),
@@ -69,11 +75,11 @@ StyleDialog::StyleDialog (
 		browser ( browserParameter ),
 		ruleSetPreset ( ruleSetPresetParameter ),
 		filterPreset ( filterPresetParameter ),
+		type(typeParameter),
 		readOnly ( readOnlyParameter )
 {
 	SetIcon ( icon );
 
-	wxSize buttonSize ( 100, wxDefaultCoord );
 
 	// top box
 	ruleSetCombo = new wxComboBox (
@@ -83,18 +89,25 @@ StyleDialog::StyleDialog (
 	    wxDefaultPosition,
 	    wxSize ( 200, -1 )
 	);
-	filterCombo = new wxComboBox (
-	    this,
-	    ID_STYLE_COMBO_FILTER,
-	    _T ( "" ),
-	    wxDefaultPosition,
-	    wxSize ( 200, -1 )
-	);
+	
+	int width, height;
+	ruleSetCombo->GetSize ( &width, &height );
+	wxSize buttonSize ( 100, height );
+
+
+    	filterCombo = new wxComboBox (
+		this,
+		ID_STYLE_COMBO_FILTER,
+		_T ( "" ),
+		wxDefaultPosition,
+		wxSize ( 200, -1 ) );
+	if (type != ID_TYPE_STYLE)
+		filterCombo->Show ( false );
 
 	wxButton *createReportButton = new wxButton (
 	    this,
 	    ID_STYLE_REPORT,
-	    _ ( "&Report" ),
+	    _ ( "&Check" ),
 	    wxDefaultPosition,
 	    buttonSize,
 	    0 );
@@ -114,9 +127,10 @@ StyleDialog::StyleDialog (
 	int widthUnit = 35;
 	myTable->InsertColumn ( 0, _ ( "No." ), wxLIST_FORMAT_LEFT, widthUnit * 1 );
 	myTable->InsertColumn ( 1, _ ( "Context" ), wxLIST_FORMAT_RIGHT, widthUnit * 3 );
-	myTable->InsertColumn ( 2, _ ( "Match" ), wxLIST_FORMAT_CENTER, widthUnit * 3 );
+	myTable->InsertColumn ( 2, _ ( "Error" ), wxLIST_FORMAT_CENTER, widthUnit * 3 );
 	myTable->InsertColumn ( 3, _ ( "Context" ), wxLIST_FORMAT_LEFT, widthUnit * 3 );
 	myTable->InsertColumn ( 4, _ ( "Suggestion" ), wxLIST_FORMAT_LEFT, widthUnit * 3 );
+	
 	myTable->InsertColumn ( 5, _ ( "Rule" ), wxLIST_FORMAT_LEFT, widthUnit * 3 );
 	myTable->InsertColumn ( 6, _ ( "Action" ), wxLIST_FORMAT_LEFT, widthUnit * 3 );
 	table = myTable;
@@ -126,9 +140,9 @@ StyleDialog::StyleDialog (
 	    new wxButton (
 	    this,
 	    ID_STYLE_EDIT,
-	    _ ( "&Edit" ),
+	    _ ( "&Apply changes" ),
 	    wxDefaultPosition,
-	    buttonSize,
+	    wxSize ( -1, buttonSize.GetHeight() ),
 	    0 );
 	wxButton *webReportButton =
 	    new wxButton (
@@ -136,7 +150,7 @@ StyleDialog::StyleDialog (
 	    ID_STYLE_WEB_REPORT,
 	    _ ( "&Printable report" ),
 	    wxDefaultPosition,
-	    buttonSize,
+	    wxSize ( -1, buttonSize.GetHeight() ),
 	    0 );
 	wxButton *webSummaryButton =
 	    new wxButton (
@@ -144,15 +158,15 @@ StyleDialog::StyleDialog (
 	    ID_STYLE_WEB_SUMMARY,
 	    _ ( "Pr&intable summary" ),
 	    wxDefaultPosition,
-	    buttonSize,
+	    wxSize ( -1, buttonSize.GetHeight() ),
 	    0 );
 	wxButton *selectAllButton =
 	    new wxButton (
 	    this,
 	    ID_STYLE_CHANGE_ALL,
-	    _ ( "&Change all" ),
+	    _ ( "&Select all" ),
 	    wxDefaultPosition,
-	    buttonSize,
+	    wxSize ( -1, buttonSize.GetHeight() ),
 	    0 );
 	wxButton *deselectAllButton =
 	    new wxButton (
@@ -160,15 +174,15 @@ StyleDialog::StyleDialog (
 	    ID_STYLE_IGNORE_ALL,
 	    _ ( "I&gnore all" ),
 	    wxDefaultPosition,
-	    buttonSize,
+	    wxSize ( -1, buttonSize.GetHeight() ),
 	    0 );
 	wxButton *cancelButton =
 	    new wxButton (
 	    this,
 	    wxID_CANCEL,
-	    _ ( "C&ancel" ),
+	    _ ( "Ca&ncel" ),
 	    wxDefaultPosition,
-	    buttonSize,
+	    wxSize ( -1, buttonSize.GetHeight() ),
 	    0 );
 
 	wxBoxSizer *reportButtonSizer = new wxBoxSizer ( wxHORIZONTAL );
@@ -190,7 +204,72 @@ StyleDialog::StyleDialog (
 	reportTopSizer->Add ( status, 0 );
 	this->SetSizer ( reportTopSizer );
 
+	createReportButton->SetFocus();
+
+	if ( readOnly )
+		filterCombo->Enable ( false );
+
+	// keyboard shortcuts
+	wxAcceleratorEntry entries[7];
+	entries[0].Set ( wxACCEL_ALT, ( int ) 'C', ID_STYLE_REPORT );
+	entries[1].Set ( wxACCEL_ALT, ( int ) 'A', ID_STYLE_EDIT );
+	entries[2].Set ( wxACCEL_ALT, ( int ) 'W', ID_STYLE_WEB_REPORT );
+	entries[3].Set ( wxACCEL_ALT, ( int ) 'B', ID_STYLE_WEB_SUMMARY );
+	entries[4].Set ( wxACCEL_ALT, ( int ) 'S', ID_STYLE_CHANGE_ALL );
+	entries[5].Set ( wxACCEL_ALT, ( int ) 'I', ID_STYLE_IGNORE_ALL );
+	entries[6].Set ( wxACCEL_ALT, ( int ) 'N', wxID_CANCEL );
+
+	wxAcceleratorTable accel ( 7, entries );
+	this->SetAcceleratorTable ( accel );
+	
 	// update combo lists
+
+	// special case spellcheck
+	if (type == ID_TYPE_SPELL)
+	{
+		AspellConfig *config;
+		AspellDictInfoList *dlist;
+		AspellDictInfoEnumeration *dels;
+		const AspellDictInfo *entry;
+		
+		config = new_aspell_config();
+		
+#ifdef __WXMSW__
+       aspell_config_replace ( config, "data-dir", ASPELL_DATA_PATH );
+       aspell_config_replace ( config, "dict-dir", ASPELL_DICT_PATH );
+#endif
+        dlist = get_aspell_dict_info_list( config );
+		
+		delete_aspell_config ( config );
+		
+		dels = aspell_dict_info_list_elements ( dlist );
+		
+		bool anyFound = false;
+		while ( ( entry = aspell_dict_info_enumeration_next ( dels ) ) != 0 )
+		{
+			anyFound = true;
+			std::string stdEntry = entry->name;
+			wxString entry = wxString ( stdEntry.c_str(), wxConvUTF8, stdEntry.size() );
+			ruleSetCombo->Append ( entry );
+		}
+		
+		if ( anyFound )
+		{
+			if ( ruleSetPreset.empty() )
+				ruleSetPreset = _ ( "en_US" );
+			ruleSetCombo->SetValue ( ruleSetPreset );
+		}
+		else
+		{
+			ruleSetCombo->Append ( _ ( "(No dictionaries found)" ) );
+			ruleSetCombo->Select ( 0 );
+			createReportButton->Enable ( false );
+		}
+		
+		return;
+	}
+
+	// all other branches
 	if ( wxFileName::DirExists ( ruleSetDirectory ) )
 	{
 		wxString ruleMask, ruleFile;
@@ -210,6 +289,8 @@ StyleDialog::StyleDialog (
 				ruleSetCombo->Append ( wxFileNameFromPath ( ruleFile ) );
 			}
 		}
+		if ( ruleSetPreset.empty() )
+			ruleSetPreset = _ ( "Default" );
 		ruleSetCombo->SetValue ( ruleSetPreset );
 	}
 	else
@@ -246,23 +327,6 @@ StyleDialog::StyleDialog (
 		filterCombo->Append ( _ ( "(No filters found)" ) );
 		filterCombo->Select ( 0 );
 	}
-	createReportButton->SetFocus();
-
-	if ( readOnly )
-		filterCombo->Enable ( false );
-
-	// keyboard shortcuts
-	wxAcceleratorEntry entries[7];
-	entries[0].Set ( wxACCEL_ALT, ( int ) 'R', ID_STYLE_REPORT );
-	entries[1].Set ( wxACCEL_ALT, ( int ) 'E', ID_STYLE_EDIT );
-	entries[2].Set ( wxACCEL_ALT, ( int ) 'W', ID_STYLE_WEB_REPORT );
-	entries[3].Set ( wxACCEL_ALT, ( int ) 'B', ID_STYLE_WEB_SUMMARY );
-	entries[4].Set ( wxACCEL_ALT, ( int ) 'C', ID_STYLE_CHANGE_ALL );
-	entries[5].Set ( wxACCEL_ALT, ( int ) 'I', ID_STYLE_IGNORE_ALL );
-	entries[6].Set ( wxACCEL_ALT, ( int ) 'A', wxID_CANCEL );
-
-	wxAcceleratorTable accel ( 7, entries );
-	this->SetAcceleratorTable ( accel );
 }
 
 StyleDialog::~StyleDialog()
@@ -332,7 +396,7 @@ void StyleDialog::OnReport ( wxCommandEvent& event )
 {
 	table->DeleteAllItems();
 	matchVector.clear();
-	status->SetStatusText ( _ ( "Creating report..." ) );
+	status->SetStatusText ( _ ( "Checking document..." ) );
 
 	// update presets
 	ruleSetPreset = ruleSetCombo->GetValue();
@@ -357,6 +421,7 @@ void StyleDialog::OnReport ( wxCommandEvent& event )
 	pathSeparatorUtf8 = separator.mb_str ( wxConvUTF8 );
 
 	std::auto_ptr<HouseStyle> hs ( new HouseStyle (
+					   (type == ID_TYPE_SPELL) ? HS_TYPE_SPELL : HS_TYPE_STYLE,
 	                                   bufferUtf8,
 	                                   ruleSetDirectoryUtf8,
 	                                   ruleSetUtf8,
@@ -365,12 +430,12 @@ void StyleDialog::OnReport ( wxCommandEvent& event )
 	                                   pathSeparatorUtf8,
 	                                   5 ) );
 
-	status->SetStatusText ( _ ( "Creating report..." ) );
+	status->SetStatusText ( _ ( "Checking document..." ) );
 	if ( !hs->createReport() )
 	{
 		std::string lastError = hs->getLastError();
 		wxString error = wxString ( lastError.c_str(), wxConvUTF8, lastError.size() );
-		status->SetStatusText ( _ ( "Cannot create report: " ) + error );
+		status->SetStatusText ( _ ( "Cannot check document: " ) + error );
 		return;
 	}
 	matchVector = hs->getMatchVector();
@@ -403,7 +468,7 @@ void StyleDialog::OnReport ( wxCommandEvent& event )
 		++i;
 	}
 	wxString message;
-	message.Printf ( ngettext ( L"%i match", L"%i matches", i ), i );
+	message.Printf ( ngettext ( L"%i error", L"%i errors", i ), i );
 	status->SetStatusText ( message );
 	if ( i )
 		table->SetFocus();
@@ -438,7 +503,7 @@ void StyleDialog::OnStyleEdit ( wxCommandEvent& event )
 	}
 	bufferUtf8 = hsw.getOutput();
 	wxCommandEvent e;
-	EndModal ( wxID_OK );//OnOK(e);
+	EndModal ( wxID_OK );
 }
 
 std::string StyleDialog::getEditedString()
@@ -547,7 +612,7 @@ void StyleDialog::OnStyleWebSummary ( wxCommandEvent& event )
 	ofs << "</h2>";
 
 	WrapExpat we;
-	ofs << "<table><tr><th>Match</th><th>Frequency</th></tr>";
+	ofs << "<table><tr><th>Term</th><th>Frequency</th></tr>";
 	std::map<std::string, int>::iterator mapIterator;
 	int matchTotal = 0;
 
@@ -567,7 +632,7 @@ void StyleDialog::OnStyleWebSummary ( wxCommandEvent& event )
 	}
 	ofs << "<tr><th>Total</th><th>";
 	ofs << matchTotal;
-	ofs << "</th></tr></table>";
+	ofs << "</th></tr></table></body>";
 	ofs << XHTML_END;
 
 	ofs.close();

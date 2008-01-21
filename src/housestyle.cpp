@@ -21,6 +21,7 @@
 #include "readfile.h"
 
 HouseStyle::HouseStyle (
+    int typeParameter,
     const std::string& bufferParameter,
     const std::string& ruleDirectoryParameter,
     const std::string& ruleFileParameter,
@@ -28,6 +29,7 @@ HouseStyle::HouseStyle (
     const std::string& filterFileParameter,
     const std::string& pathSeparatorParameter,
     int contextRangeParameter ) :
+		type ( typeParameter ),
 		buffer ( bufferParameter ),
 		ruleDirectory ( ruleDirectoryParameter ),
 		ruleFile ( ruleFileParameter ),
@@ -48,7 +50,7 @@ void HouseStyle::collectFilter (
     std::set<std::string>& excludeSet,
     int *filterCount )
 {
-	if ( fileName == "(No filter)" )
+	if ( type == HS_TYPE_SPELL || fileName == "(No filter)" )
 		return;
 
 	string filePath, buffer;
@@ -112,6 +114,9 @@ void HouseStyle::collectRules ( string& fileName,
                                 std::set<string>& excludeSet,
                                 int *ruleCount )
 {
+	if (type == HS_TYPE_SPELL)
+		return;
+	
 	std::string filePath, buffer;
 	filePath = ruleDirectory + pathSeparator + fileName;
 	if ( !ReadFile::run ( filePath, buffer ) )
@@ -159,7 +164,7 @@ void HouseStyle::collectRules ( string& fileName,
 
 bool HouseStyle::createReport()
 {
-	if ( !updateRules() )
+	if ( type == HS_TYPE_STYLE && !updateRules() )
 	{
 		error = "no rules found";
 		return false;
@@ -175,14 +180,8 @@ bool HouseStyle::createReport()
 	}
 	std::vector<std::pair<std::string, unsigned> > nodeVector;
 	xtr->getNodeVector ( nodeVector );
-
+	
 	int ruleVectorsize, nodeVectorSize;
-
-	/*
-	boost::shared_ptr<Rule> rule(new Rule(
-	  "_",
-	  false));
-	*/
 
 	std::vector<ContextMatch> contextVector;
 	std::vector<ContextMatch>::iterator matchIterator;
@@ -190,7 +189,16 @@ bool HouseStyle::createReport()
 
 	nodeVectorSize = nodeVector.size();
 
-	Spellcheck spellcheck ( dictionary, passiveDictionary );
+	WrapAspell *spellcheck = NULL;
+	try {
+		if (type == HS_TYPE_SPELL)
+			spellcheck = new WrapAspell( ruleFile );
+	}
+	catch (...)
+	{
+		error = "Cannot initialise spellcheck";
+		return false;
+	}
 
 	std::string nodeBuffer;
 	unsigned elementCount;
@@ -202,58 +210,84 @@ bool HouseStyle::createReport()
 		if ( !nodeBuffer.size() )
 			continue;
 
+		// try spelling first
+		if ( type == HS_TYPE_SPELL && spellcheck )
+		{
+			spellcheck->checkString (
+						nodeBuffer,
+						contextVector,
+						contextRange );
+
+			for ( matchIterator = contextVector.begin();
+				matchIterator != contextVector.end();
+				matchIterator++ )
+			{
+				matchIterator->report = "Not in dictionary";
+				matchIterator->elementCount = elementCount;	
+				matchVector.push_back ( *matchIterator );
+			}
+			contextVector.clear();
+			continue; // bail out before we reach style loop
+		}
+
+		// otherwise, proceed with style check
 		for ( int i = 0; i < ruleVectorsize; i++ )
 		{
-			//rule = ruleVector->at(i);
-			boost::shared_ptr<Rule> rule ( ruleVector->at ( i ) );
-			if ( rule->matchPatternGlobal (
-			            nodeBuffer,
-			            contextVector,
-			            elementCount,
-			            contextRange ) )
+			if ( type == HS_TYPE_STYLE )
 			{
-				std::string report = rule->getReport();
+				boost::shared_ptr<Rule> rule ( ruleVector->at ( i ) );
+				if ( rule->matchPatternGlobal (
+					nodeBuffer,
+					contextVector,
+					elementCount,
+					contextRange ) )
+				{
+					std::string report = rule->getReport();
+	
+					for ( matchIterator = contextVector.begin();
+						matchIterator != contextVector.end();
+						matchIterator++ )
+					{
+						if ( rule->getAdjustCaseAttribute() )
+							CaseHandler::adjustCase (
+							matchIterator->replace,
+							matchIterator->match );
+
+						// tentative?
+						matchIterator->tentative =
+						( rule->getTentativeAttribute() ) ? true : false;
+	
+						matchIterator->report = report;
+
+						matchVector.push_back ( *matchIterator );
+					}
+					contextVector.clear();
+				}
+			}
+/*
+			// check spelling
+			else // if ( !dictionary->empty() )
+			{
+				spellcheck->checkString (
+					nodeBuffer,
+					contextVector,
+					contextRange );
 
 				for ( matchIterator = contextVector.begin();
-				        matchIterator != contextVector.end();
-				        matchIterator++ )
+					matchIterator != contextVector.end();
+					matchIterator++ )
 				{
-					if ( rule->getAdjustCaseAttribute() )
-						CaseHandler::adjustCase (
-						    matchIterator->replace,
-						    matchIterator->match );
-
-					// tentative?
-					matchIterator->tentative =
-					    ( rule->getTentativeAttribute() ) ? true : false;
-
-					matchIterator->report = report;
+					matchIterator->report = "Not in dictionary";
+					matchIterator->elementCount = elementCount;	
 
 					matchVector.push_back ( *matchIterator );
 				}
 				contextVector.clear();
 			}
-		}
-		// check spelling
-		if ( !dictionary->empty() )
-		{
-			spellcheck.checkString (
-			    nodeBuffer,
-			    contextVector,
-			    contextRange );
-
-			for ( matchIterator = contextVector.begin();
-			        matchIterator != contextVector.end();
-			        matchIterator++ )
-			{
-				matchIterator->report = "Not in dictionary";
-				matchIterator->elementCount = elementCount;
-
-				matchVector.push_back ( *matchIterator );
-			}
-			contextVector.clear();
+*/
 		}
 	}
+	delete spellcheck; // ok if NULL
 	return true;
 }
 

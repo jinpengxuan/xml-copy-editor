@@ -20,8 +20,8 @@
 #ifndef STYLEDIALOG_H
 #define STYLEDIALOG_H
 
-#define XHTML_START "<?xml version=\"1.0\" encoding=\"UTF-8\"?><!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\"><html xmlns=\"http://www.w3.org/1999/xhtml\"><head><title>XML Copy Editor report</title><meta http-equiv=\"Content-Type\" content=\"text/html\" charset=\"UTF-8\"/><style type=\"text/css\"><!-- body, h1, h2, h3, h4, th, td { font-family: \"Arial\", \"Helvetica\", sans-serif; } table { border-collapse: collapse; } th { text-align: left; font-size: smaller; padding-left: 5px; padding-right: 5px; } td { border-width: 1px; border-style: solid; border-color: gray; font-size: smaller; padding-left: 5px; padding-right: 5px; } --></style></head><body>"
-#define XHTML_END "</body></html>"
+#define XHTML_START "<?xml version=\"1.0\" encoding=\"UTF-8\"?><!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\"><html xmlns=\"http://www.w3.org/1999/xhtml\"><head><title>XML Copy Editor report</title><meta http-equiv=\"Content-Type\" content=\"text/html\" charset=\"UTF-8\"/><style type=\"text/css\"><!-- body, h1, h2, h3, h4, th, td { font-family: \"Arial\", \"Helvetica\", sans-serif; } table { border-collapse: collapse; } th { text-align: left; font-size: smaller; padding-left: 5px; padding-right: 5px; } td { border-width: 1px; border-style: solid; border-color: gray; font-size: smaller; padding-left: 5px; padding-right: 5px; } --></style></head>"
+#define XHTML_END "</html>"
 
 #include <wx/wx.h>
 #include <wx/listctrl.h>
@@ -50,6 +50,8 @@ enum
 	ID_STYLE_WEB_SUMMARY,
 	ID_STYLE_IGNORE_ALL,
 	ID_STYLE_CHANGE_ALL,
+	ID_TYPE_SPELL,
+	ID_TYPE_STYLE
 };
 
 struct SortData
@@ -71,6 +73,7 @@ class StyleDialog : public wxDialog
 		    const wxString& browserParameter,
 		    const wxString& ruleSetPresetParameter,
 		    const wxString& filterPresetParameter,
+		    int type = ID_TYPE_STYLE,
 		    bool readOnlyParameter = false,
 		    wxPoint position = wxDefaultPosition,
 		    wxSize size = wxSize ( 720, 540 ) );
@@ -117,6 +120,7 @@ class StyleDialog : public wxDialog
 		wxString fileName, ruleSetDirectory, filterDirectory, browser;
 		wxString ruleSetPreset, filterPreset;
 		vector<ContextMatch> matchVector;
+		int type;
 		bool readOnly;
 		bool isIgnore ( int item );
 		void setIgnore ( int item, bool ignore );

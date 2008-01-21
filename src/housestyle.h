@@ -31,13 +31,20 @@
 #include "xmlrulereader.h"
 #include "housestylereader.h"
 #include "xmlfilterreader.h"
-#include "spellcheck.h"
+//#include "spellcheck.h"
+#include "wrapaspell.h"
 #include "casehandler.h"
+
+enum {
+		HS_TYPE_SPELL = 0,
+		HS_TYPE_STYLE
+};
 
 class HouseStyle
 {
 	public:
 		HouseStyle (
+		    int type,
 		    const std::string& bufferParameter,
 		    const std::string& ruleDirectoryParameter,
 		    const std::string& ruleFileParameter,
@@ -50,6 +57,7 @@ class HouseStyle
 		std::string getLastError();
 		std::vector<ContextMatch> getMatchVector();
 	private:
+		int type;
 		std::string
 		buffer,
 		ruleDirectory,
