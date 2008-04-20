@@ -60,7 +60,6 @@ class CommandPanel : public wxPanel
 	private:
 		wxString path, name, extension, fullpath;
 		wxTextCtrl *commandEdit;
-		//wxStaticText *label;
 		wxButton *runButton;
 		wxCheckBox *syncBox;
 		wxRadioButton *outputIgnore, *outputInsert, *outputNewDocument;

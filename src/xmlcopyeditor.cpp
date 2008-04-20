@@ -21,6 +21,7 @@
 #include <fstream>
 #include <string>
 #include <wx/aboutdlg.h>
+#include <wx/stdpaths.h>
 #include "xmlcopyeditor.h"
 #include "readfile.h"
 #include "xmldoc.h"
@@ -194,8 +195,8 @@ MyApp::MyApp() : checker ( NULL ), server ( NULL ), connection ( NULL ),
 	int fdnull = open ( "/dev/null", O_WRONLY, 0 );
 	dup2 ( fdnull, STDERR_FILENO );
 #endif
-	myLocale.Init();
-	int systemLocale = myLocale.GetSystemLanguage();
+	//myLocale.Init();
+	int systemLocale = wxLocale::GetSystemLanguage();//myLocale.GetSystemLanguage();
 	switch ( systemLocale )
 	{
 		case wxLANGUAGE_GERMAN:
@@ -275,17 +276,49 @@ MyApp::MyApp() : checker ( NULL ), server ( NULL ), connection ( NULL ),
 #endif
 	}
 
-	myLocale.Init ( lang, wxLOCALE_LOAD_DEFAULT );
+/*
+#ifndef __WXMSW__
+	lang = wxLANGUAGE_ENGLISH; // temp
+#endif
+*/
+	myLocale.Init ( lang, wxLOCALE_CONV_ENCODING );
+
+#ifdef __WXMSW__
+
 	wxLocale::AddCatalogLookupPathPrefix ( wxT ( "." ) );
 	wxLocale::AddCatalogLookupPathPrefix ( wxT ( ".." ) );
 
-#ifndef __WXMSW__
-	wxString poDir = GetLinuxAppDir::run() + wxFileName::GetPathSeparator() + _T ( "po" ) + wxFileName::GetPathSeparator();
-	wxLocale::AddCatalogLookupPathPrefix ( poDir );
-#endif
-
 	if ( !myLocale.AddCatalog ( _T ( "messages" ) ) )
 		;
+#else // Linux
+	if ( wxLocale::IsAvailable ( lang ) )
+	{
+		wxStandardPaths *paths = (wxStandardPaths *) &wxStandardPaths::Get();
+		wxString prefix = paths->GetInstallPrefix();
+		myLocale.AddCatalogLookupPathPrefix( prefix );
+		myLocale.AddCatalog ( _T ("xmlcopyeditor") );
+		if (!myLocale.IsOk() )
+		{
+			std::cout << "Locale is not OK" << std::endl;
+		}
+	}
+	else
+	{
+		std::cout << "Locale unavailable" << std::endl;
+	}
+#endif
+
+/*
+#ifndef __WXMSW__
+	wxString poDir = GetLinuxAppDir::run() + wxFileName::GetPathSeparator() + _T ( "po" ); //+ wxFileName::GetPathSeparator();
+	//wxLocale::AddCatalogLookupPathPrefix ( poDir );
+	//myLocale.AddCatalogLookupPathPrefix ( poDir );
+	//std::cout << poDir.mb_str(wxConvUTF8) << std::endl;
+	if (lang == wxLANGUAGE_ITALIAN)
+		std::cout << "OK it's set to Italian... let's see" << std::endl;	
+	myLocale.AddCatalogLookupPathPrefix ( _T ("/usr/share/locale/it/LC_MESSAGES") );
+#endif
+
 
 #ifndef __WXMSW__
 	{
@@ -293,6 +326,7 @@ MyApp::MyApp() : checker ( NULL ), server ( NULL ), connection ( NULL ),
 		myLocale.AddCatalog ( _T ( "fileutils" ) );
 	}
 #endif
+*/
 }
 
 MyApp::~MyApp()
@@ -3235,6 +3269,10 @@ void MyFrame::OnSpelling ( wxCommandEvent& event )
 	std::string rawBufferUtf8;
 	getRawText ( doc, rawBufferUtf8 );
 
+/*
+ * removed due to entity reference headaches
+ * from v. 1.1.0.7 always check raw text only
+ *
 	// handle unusual encodings
 	if ( !XmlEncodingHandler::setUtf8 ( rawBufferUtf8 ) )
 	{
@@ -3276,11 +3314,12 @@ void MyFrame::OnSpelling ( wxCommandEvent& event )
 	{
 		bufferParameterUtf8 = wl->getOutput();
 	}
+*/
 
 	auto_ptr<StyleDialog> sd ( new StyleDialog (
 	                               this,
 	                               wxICON ( appicon ),
-	                               bufferParameterUtf8,
+				       rawBufferUtf8, //bufferParameterUtf8,
 	                               doc->getShortFileName(),
 	                               ruleSetDir,
 	                               filterDir,
@@ -3288,7 +3327,7 @@ void MyFrame::OnSpelling ( wxCommandEvent& event )
 				       ( type == ID_TYPE_SPELL ) ? dictionaryPreset : ruleSetPreset,
 	                               filterPreset,
 					type,
-	                               ( success ) ? false : true,
+	                               false,//( success ) ? false : true,
 	                               stylePosition,
 	                               styleSize ) );
 

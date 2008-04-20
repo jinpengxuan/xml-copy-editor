@@ -50,9 +50,11 @@ void HouseStyle::collectFilter (
     std::set<std::string>& excludeSet,
     int *filterCount )
 {
-	if ( type == HS_TYPE_SPELL || fileName == "(No filter)" )
+	// from v. 1.1.0.7: always ignore
+	//if ( type == HS_TYPE_SPELL || fileName == "(No filter)" )
 		return;
 
+/*
 	string filePath, buffer;
 	filePath = filterDirectory + pathSeparator + fileName;
 
@@ -107,6 +109,7 @@ void HouseStyle::collectFilter (
 		if ( !excludeSet.count ( *includeIterator ) )
 			collectFilter ( *includeIterator, excludeSet, filterCount );
 	}
+*/
 }
 
 void HouseStyle::collectRules ( string& fileName,
@@ -170,6 +173,7 @@ bool HouseStyle::createReport()
 		return false;
 	}
 
+/*
 	updateFilter();
 
 	auto_ptr<HouseStyleReader> xtr ( new HouseStyleReader ( filterMap ) );
@@ -178,8 +182,10 @@ bool HouseStyle::createReport()
 		error = "file is not well-formed";
 		return false;
 	}
+*/
 	std::vector<std::pair<std::string, unsigned> > nodeVector;
-	xtr->getNodeVector ( nodeVector );
+	//xtr->getNodeVector ( nodeVector );
+	nodeVector.push_back( make_pair ( buffer, 0 ) ); // new from 1.1.0.7
 	
 	int ruleVectorsize, nodeVectorSize;
 

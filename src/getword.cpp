@@ -52,8 +52,14 @@ char *GetWord::run ( char **s, size_t *len )
 			}
 			t = u;
 		}
+		else if ( *t == '<' )
+		{
+			t = skipTags ( t );
+		}
 		else
+		{
 			t += bytes;
+		}
 	}
 	return NULL;
 }
@@ -94,4 +100,52 @@ bool GetWord::isWordCharacter ( char *s, size_t *bytes )
 		*bytes = 1;
 		return true;
 	}
+}
+
+char *GetWord::skipTags ( char *s )
+{
+	if (*s == '<')
+	{
+		// CDATA
+		if (	* ( s + 1 ) == '!' &&
+			* ( s + 2) == '[' &&
+			* ( s + 3) == 'C'	)
+		{
+			s += 3;
+			for ( ; *s; s++ )
+			{
+				if ( *s == ']' &&
+					* (s + 1 ) == ']' &&
+					* (s + 2 ) == '>')
+				{
+					return s += 3;
+				}
+			}
+		}
+		// comment
+		else if (	* ( s + 1 ) == '!' &&
+				* ( s + 2 ) == '-' &&
+				* ( s + 3 ) == '-')
+		{
+			s += 3;
+			for ( ; *s; s++ )
+			{
+				if ( *s == '-' &&
+					* ( s + 1 ) == '-' &&
+					* ( s + 2 ) == '>')
+				{
+					return s + 3;
+				}
+			}	
+		}
+		else
+		{
+			for ( ; *s; s++ )
+			{
+				if ( *s == '>' )
+					return ++s;
+			}
+		}
+	}
+	return s;
 }

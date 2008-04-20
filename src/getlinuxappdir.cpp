@@ -18,10 +18,14 @@
  */
 
 #include "getlinuxappdir.h"
-#include <wx/filename.h>
+#include <wx/stdpaths.h>
+//#include <wx/filename.h>
 
 wxString GetLinuxAppDir::run()
 {
+	wxStandardPaths *paths = ( wxStandardPaths *) &wxStandardPaths::Get();
+	return paths->GetDataDir();
+/*
 	wxString s;
 	const int stringArrayLen = 2;
 	wxString stringArray[stringArrayLen];
@@ -38,4 +42,5 @@ wxString GetLinuxAppDir::run()
 		s = wxGetCwd();
 
 	return s;
+*/
 }

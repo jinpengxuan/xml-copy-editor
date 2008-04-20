@@ -46,13 +46,18 @@ CommandPanel::CommandPanel (
 	name = _ ( "{name}" );
 	extension = _ ( "{extension}" );
 	fullpath = _ ( "{fullpath}" );
+	int sizerOffset = 2;
 
 	wxButton *pathButton = new wxButton ( this, ID_BUTTON_PATH, path, wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT | wxNO_BORDER );
 	wxButton *nameButton = new wxButton ( this, ID_BUTTON_NAME, name, wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT | wxNO_BORDER );
 	wxButton *extensionButton = new wxButton ( this, ID_BUTTON_EXTENSION, extension,     wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT | wxNO_BORDER );
 	wxButton *fullpathButton = new wxButton ( this, ID_BUTTON_FULLPATH, fullpath,     wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT | wxNO_BORDER );
 
-	int editWidth = 480;
+
+	int editWidth, editHeight;
+	parent->GetSize( &editWidth, &editHeight);
+	editWidth -= sizerOffset * 2;
+
 	commandEdit = new wxTextCtrl (
 	    this,
 	    wxID_ANY,
@@ -60,6 +65,7 @@ CommandPanel::CommandPanel (
 	    wxDefaultPosition,
 	    wxSize ( editWidth, -1 )
 	);
+
 	commandEdit->SetValue ( cmd );
 
 	runButton = new wxButton (
@@ -118,7 +124,6 @@ CommandPanel::CommandPanel (
 	    wxID_ANY,
 	    _ ( "Variables" ) );
 
-	int sizerOffset = 2;
 
 	wxStaticBoxSizer *outputSizer = new wxStaticBoxSizer ( outputBox, wxHORIZONTAL );
 	outputSizer->Add ( outputIgnore, 0, wxLEFT | wxRIGHT | wxALIGN_CENTER_VERTICAL, sizerOffset );
@@ -134,12 +139,12 @@ CommandPanel::CommandPanel (
 
 	topSizer = new wxBoxSizer ( wxHORIZONTAL );
 	topSizer->Add ( commandEdit, 0, wxLEFT | wxRIGHT | wxALIGN_CENTER_VERTICAL | wxEXPAND, sizerOffset );
-	topSizer->Add ( runButton, 0, wxLEFT | wxRIGHT | wxALIGN_CENTER_VERTICAL, sizerOffset );
-	topSizer->Add ( syncBox, 0, wxLEFT | wxRIGHT | wxALIGN_CENTER_VERTICAL, sizerOffset );
 
 	topSizer->Layout();
 
 	bottomSizer = new wxBoxSizer ( wxHORIZONTAL );
+	bottomSizer->Add ( runButton, 0, wxLEFT | wxRIGHT | wxALIGN_CENTER_VERTICAL, sizerOffset );
+	bottomSizer->Add ( syncBox, 0, wxLEFT | wxRIGHT | wxALIGN_CENTER_VERTICAL, sizerOffset );
 	bottomSizer->Add ( variablesSizer, 0, wxLEFT | wxRIGHT | wxALIGN_CENTER_VERTICAL, sizerOffset );
 	bottomSizer->Add ( outputSizer, 0, wxLEFT | wxRIGHT | wxALIGN_CENTER_VERTICAL, sizerOffset );
 

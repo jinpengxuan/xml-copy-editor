@@ -101,7 +101,7 @@ StyleDialog::StyleDialog (
 		_T ( "" ),
 		wxDefaultPosition,
 		wxSize ( 200, -1 ) );
-	if (type != ID_TYPE_STYLE)
+	//if (type != ID_TYPE_STYLE) // from v. 1.1.0.7: never show
 		filterCombo->Show ( false );
 
 	wxButton *createReportButton = new wxButton (
@@ -164,7 +164,7 @@ StyleDialog::StyleDialog (
 	    new wxButton (
 	    this,
 	    ID_STYLE_CHANGE_ALL,
-	    _ ( "&Select all" ),
+	    _ ( "C&hange all" ),
 	    wxDefaultPosition,
 	    wxSize ( -1, buttonSize.GetHeight() ),
 	    0 );
@@ -215,7 +215,7 @@ StyleDialog::StyleDialog (
 	entries[1].Set ( wxACCEL_ALT, ( int ) 'A', ID_STYLE_EDIT );
 	entries[2].Set ( wxACCEL_ALT, ( int ) 'W', ID_STYLE_WEB_REPORT );
 	entries[3].Set ( wxACCEL_ALT, ( int ) 'B', ID_STYLE_WEB_SUMMARY );
-	entries[4].Set ( wxACCEL_ALT, ( int ) 'S', ID_STYLE_CHANGE_ALL );
+	entries[4].Set ( wxACCEL_ALT, ( int ) 'H', ID_STYLE_CHANGE_ALL );
 	entries[5].Set ( wxACCEL_ALT, ( int ) 'I', ID_STYLE_IGNORE_ALL );
 	entries[6].Set ( wxACCEL_ALT, ( int ) 'N', wxID_CANCEL );
 
@@ -489,6 +489,7 @@ void StyleDialog::OnStyleEdit ( wxCommandEvent& event )
 
 	sort ( v.begin(), v.end(), elementAndOffsetCompareFunction );
 
+/*
 	HouseStyleWriter hsw ( v );
 	if ( !hsw.parse ( bufferUtf8 ) )
 	{
@@ -502,6 +503,56 @@ void StyleDialog::OnStyleEdit ( wxCommandEvent& event )
 		return;
 	}
 	bufferUtf8 = hsw.getOutput();
+*/
+
+
+	//unsigned elementCount = 1; // from v. 1.1.0.7: one raw text element only
+        int vectorsize, os_adjust, exclusion;
+
+        vectorsize = v.size();
+        os_adjust = exclusion = 0;
+        string cmp1, cmp2, buffer;
+	buffer = bufferUtf8;
+
+        for ( int i = 0; i < vectorsize; ++i )
+        {
+/*
+                unsigned vectorElementCount = v[i].elementCount;
+                if ( vectorElementCount < elementCount )
+                        continue;
+                else if ( vectorElementCount > elementCount )
+                        break;
+                else if ( vectorElementCount == elementCount )
+                {
+*/
+                        int offset = ( int ) v[i].offset + os_adjust;
+
+                        if ( offset < exclusion )
+                                continue;
+
+                        try
+                        {
+                                cmp1 = v[i].match;
+                                cmp2 = buffer.substr ( offset, v[i].match.size() );
+                        }
+                        catch ( std::exception& e )
+                        {
+                                continue;
+                        }
+
+                        if ( cmp1.compare ( cmp2 ) )
+                                continue;
+
+                        buffer.replace ( offset, v[i].match.size(), v[i].replace.c_str() );
+
+                        os_adjust += v[i].replace.size() - v[i].match.size();
+                        exclusion = offset + v[i].replace.size();
+
+		//}
+
+	}
+	bufferUtf8 = buffer;
+
 	wxCommandEvent e;
 	EndModal ( wxID_OK );
 }
