@@ -19,13 +19,14 @@
 
 #include "getword.h"
 
-char *GetWord::run ( char **s, size_t *len )
+char *GetWord::run ( char **s, size_t *len, bool skipTagsActive )
 {
 	size_t bytes;
 	char *t, *u;
 	int offset;
 
 	t = *s;
+	bool openAngleBracketEndingWord = false;
 
 	while ( *t )
 	{
@@ -35,9 +36,15 @@ char *GetWord::run ( char **s, size_t *len )
 			{
 				if ( !GetWord::isWordCharacter ( u, &bytes ) )
 				{
+					if (*u == '<')
+						openAngleBracketEndingWord = true;	
 					*len = u - t;
 					offset = t - *s;
-					*s += *len + offset + bytes;
+					*s += *len + offset;
+
+					if (!openAngleBracketEndingWord)
+						*s += bytes;
+					
 					return t;
 				}
 				else
@@ -52,7 +59,7 @@ char *GetWord::run ( char **s, size_t *len )
 			}
 			t = u;
 		}
-		else if ( *t == '<' )
+		else if ( *t == '<' && skipTagsActive )
 		{
 			t = skipTags ( t );
 		}
@@ -147,5 +154,5 @@ char *GetWord::skipTags ( char *s )
 			}
 		}
 	}
-	return s;
+	return ++s;
 }

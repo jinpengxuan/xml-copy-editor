@@ -26,7 +26,7 @@ xmlcopyeditor_SOURCES = xmlcopyeditor.cpp associatedialog.cpp casehandler.cpp \
 	findreplacepanel.cpp commandpanel.cpp \
 	binaryfile.cpp xmlencodingspy.cpp wrapaspell.cpp \
 	rulesets filters png rng xpm templates copying help po \
-	docbook xmlcopyeditor.spec xmlcopyeditor.png custom.xpm \
+	xmlcopyeditor.spec xmlcopyeditor.png custom.xpm \
 	xmlcopyeditor.desktop
 xmlcopyeditor_LDFLAGS = $(WX_LIBS) \
 	-lexpat -lxslt -lxml2 -lpcre -lxerces-c -laspell
@@ -53,8 +53,7 @@ nobase_xmlcopyeditor_DATA = png/*.png \
 	copying/*.txt copying/boost_shared_ptr/* \
 	copying/Expat/* copying/libxml2/* copying/libxslt/* \
 	copying/PCRE/* copying/Scintilla/* \
-	copying/scowl/* \
-	copying/wxStyledTextCtrl/* copying/ximian/* \
+	copying/wxStyledTextCtrl/* \
 	copying/wxStEditor/* \
 	copying/xmlcopyeditor/* \
 	copying/Aspell/* \
@@ -64,11 +63,12 @@ nobase_xmlcopyeditor_DATA = png/*.png \
 	po/sv/messages.mo \
 	po/fr/messages.mo \
 	po/de/messages.mo \
+	po/ru/messages.mo \
         po/zh_CN/messages.mo \
         po/zh_TW/messages.mo \
 	po/uk_UA/messages.mo \
         po/uk_UA/messages.mo \
-        po/en_us/messages.po \
+        po/en_us/messages.po
 
 pixmap_DATA = xmlcopyeditor.png
 

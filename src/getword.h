@@ -25,7 +25,7 @@
 class GetWord
 {
 	public:
-		static char *run ( char **s, size_t *len );
+		static char *run ( char **s, size_t *len, bool skipTagsActive = true );
 	private:
 		static bool isWordCharacter ( char *s, size_t *bytes );
 		static char *skipTags ( char *s );

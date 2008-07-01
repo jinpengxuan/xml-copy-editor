@@ -120,7 +120,7 @@ void LocationPanel::indentStructure ( std::string& structure )
 	std::string indented;
 	char *s = (char *) structure.c_str();
 	int indent = 0;
-	char *indentMark = "\t";
+	const char *indentMark = "\t";
 
 	int count = 0;
 	bool justSeenContent = false;
@@ -136,7 +136,7 @@ void LocationPanel::indentStructure ( std::string& structure )
 				indented += *s;
 			for ( int i = 0; i < indent; i++ )
 			{
-				indented += indentMark;
+				indented += (char *)indentMark;
 			}
 			if (justSeenContent)
 				indented += *s;
@@ -146,7 +146,7 @@ void LocationPanel::indentStructure ( std::string& structure )
 			indented += '\n';
 		
 			for (int i = 0; indent && i < indent; i++)
-				indented += indentMark;				
+				indented += (char *)indentMark;				
 			justSeenContent = false;
 		}
 		else if (*s == ')')
@@ -157,13 +157,13 @@ void LocationPanel::indentStructure ( std::string& structure )
 			}
 			indent--;
 			for (int i = 0; indent && i < indent; i++)
-				indented += indentMark;
+				indented += (char *)indentMark;
 			indented += *s;
 			indented += '\n';
 			if (*( s + 1 ) && *(s + 1) != ')' )
 			{
 				for (int i = 0; i < indent; i++)
-					indented += indentMark;
+					indented += (char *)indentMark;
 			}
 			justSeenContent = false;
 		}

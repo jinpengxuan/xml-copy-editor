@@ -192,6 +192,7 @@ MyPropertySheet::MyPropertySheet (
 	languageBox->Insert ( _T ( "French" ), INDEX_FRENCH );
 	languageBox->Insert ( _T ( "German" ), INDEX_GERMAN );
 	languageBox->Insert ( _T ( "Italian" ), INDEX_ITALIAN );
+	languageBox->Insert ( _T ( "Russian" ), INDEX_RUSSIAN );
 	languageBox->Insert ( _T ( "Slovak" ), INDEX_SLOVAK );
 	languageBox->Insert ( _T ( "Swedish" ), INDEX_SWEDISH );
 	languageBox->Insert ( _T ( "Ukrainian" ), INDEX_UKRAINIAN );
@@ -212,6 +213,9 @@ MyPropertySheet::MyPropertySheet (
 			break;
 		case wxLANGUAGE_SWEDISH:
 			languageBox->SetSelection ( INDEX_SWEDISH );
+			break;
+		case wxLANGUAGE_RUSSIAN:
+			languageBox->SetSelection ( INDEX_RUSSIAN );
 			break;
 		case wxLANGUAGE_CHINESE_SIMPLIFIED:
 			languageBox->SetSelection ( INDEX_CHINESE_SIMPLIFIED );
@@ -340,6 +344,9 @@ void MyPropertySheet::OnOk ( wxCommandEvent& e )
 			break;
 		case INDEX_CHINESE_TRADITIONAL:
 			lang = wxLANGUAGE_CHINESE_TRADITIONAL;
+			break;
+		case INDEX_RUSSIAN:
+			lang = wxLANGUAGE_RUSSIAN;
 			break;
 		case INDEX_FRENCH:
 			lang = wxLANGUAGE_FRENCH;

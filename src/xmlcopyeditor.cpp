@@ -2904,7 +2904,10 @@ bool MyFrame::openFile ( wxString& fileName, bool largeFile )
 		XmlEncodingSpy es;
 		es.parse ( docBuffer, docBufferLen );
 		encoding = es.getEncoding();
-		if ( encoding == "UTF-8" || encoding == "US-ASCII" ) // US-ASCII is a subset of UTF-8
+		if ( encoding == "UTF-8" ||
+			encoding == "utf-8" ||
+			encoding == "US-ASCII" ||
+			encoding == "us-ascii" ) // US-ASCII is a subset of UTF-8
 			isUtf8 = true;
 	}
 

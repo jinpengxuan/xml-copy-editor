@@ -62,11 +62,7 @@ void XMLCALL XmlShallowValidator::start ( void *data,
 	XmlShallowValidatorData *vd;
 	vd = ( XmlShallowValidatorData * ) data;
 
-#ifdef __WXMSW__
 	if ( XML_GetCurrentLineNumber ( vd->p ) > ( unsigned ) ( vd->maxLine + 1 ) )
-#else
-	if ( XML_GetCurrentLineNumber ( vd->p ) > ( vd->maxLine + 1 ) )
-#endif
 	{
 		XML_StopParser ( vd->p, true );
 	}
