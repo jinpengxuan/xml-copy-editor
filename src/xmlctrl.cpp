@@ -1370,8 +1370,8 @@ void XmlCtrl::setColorScheme ( int scheme )
 			StyleSetBackground ( wxSTC_STYLE_DEFAULT, *wxWHITE );
 			StyleClearAll();
 
-			baseBackground = LightColour ( wxTheColourDatabase->Find ( _T ( "YELLOW" ) ), 20 );
-			alternateBackground = LightColour ( wxTheColourDatabase->Find ( _T ( "YELLOW" ) ), 60 );
+			baseBackground = LightColour ( wxTheColourDatabase->Find ( _T ( "CYAN" ) ), 70 );
+			alternateBackground = LightColour ( wxTheColourDatabase->Find ( _T ( "CYAN" ) ), 90 );
 			SetCaretLineBackground ( baseBackground );
 
 			SetCaretForeground ( *wxBLACK );
