@@ -21,7 +21,6 @@
 #include <fstream>
 #include <string>
 #include <wx/aboutdlg.h>
-#include <wx/stdpaths.h>
 #include "xmlcopyeditor.h"
 #include "readfile.h"
 #include "xmldoc.h"
@@ -143,12 +142,12 @@ BEGIN_EVENT_TABLE ( MyFrame, wxFrame )
 	    ID_COLOR_SCHEME_DEFAULT,
 	    ID_COLOR_SCHEME_NONE,
 	    MyFrame::OnColorScheme )
-	/*
+	
 	EVT_MENU_RANGE (
 	    ID_SPLIT_TAB_TOP,
 	    ID_SPLIT_TAB_LEFT,
 	    MyFrame::OnSplitTab )
-	*/
+	
 	EVT_UPDATE_UI_RANGE ( ID_REPLACE, ID_GLOBAL_REPLACE, MyFrame::OnUpdateReplaceRange )
 	EVT_FIND ( wxID_ANY, MyFrame::OnDialogFind )
 	EVT_FIND_NEXT ( wxID_ANY, MyFrame::OnDialogFind )
@@ -195,8 +194,8 @@ MyApp::MyApp() : checker ( NULL ), server ( NULL ), connection ( NULL ),
 	int fdnull = open ( "/dev/null", O_WRONLY, 0 );
 	dup2 ( fdnull, STDERR_FILENO );
 #endif
-	//myLocale.Init();
-	int systemLocale = wxLocale::GetSystemLanguage();//myLocale.GetSystemLanguage();
+	myLocale.Init();
+	int systemLocale = myLocale.GetSystemLanguage();
 	switch ( systemLocale )
 	{
 		case wxLANGUAGE_GERMAN:
@@ -251,6 +250,9 @@ MyApp::MyApp() : checker ( NULL ), server ( NULL ), connection ( NULL ),
 		case wxLANGUAGE_ITALIAN:
 			systemLocale = wxLANGUAGE_ITALIAN;
 			break;
+		case wxLANGUAGE_RUSSIAN:
+			systemLocale = wxLANGUAGE_RUSSIAN;
+			break;
 		default:
 			systemLocale = wxLANGUAGE_ENGLISH_US;
 			break;
@@ -276,49 +278,17 @@ MyApp::MyApp() : checker ( NULL ), server ( NULL ), connection ( NULL ),
 #endif
 	}
 
-/*
-#ifndef __WXMSW__
-	lang = wxLANGUAGE_ENGLISH; // temp
-#endif
-*/
-	myLocale.Init ( lang, wxLOCALE_CONV_ENCODING );
-
-#ifdef __WXMSW__
-
+	myLocale.Init ( lang, wxLOCALE_LOAD_DEFAULT );
 	wxLocale::AddCatalogLookupPathPrefix ( wxT ( "." ) );
 	wxLocale::AddCatalogLookupPathPrefix ( wxT ( ".." ) );
 
+#ifndef __WXMSW__
+	wxString poDir = GetLinuxAppDir::run() + wxFileName::GetPathSeparator() + _T ( "po" ) + wxFileName::GetPathSeparator();
+	wxLocale::AddCatalogLookupPathPrefix ( poDir );
+#endif
+
 	if ( !myLocale.AddCatalog ( _T ( "messages" ) ) )
 		;
-#else // Linux
-	if ( wxLocale::IsAvailable ( lang ) )
-	{
-		wxStandardPaths *paths = (wxStandardPaths *) &wxStandardPaths::Get();
-		wxString prefix = paths->GetInstallPrefix();
-		myLocale.AddCatalogLookupPathPrefix( prefix );
-		myLocale.AddCatalog ( _T ("xmlcopyeditor") );
-		if (!myLocale.IsOk() )
-		{
-			std::cout << "Locale is not OK" << std::endl;
-		}
-	}
-	else
-	{
-		std::cout << "Locale unavailable" << std::endl;
-	}
-#endif
-
-/*
-#ifndef __WXMSW__
-	wxString poDir = GetLinuxAppDir::run() + wxFileName::GetPathSeparator() + _T ( "po" ); //+ wxFileName::GetPathSeparator();
-	//wxLocale::AddCatalogLookupPathPrefix ( poDir );
-	//myLocale.AddCatalogLookupPathPrefix ( poDir );
-	//std::cout << poDir.mb_str(wxConvUTF8) << std::endl;
-	if (lang == wxLANGUAGE_ITALIAN)
-		std::cout << "OK it's set to Italian... let's see" << std::endl;	
-	myLocale.AddCatalogLookupPathPrefix ( _T ("/usr/share/locale/it/LC_MESSAGES") );
-#endif
-
 
 #ifndef __WXMSW__
 	{
@@ -326,7 +296,6 @@ MyApp::MyApp() : checker ( NULL ), server ( NULL ), connection ( NULL ),
 		myLocale.AddCatalog ( _T ( "fileutils" ) );
 	}
 #endif
-*/
 }
 
 MyApp::~MyApp()
@@ -357,20 +326,23 @@ bool MyApp::OnInit()
 				break;
 			else
 			{
-				wxString argument;
+				wxString argument, what;
+				wxChar *whatBuffer;
+				what = _T ( "Data" );
+				whatBuffer = (wxChar *)what.c_str();
 				if ( this->argc > 1 )
 				{
 					for ( int i = 1; i < this->argc; i++ )
 					{
 						argument = ( wxString ) this->argv[i];
 						argument = PathResolver::run ( argument );
-						connection->Poke ( argument, _T ( "Data" ) );
+						connection->Poke ( argument, whatBuffer );
 					}
 				}
 				else
 				{
 					argument = ( wxString ) IPC_NO_FILE;
-					connection->Poke ( argument, _T ( "Data" ) );
+					connection->Poke ( argument, whatBuffer );
 				}
 				return false;
 			}
@@ -1220,24 +1192,31 @@ bool MyFrame::activateTab ( const wxString& fileName )
 
 void MyFrame::OnAbout ( wxCommandEvent& WXUNUSED ( event ) )
 {
+	wxString description;
+	description = ABOUT_DESCRIPTION;
+	description.Append ( _T("\n\nFramework version: ") );
+	description.Append ( wxVERSION_STRING );
+	description.Append ( _T("\n") );
+
 	wxAboutDialogInfo info;
 	info.SetName ( _ ( "XML Copy Editor" ) );
 	info.SetWebSite ( _T ( "http://xml-copy-editor.sourceforge.net" ) );
 	info.SetVersion ( ABOUT_VERSION );
 	info.SetCopyright ( ABOUT_COPYRIGHT );
-	info.AddDeveloper ( _ ( "Gerald Schmidt (development) <gnschmidt@users.sourceforge.net>" ) );
-	info.AddDeveloper ( _ ( "Matt Smigielski (testing) <alectrus@users.sourceforge.net>" ) );
-	info.AddDeveloper ( _ ( "Justin Dearing (development) <j-pimp@users.sourceforge.net>" ) );
-	info.AddTranslator ( _ ( "Viliam Búr (Slovak) <viliam@bur.sk>" ) );
-	info.AddTranslator ( _ ( "David Håsäther (Swedish) <hasather@gmail.com>" ) );
-	info.AddTranslator ( _ ( "François Badier (French) <frabad@gmail.com>" ) );
-	info.AddTranslator ( _ ( "Thomas Wenzel (German) <thowen@users.sourceforge.net>" ) );
-	info.AddTranslator ( _ ( "SHiNE CsyFeK (Chinese Simplified) <csyfek@gmail.com>" ) );
+	info.AddDeveloper ( _ ( "Gerald Schmidt (development) <gnschmidt at users.sourceforge.net>" ) );
+	info.AddDeveloper ( _ ( "Matt Smigielski (testing) <alectrus at users.sourceforge.net>" ) );
+	info.AddDeveloper ( _ ( "Justin Dearing (development) <j-pimp at users.sourceforge.net>" ) );
+	info.AddTranslator ( _ ( "Viliam Búr (Slovak) <viliam at bur.sk>" ) );
+	info.AddTranslator ( _ ( "David Håsäther (Swedish) <hasather at gmail.com>" ) );
+	info.AddTranslator ( _ ( "François Badier (French) <frabad at gmail.com>" ) );
+	info.AddTranslator ( _ ( "Thomas Wenzel (German) <thowen at users.sourceforge.net>" ) );
+	info.AddTranslator ( _ ( "SHiNE CsyFeK (Chinese Simplified) <csyfek at gmail.com>" ) );
 	info.AddTranslator ( _ ( "HSU PICHAN, YANG SHUFUN, CHENG PAULIAN, CHUANG KUO-PING, Marcus Bingenheimer (Chinese Traditional)" ) );
-	info.AddTranslator ( _ ( "Serhij Dubyk (Ukrainian) <dubyk@library.lviv.ua>" ) );
-	info.AddTranslator ( _ ( "Antonio Angelo (Italian) <aangelo@users.sourceforge.net>" ) );
+	info.AddTranslator ( _ ( "Serhij Dubyk (Ukrainian) <dubyk at library.lviv.ua>" ) );
+	info.AddTranslator ( _ ( "Antonio Angelo (Italian) <aangelo at users.sourceforge.net>" ) );
+	info.AddTranslator ( _ ( "Siarhei Kuchuk (Russian) <Cuchuk.Sergey at gmail.com>" ) );
 	info.SetLicense ( ABOUT_LICENSE );
-	info.SetDescription ( ABOUT_DESCRIPTION );
+	info.SetDescription ( description );
 	wxAboutBox ( info );
 	XmlDoc *doc;
 	if ( ( doc = getActiveDocument() ) == NULL )
@@ -3269,10 +3248,6 @@ void MyFrame::OnSpelling ( wxCommandEvent& event )
 	std::string rawBufferUtf8;
 	getRawText ( doc, rawBufferUtf8 );
 
-/*
- * removed due to entity reference headaches
- * from v. 1.1.0.7 always check raw text only
- *
 	// handle unusual encodings
 	if ( !XmlEncodingHandler::setUtf8 ( rawBufferUtf8 ) )
 	{
@@ -3314,12 +3289,11 @@ void MyFrame::OnSpelling ( wxCommandEvent& event )
 	{
 		bufferParameterUtf8 = wl->getOutput();
 	}
-*/
 
 	auto_ptr<StyleDialog> sd ( new StyleDialog (
 	                               this,
 	                               wxICON ( appicon ),
-				       rawBufferUtf8, //bufferParameterUtf8,
+	                               bufferParameterUtf8,
 	                               doc->getShortFileName(),
 	                               ruleSetDir,
 	                               filterDir,
@@ -3327,7 +3301,7 @@ void MyFrame::OnSpelling ( wxCommandEvent& event )
 				       ( type == ID_TYPE_SPELL ) ? dictionaryPreset : ruleSetPreset,
 	                               filterPreset,
 					type,
-	                               false,//( success ) ? false : true,
+	                               ( success ) ? false : true,
 	                               stylePosition,
 	                               styleSize ) );
 
