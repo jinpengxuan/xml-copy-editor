@@ -3250,53 +3250,12 @@ void MyFrame::OnSpelling ( wxCommandEvent& event )
 
 	std::string rawBufferUtf8;
 	getRawText ( doc, rawBufferUtf8 );
-
-	// handle unusual encodings
-	if ( !XmlEncodingHandler::setUtf8 ( rawBufferUtf8 ) )
-	{
-		encodingMessage();
-		return;
-	}
-
-	WrapTempFileName tempFileName ( doc->getFullFileName() );
-
-	ofstream rawBufferStream ( tempFileName.name().c_str() );
-	if ( !rawBufferStream )
-		return;
-
-	rawBufferStream << rawBufferUtf8;
-	rawBufferStream.close();
-
-	auto_ptr<WrapLibxml> wl ( new WrapLibxml ( libxmlNetAccess, catalogPath ) );
-
-	bool success = wl->parse ( tempFileName.name(), true );
-
-	std::string bufferParameterUtf8;
-
-	if ( !success )
-	{
-		statusProgress ( wxEmptyString );
-		std::string error = wl->getLastError();
-		wxString wideError = wxString ( error.c_str(), wxConvUTF8, error.size() );
-		wideError.Prepend ( _ ( "Checking document in read-only mode: " ) );
-		messagePane ( wideError, CONST_WARNING );
-
-		if ( !ReadFile::run ( tempFileName.name(), bufferParameterUtf8 ) )
-			return;
-		std::auto_ptr<WrapExpat> we ( new WrapExpat() );
-		bufferParameterUtf8 = we->xmliseTextNode ( bufferParameterUtf8 );
-		bufferParameterUtf8.insert ( 0, "<root>" );
-		bufferParameterUtf8 += "</root>";
-	}
-	else
-	{
-		bufferParameterUtf8 = wl->getOutput();
-	}
+	bool success = true; // always true for now: well-formedness not req'd 
 
 	auto_ptr<StyleDialog> sd ( new StyleDialog (
 	                               this,
 	                               wxICON ( appicon ),
-	                               bufferParameterUtf8,
+	                               rawBufferUtf8,
 	                               doc->getShortFileName(),
 	                               ruleSetDir,
 	                               filterDir,

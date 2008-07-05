@@ -210,7 +210,7 @@ xmlcopyeditor_SOURCES = xmlcopyeditor.cpp associatedialog.cpp casehandler.cpp \
 	xmlparseschemans.cpp xmlshallowvalidator.cpp wrapxerces.cpp \
 	findreplacepanel.cpp commandpanel.cpp \
 	binaryfile.cpp xmlencodingspy.cpp wrapaspell.cpp \
-	rulesets filters png rng xpm templates copying help po \
+	rulesets png rng xpm templates copying help po \
 	xmlcopyeditor.spec xmlcopyeditor.png custom.xpm \
 	xmlcopyeditor.desktop
 
@@ -219,7 +219,6 @@ xmlcopyeditor_LDFLAGS = $(WX_LIBS) \
 
 nobase_xmlcopyeditor_DATA = png/*.png \
 	rulesets/*.* \
-	filters/*.* \
 	rng/*.rng \
 	rng/*.rnc \
 	rng/exclude/*.rng \
