@@ -21,7 +21,10 @@
 #include "xmlpromptgenerator.h"
 #include "xmlshallowvalidator.h"
 #include "xmlencodinghandler.h"
+#include "wrapxerces.h"
+#include "xmlcopyeditor.h" // needed to enable validation-as-you-type alerts
 #include <utility>
+#include <memory>
 
 // adapted from wxSTEdit (c) 2005 John Labenski, Otto Wyss
 #define XMLCTRL_HASBIT(value, bit) (((value) & (bit)) != 0)
@@ -59,8 +62,13 @@ XmlCtrl::XmlCtrl (
 		basePath ( basePathParameter ),
 		auxPath ( auxPathParameter )
 {
+	validationThread = NULL;
+	validationStarted = false;
+	validationFinished = false;
+	grammarFound = false;
+	validationRequired = (buffer) ? true : false; // NULL for plain XML template
+
 	currentMaxLine = 1;
-	validationRequired = grammarFound = false;
 
 	applyProperties ( propertiesParameter );
 
@@ -130,6 +138,24 @@ static wxColor LightColour ( const wxColour& color, int percent )
 
 void XmlCtrl::OnIdle ( wxIdleEvent& event )
 {
+	// poll validation thread output if any
+	if (validationStarted && validationFinished)
+	{
+		validationStarted = false;
+		MyFrame *frame = (MyFrame *)GetGrandParent();
+		if ( validationSuccess )
+		{
+			clearErrorIndicators ( GetLineCount() );
+			frame->statusProgress ( wxEmptyString );
+		}
+		else
+		{
+			clearErrorIndicators ( validationPosition.first -1 );
+			setErrorIndicator ( validationPosition.first - 1, 0 );
+			frame->statusProgress ( wxString ( validationMessage.c_str(), wxConvUTF8, validationMessage.size() ) );
+		}
+	}
+
 	if ( properties.number && type != FILE_TYPE_BINARY )
 		adjustNoColumnWidth();
 }
@@ -1968,91 +1994,59 @@ bool XmlCtrl::shallowValidate ( int maxLine, bool segmentOnly )
 	if ( !properties.validateAsYouType || type != FILE_TYPE_XML )
 		return true;
 
-	validationRequired = false;
-
-	if ( !maxLine )
-		maxLine = GetLineCount();
-
-	std::string bufferUtf8;
-	int startLine, columnOffset;
-	startLine = columnOffset = 0;
-
-	if ( !segmentOnly )
-	{
-		clearErrorIndicators ( maxLine );
-		bufferUtf8 = myGetTextRaw();
-	}
-	else
-	{
-		int current,
-		line,
-		lineEnd,
-		parentCloseAngleBracket,
-		parentStartAngleBracket,
-		memory;
-		current = GetCurrentPos();
-		line = LineFromPosition ( current );
-
-		// try to include next line
-		lineEnd = GetLineEndPosition ( line + 1 );
-		if ( lineEnd == -1 )
-			lineEnd = GetLineEndPosition ( line );
-
-		// fetch parent
-		parentCloseAngleBracket = getParentCloseAngleBracket ( current );
-		parentStartAngleBracket = getTagStartPos ( parentCloseAngleBracket );
-		if ( parentStartAngleBracket == -1 )
-			return false;
-
-		memory = parentStartAngleBracket;
-
-		// fetch grandparent if not at start of document
-		if ( parentStartAngleBracket > 1 )
-		{
-			parentCloseAngleBracket =
-			    getParentCloseAngleBracket ( parentStartAngleBracket - 1 );
-			parentStartAngleBracket = getTagStartPos ( parentCloseAngleBracket );
-			if ( parentStartAngleBracket == -1 )
-				parentStartAngleBracket = memory;
-		}
-
-		startLine = LineFromPosition ( parentStartAngleBracket );
-
-		if ( startLine == line )
-		{
-			columnOffset = parentStartAngleBracket - PositionFromLine ( line );
-
-			// disallow negative offsets
-			if ( columnOffset < 0 )
-				columnOffset = 0;
-		}
-
-		// sanity-check range
-		if ( lineEnd <= parentStartAngleBracket )
-			return false;
-
-		// clear indicators within range
-		StartStyling ( parentStartAngleBracket, wxSTC_INDIC2_MASK );
-		int length = lineEnd - parentStartAngleBracket;
-		SetStyling ( length, 0 );
-
-		// tweak raw getTextRange variant
-		wxString wideBuffer = GetTextRange ( parentStartAngleBracket, lineEnd );
-
-		bufferUtf8 = ( const char * ) wideBuffer.mb_str ( wxConvUTF8 );
-	}
-
-	return shallowValidate ( bufferUtf8.c_str(), bufferUtf8.size(), startLine,
-	                         maxLine, columnOffset, segmentOnly );
+	clearErrorIndicators ( GetLineCount() );
+	std::string bufferUtf8 = myGetTextRaw();
+	
+	return shallowValidate (
+		bufferUtf8.c_str(),
+		basePath.c_str(),
+		bufferUtf8.size() );
 }
 
-bool XmlCtrl::shallowValidate ( const char *buffer,
-                                size_t bufferLen,
-                                int startLine,
-                                int maxLine,
-                                int columnOffset,
-                                bool segmentOnly )
+bool XmlCtrl::shallowValidate (
+				const char *buffer,
+				const char *system,
+                                size_t bufferLen//,
+                                //int startLine,
+                                //int maxLine,
+                                //int columnOffset,
+                                //bool segmentOnly
+				)
 {
+	if ( !validationRequired )
+		return true;
+
+	validationRequired = false;
+	
+	if (validationThread && !validationFinished)
+	{
+		validationThread->Delete();
+		validationThread = NULL;
+	}
+
+	validationThread = new ValidationThread(
+		buffer,
+		system,
+		&validationFinished,
+		&validationSuccess,
+		&validationPosition,
+		&validationMessage
+	);
+
+	if ( validationThread->Create() != wxTHREAD_NO_ERROR )
+	{
+		validationFinished = true;
+		return false;
+	}
+	
+	validationStarted = true;
+	validationFinished = false;
+
+
+	validationThread->Run();
+	return true;
+
+/*
 	std::auto_ptr<XmlShallowValidator> validator ( new XmlShallowValidator (
 	            elementMap,
 	            attributeMap,
@@ -2084,6 +2078,7 @@ bool XmlCtrl::shallowValidate ( const char *buffer,
 		return false;
 	}
 	return true;
+*/
 }
 
 std::string XmlCtrl::myGetTextRaw()

@@ -24,6 +24,7 @@
 #include <xercesc/sax2/SAX2XMLReader.hpp>
 #include <xercesc/sax2/DefaultHandler.hpp>
 #include <xercesc/util/XMLUni.hpp>
+#include <xercesc/framework/MemBufInputSource.hpp>
 #include <sstream>
 #include <utility>
 #include <stdexcept>
@@ -58,6 +59,7 @@ bool WrapXerces::validate ( const std::string& fileName )
 	parser->setFeature ( XMLUni::fgXercesSchema, true );
 	parser->setFeature ( XMLUni::fgXercesSchemaFullChecking, true );
 	parser->setFeature ( XMLUni::fgXercesValidationErrorAsFatal, true );
+	parser->setFeature ( XMLUni::fgXercesLoadExternalDTD, true );
 
 	DefaultHandler handler;
 	MySAX2Handler mySAX2Handler;
@@ -98,8 +100,75 @@ bool WrapXerces::validate ( const std::string& fileName )
 	return true;
 }
 
+// tbd: cache grammar
+bool WrapXerces::validateMemory (
+	const char *buffer,
+	const char *system,
+	unsigned len )
+{
+	SAX2XMLReader *parser = XMLReaderFactory::createXMLReader();
+
+	parser->setFeature ( XMLUni::fgSAX2CoreNameSpaces, true );
+	parser->setFeature ( XMLUni::fgSAX2CoreValidation, true );
+	parser->setFeature ( XMLUni::fgXercesDynamic, true );
+	parser->setFeature ( XMLUni::fgXercesSchema, true );
+	parser->setFeature ( XMLUni::fgXercesSchemaFullChecking, true );
+	parser->setFeature ( XMLUni::fgXercesValidationErrorAsFatal, true );
+	parser->setFeature ( XMLUni::fgXercesLoadExternalDTD, true );
+	
+	DefaultHandler handler;
+	MySAX2Handler mySAX2Handler;
+	parser->setContentHandler ( &handler );
+	parser->setErrorHandler ( &mySAX2Handler );
+	parser->setEntityResolver ( &handler );
+
+	XMLByte* xmlBuffer = (XMLByte*) buffer;
+        MemBufInputSource source (
+		xmlBuffer,
+                len,
+		system );
+  
+	try
+	{
+		parser->parse ( source );
+	}
+	catch ( XMLException& e )
+	{
+		delete parser;
+		lastError = "";
+		return false;
+	}
+	catch ( SAXParseException& e )
+	{
+		delete parser;
+		char *err = XMLString::transcode ( e.getMessage() );
+		std::stringstream ss;
+		ss << "Ln " << e.getLineNumber() << " Col " << e.getColumnNumber() << ": " << err;
+		lastError = ss.str();
+		errorPosition = std::make_pair ( e.getLineNumber(), e.getColumnNumber() );
+		XMLString::release ( &err );
+		return false;
+	}
+	catch ( ... )
+	{
+		delete parser;
+		lastError = "";
+		return false;
+	}
+	delete parser;
+	return true;
+}
+
 std::string WrapXerces::getLastError()
 {
+	char *rawError, *it;
+	rawError = (char *)lastError.c_str();
+	it = strstr ( rawError, "Message:" );
+	if ( it )
+	{
+		lastError = it + 8;
+	}
+
 	return lastError;
 }
 

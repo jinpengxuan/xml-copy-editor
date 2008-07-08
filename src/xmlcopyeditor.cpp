@@ -3112,7 +3112,7 @@ bool MyFrame::openFile ( wxString& fileName, bool largeFile )
 	if ( !largeFile && ( properties.validateAsYouType && doc->getGrammarFound() ) )
 	{
 		statusProgress ( _T ( "Validating document..." ) );
-		doc->shallowValidate ( finalBuffer, finalBufferLen );
+		doc->shallowValidate ( finalBuffer, doc->getFullFileName().mb_str(wxConvUTF8), finalBufferLen );
 		statusProgress ( wxEmptyString );
 	}
 
@@ -3811,7 +3811,7 @@ void MyFrame::OnValidateSchema ( wxCommandEvent& event )
 		int cursorPos =
 		    doc->PositionFromLine ( posPair.first - 1 );
 		doc->SetSelection ( cursorPos, cursorPos );
-		doc->setErrorIndicator ( posPair.first - 1, posPair.second );
+		doc->setErrorIndicator ( posPair.first - 1, 0 ); //posPair.second );
 	}
 	else
 		documentOk ( _ ( "valid" ) );
@@ -4744,7 +4744,7 @@ bool MyFrame::saveFile ( XmlDoc *doc, wxString& fileName, bool checkLastModified
 	if ( properties.validateAsYouType && isXml )
 	{
 		doc->clearErrorIndicators();
-		doc->shallowValidate ( utf8Buffer.c_str(), utf8Buffer.size() );
+		doc->shallowValidate ( utf8Buffer.c_str(), doc->getFullFileName().mb_str(wxConvUTF8), utf8Buffer.size() );
 	}
 
 	if ( !unlimitedUndo )

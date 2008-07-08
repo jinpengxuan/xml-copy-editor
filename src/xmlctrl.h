@@ -1,3 +1,4 @@
+
 /*
  * Copyright 2005-2007 Gerald Schmidt.
  *
@@ -27,6 +28,7 @@
 #include <string>
 #include <set>
 #include <map>
+#include "validationthread.h"
 
 struct XmlCtrlProperties
 {
@@ -111,6 +113,7 @@ class XmlCtrl: public wxStyledTextCtrl
 			attributeMap.clear();
 			elementMap.clear();
 			entitySet.clear();
+			// don't delete validationThread in case it's gone
 		}
 		int getType();
 		int getParentCloseAngleBracket ( int pos, int range = USHRT_MAX * 4 );
@@ -141,15 +144,25 @@ class XmlCtrl: public wxStyledTextCtrl
 		int getTagStartPos ( int pos );
 		void toggleLineBackground();
 		bool shallowValidate ( int maxLine = 0, bool segmentOnly = false );
-		bool shallowValidate ( const char *buffer, size_t bufferLen,
-		                       int startLine = 0,
-		                       int maxLine = 0,
-		                       int columnOffset = 0,
-		                       bool segmentOnly = false );
+		bool shallowValidate (
+			const char *buffer,
+			const char *system,
+			size_t bufferLen//,
+		                       //int startLine = 0,
+		                       //int maxLine = 0,
+		                       //int columnOffset = 0,
+		                       //bool segmentOnly = false
+				       );
 		std::string myGetTextRaw(); // alternative to faulty stc implementation
 		bool getValidationRequired();
 		void setValidationRequired ( bool b );
 	private:
+		// the following are used for background validation
+		ValidationThread *validationThread;
+		bool validationStarted, validationFinished, validationSuccess;
+		std::pair<int, int> validationPosition;
+		std::string validationMessage;
+	
 		int type;
 		bool *protectTags;
 		bool validationRequired, grammarFound;

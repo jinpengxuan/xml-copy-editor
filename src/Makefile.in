@@ -70,7 +70,7 @@ am_xmlcopyeditor_OBJECTS = xmlcopyeditor.$(OBJEXT) \
 	xmlshallowvalidator.$(OBJEXT) wrapxerces.$(OBJEXT) \
 	findreplacepanel.$(OBJEXT) commandpanel.$(OBJEXT) \
 	binaryfile.$(OBJEXT) xmlencodingspy.$(OBJEXT) \
-	wrapaspell.$(OBJEXT)
+	wrapaspell.$(OBJEXT) validationthread.$($OBJEXT)
 xmlcopyeditor_OBJECTS = $(am_xmlcopyeditor_OBJECTS)
 xmlcopyeditor_LDADD = $(LDADD)
 xmlcopyeditor_LINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) \
@@ -209,7 +209,7 @@ xmlcopyeditor_SOURCES = xmlcopyeditor.cpp associatedialog.cpp casehandler.cpp \
 	insertpanel.cpp xmlwordcount.cpp getword.cpp locationpanel.cpp catalogresolver.cpp getlinuxappdir.cpp \
 	xmlparseschemans.cpp xmlshallowvalidator.cpp wrapxerces.cpp \
 	findreplacepanel.cpp commandpanel.cpp \
-	binaryfile.cpp xmlencodingspy.cpp wrapaspell.cpp \
+	binaryfile.cpp xmlencodingspy.cpp wrapaspell.cpp validationthread.cpp \
 	rulesets png rng xpm templates copying help po \
 	xmlcopyeditor.spec xmlcopyeditor.png custom.xpm \
 	xmlcopyeditor.desktop
@@ -351,6 +351,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/rule.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/styledialog.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/wrapaspell.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/validationthread.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/wrapexpat.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/wraplibxml.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/wrapregex.Po@am__quote@

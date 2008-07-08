@@ -24,7 +24,7 @@ xmlcopyeditor_SOURCES = xmlcopyeditor.cpp associatedialog.cpp casehandler.cpp \
 	insertpanel.cpp xmlwordcount.cpp getword.cpp locationpanel.cpp catalogresolver.cpp getlinuxappdir.cpp \
 	xmlparseschemans.cpp xmlshallowvalidator.cpp wrapxerces.cpp \
 	findreplacepanel.cpp commandpanel.cpp \
-	binaryfile.cpp xmlencodingspy.cpp wrapaspell.cpp \
+	binaryfile.cpp xmlencodingspy.cpp wrapaspell.cpp validationthread.cpp \
 	rulesets png rng xpm templates copying help po \
 	xmlcopyeditor.spec xmlcopyeditor.png custom.xpm \
 	xmlcopyeditor.desktop

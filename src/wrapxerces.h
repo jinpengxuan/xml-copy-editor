@@ -34,6 +34,7 @@ class WrapXerces
 		WrapXerces();
 		~WrapXerces();
 		bool validate ( const std::string& fileName );
+		bool validateMemory ( const char *buffer, const char *system, unsigned len );
 		std::string getLastError();
 		std::pair<int, int> getErrorPosition();
 	private:
