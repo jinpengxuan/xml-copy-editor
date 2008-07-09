@@ -2567,6 +2567,7 @@ void MyFrame::OnGlobalReplace ( wxCommandEvent& event )
 			                        replaceUtf8,
 			                        flags & wxFR_MATCHCASE );
 			currentDoc->SetTextRaw ( bufferUtf8.c_str() );
+			currentDoc->setValidationRequired ( true );
 		}
 		else
 		{
@@ -2581,6 +2582,7 @@ void MyFrame::OnGlobalReplace ( wxCommandEvent& event )
 				std::string outputBuffer = wr->replaceGlobal ( bufferUtf8, &matchCount );
 				globalMatchCount += matchCount;
 				currentDoc->SetTextRaw ( outputBuffer.c_str() );
+				currentDoc->setValidationRequired ( true );
 			}
 			catch ( std::exception& e )
 			{
@@ -4094,6 +4096,7 @@ void MyFrame::OnPrettyPrint ( wxCommandEvent& event )
 		statusProgress ( wxEmptyString );
 	}
 
+	doc->setValidationRequired ( true );
 	doc->GotoLine ( line );
 	doc->SetFocus();
 }
@@ -4173,6 +4176,7 @@ void MyFrame::OnEncoding ( wxCommandEvent& event )
 	}
 
 	doc->SetTextRaw ( xur->getBuffer().c_str() );
+	doc->setValidationRequired ( true );
 	doc->SetFocus();
 }
 

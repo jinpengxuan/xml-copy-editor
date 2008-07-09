@@ -8,12 +8,12 @@
 class ValidationThread : public wxThread
 {
 public:
-	ValidationThread ( const char *buffer, const char *system, bool *finished, bool *success, std::pair<int, int> *position, std::string *message );
+	ValidationThread ( const char *buffer, const char *system, bool *finished, bool *success, bool *release, std::pair<int, int> *position, std::string *message );
 	virtual void *Entry();
 	virtual void OnExit();
 private:
 	std::string myBuffer, mySystem;
-	bool *myFinishedPtr, *mySuccessPtr;
+	bool *myFinishedPtr, *mySuccessPtr, *myReleasePtr;
 	std::pair<int, int> *myPositionPtr;
 	std::string *myMessagePtr;
 };

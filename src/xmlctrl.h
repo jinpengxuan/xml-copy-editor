@@ -113,7 +113,9 @@ class XmlCtrl: public wxStyledTextCtrl
 			attributeMap.clear();
 			elementMap.clear();
 			entitySet.clear();
-			// don't delete validationThread in case it's gone
+			
+			// don't delete thread in case it's gone - just set the release flag
+			validationRelease = true;
 		}
 		int getType();
 		int getParentCloseAngleBracket ( int pos, int range = USHRT_MAX * 4 );
@@ -147,19 +149,17 @@ class XmlCtrl: public wxStyledTextCtrl
 		bool shallowValidate (
 			const char *buffer,
 			const char *system,
-			size_t bufferLen//,
-		                       //int startLine = 0,
-		                       //int maxLine = 0,
-		                       //int columnOffset = 0,
-		                       //bool segmentOnly = false
-				       );
+			size_t bufferLen );
 		std::string myGetTextRaw(); // alternative to faulty stc implementation
 		bool getValidationRequired();
 		void setValidationRequired ( bool b );
 	private:
 		// the following are used for background validation
 		ValidationThread *validationThread;
-		bool validationStarted, validationFinished, validationSuccess;
+		bool validationStarted,
+			validationFinished,
+			validationSuccess,
+			validationRelease;
 		std::pair<int, int> validationPosition;
 		std::string validationMessage;
 	

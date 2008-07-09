@@ -65,6 +65,7 @@ XmlCtrl::XmlCtrl (
 	validationThread = NULL;
 	validationStarted = false;
 	validationFinished = false;
+	validationRelease = false;
 	grammarFound = false;
 	validationRequired = (buffer) ? true : false; // NULL for plain XML template
 
@@ -138,6 +139,9 @@ static wxColor LightColour ( const wxColour& color, int percent )
 
 void XmlCtrl::OnIdle ( wxIdleEvent& event )
 {
+	if ( properties.number && type != FILE_TYPE_BINARY )
+		adjustNoColumnWidth(); // exits if unchanged
+
 	// poll validation thread output if any
 	if (validationStarted && validationFinished)
 	{
@@ -155,9 +159,6 @@ void XmlCtrl::OnIdle ( wxIdleEvent& event )
 			frame->statusProgress ( wxString ( validationMessage.c_str(), wxConvUTF8, validationMessage.size() ) );
 		}
 	}
-
-	if ( properties.number && type != FILE_TYPE_BINARY )
-		adjustNoColumnWidth();
 }
 
 void XmlCtrl::OnChar ( wxKeyEvent& event )
@@ -445,13 +446,13 @@ void XmlCtrl::handleOpenAngleBracket ( wxKeyEvent& event )
 	if ( AutoCompActive() )
 		AutoCompCancel();
 
+	validationRequired = true;
+
 	if ( *protectTags )
 	{
 		AddText ( _T ( "&lt;" ) );
 		return;
 	}
-
-	validationRequired = true;
 
 	AddText ( _T ( "<" ) );
 
@@ -503,14 +504,14 @@ void XmlCtrl::handleCloseAngleBracket ( wxKeyEvent& event )
 	if ( AutoCompActive() )
 		AutoCompCancel();
 
+	validationRequired = true;
+
 	if ( *protectTags )
 	{
 		AddText ( _T ( "&gt;" ) );
 		return;
 	}
-
-	validationRequired = true;
-
+	
 	wxString insertBuffer;
 	int pos;
 	pos = GetCurrentPos();
@@ -689,7 +690,10 @@ void XmlCtrl::handleSpace ( wxKeyEvent& event )
 		choice.Append ( conversion );
 	}
 	if ( !choice.empty() )
+	{
 		UserListShow ( 0, choice );
+		validationRequired = true;
+	}
 }
 
 void XmlCtrl::handleAmpersand ( wxKeyEvent& event )
@@ -757,6 +761,7 @@ void XmlCtrl::handleForwardSlash ( wxKeyEvent& event )
 	if ( wideParent.empty() )
 		return;
 	AddText ( wideParent + _T ( ">" ) );
+	validationRequired = true;
 }
 
 void XmlCtrl::OnKeyPressed ( wxKeyEvent& event )
@@ -868,6 +873,7 @@ void XmlCtrl::OnKeyPressed ( wxKeyEvent& event )
 			break;
 		case WXK_BACK:
 			handleBackspace ( event );
+			validationRequired = true;
 			return;
 		case WXK_TAB:
 			if ( *protectTags )
@@ -914,6 +920,7 @@ void XmlCtrl::OnKeyPressed ( wxKeyEvent& event )
 			break;
 		case WXK_DELETE:
 			handleDelete ( event );
+			validationRequired = true;
 			return;
 		default:
 			break;
@@ -1041,7 +1048,7 @@ int XmlCtrl::getParentCloseAngleBracket ( int pos, int range )
 }
 
 void XmlCtrl::adjustNoColumnWidth()
-{
+{	
 	int maxLine = GetLineCount();
 	if ( maxLine == currentMaxLine )
 		return;
@@ -2006,42 +2013,40 @@ bool XmlCtrl::shallowValidate ( int maxLine, bool segmentOnly )
 bool XmlCtrl::shallowValidate (
 				const char *buffer,
 				const char *system,
-                                size_t bufferLen//,
-                                //int startLine,
-                                //int maxLine,
-                                //int columnOffset,
-                                //bool segmentOnly
+                                size_t bufferLen
 				)
 {
 	if ( !validationRequired )
 		return true;
 
+	
+	if ( validationStarted && !validationFinished )
+	{
+		validationRelease = true;
+		return true; // wait for next idle cycle call from main app frame
+	}
 	validationRequired = false;
 	
-	if (validationThread && !validationFinished)
-	{
-		validationThread->Delete();
-		validationThread = NULL;
-	}
-
+	validationRelease = false;
 	validationThread = new ValidationThread(
 		buffer,
 		system,
 		&validationFinished,
 		&validationSuccess,
+		&validationRelease,
 		&validationPosition,
 		&validationMessage
 	);
 
 	if ( validationThread->Create() != wxTHREAD_NO_ERROR )
 	{
+		validationStarted = false;
 		validationFinished = true;
 		return false;
 	}
 	
 	validationStarted = true;
 	validationFinished = false;
-
 
 	validationThread->Run();
 	return true;

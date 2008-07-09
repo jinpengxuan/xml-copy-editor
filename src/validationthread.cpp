@@ -9,6 +9,7 @@ ValidationThread::ValidationThread (
 	const char *system,
 	bool *finished,
 	bool *success,
+	bool *release,
 	std::pair<int, int> *position,
 	std::string *message ) : wxThread()
 {
@@ -21,6 +22,7 @@ ValidationThread::ValidationThread (
 	mySystem = system;
 	myFinishedPtr = finished;
 	mySuccessPtr = success;
+	myReleasePtr = release;
 	myPositionPtr = position;
 	myMessagePtr = message;
 }
@@ -29,7 +31,7 @@ void *ValidationThread::Entry()
 {
 	std::auto_ptr<WrapXerces> validator ( new WrapXerces() );
 
-	if ( TestDestroy() )
+	if ( *myReleasePtr || TestDestroy()  )
 		Exit();
 	
 	bool res = validator->validateMemory (
@@ -37,7 +39,7 @@ void *ValidationThread::Entry()
 		mySystem.c_str(),
 		myBuffer.size() );
 	
-	if ( TestDestroy() )
+	if ( *myReleasePtr  || TestDestroy() )
 		Exit();
 	
 	if ( !res )
@@ -52,11 +54,14 @@ void *ValidationThread::Entry()
 		*myPositionPtr = std::make_pair ( 0, 0 );
 		*myMessagePtr = "";
 	}
-	*myFinishedPtr = true;
 	
 	return NULL;
 }
 
 void ValidationThread::OnExit()
 {
+	if ( *myReleasePtr )
+		return;
+
+	*myFinishedPtr = true;
 }
