@@ -179,7 +179,7 @@ BEGIN_EVENT_TABLE ( MyFrame, wxFrame )
 	#endif
 END_EVENT_TABLE()
 
-IMPLEMENT_APP ( MyApp )
+IMPLEMENT_APP ( MyApp)
 
 MyApp::MyApp() : checker ( NULL ), server ( NULL ), connection ( NULL ),
 #ifdef __WXMSW__
@@ -1633,7 +1633,7 @@ void MyFrame::OnIdle ( wxIdleEvent& event )
 	if ( !parent.empty() && properties.validateAsYouType && doc->getValidationRequired() )
 	{
 		// tbd: limit to parent element
-		doc->shallowValidate ( doc->LineFromPosition ( current ), true );
+		doc->backgroundValidate();
 	}
 
 
@@ -2742,7 +2742,7 @@ void MyFrame::newDocument ( const std::string& s, const std::string& path, bool 
 	insertSiblingPanel->update ( doc, wxEmptyString );
 	insertEntityPanel->update ( doc );
 	if ( properties.validateAsYouType )
-		doc->shallowValidate();
+		doc->backgroundValidate();
 }
 
 void MyFrame::OnOpen ( wxCommandEvent& event )
@@ -3114,7 +3114,7 @@ bool MyFrame::openFile ( wxString& fileName, bool largeFile )
 	if ( !largeFile && ( properties.validateAsYouType && doc->getGrammarFound() ) )
 	{
 		statusProgress ( _T ( "Validating document..." ) );
-		doc->shallowValidate ( finalBuffer, doc->getFullFileName().mb_str(wxConvUTF8), finalBufferLen );
+		doc->backgroundValidate ( finalBuffer, doc->getFullFileName().mb_str(wxConvUTF8), finalBufferLen );
 		statusProgress ( wxEmptyString );
 	}
 
@@ -3629,7 +3629,7 @@ void MyFrame::OnValidateDTD ( wxCommandEvent& event )
 		doc->SetSelection ( cursorPos, cursorPos );
 
 		// shallow validate all
-		doc->shallowValidate(); // has to come first as it deletes all indicators
+		doc->backgroundValidate(); // has to come first as it deletes all indicators
 		doc->setErrorIndicator ( posPair.first, posPair.second );
 
 		return;
@@ -4748,7 +4748,7 @@ bool MyFrame::saveFile ( XmlDoc *doc, wxString& fileName, bool checkLastModified
 	if ( properties.validateAsYouType && isXml )
 	{
 		doc->clearErrorIndicators();
-		doc->shallowValidate ( utf8Buffer.c_str(), doc->getFullFileName().mb_str(wxConvUTF8), utf8Buffer.size() );
+		doc->backgroundValidate ( utf8Buffer.c_str(), doc->getFullFileName().mb_str(wxConvUTF8), utf8Buffer.size() );
 	}
 
 	if ( !unlimitedUndo )

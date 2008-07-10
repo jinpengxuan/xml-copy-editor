@@ -1,4 +1,3 @@
-
 /*
  * Copyright 2005-2007 Gerald Schmidt.
  *
@@ -145,8 +144,8 @@ class XmlCtrl: public wxStyledTextCtrl
 		bool canInsertAt ( int pos );
 		int getTagStartPos ( int pos );
 		void toggleLineBackground();
-		bool shallowValidate ( int maxLine = 0, bool segmentOnly = false );
-		bool shallowValidate (
+		bool backgroundValidate (  );
+		bool backgroundValidate (
 			const char *buffer,
 			const char *system,
 			size_t bufferLen );

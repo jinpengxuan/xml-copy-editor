@@ -40,6 +40,9 @@ BEGIN_EVENT_TABLE ( XmlCtrl, wxStyledTextCtrl )
 	EVT_MIDDLE_DOWN ( XmlCtrl::OnMiddleDown )
 END_EVENT_TABLE()
 
+// global protection for validation threads
+wxCriticalSection xmlcopyeditorCriticalSection;
+
 XmlCtrl::XmlCtrl (
     wxWindow *parent,
     XmlCtrlProperties propertiesParameter,
@@ -143,20 +146,24 @@ void XmlCtrl::OnIdle ( wxIdleEvent& event )
 		adjustNoColumnWidth(); // exits if unchanged
 
 	// poll validation thread output if any
-	if (validationStarted && validationFinished)
+	
 	{
-		validationStarted = false;
-		MyFrame *frame = (MyFrame *)GetGrandParent();
-		if ( validationSuccess )
+		wxCriticalSectionLocker locker ( xmlcopyeditorCriticalSection );
+		if (validationStarted && validationFinished)
 		{
-			clearErrorIndicators ( GetLineCount() );
-			frame->statusProgress ( wxEmptyString );
-		}
-		else
-		{
-			clearErrorIndicators ( validationPosition.first -1 );
-			setErrorIndicator ( validationPosition.first - 1, 0 );
-			frame->statusProgress ( wxString ( validationMessage.c_str(), wxConvUTF8, validationMessage.size() ) );
+			validationStarted = false;
+			MyFrame *frame = (MyFrame *)GetGrandParent();
+			if ( validationSuccess )
+			{
+				clearErrorIndicators ( GetLineCount() );
+				frame->statusProgress ( wxEmptyString );
+			}
+			else
+			{
+				clearErrorIndicators ( GetLineCount() );
+				setErrorIndicator ( validationPosition.first - 1, 0 );
+				frame->statusProgress ( wxString ( validationMessage.c_str(), wxConvUTF8, validationMessage.size() ) );
+			}
 		}
 	}
 }
@@ -1996,21 +2003,20 @@ std::string XmlCtrl::getElementStructure ( const wxString& element )
 	return ret;
 }
 
-bool XmlCtrl::shallowValidate ( int maxLine, bool segmentOnly )
+bool XmlCtrl::backgroundValidate()
 {
 	if ( !properties.validateAsYouType || type != FILE_TYPE_XML )
 		return true;
 
-	clearErrorIndicators ( GetLineCount() );
 	std::string bufferUtf8 = myGetTextRaw();
 	
-	return shallowValidate (
+	return backgroundValidate (
 		bufferUtf8.c_str(),
 		basePath.c_str(),
 		bufferUtf8.size() );
 }
 
-bool XmlCtrl::shallowValidate (
+bool XmlCtrl::backgroundValidate (
 				const char *buffer,
 				const char *system,
                                 size_t bufferLen
@@ -2018,8 +2024,8 @@ bool XmlCtrl::shallowValidate (
 {
 	if ( !validationRequired )
 		return true;
-
 	
+	wxCriticalSectionLocker locker ( xmlcopyeditorCriticalSection );
 	if ( validationStarted && !validationFinished )
 	{
 		validationRelease = true;
@@ -2047,43 +2053,8 @@ bool XmlCtrl::shallowValidate (
 	
 	validationStarted = true;
 	validationFinished = false;
-
 	validationThread->Run();
 	return true;
-
-/*
-	std::auto_ptr<XmlShallowValidator> validator ( new XmlShallowValidator (
-	            elementMap,
-	            attributeMap,
-	            requiredAttributeMap,
-	            entitySet,
-	            maxLine,
-	            segmentOnly ) );
-
-	bool res = validator->parse ( buffer, bufferLen, ( segmentOnly ) ? false : true );
-	if (
-		!validator->getOverrideFailure() &&
-		( !res || !validator->isValid() ) )
-	{
-		std::vector<std::pair<int, int> > positionVector = validator->getPositionVector();
-
-		if ( res == XML_STATUS_ERROR )
-		{
-			positionVector.push_back ( validator->getErrorPosition() );
-		}
-
-		std::vector<std::pair<int, int> >::iterator it;
-		for ( it = positionVector.begin(); it != positionVector.end(); it++ )
-		{
-			int line, column;
-			line = ( it->first - 1 ) + startLine;
-			column = it->second + columnOffset;
-			setErrorIndicator ( line, column );
-		}
-		return false;
-	}
-	return true;
-*/
 }
 
 std::string XmlCtrl::myGetTextRaw()
@@ -2105,12 +2076,6 @@ void XmlCtrl::setErrorIndicator ( int line, int column )
 	StartStyling ( startPos, wxSTC_INDIC2_MASK );
 
 	int length = endPos - startPos;
-
-	/*
-	from CellBuffer.cxx:
-	 PLATFORM_ASSERT(lengthStyle == 0 ||
-		(lengthStyle > 0 && lengthStyle + position < length));
-	*/
 
 	if ( length == 0 || ( length > 0 && length + startPos < GetLength() ) )
 	{
