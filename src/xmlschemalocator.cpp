@@ -20,6 +20,7 @@
 #include <string>
 #include <vector>
 #include <stdexcept>
+#include <cstring>
 #include <expat.h>
 #include "xmlschemalocator.h"
 

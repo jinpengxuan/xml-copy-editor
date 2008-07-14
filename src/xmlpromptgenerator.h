@@ -23,6 +23,7 @@
 #include <expat.h>
 #include <map>
 #include <set>
+#include <memory>
 #include "wrapexpat.h"
 #include "parserdata.h"
 

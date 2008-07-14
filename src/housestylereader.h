@@ -24,6 +24,7 @@
 #include <map>
 #include <set>
 #include <vector>
+#include <memory>
 #include <expat.h>
 #include "wrapexpat.h"
 

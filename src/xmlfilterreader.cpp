@@ -23,6 +23,7 @@
 #include <expat.h>
 #include <map>
 #include <set>
+#include <cstring>
 #include "xmlfilterreader.h"
 
 using namespace std;

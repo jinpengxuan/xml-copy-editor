@@ -24,6 +24,7 @@
 #include <expat.h>
 #include <string>
 #include <map>
+#include <memory>
 #include "wrapexpat.h"
 
 struct AssociateXsdData : public ParserData

@@ -21,6 +21,7 @@
 #include <vector>
 #include <stdexcept>
 #include <expat.h>
+#include <cstring>
 #include "xmlassociatexsd.h"
 #include "xmlparseschemans.h"
 #include "readfile.h"

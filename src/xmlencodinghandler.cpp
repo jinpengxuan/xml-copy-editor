@@ -17,6 +17,7 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
+#include <cstring>
 #include "xmlencodinghandler.h"
 
 bool XmlEncodingHandler::hasDeclaration ( const std::string& utf8 )

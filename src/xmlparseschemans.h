@@ -23,6 +23,7 @@
 #include <vector>
 #include <expat.h>
 #include <string>
+#include <memory>
 #include "wrapexpat.h"
 
 struct ParseSchemaNsData : public ParserData

@@ -21,6 +21,7 @@
 #define XML_WORD_COUNT_H
 
 #include <string>
+#include <memory>
 #include "wrapexpat.h"
 
 struct WordCountData : public ParserData

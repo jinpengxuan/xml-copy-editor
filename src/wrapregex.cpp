@@ -21,6 +21,7 @@
 #include <string>
 #include <ctype.h>
 #include <stdexcept>
+#include <cstring>
 #include "wrapregex.h"
 #include "contexthandler.h"
 

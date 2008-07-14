@@ -22,6 +22,7 @@
 
 #include <expat.h>
 #include <string>
+#include <memory>
 #include "wrapexpat.h"
 
 struct EncodingData : public ParserData

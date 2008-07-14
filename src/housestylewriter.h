@@ -22,6 +22,7 @@
 
 #include <set>
 #include <string>
+#include <memory>
 #include <expat.h>
 #include "wrapexpat.h"
 #include "wrapregex.h"

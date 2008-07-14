@@ -24,6 +24,7 @@
 #include <stdexcept>
 #include <cmath>
 #include <climits>
+#include <cstring>
 #ifdef __WXMSW__
 #include <mem.h>
 #endif
