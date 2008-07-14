@@ -68,10 +68,12 @@ XmlCtrl::XmlCtrl (
 	validationThread = NULL;
 	validationStarted = false;
 	validationFinished = false;
-	validationRelease = false;
 	grammarFound = false;
 	validationRequired = (buffer) ? true : false; // NULL for plain XML template
 
+	validationReleasePtr = new bool;
+	*validationReleasePtr = false;
+	
 	currentMaxLine = 1;
 
 	applyProperties ( propertiesParameter );
@@ -121,6 +123,28 @@ XmlCtrl::XmlCtrl (
 	IndicatorSetStyle ( 2, wxSTC_INDIC_SQUIGGLE );
 	IndicatorSetForeground ( 0, *wxRED );
 }
+
+
+XmlCtrl::~XmlCtrl()
+{
+	attributeMap.clear();
+	elementMap.clear();
+	entitySet.clear();
+
+	if ( validationStarted && !validationFinished )
+	{
+		*validationReleasePtr = true;
+
+		// don't delete validationReleasePtr because the thread will check the value before exiting
+		// this means that 1 variable of type bool will be leaked in this case
+		// the alternative is waiting for the validation thread to finish, which can take anything up to several minutes
+		return;
+	}
+	
+	delete validationReleasePtr;
+		
+}
+
 
 // taken from wxStyledNotebook (c) Eran Ifrah <eranif@bezeqint.net>
 static wxColor LightColour ( const wxColour& color, int percent )
@@ -2028,18 +2052,18 @@ bool XmlCtrl::backgroundValidate (
 	wxCriticalSectionLocker locker ( xmlcopyeditorCriticalSection );
 	if ( validationStarted && !validationFinished )
 	{
-		validationRelease = true;
+		*validationReleasePtr = true;
 		return true; // wait for next idle cycle call from main app frame
 	}
 	validationRequired = false;
 	
-	validationRelease = false;
+	*validationReleasePtr = false;
 	validationThread = new ValidationThread(
 		buffer,
 		system,
 		&validationFinished,
 		&validationSuccess,
-		&validationRelease,
+		validationReleasePtr,
 		&validationPosition,
 		&validationMessage
 	);

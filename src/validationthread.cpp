@@ -1,4 +1,5 @@
 #include "wx/wx.h"
+#include "xmlctrl.h"
 #include "validationthread.h"
 #include "wrapxerces.h"
 #include <stdexcept>
@@ -31,17 +32,23 @@ void *ValidationThread::Entry()
 {
 	std::auto_ptr<WrapXerces> validator ( new WrapXerces() );
 	
+	{
+		//wxCriticalSectionLocker locker ( xmlcopyeditorCriticalSection );
 		if ( *myReleasePtr || TestDestroy()  )
 		{
 			Exit();
 			return NULL;
 		}
+	}
 	
 	bool res = validator->validateMemory (
 		myBuffer.c_str(),
 		mySystem.c_str(),
 		myBuffer.size() );
 	
+	
+	{
+		//wxCriticalSectionLocker locker ( xmlcopyeditorCriticalSection );
 		if ( *myReleasePtr  || TestDestroy() )
 		{
 			Exit();
@@ -60,13 +67,16 @@ void *ValidationThread::Entry()
 			*myPositionPtr = std::make_pair ( 0, 0 );
 			*myMessagePtr = "";
 		}
+	}
 	return NULL;
 }
 
 void ValidationThread::OnExit()
 {
-	if ( *myReleasePtr )
-		return;
-
-	*myFinishedPtr = true;
+	{
+		//wxCriticalSectionLocker locker ( xmlcopyeditorCriticalSection );
+		if ( *myReleasePtr )
+			return;
+		*myFinishedPtr = true;
+	}
 }

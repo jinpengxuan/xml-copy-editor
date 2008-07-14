@@ -107,15 +107,7 @@ class XmlCtrl: public wxStyledTextCtrl
 		    const wxPoint &position = wxDefaultPosition,
 		    const wxSize& size = wxDefaultSize,
 		    long style = 0 );
-		~XmlCtrl()
-		{
-			attributeMap.clear();
-			elementMap.clear();
-			entitySet.clear();
-			
-			// don't delete thread in case it's gone - just set the release flag
-			validationRelease = true;
-		}
+		~XmlCtrl();
 		int getType();
 		int getParentCloseAngleBracket ( int pos, int range = USHRT_MAX * 4 );
 		void applyProperties (
@@ -157,8 +149,8 @@ class XmlCtrl: public wxStyledTextCtrl
 		ValidationThread *validationThread;
 		bool validationStarted,
 			validationFinished,
-			validationSuccess,
-			validationRelease;
+			validationSuccess;
+		bool *validationReleasePtr;
 		std::pair<int, int> validationPosition;
 		std::string validationMessage;
 	
