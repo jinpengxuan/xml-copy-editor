@@ -26,6 +26,8 @@
 #include "replace.h"
 #include "getword.h"
 #include "pathresolver.h"
+
+#undef XMLCALL
 #include "catalogresolver.h"
 
 // Xerces-C req'd for Schema parsing
@@ -39,6 +41,7 @@
 #include <xercesc/validators/schema/SchemaValidator.hpp>
 #include <xercesc/validators/common/ContentSpecNode.hpp>
 #include <xercesc/validators/schema/SchemaSymbols.hpp>
+//#include "wrapxerces.h"
 
 using namespace xercesc;
 
@@ -84,7 +87,7 @@ void XMLCALL XmlPromptGenerator::starthandler (
 	if (d->isRootElement)
 	{
 		d->rootElement = el;
-		handleSchema ( d, el, attr );
+		handleSchema ( d, el, attr ); // experimental: schema has been pre-parsed
 		d->isRootElement = false;
 		if ( ! (d->elementMap.empty() )  )//if ( d->elementMap.size() == 1) // must be 1 for success
 		{
@@ -304,7 +307,8 @@ int XMLCALL XmlPromptGenerator::externalentityrefhandler (
 	if ( publicId )
 		stdPublicId = publicId;
 
-	std::string stdSystemId = CatalogResolver::lookupPublicId ( stdPublicId, d->catalogPath );
+	CatalogResolver cr ( d->catalogPath );
+	std::string stdSystemId = cr.lookupPublicId ( stdPublicId );
 	
 	if ( !stdSystemId.empty() )
 	{
@@ -312,6 +316,7 @@ int XMLCALL XmlPromptGenerator::externalentityrefhandler (
 		Replace::run ( stdSystemId, "%20", " ", false );
 
 #ifdef __WXMSW__
+       Replace::run ( stdSystemId, "//C:/", "C:\\", false );
        Replace::run ( stdSystemId, "/C:/", "C:\\", false );
        Replace::run ( stdSystemId, "/", "\\", false );
 #endif
@@ -523,6 +528,3 @@ void XmlPromptGenerator::handleSchema (
     delete parser;
 	XMLPlatformUtils::Terminate();
 }
-
-
-

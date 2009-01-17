@@ -18,7 +18,7 @@
  */
 
 #include "wrapexpat.h"
-#include "expat.h"
+//#include "expat.h"
 #include <stdexcept>
 #include <iostream>
 #include <sstream>

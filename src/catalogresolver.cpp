@@ -18,13 +18,21 @@
  */
 
 #include <memory>
-#include "wraplibxml.h"
 #include "catalogresolver.h"
 
-std::string CatalogResolver::lookupPublicId (
-    const std::string& publicId,
-    const std::string& catalogPath )
+CatalogResolver::CatalogResolver( const std::string& catalogPath )
 {
-	std::auto_ptr<WrapLibxml> libxml ( new WrapLibxml ( false, catalogPath ) );
-	return libxml->lookupPublicId ( publicId );
+	wl = new WrapLibxml ( false, catalogPath );
+}
+
+CatalogResolver::~CatalogResolver()
+{
+	delete wl;
+}
+
+std::string CatalogResolver::lookupPublicId (
+    const std::string& publicId)
+{
+	//std::auto_ptr<WrapLibxml> libxml ( new WrapLibxml ( false, catalogPath ) );
+	return wl->lookupPublicId ( publicId );
 }

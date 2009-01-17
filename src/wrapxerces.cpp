@@ -31,7 +31,7 @@
 
 using namespace xercesc;
 
-WrapXerces::WrapXerces()
+WrapXerces::WrapXerces( std::string catalogPath, std::string catalogUtilityPath )
 {
 	try
 	{
@@ -42,11 +42,13 @@ WrapXerces::WrapXerces()
 		throw std::runtime_error ( "Cannot initialize Xerces" );
 	}
 	errorPosition = std::make_pair ( 1, 1 );
+	catalogResolver = new XercesCatalogResolver( catalogPath, catalogUtilityPath );
 }
 
 WrapXerces::~WrapXerces()
 {
-	XMLPlatformUtils::Terminate();
+	delete catalogResolver;
+	XMLPlatformUtils::Terminate();	
 }
 
 bool WrapXerces::validate ( const std::string& fileName )
@@ -61,11 +63,15 @@ bool WrapXerces::validate ( const std::string& fileName )
 	parser->setFeature ( XMLUni::fgXercesValidationErrorAsFatal, true );
 	parser->setFeature ( XMLUni::fgXercesLoadExternalDTD, true );
 
+
 	DefaultHandler handler;
 	MySAX2Handler mySAX2Handler;
 	parser->setContentHandler ( &handler );
 	parser->setErrorHandler ( &mySAX2Handler );
-	parser->setEntityResolver ( &handler );
+
+	//DefaultHandler handler;
+	//parser->setEntityResolver ( &handler );
+	parser->setEntityResolver ( catalogResolver );
 
 	try
 	{
@@ -112,7 +118,7 @@ bool WrapXerces::validateMemory (
 	parser->setFeature ( XMLUni::fgSAX2CoreValidation, true );
 	parser->setFeature ( XMLUni::fgXercesDynamic, true );
 	parser->setFeature ( XMLUni::fgXercesSchema, true );
-	parser->setFeature ( XMLUni::fgXercesSchemaFullChecking, true );
+	//parser->setFeature ( XMLUni::fgXercesSchemaFullChecking, true );
 	parser->setFeature ( XMLUni::fgXercesValidationErrorAsFatal, true );
 	parser->setFeature ( XMLUni::fgXercesLoadExternalDTD, true );
 	
@@ -120,7 +126,8 @@ bool WrapXerces::validateMemory (
 	MySAX2Handler mySAX2Handler;
 	parser->setContentHandler ( &handler );
 	parser->setErrorHandler ( &mySAX2Handler );
-	parser->setEntityResolver ( &handler );
+	//parser->setEntityResolver ( &handler );
+	parser->setEntityResolver ( catalogResolver );
 
 	XMLByte* xmlBuffer = (XMLByte*) buffer;
         MemBufInputSource source (

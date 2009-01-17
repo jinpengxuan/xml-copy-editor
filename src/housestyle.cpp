@@ -29,6 +29,10 @@ HouseStyle::HouseStyle (
     const std::string& filterDirectoryParameter,
     const std::string& filterFileParameter,
     const std::string& pathSeparatorParameter,
+#ifdef __WXMSW__
+    const std::string& aspellDataPathParameter,
+    const std::string& aspellDictPathParameter,
+#endif
     int contextRangeParameter ) :
 		type ( typeParameter ),
 		buffer ( bufferParameter ),
@@ -37,11 +41,16 @@ HouseStyle::HouseStyle (
 		filterDirectory ( filterDirectoryParameter ),
 		filterFile ( filterFileParameter ),
 		pathSeparator ( pathSeparatorParameter ),
+#ifdef __WXMSW__
+       aspellDataPath ( aspellDataPathParameter ),
+       aspellDictPath ( aspellDictPathParameter ),
+#endif
 		contextRange ( contextRangeParameter ),
 		ruleVector ( new std::vector<boost::shared_ptr<Rule> > ),
 		dictionary ( new StringSet<char> ),
 		passiveDictionary ( new StringSet<char> )
-{}
+{     
+}
 
 HouseStyle::~HouseStyle()
 {}
@@ -199,7 +208,13 @@ bool HouseStyle::createReport()
 	WrapAspell *spellcheck = NULL;
 	try {
 		if (type == HS_TYPE_SPELL)
-			spellcheck = new WrapAspell( ruleFile );
+			spellcheck = new WrapAspell(
+            ruleFile, // carries lang information
+#ifdef __WXMSW__
+                aspellDataPath,
+                aspellDictPath
+#endif            
+             );
 	}
 	catch (...)
 	{
@@ -294,7 +309,7 @@ bool HouseStyle::createReport()
 */
 		}
 	}
-	delete spellcheck; // ok if NULL
+	delete spellcheck;
 	return true;
 }
 

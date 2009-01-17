@@ -158,10 +158,10 @@ BEGIN_EVENT_TABLE ( MyFrame, wxFrame )
 	EVT_UPDATE_UI ( wxID_CLOSE, MyFrame::OnUpdateDocRange )
 	EVT_UPDATE_UI ( wxID_SAVEAS, MyFrame::OnUpdateDocRange )
 	EVT_UPDATE_UI ( wxID_CLOSE_ALL, MyFrame::OnUpdateCloseAll )
-	// EVT_UPDATE_UI_RANGE ( ID_SPLIT_TAB_TOP, ID_SPLIT_TAB_LEFT, MyFrame::OnUpdateCloseAll )
-	EVT_UPDATE_UI ( wxID_REVERT, MyFrame::OnUpdateSaveUndo )
+	EVT_UPDATE_UI_RANGE ( ID_SPLIT_TAB_TOP, ID_SPLIT_TAB_LEFT, MyFrame::OnUpdateCloseAll )
+	EVT_UPDATE_UI ( wxID_REVERT, MyFrame::OnUpdateUndo )
 	EVT_UPDATE_UI ( wxID_SAVE, MyFrame::OnUpdateDocRange ) // always allow save if doc present
-	EVT_UPDATE_UI ( wxID_UNDO, MyFrame::OnUpdateSaveUndo )
+	EVT_UPDATE_UI ( wxID_UNDO, MyFrame::OnUpdateUndo )
 	EVT_UPDATE_UI ( wxID_REDO, MyFrame::OnUpdateRedo )
 	EVT_UPDATE_UI ( wxID_PASTE, MyFrame::OnUpdatePaste )
 	EVT_UPDATE_UI ( wxID_CUT, MyFrame::OnUpdateCutCopy )
@@ -174,18 +174,18 @@ BEGIN_EVENT_TABLE ( MyFrame, wxFrame )
 	EVT_UPDATE_UI ( ID_RELOAD, MyFrame::OnUpdateReload )
 	EVT_IDLE ( MyFrame::OnIdle )
 	EVT_AUINOTEBOOK_PAGE_CLOSE ( wxID_ANY, MyFrame::OnPageClosing )
-	#ifdef __WXMSW__
+#ifdef __WXMSW__
 	EVT_DROP_FILES ( MyFrame::OnDropFiles )
-	#endif
+#endif
 END_EVENT_TABLE()
 
 IMPLEMENT_APP ( MyApp)
 
 MyApp::MyApp() : checker ( NULL ), server ( NULL ), connection ( NULL ),
 #ifdef __WXMSW__
-		config ( new wxConfig ( _T ( "SourceForge Project\\XML Copy Editor" ) ) )
+       config ( new wxFileConfig ( _T ( ".xmlcopyeditor" ) ) )//( _T ( "SourceForge Project\\XML Copy Editor" ) ) )
 #else
-		config ( new wxConfig ( _T ( "xmlcopyeditor" ) ) )
+		config ( new wxFileConfig ( _T ( "xmlcopyeditor" ) ) )
 #endif
 {
 	lang = 0;
@@ -315,7 +315,7 @@ bool MyApp::OnInit()
 
 	if ( singleInstanceCheck )
 	{
-		checker = new wxSingleInstanceChecker ( name );
+        checker = new wxSingleInstanceChecker ( name );
 		while ( checker->IsAnotherRunning() )
 		{
 			// attempt calling server
@@ -336,7 +336,8 @@ bool MyApp::OnInit()
 					{
 						argument = ( wxString ) this->argv[i];
 						argument = PathResolver::run ( argument );
-						connection->Poke ( argument, whatBuffer );
+						if ( ! connection->Poke ( argument, whatBuffer ) )
+						   break;
 					}
 				}
 				else
@@ -529,7 +530,7 @@ void MyApp::HandleEvent ( wxEvtHandler *handler, wxEventFunction func, wxEvent& 
 
 MyFrame::MyFrame (
     const wxString& title,
-    wxConfig *configParameter,
+    wxFileConfig *configParameter,
     wxLocale& locale,
     bool singleInstanceCheckParameter,
     int langParameter ) :
@@ -981,8 +982,8 @@ MyFrame::~MyFrame()
 	config->Write ( _T ( "protectTags" ), protectTags );
 	config->Write ( _T ( "visibilityState" ), visibilityState );
 	config->Write ( _T ( "browserCommand" ), browserCommand );
-	config->Write ( _T ( "layout" ), layout );
-	config->Write ( _T ( "showLocationPane" ), manager.GetPane ( locationPanel ).IsShown() );
+	// config->Write ( _T ( "layout" ), layout ); // omit while unused
+ 	config->Write ( _T ( "showLocationPane" ), manager.GetPane ( locationPanel ).IsShown() );
 	config->Write ( _T ( "showInsertChildPane" ), manager.GetPane ( insertChildPanel ).IsShown() );
 	config->Write ( _T ( "showInsertSiblingPane" ), manager.GetPane ( insertSiblingPanel ).IsShown() );
 	config->Write ( _T ( "showInsertEntityPane" ), manager.GetPane ( insertEntityPanel ).IsShown() );
@@ -1451,22 +1452,13 @@ void MyFrame::OnPaste ( wxCommandEvent& event )
 		wxTextDataObject data;
 		wxTheClipboard->GetData ( data );
 		wxString buffer = data.GetText();
+		wxTheClipboard->Close();
 		xmliseWideTextNode ( buffer );
 		doc->adjustCursor();
 		doc->AddText ( buffer );
 	}
 	else
 		doc->Paste();
-
-	/*
-	XmlDoc *doc;
-	doc = getActiveDocument();
-	if (doc && protectTags)
-	  doc->adjustCursor();
-
-	doc->setValidationRequired(true);
-	event.Skip(); // new
-	*/
 }
 
 void MyFrame::OnIdle ( wxIdleEvent& event )
@@ -1474,6 +1466,15 @@ void MyFrame::OnIdle ( wxIdleEvent& event )
 	wxStatusBar *status = GetStatusBar();
 	if ( !status )
 		return;
+
+    /*
+    // IPC handling: take one file from fileQueue at a time
+    if ( !fileQueue.empty() )
+    {
+      openFile ( * ( fileQueue.begin() ) );
+      fileQueue.erase( fileQueue.begin() );  
+    }
+    */
 
 	// update attributes hidden field even if no document loaded
 	wxString currentHiddenStatus = status->GetStatusText ( STATUS_HIDDEN );
@@ -1557,7 +1558,7 @@ void MyFrame::OnIdle ( wxIdleEvent& event )
 	if ( frameTitle != docTitle )
 		SetTitle ( docTitle );
 
-	// update modified field
+    // update modified field
 	if ( !mainBook )
 		return;
 	int index = mainBook->GetSelection();
@@ -1799,6 +1800,7 @@ void MyFrame::OnPasteNewDocument ( wxCommandEvent& event )
 	buffer.Append ( _T ( "</root>\n" ) );
 
 	newDocument ( buffer );
+	wxTheClipboard->Close();
 }
 
 void MyFrame::OnDialogFind ( wxFindDialogEvent& event )
@@ -2278,7 +2280,6 @@ void MyFrame::OnSplitTab ( wxCommandEvent& event )
 	direction = wxAUI_NB_RIGHT;
 	switch ( id )
 	{
-			/*
 			    ID_SPLIT_TAB_TOP:
 			        direction = wxAUI_NB_TOP;
 			        break;
@@ -2291,7 +2292,6 @@ void MyFrame::OnSplitTab ( wxCommandEvent& event )
 			    ID_SPLIT_TAB_LEFT:
 			        direction = wxAUI_NB_LEFT;
 			        break;
-			*/
 		default:
 			direction = wxAUI_NB_RIGHT;
 			break;
@@ -2726,6 +2726,7 @@ void MyFrame::newDocument ( const std::string& s, const std::string& path, bool 
 	          s.c_str(), // modified
 	          s.size(), // new
 	          catalogPath,
+	          catalogUtilityPath,
 	          path,
 	          auxPath );
 	mainBook->AddPage ( ( wxWindow * ) doc, documentLabel, true );
@@ -3040,6 +3041,7 @@ bool MyFrame::openFile ( wxString& fileName, bool largeFile )
 	    finalBuffer,
 	    finalBufferLen,
 	    catalogPath,
+	    catalogUtilityPath,
 	    ( const char * ) fileName.mb_str ( wxConvLocal ),
 	    auxPath );
 #ifdef __WXMSW__
@@ -3114,7 +3116,8 @@ bool MyFrame::openFile ( wxString& fileName, bool largeFile )
 	if ( !largeFile && ( properties.validateAsYouType && doc->getGrammarFound() ) )
 	{
 		statusProgress ( _T ( "Validating document..." ) );
-		doc->backgroundValidate ( finalBuffer, doc->getFullFileName().mb_str(wxConvUTF8), finalBufferLen );
+		//doc->backgroundValidate ( finalBuffer, doc->getFullFileName().mb_str(wxConvUTF8), finalBufferLen );
+		doc->backgroundValidate();
 		statusProgress ( wxEmptyString );
 	}
 
@@ -3262,9 +3265,13 @@ void MyFrame::OnSpelling ( wxCommandEvent& event )
 	                               ruleSetDir,
 	                               filterDir,
 	                               browserCommand,
-				       ( type == ID_TYPE_SPELL ) ? dictionaryPreset : ruleSetPreset,
+				                   ( type == ID_TYPE_SPELL ) ? dictionaryPreset : ruleSetPreset,
 	                               filterPreset,
-					type,
+ #ifdef __WXMSW__
+                                   aspellDataPath,
+                                   aspellDictPath,
+ #endif
+					               type,
 	                               ( success ) ? false : true,
 	                               stylePosition,
 	                               styleSize ) );
@@ -3511,7 +3518,7 @@ void MyFrame::OnUpdateFindAgain ( wxUpdateUIEvent& event )
 	event.Enable ( true );
 }
 
-void MyFrame::OnUpdateSaveUndo ( wxUpdateUIEvent& event )
+void MyFrame::OnUpdateUndo ( wxUpdateUIEvent& event )
 {
 	XmlDoc *doc;
 	if ( ( doc = getActiveDocument() ) == NULL )
@@ -3519,8 +3526,11 @@ void MyFrame::OnUpdateSaveUndo ( wxUpdateUIEvent& event )
 		event.Enable ( false );
 		return;
 	}
-	//event.Enable((doc->CanUndo()) ? true : false);
+#ifdef __WXMSW__
+	event.Enable((doc->CanUndo()) ? true : false);
+#else
 	event.Enable ( ( doc->GetModify() ) ? true : false );
+#endif
 }
 
 void MyFrame::OnUpdateRedo ( wxUpdateUIEvent& event )
@@ -3760,6 +3770,7 @@ void MyFrame::OnValidateSchema ( wxCommandEvent& event )
 	// branch: if no XML Schema found, use LibXML DTD parser instead
 	// so the catalog is read - switch when Xerces-C implements
 	// XMLCatalogResolver
+#ifdef __WXMSW__
 	{
 		std::string rawBuffer, schemaLocation;
 		getRawText ( doc, rawBuffer );
@@ -3771,6 +3782,7 @@ void MyFrame::OnValidateSchema ( wxCommandEvent& event )
 			return;
 		}
 	}
+#endif
 
 	wxString fileName;
 	std::string tempFileNameLocal;
@@ -3800,7 +3812,9 @@ void MyFrame::OnValidateSchema ( wxCommandEvent& event )
 	std::string error;
 	wxString wideError;
 
-	std::auto_ptr<WrapXerces> validator ( new WrapXerces() );
+	std::auto_ptr<WrapXerces> validator (
+                                        new WrapXerces( catalogPath, catalogUtilityPath )
+                              );
 	std::string fileNameLocal = ( const char * ) fileName.mb_str ( wxConvLocal );
 	if ( !validator->validate ( fileNameLocal ) )
 	{
@@ -3813,11 +3827,10 @@ void MyFrame::OnValidateSchema ( wxCommandEvent& event )
 		int cursorPos =
 		    doc->PositionFromLine ( posPair.first - 1 );
 		doc->SetSelection ( cursorPos, cursorPos );
-		doc->setErrorIndicator ( posPair.first - 1, 0 ); //posPair.second );
+		doc->setErrorIndicator ( posPair.first - 1, 0 );
 	}
 	else
 		documentOk ( _ ( "valid" ) );
-//#endif
 }
 
 void MyFrame::OnXPath ( wxCommandEvent& event )
@@ -4605,7 +4618,7 @@ bool MyFrame::saveFile ( XmlDoc *doc, wxString& fileName, bool checkLastModified
 					finalBuffer = iconvBuffer; // iconvBuffer will be incremented by iconv
 					size_t nconv;
 
-#ifdef __WXMSW_
+#ifdef __WXMSW__
 					const char *
 #else
 					char *
@@ -4748,7 +4761,8 @@ bool MyFrame::saveFile ( XmlDoc *doc, wxString& fileName, bool checkLastModified
 	if ( properties.validateAsYouType && isXml )
 	{
 		doc->clearErrorIndicators();
-		doc->backgroundValidate ( utf8Buffer.c_str(), doc->getFullFileName().mb_str(wxConvUTF8), utf8Buffer.size() );
+		//doc->backgroundValidate ( utf8Buffer.c_str(), doc->getFullFileName().mb_str(wxConvUTF8), utf8Buffer.size() );
+		doc->backgroundValidate();
 	}
 
 	if ( !unlimitedUndo )
@@ -4950,13 +4964,13 @@ wxMenuBar *MyFrame::getMenuBar()
 			break;
 	}
 
-	/* WAIT FOR AUI LIBRARY TO SUPPORT THIS - currently always splits left
+	 /* WAIT FOR AUI LIBRARY TO SUPPORT THIS - currently always splits left
 	wxMenu *splitTabMenu = new wxMenu;
 	splitTabMenu->Append ( ID_SPLIT_TAB_TOP, _ ( "&Top" ), _ ( "Top" ));
 	splitTabMenu->Append ( ID_SPLIT_TAB_RIGHT, _ ( "&Right" ), _ ( "Right" ));
 	splitTabMenu->Append ( ID_SPLIT_TAB_BOTTOM, _ ( "&Bottom" ), _ ( "Bottom" ));
 	splitTabMenu->Append ( ID_SPLIT_TAB_LEFT, _ ( "&Left" ), _ ( "Left" ));
-	*/
+	 */
 
 	viewMenu = new wxMenu; // use class-wide data member
 	viewMenu->Append ( ID_PREVIOUS_DOCUMENT, _ ( "&Previous Document\tCtrl+PgUp" ), _ ( "Previous Document" ) );
@@ -5333,11 +5347,7 @@ wxToolBar *MyFrame::getToolBar()
 	    wxTB_HORIZONTAL |
 	    wxTB_DOCKABLE );
 	int w, h;
-//#ifdef __WXMSW__
 	w = saveBitmap.GetWidth(), h = saveBitmap.GetHeight();
-//#else
-//    w = h = 24;
-//#endif
 	toolBar->SetToolBitmapSize ( wxSize ( w, h ) );
 
 	toolBar->AddTool (
@@ -5623,6 +5633,8 @@ void MyFrame::updatePaths()
 	    applicationDir + wxFileName::GetPathSeparator() + _T ( "catalog" ) +
 	    wxFileName::GetPathSeparator() + _T ( "catalog" );
 	catalogPath = wideCatalogPath.mb_str ( wxConvLocal );
+	wxString wideCatalogUtilityPath = applicationDir + wxFileName::GetPathSeparator() + _T ( "xmlcatalog" );
+	catalogUtilityPath = wideCatalogUtilityPath.mb_str ( wxConvLocal );
 	wxString wideXslDtdPath =
 	    applicationDir + wxFileName::GetPathSeparator() + _T ( "dtd" ) +
 	    wxFileName::GetPathSeparator() + _T ( "xslt10.dtd" );
@@ -5643,6 +5655,12 @@ void MyFrame::updatePaths()
 	    applicationDir + wxFileName::GetPathSeparator() + _T ( "dtd" ) +
 	    wxFileName::GetPathSeparator() + _T ( "xliff.dtd" );
 	xliffDtdPath = wideXliffDtdPath.mb_str ( wxConvLocal );
+	wxString wideAspellDataPath = applicationDir + wxFileName::GetPathSeparator() +
+        _T ( "aspell" ) + wxFileName::GetPathSeparator() + _T ( "data" );
+    aspellDataPath = wideAspellDataPath.mb_str ( wxConvLocal );
+	wxString wideAspellDictPath = applicationDir + wxFileName::GetPathSeparator() +
+        _T ( "aspell" ) + wxFileName::GetPathSeparator() + _T ( "dict" );
+    aspellDictPath = wideAspellDictPath.mb_str ( wxConvLocal );
 }
 
 void MyFrame::OnAssociate ( wxCommandEvent& event )
@@ -6018,3 +6036,7 @@ void MyFrame::setStrictScrolling ( bool b )
 	                       ( b ) ? 10 : 0 );
 }
 
+void MyFrame::addToFileQueue ( wxString& fileName )
+{
+     fileQueue.push_back ( fileName );
+}

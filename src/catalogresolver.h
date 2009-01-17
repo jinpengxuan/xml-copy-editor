@@ -21,13 +21,17 @@
 #define CATALOG_RESOLVER_H
 
 #include <string>
+#include "wraplibxml.h"
 
 class CatalogResolver
 {
 	public:
-		static std::string lookupPublicId (
-		    const std::string& publicId,
-		    const std::string& catalogPath );
+		CatalogResolver( const std::string& catalogPath );
+		~CatalogResolver();
+		std::string lookupPublicId (
+		    const std::string& publicId);
+	private:
+		WrapLibxml *wl;
 };
 
 #endif

@@ -41,6 +41,7 @@
 #include <wx/snglinst.h>
 #include <wx/ipc.h>
 #include <wx/intl.h>
+#include <wx/fileconf.h>
 #include <utility>
 #include <string>
 #include <set>
@@ -184,7 +185,7 @@ class MyApp : public wxApp
 		MyClientConnection *connection;
 		bool singleInstanceCheck;
 		int lang;
-		std::auto_ptr<wxConfig> config;
+		std::auto_ptr<wxFileConfig> config;
 };
 
 // forward declarations
@@ -203,7 +204,7 @@ class MyFrame : public wxFrame
 	public:
 		MyFrame (
 		    const wxString& title,
-		    wxConfig *configParameter,
+		    wxFileConfig *configParameter,
 		    wxLocale& locale,
 		    bool singleInstanceCheck,
 		    int langParameter );
@@ -266,7 +267,7 @@ class MyFrame : public wxFrame
 		void OnIdle ( wxIdleEvent& event );
 		void OnUpdateClosePane ( wxUpdateUIEvent& event );
 		void OnUpdateCloseAll ( wxUpdateUIEvent& event );
-		void OnUpdateSaveUndo ( wxUpdateUIEvent& event );
+		void OnUpdateUndo ( wxUpdateUIEvent& event );
 		void OnUpdatePreviousDocument ( wxUpdateUIEvent& event );
 		void OnUpdateSavedOnly ( wxUpdateUIEvent& event );
 		void OnUpdateNextDocument ( wxUpdateUIEvent& event );
@@ -337,10 +338,11 @@ class MyFrame : public wxFrame
 		bool isOpen ( const wxString& fileName );
 		bool activateTab ( const wxString& fileName );
 		void reloadTab();
+		void addToFileQueue ( wxString& fileName );
 	private:
 		wxAuiManager manager;
-		wxConfig *config; // owned by MyApp
-		wxLocale& myLocale;
+		wxFileConfig *config; // owned by MyApp
+        wxLocale& myLocale;
 		bool singleInstanceCheck;
 		int lang, lastPos;
 		wxLogNull logTarget;
@@ -365,15 +367,15 @@ class MyFrame : public wxFrame
 		MyNotebook *mainBook;
 		MyHtmlPane *htmlReport;
 
-		std::string catalogPath, xslDtdPath, rssDtdPath, lzxDtdPath, xtmDtdPath,
-		xliffDtdPath;
+		std::string catalogPath, catalogUtilityPath, xslDtdPath, rssDtdPath, lzxDtdPath, xtmDtdPath,
+		xliffDtdPath, aspellDataPath, aspellDictPath;
 		std::pair<int, int> controlCoordinates;
 		std::map<std::string, std::map<std::string, std::set<std::string> > >
 		promptMap;
 		std::map<int, wxString> validationPresetMap;
 		std::set<wxString> openFileSet;
 		std::set<wxString> openLargeFileSet;
-		std::vector<wxString> tempFileVector;
+		std::vector<wxString> tempFileVector, fileQueue;
 		int documentCount,
 		framePosX,
 		framePosY,
@@ -385,33 +387,33 @@ class MyFrame : public wxFrame
 		wxPoint stylePosition, aboutPosition;
 		wxSize styleSize;
 		wxString applicationDir,
-		ruleSetPreset,
-		dictionaryPreset,
-		filterPreset,
-		ruleSetDir,
-		filterDir,
-		binDir,
-		templateDir,
-		helpDir,
-		rngDir,
-		htmlDir,
-		pngDir,
-		xpathExpression,
-		lastDtdPublic,
-		lastDtdSystem,
-		lastSchema,
-		lastSchemaNamespace,
-		lastXslStylesheet,
-		lastSchemaNamespaceAux,
-		lastRelaxNGSchema,
-		lastDtdPublicAux,
-		openTabsOnClose,
-		browserCommand,
-		layout,
-		defaultLayout,
-		lastParent,
-		lastGrandparent,
-		commandString;
+		  ruleSetPreset,
+		  dictionaryPreset,
+		  filterPreset,
+		  ruleSetDir,
+		  filterDir,
+		  binDir,
+		  templateDir,
+		  helpDir,
+		  rngDir,
+		  htmlDir,
+		  pngDir,
+		  xpathExpression,
+		  lastDtdPublic,
+		  lastDtdSystem,
+		  lastSchema,
+		  lastSchemaNamespace,
+		  lastXslStylesheet,
+		  lastSchemaNamespaceAux,
+		  lastRelaxNGSchema,
+		  lastDtdPublicAux,
+		  openTabsOnClose,
+		  browserCommand,
+		  layout,
+		  defaultLayout,
+		  lastParent,
+		  lastGrandparent,
+		  commandString;
 		bool globalReplaceAllDocuments,
 		toolbarVisible,
 		protectTags,

@@ -128,3 +128,4 @@ XmlEncodingHandler::getEncodingValueLimits ( const std::string& utf8 )
 		return make_pair ( -1, -1 );
 	return make_pair ( start - buffer, end - start );
 }
+

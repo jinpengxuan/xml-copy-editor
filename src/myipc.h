@@ -20,6 +20,8 @@
 #ifndef MY_IPC_H
 #define MY_IPC_H
 
+//#define wxUSE_DDE_FOR_IPC 0
+
 #include <wx/wx.h>
 #include <wx/ipc.h>
 

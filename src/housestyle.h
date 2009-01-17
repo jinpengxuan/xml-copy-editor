@@ -31,7 +31,6 @@
 #include "xmlrulereader.h"
 #include "housestylereader.h"
 #include "xmlfilterreader.h"
-//#include "spellcheck.h"
 #include "wrapaspell.h"
 #include "casehandler.h"
 
@@ -51,6 +50,10 @@ class HouseStyle
 		    const std::string& filterDirectoryParameter,
 		    const std::string& filterFileParameter,
 		    const std::string& pathSeparatorParameter,
+#ifdef __WXMSW__
+                const std::string& aspellDataPathParameter,
+                const std::string& aspellDictPathParameter,
+#endif
 		    int contextRangeParameter );
 		~HouseStyle();
 		bool createReport();
@@ -59,13 +62,18 @@ class HouseStyle
 	private:
 		int type;
 		std::string
-		buffer,
-		ruleDirectory,
-		ruleFile,
-		filterDirectory,
-		filterFile,
-		pathSeparator,
-		error;
+		           buffer,
+		           ruleDirectory,
+		           ruleFile,
+		           filterDirectory,
+		           filterFile,
+		           pathSeparator,
+		           error,
+#ifdef __WXMSW__
+                   aspellDataPath,
+                   aspellDictPath
+#endif
+                   ;
 		int contextRange;
 		boost::shared_ptr<std::vector<boost::shared_ptr<Rule> > > ruleVector;
 		std::map<std::string, std::map<std::string, std::set<std::string> > >

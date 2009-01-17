@@ -8,6 +8,8 @@
 ValidationThread::ValidationThread (
 	const char *buffer,
 	const char *system,
+	const char *catalogPath,
+	const char *catalogUtilityPath,
 	bool *finished,
 	bool *success,
 	bool *release,
@@ -21,6 +23,8 @@ ValidationThread::ValidationThread (
 
 	myBuffer = buffer;
 	mySystem = system;
+	myCatalogPath = catalogPath;
+	myCatalogUtilityPath = catalogUtilityPath;
 	myFinishedPtr = finished;
 	mySuccessPtr = success;
 	myReleasePtr = release;
@@ -30,7 +34,9 @@ ValidationThread::ValidationThread (
 
 void *ValidationThread::Entry()
 {
-	std::auto_ptr<WrapXerces> validator ( new WrapXerces() );
+	std::auto_ptr<WrapXerces> validator ( new WrapXerces(
+                              myCatalogPath,
+                              myCatalogUtilityPath ) );
 	
 	{
 		//wxCriticalSectionLocker locker ( xmlcopyeditorCriticalSection );
@@ -45,8 +51,6 @@ void *ValidationThread::Entry()
 		myBuffer.c_str(),
 		mySystem.c_str(),
 		myBuffer.size() );
-	
-	
 	{
 		//wxCriticalSectionLocker locker ( xmlcopyeditorCriticalSection );
 		if ( *myReleasePtr  || TestDestroy() )

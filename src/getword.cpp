@@ -77,7 +77,7 @@ bool GetWord::isWordCharacter ( char *s, size_t *bytes )
 
 	unsigned char *us = ( unsigned char * ) s;
 	if (
-	    *us < 65 ||
+	    ( *us < 65  && *us != 45 ) ||
 	    ( *us > 90 && *us < 97 ) ||
 	    ( *us > 123 && *us < 128 )
 	)

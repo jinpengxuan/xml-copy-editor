@@ -29,13 +29,20 @@
        #include "aspellpaths.h"
 #endif
 
-WrapAspell::WrapAspell ( std::string lang )
+WrapAspell::WrapAspell (
+                       std::string lang
+#ifdef __WXMSW__
+                       ,
+                       const std::string& aspellDataPathParameter,
+                       const std::string& aspellDictPathParameter
+#endif
+)
 {
 	spell_config = new_aspell_config();
 	
 #ifdef __WXMSW__
-       aspell_config_replace ( spell_config, "data-dir", ASPELL_DATA_PATH );
-       aspell_config_replace ( spell_config, "dict-dir", ASPELL_DICT_PATH );
+       aspell_config_replace ( spell_config, "data-dir", aspellDataPathParameter.c_str() );//ASPELL_DATA_PATH );
+       aspell_config_replace ( spell_config, "dict-dir", aspellDictPathParameter.c_str() );//ASPELL_DICT_PATH );
 #endif
 	
 	aspell_config_replace ( spell_config, "lang", lang.c_str() );	
@@ -101,4 +108,3 @@ bool WrapAspell::checkWord ( char *s, size_t len )
 {
 	return aspell_speller_check ( spell_checker, s, len ); 
 }
-

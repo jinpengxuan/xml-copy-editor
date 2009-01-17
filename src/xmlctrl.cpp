@@ -21,7 +21,7 @@
 #include "xmlpromptgenerator.h"
 #include "xmlshallowvalidator.h"
 #include "xmlencodinghandler.h"
-#include "wrapxerces.h"
+//#include "wrapxerces.h"
 #include "xmlcopyeditor.h" // needed to enable validation-as-you-type alerts
 #include <utility>
 #include <memory>
@@ -53,6 +53,7 @@ XmlCtrl::XmlCtrl (
     const char *buffer, // could be NULL
     size_t bufferLen,
     const std::string& catalogPathParameter,
+    const std::string& catalogUtilityPathParameter,
     const std::string& basePathParameter,
     const std::string& auxPathParameter,
     const wxPoint& position,
@@ -62,6 +63,7 @@ XmlCtrl::XmlCtrl (
 		protectTags ( protectTagsParameter ),
 		visibilityState ( visibilityStateParameter ),
 		catalogPath ( catalogPathParameter ),
+		catalogUtilityPath ( catalogUtilityPathParameter ),
 		basePath ( basePathParameter ),
 		auxPath ( auxPathParameter )
 {
@@ -142,7 +144,6 @@ XmlCtrl::~XmlCtrl()
 	}
 	
 	delete validationReleasePtr;
-		
 }
 
 
@@ -244,7 +245,7 @@ void XmlCtrl::handleBackspace ( wxKeyEvent& event )
 
 	if ( canMoveLeftAt ( GetCurrentPos() ) )
 	{
-		event.Skip();
+		DeleteBack();//event.Skip();
 		return;
 	}
 
@@ -269,13 +270,13 @@ void XmlCtrl::handleBackspace ( wxKeyEvent& event )
 			if ( *protectTags )
 				adjustSelection();
 			else
-				event.Skip();
+				DeleteBack();//event.Skip();
 			return;
 		}
 		if ( !properties.deleteWholeTag )
 		{
 			if ( ! ( *protectTags ) )
-				event.Skip();
+				DeleteBack();//event.Skip();
 			return;
 		}
 		// delete tag to left of caret
@@ -352,7 +353,11 @@ void XmlCtrl::handleDelete ( wxKeyEvent& event )
 	end = GetSelectionEnd();
 	startLine = LineFromPosition ( start );
 	endLine = LineFromPosition ( end );
-	if ( startLine != endLine )
+	
+	// add test so range unindentation only happens when caret is flush with left margin
+	int column = GetColumn ( GetCurrentPos() );
+	
+	if ( startLine != endLine && !column)
 	{
 		if ( startLine > endLine )
 		{
@@ -398,13 +403,13 @@ void XmlCtrl::handleDelete ( wxKeyEvent& event )
 				if ( *protectTags )
 					adjustSelection();
 				else
-					event.Skip();
+					DeleteBack();//event.Skip();
 				return;
 			}
 			if ( !properties.deleteWholeTag )
 			{
 				if ( ! ( *protectTags ) )
-					event.Skip();
+					DeleteBack();//event.Skip();
 				return;
 			}
 
@@ -414,7 +419,7 @@ void XmlCtrl::handleDelete ( wxKeyEvent& event )
 			{
 				if ( limitPos > ( currentPos + BUFSIZ ) )
 				{
-					event.Skip();
+					DeleteBack();//event.Skip();
 					return;
 				}
 			}
@@ -445,7 +450,7 @@ void XmlCtrl::handleDelete ( wxKeyEvent& event )
 					break;
 				else if ( GetCharAt ( limitPos ) == '\n' || limitPos > ( currentPos + BUFSIZ ) )
 				{
-					event.Skip();
+					DeleteBack();//event.Skip();
 					return;
 				}
 			}
@@ -1434,12 +1439,12 @@ void XmlCtrl::setColorScheme ( int scheme )
 			StyleSetBackground ( wxSTC_STYLE_DEFAULT, *wxWHITE );
 			StyleClearAll();
 
-			baseBackground = LightColour ( wxTheColourDatabase->Find ( _T ( "CYAN" ) ), 70 );
-			alternateBackground = LightColour ( wxTheColourDatabase->Find ( _T ( "CYAN" ) ), 90 );
+			baseBackground = LightColour ( wxTheColourDatabase->Find ( _T ( "CYAN" ) ), 75 );
+			alternateBackground = LightColour ( wxTheColourDatabase->Find ( _T ( "CYAN" ) ), 95 );
 			SetCaretLineBackground ( baseBackground );
 
 			SetCaretForeground ( *wxBLACK );
-			SetSelBackground ( true, wxTheColourDatabase->Find ( _T ( "LIGHT GREY" ) ) );
+			SetSelBackground ( true,  LightColour ( wxTheColourDatabase->Find ( _T ( "YELLOW" ) ), 20));//wxTheColourDatabase->Find ( _T ( "LIGHT GREY" ) ) );
 
 			if ( type == FILE_TYPE_CSS )
 			{
@@ -1501,12 +1506,12 @@ void XmlCtrl::setColorScheme ( int scheme )
 			StyleSetBackground ( wxSTC_STYLE_DEFAULT, *wxWHITE );
 			StyleClearAll();
 
-			baseBackground = LightColour ( wxTheColourDatabase->Find ( _T ( "YELLOW" ) ), 20 );
-			alternateBackground = LightColour ( wxTheColourDatabase->Find ( _T ( "YELLOW" ) ), 60 );
+			baseBackground = LightColour ( wxTheColourDatabase->Find ( _T ( "CYAN" ) ), 75 );
+			alternateBackground = LightColour ( wxTheColourDatabase->Find ( _T ( "CYAN" ) ), 95 );
 			SetCaretLineBackground ( baseBackground );
 
 			SetCaretForeground ( *wxBLACK );
-			SetSelBackground ( true, wxTheColourDatabase->Find ( _T ( "LIGHT GREY" ) ) );
+			SetSelBackground ( true, LightColour ( wxTheColourDatabase->Find ( _T ( "YELLOW" ) ), 20) );//wxTheColourDatabase->Find ( _T ( "LIGHT GREY" ) ) );
 
 			if ( type == FILE_TYPE_CSS )
 			{
@@ -1688,8 +1693,8 @@ void XmlCtrl::setColorScheme ( int scheme )
 			}
 			break;
 		case COLOR_SCHEME_NONE:
-			baseBackground = LightColour ( wxTheColourDatabase->Find ( _T ( "YELLOW" ) ), 20 );
-			alternateBackground = LightColour ( wxTheColourDatabase->Find ( _T ( "YELLOW" ) ), 60 );
+			baseBackground = LightColour ( wxTheColourDatabase->Find ( _T ( "CYAN" ) ), 75 );
+			alternateBackground = LightColour ( wxTheColourDatabase->Find ( _T ( "CYAN" ) ), 95 );
 			SetCaretLineBackground ( baseBackground );
 
 			SetSelBackground ( true, wxTheColourDatabase->Find ( _T ( "LIGHT GREY" ) ) );
@@ -2033,6 +2038,8 @@ bool XmlCtrl::backgroundValidate()
 		return true;
 
 	std::string bufferUtf8 = myGetTextRaw();
+
+	XmlEncodingHandler::setUtf8( bufferUtf8, true );
 	
 	return backgroundValidate (
 		bufferUtf8.c_str(),
@@ -2043,7 +2050,7 @@ bool XmlCtrl::backgroundValidate()
 bool XmlCtrl::backgroundValidate (
 				const char *buffer,
 				const char *system,
-                                size_t bufferLen
+                size_t bufferLen
 				)
 {
 	if ( !validationRequired )
@@ -2061,6 +2068,8 @@ bool XmlCtrl::backgroundValidate (
 	validationThread = new ValidationThread(
 		buffer,
 		system,
+		catalogPath.c_str(),
+		catalogUtilityPath.c_str(),
 		&validationFinished,
 		&validationSuccess,
 		validationReleasePtr,

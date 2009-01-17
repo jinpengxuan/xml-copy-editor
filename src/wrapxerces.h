@@ -25,19 +25,22 @@
 #include <utility>
 #include <xercesc/sax2/SAX2XMLReader.hpp>
 #include <xercesc/sax2/DefaultHandler.hpp>
+#include "xercescatalogresolver.h"
 
 using namespace xercesc;
 
 class WrapXerces
 {
 	public:
-		WrapXerces();
+		WrapXerces( std::string catalogPath = "",
+                    std::string catalogUtilityPath = "" );
 		~WrapXerces();
 		bool validate ( const std::string& fileName );
 		bool validateMemory ( const char *buffer, const char *system, unsigned len );
 		std::string getLastError();
 		std::pair<int, int> getErrorPosition();
 	private:
+		XercesCatalogResolver *catalogResolver;
 		std::string lastError;
 		std::pair<int, int> errorPosition;
 };

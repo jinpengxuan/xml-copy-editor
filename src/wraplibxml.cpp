@@ -533,7 +533,18 @@ std::string WrapLibxml::lookupPublicId ( const std::string& id )
 	char *s = ( char * ) xmlCatalogResolvePublic ( ( const xmlChar * ) id.c_str() );
 	if ( !s )
 		return ret;
+
+	char *original, *it;
+	original = s;
+
+	it = strstr ( s, "file://" );
+	if ( it )
+	{
+		s = it + 6;
+	}
+
 	ret = s;
-	free ( s );
+
+	free ( original );
 	return ret;
 }

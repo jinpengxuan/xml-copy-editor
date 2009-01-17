@@ -73,6 +73,10 @@ class StyleDialog : public wxDialog
 		    const wxString& browserParameter,
 		    const wxString& ruleSetPresetParameter,
 		    const wxString& filterPresetParameter,
+  #ifdef __WXMSW__
+            const std::string& aspellDataPath,
+            const std::string& aspellDictPath,
+  #endif
 		    int type = ID_TYPE_STYLE,
 		    bool readOnlyParameter = false,
 		    wxPoint position = wxDefaultPosition,
@@ -115,7 +119,7 @@ class StyleDialog : public wxDialog
 		wxComboBox *ruleSetCombo, *filterCombo;
 		wxListCtrl *table;
 		wxStatusBar *status;
-		std::string bufferUtf8;
+		std::string bufferUtf8, aspellDataPath, aspellDictPath;
 		std::set<wxString> tempFiles;
 		wxString fileName, ruleSetDirectory, filterDirectory, browser;
 		wxString ruleSetPreset, filterPreset;

@@ -70,6 +70,7 @@ bool MyServerConnection::OnPoke (
 	else
 	{
 		frame->openFile ( ( wxString& ) item );
+		//frame->addToFileQueue ( ( wxString& ) item ); // prevent event loop problems
 	}
 	frame->Raise();
 	return true;

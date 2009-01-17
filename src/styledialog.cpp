@@ -57,6 +57,10 @@ StyleDialog::StyleDialog (
     const wxString& browserParameter,
     const wxString& ruleSetPresetParameter,
     const wxString& filterPresetParameter,
+#ifdef __WXMSW__
+    const std::string& aspellDataPathParameter,
+    const std::string& aspellDictPathParameter,
+#endif
     int typeParameter,
     bool readOnlyParameter,
     wxPoint position,
@@ -75,6 +79,10 @@ StyleDialog::StyleDialog (
 		browser ( browserParameter ),
 		ruleSetPreset ( ruleSetPresetParameter ),
 		filterPreset ( filterPresetParameter ),
+#ifdef __WXMSW__
+		aspellDataPath ( aspellDataPathParameter ),
+		aspellDictPath ( aspellDictPathParameter ),
+#endif
 		type(typeParameter),
 		readOnly ( readOnlyParameter )
 {
@@ -235,8 +243,8 @@ StyleDialog::StyleDialog (
 		config = new_aspell_config();
 		
 #ifdef __WXMSW__
-       aspell_config_replace ( config, "data-dir", ASPELL_DATA_PATH );
-       aspell_config_replace ( config, "dict-dir", ASPELL_DICT_PATH );
+       aspell_config_replace ( config, "data-dir", aspellDataPath.c_str() ); //ASPELL_DATA_PATH );
+       aspell_config_replace ( config, "dict-dir", aspellDictPath.c_str() ); //ASPELL_DICT_PATH );
 #endif
         dlist = get_aspell_dict_info_list( config );
 		
@@ -428,6 +436,10 @@ void StyleDialog::OnReport ( wxCommandEvent& event )
 	                                   filterDirectoryUtf8,
 	                                   filterUtf8,
 	                                   pathSeparatorUtf8,
+ #ifdef __WXMSW__
+                                       aspellDataPath,
+                                       aspellDictPath,
+ #endif
 	                                   5 ) );
 
 	status->SetStatusText ( _ ( "Checking document..." ) );
@@ -589,6 +601,9 @@ void StyleDialog::OnStyleWebReport ( wxCommandEvent& event )
 	std::ofstream ofs ( tempNameUtf8.c_str() );
 	if ( !ofs )
 		return;
+
+	WrapExpat we;
+
 	ofs << XHTML_START;
 	ofs << "<body><h2>";
 	ofs << fileName.mb_str ( wxConvUTF8 );
@@ -606,15 +621,15 @@ void StyleDialog::OnStyleWebReport ( wxCommandEvent& event )
 		ofs << ++matchCount;
 		ofs << "</td>";
 		ofs << "<td align=\"right\">";
-		ofs << it->prelog;
+		ofs << we.xmliseTextNode ( it->prelog );
 		ofs << "</td><td align=\"center\"><font color=\"red\"><b>";
-		ofs << it->match;
+		ofs << we.xmliseTextNode ( it->match );
 		ofs << "</b></font></td><td align=\"left\">";
-		ofs << it->postlog;
+		ofs << we.xmliseTextNode ( it->postlog );
 		ofs << "</td><td><font color=\"green\"><b>";
-		ofs << it->replace;
+		ofs << we.xmliseTextNode ( it->replace );
 		ofs << "</b></font></td><td>";
-		ofs << it->report;
+		ofs << we.xmliseTextNode ( it->report );
 		ofs << "</td></tr>";
 	}
 	ofs << "</table></body>";

@@ -28,7 +28,13 @@
 class WrapAspell
 {
 	public:
-		WrapAspell ( std::string lang = "en_US" );
+		WrapAspell (
+                   std::string lang,// = "en_US",
+#ifdef __WXMSW__
+                   const std::string& aspellDataPathParameter,
+                   const std::string& aspellDictPath
+#endif
+                   );
 		~WrapAspell();
 		inline bool checkWord ( std::string &s );
 		void checkString (
@@ -36,6 +42,7 @@ class WrapAspell
 		    std::vector<ContextMatch> &v,
 		    int contextRange );
 		std::string getSuggestion ( std::string &s );
+		std::string getVersion();
 	private:
 		AspellConfig *spell_config;
 		AspellSpeller *spell_checker;

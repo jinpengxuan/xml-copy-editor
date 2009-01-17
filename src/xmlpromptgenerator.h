@@ -20,7 +20,7 @@
 #ifndef XML_PROMPT_GENERATOR_H
 #define XML_PROMPT_GENERATOR_H
 
-#include <expat.h>
+//#include <expat.h>
 #include <map>
 #include <set>
 #include <memory>

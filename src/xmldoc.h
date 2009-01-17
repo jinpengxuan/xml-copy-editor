@@ -39,6 +39,7 @@ class XmlDoc : public XmlCtrl
 		    const char *buffer = NULL,
 		    size_t bufferLen = 0,
 		    const std::string& catalogPath = "",
+		    const std::string& catalogUtilityPath = "",
 		    const std::string& basePath = "",
 		    const std::string& auxPath = "",
 		    const wxPoint& position = wxDefaultPosition,
