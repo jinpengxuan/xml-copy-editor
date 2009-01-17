@@ -2275,9 +2275,11 @@ void MyFrame::OnSplitTab ( wxCommandEvent& event )
 	    if ( currentSelection == -1 )
 	        return;
 	*/
+
 	int currentSelection, direction;
 	currentSelection = mainBook->GetSelection();
 	direction = wxAUI_NB_RIGHT;
+
 	switch ( id )
 	{
 			    ID_SPLIT_TAB_TOP:
@@ -4964,13 +4966,13 @@ wxMenuBar *MyFrame::getMenuBar()
 			break;
 	}
 
-	 /* WAIT FOR AUI LIBRARY TO SUPPORT THIS - currently always splits left
+	 /* WAIT FOR AUI LIBRARY TO SUPPORT THIS - currently always splits left */
 	wxMenu *splitTabMenu = new wxMenu;
 	splitTabMenu->Append ( ID_SPLIT_TAB_TOP, _ ( "&Top" ), _ ( "Top" ));
 	splitTabMenu->Append ( ID_SPLIT_TAB_RIGHT, _ ( "&Right" ), _ ( "Right" ));
 	splitTabMenu->Append ( ID_SPLIT_TAB_BOTTOM, _ ( "&Bottom" ), _ ( "Bottom" ));
 	splitTabMenu->Append ( ID_SPLIT_TAB_LEFT, _ ( "&Left" ), _ ( "Left" ));
-	 */
+	 /**/
 
 	viewMenu = new wxMenu; // use class-wide data member
 	viewMenu->Append ( ID_PREVIOUS_DOCUMENT, _ ( "&Previous Document\tCtrl+PgUp" ), _ ( "Previous Document" ) );

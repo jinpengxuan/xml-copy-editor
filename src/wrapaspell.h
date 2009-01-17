@@ -29,9 +29,9 @@ class WrapAspell
 {
 	public:
 		WrapAspell (
-                   std::string lang,// = "en_US",
+                   std::string lang// = "en_US",
 #ifdef __WXMSW__
-                   const std::string& aspellDataPathParameter,
+                   , const std::string& aspellDataPathParameter,
                    const std::string& aspellDictPath
 #endif
                    );
