@@ -1,21 +1,15 @@
-How to build wxWidgets (if your distribution doesn't package wxGTK-2.8.x)
-=========================================================================
+Dependencies (libraries that need to be present before the tarball compiles)
+============================================================================
 
-Download wxGTK-2.8.0 (or higher) from 
-<http://sourceforge.net/project/showfiles.php?group_id=9863&package_id=14076> and unpack.
-
-$ cd wxGTK-2.8.* 
-$ mkdir build
-$ cd build
-$ ../configure --enable-unicode
-$ make
-$ [as root] make install
-$ cd contrib/src/stc
-$ make
-$ [as root] make install 
-
-Q: Will wxGTK-2.6.x work?
-A: Unfortunately not. The program relies on a number of features (notably the docking library wxAUI) that were not available in a stable build of wxGTK until version 2.8.0.
+pcre-devel
+aspell-devel
+boost
+boost-devel
+xerces-c
+xerces-c-devel
+libxml-devel
+libxslt-devel
+expat-devel
 
 Compiling XML Copy Editor
 =========================
@@ -36,11 +30,30 @@ At first startup, the application tries to locate its data files in /usr/local/s
 
 If you have any questions, please do not hesitate to contact gnschmidt@users.sourceforge.net.
 
+How to build wxWidgets (if your distribution doesn't package wxGTK-2.8.x)
+=========================================================================
+
+Download wxGTK-2.8.0 (or higher) from 
+<http://sourceforge.net/project/showfiles.php?group_id=9863&package_id=14076> and unpack.
+
+$ cd wxGTK-2.8.* 
+$ mkdir build
+$ cd build
+$ ../configure --enable-unicode
+$ make
+$ [as root] make install
+$ cd contrib/src/stc
+$ make
+$ [as root] make install 
+
+Q: Will wxGTK-2.6.x work?
+A: Unfortunately not. The program relies on a number of features (notably the docking library wxAUI) that were not available in a stable build of wxGTK until version 2.8.0.
+
+
 Basic Installation
 ==================
 
    These are generic installation instructions.
-
    The `configure' shell script attempts to guess correct values for
 various system-dependent variables used during compilation.  It uses
 those values to create a `Makefile' in each directory of the package.
