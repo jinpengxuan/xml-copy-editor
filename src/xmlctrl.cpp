@@ -354,7 +354,6 @@ void XmlCtrl::handleDelete ( wxKeyEvent& event )
 	startLine = LineFromPosition ( start );
 	endLine = LineFromPosition ( end );
 	
-	/* commented out: redundant as covered by shift-tab
 	// add test so range unindentation only happens when caret is flush with left margin
 	int column = GetColumn ( GetCurrentPos() );
 	
@@ -382,7 +381,6 @@ void XmlCtrl::handleDelete ( wxKeyEvent& event )
 			return;
 		}
 	}
-	*/
 
 	if ( !canMoveRightAt ( GetCurrentPos() ) &&
 	        GetSelectionStart() == GetSelectionEnd() )

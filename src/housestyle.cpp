@@ -209,9 +209,9 @@ bool HouseStyle::createReport()
 	try {
 		if (type == HS_TYPE_SPELL)
 			spellcheck = new WrapAspell(
-            ruleFile // carries lang information
+            ruleFile, // carries lang information
 #ifdef __WXMSW__
-                , aspellDataPath,
+                aspellDataPath,
                 aspellDictPath
 #endif            
              );
