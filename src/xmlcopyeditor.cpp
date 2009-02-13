@@ -1207,6 +1207,7 @@ void MyFrame::OnAbout ( wxCommandEvent& WXUNUSED ( event ) )
 	info.AddDeveloper ( _ ( "Gerald Schmidt (development) <gnschmidt at users.sourceforge.net>" ) );
 	info.AddDeveloper ( _ ( "Matt Smigielski (testing) <alectrus at users.sourceforge.net>" ) );
 	info.AddDeveloper ( _ ( "Justin Dearing (development) <j-pimp at users.sourceforge.net>" ) );
+	info.AddDeveloper ( _ ( "Kev James (development) <kmjames at users.sourceforge.net>" ) );
 	info.AddTranslator ( _ ( "Viliam Búr (Slovak) <viliam at bur.sk>" ) );
 	info.AddTranslator ( _ ( "David Håsäther (Swedish) <hasather at gmail.com>" ) );
 	info.AddTranslator ( _ ( "François Badier (French) <frabad at gmail.com>" ) );
