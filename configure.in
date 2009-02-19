@@ -105,4 +105,9 @@ AC_LANG(C++)
 AC_CHECK_HEADER(xercesc/util/PlatformUtils.hpp, ,
 	AC_MSG_ERROR([Xerces-C headers not found]))
 
+# Check expat is available
+AC_LANG(C++)
+AC_CHECK_HEADER(expat.h, ,
+	AC_MSG_ERROR([Expat headers not found]))
+
 AC_OUTPUT(Makefile src/Makefile)
