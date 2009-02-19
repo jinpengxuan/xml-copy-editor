@@ -10,6 +10,9 @@ CPPFLAGS="$CPPFLAGS -Wall -g -fexceptions"
 CXXFLAGS="$CPPFLAGS -Wall -g -fexceptions"
 
 WXCONFIG=wx-config
+LIBXMLCONFIG=xml2-config
+LIBXSLTCONFIG=xslt-config
+
 AC_ARG_WITH(wx-config,
 [[  --with-wx-config=FILE     Use the given path to wx-config when determining
                             wxWidgets configuration; defaults to "wx-config"]],
@@ -44,6 +47,40 @@ if test -n "$vers" && test "$vers" -ge 2008000; then
 else
 	AC_MSG_ERROR([wxWidgets 2.8.0 or newer is required])
 fi
+
+# Check for libxml2
+libxmlversion=0
+
+AC_DEFUN([LIBXML2TEST],
+[
+	AC_REQUIRE([AC_PROG_AWK])
+	AC_MSG_CHECKING([libxml2])
+	if libxmlversion=`$LIBXMLCONFIG --version`; then
+		AC_MSG_RESULT([$libxmlversion])
+	else
+		AC_MSG_RESULT([not found])
+		AC_MSG_ERROR([libxml2.])
+	fi])
+
+# Call XML2 TEST func
+LIBXML2TEST
+
+# Check for libxslt
+libxsltversion=0
+
+AC_DEFUN([LIBXSLTTEST],
+[
+	AC_REQUIRE([AC_PROG_AWK])
+	AC_MSG_CHECKING([libxslt])
+	if libxsltversion=`$LIBXSLTCONFIG --version`; then
+		AC_MSG_RESULT([$libxsltversion])
+	else
+		AC_MSG_RESULT([not found])
+		AC_MSG_ERROR([libxslt])
+	fi])
+
+# Call XSLT TEST func
+LIBXSLTTEST
 
 CPPFLAGS="$CPPFLAGS $WX_CPPFLAGS"
 CXXFLAGS="$CXXFLAGS $WX_CPPFLAGS"

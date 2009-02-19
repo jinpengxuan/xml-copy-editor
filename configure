@@ -14973,6 +14973,9 @@ CPPFLAGS="$CPPFLAGS -Wall -g -fexceptions"
 CXXFLAGS="$CPPFLAGS -Wall -g -fexceptions"
 
 WXCONFIG=wx-config
+LIBXMLCONFIG=xml2-config
+LIBXSLTCONFIG=xslt-config
+
 
 # Check whether --with-wx-config was given.
 if test "${with_wx_config+set}" = set; then
@@ -15015,6 +15018,48 @@ else
 echo "$as_me: error: wxWidgets 2.8.0 or newer is required" >&2;}
    { (exit 1); exit 1; }; }
 fi
+
+# Check for libxml2
+libxmlversion=0
+
+
+
+# Call XML2 TEST func
+
+
+	{ echo "$as_me:$LINENO: checking libxml2" >&5
+echo $ECHO_N "checking libxml2... $ECHO_C" >&6; }
+	if libxmlversion=`$LIBXMLCONFIG --version`; then
+		{ echo "$as_me:$LINENO: result: $libxmlversion" >&5
+echo "${ECHO_T}$libxmlversion" >&6; }
+	else
+		{ echo "$as_me:$LINENO: result: not found" >&5
+echo "${ECHO_T}not found" >&6; }
+		{ { echo "$as_me:$LINENO: error: libxml2." >&5
+echo "$as_me: error: libxml2." >&2;}
+   { (exit 1); exit 1; }; }
+	fi
+
+# Check for libxslt
+libxsltversion=0
+
+
+
+# Call XSLT TEST func
+
+
+	{ echo "$as_me:$LINENO: checking libxslt" >&5
+echo $ECHO_N "checking libxslt... $ECHO_C" >&6; }
+	if libxsltversion=`$LIBXSLTCONFIG --version`; then
+		{ echo "$as_me:$LINENO: result: $libxsltversion" >&5
+echo "${ECHO_T}$libxsltversion" >&6; }
+	else
+		{ echo "$as_me:$LINENO: result: not found" >&5
+echo "${ECHO_T}not found" >&6; }
+		{ { echo "$as_me:$LINENO: error: libxslt" >&5
+echo "$as_me: error: libxslt" >&2;}
+   { (exit 1); exit 1; }; }
+	fi
 
 CPPFLAGS="$CPPFLAGS $WX_CPPFLAGS"
 CXXFLAGS="$CXXFLAGS $WX_CPPFLAGS"
