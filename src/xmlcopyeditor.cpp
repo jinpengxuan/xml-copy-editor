@@ -1208,6 +1208,7 @@ void MyFrame::OnAbout ( wxCommandEvent& WXUNUSED ( event ) )
 	info.AddDeveloper ( _ ( "Matt Smigielski (testing) <alectrus at users.sourceforge.net>" ) );
 	info.AddDeveloper ( _ ( "Justin Dearing (development) <j-pimp at users.sourceforge.net>" ) );
 	info.AddDeveloper ( _ ( "Kev James (development) <kmjames at users.sourceforge.net>" ) );
+	info.AddDeveloper ( _ ( "Anh Trinh (development) <ant271 at users.sourceforge.net>" ) );
 	info.AddTranslator ( _ ( "Viliam Búr (Slovak) <viliam at bur.sk>" ) );
 	info.AddTranslator ( _ ( "David Håsäther (Swedish) <hasather at gmail.com>" ) );
 	info.AddTranslator ( _ ( "François Badier (French) <frabad at gmail.com>" ) );
@@ -1217,6 +1218,7 @@ void MyFrame::OnAbout ( wxCommandEvent& WXUNUSED ( event ) )
 	info.AddTranslator ( _ ( "Serhij Dubyk (Ukrainian) <dubyk at library.lviv.ua>" ) );
 	info.AddTranslator ( _ ( "Antonio Angelo (Italian) <aangelo at users.sourceforge.net>" ) );
 	info.AddTranslator ( _ ( "Siarhei Kuchuk (Russian) <Cuchuk.Sergey at gmail.com>" ) );
+	info.AddTranslator ( _ ( "Marcos Pérez González (Spanish) <marcos_pg at yahoo.com>" ) );
 	info.SetLicense ( ABOUT_LICENSE );
 	info.SetDescription ( description );
 	wxAboutBox ( info );
