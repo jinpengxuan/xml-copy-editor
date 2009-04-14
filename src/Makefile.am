@@ -63,6 +63,7 @@ nobase_xmlcopyeditor_DATA = png/*.png \
 	po/fr/messages.mo \
 	po/de/messages.mo \
 	po/ru/messages.mo \
+	po/es/messages.mo \
         po/zh_CN/messages.mo \
         po/zh_TW/messages.mo \
 	po/uk_UA/messages.mo \
