@@ -446,8 +446,10 @@ install-applicationsDATA: $(applications_DATA)
 	@list='$(applications_DATA)'; for p in $$list; do \
 	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
 	  f=$(am__strip_dir) \
+	  if test -w "$(DESTDIR)$(applicationsdir)"; then \
 	  echo " $(applicationsDATA_INSTALL) '$$d$$p' '$(DESTDIR)$(applicationsdir)/$$f'"; \
 	  $(applicationsDATA_INSTALL) "$$d$$p" "$(DESTDIR)$(applicationsdir)/$$f"; \
+	  else echo "$(DESTDIR)$(applicationsdir) not writable: skipping $$f"; fi; \
 	done
 
 uninstall-applicationsDATA:
@@ -483,7 +485,9 @@ install-pixmapDATA: $(pixmap_DATA)
 	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
 	  f=$(am__strip_dir) \
 	  echo " $(pixmapDATA_INSTALL) '$$d$$p' '$(DESTDIR)$(pixmapdir)/$$f'"; \
+	  if test -w "$(DESTDIR)$(pixmapdir)"; then \
 	  $(pixmapDATA_INSTALL) "$$d$$p" "$(DESTDIR)$(pixmapdir)/$$f"; \
+	  else echo "$(DESTDIR)$(pixmapdir) not writable: skipping $$f"; fi \
 	done
 
 uninstall-pixmapDATA:
