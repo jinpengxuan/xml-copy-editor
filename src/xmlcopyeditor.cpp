@@ -174,6 +174,7 @@ BEGIN_EVENT_TABLE ( MyFrame, wxFrame )
 	EVT_UPDATE_UI ( ID_RELOAD, MyFrame::OnUpdateReload )
 	EVT_IDLE ( MyFrame::OnIdle )
 	EVT_AUINOTEBOOK_PAGE_CLOSE ( wxID_ANY, MyFrame::OnPageClosing )
+	EVT_AUI_PANE_CLOSE ( MyFrame::OnPaneClose )
 #ifdef __WXMSW__
 	EVT_DROP_FILES ( MyFrame::OnDropFiles )
 #endif
@@ -890,7 +891,7 @@ MyFrame::MyFrame (
 	manager.AddPane (
 	    ( wxWindow * ) findReplacePanel,
 	    wxAuiPaneInfo().Bottom().Hide().Caption ( wxEmptyString ).
-	    DestroyOnClose ( false ).Layer ( 2 ) );
+	    Name( _T ( "FindReplacePanel" ) ).DestroyOnClose ( false ).Layer ( 2 ) );
 #endif
 
 	commandPanel = new CommandPanel (
@@ -2608,6 +2609,7 @@ void MyFrame::OnGlobalReplace ( wxCommandEvent& event )
 
 void MyFrame::OnFrameClose ( wxCloseEvent& event )
 {
+	std::cout<<"MyFrame::OnFrameClose\n";
 	wxCommandEvent e;
 	OnCloseAll ( e );
 	if ( mainBook->GetPageCount() )
@@ -6042,4 +6044,18 @@ void MyFrame::setStrictScrolling ( bool b )
 void MyFrame::addToFileQueue ( wxString& fileName )
 {
      fileQueue.push_back ( fileName );
+}
+
+void MyFrame::OnPaneClose ( wxAuiManagerEvent& event )
+{
+	wxAuiPaneInfo* closedPane=event.GetPane();
+	
+	if (closedPane->name== _T ( "FindReplacePanel" ) )
+	{
+		// Find pane was closed - set focus back to document pane
+		XmlDoc *doc;
+		if ( ( doc = getActiveDocument() ) == NULL )
+			return;
+		doc->SetFocus();
+	}
 }

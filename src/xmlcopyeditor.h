@@ -507,6 +507,7 @@ class MyFrame : public wxFrame
 		    bool ignoreEncoding = false,
 		    bool isXml = true );
 		void removeUtf8Bom ( std::string& buffer );
+		void OnPaneClose ( wxAuiManagerEvent& event );
 		std::string getAuxPath ( const std::string& fileName );
 		wxMenuBar *getMenuBar();
 		wxToolBar *getToolBar();
