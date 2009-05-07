@@ -5452,14 +5452,14 @@ void MyFrame::messagePane ( const wxString& s, int iconType, bool forcePane )
 	switch ( iconType )
 	{
 		case ( CONST_INFO ) :
-						/*
-						                    if ( !forcePane && s.Length() < 50 ) // magic no. necessary?
-						            {
-						                statusProgress ( s );
-						                return;
-						            }
-						*/
-						paneTitle = _ ( "Information" );
+			/*
+				if ( !forcePane && s.Length() < 50 ) // magic no. necessary?
+				{
+					statusProgress ( s );
+					return;
+				}
+			*/
+			paneTitle = _ ( "Information" );
 			break;
 		case ( CONST_WARNING ) :
 						paneTitle = _ ( "Warning" );
@@ -5477,7 +5477,7 @@ void MyFrame::messagePane ( const wxString& s, int iconType, bool forcePane )
 
 	wxAuiPaneInfo info = manager.GetPane ( htmlReport );
 	if ( !info.IsShown() )
-{
+	{
 		manager.GetPane ( htmlReport ).Show ( true );
 		manager.Update();
 	}
@@ -5494,19 +5494,19 @@ void MyFrame::messagePane ( const wxString& s, int iconType, bool forcePane )
 	switch ( iconType )
 	{
 		case ( CONST_INFO ) :
-						htmlBuffer += pngDir;
+			htmlBuffer += pngDir;
 			htmlBuffer += _T ( "stock_dialog-info-32.png" );
 			break;
 		case ( CONST_WARNING ) :
-						htmlBuffer += pngDir;
+			htmlBuffer += pngDir;
 			htmlBuffer += _T ( "stock_dialog-warning-32.png" );
 			break;
 		case ( CONST_STOP ) :
-						htmlBuffer += pngDir;
+			htmlBuffer += pngDir;
 			htmlBuffer += _T ( "stock_dialog-stop-32.png" );
 			break;
 		case ( CONST_QUESTION ) :
-						htmlBuffer += pngDir;
+			htmlBuffer += pngDir;
 			htmlBuffer += _T ( "stock_dialog-question-32.png" );
 			break;
 		default:
@@ -5517,7 +5517,8 @@ void MyFrame::messagePane ( const wxString& s, int iconType, bool forcePane )
 	htmlBuffer += _T ( "</td></tr></table></body></html>" );
 
 	htmlReport->SetPage ( htmlBuffer );
-
+	htmlReport->error_message = htmlString.mb_str(wxConvUTF8);
+	htmlReport->SetCurrentDocument(getActiveDocument());
 	manager.Update();
 }
 
