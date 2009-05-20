@@ -1,5 +1,5 @@
 # these are the headers for your project
-noinst_HEADERS = *.h
+noinst_HEADERS = $(srcdir)/*.h
 
 #########################################################################
 # APPLICATION SECTION
@@ -8,9 +8,9 @@ noinst_HEADERS = *.h
 # of the other Makefile.am variables
 bin_PROGRAMS = xmlcopyeditor
 bindir = ${prefix}/bin
-xmlcopyeditordir = ${prefix}/share/xmlcopyeditor
-pixmapdir = /usr/share/pixmaps
-applicationsdir = /usr/share/applications
+xmlcopyeditordir = ${datarootdir}/xmlcopyeditor
+pixmapdir = ${datarootdir}/pixmaps
+desktopdir = ${datarootdir}/applications
 
 # the application source, library search path, and link libraries
 xmlcopyeditor_SOURCES = xmlcopyeditor.cpp associatedialog.cpp casehandler.cpp \
@@ -25,54 +25,55 @@ xmlcopyeditor_SOURCES = xmlcopyeditor.cpp associatedialog.cpp casehandler.cpp \
 	xmlparseschemans.cpp xmlshallowvalidator.cpp wrapxerces.cpp \
 	findreplacepanel.cpp commandpanel.cpp xercescatalogresolver.cpp \
 	binaryfile.cpp xmlencodingspy.cpp wrapaspell.cpp validationthread.cpp \
-	rulesets png rng xpm templates copying help po \
 	xmlcopyeditor.spec xmlcopyeditor.png custom.xpm \
 	xmlcopyeditor.desktop
+#       rulesets png rng xpm templates copying help po 
+
 xmlcopyeditor_LDFLAGS = $(WX_LIBS) \
 	-lexpat -lxslt -lxml2 -lpcre -lxerces-c -laspell
 
-nobase_xmlcopyeditor_DATA = png/*.png \
-	rulesets/*.* \
-	rng/*.rng \
-	rng/*.rnc \
-	rng/exclude/*.rng \
-	rng/modules/*.rng \
-	xpm/*.xpm \
-	templates/*.xml \
-	templates/*.dtd \
-	templates/*.xsl \
-	templates/*.rss \
-	templates/*.html \
-	templates/*.xtm \
-	templates/*.xsd \
-	templates/*.rng \
-	templates/*.lzx \
-	templates/*.xlf \
-	help/*.* help/html/*.* \
-	copying/*.txt copying/boost_shared_ptr/* \
-	copying/Expat/* copying/libxml2/* copying/libxslt/* \
-	copying/PCRE/* copying/Scintilla/* \
-	copying/wxStyledTextCtrl/* \
-	copying/wxStEditor/* \
-	copying/xmlcopyeditor/* \
-	copying/Aspell/* \
-	copying/Apache/LICENSE-2.0 \
-	copying/Apache/LICENSE-2_files/* \
-	po/sk/messages.mo \
-	po/sv/messages.mo \
-	po/fr/messages.mo \
-	po/de/messages.mo \
-	po/ru/messages.mo \
-	po/es/messages.mo \
-        po/zh_CN/messages.mo \
-        po/zh_TW/messages.mo \
-	po/uk_UA/messages.mo \
-        po/uk_UA/messages.mo \
-        po/en_us/messages.po
+nobase_xmlcopyeditor_DATA = $(srcdir)/png/*.png\
+	$(srcdir)/rulesets/*.* \
+	$(srcdir)/rng/*.rng \
+	$(srcdir)/rng/*.rnc \
+	$(srcdir)/rng/exclude/*.rng \
+	$(srcdir)/rng/modules/*.rng \
+	$(srcdir)/xpm/*.xpm \
+	$(srcdir)/templates/*.xml \
+	$(srcdir)/templates/*.dtd \
+	$(srcdir)/templates/*.xsl \
+	$(srcdir)/templates/*.rss \
+	$(srcdir)/templates/*.html \
+	$(srcdir)/templates/*.xtm \
+	$(srcdir)/templates/*.xsd \
+	$(srcdir)/templates/*.rng \
+	$(srcdir)/templates/*.lzx \
+	$(srcdir)/templates/*.xlf \
+	$(srcdir)/help/*.* $(srcdir)/help/html/*.* \
+	$(srcdir)/copying/*.txt $(srcdir)/copying/boost_shared_ptr/* \
+	$(srcdir)/copying/Expat/* $(srcdir)/copying/libxml2/* $(srcdir)/copying/libxslt/* \
+	$(srcdir)/copying/PCRE/* $(srcdir)/copying/Scintilla/* \
+	$(srcdir)/copying/wxStyledTextCtrl/* \
+	$(srcdir)/copying/wxStEditor/* \
+	$(srcdir)/copying/xmlcopyeditor/* \
+	$(srcdir)/copying/Aspell/* \
+	$(srcdir)/copying/Apache/LICENSE-2.0 \
+	$(srcdir)/copying/Apache/LICENSE-2_files/* \
+	$(srcdir)/po/sk/messages.mo \
+	$(srcdir)/po/sv/messages.mo \
+	$(srcdir)/po/fr/messages.mo \
+	$(srcdir)/po/de/messages.mo \
+	$(srcdir)/po/ru/messages.mo \
+	$(srcdir)/po/es/messages.mo \
+        $(srcdir)/po/zh_CN/messages.mo \
+        $(srcdir)/po/zh_TW/messages.mo \
+	$(srcdir)/po/uk_UA/messages.mo \
+        $(srcdir)/po/uk_UA/messages.mo \
+        $(srcdir)/po/en_us/messages.po
 
 pixmap_DATA = xmlcopyeditor.png
 
-applications_DATA = xmlcopyeditor.desktop
+desktop_DATA = xmlcopyeditor.desktop
 
 INCLUDES = -I/usr/include/libxml2 
 
