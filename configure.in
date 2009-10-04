@@ -87,13 +87,16 @@ CXXFLAGS="$CXXFLAGS $WX_CPPFLAGS"
 
 AC_SUBST(WX_LIBS)
 
+AC_ARG_ENABLE(debug,
+[  --enable-debug,  Enable debug build],
+[
+  debugbuild="y"
+  CXXFLAGS="${CXXFLAGS} -ggdb -O0"
+])
+
 # Check pcre is available
 AC_CHECK_HEADER(pcre.h, ,
 	AC_MSG_ERROR([PCRE headers not found]))
-
-# Check ASPELL is available
-AC_CHECK_HEADER(aspell.h, ,
-	AC_MSG_ERROR([Aspell headers not found]))
 
 # Check boost::shared_ptr is available
 AC_LANG(C++)
@@ -110,4 +113,25 @@ AC_LANG(C++)
 AC_CHECK_HEADER(expat.h, ,
 	AC_MSG_ERROR([Expat headers not found]))
 
+# Check enchant is available
+PKG_CHECK_MODULES(ENCHANT, [enchant], [CXXFLAGS="$CXXFLAGS -DUSE_ENCHANT"], 
+	# otherwise Check ASPELL is available
+	  [AC_CHECK_HEADER(aspell.h, [ASPELL_LIBS="-laspell"],
+		AC_MSG_ERROR([Aspell headers not found]))]
+)
+
+AC_SUBST(ASPELL_LIBS)
+
 AC_OUTPUT(Makefile src/Makefile)
+
+dnl Summarized output
+echo
+echo "***************************************"
+echo
+
+if [[ "$debugbuild" = "y" ]]; then
+echo "Debug               Enabled"
+else
+echo "Debug               Disabled"
+fi
+
