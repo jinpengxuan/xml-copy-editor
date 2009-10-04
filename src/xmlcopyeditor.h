@@ -157,6 +157,7 @@ enum
 	ID_VALIDATE_PRESET7,
 	ID_VALIDATE_PRESET8,
 	ID_VALIDATE_PRESET9,
+	ID_EXPORT,
 	ID_EXPORT_MSWORD,
 	// icon constants
 	CONST_WARNING,
@@ -234,6 +235,7 @@ class MyFrame : public wxFrame
 		void OnFontMedium ( wxCommandEvent& event );
 		void OnFontLarger ( wxCommandEvent& event );
 		void OnImportMSWord ( wxCommandEvent& event );
+		void OnExport ( wxCommandEvent& event );
 		void OnInsertChild ( wxCommandEvent& event );
 		void OnInsertSibling ( wxCommandEvent& event );
 		void OnInsertTwin ( wxCommandEvent& event );
@@ -398,6 +400,7 @@ class MyFrame : public wxFrame
 		  rngDir,
 		  htmlDir,
 		  pngDir,
+		  daisyDir,
 		  xpathExpression,
 		  lastDtdPublic,
 		  lastDtdSystem,
@@ -413,7 +416,9 @@ class MyFrame : public wxFrame
 		  defaultLayout,
 		  lastParent,
 		  lastGrandparent,
-		  commandString;
+		  commandString,
+          exportStylesheet,
+          exportFolder;
 		bool globalReplaceAllDocuments,
 		toolbarVisible,
 		protectTags,
@@ -437,7 +442,9 @@ class MyFrame : public wxFrame
 		restoreFocusToNotebook,
 		showFullPathOnFrame,
 		findRegex,
-		commandSync;
+		commandSync,
+        exportQuiet,
+        exportMp3Album;
 		wxBitmap newBitmap,
 		new16Bitmap,
 		openBitmap,
@@ -507,7 +514,6 @@ class MyFrame : public wxFrame
 		    bool ignoreEncoding = false,
 		    bool isXml = true );
 		void removeUtf8Bom ( std::string& buffer );
-		void OnPaneClose ( wxAuiManagerEvent& event );
 		std::string getAuxPath ( const std::string& fileName );
 		wxMenuBar *getMenuBar();
 		wxToolBar *getToolBar();
@@ -516,4 +522,3 @@ class MyFrame : public wxFrame
 };
 
 #endif
-

@@ -37,6 +37,7 @@ XmlAssociateXsd::XmlAssociateXsd (
 	d->rootElementSeen = false;
 	XML_SetElementHandler ( p, start, end );
 	XML_SetDefaultHandlerExpand ( p, defaulthandler );
+	XML_SetUserData ( p, d.get() );
 
 	std::auto_ptr<XmlParseSchemaNs> parser ( new XmlParseSchemaNs() );
 	std::string normalisedPath, buffer;
@@ -66,7 +67,6 @@ XmlAssociateXsd::XmlAssociateXsd (
 		}
 	}
 	d->namespaceMap = namespaceMap;
-	XML_SetUserData ( p, d.get() );
 }
 
 XmlAssociateXsd::~XmlAssociateXsd()
@@ -77,18 +77,24 @@ void XMLCALL XmlAssociateXsd::defaulthandler (
     const XML_Char *s,
     int len )
 {
+	if ( !data || !s )
+		return;
 	AssociateXsdData *d;
 	d = ( AssociateXsdData * ) data;
-	d->buffer.append ( s, len );
+	if ( d )
+		d->buffer.append ( s, len );
 }
 
 void XMLCALL XmlAssociateXsd::start ( void *data,
                                       const XML_Char *el,
                                       const XML_Char **attr )
 {
+	if ( !data )
+		return;
+	
 	AssociateXsdData *d;
 	d = ( AssociateXsdData * ) data;
-
+	
 	d->buffer += "<";
 	d->buffer += el;
 
@@ -141,6 +147,8 @@ void XMLCALL XmlAssociateXsd::start ( void *data,
 
 void XMLCALL XmlAssociateXsd::end ( void *data, const XML_Char *el )
 {
+	if ( !data )
+		return;
 	AssociateXsdData *d;
 	d = ( AssociateXsdData * ) data;
 	d->buffer += "</";

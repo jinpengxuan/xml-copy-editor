@@ -18,14 +18,17 @@
  */
 
 #include <wx/intl.h>
-#include "aspell.h"
+#ifdef USE_ENCHANT
+#	include <enchant.h>
+#else
+#	include "aspell.h"
+#	ifdef __WXMSW__
+#		include "aspellpaths.h"
+#	endif
+#endif
 #include "styledialog.h"
 #include "nocasecompare.h"
 #define ngettext wxGetTranslation
-
-#ifdef __WXMSW__
-       #include "aspellpaths.h"
-#endif
 
 BEGIN_EVENT_TABLE ( StyleDialog, wxDialog )
 	EVT_BUTTON ( ID_STYLE_REPORT, StyleDialog::OnReport )
@@ -47,6 +50,38 @@ BEGIN_EVENT_TABLE ( StyleDialog, wxDialog )
 	EVT_UPDATE_UI_RANGE ( ID_STYLE_EDIT, ID_STYLE_CHANGE_ALL, StyleDialog::OnUpdateTableRange )
 END_EVENT_TABLE()
 
+#ifdef USE_ENCHANT
+class dictdetect
+{
+public:
+	dictdetect(wxComboBox *aCombo) : ruleSetCombo(aCombo), anyFound(false) {}
+	void add(const char *lang_tag);
+	bool empty() const { return !anyFound; }
+private:
+	wxComboBox *ruleSetCombo;
+	bool anyFound;
+};
+
+void dictdetect::add(const char *lang_tag)
+{
+	anyFound = true;
+	std::string stdEntry = lang_tag;
+	wxString entry = wxString ( stdEntry.c_str(), wxConvUTF8, stdEntry.size() );
+	ruleSetCombo->Append ( entry );
+}
+
+void EnchantDictDescribe(const char * const lang_tag,
+	const char * const provider_name,
+	const char * const provider_desc,
+	const char * const provider_file,
+	void * user_data)
+{
+	dictdetect *detected = (dictdetect*)user_data;
+	detected->add(lang_tag);
+}
+
+#endif
+
 StyleDialog::StyleDialog (
     wxWindow *parent,
     wxIcon icon,
@@ -57,7 +92,7 @@ StyleDialog::StyleDialog (
     const wxString& browserParameter,
     const wxString& ruleSetPresetParameter,
     const wxString& filterPresetParameter,
-#ifdef __WXMSW__
+#if !defined(USE_ENCHANT) && defined(__WXMSW__)
     const std::string& aspellDataPathParameter,
     const std::string& aspellDictPathParameter,
 #endif
@@ -79,7 +114,7 @@ StyleDialog::StyleDialog (
 		browser ( browserParameter ),
 		ruleSetPreset ( ruleSetPresetParameter ),
 		filterPreset ( filterPresetParameter ),
-#ifdef __WXMSW__
+#if !defined(USE_ENCHANT) && defined(__WXMSW__)
 		aspellDataPath ( aspellDataPathParameter ),
 		aspellDictPath ( aspellDictPathParameter ),
 #endif
@@ -235,6 +270,12 @@ StyleDialog::StyleDialog (
 	// special case spellcheck
 	if (type == ID_TYPE_SPELL)
 	{
+#ifdef USE_ENCHANT
+		EnchantBroker *broker = enchant_broker_init();
+		dictdetect adetected(ruleSetCombo);
+		enchant_broker_list_dicts(broker, EnchantDictDescribe, &adetected);
+		bool anyFound = !adetected.empty();
+#else
 		AspellConfig *config;
 		AspellDictInfoList *dlist;
 		AspellDictInfoEnumeration *dels;
@@ -243,10 +284,10 @@ StyleDialog::StyleDialog (
 		config = new_aspell_config();
 		
 #ifdef __WXMSW__
-       aspell_config_replace ( config, "data-dir", aspellDataPath.c_str() ); //ASPELL_DATA_PATH );
-       aspell_config_replace ( config, "dict-dir", aspellDictPath.c_str() ); //ASPELL_DICT_PATH );
+		aspell_config_replace ( config, "data-dir", aspellDataPath.c_str() ); //ASPELL_DATA_PATH );
+		aspell_config_replace ( config, "dict-dir", aspellDictPath.c_str() ); //ASPELL_DICT_PATH );
 #endif
-        dlist = get_aspell_dict_info_list( config );
+		dlist = get_aspell_dict_info_list( config );
 		
 		delete_aspell_config ( config );
 		
@@ -260,6 +301,7 @@ StyleDialog::StyleDialog (
 			wxString entry = wxString ( stdEntry.c_str(), wxConvUTF8, stdEntry.size() );
 			ruleSetCombo->Append ( entry );
 		}
+#endif
 		
 		if ( anyFound )
 		{

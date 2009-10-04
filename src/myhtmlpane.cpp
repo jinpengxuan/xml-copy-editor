@@ -20,11 +20,6 @@
 #include "myhtmlpane.h"
 #include "xmlcopyeditor.h"
 
-#include <string>
-#include <sstream>
-#include <iostream>
-
-
 BEGIN_EVENT_TABLE ( MyHtmlPane, wxHtmlWindow )
 	EVT_LEFT_DCLICK ( MyHtmlPane::OnLeftDoubleClick )
 END_EVENT_TABLE()
@@ -57,32 +52,4 @@ void MyHtmlPane::OnCellClicked(
 */
 
 void MyHtmlPane::OnLeftDoubleClick ( wxMouseEvent& WXUNUSED ( event ) )
-{ 
-
-}
-
-bool MyHtmlPane::OnCellClicked(wxHtmlCell *cell, wxCoord x, wxCoord y, const wxMouseEvent& event)
-{
-	//since the error description was hardcoded, make use of this error string
-	//parse the get the line number, then jump to that line
-	if(error_message.find("Validation stopped at line") != -1 || 
-				error_message.find("Error at line")!= -1){
-		string substring = error_message.substr(error_message.find("at line ")+8);
-		string number = substring.substr(0,substring.find(", "));
-		istringstream iss(substring);
-		int line ;
-		iss >> line;
-		if (--line >= 0 && (doc))
-		{
-			doc->GotoLine ( ( int ) line );
-			doc->SetFocus();
-		}
-		return true;
-	}
-	return false;
-}
-
-void MyHtmlPane::SetCurrentDocument(XmlDoc *xdoc)
-{
-	doc = xdoc;
-}
+{ }

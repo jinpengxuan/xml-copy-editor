@@ -70,7 +70,7 @@ class WrapLibxml
 		std::string lookupPublicId ( const std::string& id );
 	private:
 		bool netAccess;
-		std::string catalogPath, output;
+		std::string catalogPath, output, nonParserError;
 		int errorLine;
 		void loadCatalog();
 };

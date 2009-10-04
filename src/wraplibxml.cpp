@@ -339,6 +339,7 @@ bool WrapLibxml::xslt (
 	cur = xsltParseStylesheetFile ( ( const xmlChar * ) styleFileName.c_str() );
 	if ( !cur )
 	{
+        nonParserError = "Cannot parse stylesheet";
 		return false;
 	}
 
@@ -346,6 +347,7 @@ bool WrapLibxml::xslt (
 	doc = xmlParseFile ( fileName.c_str() );
 	if ( !doc )
 	{
+        nonParserError = "Cannot parse file";
 		xsltFreeStylesheet ( cur );
 		return false;
 	}
@@ -361,6 +363,7 @@ bool WrapLibxml::xslt (
 	res = xsltApplyStylesheet ( cur, doc, NULL );
 	if ( !res )
 	{
+        nonParserError = "Cannot apply stylesheet";
 		xmlFreeDoc ( doc );
 		xsltFreeStylesheet ( cur );
 		return false;
@@ -493,7 +496,9 @@ std::string WrapLibxml::getLastError()
 	xmlErrorPtr err = xmlGetLastError();
 
 	if ( !err )
-		return "";
+	{
+        return ( nonParserError.empty() ) ? "" : nonParserError;
+    }
 
 	std::stringstream ss;
 	ss << "Error at line ";

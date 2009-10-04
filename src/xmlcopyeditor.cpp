@@ -40,6 +40,7 @@
 #include "xmlassociatexsd.h"
 #include "xmlassociatexsl.h"
 #include "xmlassociatedtd.h"
+#include "wrapdaisy.h"
 #include "aboutdialog.h"
 #include "pathresolver.h"
 #include "locationpanel.h"
@@ -49,6 +50,7 @@
 #include "getlinuxappdir.h"
 #include "commandpanel.h"
 #include "binaryfile.h"
+#include "exportdialog.h"
 #include <wx/aui/auibook.h>
 #include <wx/richtext/richtextsymboldlg.h>
 #include <wx/textctrl.h>
@@ -103,6 +105,7 @@ BEGIN_EVENT_TABLE ( MyFrame, wxFrame )
 	EVT_MENU ( ID_WORD_COUNT, MyFrame::OnWordCount )
 	EVT_MENU ( ID_IMPORT_MSWORD, MyFrame::OnImportMSWord )
 	EVT_MENU ( ID_EXPORT_MSWORD, MyFrame::OnExportMSWord )
+	EVT_MENU ( ID_EXPORT, MyFrame::OnExport )
 	EVT_MENU ( ID_HIDE_PANE, MyFrame::OnClosePane )
 	EVT_MENU ( ID_COMMAND, MyFrame::OnCommand )
 	EVT_MENU ( ID_FIND, MyFrame::OnFind )
@@ -174,7 +177,6 @@ BEGIN_EVENT_TABLE ( MyFrame, wxFrame )
 	EVT_UPDATE_UI ( ID_RELOAD, MyFrame::OnUpdateReload )
 	EVT_IDLE ( MyFrame::OnIdle )
 	EVT_AUINOTEBOOK_PAGE_CLOSE ( wxID_ANY, MyFrame::OnPageClosing )
-	EVT_AUI_PANE_CLOSE ( MyFrame::OnPaneClose )
 #ifdef __WXMSW__
 	EVT_DROP_FILES ( MyFrame::OnDropFiles )
 #endif
@@ -253,6 +255,9 @@ MyApp::MyApp() : checker ( NULL ), server ( NULL ), connection ( NULL ),
 			break;
 		case wxLANGUAGE_RUSSIAN:
 			systemLocale = wxLANGUAGE_RUSSIAN;
+			break;
+		case wxLANGUAGE_DUTCH:
+			systemLocale = wxLANGUAGE_DUTCH;
 			break;
 		default:
 			systemLocale = wxLANGUAGE_ENGLISH_US;
@@ -609,6 +614,12 @@ MyFrame::MyFrame (
 
 		lastXslStylesheet.Replace ( _T ( " " ), _T ( "%20" ), true );
 		lastRelaxNGSchema.Replace ( _T ( " " ), _T ( "%20" ), true );
+		
+		exportQuiet =
+		  config->Read ( _T ( "exportQuiet" ), (long)false );
+		exportMp3Album =
+		  config->Read ( _T ( "exportMp3Album" ), (long)false );
+		
 
 		applicationDir =
 		    config->Read ( _T ( "applicationDir" ), wxEmptyString );
@@ -648,6 +659,9 @@ MyFrame::MyFrame (
 		commandSync = config->Read ( _T ( "commandSync" ), longFalse );
 		commandOutput = config->Read ( _T ( "commandOutput" ), ID_COMMAND_OUTPUT_IGNORE );
 		commandString = config->Read ( _T ( "commandString" ), wxEmptyString );
+		
+		exportStylesheet = config->Read ( _T ( "exportStylesheet" ), wxEmptyString );
+		exportFolder = config->Read ( _T ( "exportFolder" ), wxEmptyString );
 
 		ruleSetPreset =
 		    config->Read ( _T ( "ruleSetPreset" ), _ ( "Default style" ) );
@@ -731,6 +745,9 @@ MyFrame::MyFrame (
 		commandSync = false;
 		commandOutput = ID_COMMAND_OUTPUT_IGNORE;
 		commandString = wxEmptyString;
+		
+		exportStylesheet = exportFolder = wxEmptyString;
+		exportQuiet = exportMp3Album = false;
 
 	}
 
@@ -891,7 +908,7 @@ MyFrame::MyFrame (
 	manager.AddPane (
 	    ( wxWindow * ) findReplacePanel,
 	    wxAuiPaneInfo().Bottom().Hide().Caption ( wxEmptyString ).
-	    Name( _T ( "FindReplacePanel" ) ).DestroyOnClose ( false ).Layer ( 2 ) );
+	    DestroyOnClose ( false ).Layer ( 2 ) );
 #endif
 
 	commandPanel = new CommandPanel (
@@ -983,7 +1000,6 @@ MyFrame::~MyFrame()
 	config->Write ( _T ( "protectTags" ), protectTags );
 	config->Write ( _T ( "visibilityState" ), visibilityState );
 	config->Write ( _T ( "browserCommand" ), browserCommand );
-	// config->Write ( _T ( "layout" ), layout ); // omit while unused
  	config->Write ( _T ( "showLocationPane" ), manager.GetPane ( locationPanel ).IsShown() );
 	config->Write ( _T ( "showInsertChildPane" ), manager.GetPane ( insertChildPanel ).IsShown() );
 	config->Write ( _T ( "showInsertSiblingPane" ), manager.GetPane ( insertSiblingPanel ).IsShown() );
@@ -994,12 +1010,13 @@ MyFrame::~MyFrame()
 	config->Write ( _T ( "commandSync" ), commandPanel->getSync() );
 	config->Write ( _T ( "commandOutput" ), commandPanel->getOutput() );
 	config->Write ( _T ( "commandString" ), commandPanel->getCommand() );
-
 	config->Write ( _T ( "restoreLayout" ), restoreLayout );
-
-
 	config->Write ( _T ( "lastXslStylesheet" ), lastXslStylesheet );
 	config->Write ( _T ( "lastRelaxNGSchema" ), lastRelaxNGSchema );
+	config->Write ( _T ( "exportStylesheet" ), exportStylesheet );
+	config->Write ( _T ( "exportFolder" ), exportFolder );
+	config->Write ( _T ( "exportQuiet" ), exportQuiet );
+	config->Write ( _T ( "exportMp3Album" ), exportMp3Album );
 
 	GetPosition ( &framePosX, &framePosY );
 	config->Write ( _T ( "framePosX" ), framePosX );
@@ -1018,6 +1035,7 @@ MyFrame::~MyFrame()
 	config->Write ( _T ( "saveBom" ), saveBom );
 	config->Write ( _T ( "unlimitedUndo" ), unlimitedUndo );
 	manager.UnInit();
+	wxTheClipboard->Flush();
 }
 
 wxString MyFrame::getLinuxBrowser()
@@ -1220,6 +1238,7 @@ void MyFrame::OnAbout ( wxCommandEvent& WXUNUSED ( event ) )
 	info.AddTranslator ( _ ( "Antonio Angelo (Italian) <aangelo at users.sourceforge.net>" ) );
 	info.AddTranslator ( _ ( "Siarhei Kuchuk (Russian) <Cuchuk.Sergey at gmail.com>" ) );
 	info.AddTranslator ( _ ( "Marcos Pérez González (Spanish) <marcos_pg at yahoo.com>" ) );
+	info.AddTranslator ( _ ( "Rob Elemans (Dutch) <relemans at gmail.com>" ) );
 	info.SetLicense ( ABOUT_LICENSE );
 	info.SetDescription ( description );
 	wxAboutBox ( info );
@@ -2015,11 +2034,6 @@ void MyFrame::OnImportMSWord ( wxCommandEvent& event )
 	                                     _T ( "" ),
 	                                     _T ( "Microsoft Word (*.doc)|*.doc" ),
 	                                     wxOPEN | wxFILE_MUST_EXIST | wxCHANGE_DIR
-	                                     /*
-	                                     #ifdef __WXMSW__
-	                                         | wxHIDE_READONLY
-	                                     #endif
-	                                     */
 	                                 ) );
 	if ( fd->ShowModal() == wxID_CANCEL )
 		return;
@@ -2030,6 +2044,67 @@ void MyFrame::OnImportMSWord ( wxCommandEvent& event )
 		return;
 
 	importMSWord ( path );
+}
+
+void MyFrame::OnExport ( wxCommandEvent& event )
+{
+	statusProgress ( wxEmptyString );
+	closePane();
+
+	XmlDoc *doc;
+	if ( ( doc = getActiveDocument() ) == NULL )
+		return;
+
+    wxString testDir = applicationDir + wxFileName::GetPathSeparator() + _T ( "daisy" );
+    bool downloadLink = !wxDirExists ( testDir );
+
+    std::auto_ptr<ExportDialog> ed ( new ExportDialog (
+        this,
+        exportStylesheet,
+        exportFolder,
+        exportQuiet,
+	true, //suppressOptional
+        true, //epub
+        true, //rtf
+	true, //doc
+        true, //fullDaisy
+        exportMp3Album,
+        downloadLink ) );
+    int ret = ed->ShowModal();
+    
+    if ( ret == wxID_CANCEL )
+        return;
+
+    exportStylesheet = ed->getUrlString();
+    exportFolder = ed->getFolderString();
+    exportQuiet = ed->getQuiet();
+    exportMp3Album = ed->getMp3Album();
+
+	std::string rawBufferUtf8;
+	getRawText ( doc, rawBufferUtf8 );
+	if ( !XmlEncodingHandler::setUtf8 ( rawBufferUtf8 ) )
+	{
+		encodingMessage();
+		return;
+	}
+
+	WrapTempFileName tempFileName ( doc->getFullFileName() );
+
+	ofstream rawBufferStream ( tempFileName.name().c_str() );
+	if ( !rawBufferStream )
+		return;
+	rawBufferStream << rawBufferUtf8;
+	rawBufferStream.close();
+
+    wxString tempFile= tempFileName.wideName();
+        
+    WrapDaisy wd ( daisyDir );
+    if ( !wd.run ( tempFile, exportStylesheet, exportFolder, exportQuiet, exportMp3Album, true, true, true, true ) )
+    {
+        messagePane ( _ ("DAISY Talking Book export stopped: ") + wd.getLastError(), CONST_STOP );
+        return;
+    }
+	messagePane ( _ ( "DAISY Talking Book export completed. Output files are stored in " ) + exportFolder + _T ( "." ), CONST_INFO );
 }
 
 void MyFrame::importMSWord ( const wxString& path )
@@ -2254,6 +2329,7 @@ void MyFrame::OnHelp ( wxCommandEvent& event )
 
 void MyFrame::OnSplitTab ( wxCommandEvent& event )
 {
+/*
 	int id = event.GetId();
 	XmlDoc *doc = getActiveDocument();
 	if ( !doc )
@@ -2262,7 +2338,6 @@ void MyFrame::OnSplitTab ( wxCommandEvent& event )
 
 	// mainBook->GetSelection() is currently unreliable, so fetch by title
 
-	/*
 	    int pageCount = mainBook->GetPageCount();
 	    XmlDoc *currentDoc;
 	    int currentSelection = -1;
@@ -2282,6 +2357,7 @@ void MyFrame::OnSplitTab ( wxCommandEvent& event )
 	int currentSelection, direction;
 	currentSelection = mainBook->GetSelection();
 	direction = wxAUI_NB_RIGHT;
+/*
 	switch ( id )
 	{
 			    ID_SPLIT_TAB_TOP:
@@ -2300,6 +2376,7 @@ void MyFrame::OnSplitTab ( wxCommandEvent& event )
 			direction = wxAUI_NB_RIGHT;
 			break;
 	}
+*/
 	mainBook->Split ( currentSelection, direction );
 }
 
@@ -2609,7 +2686,6 @@ void MyFrame::OnGlobalReplace ( wxCommandEvent& event )
 
 void MyFrame::OnFrameClose ( wxCloseEvent& event )
 {
-	std::cout<<"MyFrame::OnFrameClose\n";
 	wxCommandEvent e;
 	OnCloseAll ( e );
 	if ( mainBook->GetPageCount() )
@@ -5288,6 +5364,9 @@ void MyFrame::updateFileMenu ( bool deleteExisting )
 	wxMenuItem *saveAsItem =
 	    new wxMenuItem ( NULL, wxID_SAVEAS, _ ( "S&ave As...\tF12" ), _ ( "Save As..." ) );
 	saveAsItem->SetBitmap ( wxNullBitmap );
+	wxMenuItem *exportItem =
+        new wxMenuItem ( NULL, ID_EXPORT, _ ( "Export &DAISY Talking Book..." ), _ ( "Export DAISY Talking Book..." ) );
+    exportItem->SetBitmap ( wxNullBitmap );
 	wxMenuItem *reloadItem =
 	    new wxMenuItem ( NULL, ID_RELOAD, _ ( "&Reload" ), _ ( "Reload" ) );
 	reloadItem->SetBitmap ( wxNullBitmap );
@@ -5309,7 +5388,7 @@ void MyFrame::updateFileMenu ( bool deleteExisting )
 	importMSWordItem->SetBitmap ( wxNullBitmap );
 	wxMenuItem *exportMSWordItem =
 	    new wxMenuItem (
-	    NULL, ID_EXPORT_MSWORD, _ ( "&Export Microsoft Word Document..." ) );
+	    NULL, ID_EXPORT_MSWORD, _ ( "Expor&t Microsoft Word Document..." ) );
 	exportMSWordItem->SetBitmap ( wxNullBitmap );
 
 	wxMenuItem *exitItem =
@@ -5324,15 +5403,16 @@ void MyFrame::updateFileMenu ( bool deleteExisting )
 	fileMenu->Append ( closeAllItem );
 	fileMenu->Append ( saveItem );
 	fileMenu->Append ( saveAsItem );
-	fileMenu->AppendSeparator();
+    fileMenu->AppendSeparator();
 	fileMenu->Append ( reloadItem );
 	fileMenu->Append ( revertItem );
 	fileMenu->AppendSeparator();
 	fileMenu->Append ( printSetupItem );
 	fileMenu->Append ( printPreviewItem );
 	fileMenu->Append ( printItem );
-#ifdef __WXMSW__
 	fileMenu->AppendSeparator();
+	fileMenu->Append ( exportItem );
+#ifdef __WXMSW__
 	fileMenu->Append ( importMSWordItem );
 	fileMenu->Append ( exportMSWordItem );
 #endif
@@ -5452,14 +5532,14 @@ void MyFrame::messagePane ( const wxString& s, int iconType, bool forcePane )
 	switch ( iconType )
 	{
 		case ( CONST_INFO ) :
-			/*
-				if ( !forcePane && s.Length() < 50 ) // magic no. necessary?
-				{
-					statusProgress ( s );
-					return;
-				}
-			*/
-			paneTitle = _ ( "Information" );
+						/*
+						                    if ( !forcePane && s.Length() < 50 ) // magic no. necessary?
+						            {
+						                statusProgress ( s );
+						                return;
+						            }
+						*/
+						paneTitle = _ ( "Information" );
 			break;
 		case ( CONST_WARNING ) :
 						paneTitle = _ ( "Warning" );
@@ -5477,7 +5557,7 @@ void MyFrame::messagePane ( const wxString& s, int iconType, bool forcePane )
 
 	wxAuiPaneInfo info = manager.GetPane ( htmlReport );
 	if ( !info.IsShown() )
-	{
+{
 		manager.GetPane ( htmlReport ).Show ( true );
 		manager.Update();
 	}
@@ -5494,19 +5574,19 @@ void MyFrame::messagePane ( const wxString& s, int iconType, bool forcePane )
 	switch ( iconType )
 	{
 		case ( CONST_INFO ) :
-			htmlBuffer += pngDir;
+						htmlBuffer += pngDir;
 			htmlBuffer += _T ( "stock_dialog-info-32.png" );
 			break;
 		case ( CONST_WARNING ) :
-			htmlBuffer += pngDir;
+						htmlBuffer += pngDir;
 			htmlBuffer += _T ( "stock_dialog-warning-32.png" );
 			break;
 		case ( CONST_STOP ) :
-			htmlBuffer += pngDir;
+						htmlBuffer += pngDir;
 			htmlBuffer += _T ( "stock_dialog-stop-32.png" );
 			break;
 		case ( CONST_QUESTION ) :
-			htmlBuffer += pngDir;
+						htmlBuffer += pngDir;
 			htmlBuffer += _T ( "stock_dialog-question-32.png" );
 			break;
 		default:
@@ -5517,8 +5597,7 @@ void MyFrame::messagePane ( const wxString& s, int iconType, bool forcePane )
 	htmlBuffer += _T ( "</td></tr></table></body></html>" );
 
 	htmlReport->SetPage ( htmlBuffer );
-	htmlReport->error_message = htmlString.mb_str(wxConvUTF8);
-	htmlReport->SetCurrentDocument(getActiveDocument());
+
 	manager.Update();
 }
 
@@ -5635,6 +5714,8 @@ void MyFrame::updatePaths()
 	          wxFileName::GetPathSeparator();
 	pngDir = applicationDir + wxFileName::GetPathSeparator() + _T ( "png" ) +
 	         wxFileName::GetPathSeparator();
+    daisyDir = applicationDir + wxFileName::GetPathSeparator() + _T ( "daisy" ) +
+        wxFileName::GetPathSeparator();
 	wxString wideCatalogPath =
 	    applicationDir + wxFileName::GetPathSeparator() + _T ( "catalog" ) +
 	    wxFileName::GetPathSeparator() + _T ( "catalog" );
@@ -5863,8 +5944,6 @@ void MyFrame::getRawText ( XmlDoc *doc, std::string& buffer )
 		buffer = "";
 		return;
 	}
-	//wxString wideBuffer = doc->GetText();
-	//buffer = wideBuffer.mb_str(wxConvUTF8);
 	buffer = doc->myGetTextRaw();
 }
 
@@ -6045,18 +6124,4 @@ void MyFrame::setStrictScrolling ( bool b )
 void MyFrame::addToFileQueue ( wxString& fileName )
 {
      fileQueue.push_back ( fileName );
-}
-
-void MyFrame::OnPaneClose ( wxAuiManagerEvent& event )
-{
-	wxAuiPaneInfo* closedPane=event.GetPane();
-	
-	if (closedPane->name== _T ( "FindReplacePanel" ) )
-	{
-		// Find pane was closed - set focus back to document pane
-		XmlDoc *doc;
-		if ( ( doc = getActiveDocument() ) == NULL )
-			return;
-		doc->SetFocus();
-	}
 }

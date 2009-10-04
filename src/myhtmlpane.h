@@ -19,23 +19,18 @@
 
 #ifndef MY_HTML_PANE_H
 #define MY_HTML_PANE_H
-#include "xmldoc.h"
+
 #include <wx/wx.h>
 #include <wx/wxhtml.h>
 
 class MyHtmlPane : public wxHtmlWindow
 {
 	public:
-		std::string error_message;
-		
 		MyHtmlPane (
 		    wxWindow *parent,
 		    wxWindowID id = wxID_ANY,
 		    const wxPoint& position = wxDefaultPosition,
 		    const wxSize& size = wxDefaultSize );
-			
-		void SetCurrentDocument(XmlDoc *xdoc);
-			 
 	private:
 		/*
 		void OnCellClicked(
@@ -44,9 +39,7 @@ class MyHtmlPane : public wxHtmlWindow
 		  wxCoord y,
 		  const wxMouseEvent& event);
 		*/
-		XmlDoc *doc;
 		void OnLeftDoubleClick ( wxMouseEvent& event );
-		bool OnCellClicked(wxHtmlCell *cell, wxCoord x, wxCoord y, const wxMouseEvent& event);
 		DECLARE_EVENT_TABLE()
 };
 

@@ -20,7 +20,9 @@
 #include <iostream>
 #include <stdexcept>
 #include "wrapaspell.h"
-#include "aspell.h"
+#ifdef USE_ENCHANT
+#include <enchant++.h>
+#endif
 #include "casehandler.h"
 #include "contexthandler.h"
 #include "getword.h"
@@ -31,13 +33,17 @@
 
 WrapAspell::WrapAspell (
                        std::string lang
-#ifdef __WXMSW__
+#if !defined(USE_ENCHANT) && defined(__WXMSW__)
                        ,
                        const std::string& aspellDataPathParameter,
                        const std::string& aspellDictPathParameter
 #endif
 )
 {
+#ifdef USE_ENCHANT
+	spell_broker = enchant::Broker::instance();
+	spell_checker = spell_broker->request_dict( lang ); 
+#else
 	spell_config = new_aspell_config();
 	
 #ifdef __WXMSW__
@@ -55,26 +61,41 @@ WrapAspell::WrapAspell (
 	}
 	else
 		spell_checker = to_aspell_speller ( possible_err ); 
+#endif
 }
 
 WrapAspell::~WrapAspell()
 { 
+#ifdef USE_ENCHANT
+	delete spell_checker;
+#else
 	delete_aspell_speller ( spell_checker ); 
 	delete_aspell_config ( spell_config );
+#endif
 }
 
-bool WrapAspell::checkWord ( std::string &s )
+bool WrapAspell::checkWord ( const std::string &s )
 {
+#ifdef USE_ENCHANT
+	return spell_checker->check(s);
+#else
 	return checkWord ( (char *) s.c_str(), s.size() );
+#endif
 }
 
 std::string WrapAspell::getSuggestion (
     std::string &s )
 {
+#ifdef USE_ENCHANT
+	std::vector<std::string> out_suggestions;
+	spell_checker->suggest(s, out_suggestions);
+	return out_suggestions.empty() ? "----" : out_suggestions[0];
+#else
 	const AspellWordList *suggestions = aspell_speller_suggest ( spell_checker, s.c_str(), s.size() );
 	AspellStringEnumeration *elements = aspell_word_list_elements ( suggestions );
 	const char *word = aspell_string_enumeration_next ( elements ); // no iteration req'd
 	return (word) ? word : "----";
+#endif
 }
 
 void WrapAspell::checkString (
@@ -104,7 +125,11 @@ void WrapAspell::checkString (
 		}
 }
 
-bool WrapAspell::checkWord ( char *s, size_t len )
+bool WrapAspell::checkWord ( const char *s, size_t len )
 {
+#ifdef USE_ENCHANT
+	return checkWord( std::string(s, len) );
+#else
 	return aspell_speller_check ( spell_checker, s, len ); 
+#endif
 }

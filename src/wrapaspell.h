@@ -23,20 +23,28 @@
 #include <string>
 #include <vector>
 #include "contexthandler.h"
+#if !defined(USE_ENCHANT)
 #include "aspell.h"
+#else
+namespace enchant
+{
+	class Broker;
+	class Dict;
+}
+#endif
 
 class WrapAspell
 {
 	public:
 		WrapAspell (
                    std::string lang// = "en_US",
-#ifdef __WXMSW__
+#if !defined(USE_ENCHANT) && defined(__WXMSW__)
                    , const std::string& aspellDataPathParameter,
                    const std::string& aspellDictPath
 #endif
                    );
 		~WrapAspell();
-		inline bool checkWord ( std::string &s );
+		inline bool checkWord ( const std::string &s );
 		void checkString (
 		    std::string &s,
 		    std::vector<ContextMatch> &v,
@@ -44,8 +52,13 @@ class WrapAspell
 		std::string getSuggestion ( std::string &s );
 		std::string getVersion();
 	private:
+#ifdef USE_ENCHANT
+		enchant::Broker *spell_broker;
+		enchant::Dict *spell_checker;
+#else
 		AspellConfig *spell_config;
 		AspellSpeller *spell_checker;
-		bool checkWord ( char *s, size_t len );
+#endif
+		bool checkWord ( const char *s, size_t len );
 };
 #endif
