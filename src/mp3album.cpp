@@ -23,6 +23,7 @@
 #include <stdexcept>
 #include <expat.h>
 #include <cstring>
+#include "replace.h"
 #include "wrapregex.h"
 #include "mp3album.h"
 
@@ -108,12 +109,15 @@ void XMLCALL Mp3Album::end ( void *data, const XML_Char *el )
             ad->buffer.append ( "..." );
 
         if ( ad->trackNo == 1 )
+        {
             ad->albumTitle = ad->buffer;
+            if ( ad->albumTitle.empty() )
+                ad->albumTitle = "album";
+        }
 
         if ( abbrev )
             ad->buffer.append ( " " );
 
-        
         std::string source;
         source.append ( "speechgen" );
         source.append ( ad->trackNoString );

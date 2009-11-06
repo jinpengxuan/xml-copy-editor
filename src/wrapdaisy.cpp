@@ -7,14 +7,31 @@
 #include "wraptempfilename.h"
 #include "wraplibxml.h"
 #include "xmlprodnote.h"
-#include "mp3album.h"
+#include "xmlsuppressprodnote.h"
+#include "xmlcopyimg.h"
 #include "binaryfile.h"
+#include "replace.h"
+#include "playlistrenamer.h"
+#include "mp3album.h"
 
-WrapDaisy::WrapDaisy ( const wxString& daisyDirParameter ) :
-    daisyDir ( daisyDirParameter)
+#ifdef __WXMSW__
+#include <wx/msw/ole/automtn.h>
+#endif
+
+WrapDaisy::WrapDaisy (
+    MyFrame *frameParameter,
+    const wxString& daisyDirParameter,
+    const wxString& pathParameter ) :
+    frame ( frameParameter ), daisyDir ( daisyDirParameter), path ( pathParameter )
 {
     albumCover = daisyDir + _T("cover.jpg");
-    
+    blankImage = daisyDir + _T("blank.jpg");
+
+    //wxFileName::SetCwd ( daisyDir ); // not working
+    //_chdir ( systemCmd.c_str() ); // not working
+    //wxFileName::SetCwd ( daisyCwd ); // not working
+    //wxSetWorkingDirectory ( daisyDir ); // not working
+
     memoryCwd = wxFileName::GetCwd();
     daisyCwd = daisyDir +
         _T("pipeline-20090410") +
@@ -37,7 +54,7 @@ WrapDaisy::WrapDaisy ( const wxString& daisyDirParameter ) :
 
 WrapDaisy::~WrapDaisy()
 {
-    wxFileName::SetCwd ( memoryCwd );   
+    wxFileName::SetCwd ( memoryCwd );
 }
 
 bool WrapDaisy::run (
@@ -59,40 +76,97 @@ bool WrapDaisy::run (
         _ ( "Initializing..." ),
         100,
         NULL,
-        wxPD_SMOOTH | wxPD_CAN_ABORT ) );
+        wxPD_SMOOTH | wxPD_CAN_ABORT ) );    
+
+    // prepare dtbook location
+    wxString dtbDir, dtbFilePath;
     
-    // #1: convert to canonical XHTML
-    pd->ProcessPendingEvents();
-    if ( !pd->Update ( 20, _T("Preparing canonical XHTML...") ) )
+    dtbDir = folder + wxFileName::GetPathSeparator() + _T("dtbook");
+    dtbFilePath =
+        dtbDir +
+        wxFileName::GetPathSeparator() +
+        _T("dtbook.xml");
+    
+    wxFileName dtbDirTest ( dtbDir );
+    bool dtbDirExists = dtbDirTest.DirExists();    
+
+#ifdef __WXMSW__
+    if ( wxMkDir ( dtbDir ) && !dtbDirExists )
+#else
+    if ( wxMkDir ( (const char *) dtbDir.mb_str( wxConvUTF8 ), 0 ) && !dtbDirExists )
+#endif
+
     {
-        error = _T( "Cancelled" );
-        return false;   
-    }
-    
-    WrapTempFileName canonicalFile;
-    WrapTempFileName dtbFile ( wxEmptyString, _T(".xml"));
-    WrapLibxml wrapLibxml;
-    std::string stdStylesheet, stdFileIn;
-    stdStylesheet = stylesheet.mb_str ( wxConvUTF8 );
-    stdFileIn = fileIn.mb_str ( wxConvUTF8 );
-        
-    bool success = wrapLibxml.xslt ( stdStylesheet, stdFileIn );
-   
-    if ( !success )
-    {
-        std::string stdError = wrapLibxml.getLastError();
-        error = wxString ( stdError.c_str(), wxConvUTF8, stdError.size() );
-        return false;   
-    }
-    
-    std::string output = wrapLibxml.getOutput();
-    
-    if ( output.empty() )
-    {
-        error = _ ("Empty XHTML file");
+        error = _ ("Cannot create folder [b]") + dtbDir + _T("[/b]");
         return false;
     }
+
+    std::string output, stdStylesheet, stdFileIn;
+    stdStylesheet = stylesheet.mb_str ( wxConvUTF8 );
+    stdFileIn = fileIn.mb_str ( wxConvUTF8 );
+
+    if ( !stdStylesheet.empty() ) // stylesheet found
+    {
+        // #1: convert to canonical XHTML
+        pd->ProcessPendingEvents();
+        if ( !pd->Update ( 10, _T("Preparing canonical XHTML...") ) )
+        {
+            error = _T( "Cancelled" );
+            return false;   
+        }    
     
+        WrapLibxml wrapLibxml;
+            
+        bool success = wrapLibxml.xslt ( stdStylesheet, stdFileIn );
+       
+        if ( !success )
+        {
+            std::string stdError = wrapLibxml.getLastError();
+            error = wxString ( stdError.c_str(), wxConvUTF8, stdError.size() );
+            return false;   
+        }
+        
+        output = wrapLibxml.getOutput();
+        
+        if ( output.empty() )
+        {
+            error = _ ("Empty XHTML file");
+            return false;
+        }
+    }
+    else // no stylesheet
+    {
+        try {
+            BinaryFile bf( stdFileIn.c_str() );
+            output.append ( bf.getData(), bf.getDataLen() );
+        }
+        catch ( ... )
+        {
+            error = _( "Cannot read [b]" ) + fileIn + ( _("[/b]") );
+            return false;
+        }
+    }
+    
+    if ( suppressOptional )
+    {
+        pd->ProcessPendingEvents();
+        if ( !pd->Update ( 15, _("Suppressing optional production notes...") ) )
+        {
+            error = _ ( "Cancelled" );
+            return false;
+        }
+
+    	auto_ptr<XmlSuppressProdnote> xsp ( new XmlSuppressProdnote() );
+    	if ( !xsp->parse ( output.c_str() ) )
+    	{
+            frame->newDocument ( output );
+            std::string stdError = xsp->getLastError();
+            error = wxString ( stdError.c_str(), wxConvUTF8, stdError.size() );
+            return false;
+        }
+        output = xsp->getBuffer();
+    }
+
     if ( quiet )
     {
         // #1.5: apply quiet setting if req'd
@@ -106,14 +180,86 @@ bool WrapDaisy::run (
     	auto_ptr<XmlProdnote> xp ( new XmlProdnote() );
     	if ( !xp->parse ( output.c_str() ) )
     	{
+            frame->newDocument ( output );
             std::string stdError = xp->getLastError();
             error = wxString ( stdError.c_str(), wxConvUTF8, stdError.size() );
             return false;
         }
         output = xp->getBuffer();
     }
+
+    // prevent MIME type errors in href="www..." attributes
+    Replace::run ( output, "href=\"www", "href=\"http://www", true );
+
+    // copy images
+    wxString htmlDir, imagesDir, mediaDir;
+    htmlDir = folder + wxFileName::GetPathSeparator() + _T("html");
+    imagesDir = htmlDir + wxFileName::GetPathSeparator() + _T("images");
+    mediaDir = htmlDir + wxFileName::GetPathSeparator() + _T("media");
+    bool htmlDirExists, imagesDirExists, mediaDirExists;
+    wxFileName htmlDirTest ( htmlDir );
+    wxFileName imagesDirTest ( imagesDir );
+    wxFileName mediaDirTest ( mediaDir );
+    htmlDirExists = htmlDirTest.DirExists();
+    imagesDirExists = imagesDirTest.DirExists();
+    mediaDirExists = mediaDirTest.DirExists();    
+
+#ifdef __WXMSW__
+    if ( wxMkDir ( htmlDir ) && !htmlDirExists )
+#else
+    if ( wxMkDir ( (const char *) htmlDir.mb_str( wxConvUTF8 ), 0 ) && !htmlDirExists )
+#endif
+    {
+        error = _ ("Cannot create HTML folder [b]") + htmlDir + _T("[/b]");
+        return false;
+    }
+
+#ifdef __WXMSW__
+    if ( wxMkDir ( imagesDir ) && !imagesDirExists )
+#else
+    if ( wxMkDir ( (const char *) imagesDir.mb_str( wxConvUTF8 ), 0 ) && !imagesDirExists )
+#endif
+
+    {
+        error = _ ("Cannot create image folder [b]") + imagesDir + _T("[/b]");
+        return false;
+    }
     
-    std::ofstream canonicalStream ( canonicalFile.name().c_str() );
+#ifdef __WXMSW__
+    if ( wxMkDir ( mediaDir ) && !mediaDirExists )
+#else
+    if ( wxMkDir ( (const char *) mediaDir.mb_str( wxConvUTF8 ), 0 ) && !mediaDirExists )
+#endif
+
+    {
+        error = _ ("Cannot create folder [b]") + mediaDir + _T("[/b]");
+        return false;
+    }
+        
+    // copy images
+    pd->ProcessPendingEvents();
+    if ( !pd->Update ( 25, _("Copying images and audio files...") ) )
+    {
+        error = _ ( "Cancelled" );
+        return false;
+    }
+
+	auto_ptr<XmlCopyImg> xci (
+        new XmlCopyImg ( blankImage, imagesDir, mediaDir, path )
+    );
+	if ( !xci->parse ( output.c_str() ) )
+	{
+        frame->newDocument ( output );
+        std::string stdError = xci->getLastError();
+        error = wxString ( stdError.c_str(), wxConvUTF8, stdError.size() );
+        return false;
+    }
+    output = xci->getBuffer();
+    
+    // write out canonical file
+    wxString canonicalFile = htmlDir + wxFileName::GetPathSeparator() + _T("index.html");
+    std::string stdCanonicalFile = ( const char *) canonicalFile.mb_str ( wxConvUTF8 );
+    std::ofstream canonicalStream ( stdCanonicalFile.c_str() );//canonicalFile.name().c_str() );
     if ( !canonicalStream )
     {
         error = _T( "Cannot write canonical XHTML file" );
@@ -142,9 +288,10 @@ bool WrapDaisy::run (
     
     wxString cmd = baseCmd +
         xhtml2dtbookScript +
-        _T(" --inputFile=") +
-        canonicalFile.wideName() + _T(" --outputFile=") +
-        dtbFile.wideName();
+        _T(" --inputFile=\"") +
+        canonicalFile + //canonicalFile.wideName() +
+        _T("\" --outputFile=\"") +
+        dtbFilePath + _T("\"");
 
     wxArrayString out, err;
 	
@@ -173,7 +320,7 @@ bool WrapDaisy::run (
         
     // #2.5: create EPUB version
     pd->ProcessPendingEvents();
-    if ( !pd->Update ( 50, _T("Transforming to EPUB ebook...") ) )
+    if ( !pd->Update ( 50, _T("Preparing ePub...") ) )
     {
         error = _T ( "Cancelled" );
         return false;   
@@ -191,7 +338,8 @@ bool WrapDaisy::run (
 
     cmd = baseCmd +
         _T("\"") + epubScript + _T("\" --input=\"") +
-        canonicalFile.wideName() + _T("\" --output=\"") +
+        canonicalFile + //canonicalFile.wideName() +
+        _T("\" --output=\"") +
         folder + wxFileName::GetPathSeparator() + _T("ebook.epub\"");
         
     result = wxExecute ( cmd, out, err );
@@ -223,7 +371,7 @@ bool WrapDaisy::run (
 
     // #2.9: convert to RTF
     pd->ProcessPendingEvents();
-    if ( !pd->Update ( 50, _T("Transforming to RTF...") ) )
+    if ( !pd->Update ( 60, _T("Preparing RTF...") ) )
     {
         error = _T ( "Cancelled" );
         return false;   
@@ -239,10 +387,13 @@ bool WrapDaisy::run (
     rtfScript += wxFileName::GetPathSeparator();
     rtfScript += _T("DtbookToRtf.taskScript");
 
+    wxString rtfFile = folder + wxFileName::GetPathSeparator() + _T("document.rtf");
+    
     cmd = baseCmd +
         _T("\"") + rtfScript + _T("\" --input=\"") +
-        canonicalFile.wideName() + _T("\" --output=\"") +
-        folder + wxFileName::GetPathSeparator() + _T("document.rtf\" --inclToc=\"true\" --inclPagenum=\"false\"");
+        dtbFilePath + //dtbFile.wideName() +
+        _T("\" --output=\"") + rtfFile + 
+        _T("\" --inclTOC=\"true\" --inclPagenum=\"false\"");
         
     result = wxExecute ( cmd, out, err );
 	
@@ -256,7 +407,7 @@ bool WrapDaisy::run (
         }
     }
     
-/**/
+/*
     count = out.GetCount();
     if ( count )
     {
@@ -266,14 +417,58 @@ bool WrapDaisy::run (
             error += _T(" ");
         }
     }
-/**/
+*/
 
     if ( !error.empty() )
         return false;    
 
+    // #2.9.5: convert to binary Word
+    // (Win only; otherwise create copy with *.doc extension)
+
+    pd->ProcessPendingEvents();
+    if ( !pd->Update ( 60, _T("Preparing Word document...") ) )
+    {
+        error = _T ( "Cancelled" );
+        return false;   
+    }
+
+
+    wxString docFile = rtfFile;
+    docFile.Replace ( _T(".rtf"), _T(".doc") );
+
+#ifdef __WXMSW__
+    wxAutomationObject wordObject, documentObject;
+
+    if ( wordObject.CreateInstance ( _T("Word.Application") ) )
+    {
+        wxVariant openParams[2];
+        openParams[0] = rtfFile;
+        openParams[1] = false;   
+
+        wordObject.CallMethod(_("documents.open"), 2, openParams);
+        if (!wordObject.GetObject(documentObject, _("ActiveDocument"))) 
+        { 
+            error = _("Cannot open ") + rtfFile;
+            return false;
+        }
+        wxVariant saveAsParams[2];
+        saveAsParams[0] = docFile;
+        saveAsParams[1] = (long)0; //wdFormatDocument
+        if ( !documentObject.CallMethod(_("SaveAs"), 2, saveAsParams) )
+        {
+            //error = _("Cannot save ") + docFile;
+            //return false;
+        }
+        documentObject.CallMethod(_("Close"), 0, NULL );
+        wordObject.CallMethod(_T("Quit"), 0, NULL );
+    }
+#else
+    wxCopyFile ( rtfFile, docFile );
+#endif
+
     // #3: convert to full DAISY book
     pd->ProcessPendingEvents();
-    if ( !pd->Update ( 60, _T("Preparing DAISY book...") ) )
+    if ( !pd->Update ( 70, _T("Preparing DAISY books...") ) )
     {
         error = _T ( "Cancelled" );
         return false;   
@@ -290,8 +485,9 @@ bool WrapDaisy::run (
     narratorScript += _T("Narrator-DtbookToDaisy.taskScript");
 
     cmd = baseCmd +
-        _T("\"") + narratorScript + _T("\" --input=") +
-        dtbFile.wideName() + _T(" --outputPath=") +
+        _T("\"") + narratorScript + _T("\" --input=\"") +
+        dtbFilePath + _T("\"") +//dtbFile.wideName() +
+        _T(" --outputPath=") +
         _T("\"") +
         folder +
         _T("\"");
@@ -322,7 +518,7 @@ bool WrapDaisy::run (
 
     if ( !error.empty() )
         return false;
-    
+
     // #4: create MP3 album
     pd->ProcessPendingEvents();
     if ( !pd->Update ( 80, _T("Preparing MP3 album...") ) )
@@ -331,8 +527,89 @@ bool WrapDaisy::run (
         return false;   
     }
     
+    // identify path to input file
+    wxString folderWith202SmilFile, fileWith202SmilAttribs;
+    folderWith202SmilFile =
+        folder + wxFileName::GetPathSeparator() +
+        _T("daisy202") + wxFileName::GetPathSeparator();
+    fileWith202SmilAttribs = folderWith202SmilFile + _T("ncc.html");
+
+    wxString taggerScript;
+    
+    taggerScript += _T("scripts");
+    taggerScript += wxFileName::GetPathSeparator();
+    taggerScript += _T("modify_improve");
+    taggerScript += wxFileName::GetPathSeparator();
+    taggerScript += _T("multiformat");
+    taggerScript += wxFileName::GetPathSeparator();
+    taggerScript += _T("AudioTagger.taskScript");
+
+    //create mp3 folder
+    wxString albumDir = folder + wxFileName::GetPathSeparator() + _T("mp3");
+    wxFileName dirTest ( albumDir );
+    bool dirExists = dirTest.DirExists();
+#ifdef __WXMSW__
+    if ( !wxMkDir ( albumDir ) && !dirExists )
+#else
+    if ( !wxMkDir ( (const char *) albumDir.mb_str( wxConvUTF8 ), 0 ) && !dirExists )
+#endif
+
+    {
+        error = _ ("Cannot create MP3 album folder [b]") + albumDir + _T("[/b]");
+        return false;
+    }
+    
+    cmd = baseCmd +
+        _T("\"") + taggerScript + _T("\" --audioTaggerInputFile=\"") +
+        fileWith202SmilAttribs + _T("\" --audioTaggerOutputPath=") + // see filesetAudioTagger transformer
+        _T("\"") +
+        albumDir +
+        _T("\"");
+        
+    result = wxExecute ( cmd, out, err );
+	
+    count = err.GetCount();
+    if ( count )
+    {
+        for ( int i = 0; i < count; i++ )
+        {
+            error += err.Item ( i );
+            error += _T(" ");
+        }
+    }
+
+/*
+    count = out.GetCount();
+    if ( count )
+    {
+        for ( int i = 0; i < count; i++ )
+        {
+            error += out.Item ( i );
+            error += _T("");
+        }
+    }
+*/
+
+    if ( !error.empty() )
+        return false;
+        
+
+    pd->ProcessPendingEvents();
+    if ( !pd->Update ( 90, _T("Updating playlists...") ) )
+    {
+        error = _T ( "Cancelled" );
+        return false;   
+    }
+
+    //rename mp3 playlists
+/*
+    PlayListRenamer plr;
+    std::string stdAlbumDir = ( const char *) albumDir.mb_str ( wxConvUTF8 );
+    plr.run ( stdAlbumDir );
+*/  
+
     //rename mp3 files in //z3986/
-    wxFileName fn ( dtbFile.wideName() );
+    wxFileName fn ( dtbFilePath );
     wxString folderWithSmilFile, fileWithSmilAttribs;
     folderWithSmilFile =
         folder + wxFileName::GetPathSeparator() +
@@ -364,7 +641,8 @@ bool WrapDaisy::run (
     
     delete binaryfile;
 
-    wxString albumDir = folder;
+    // redefine albumDir - remove when PlayListRename is ready
+    albumDir = folder;
     albumDir += wxFileName::GetPathSeparator();
     
     std::string albumTitle = ma->getAlbumTitle();
@@ -372,14 +650,15 @@ bool WrapDaisy::run (
     albumDir += wideAlbumTitle;
 #ifdef __WXMSW__
     albumDir.Replace ( _T("."), wxEmptyString );
+    albumDir.Replace ( _T("?"), wxEmptyString );
 #endif
 
     wxFileName dir ( albumDir );
-    bool dirExists = dir.DirExists();
+    bool albumDirExists = dir.DirExists();
 #ifdef __WXMSW__
-    if ( !wxMkDir ( albumDir ) && !dirExists )
+    if ( !wxMkDir ( albumDir ) && !albumDirExists )
 #else
-    if ( !wxMkDir ( (const char *) albumDir.mb_str( wxConvUTF8 ), 0 ) && !dirExists )
+    if ( !wxMkDir ( (const char *) albumDir.mb_str( wxConvUTF8 ), 0 ) && !albumDirExists )
 #endif
     {
         error = _ ("Cannot create MP3 album folder ") + albumDir;

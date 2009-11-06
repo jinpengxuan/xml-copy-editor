@@ -2,25 +2,30 @@
 #define WRAPDAISY_H
 
 #include <wx/wx.h>
+#include "xmlcopyeditor.h"
 
 class WrapDaisy
 {
 public:
-    WrapDaisy ( const wxString& daisyDir );
+    WrapDaisy (
+        MyFrame *frame,
+        const wxString& daisyDir,
+        const wxString& path );
     ~WrapDaisy();
     bool run (
         wxString& fileIn,
         wxString& stylesheet,
         wxString& folder,
         bool quiet,
-	bool suppressOptional,
-	bool epub,
-	bool rtf,
-	bool fullDaisy,
+        bool suppressOptional,
+        bool epub,
+        bool rtf,
+        bool fullDaisy,
         bool mp3Album );
     wxString getLastError();
 private:
-    wxString daisyDir, classPath, commandLineUI, baseCmd, error,
+    MyFrame *frame;
+    wxString daisyDir, path, blankImage, classPath, commandLineUI, baseCmd, error,
         memoryCwd, daisyCwd, albumCover;
 };
 

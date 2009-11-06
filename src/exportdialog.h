@@ -33,9 +33,10 @@ class ExportDialog : public wxDialog
             const wxString& folderParameter,
             bool quiet = true,
             bool suppressOptional = true,
+            bool html = true,
             bool epub = true,
             bool rtf = true,
-	    bool doc = true,
+            bool doc = true,
             bool fullDaisy = true,
             bool mp3Album = true,
             bool downloadLink = false );
@@ -58,7 +59,8 @@ class ExportDialog : public wxDialog
 			ID_MP3,
 			ID_EPUB,
 			ID_RTF,
-			ID_DOC
+			ID_DOC,
+			ID_HTML
 		};
 
 	private:
@@ -66,14 +68,15 @@ class ExportDialog : public wxDialog
 		wxString url, folder;
 		wxCheckBox *quietCheckbox,
 		*suppressOptionalCheckbox,
-            *epubCheckbox,
-            *rtfCheckbox,
+        *htmlCheckbox,
+        *epubCheckbox,
+        *rtfCheckbox,
 	    *docCheckbox,
-            *fullDaisyCheckbox,
-            *mp3AlbumCheckbox;
+        *fullDaisyCheckbox,
+        *mp3AlbumCheckbox;
 		wxFilePickerCtrl *urlCtrl;
         wxDirPickerCtrl *dirPicker;
-		bool quiet, suppressOptional, epub, rtf, doc, fullDaisy, mp3Album, downloadLink;
+		bool quiet, suppressOptional, html, epub, rtf, doc, fullDaisy, mp3Album, downloadLink;
 		DECLARE_EVENT_TABLE()
 };
 

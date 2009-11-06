@@ -39,6 +39,7 @@ ExportDialog::ExportDialog (
     const wxString& folderParameter,
     bool quietParameter,
     bool suppressOptionalParameter,
+    bool htmlParameter,
     bool epubParameter,
     bool rtfParameter,
     bool docParameter,
@@ -50,6 +51,7 @@ ExportDialog::ExportDialog (
 		folder ( folderParameter ),
 		quiet ( quietParameter ),
 		suppressOptional ( suppressOptionalParameter ),
+		html ( htmlParameter ),
 		epub ( epubParameter ),
 		rtf ( rtfParameter ),
 		doc ( docParameter ),
@@ -61,14 +63,14 @@ ExportDialog::ExportDialog (
 	Create (
 	    parent,
 	    wxID_ANY,
-	    wxString ( _ ( "Export DAISY" ) ),
+	    wxString ( _ ( "DAISY export" ) ),
 	    wxDefaultPosition,
 	    wxSize ( 250, -1 ),
 	    wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER );
 
 	wxBoxSizer *dialogSizer = new wxBoxSizer ( wxVERTICAL );
 
-	wxString labelText = _ ( "&Stylesheet for conversion to canonical XHTML:" );
+	wxString labelText = _ ( "&Stylesheet for conversion to canonical XHTML (optional):" );
 	// pad with whitespace
 	labelText += _T("                                  ");
 	wxStaticText *urlLabel =
@@ -97,14 +99,16 @@ ExportDialog::ExportDialog (
     suppressOptionalCheckbox->SetValue ( suppressOptional );
 
     wxStaticBoxSizer *outputSizer = new wxStaticBoxSizer ( wxVERTICAL, this, _("Outputs") );
-    fullDaisyCheckbox = new wxCheckBox ( this, ID_FULL_DAISY, _ ( "&Full DAISY 3.0 Talking Book" ) );
+    fullDaisyCheckbox = new wxCheckBox ( this, ID_FULL_DAISY, _ ( "&Full DAISY 2.02 and 3.0 Talking Books" ) );
     fullDaisyCheckbox->SetValue ( fullDaisy );
-    epubCheckbox = new wxCheckBox ( this, ID_EPUB, _ ( "&EPUB ebook" ) );
+    htmlCheckbox = new wxCheckBox ( this, ID_HTML, _ ( "&HTML" ) );
+    htmlCheckbox->SetValue ( html );
+    epubCheckbox = new wxCheckBox ( this, ID_EPUB, _ ( "&ePub ebook" ) );
     epubCheckbox->SetValue ( epub );
     rtfCheckbox = new wxCheckBox ( this, ID_EPUB, _ ( "&RTF document" ) );
     rtfCheckbox->SetValue ( rtf );
     docCheckbox = new wxCheckBox ( this, ID_DOC, _ ( "&Word document" ) );
-    docCheckbox->SetValue ( rtf );
+    docCheckbox->SetValue ( doc );
     mp3AlbumCheckbox = new wxCheckBox ( this, ID_MP3, _ ( "&MP3 album" ) );
     mp3AlbumCheckbox->SetValue ( mp3Album );
 
@@ -114,10 +118,11 @@ ExportDialog::ExportDialog (
     dialogSizer->Add ( dirPicker, 0, wxALL | wxALIGN_LEFT | wxEXPAND, 5 );
     prodnoteSizer->Add ( quietCheckbox, 0, wxTOP | wxLEFT | wxALIGN_LEFT, 5 );
     prodnoteSizer->Add ( suppressOptionalCheckbox, 0, wxTOP | wxLEFT | wxALIGN_LEFT, 5 );
+    outputSizer->Add ( fullDaisyCheckbox, 0, wxTOP | wxLEFT | wxALIGN_LEFT, 5 );
+    outputSizer->Add ( htmlCheckbox, 0, wxTOP | wxLEFT | wxALIGN_LEFT, 5 );
+    outputSizer->Add ( epubCheckbox, 0, wxTOP | wxLEFT | wxALIGN_LEFT, 5 );
     outputSizer->Add ( rtfCheckbox, 0, wxTOP | wxLEFT | wxALIGN_LEFT, 5 );
     outputSizer->Add ( docCheckbox, 0, wxTOP | wxLEFT | wxALIGN_LEFT, 5 );
-    outputSizer->Add ( epubCheckbox, 0, wxTOP | wxLEFT | wxALIGN_LEFT, 5 );
-    outputSizer->Add ( fullDaisyCheckbox, 0, wxTOP | wxLEFT | wxALIGN_LEFT, 5 );
     outputSizer->Add ( mp3AlbumCheckbox, 0, wxTOP | wxLEFT | wxALIGN_LEFT, 5 );
     dialogSizer->Add ( prodnoteSizer, 0, wxTOP | wxLEFT | wxALIGN_LEFT | wxEXPAND, 5 );
     dialogSizer->Add ( outputSizer, 0, wxTOP | wxLEFT | wxALIGN_LEFT | wxEXPAND, 5 );
@@ -128,7 +133,12 @@ ExportDialog::ExportDialog (
             this,
             wxID_ANY,
             _ ( "Download DAISY extension" ),
-            _T ( "http://xml-copy-editor.sourceforge.net" ) );
+#ifdef __WXMSW__
+            _T ( "https://sourceforge.net/projects/xml-copy-editor/files/xmlcopyeditor-daisy/xmlcopyeditor-daisy-1.0.exe/download" )
+#else
+            _T ( "http://xml-copy-editor.sourceforge.net" )
+#endif
+        );
         dialogSizer->AddSpacer ( 5 );
         dialogSizer->Add ( downloadCtrl, 0, wxTOP | wxLEFT | wxALIGN_LEFT, 5 );
     }
@@ -189,11 +199,14 @@ void ExportDialog::OnContextHelp ( wxHelpEvent& e )
 void ExportDialog::OnUpdateOk ( wxUpdateUIEvent& e )
 {
     bool enable = true;
+/*
 #ifdef __WXMSW__
     if ( urlCtrl->GetTextCtrlValue().empty() ||
 #else
     if ( urlCtrl->GetPath().empty() ||
 #endif
+*/
+    if (
         dirPicker->GetPath().empty() ||
         downloadLink )
         enable = false;

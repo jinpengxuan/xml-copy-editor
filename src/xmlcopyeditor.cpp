@@ -215,6 +215,9 @@ MyApp::MyApp() : checker ( NULL ), server ( NULL ), connection ( NULL ),
 		case wxLANGUAGE_CHINESE_TRADITIONAL:
 			systemLocale = wxLANGUAGE_CHINESE_TRADITIONAL;
 			break;
+		case wxLANGUAGE_CATALAN:
+            systemLocale = wxLANGUAGE_CATALAN;
+            break;
 		case wxLANGUAGE_SPANISH:
 		case wxLANGUAGE_SPANISH_ARGENTINA:
 		case wxLANGUAGE_SPANISH_BOLIVIA:
@@ -1223,23 +1226,24 @@ void MyFrame::OnAbout ( wxCommandEvent& WXUNUSED ( event ) )
 	info.SetWebSite ( _T ( "http://xml-copy-editor.sourceforge.net" ) );
 	info.SetVersion ( ABOUT_VERSION );
 	info.SetCopyright ( ABOUT_COPYRIGHT );
-	info.AddDeveloper ( _ ( "Gerald Schmidt (development) <gnschmidt at users.sourceforge.net>" ) );
-	info.AddDeveloper ( _ ( "Matt Smigielski (testing) <alectrus at users.sourceforge.net>" ) );
-	info.AddDeveloper ( _ ( "Justin Dearing (development) <j-pimp at users.sourceforge.net>" ) );
-	info.AddDeveloper ( _ ( "Kev James (development) <kmjames at users.sourceforge.net>" ) );
-	info.AddDeveloper ( _ ( "Anh Trinh (development) <ant271 at users.sourceforge.net>" ) );
-	info.AddTranslator ( _ ( "Viliam Búr (Slovak) <viliam at bur.sk>" ) );
-	info.AddTranslator ( _ ( "David Håsäther (Swedish) <hasather at gmail.com>" ) );
-	info.AddTranslator ( _ ( "François Badier (French) <frabad at gmail.com>" ) );
-	info.AddTranslator ( _ ( "Thomas Wenzel (German) <thowen at users.sourceforge.net>" ) );
-	info.AddTranslator ( _ ( "SHiNE CsyFeK (Chinese Simplified) <csyfek at gmail.com>" ) );
+	info.AddDeveloper ( _ ( "Gerald Schmidt (development) <gnschmidt at users dot sourceforge dot net>" ) );
+	info.AddDeveloper ( _ ( "Matt Smigielski (testing) <alectrus at users dot sourceforge dot net>" ) );
+	info.AddDeveloper ( _ ( "Justin Dearing (development) <j-pimp at users dot sourceforge dot net>" ) );
+	info.AddDeveloper ( _ ( "Kev James (development) <kmjames at users dot sourceforge dot net>" ) );
+	info.AddDeveloper ( _ ( "Anh Trinh (development) <ant271 at users dot sourceforge dot net>" ) );
+	info.AddTranslator ( _ ( "Viliam Búr (Slovak) <viliam at bur dot sk>" ) );
+	info.AddTranslator ( _ ( "David Håsäther (Swedish) <hasather at gmail dot com>" ) );
+	info.AddTranslator ( _ ( "François Badier (French) <frabad at gmail dot com>" ) );
+	info.AddTranslator ( _ ( "Thomas Wenzel (German) <thowen at users dot sourceforge.net>" ) );
+	info.AddTranslator ( _ ( "SHiNE CsyFeK (Chinese Simplified) <csyfek at gmail dot com>" ) );
 	info.AddTranslator ( _ ( "HSU PICHAN, YANG SHUFUN, CHENG PAULIAN, CHUANG KUO-PING, Marcus Bingenheimer (Chinese Traditional)" ) );
-	info.AddTranslator ( _ ( "Serhij Dubyk (Ukrainian) <dubyk at library.lviv.ua>" ) );
-	info.AddTranslator ( _ ( "Antonio Angelo (Italian) <aangelo at users.sourceforge.net>" ) );
-	info.AddTranslator ( _ ( "Siarhei Kuchuk (Russian) <Cuchuk.Sergey at gmail.com>" ) );
-	info.AddTranslator ( _ ( "Marcos Pérez González (Spanish) <marcos_pg at yahoo.com>" ) );
-	info.AddTranslator ( _ ( "Rob Elemans (Dutch) <relemans at gmail.com>" ) );
-	info.SetLicense ( ABOUT_LICENSE );
+	info.AddTranslator ( _ ( "Serhij Dubyk (Ukrainian) <dubyk at library dot lviv dot ua>" ) );
+	info.AddTranslator ( _ ( "Antonio Angelo (Italian) <aangelo at users dot sourceforge dot net>" ) );
+	info.AddTranslator ( _ ( "Siarhei Kuchuk (Russian) <Cuchuk dot Sergey at gmail dot com>" ) );
+	info.AddTranslator ( _ ( "Marcos Pérez González (Spanish) <marcos_pg at yahoo dot com>" ) );
+	info.AddTranslator ( _ ( "Rob Elemans (Dutch) <relemans at gmail dot com>" ) );
+	info.AddTranslator ( _ ( "Robert Falco Miramontes <rfalco at acett dot org>" ) );
+    info.SetLicense ( ABOUT_LICENSE );
 	info.SetDescription ( description );
 	wxAboutBox ( info );
 	XmlDoc *doc;
@@ -2063,16 +2067,17 @@ void MyFrame::OnExport ( wxCommandEvent& event )
         exportStylesheet,
         exportFolder,
         exportQuiet,
-	true, //suppressOptional
+        true, //suppressOptional
+        true, //html
         true, //epub
         true, //rtf
-	true, //doc
+        true, //doc
         true, //fullDaisy
         exportMp3Album,
         downloadLink ) );
     int ret = ed->ShowModal();
     
-    if ( ret == wxID_CANCEL )
+    if ( ret != wxID_OK )
         return;
 
     exportStylesheet = ed->getUrlString();
@@ -2097,14 +2102,14 @@ void MyFrame::OnExport ( wxCommandEvent& event )
 	rawBufferStream.close();
 
     wxString tempFile= tempFileName.wideName();
-        
-    WrapDaisy wd ( daisyDir );
+    
+    WrapDaisy wd ( this, daisyDir, doc->getFullFileName() );
     if ( !wd.run ( tempFile, exportStylesheet, exportFolder, exportQuiet, exportMp3Album, true, true, true, true ) )
     {
-        messagePane ( _ ("DAISY Talking Book export stopped: ") + wd.getLastError(), CONST_STOP );
+        messagePane ( _ ("[b]DAISY export stopped[/b]: ") + wd.getLastError(), CONST_STOP );
         return;
     }
-	messagePane ( _ ( "DAISY Talking Book export completed. Output files are stored in " ) + exportFolder + _T ( "." ), CONST_INFO );
+	messagePane ( _ ( "DAISY export completed. Output files are stored in: [b]" ) + exportFolder + _T ( "[/b]." ), CONST_INFO );
 }
 
 void MyFrame::importMSWord ( const wxString& path )
@@ -2119,7 +2124,7 @@ void MyFrame::importMSWord ( const wxString& path )
 	if ( !wxCopyFile ( path, completeSwapFileName, true ) )
 	{
 		wxString message;
-		message.Printf ( _ ( "Cannot open %s for import" ), path.c_str() );
+		message.Printf ( _ ( "Cannot open [b]%s[/b] for import" ), path.c_str() );
 		messagePane ( message, CONST_STOP );
 		return;
 	}
@@ -2151,11 +2156,11 @@ void MyFrame::importMSWord ( const wxString& path )
 			    _ ( "A more recent version of Microsoft Word is required" ), CONST_STOP );
 			return;
 		case 3:
-			message.Printf ( _T ( "Microsoft Word cannot open %s" ), path.c_str() );
+			message.Printf ( _T ( "Microsoft Word cannot open [b]%s[/b]" ), path.c_str() );
 			messagePane ( message + path, CONST_STOP );
 			return;
 		case 4:
-			message.Printf ( _ ( "Microsoft Word cannot save %s as XML" ), path.c_str() );
+			message.Printf ( _ ( "Microsoft Word cannot save [b]%s[/b] as XML" ), path.c_str() );
 			messagePane ( message, CONST_STOP );
 			return;
 		case 5:
@@ -2882,7 +2887,7 @@ bool MyFrame::openFile ( wxString& fileName, bool largeFile )
 	if ( !wxFileName::FileExists ( fileName ) )
 	{
 		wxString message;
-		message.Printf ( _ ( "Cannot open %s" ), fileName.c_str() );
+		message.Printf ( _ ( "Cannot open %s." ), fileName.c_str() );
 		messagePane ( message, CONST_STOP );
 		return false;
 	}
@@ -5365,7 +5370,7 @@ void MyFrame::updateFileMenu ( bool deleteExisting )
 	    new wxMenuItem ( NULL, wxID_SAVEAS, _ ( "S&ave As...\tF12" ), _ ( "Save As..." ) );
 	saveAsItem->SetBitmap ( wxNullBitmap );
 	wxMenuItem *exportItem =
-        new wxMenuItem ( NULL, ID_EXPORT, _ ( "Export &DAISY Talking Book..." ), _ ( "Export DAISY Talking Book..." ) );
+        new wxMenuItem ( NULL, ID_EXPORT, _ ( "&DAISY Export..." ), _ ( "DAISY Export..." ) );
     exportItem->SetBitmap ( wxNullBitmap );
 	wxMenuItem *reloadItem =
 	    new wxMenuItem ( NULL, ID_RELOAD, _ ( "&Reload" ), _ ( "Reload" ) );
@@ -5532,23 +5537,16 @@ void MyFrame::messagePane ( const wxString& s, int iconType, bool forcePane )
 	switch ( iconType )
 	{
 		case ( CONST_INFO ) :
-						/*
-						                    if ( !forcePane && s.Length() < 50 ) // magic no. necessary?
-						            {
-						                statusProgress ( s );
-						                return;
-						            }
-						*/
-						paneTitle = _ ( "Information" );
+			paneTitle = _ ( "Information" );
 			break;
 		case ( CONST_WARNING ) :
-						paneTitle = _ ( "Warning" );
+			paneTitle = _ ( "Warning" );
 			break;
 		case ( CONST_STOP ) :
 						paneTitle = _ ( "Stopped" );
 			break;
 		case ( CONST_QUESTION ) :
-						paneTitle = _ ( "Question" );
+			paneTitle = _ ( "Question" );
 			break;
 		default:
 			paneTitle = _ ( "Message" );
@@ -5557,7 +5555,7 @@ void MyFrame::messagePane ( const wxString& s, int iconType, bool forcePane )
 
 	wxAuiPaneInfo info = manager.GetPane ( htmlReport );
 	if ( !info.IsShown() )
-{
+    {
 		manager.GetPane ( htmlReport ).Show ( true );
 		manager.Update();
 	}
@@ -5568,6 +5566,13 @@ void MyFrame::messagePane ( const wxString& s, int iconType, bool forcePane )
 	htmlString.Replace ( _T ( "&" ), _T ( "&amp;" ), true );
 	htmlString.Replace ( _T ( "<" ), _T ( "&lt;" ), true );
 	htmlString.Replace ( _T ( ">" ), _T ( "&gt;" ), true );
+	
+    htmlString.Replace ( _T("[br/]"), _T("<br/>"), true );
+    htmlString.Replace ( _T("[b]"), _T("<b>"), true );
+    htmlString.Replace ( _T("[/b]"), _T("</b>"), true );
+    htmlString.Replace ( _T("[i]"), _T("<i>"), true );
+    htmlString.Replace ( _T("[/i]"), _T("</i>"), true );
+    
 
 	wxString htmlBuffer;
 	htmlBuffer += _T ( "<html><body><table><tr><td width=\"5%\"><img src=\"" );

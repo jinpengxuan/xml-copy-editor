@@ -25,7 +25,7 @@
 
 #endif
 #define ABOUT_COPYRIGHT _("Copyright © 2005-2009 Gerald Schmidt <gnschmidt@users.sourceforge.net>")
-#define ABOUT_DESCRIPTION _("\nXML Copy Editor is free software released under the GNU\nGeneral Public License.\n\nMany thanks are due to Tim van Niekerk, Matt Smigielski,\nDavid Scholl, Jan Merka, Marcus Bingenheimer, Roberto\nRosselli Del Turco, Ken Zalewski, C.J. Meidlinger,\nThomas Zajic, Viliam Búr, David Håsäther, François\nBadier, Thomas Wenzel, Roger Sperberg, SHiNE CsyFeK,\nHSU PICHAN, YANG SHUFUN, CHENG PAULIAN,\nCHUANG KUO-PING, Justin Dearing, Serhij Dubyk,\nAntonio Angelo, Jose Luis Rivero, Siarhei Kuchuk,\nIan Abbott, Kev James, Marcos Pérez González, Anh\nTrinh and Rob Elemans.")
+#define ABOUT_DESCRIPTION _("\nXML Copy Editor is free software released under the GNU\nGeneral Public License.\n\nMany thanks are due to Tim van Niekerk, Matt Smigielski,\nDavid Scholl, Jan Merka, Marcus Bingenheimer, Roberto\nRosselli Del Turco, Ken Zalewski, C.J. Meidlinger,\nThomas Zajic, Viliam Búr, David Håsäther, François\nBadier, Thomas Wenzel, Roger Sperberg, SHiNE CsyFeK,\nHSU PICHAN, YANG SHUFUN, CHENG PAULIAN,\nCHUANG KUO-PING, Justin Dearing, Serhij Dubyk,\nAntonio Angelo, Jose Luis Rivero, Siarhei Kuchuk,\nIan Abbott, Kev James, Marcos Pérez González, Anh\nTrinh, Rob Elemans and Robert Falco Miramontes.")
 #define ABOUT_LICENSE _T(\
 "This program is free software; you can redistribute it\n"\
 "and/or modify it under the terms of the GNU General Public\n"\
@@ -43,3 +43,13 @@
 "Boston, MA 02111-1307 USA.")
 #define ABOUT_VERSION _T("1.2.0.6")
 #define XMLCE_VAR _T("XMLCE_VAR")
+
+#ifdef __WXMSW__
+#define IMAGEMAGICK_CONVERT_PATH _T("\"C:\\Program Files\\ImageMagick-6.5.7-Q16\\convert.exe\"")
+#define IMAGEMAGICK_INSTALL_URL _T("http://www.imagemagick.org/download/binaries/ImageMagick-6.5.7-4-Q16-windows-dll.exe")
+#define GHOSTSCRIPT_INSTALL_URL _T("https://sourceforge.net/projects/ghostscript/files/GPL%20Ghostscript/8.70/gs870w32.exe/download")
+#else
+#define IMAGEMAGICK_CONVERT_PATH _T("/usr/bin/convert")
+#define IMAGEMAGICK_INSTALL_URL _T("ftp://ftp.imagemagick.org/pub/ImageMagick/ImageMagick.tar.gz")
+#define GHOSTSCRIPT_INSTALL_URL _T("http://ghostscript.com/releases/ghostscript-8.64.tar.gz")
+#endif

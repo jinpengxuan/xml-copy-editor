@@ -1,34 +1,15 @@
-/*
- * Copyright 2005-2007 Gerald Schmidt.
- *
- * This file is part of Xml Copy Editor.
- *
- * Xml Copy Editor is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; version 2 of the License.
- *
- * Xml Copy Editor is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Xml Copy Editor; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
- */
-
 #include <string>
 #include <vector>
 #include <stdexcept>
 #include <expat.h>
 #include <cstring>
-#include "xmlprodnote.h"
+#include "xmlsuppressprodnote.h"
 
-XmlProdnote::XmlProdnote (
+XmlSuppressProdnote::XmlSuppressProdnote (
     bool parseDeclaration,
     bool expandInternalEntities,
     size_t size ) :
-		d ( new ProdnoteData() )
+		d ( new SuppressProdnoteData() )
 {
 	d->buffer.reserve ( size );
 	XML_SetUserData ( p, d.get() );
@@ -45,19 +26,20 @@ XmlProdnote::XmlProdnote (
 
 	XML_SetElementHandler ( p, start, end );
 	d->level = 100;
+	d->skip = false;
 }
 
-XmlProdnote::~XmlProdnote()
+XmlSuppressProdnote::~XmlSuppressProdnote()
 {}
 
-void XMLCALL XmlProdnote::xmldeclhandler (
+void XMLCALL XmlSuppressProdnote::xmldeclhandler (
     void *data,
     const XML_Char *version,
     const XML_Char *encoding,
     int standalone )
 {
-	ProdnoteData *d;
-	d = ( ProdnoteData * ) data;
+	SuppressProdnoteData *d;
+	d = ( SuppressProdnoteData * ) data;
 
 	d->encoding = ( encoding ) ? encoding : "UTF-8";
 
@@ -76,31 +58,53 @@ void XMLCALL XmlProdnote::xmldeclhandler (
 	d->buffer.append ( "?>" );
 }
 
-void XMLCALL XmlProdnote::defaulthandler (
+void XMLCALL XmlSuppressProdnote::defaulthandler (
     void *data,
     const XML_Char *s,
     int len )
 {
-	ProdnoteData *d;
-	d = ( ProdnoteData * ) data;
-	d->buffer.append ( s, len );
+	SuppressProdnoteData *d;
+	d = ( SuppressProdnoteData * ) data;
+	if ( ! ( d->skip ) )
+	   d->buffer.append ( s, len );
 }
 
-void XMLCALL XmlProdnote::start ( void *data,
+void XMLCALL XmlSuppressProdnote::start ( void *data,
                                       const XML_Char *el,
                                       const XML_Char **attr )
 {
-	ProdnoteData *pd;
-	pd = ( ProdnoteData * ) data;
+	SuppressProdnoteData *pd;
+	pd = ( SuppressProdnoteData * ) data;
 
     pd->level += 1;
     
-    bool skip = false;
-    
+    if ( pd->skip )
+        return;
+
     std::string tag;
+    
+    if ( !strcmp ( el, "span" ) )
+    {
+        char **attrPreview = (char **)attr;
+        for ( ; *attrPreview; attrPreview +=2 )
+        {
+            if (
+                !strcmp ( *attrPreview, "class") &&
+                !strcmp ( * ( attrPreview + 1 ), "optional-prodnote" )
+            )
+            {
+                pd->skip = true;
+                pd->level = 1;
+                break;
+            }
+        }
+    }
+    
+    if ( pd->skip )
+        return;
+
     tag += "<";
     tag += el;
-    
     for ( ; *attr; attr += 2 )
     {
         tag += " ";
@@ -108,40 +112,30 @@ void XMLCALL XmlProdnote::start ( void *data,
         tag += "=\"";
         tag += *(attr + 1);
         tag += "\"";
-		if ( !strcmp ( el, "span" ) && !strcmp (*attr, "class") )
-		{
-            if ( !strcmp ( *(attr + 1), "optional-prodnote" ) ||
-                !strcmp ( *(attr + 1), "required-prodnote" ) )
-            {
-                skip = true;
-                pd->level = 1;
-                break;
-            }
-        }
     }
     
     tag += ">";
-    
-    if ( skip )
-    {
-        return;
-    }
 
     pd->buffer += tag;
 }
 
-void XMLCALL XmlProdnote::end ( void *data, const XML_Char *el )
+void XMLCALL XmlSuppressProdnote::end ( void *data, const XML_Char *el )
 {
-	ProdnoteData *pd;
-	pd = ( ProdnoteData * ) data;
+	SuppressProdnoteData *pd;
+	pd = ( SuppressProdnoteData * ) data;
     
     pd->level -= 1;
     
     if ( !(pd->level) && !strcmp ( el, "span" ) )
     {
         pd->level = 100;
+        pd->skip = false;
         return;
     }
+
+    if ( pd->skip )
+        return;
+
     pd->buffer += "</";
     pd->buffer += el;
     pd->buffer += ">";
