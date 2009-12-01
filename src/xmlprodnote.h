@@ -20,6 +20,7 @@
 #ifndef XML_PRODNOTE_H
 #define XML_PRODNOTE_H
 
+#include <cstdio>
 #include <vector>
 #include <expat.h>
 #include <string>

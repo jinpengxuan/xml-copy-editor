@@ -20,6 +20,8 @@
 #ifndef STRINGSET_H
 #define STRINGSET_H
 
+#include <stdint.h>
+#include <cstdio>
 #include <string>
 #include <stdexcept>
 #include <cmath>

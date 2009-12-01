@@ -135,6 +135,7 @@ void XMLCALL XmlCopyImg::start ( void *data,
             {
                 wxString cmd;
                 cmd += IMAGEMAGICK_CONVERT_PATH;
+                cmd += _T(" -resize 720x1440>");
                 cmd += _T(" \"");
                 cmd += wideFile;
                 cmd += _T("\" \"");
@@ -156,7 +157,7 @@ void XMLCALL XmlCopyImg::start ( void *data,
         } // img + src
         else if ( !strcmp ( el, "a" ) &&
             !strcmp (*attr, "href") &&
-            strstr ( value.c_str(), ".mp3" ) || strstr ( value.c_str(), ".pdf" ) )
+            ( strstr ( value.c_str(), ".mp3" ) || strstr ( value.c_str(), ".pdf" ) ) )
         {
             wideFile = wxString ( value.c_str(), wxConvUTF8, value.size() );
             wxFileName fn ( wideFile );

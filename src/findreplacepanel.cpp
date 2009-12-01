@@ -255,7 +255,7 @@ void FindReplacePanel::setReplaceVisible ( bool b )
 
 void FindReplacePanel::flagNotFound ( bool b )
 {
-	if ( notFoundSet && b || !notFoundSet && !b )
+	if ( ( notFoundSet && b ) || ( !notFoundSet && !b ) )
 		return;
 
 	notFoundSet = b;

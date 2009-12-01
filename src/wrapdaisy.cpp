@@ -11,7 +11,6 @@
 #include "xmlcopyimg.h"
 #include "binaryfile.h"
 #include "replace.h"
-#include "playlistrenamer.h"
 #include "mp3album.h"
 
 #ifdef __WXMSW__
@@ -109,6 +108,9 @@ bool WrapDaisy::run (
     {
         // #1: convert to canonical XHTML
         pd->ProcessPendingEvents();
+        while (wxTheApp->Pending())
+            wxTheApp->Dispatch();
+
         if ( !pd->Update ( 10, _T("Preparing canonical XHTML...") ) )
         {
             error = _T( "Cancelled" );
@@ -136,12 +138,10 @@ bool WrapDaisy::run (
     }
     else // no stylesheet
     {
-        try {
-            BinaryFile bf( stdFileIn.c_str() );
+        BinaryFile bf( stdFileIn.c_str() );
+	if ( !bf.getData() )
+	{
             output.append ( bf.getData(), bf.getDataLen() );
-        }
-        catch ( ... )
-        {
             error = _( "Cannot read [b]" ) + fileIn + ( _("[/b]") );
             return false;
         }
@@ -150,6 +150,8 @@ bool WrapDaisy::run (
     if ( suppressOptional )
     {
         pd->ProcessPendingEvents();
+        while (wxTheApp->Pending())
+            wxTheApp->Dispatch();
         if ( !pd->Update ( 15, _("Suppressing optional production notes...") ) )
         {
             error = _ ( "Cancelled" );
@@ -171,6 +173,8 @@ bool WrapDaisy::run (
     {
         // #1.5: apply quiet setting if req'd
         pd->ProcessPendingEvents();
+        while (wxTheApp->Pending())
+            wxTheApp->Dispatch();
         if ( !pd->Update ( 20, _("De-emphasizing production notes...") ) )
         {
             error = _ ( "Cancelled" );
@@ -238,6 +242,9 @@ bool WrapDaisy::run (
         
     // copy images
     pd->ProcessPendingEvents();
+    while (wxTheApp->Pending())
+        wxTheApp->Dispatch();
+
     if ( !pd->Update ( 25, _("Copying images and audio files...") ) )
     {
         error = _ ( "Cancelled" );
@@ -270,6 +277,9 @@ bool WrapDaisy::run (
     
     // #2: convert to DTBook
     pd->ProcessPendingEvents();
+    while (wxTheApp->Pending())
+        wxTheApp->Dispatch();
+
     if ( !pd->Update ( 40, _T("Preparing DTBook...") ) )
     {
         error = _T ( "Cancelled" );
@@ -320,6 +330,9 @@ bool WrapDaisy::run (
         
     // #2.5: create EPUB version
     pd->ProcessPendingEvents();
+    while (wxTheApp->Pending())
+        wxTheApp->Dispatch();
+
     if ( !pd->Update ( 50, _T("Preparing ePub...") ) )
     {
         error = _T ( "Cancelled" );
@@ -371,6 +384,9 @@ bool WrapDaisy::run (
 
     // #2.9: convert to RTF
     pd->ProcessPendingEvents();
+    while (wxTheApp->Pending())
+        wxTheApp->Dispatch();
+
     if ( !pd->Update ( 60, _T("Preparing RTF...") ) )
     {
         error = _T ( "Cancelled" );
@@ -425,7 +441,10 @@ bool WrapDaisy::run (
     // #2.9.5: convert to binary Word
     // (Win only; otherwise create copy with *.doc extension)
 
-    pd->ProcessPendingEvents();
+    pd->ProcessPendingEvents();    
+    while (wxTheApp->Pending())
+        wxTheApp->Dispatch();
+    
     if ( !pd->Update ( 60, _T("Preparing Word document...") ) )
     {
         error = _T ( "Cancelled" );
@@ -468,6 +487,9 @@ bool WrapDaisy::run (
 
     // #3: convert to full DAISY book
     pd->ProcessPendingEvents();
+    while (wxTheApp->Pending())
+        wxTheApp->Dispatch();
+
     if ( !pd->Update ( 70, _T("Preparing DAISY books...") ) )
     {
         error = _T ( "Cancelled" );
@@ -521,6 +543,9 @@ bool WrapDaisy::run (
 
     // #4: create MP3 album
     pd->ProcessPendingEvents();
+    while (wxTheApp->Pending())
+        wxTheApp->Dispatch();
+
     if ( !pd->Update ( 80, _T("Preparing MP3 album...") ) )
     {
         error = _T ( "Cancelled" );
@@ -595,6 +620,9 @@ bool WrapDaisy::run (
         
 
     pd->ProcessPendingEvents();
+    while (wxTheApp->Pending())
+        wxTheApp->Dispatch();
+
     if ( !pd->Update ( 90, _T("Updating playlists...") ) )
     {
         error = _T ( "Cancelled" );
@@ -621,11 +649,8 @@ bool WrapDaisy::run (
 	auto_ptr<Mp3Album> ma ( new Mp3Album() );
 	
 	BinaryFile *binaryfile;
-    try
-	{
-		binaryfile = new BinaryFile ( file.c_str() );
-	}
-	catch ( ... )
+	binaryfile = new BinaryFile ( file.c_str() );
+	if ( !binaryfile->getData() )
 	{
 		error.Printf ( _ ( "Cannot open %s" ), file.c_str() );
 		return false;

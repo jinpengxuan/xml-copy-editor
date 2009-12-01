@@ -46,7 +46,11 @@ void XMLCALL XslLocator::processingInstructionHandler (
 		return;
 
 	char *value, *iterator;
+#ifdef __WXMSW__
 	value = strstr ( ( const char * ) data, "href=" );
+#else
+	value = ( char *) strstr ( data, "href=" );
+#endif
 	if ( !value || strlen ( value ) < 7 )
 		return;
 	value += 6;

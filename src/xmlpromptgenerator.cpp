@@ -31,7 +31,9 @@
 #include "catalogresolver.h"
 
 // Xerces-C req'd for Schema parsing
+#ifdef __WXMSW__
 #define XERCES_TMPLSINC
+#endif
 
 #include <xercesc/util/NameIdPool.hpp>
 #include <xercesc/util/PlatformUtils.hpp>

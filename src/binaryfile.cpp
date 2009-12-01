@@ -30,7 +30,7 @@ BinaryFile::BinaryFile ( const char *fname ) : m_data ( 0 ), m_dataLen ( 0 )
 	pFile = fopen ( fname, "rb" );
 	if ( pFile == NULL )
 	{
-		throw;
+		return;
 	}
 
 	// obtain file size
@@ -44,7 +44,7 @@ BinaryFile::BinaryFile ( const char *fname ) : m_data ( 0 ), m_dataLen ( 0 )
 	buffer = ( char* ) malloc ( sizeof ( char ) *lSize );
 	if ( buffer == NULL )
 	{
-		throw;
+		return;
 	}
 
 	// copy the file into the buffer:
@@ -52,7 +52,7 @@ BinaryFile::BinaryFile ( const char *fname ) : m_data ( 0 ), m_dataLen ( 0 )
 	if ( result != lSize )
 	{
 		if ( !feof ( pFile ) )
-			throw;
+			return;
 	}
 
 	/* the whole file is now loaded in the memory buffer. */

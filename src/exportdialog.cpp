@@ -134,7 +134,7 @@ ExportDialog::ExportDialog (
             wxID_ANY,
             _ ( "Download DAISY extension" ),
 #ifdef __WXMSW__
-            _T ( "https://sourceforge.net/projects/xml-copy-editor/files/xmlcopyeditor-daisy/xmlcopyeditor-daisy-1.0.exe/download" )
+            _T ( "https://sourceforge.net/projects/xml-copy-editor/files/xmlcopyeditor-daisy/xmlcopyeditor-daisy-1.0.1.exe/download" )
 #else
             _T ( "http://xml-copy-editor.sourceforge.net" )
 #endif

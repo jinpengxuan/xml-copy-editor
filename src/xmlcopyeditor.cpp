@@ -1242,7 +1242,7 @@ void MyFrame::OnAbout ( wxCommandEvent& WXUNUSED ( event ) )
 	info.AddTranslator ( _ ( "Siarhei Kuchuk (Russian) <Cuchuk dot Sergey at gmail dot com>" ) );
 	info.AddTranslator ( _ ( "Marcos Pérez González (Spanish) <marcos_pg at yahoo dot com>" ) );
 	info.AddTranslator ( _ ( "Rob Elemans (Dutch) <relemans at gmail dot com>" ) );
-	info.AddTranslator ( _ ( "Robert Falco Miramontes <rfalco at acett dot org>" ) );
+	info.AddTranslator ( _ ( "Robert Falc\xf3 Miramontes <rfalco at acett dot org>" ) );
     info.SetLicense ( ABOUT_LICENSE );
 	info.SetDescription ( description );
 	wxAboutBox ( info );
@@ -2727,6 +2727,7 @@ void MyFrame::OnNew ( wxCommandEvent& WXUNUSED ( event ) )
 				templateFile = wxFindNextFile();
 				if ( templateFile.empty() )
 					break;
+				templateFile.Replace ( _T("_"), _T(" ") );
 				fn.Assign ( templateFile );
 				name = fn.GetName();
 				extension = fn.GetExt();
@@ -2765,6 +2766,7 @@ void MyFrame::OnNew ( wxCommandEvent& WXUNUSED ( event ) )
 
 	typeSelection.Replace ( _T ( " (*" ), wxEmptyString );
 	typeSelection.Replace ( _T ( ")" ), wxEmptyString );
+	typeSelection.Replace ( _T ( " " ), _T ( "_" ) );
 	templateFile = templateDir + typeSelection;
 	std::string templateFileLocal, buffer;
 	templateFileLocal = templateFile.mb_str ( wxConvLocal );
@@ -2926,25 +2928,8 @@ bool MyFrame::openFile ( wxString& fileName, bool largeFile )
 	//wxMemoryMappedFile *memorymap = NULL;
 	BinaryFile *binaryfile = NULL;
 
-	try
-	{
-		binaryfile = new BinaryFile ( ( const char * ) fileName.mb_str ( wxConvLocal ) );
-		/*
-		    memorymap = new wxMemoryMappedFile(
-		      fileName,
-		      true, // readOnly
-		      true // fread
-		    );
-		*/
-
-	}
-	/*
-	  catch (wxMemoryMappedFileEmptyException&)
-	  {
-	    fileEmpty = true;
-	  }
-	*/
-	catch ( ... )
+	binaryfile = new BinaryFile ( ( const char * ) fileName.mb_str ( wxConvLocal ) );
+	if ( !binaryfile->getData() )
 	{
 		wxString message;
 		message.Printf ( _ ( "Cannot open %s" ), fileName.c_str() );
@@ -2952,6 +2937,20 @@ bool MyFrame::openFile ( wxString& fileName, bool largeFile )
 		statusProgress ( wxEmptyString );
 		return false;
 	}
+	/*
+	    memorymap = new wxMemoryMappedFile(
+	      fileName,
+	      true, // readOnly
+	      true // fread
+	    );
+	*/
+
+	/*
+	  catch (wxMemoryMappedFileEmptyException&)
+	  {
+	    fileEmpty = true;
+	  }
+	*/
 
 	bool isUtf8 = false;
 
@@ -5369,9 +5368,11 @@ void MyFrame::updateFileMenu ( bool deleteExisting )
 	wxMenuItem *saveAsItem =
 	    new wxMenuItem ( NULL, wxID_SAVEAS, _ ( "S&ave As...\tF12" ), _ ( "Save As..." ) );
 	saveAsItem->SetBitmap ( wxNullBitmap );
+#ifdef __WXMSW__
 	wxMenuItem *exportItem =
         new wxMenuItem ( NULL, ID_EXPORT, _ ( "&DAISY Export..." ), _ ( "DAISY Export..." ) );
     exportItem->SetBitmap ( wxNullBitmap );
+#endif
 	wxMenuItem *reloadItem =
 	    new wxMenuItem ( NULL, ID_RELOAD, _ ( "&Reload" ), _ ( "Reload" ) );
 	reloadItem->SetBitmap ( wxNullBitmap );
@@ -5415,9 +5416,9 @@ void MyFrame::updateFileMenu ( bool deleteExisting )
 	fileMenu->Append ( printSetupItem );
 	fileMenu->Append ( printPreviewItem );
 	fileMenu->Append ( printItem );
+#ifdef __WXMSW__
 	fileMenu->AppendSeparator();
 	fileMenu->Append ( exportItem );
-#ifdef __WXMSW__
 	fileMenu->Append ( importMSWordItem );
 	fileMenu->Append ( exportMSWordItem );
 #endif

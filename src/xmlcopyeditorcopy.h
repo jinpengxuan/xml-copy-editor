@@ -25,7 +25,7 @@
 
 #endif
 #define ABOUT_COPYRIGHT _("Copyright © 2005-2009 Gerald Schmidt <gnschmidt@users.sourceforge.net>")
-#define ABOUT_DESCRIPTION _("\nXML Copy Editor is free software released under the GNU\nGeneral Public License.\n\nMany thanks are due to Tim van Niekerk, Matt Smigielski,\nDavid Scholl, Jan Merka, Marcus Bingenheimer, Roberto\nRosselli Del Turco, Ken Zalewski, C.J. Meidlinger,\nThomas Zajic, Viliam Búr, David Håsäther, François\nBadier, Thomas Wenzel, Roger Sperberg, SHiNE CsyFeK,\nHSU PICHAN, YANG SHUFUN, CHENG PAULIAN,\nCHUANG KUO-PING, Justin Dearing, Serhij Dubyk,\nAntonio Angelo, Jose Luis Rivero, Siarhei Kuchuk,\nIan Abbott, Kev James, Marcos Pérez González, Anh\nTrinh, Rob Elemans and Robert Falco Miramontes.")
+#define ABOUT_DESCRIPTION _("\nXML Copy Editor is free software released under the GNU\nGeneral Public License.\n\nMany thanks are due to Tim van Niekerk, Matt Smigielski,\nDavid Scholl, Jan Merka, Marcus Bingenheimer, Roberto\nRosselli Del Turco, Ken Zalewski, C.J. Meidlinger,\nThomas Zajic, Viliam Búr, David Håsäther, François\nBadier, Thomas Wenzel, Roger Sperberg, SHiNE CsyFeK,\nHSU PICHAN, YANG SHUFUN, CHENG PAULIAN,\nCHUANG KUO-PING, Justin Dearing, Serhij Dubyk,\nAntonio Angelo, Jose Luis Rivero, Siarhei Kuchuk,\nIan Abbott, Kev James, Marcos Pérez González, Anh\nTrinh, Rob Elemans and Robert Falc\xf3 Miramontes.")
 #define ABOUT_LICENSE _T(\
 "This program is free software; you can redistribute it\n"\
 "and/or modify it under the terms of the GNU General Public\n"\

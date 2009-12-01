@@ -26,6 +26,7 @@ xmlcopyeditor_SOURCES = xmlcopyeditor.cpp associatedialog.cpp casehandler.cpp \
 	findreplacepanel.cpp commandpanel.cpp xercescatalogresolver.cpp \
 	binaryfile.cpp xmlencodingspy.cpp wrapaspell.cpp validationthread.cpp \
 	wrapdaisy.cpp exportdialog.cpp mp3album.cpp xmlprodnote.cpp \
+	xmlsuppressprodnote.cpp xmlcopyimg.cpp \
 	rulesets png rng xpm templates copying help po \
 	xmlcopyeditor.spec xmlcopyeditor.png custom.xpm \
 	xmlcopyeditor.desktop
@@ -68,7 +69,7 @@ nobase_xmlcopyeditor_DATA = png/*.png \
         po/zh_CN/messages.mo \
         po/zh_TW/messages.mo \
 	po/uk_UA/messages.mo \
-        po/uk_UA/messages.mo \
+        po/ca/messages.mo \
         po/en_us/messages.po
 
 pixmap_DATA = xmlcopyeditor.png

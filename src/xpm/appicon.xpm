@@ -1,5 +1,10 @@
 /* XPM */
+#ifdef __WXMSW__
 static char * appicon_xpm[] = {
+#else
+static const char * appicon_xpm[] = {
+#endif
+
 "16 16 238 2",
 "  	c #742719",
 ". 	c #9A3320",

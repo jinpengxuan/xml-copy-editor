@@ -18,6 +18,7 @@
  */
 
 #include <iostream>
+#include <cstdio>
 #include <stdexcept>
 #include "wrapaspell.h"
 #ifdef USE_ENCHANT

@@ -137,7 +137,6 @@ StyleDialog::StyleDialog (
 	ruleSetCombo->GetSize ( &width, &height );
 	wxSize buttonSize ( 100, height );
 
-
     	filterCombo = new wxComboBox (
 		this,
 		ID_STYLE_COMBO_FILTER,
@@ -329,6 +328,7 @@ StyleDialog::StyleDialog (
 		if ( !ruleFile.empty() )
 		{
 			ruleFile.Replace ( _T ( ".xml" ), _T ( "" ) );
+			ruleFile.Replace ( _T ( "_" ), _T ( " " ) );
 			ruleSetCombo->Append ( wxFileNameFromPath ( ruleFile ) );
 			for ( ;; )
 			{
@@ -336,6 +336,7 @@ StyleDialog::StyleDialog (
 				if ( ruleFile.empty() )
 					break;
 				ruleFile.Replace ( _T ( ".xml" ), _T ( "" ) );
+				ruleFile.Replace ( _T ( "_" ), _T ( " " ) );
 				ruleSetCombo->Append ( wxFileNameFromPath ( ruleFile ) );
 			}
 		}
@@ -455,6 +456,7 @@ void StyleDialog::OnReport ( wxCommandEvent& event )
 	// reconstitute short filenames
 	wxString ruleSet, filter;
 	ruleSet = ruleSetPreset + _T ( ".xml" );
+	ruleSet.Replace ( _(" "), _T("_") );
 	filter = filterPreset + _T ( ".xml" );
 
 	std::string ruleSetDirectoryUtf8,

@@ -20,6 +20,7 @@
 #ifndef XML_ASSOCIATE_XSL_H
 #define XML_ASSOCIATE_XSL_H
 
+#include <cstdio>
 #include <vector>
 #include <expat.h>
 #include <string>
