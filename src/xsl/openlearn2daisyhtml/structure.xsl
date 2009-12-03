@@ -10,9 +10,11 @@
   </xsl:template>
   <xsl:template match="UnitID"/>
   <xsl:template match="UnitTitle">
-    <h1>
-      <xsl:call-template name="apply-templates-lang"/>
-    </h1>
+    <xsl:if test="string-length(./text()) &gt; 0">
+      <h1>
+        <xsl:call-template name="apply-templates-lang"/>
+      </h1>
+    </xsl:if>
   </xsl:template>
   <xsl:template match="Unit/ByLine">
     <p>
@@ -125,14 +127,18 @@
   </xsl:template>
   <xsl:template match="MediaContent">
     <xsl:if test="@type = 'audio'">
-      <p><span class="required-prodnote">[Audio content]</span></p>
+      <p>
+        <span class="required-prodnote">[Audio content]</span>
+      </p>
       <p>
         <a><xsl:attribute name="href"><xsl:value-of select="@src"/>.mp3</xsl:attribute>MP3 file
       </a>
       </p>
     </xsl:if>
     <xsl:if test="@type = 'pdf'">
-      <p><span class="required-prodnote">[PDF content]</span></p>
+      <p>
+        <span class="required-prodnote">[PDF content]</span>
+      </p>
       <!--<p><a><xsl:attribute name="href"><xsl:value-of select="@src"/>.pdf</xsl:attribute></a></p>-->
     </xsl:if>
     <xsl:call-template name="apply-templates-lang"/>
@@ -162,22 +168,32 @@
   </xsl:template>
   <xsl:template match="Caption">
     <p>
-      <xsl:call-template name="apply-templates-lang"/>
+      <span class="caption">
+        <xsl:call-template name="apply-templates-lang"/>
+      </span>
     </p>
   </xsl:template>
   <xsl:template match="Alternative">
     <p>
+      <xsl:if test="string-length(.) &gt; 0">
+        <span class="optional-prodnote"><strong>Alternative</strong>: </span>
+      </xsl:if>
       <xsl:call-template name="apply-templates-lang"/>
     </p>
   </xsl:template>
   <xsl:template match="Description">
     <p>
+      <xsl:if test="string-length(.) &gt; 0">
+        <span class="optional-prodnote"><strong>Description</strong>: </span>
+      </xsl:if>
       <xsl:call-template name="apply-templates-lang"/>
     </p>
   </xsl:template>
   <xsl:template match="Label">
     <p>
-      <xsl:call-template name="apply-templates-lang"/>
+      <strong>
+        <xsl:call-template name="apply-templates-lang"/>
+      </strong>
     </p>
   </xsl:template>
   <xsl:template match="Table">

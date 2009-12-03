@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
   <xsl:template match="b">
     <!-- b not available -->
@@ -38,10 +38,12 @@
   </xsl:template>
   <xsl:template match="SideNote">
     <br/>
+    <hr/>
     <span class="required-prodnote">Side note</span>
-    <xsl:apply-templates/>
     <br/>
+    <xsl:apply-templates/>
     <span class="optional-prodnote">End of side note</span>
+    <hr/>
     <br/>
   </xsl:template>
   <xsl:template match="SideNote/Heading">
@@ -54,16 +56,18 @@
     <br/>
     <xsl:apply-templates/>
   </xsl:template>
-    <xsl:template match="Footnote">
+  <xsl:template match="Footnote">
     <br/>
+    <hr/>
     <span class="required-prodnote">Footnote</span>
     <br/>
     <xsl:apply-templates/>
     <br/>
+    <hr/>
     <span class="optional-prodnote">End of footnote</span>
     <br/>
   </xsl:template>
-    <xsl:template match="InlineEquation">
+  <xsl:template match="InlineEquation">
     <br/>
     <xsl:apply-templates/>
   </xsl:template>

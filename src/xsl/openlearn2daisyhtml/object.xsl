@@ -103,20 +103,36 @@
     <p>
       <span class="optional-prodnote">Figure</span>
     </p>
-    <p>
-      <img>
-        <xsl:attribute name="src">
-          <xsl:value-of select="./Image/@src"/>
-        </xsl:attribute>
-        <xsl:attribute name="alt">
-          <xsl:value-of select="./Image/@alt"/>
-        </xsl:attribute>
-      </img>
-    </p>
+    <xsl:choose>
+      <xsl:when test="string-length(./Image/@src) &gt; 0">
+        <img>
+          <xsl:attribute name="src">
+            <xsl:value-of select="./Image/@src"/>
+          </xsl:attribute>
+          <xsl:attribute name="alt">
+            <xsl:choose>
+              <xsl:when test="string-length(./Image/@alt) &gt; 0">
+                <xsl:value-of select="./Image/@alt"/>
+              </xsl:when>
+              <xsl:when test="string-length(Alternative) &gt; 0">
+                <xsl:value-of select="Alternative"/>
+              </xsl:when>
+              <xsl:otherwise>
+                <xsl:text>no alternative text</xsl:text>
+              </xsl:otherwise>
+            </xsl:choose>
+          </xsl:attribute>
+        </img>
+      </xsl:when>
+      <xsl:otherwise>
+        <p>
+          <xsl:apply-templates select="./Image/text() | ./Image/* "/>
+        </p>
+      </xsl:otherwise>
+    </xsl:choose>
     <xsl:apply-templates select="Caption"/>
-    <xsl:apply-templates select="Alternative"/>
     <xsl:apply-templates select="Description"/>
-    <xsl:apply-tempaltes select="SourceReference"/>
+    <xsl:apply-templates select="SourceReference"/>
     <p>
       <span class="optional-prodnote">End of figure</span>
     </p>
@@ -125,22 +141,39 @@
     <p>
       <span class="optional-prodnote">Equation</span>
     </p>
-    <p>
-      <img>
-        <xsl:attribute name="src">
-          <xsl:value-of select="./Image/@src"/>
-        </xsl:attribute>
-        <xsl:attribute name="alt">
-          <xsl:value-of select="./Image/@alt"/>
-        </xsl:attribute>
-      </img>
-    </p>
+    <xsl:choose>
+      <xsl:when test="string-length(./Image/@src) &gt; 0">
+        <img>
+          <xsl:attribute name="src">
+            <xsl:value-of select="./Image/@src"/>
+          </xsl:attribute>
+          <xsl:attribute name="alt">
+            <xsl:choose>
+              <xsl:when test="string-length(./Image/@alt) &gt; 0">
+                <xsl:value-of select="./Image/@alt"/>
+              </xsl:when>
+              <xsl:when test="string-length(Alternative) &gt; 0">
+                <xsl:value-of select="Alternative"/>
+              </xsl:when>
+              <xsl:otherwise>
+                <xsl:text>no alternative text</xsl:text>
+              </xsl:otherwise>
+            </xsl:choose>
+          </xsl:attribute>
+        </img>
+      </xsl:when>
+      <xsl:otherwise>
+        <p>
+          <xsl:apply-templates select="./Image/text() | ./Image/* "/>
+        </p>
+      </xsl:otherwise>
+    </xsl:choose>
+    <xsl:apply-templates select="Label"/>
     <xsl:apply-templates select="TeX"/>
     <xsl:apply-templates select="MathML"/>
     <xsl:apply-templates select="Caption"/>
-    <xsl:apply-templates select="Alternative"/>
     <xsl:apply-templates select="Description"/>
-    <xsl:apply-tempaltes select="SourceReference"/>
+    <xsl:apply-templates select="SourceReference"/>
     <span class="optional-prodnote">End of equation</span>
   </xsl:template>
   <xsl:template match="Equation/TeX">
