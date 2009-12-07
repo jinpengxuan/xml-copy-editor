@@ -10,25 +10,39 @@ bool PlayListRenamer::run (
 {
     std::string m3uFile, m3uBuffer;
     m3uFile = folder + "playlist.m3u";
+    
     if ( !readFile ( m3uFile, m3uBuffer ) )
+    {
         return false;
+    }
     
     std::vector<std::string> lines;
     if ( !splitBuffer ( m3uBuffer, lines ) )
+    {
+        wxMessageBox ( _T("can't split buffer") );
         return false;
+    }
 
     std::string title, from, to;
     size_t lineCount = lines.size();
     int trackNo = 0;
+    
+    wxString random;
+    random.Printf ( _T("%i"), lineCount );
+    wxMessageBox (random );
     for ( size_t i = 0; i < lineCount; i++ )
     {
+        wxString line;
+        line = wxString ( lines[i].c_str(), wxConvUTF8, lines[i].size() );
+        wxMessageBox ( line );
+        
         if ( lines[i][0] == '#' )
         {
-            if ( !lines[i].find ( "EXTINF" ) )
+            if ( lines[i].find ( "EXTINF" ) == std::string::npos )
                 continue;
 
             //isolate m3u trackname
-            std::string pattern0 = ".*?,";
+            std::string pattern0 = ".+?,";
             WrapRegex re0 ( pattern0, true );
             int replacements;
             title = re0.replaceGlobal ( lines[i], &replacements );
@@ -66,6 +80,10 @@ bool PlayListRenamer::run (
            from = lines[i];
            to = title;
            
+            wxString wideFrom, wideTo;
+            wideFrom = wxString ( from.c_str(), wxConvUTF8, from.size() );
+            wideTo = wxString ( to.c_str(), wxConvUTF8, to.size() );
+
            renameFile ( from, to, folder );
            editFiles ( from, to, folder );
            
@@ -88,8 +106,9 @@ bool PlayListRenamer::readFile ( const std::string& path, std::string& buffer )
     return true;
 }
 
-bool PlayListRenamer::splitBuffer ( const std::string& buffer, std::vector<std::string> lineVector )
+bool PlayListRenamer::splitBuffer ( const std::string& buffer, std::vector<std::string>& lineVector )
 {
+    wxMessageBox ( wxString ( buffer.c_str(), wxConvUTF8, buffer.size() ) );
     std::string line;
     lineVector.clear();
     size_t bufferSize = buffer.size();
@@ -134,7 +153,8 @@ void PlayListRenamer::renameFile ( const std::string& from, const std::string& t
     wideFolder = wxString ( folder.c_str(), wxConvUTF8, folder.size() );
     wideFrom = wxString ( from.c_str(), wxConvUTF8, from.size() );
     wideTo = wxString ( to.c_str(), wxConvUTF8, to.size() );
-    wxRenameFile ( wideFolder + wideFrom, wideFolder + wideTo );
+    wxMessageBox ( wideFolder + wideFrom, wideFolder + wideTo );
+    //wxRenameFile ( wideFolder + wideFrom, wideFolder + wideTo );
 }
 
 void PlayListRenamer::editFiles ( const std::string& from, const std::string& to, const std::string& folder )

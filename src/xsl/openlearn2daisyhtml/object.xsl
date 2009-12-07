@@ -19,8 +19,8 @@
   <xsl:template match="GlossaryItem">
     <xsl:call-template name="apply-templates-lang"/>
   </xsl:template>
-  <xsl:template match="GlossaryItem/Term"><p><em><xsl:call-template name="apply-templates-lang"/></em></p> 
-  </xsl:template>
+  <xsl:template match="GlossaryItem/Term"><p><em><xsl:call-template name="apply-templates-lang"
+        /></em></p>  </xsl:template>
   <xsl:template match="GlossaryItem/Definition">
     <p>
       <xsl:call-template name="apply-templates-lang"/>
@@ -105,24 +105,26 @@
     </p>
     <xsl:choose>
       <xsl:when test="string-length(./Image/@src) &gt; 0">
-        <img>
-          <xsl:attribute name="src">
-            <xsl:value-of select="./Image/@src"/>
-          </xsl:attribute>
-          <xsl:attribute name="alt">
-            <xsl:choose>
-              <xsl:when test="string-length(./Image/@alt) &gt; 0">
-                <xsl:value-of select="./Image/@alt"/>
-              </xsl:when>
-              <xsl:when test="string-length(Alternative) &gt; 0">
-                <xsl:value-of select="Alternative"/>
-              </xsl:when>
-              <xsl:otherwise>
-                <xsl:text>no alternative text</xsl:text>
-              </xsl:otherwise>
-            </xsl:choose>
-          </xsl:attribute>
-        </img>
+        <p>
+          <img>
+            <xsl:attribute name="src">
+              <xsl:value-of select="./Image/@src"/>
+            </xsl:attribute>
+            <xsl:attribute name="alt">
+              <xsl:choose>
+                <xsl:when test="string-length(./Image/@alt) &gt; 0">
+                  <xsl:value-of select="./Image/@alt"/>
+                </xsl:when>
+                <xsl:when test="string-length(Alternative) &gt; 0">
+                  <xsl:value-of select="Alternative"/>
+                </xsl:when>
+                <xsl:otherwise>
+                  <xsl:text>no alternative text</xsl:text>
+                </xsl:otherwise>
+              </xsl:choose>
+            </xsl:attribute>
+          </img>
+        </p>
       </xsl:when>
       <xsl:otherwise>
         <p>
@@ -143,24 +145,26 @@
     </p>
     <xsl:choose>
       <xsl:when test="string-length(./Image/@src) &gt; 0">
-        <img>
-          <xsl:attribute name="src">
-            <xsl:value-of select="./Image/@src"/>
-          </xsl:attribute>
-          <xsl:attribute name="alt">
-            <xsl:choose>
-              <xsl:when test="string-length(./Image/@alt) &gt; 0">
-                <xsl:value-of select="./Image/@alt"/>
-              </xsl:when>
-              <xsl:when test="string-length(Alternative) &gt; 0">
-                <xsl:value-of select="Alternative"/>
-              </xsl:when>
-              <xsl:otherwise>
-                <xsl:text>no alternative text</xsl:text>
-              </xsl:otherwise>
-            </xsl:choose>
-          </xsl:attribute>
-        </img>
+        <p>
+          <img>
+            <xsl:attribute name="src">
+              <xsl:value-of select="./Image/@src"/>
+            </xsl:attribute>
+            <xsl:attribute name="alt">
+              <xsl:choose>
+                <xsl:when test="string-length(./Image/@alt) &gt; 0">
+                  <xsl:value-of select="./Image/@alt"/>
+                </xsl:when>
+                <xsl:when test="string-length(Alternative) &gt; 0">
+                  <xsl:value-of select="Alternative"/>
+                </xsl:when>
+                <xsl:otherwise>
+                  <xsl:text>no alternative text</xsl:text>
+                </xsl:otherwise>
+              </xsl:choose>
+            </xsl:attribute>
+          </img>
+        </p>
       </xsl:when>
       <xsl:otherwise>
         <p>
@@ -396,4 +400,17 @@
       <span class="optional-prodnote">End of summary</span>
     </p>
   </xsl:template>
+  <xsl:template match="SideNote">
+    <hr/>
+    <span class="optional-prodnote">Side note</span>
+    <xsl:apply-templates/>
+    <span class="optional-prodnote">End of side note</span>
+    <hr/>
+  </xsl:template>
+  <xsl:template match="footnote">
+    <sup>
+      <xsl:value-of select="count(preceding::footnote) + 1"/>
+    </sup>
+  </xsl:template>
+
 </xsl:stylesheet>

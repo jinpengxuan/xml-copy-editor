@@ -135,7 +135,7 @@ void XMLCALL XmlCopyImg::start ( void *data,
             {
                 wxString cmd;
                 cmd += IMAGEMAGICK_CONVERT_PATH;
-                cmd += _T(" -resize 720x1440>");
+                cmd += _T(" -resize 720x720>");
                 cmd += _T(" \"");
                 cmd += wideFile;
                 cmd += _T("\" \"");

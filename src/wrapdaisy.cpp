@@ -11,7 +11,9 @@
 #include "xmlcopyimg.h"
 #include "binaryfile.h"
 #include "replace.h"
+#include "wrapregex.h"
 #include "mp3album.h"
+//#include "playlistrenamer.h"
 
 #ifdef __WXMSW__
 #include <wx/msw/ole/automtn.h>
@@ -194,6 +196,19 @@ bool WrapDaisy::run (
 
     // prevent MIME type errors in href="www..." attributes
     Replace::run ( output, "href=\"www", "href=\"http://www", true );
+    
+    // remove em-space
+    Replace::run ( output, "\xE2\x80\x83", " ", true );
+    
+    // remove blank paragraphs
+    Replace::run ( output, "<p></p>", "", true );
+    
+    int replaceCount;
+    WrapRegex regexParaWhitespace ( "<p>\\w+</p>", true );
+    output = regexParaWhitespace.replaceGlobal ( output, &replaceCount );
+    
+    WrapRegex regexContiguousWhitespace ( "[\\t ]+", true, " " );
+    output = regexContiguousWhitespace.replaceGlobal ( output, &replaceCount );
 
     // copy images
     wxString htmlDir, imagesDir, mediaDir;
@@ -245,7 +260,7 @@ bool WrapDaisy::run (
     while (wxTheApp->Pending())
         wxTheApp->Dispatch();
 
-    if ( !pd->Update ( 25, _("Copying images and audio files...") ) )
+    if ( !pd->Update ( 25, _("Copying files...") ) )
     {
         error = _ ( "Cancelled" );
         return false;
@@ -299,7 +314,7 @@ bool WrapDaisy::run (
     wxString cmd = baseCmd +
         xhtml2dtbookScript +
         _T(" --inputFile=\"") +
-        canonicalFile + //canonicalFile.wideName() +
+        canonicalFile +
         _T("\" --outputFile=\"") +
         dtbFilePath + _T("\"");
 
@@ -328,7 +343,7 @@ bool WrapDaisy::run (
     if ( !error.empty() )
         return false;
         
-    // #2.5: create EPUB version
+    // #2.5: create ePub version
     pd->ProcessPendingEvents();
     while (wxTheApp->Pending())
         wxTheApp->Dispatch();
@@ -403,7 +418,15 @@ bool WrapDaisy::run (
     rtfScript += wxFileName::GetPathSeparator();
     rtfScript += _T("DtbookToRtf.taskScript");
 
-    wxString rtfFile = folder + wxFileName::GetPathSeparator() + _T("document.rtf");
+    wxString rtfFile, tempRtfFile, docFile, tempDocFile;
+    rtfFile = folder + wxFileName::GetPathSeparator() + _T("document.rtf");
+    tempRtfFile = folder + wxFileName::GetPathSeparator() + _T("html") +
+        wxFileName::GetPathSeparator() + _T("document.rtf");
+ 
+    docFile = rtfFile;
+    tempDocFile = tempRtfFile;
+    docFile.Replace ( _T(".rtf"), _T(".doc") );
+    tempDocFile.Replace ( _T(".rtf"), _T(".doc") );
     
     cmd = baseCmd +
         _T("\"") + rtfScript + _T("\" --input=\"") +
@@ -451,9 +474,8 @@ bool WrapDaisy::run (
         return false;   
     }
 
-
-    wxString docFile = rtfFile;
-    docFile.Replace ( _T(".rtf"), _T(".doc") );
+    //wxString docFile = rtfFile;
+    //docFile.Replace ( _T(".rtf"), _T(".doc") );
 
 #ifdef __WXMSW__
     wxAutomationObject wordObject, documentObject;
@@ -461,17 +483,17 @@ bool WrapDaisy::run (
     if ( wordObject.CreateInstance ( _T("Word.Application") ) )
     {
         wxVariant openParams[2];
-        openParams[0] = rtfFile;
+        openParams[0] = rtfFile;//tempRtfFile
         openParams[1] = false;   
 
         wordObject.CallMethod(_("documents.open"), 2, openParams);
         if (!wordObject.GetObject(documentObject, _("ActiveDocument"))) 
         { 
-            error = _("Cannot open ") + rtfFile;
+            error = _("Cannot open ") + rtfFile;//tempRtfFile;
             return false;
         }
         wxVariant saveAsParams[2];
-        saveAsParams[0] = docFile;
+        saveAsParams[0] = docFile;//tempDocFile;//
         saveAsParams[1] = (long)0; //wdFormatDocument
         if ( !documentObject.CallMethod(_("SaveAs"), 2, saveAsParams) )
         {
@@ -482,8 +504,14 @@ bool WrapDaisy::run (
         wordObject.CallMethod(_T("Quit"), 0, NULL );
     }
 #else
+    //wxCopyFile ( tempRtfFile, tempDocFile );
     wxCopyFile ( rtfFile, docFile );
 #endif
+
+    //wxCopyFile ( tempRtfFile, rtfFile );
+    //wxCopyFile ( tempDocFile, docFile );
+    //wxRemoveFile ( tempRtfFile );
+    //wxRemoveFile ( tempDocFile );
 
     // #3: convert to full DAISY book
     pd->ProcessPendingEvents();
@@ -629,12 +657,13 @@ bool WrapDaisy::run (
         return false;   
     }
 
-    //rename mp3 playlists
 /*
+    //rename mp3 playlists
+    albumDir += wxFileName::GetPathSeparator();
     PlayListRenamer plr;
     std::string stdAlbumDir = ( const char *) albumDir.mb_str ( wxConvUTF8 );
     plr.run ( stdAlbumDir );
-*/  
+*/
 
     //rename mp3 files in //z3986/
     wxFileName fn ( dtbFilePath );

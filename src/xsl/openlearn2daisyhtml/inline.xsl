@@ -36,60 +36,107 @@
     <xsl:variable name="caps" select="'ABCDEFGHIJKLMNOPQRSTUVWXYZ'"/>
     <xsl:value-of select="translate(text(), $small, $caps)"/>
   </xsl:template>
-  <xsl:template match="SideNote">
-    <br/>
-    <hr/>
-    <span class="required-prodnote">Side note</span>
-    <br/>
-    <xsl:apply-templates/>
-    <span class="optional-prodnote">End of side note</span>
-    <hr/>
-    <br/>
-  </xsl:template>
-  <xsl:template match="SideNote/Heading">
-    <br/>
-    <em>
-      <xsl:apply-templates/>
-    </em>
-  </xsl:template>
-  <xsl:template match="SideNoteParagraph">
-    <br/>
-    <xsl:apply-templates/>
-  </xsl:template>
-  <xsl:template match="Footnote">
-    <br/>
-    <hr/>
-    <span class="required-prodnote">Footnote</span>
-    <br/>
-    <xsl:apply-templates/>
-    <br/>
-    <hr/>
-    <span class="optional-prodnote">End of footnote</span>
-    <br/>
-  </xsl:template>
   <xsl:template match="InlineEquation">
-    <br/>
-    <xsl:apply-templates/>
+    <xsl:choose>
+      <xsl:when test="string-length(./Image/@src) &gt; 0">
+        <img>
+          <xsl:attribute name="src">
+            <xsl:value-of select="./Image/@src"/>
+          </xsl:attribute>
+          <xsl:attribute name="alt">
+            <xsl:choose>
+              <xsl:when test="string-length(Description) &gt; 0">
+                <xsl:value-of select="Description"/>
+              </xsl:when>
+              <xsl:when test="string-length(./Image/@alt) &gt; 0">
+                <xsl:value-of select="./Image/@alt"/>
+              </xsl:when>
+              <xsl:when test="string-length(Alternative) &gt; 0">
+                <xsl:value-of select="Alternative"/>
+              </xsl:when>
+              <xsl:when test="string-length(TeX) &gt; 0">
+                <xsl:value-of select="TeX"/>
+              </xsl:when>
+              <xsl:otherwise>
+                <xsl:text>no alternative text</xsl:text>
+              </xsl:otherwise>
+            </xsl:choose>
+          </xsl:attribute>
+        </img>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:apply-templates select="./Image/text() | ./Image/* "/>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
-  <xsl:template match="InlineEquation/Image">
+  <xsl:template
+    match="InlineEquation/Description | InlineEquation/Alternative | InlineEquation/TeX | InlineEquation/MathML"/>
+  <xsl:template match="InlineFigure">
     <img>
       <xsl:attribute name="src">
         <xsl:value-of select="./Image/@src"/>
       </xsl:attribute>
       <xsl:attribute name="alt">
-        <xsl:value-of select="./Image/@alt"/>
+        <xsl:choose>
+          <xsl:when test="string-length(Description) &gt; 0">
+            <xsl:value-of select="Description"/>
+          </xsl:when>
+          <xsl:when test="string-length(./Image/@alt) &gt; 0">
+            <xsl:value-of select="./Image/@alt"/>
+          </xsl:when>
+          <xsl:when test="string-length(Alternative) &gt; 0">
+            <xsl:value-of select="Alternative"/>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:text>no alternative text</xsl:text>
+          </xsl:otherwise>
+        </xsl:choose>
       </xsl:attribute>
     </img>
   </xsl:template>
-  <xsl:template match="InlineEquation/Description">
-    <value-of select="text()"/>
-    <br/>
+  <xsl:template match="InlineFigure/Description | InlineFigure/Alternative"/>
+
+
+  <xsl:template match="InlineChemistry">
+    <xsl:choose>
+      <xsl:when test="string-length(./Image/@src) &gt; 0">
+        <img>
+          <xsl:attribute name="src">
+            <xsl:value-of select="./Image/@src"/>
+          </xsl:attribute>
+          <xsl:attribute name="alt">
+            <xsl:choose>
+              <xsl:when test="string-length(Description) &gt; 0">
+                <xsl:value-of select="Description"/>
+              </xsl:when>
+              <xsl:when test="string-length(./Image/@alt) &gt; 0">
+                <xsl:value-of select="./Image/@alt"/>
+              </xsl:when>
+              <xsl:when test="string-length(Alternative) &gt; 0">
+                <xsl:value-of select="Alternative"/>
+              </xsl:when>
+              <xsl:otherwise>
+                <xsl:text>no alternative text</xsl:text>
+              </xsl:otherwise>
+            </xsl:choose>
+          </xsl:attribute>
+        </img>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:apply-templates select="./Image/text() | ./Image/* "/>
+      </xsl:otherwise>
+    </xsl:choose>
   </xsl:template>
-  <xsl:template match="InlineEquation/Alternative">
-    <value-of select="text()"/>
-    <br/>
-  </xsl:template>
-  <xsl:template match="InlineEquation/TeX | InlineEquation/MathML"/>
+  <xsl:template
+    match="InlineChemistry/Description | InlineChemistry/Alternative"/>
+  
+
+
+
+
+  
+  
+  
   <xsl:template match="AuthorComment">
     <!-- omit -->
     <xsl:apply-templates/>
