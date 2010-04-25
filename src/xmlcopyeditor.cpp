@@ -617,12 +617,23 @@ MyFrame::MyFrame (
 
 		lastXslStylesheet.Replace ( _T ( " " ), _T ( "%20" ), true );
 		lastRelaxNGSchema.Replace ( _T ( " " ), _T ( "%20" ), true );
-		
+	
 		exportQuiet =
-		  config->Read ( _T ( "exportQuiet" ), (long)false );
+		  config->Read ( _T ( "exportQuiet" ), (long)true );
 		exportMp3Album =
-		  config->Read ( _T ( "exportMp3Album" ), (long)false );
-		
+		  config->Read ( _T ( "exportMp3Album" ), (long)true );
+        exportSuppressOptional = 
+            config->Read ( _T ( "exportSuppressOptional" ), (long)true );
+        exportHtml =
+            config->Read ( _T ( "exportHtml" ), (long)true );
+        exportEpub =
+            config->Read ( _T ( "exportEpub" ), (long)true );
+        exportRtf =
+            config->Read ( _T ( "exportRtf" ), (long)true );
+        exportDoc =
+            config->Read ( _T ( "exportDoc" ), (long)true );
+        exportFullDaisy =
+            config->Read ( _T ( "exportFullDaisy" ), (long)true );
 
 		applicationDir =
 		    config->Read ( _T ( "applicationDir" ), wxEmptyString );
@@ -751,7 +762,8 @@ MyFrame::MyFrame (
 		
 		exportStylesheet = exportFolder = wxEmptyString;
 		exportQuiet = exportMp3Album = false;
-
+		exportQuiet = exportMp3Album = exportSuppressOptional = exportHtml =
+            exportEpub = exportRtf = exportDoc = exportFullDaisy = true;
 	}
 
 	largeFileProperties.completion = false;
@@ -1020,6 +1032,12 @@ MyFrame::~MyFrame()
 	config->Write ( _T ( "exportFolder" ), exportFolder );
 	config->Write ( _T ( "exportQuiet" ), exportQuiet );
 	config->Write ( _T ( "exportMp3Album" ), exportMp3Album );
+	config->Write ( _T ( "exportSuppressOptional" ), exportSuppressOptional );
+	config->Write ( _T ( "exportHtml" ), exportHtml );
+	config->Write ( _T ( "exportEpub" ), exportEpub );
+	config->Write ( _T ( "exportRtf" ), exportRtf );
+	config->Write ( _T ( "exportDoc" ), exportDoc );
+	config->Write ( _T ( "exportFullDaisy" ), exportFullDaisy );
 
 	GetPosition ( &framePosX, &framePosY );
 	config->Write ( _T ( "framePosX" ), framePosX );
@@ -2067,12 +2085,12 @@ void MyFrame::OnExport ( wxCommandEvent& event )
         exportStylesheet,
         exportFolder,
         exportQuiet,
-        true, //suppressOptional
-        true, //html
-        true, //epub
-        true, //rtf
-        true, //doc
-        true, //fullDaisy
+        exportSuppressOptional,
+        exportHtml,
+        exportEpub,
+        exportRtf,
+        exportDoc,
+        exportFullDaisy,
         exportMp3Album,
         downloadLink ) );
     int ret = ed->ShowModal();
@@ -2084,6 +2102,12 @@ void MyFrame::OnExport ( wxCommandEvent& event )
     exportFolder = ed->getFolderString();
     exportQuiet = ed->getQuiet();
     exportMp3Album = ed->getMp3Album();
+    exportSuppressOptional = ed->getSuppressOptional();
+    exportHtml = ed->getHtml();
+    exportEpub = ed->getEpub();
+    exportRtf = ed->getRtf();
+    exportDoc = ed->getDoc();
+    exportFullDaisy = ed->getFullDaisy();
 
 	std::string rawBufferUtf8;
 	getRawText ( doc, rawBufferUtf8 );
@@ -2104,7 +2128,17 @@ void MyFrame::OnExport ( wxCommandEvent& event )
     wxString tempFile= tempFileName.wideName();
     
     WrapDaisy wd ( this, daisyDir, doc->getFullFileName() );
-    if ( !wd.run ( tempFile, exportStylesheet, exportFolder, exportQuiet, exportMp3Album, true, true, true, true ) )
+    if ( !wd.run (
+        tempFile,
+        exportStylesheet,
+        exportFolder,
+        exportQuiet,
+        exportSuppressOptional,
+        exportEpub,
+        exportRtf,
+        exportDoc,
+        exportFullDaisy,
+        exportMp3Album ) )
     {
         messagePane ( _ ("[b]DAISY export stopped[/b]: ") + wd.getLastError(), CONST_STOP );
         return;

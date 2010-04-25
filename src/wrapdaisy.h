@@ -20,6 +20,7 @@ public:
         bool suppressOptional,
         bool epub,
         bool rtf,
+        bool doc,
         bool fullDaisy,
         bool mp3Album );
     wxString getLastError();

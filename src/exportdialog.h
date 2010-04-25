@@ -49,6 +49,13 @@ class ExportDialog : public wxDialog
 		wxString getFolderString();
 		bool getQuiet();
 		bool getMp3Album();
+		bool getSuppressOptional();
+		bool getHtml();
+        bool getEpub();
+        bool getRtf();
+        bool getDoc();
+        bool getFullDaisy();
+
 		enum constants
 		{
 			ID_URL,

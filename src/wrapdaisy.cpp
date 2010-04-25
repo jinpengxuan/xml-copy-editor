@@ -66,6 +66,7 @@ bool WrapDaisy::run (
     bool suppressOptional,
     bool epub,
     bool rtf,
+    bool doc,
     bool fullDaisy,
     bool mp3Album )
 {
@@ -348,176 +349,185 @@ bool WrapDaisy::run (
     while (wxTheApp->Pending())
         wxTheApp->Dispatch();
 
-    if ( !pd->Update ( 50, _T("Preparing ePub...") ) )
+    if ( epub )
     {
-        error = _T ( "Cancelled" );
-        return false;   
-    }
-
-    wxString epubScript;
+        if ( !pd->Update ( 50, _T("Preparing ePub...") ) )
+        {
+            error = _T ( "Cancelled" );
+            return false;   
+        }
     
-    epubScript += _T("scripts");
-    epubScript += wxFileName::GetPathSeparator();
-    epubScript += _T("create_distribute");
-    epubScript += wxFileName::GetPathSeparator();
-    epubScript += _T("epub");
-    epubScript += wxFileName::GetPathSeparator();
-    epubScript += _T("OPSCreator.taskScript");
-
-    cmd = baseCmd +
-        _T("\"") + epubScript + _T("\" --input=\"") +
-        canonicalFile + //canonicalFile.wideName() +
-        _T("\" --output=\"") +
-        folder + wxFileName::GetPathSeparator() + _T("ebook.epub\"");
+        wxString epubScript;
         
-    result = wxExecute ( cmd, out, err );
-	
-    count = err.GetCount();
-    if ( count )
-    {
-        for ( int i = 0; i < count; i++ )
-        {
-            error += err.Item ( i );
-            error += _T(" ");
-        }
-    }
+        epubScript += _T("scripts");
+        epubScript += wxFileName::GetPathSeparator();
+        epubScript += _T("create_distribute");
+        epubScript += wxFileName::GetPathSeparator();
+        epubScript += _T("epub");
+        epubScript += wxFileName::GetPathSeparator();
+        epubScript += _T("OPSCreator.taskScript");
     
-/*
-    count = out.GetCount();
-    if ( count )
-    {
-        for ( int i = 0; i < count; i++ )
+        cmd = baseCmd +
+            _T("\"") + epubScript + _T("\" --input=\"") +
+            canonicalFile + //canonicalFile.wideName() +
+            _T("\" --output=\"") +
+            folder + wxFileName::GetPathSeparator() + _T("ebook.epub\"");
+            
+        result = wxExecute ( cmd, out, err );
+    	
+        count = err.GetCount();
+        if ( count )
         {
-            error += out.Item ( i );
-            error += _T(" ");
+            for ( int i = 0; i < count; i++ )
+            {
+                error += err.Item ( i );
+                error += _T(" ");
+            }
         }
+        
+    /*
+        count = out.GetCount();
+        if ( count )
+        {
+            for ( int i = 0; i < count; i++ )
+            {
+                error += out.Item ( i );
+                error += _T(" ");
+            }
+        }
+    */
+    
+        if ( !error.empty() )
+            return false;
     }
-*/
-
-    if ( !error.empty() )
-        return false;
 
     // #2.9: convert to RTF
-    pd->ProcessPendingEvents();
-    while (wxTheApp->Pending())
-        wxTheApp->Dispatch();
-
-    if ( !pd->Update ( 60, _T("Preparing RTF...") ) )
+    if ( rtf || doc )
     {
-        error = _T ( "Cancelled" );
-        return false;   
-    }
-
-    wxString rtfScript;
+        pd->ProcessPendingEvents();
+        while (wxTheApp->Pending())
+            wxTheApp->Dispatch();
     
-    rtfScript += _T("scripts");
-    rtfScript += wxFileName::GetPathSeparator();
-    rtfScript += _T("create_distribute");
-    rtfScript += wxFileName::GetPathSeparator();
-    rtfScript += _T("text");
-    rtfScript += wxFileName::GetPathSeparator();
-    rtfScript += _T("DtbookToRtf.taskScript");
-
-    wxString rtfFile, tempRtfFile, docFile, tempDocFile;
-    rtfFile = folder + wxFileName::GetPathSeparator() + _T("document.rtf");
-    tempRtfFile = folder + wxFileName::GetPathSeparator() + _T("html") +
-        wxFileName::GetPathSeparator() + _T("document.rtf");
- 
-    docFile = rtfFile;
-    tempDocFile = tempRtfFile;
-    docFile.Replace ( _T(".rtf"), _T(".doc") );
-    tempDocFile.Replace ( _T(".rtf"), _T(".doc") );
+        if ( !pd->Update ( 60, _T("Preparing RTF...") ) )
+        {
+            error = _T ( "Cancelled" );
+            return false;   
+        }
     
-    cmd = baseCmd +
-        _T("\"") + rtfScript + _T("\" --input=\"") +
-        dtbFilePath + //dtbFile.wideName() +
-        _T("\" --output=\"") + rtfFile + 
-        _T("\" --inclTOC=\"true\" --inclPagenum=\"false\"");
+        wxString rtfScript;
         
-    result = wxExecute ( cmd, out, err );
-	
-    count = err.GetCount();
-    if ( count )
-    {
-        for ( int i = 0; i < count; i++ )
+        rtfScript += _T("scripts");
+        rtfScript += wxFileName::GetPathSeparator();
+        rtfScript += _T("create_distribute");
+        rtfScript += wxFileName::GetPathSeparator();
+        rtfScript += _T("text");
+        rtfScript += wxFileName::GetPathSeparator();
+        rtfScript += _T("DtbookToRtf.taskScript");
+    
+        wxString rtfFile, tempRtfFile, docFile, tempDocFile;
+        rtfFile = folder + wxFileName::GetPathSeparator() + _T("document.rtf");
+        tempRtfFile = folder + wxFileName::GetPathSeparator() + _T("html") +
+            wxFileName::GetPathSeparator() + _T("document.rtf");
+     
+        docFile = rtfFile;
+        tempDocFile = tempRtfFile;
+        docFile.Replace ( _T(".rtf"), _T(".doc") );
+        tempDocFile.Replace ( _T(".rtf"), _T(".doc") );
+        
+        cmd = baseCmd +
+            _T("\"") + rtfScript + _T("\" --input=\"") +
+            dtbFilePath + //dtbFile.wideName() +
+            _T("\" --output=\"") + rtfFile + 
+            _T("\" --inclTOC=\"true\" --inclPagenum=\"false\"");
+            
+        result = wxExecute ( cmd, out, err );
+    	
+        count = err.GetCount();
+        if ( count )
         {
-            error += err.Item ( i );
-            error += _T(" ");
+            for ( int i = 0; i < count; i++ )
+            {
+                error += err.Item ( i );
+                error += _T(" ");
+            }
         }
+        
+    /*
+        count = out.GetCount();
+        if ( count )
+        {
+            for ( int i = 0; i < count; i++ )
+            {
+                error += out.Item ( i );
+                error += _T(" ");
+            }
+        }
+    */
+    
+        if ( !error.empty() )
+            return false;    
+    
+        // #2.9.5: convert to binary Word
+        // (Win only; otherwise create copy with *.doc extension)
+    
+        pd->ProcessPendingEvents();    
+        while (wxTheApp->Pending())
+            wxTheApp->Dispatch();
+        
+        if ( !pd->Update ( 60, _T("Preparing Word document...") ) )
+        {
+            error = _T ( "Cancelled" );
+            return false;   
+        }
+    
+        //wxString docFile = rtfFile;
+        //docFile.Replace ( _T(".rtf"), _T(".doc") );
+    
+    #ifdef __WXMSW__
+        wxAutomationObject wordObject, documentObject;
+    
+        if ( wordObject.CreateInstance ( _T("Word.Application") ) )
+        {
+            wxVariant openParams[2];
+            openParams[0] = rtfFile;//tempRtfFile
+            openParams[1] = false;   
+    
+            wordObject.CallMethod(_("documents.open"), 2, openParams);
+            if (!wordObject.GetObject(documentObject, _("ActiveDocument"))) 
+            { 
+                error = _("Cannot open ") + rtfFile;//tempRtfFile;
+                return false;
+            }
+            wxVariant saveAsParams[2];
+            saveAsParams[0] = docFile;//tempDocFile;//
+            saveAsParams[1] = (long)0; //wdFormatDocument
+            if ( !documentObject.CallMethod(_("SaveAs"), 2, saveAsParams) )
+            {
+                //error = _("Cannot save ") + docFile;
+                //return false;
+            }
+            documentObject.CallMethod(_("Close"), 0, NULL );
+            wordObject.CallMethod(_T("Quit"), 0, NULL );
+        }
+    #else
+        //wxCopyFile ( tempRtfFile, tempDocFile );
+        wxCopyFile ( rtfFile, docFile );
+    #endif
+    
+        //wxCopyFile ( tempRtfFile, rtfFile );
+        //wxCopyFile ( tempDocFile, docFile );
+        //wxRemoveFile ( tempRtfFile );
+        //wxRemoveFile ( tempDocFile );
     }
     
-/*
-    count = out.GetCount();
-    if ( count )
-    {
-        for ( int i = 0; i < count; i++ )
-        {
-            error += out.Item ( i );
-            error += _T(" ");
-        }
-    }
-*/
-
-    if ( !error.empty() )
-        return false;    
-
-    // #2.9.5: convert to binary Word
-    // (Win only; otherwise create copy with *.doc extension)
-
-    pd->ProcessPendingEvents();    
-    while (wxTheApp->Pending())
-        wxTheApp->Dispatch();
-    
-    if ( !pd->Update ( 60, _T("Preparing Word document...") ) )
-    {
-        error = _T ( "Cancelled" );
-        return false;   
-    }
-
-    //wxString docFile = rtfFile;
-    //docFile.Replace ( _T(".rtf"), _T(".doc") );
-
-#ifdef __WXMSW__
-    wxAutomationObject wordObject, documentObject;
-
-    if ( wordObject.CreateInstance ( _T("Word.Application") ) )
-    {
-        wxVariant openParams[2];
-        openParams[0] = rtfFile;//tempRtfFile
-        openParams[1] = false;   
-
-        wordObject.CallMethod(_("documents.open"), 2, openParams);
-        if (!wordObject.GetObject(documentObject, _("ActiveDocument"))) 
-        { 
-            error = _("Cannot open ") + rtfFile;//tempRtfFile;
-            return false;
-        }
-        wxVariant saveAsParams[2];
-        saveAsParams[0] = docFile;//tempDocFile;//
-        saveAsParams[1] = (long)0; //wdFormatDocument
-        if ( !documentObject.CallMethod(_("SaveAs"), 2, saveAsParams) )
-        {
-            //error = _("Cannot save ") + docFile;
-            //return false;
-        }
-        documentObject.CallMethod(_("Close"), 0, NULL );
-        wordObject.CallMethod(_T("Quit"), 0, NULL );
-    }
-#else
-    //wxCopyFile ( tempRtfFile, tempDocFile );
-    wxCopyFile ( rtfFile, docFile );
-#endif
-
-    //wxCopyFile ( tempRtfFile, rtfFile );
-    //wxCopyFile ( tempDocFile, docFile );
-    //wxRemoveFile ( tempRtfFile );
-    //wxRemoveFile ( tempDocFile );
-
     // #3: convert to full DAISY book
     pd->ProcessPendingEvents();
     while (wxTheApp->Pending())
         wxTheApp->Dispatch();
 
+    if ( !fullDaisy )
+        return true; // no full DAISY, no audio
+        
     if ( !pd->Update ( 70, _T("Preparing DAISY books...") ) )
     {
         error = _T ( "Cancelled" );
@@ -568,6 +578,9 @@ bool WrapDaisy::run (
 
     if ( !error.empty() )
         return false;
+
+    if ( !mp3Album )
+        return true;
 
     // #4: create MP3 album
     pd->ProcessPendingEvents();
@@ -651,19 +664,19 @@ bool WrapDaisy::run (
     while (wxTheApp->Pending())
         wxTheApp->Dispatch();
 
+/*
     if ( !pd->Update ( 90, _T("Updating playlists...") ) )
     {
         error = _T ( "Cancelled" );
         return false;   
     }
 
-/*
+
     //rename mp3 playlists
-    albumDir += wxFileName::GetPathSeparator();
-    PlayListRenamer plr;
-    std::string stdAlbumDir = ( const char *) albumDir.mb_str ( wxConvUTF8 );
-    plr.run ( stdAlbumDir );
-*/
+    //albumDir += wxFileName::GetPathSeparator();
+    //PlayListRenamer plr;
+    //std::string stdAlbumDir = ( const char *) albumDir.mb_str ( wxConvUTF8 );
+    //plr.run ( stdAlbumDir );
 
     //rename mp3 files in //z3986/
     wxFileName fn ( dtbFilePath );
@@ -741,6 +754,7 @@ bool WrapDaisy::run (
         wxFileName::GetPathSeparator() +
         _T("cover.jpg");
     wxCopyFile ( albumCover, destAlbumCover, true );
+*/
     
     return true;
 }

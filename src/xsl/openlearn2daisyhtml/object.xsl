@@ -112,11 +112,18 @@
             </xsl:attribute>
             <xsl:attribute name="alt">
               <xsl:choose>
+                <xsl:when
+                  test="count(./Description/*) = 0 and string-length(./Description) &lt; 1024">
+                  <xsl:value-of select="./Description"/>
+                </xsl:when>
                 <xsl:when test="string-length(./Image/@alt) &gt; 0">
                   <xsl:value-of select="./Image/@alt"/>
                 </xsl:when>
                 <xsl:when test="string-length(Alternative) &gt; 0">
                   <xsl:value-of select="Alternative"/>
+                </xsl:when>
+                <xsl:when test="count(./Description/*) &gt; 0">
+                  <xsl:text>figure description follows</xsl:text>
                 </xsl:when>
                 <xsl:otherwise>
                   <xsl:text>no alternative text</xsl:text>
@@ -133,7 +140,9 @@
       </xsl:otherwise>
     </xsl:choose>
     <xsl:apply-templates select="Caption"/>
-    <xsl:apply-templates select="Description"/>
+    <xsl:if test="count(./Description/*) &gt; 0 or string-length(./Description) &gt; 1024">
+      <xsl:apply-templates select="Description"/>
+    </xsl:if>
     <xsl:apply-templates select="SourceReference"/>
     <p>
       <span class="optional-prodnote">End of figure</span>
@@ -152,11 +161,18 @@
             </xsl:attribute>
             <xsl:attribute name="alt">
               <xsl:choose>
+                <xsl:when
+                  test="count(./Description/*) = 0 and string-length(./Description) &lt; 1024">
+                  <xsl:value-of select="./Description"/>
+                </xsl:when>
                 <xsl:when test="string-length(./Image/@alt) &gt; 0">
                   <xsl:value-of select="./Image/@alt"/>
                 </xsl:when>
                 <xsl:when test="string-length(Alternative) &gt; 0">
                   <xsl:value-of select="Alternative"/>
+                </xsl:when>
+                <xsl:when test="count(./Description/*) &gt; 0">
+                  <xsl:text>equation description follows</xsl:text>
                 </xsl:when>
                 <xsl:otherwise>
                   <xsl:text>no alternative text</xsl:text>
@@ -176,7 +192,9 @@
     <xsl:apply-templates select="TeX"/>
     <xsl:apply-templates select="MathML"/>
     <xsl:apply-templates select="Caption"/>
-    <xsl:apply-templates select="Description"/>
+    <xsl:if test="count(./Description/*) &gt; 0 or string-length(./Description) &gt; 1024">
+      <xsl:apply-templates select="Description"/>
+    </xsl:if>
     <xsl:apply-templates select="SourceReference"/>
     <span class="optional-prodnote">End of equation</span>
   </xsl:template>
@@ -402,9 +420,9 @@
   </xsl:template>
   <xsl:template match="SideNote">
     <hr/>
-    <span class="optional-prodnote">Side note</span>
+    <p><span class="optional-prodnote">Side note</span></p>
     <xsl:apply-templates/>
-    <span class="optional-prodnote">End of side note</span>
+    <p><span class="optional-prodnote">End of side note</span></p>
     <hr/>
   </xsl:template>
   <xsl:template match="footnote">

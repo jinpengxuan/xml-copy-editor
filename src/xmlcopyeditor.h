@@ -444,7 +444,13 @@ class MyFrame : public wxFrame
 		findRegex,
 		commandSync,
         exportQuiet,
-        exportMp3Album;
+        exportMp3Album,
+        exportSuppressOptional,
+        exportHtml,
+        exportEpub,
+        exportRtf,
+        exportDoc,
+        exportFullDaisy;
 		wxBitmap newBitmap,
 		new16Bitmap,
 		openBitmap,

@@ -129,14 +129,6 @@
   </xsl:template>
   <xsl:template
     match="InlineChemistry/Description | InlineChemistry/Alternative"/>
-  
-
-
-
-
-  
-  
-  
   <xsl:template match="AuthorComment">
     <!-- omit -->
     <xsl:apply-templates/>

@@ -165,6 +165,12 @@ void ExportDialog::OnOk ( wxCommandEvent& e )
 	folder = dirPicker->GetPath();
 	quiet = quietCheckbox->IsChecked();
 	mp3Album = mp3AlbumCheckbox->IsChecked();
+    suppressOptional = suppressOptionalCheckbox->IsChecked();
+	html = htmlCheckbox->IsChecked();
+    epub = epubCheckbox->IsChecked();
+    rtf = rtfCheckbox->IsChecked();
+    doc = docCheckbox->IsChecked();
+    fullDaisy = fullDaisyCheckbox->IsChecked();
 	urlUtf8 = ( const char * ) url.mb_str ( wxConvUTF8 );
 
 	e.Skip();
@@ -199,13 +205,6 @@ void ExportDialog::OnContextHelp ( wxHelpEvent& e )
 void ExportDialog::OnUpdateOk ( wxUpdateUIEvent& e )
 {
     bool enable = true;
-/*
-#ifdef __WXMSW__
-    if ( urlCtrl->GetTextCtrlValue().empty() ||
-#else
-    if ( urlCtrl->GetPath().empty() ||
-#endif
-*/
     if (
         dirPicker->GetPath().empty() ||
         downloadLink )
@@ -232,6 +231,13 @@ bool ExportDialog::getMp3Album()
 {
     return mp3Album;   
 }
+
+bool ExportDialog::getSuppressOptional() { return suppressOptional; }
+bool ExportDialog::getHtml() { return html; }
+bool ExportDialog::getEpub() { return epub; }
+bool ExportDialog::getRtf() { return rtf; }
+bool ExportDialog::getDoc() { return doc; }
+bool ExportDialog::getFullDaisy() { return fullDaisy; }
 
 void ExportDialog::OnFolderBrowse ( wxCommandEvent& e )
 {

@@ -66,9 +66,7 @@
   <xsl:template match="Question">
     <xsl:if test="count(Heading) = '0'">
       <p>
-        <span class="optional-prodnote">
-          <strong>Question</strong>
-        </span>
+        <span class="optional-prodnote">Question</span>
       </p>
     </xsl:if>
     <xsl:call-template name="apply-templates-lang"/>
@@ -76,9 +74,7 @@
   <xsl:template match="Answer">
     <xsl:if test="count(Heading) = '0'">
       <p>
-        <span class="optional-prodnote">
-          <strong>Answer</strong>
-        </span>
+        <span class="optional-prodnote">Answer</span>
       </p>
     </xsl:if>
     <xsl:call-template name="apply-templates-lang"/>
@@ -86,9 +82,7 @@
   <xsl:template match="Discussion">
     <xsl:if test="count(Heading) = '0'">
       <p>
-        <span class="optional-prodnote">
-          <strong>Discussion</strong>
-        </span>
+        <span class="optional-prodnote">Discussion</span>
       </p>
     </xsl:if>
     <xsl:call-template name="apply-templates-lang"/>
