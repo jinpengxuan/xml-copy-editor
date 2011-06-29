@@ -1,6 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE Item PUBLIC "-//OpenLearn//DTD" "OUGenericFull.dtd">
-<Item>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://openlearn.open.ac.uk/local/schemas/OUIntermediateSchema.xsd">
   <FrontMatter>
     <CourseCode></CourseCode>
     <CourseTitle></CourseTitle>
