@@ -1,0 +1,134 @@
+//////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 1 resource.
+//
+
+//
+//////////////////////////////////////////////////////////////////////////////
+
+
+//////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+
+#define APSTUDIO_READONLY_SYMBOLS
+#define APSTUDIO_HIDDEN_SYMBOLS
+#include <wx/msw/wx.rc>
+#undef APSTUDIO_HIDDEN_SYMBOLS
+
+#undef APSTUDIO_READONLY_SYMBOLS
+//
+//////////////////////////////////////////////////////////////////////////////
+
+
+//////////////////////////////////////////////////////////////////////////////
+//
+// Additional include files
+//
+
+
+
+//////////////////////////////////////////////////////////////////////////////
+//
+// English (United States) resources
+//
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+
+//////////////////////////////////////////////////////////////////////////////
+//
+// BITMAP : Bitmap
+//
+
+stock_calc-accept BITMAP "png/stock_calc-accept.bmp"
+stock_calc-accept-green BITMAP "png/stock_calc-accept-green.bmp"
+stock_copy_16 BITMAP "png/stock_copy-16.bmp"
+stock_cut_16 BITMAP "png/stock_cut-16.bmp"
+stock_filters BITMAP "png/stock_filters.bmp"
+stock_help_16 BITMAP "png/stock_help-16.bmp"
+stock_hyperlink BITMAP "png/stock_hyperlink.bmp"
+stock_internet BITMAP "png/stock_internet.bmp"
+stock_internet_16 BITMAP "png/stock_internet-16.bmp"
+stock_new BITMAP "png/stock_new.bmp"
+stock_new_16 BITMAP "png/stock_new-16.bmp"
+stock_open BITMAP "png/stock_open.bmp"
+stock_open_16 BITMAP "png/stock_open-16.bmp"
+stock_paste_16 BITMAP "png/stock_paste-16.bmp"
+stock_print BITMAP "png/stock_print.bmp"
+stock_print_16 BITMAP "png/stock_print-16.bmp"
+stock_print_preview_16 BITMAP "png/stock_print-preview-16.bmp"
+stock_redo_16 BITMAP "png/stock_redo-16.bmp"
+stock_save BITMAP "png/stock_save.bmp"
+stock_save_16 BITMAP "png/stock_save-16.bmp"
+stock_search_16 BITMAP "png/stock_search-16.bmp"
+stock_spellcheck BITMAP "png/stock_spellcheck.bmp"
+stock_spellcheck_16 BITMAP "png/stock_spellcheck-16.bmp"
+stock_undo_16 BITMAP "png/stock_undo-16.bmp"
+
+//////////////////////////////////////////////////////////////////////////////
+//
+// MENUEX : Menu
+//
+
+
+//////////////////////////////////////////////////////////////////////////////
+//
+// CURSOR : Cursor
+//
+
+
+//////////////////////////////////////////////////////////////////////////////
+//
+// ICON : Icon
+//
+
+appicon ICON "res/appicon.ico"
+appicondoc ICON "res/appicondoc.ico"
+
+#endif    // English (United States) resources
+//////////////////////////////////////////////////////////////////////////////
+//
+// RT_MANIFEST : Manifest
+//
+// Already taken care of by wxWidgets
+
+#ifdef APSTUDIO_INVOKED
+
+//////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE
+BEGIN
+  "\0"
+END
+
+2 TEXTINCLUDE
+BEGIN
+  "#define APSTUDIO_HIDDEN_SYMBOLS\r\n",
+  "#include <wx/msw/wx.rc>\r\n",
+  "#undef APSTUDIO_HIDDEN_SYMBOLS\r\n"
+END
+
+3 TEXTINCLUDE
+BEGIN
+  "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+//////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+#ifndef APSTUDIO_INVOKED
+
+#endif    // not APSTUDIO_INVOKED
+//
+//////////////////////////////////////////////////////////////////////////////
+

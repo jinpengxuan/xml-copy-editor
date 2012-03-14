@@ -110,7 +110,11 @@ bool WrapDaisy::run (
     if ( !stdStylesheet.empty() ) // stylesheet found
     {
         // #1: convert to canonical XHTML
-        pd->ProcessPendingEvents();
+#if wxCHECK_VERSION(2,9,2)
+    	pd->GetEventHandler()->ProcessPendingEvents();
+#else
+    	pd->ProcessPendingEvents();
+#endif
         while (wxTheApp->Pending())
             wxTheApp->Dispatch();
 
@@ -152,7 +156,11 @@ bool WrapDaisy::run (
     
     if ( suppressOptional )
     {
-        pd->ProcessPendingEvents();
+#if wxCHECK_VERSION(2,9,2)
+    	pd->GetEventHandler()->ProcessPendingEvents();
+#else
+    	pd->ProcessPendingEvents();
+#endif
         while (wxTheApp->Pending())
             wxTheApp->Dispatch();
         if ( !pd->Update ( 15, _("Suppressing optional production notes...") ) )
@@ -175,7 +183,11 @@ bool WrapDaisy::run (
     if ( quiet )
     {
         // #1.5: apply quiet setting if req'd
-        pd->ProcessPendingEvents();
+#if wxCHECK_VERSION(2,9,2)
+    	pd->GetEventHandler()->ProcessPendingEvents();
+#else
+    	pd->ProcessPendingEvents();
+#endif
         while (wxTheApp->Pending())
             wxTheApp->Dispatch();
         if ( !pd->Update ( 20, _("De-emphasizing production notes...") ) )
@@ -257,7 +269,11 @@ bool WrapDaisy::run (
     }
         
     // copy images
-    pd->ProcessPendingEvents();
+#if wxCHECK_VERSION(2,9,2)
+   	pd->GetEventHandler()->ProcessPendingEvents();
+#else
+   	pd->ProcessPendingEvents();
+#endif
     while (wxTheApp->Pending())
         wxTheApp->Dispatch();
 
@@ -292,7 +308,11 @@ bool WrapDaisy::run (
     canonicalStream.close();
     
     // #2: convert to DTBook
-    pd->ProcessPendingEvents();
+#if wxCHECK_VERSION(2,9,2)
+   	pd->GetEventHandler()->ProcessPendingEvents();
+#else
+   	pd->ProcessPendingEvents();
+#endif
     while (wxTheApp->Pending())
         wxTheApp->Dispatch();
 
@@ -345,7 +365,11 @@ bool WrapDaisy::run (
         return false;
         
     // #2.5: create ePub version
-    pd->ProcessPendingEvents();
+#if wxCHECK_VERSION(2,9,2)
+   	pd->GetEventHandler()->ProcessPendingEvents();
+#else
+   	pd->ProcessPendingEvents();
+#endif
     while (wxTheApp->Pending())
         wxTheApp->Dispatch();
 
@@ -404,7 +428,11 @@ bool WrapDaisy::run (
     // #2.9: convert to RTF
     if ( rtf || doc )
     {
-        pd->ProcessPendingEvents();
+#if wxCHECK_VERSION(2,9,2)
+    	pd->GetEventHandler()->ProcessPendingEvents();
+#else
+   		pd->ProcessPendingEvents();
+#endif
         while (wxTheApp->Pending())
             wxTheApp->Dispatch();
     
@@ -470,7 +498,11 @@ bool WrapDaisy::run (
         // #2.9.5: convert to binary Word
         // (Win only; otherwise create copy with *.doc extension)
     
-        pd->ProcessPendingEvents();    
+#if wxCHECK_VERSION(2,9,2)
+        pd->GetEventHandler()->ProcessPendingEvents();
+#else
+   		pd->ProcessPendingEvents();
+#endif
         while (wxTheApp->Pending())
             wxTheApp->Dispatch();
         
@@ -521,7 +553,11 @@ bool WrapDaisy::run (
     }
     
     // #3: convert to full DAISY book
-    pd->ProcessPendingEvents();
+#if wxCHECK_VERSION(2,9,2)
+   	pd->GetEventHandler()->ProcessPendingEvents();
+#else
+   	pd->ProcessPendingEvents();
+#endif
     while (wxTheApp->Pending())
         wxTheApp->Dispatch();
 
@@ -583,7 +619,11 @@ bool WrapDaisy::run (
         return true;
 
     // #4: create MP3 album
-    pd->ProcessPendingEvents();
+#if wxCHECK_VERSION(2,9,2)
+   	pd->GetEventHandler()->ProcessPendingEvents();
+#else
+   	pd->ProcessPendingEvents();
+#endif
     while (wxTheApp->Pending())
         wxTheApp->Dispatch();
 
@@ -660,7 +700,11 @@ bool WrapDaisy::run (
         return false;
         
 
-    pd->ProcessPendingEvents();
+#if wxCHECK_VERSION(2,9,2)
+   	pd->GetEventHandler()->ProcessPendingEvents();
+#else
+   	pd->ProcessPendingEvents();
+#endif
     while (wxTheApp->Pending())
         wxTheApp->Dispatch();
 

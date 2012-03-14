@@ -171,8 +171,12 @@ void AssociateDialog::OnBrowse ( wxCommandEvent& e )
 	                                     _T ( "" ),
 	                                     _T ( "" ),
 	                                     extensionArgument,
+#if wxCHECK_VERSION(2,9,2)
+	                                     wxFD_OPEN | wxFD_FILE_MUST_EXIST | wxFD_CHANGE_DIR
+#else
 	                                     wxOPEN | wxFILE_MUST_EXIST | wxCHANGE_DIR
-	                                 ) );
+#endif
+	                                     ) );
 
 	if ( fd->ShowModal() == wxID_OK )
 	{

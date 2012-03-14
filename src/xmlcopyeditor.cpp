@@ -197,7 +197,7 @@ MyApp::MyApp() : checker ( NULL ), server ( NULL ), connection ( NULL ),
 	int fdnull = open ( "/dev/null", O_WRONLY, 0 );
 	dup2 ( fdnull, STDERR_FILENO );
 #endif
-	myLocale.Init();
+	//myLocale.Init();
 	int systemLocale = myLocale.GetSystemLanguage();
 	switch ( systemLocale )
 	{
@@ -338,7 +338,11 @@ bool MyApp::OnInit()
 				wxString argument, what;
 				wxChar *whatBuffer;
 				what = _T ( "Data" );
+#if wxCHECK_VERSION(2,9,2)
+				whatBuffer = (wxChar *)what.wchar_str();
+#else
 				whatBuffer = (wxChar *)what.c_str();
+#endif
 				if ( this->argc > 1 )
 				{
 					for ( int i = 1; i < this->argc; i++ )
@@ -2055,8 +2059,12 @@ void MyFrame::OnImportMSWord ( wxCommandEvent& event )
 	                                     _T ( "" ),
 	                                     _T ( "" ),
 	                                     _T ( "Microsoft Word (*.doc)|*.doc" ),
+#if wxCHECK_VERSION(2,9,2)
+	                                     wxFD_OPEN | wxFD_FILE_MUST_EXIST | wxFD_CHANGE_DIR
+#else
 	                                     wxOPEN | wxFILE_MUST_EXIST | wxCHANGE_DIR
-	                                 ) );
+#endif
+	                                     ) );
 	if ( fd->ShowModal() == wxID_CANCEL )
 		return;
 
@@ -2280,7 +2288,11 @@ void MyFrame::OnExportMSWord ( wxCommandEvent& event )
 	                                     _T ( "" ),
 	                                     _T ( "" ),
 	                                     _T ( "Microsoft Word (*.doc)|*.doc" ),
+#if wxCHECK_VERSION(2,9,2)
+	                                     wxFD_SAVE | wxFD_OVERWRITE_PROMPT));
+#else
 	                                     wxSAVE | wxOVERWRITE_PROMPT ) );
+#endif
 	fd->ShowModal();
 
 	wxString path = fd->GetPath();
@@ -2891,8 +2903,12 @@ void MyFrame::OnOpen ( wxCommandEvent& event )
 	    defaultDir,
 	    wxEmptyString,
 	    FILE_FILTER,
+#if wxCHECK_VERSION(2,9,2)
+	    wxFD_OPEN | wxFD_MULTIPLE | wxFD_FILE_MUST_EXIST | wxFD_CHANGE_DIR
+#else
 	    wxOPEN | wxMULTIPLE | wxFILE_MUST_EXIST | wxCHANGE_DIR
-	);
+#endif
+	    );
 
 
 	if ( fd->ShowModal() == wxID_CANCEL )
@@ -3122,7 +3138,7 @@ bool MyFrame::openFile ( wxString& fileName, bool largeFile )
 
 		nconv = iconv (
 		            cd,
-#ifdef __WXMSW__
+#if defined(__WXMSW__) && !wxCHECK_VERSION(2,9,2)
 		            ( const char ** )
 #endif
 		            &docBuffer,
@@ -3517,7 +3533,11 @@ void MyFrame::saveAs()
 	                                defaultDir,
 	                                defaultFile,
 	                                FILE_FILTER,
+#if wxCHECK_VERSION(2,9,2)
+	                                wxFD_SAVE | wxFD_OVERWRITE_PROMPT ) );
+#else
 	                                wxSAVE | wxOVERWRITE_PROMPT ) );
+#endif
 	if ( fd->ShowModal() == wxID_CANCEL )
 		return;
 
@@ -4737,7 +4757,7 @@ bool MyFrame::saveFile ( XmlDoc *doc, wxString& fileName, bool checkLastModified
 					finalBuffer = iconvBuffer; // iconvBuffer will be incremented by iconv
 					size_t nconv;
 
-#ifdef __WXMSW__
+#if defined(__WXMSW__) && !wxCHECK_VERSION(2,9,2)
 					const char *
 #else
 					char *
@@ -4748,7 +4768,7 @@ bool MyFrame::saveFile ( XmlDoc *doc, wxString& fileName, bool checkLastModified
 
 					nconv = iconv (
 					            cd,
-#ifdef __WXMSW__
+#if defined(__WXMSW__) && !wxCHECK_VERSION(2,9,2)
 					            ( const char ** )
 #endif
 					            &utf8BufferPtr,
@@ -6141,7 +6161,11 @@ void MyFrame::OnActivateApp ( wxActivateEvent& event )
 void MyFrame::OnIconize ( wxIconizeEvent& event )
 {
 	event.Skip();
+#if wxCHECK_VERSION(2,9,2)
+	if (event.IsIconized())
+#else
 	if ( event.Iconized() )
+#endif
 		return;
 	restoreFocusToNotebook = true;
 }
