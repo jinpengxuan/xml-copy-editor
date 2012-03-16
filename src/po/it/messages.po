@@ -1,36 +1,18 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2007-11-16 10:09+0100\n"
 "Last-Translator: Antonio Angelo <antonio.angelo@poste.it>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: 1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-Language: Italian\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-SourceCharset: utf-8\n"
-
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#, fuzzy
-msgid "\n"
-msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2007-07-27 00:13+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=1;\n"
 
 #: xmlcopyeditorcopy.h:2
 msgid "All files (*.*)|*.*|XML (*.xml)|*.xml|XHTML (*.html)|*.html|DTD (*.dtd)|*.dtd|XML Schema (*.xsd)|*.xsd|RELAX NG grammar (*.rng)|*.rng|XSL (*.xsl)|*.xsl"
@@ -46,25 +28,13 @@ msgid ""
 "XML Copy Editor is free software released under the GNU\n"
 "General Public License.\n"
 "\n"
-"Many thanks are due to Tim van Niekerk, Matt Smigielski,\n"
-"David Scholl, Jan Merka, Marcus Bingenheimer, Roberto\n"
-"Rosselli Del Turco, Ken Zalewski, C.J. Meidlinger,\n"
-"Thomas Zajic, Viliam B√∫r, David H√•s√§ther, Fran√ßois\n"
-"Badier, Thomas Wenzel, Roger Sperberg, SHiNE CsyFeK,\n"
-"HSU PICHAN, YANG SHUFUN, CHENG PAULIAN and\n"
-"CHUANG KUO-PING."
+"Many thanks are due to "
 msgstr ""
 "\n"
-"XML Copy Editor Ë un software gratuito rilasciato sotto la GNU\n"
+"XML Copy Editor √® un software gratuito rilasciato sotto la GNU\n"
 "General Public License.\n"
 "\n"
-"Molti ringraziamenti a Tim van Niekerk, Matt Smigielski,\n"
-"David Scholl, Jan Merka, Marcus Bingenheimer, Roberto\n"
-"Rosselli Del Turco, Ken Zalewski, C.J. Meidlinger,\n"
-"Thomas Zajic, Viliam B√∫r, David H√•s√§ther, Fran√ßois\n"
-"Badier, Thomas Wenzel, Roger Sperberg, SHiNE CsyFeK,\n"
-"HSU PICHAN, YANG SHUFUN, CHENG PAULIAN e\n"
-"CHUANG KUO-PING."
+"Molti ringraziamenti a "
 
 #: aboutdialog.cpp:29
 msgid "OK"
@@ -321,7 +291,7 @@ msgstr "&Abilita l'accesso alla rete per validazione DTD"
 
 #: mypropertysheet.cpp:215
 msgid "E&xpand internal entities on open"
-msgstr "E&spandi le entit‡ interne all'apertura"
+msgstr "E&spandi le entit√† interne all'apertura"
 
 #: mypropertysheet.cpp:218
 msgid "&One application instance only"
@@ -548,7 +518,7 @@ msgstr "Memoria insufficiente"
 
 #: xmlcopyeditor.cpp:400
 msgid "The following error has occurred: "
-msgstr "Si Ë incontrato il seguente errore: "
+msgstr "Si √® incontrato il seguente errore: "
 
 #: xmlcopyeditor.cpp:402
 msgid ""
@@ -587,7 +557,7 @@ msgstr "Inserisci fratello"
 #: xmlcopyeditor.cpp:811
 #: xmlcopyeditor.cpp:813
 msgid "Insert Entity"
-msgstr "Inserisci entit‡"
+msgstr "Inserisci entit√†"
 
 #: xmlcopyeditor.cpp:877
 msgid "Cannot open application directory: see Tools, Options..., General"
@@ -600,38 +570,6 @@ msgstr "Modificatore sconosciuto nella riga di comando (si attende 'w' o 's')"
 #: xmlcopyeditor.cpp:1093
 msgid "Command line processing incomplete: no file specified"
 msgstr "Elaborazione della riga di comando incompleta: nessun file specificato"
-
-#: xmlcopyeditor.cpp:1182
-msgid "Gerald Schmidt (development) <gnschmidt@users.sourceforge.net>"
-msgstr "Gerald Schmidt (sviluppo) <gnschmidt@users.sourceforge.net>"
-
-#: xmlcopyeditor.cpp:1183
-msgid "Matt Smigielski (testing) <alectrus@users.sourceforge.net>"
-msgstr "Matt Smigielski (testing) <alectrus@users.sourceforge.net>"
-
-#: xmlcopyeditor.cpp:1184
-msgid "Viliam B√∫r (Slovak) <viliam@bur.sk>"
-msgstr "Viliam B√∫r (Slovacco) <viliam@bur.sk>"
-
-#: xmlcopyeditor.cpp:1185
-msgid "David H√•s√§ther (Swedish) <hasather@gmail.com>"
-msgstr "David H√•s√§ther (Svedese) <hasather@gmail.com>"
-
-#: xmlcopyeditor.cpp:1186
-msgid "Fran√ßois Badier (French) <frabad@gmail.com>"
-msgstr "Fran√ßois Badier (Francese) <frabad@gmail.com>"
-
-#: xmlcopyeditor.cpp:1187
-msgid "Thomas Wenzel (German) <thowen@users.sourceforge.net>"
-msgstr "Thomas Wenzel (Tedesco) <thowen@users.sourceforge.net>"
-
-#: xmlcopyeditor.cpp:1188
-msgid "SHiNE CsyFeK (Chinese Simplified) <csyfek@gmail.com>"
-msgstr "SHiNE CsyFeK (Cinese semplificato) <csyfek@gmail.com>"
-
-#: xmlcopyeditor.cpp:1189
-msgid "HSU PICHAN, YANG SHUFUN, CHENG PAULIAN, CHUANG KUO-PING, Marcus Bingenheimer (Chinese Traditional)"
-msgstr "HSU PICHAN, YANG SHUFUN, CHENG PAULIAN, CHUANG KUO-PING, Marcus Bingenheimer (Cinese tradizionale)"
 
 #: xmlcopyeditor.cpp:1219
 msgid "Parse in progress..."
@@ -703,7 +641,7 @@ msgstr "Trova"
 #: xmlcopyeditor.cpp:2010
 #: xmlcopyeditor.cpp:2104
 msgid "This functionality requires Microsoft Windows"
-msgstr "Questa funzionalit‡ richiede Microsoft Windows"
+msgstr "Questa funzionalit√† richiede Microsoft Windows"
 
 #: xmlcopyeditor.cpp:1985
 msgid "Import Microsoft Word Document"
@@ -730,16 +668,16 @@ msgstr "Impossibile eseguire Microsoft Word"
 #: xmlcopyeditor.cpp:2048
 #: xmlcopyeditor.cpp:2165
 msgid "A more recent version of Microsoft Word is required"
-msgstr "Si richiede una versione pi˘ recente di Microsoft Word"
+msgstr "Si richiede una versione pi√π recente di Microsoft Word"
 
 #: xmlcopyeditor.cpp:2055
 #, c-format
 msgid "Microsoft Word cannot save %s as XML"
-msgstr "Microsoft Word non puÚ salvare %s come XML"
+msgstr "Microsoft Word non pu√≤ salvare %s come XML"
 
 #: xmlcopyeditor.cpp:2060
 msgid "Microsoft Word cannot save this document as WordprocessingML "
-msgstr "Microsoft Word non puÚ salvare questo documento come WordprocessingML "
+msgstr "Microsoft Word non pu√≤ salvare questo documento come WordprocessingML "
 
 #: xmlcopyeditor.cpp:2068
 msgid "Opening imported file..."
@@ -760,7 +698,7 @@ msgstr "Esportazione in corso..."
 #: xmlcopyeditor.cpp:2168
 #, c-format
 msgid "Microsoft Word cannot save %s"
-msgstr "Microsoft Word non puÚ salvare %s"
+msgstr "Microsoft Word non pu√≤ salvare %s"
 
 #: xmlcopyeditor.cpp:2197
 msgid "Cannot save temporary file"
@@ -777,7 +715,7 @@ msgstr "Vai a"
 #: xmlcopyeditor.cpp:2385
 #, c-format
 msgid "'%s' is not a valid line number"
-msgstr "'%s' non Ë un valido numero di riga"
+msgstr "'%s' non √® un valido numero di riga"
 
 #: xmlcopyeditor.cpp:2414
 msgid "Replace"
@@ -828,7 +766,7 @@ msgstr "Impossibile aprire %s"
 #: xmlcopyeditor.cpp:3349
 #, c-format
 msgid "%s is already open"
-msgstr "%s Ë gi‡ aperto"
+msgstr "%s √® gi√† aperto"
 
 #: xmlcopyeditor.cpp:2887
 #, c-format
@@ -850,7 +788,7 @@ msgstr "Apri controllo ortografico e di stile in sola lettura: "
 
 #: xmlcopyeditor.cpp:3237
 msgid "Edited document empty"
-msgstr "Il documento editato Ë vuoto"
+msgstr "Il documento editato √® vuoto"
 
 #: xmlcopyeditor.cpp:3334
 msgid "Save As"
@@ -897,7 +835,7 @@ msgstr "Validazione in corso..."
 
 #: xmlcopyeditor.cpp:3753
 msgid "MSXML validation failed (version 4.0 or later required)"
-msgstr "Validazione MSXML fallita (Ë richiesta la version 4.0 o successiva)"
+msgstr "Validazione MSXML fallita (√® richiesta la version 4.0 o successiva)"
 
 #: xmlcopyeditor.cpp:3763
 msgid "Validation error"
@@ -996,7 +934,7 @@ msgid ""
 "File has been modified by another application.\n"
 "Do you want to proceed?"
 msgstr ""
-"Il file Ë stato modificato da un'altra applicazione.\n"
+"Il file √® stato modificato da un'altra applicazione.\n"
 "Vuoi continuare?"
 
 #: xmlcopyeditor.cpp:4540
@@ -1026,7 +964,7 @@ msgstr "Impossibile salvare %s"
 #: xmlcopyeditor.cpp:4735
 #, c-format
 msgid "Memory low: %s saved in large document mode"
-msgstr "Memoria bassa: %s salvato in modalit‡ grandi documenti"
+msgstr "Memoria bassa: %s salvato in modalit√† grandi documenti"
 
 #: xmlcopyeditor.cpp:4790
 msgid "MB"
@@ -1309,11 +1247,11 @@ msgstr "Fratello..."
 
 #: xmlcopyeditor.cpp:5007
 msgid "&Entity...\tCtrl+E"
-msgstr "&Entit‡...\tCtrl+E"
+msgstr "&Entit√†...\tCtrl+E"
 
 #: xmlcopyeditor.cpp:5007
 msgid "Entity..."
-msgstr "Entit‡..."
+msgstr "Entit√†..."
 
 #: xmlcopyeditor.cpp:5009
 msgid "&Twin\tCtrl+Enter"
@@ -1743,11 +1681,11 @@ msgstr "Messaggio"
 #: xmlcopyeditor.cpp:5464
 #, c-format
 msgid "%s is %s"
-msgstr "%s Ë %s"
+msgstr "%s √® %s"
 
 #: xmlcopyeditor.cpp:5489
 msgid "Document has been modified: save or discard changes"
-msgstr "Il documento Ë stato modificato: salva o scarta le modifiche"
+msgstr "Il documento √® stato modificato: salva o scarta le modifiche"
 
 #: xmlcopyeditor.cpp:5550
 msgid "Encoding should be one of "
@@ -1802,5 +1740,5 @@ msgstr "Tag bloccati"
 #: xmlctrl.cpp:238
 #: xmlctrl.cpp:373
 msgid "Delete entity reference?"
-msgstr "Cancellare il riferimento alle entit‡?"
+msgstr "Cancellare il riferimento alle entit√†?"
 
