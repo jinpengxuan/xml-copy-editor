@@ -186,8 +186,8 @@ END_EVENT_TABLE()
 IMPLEMENT_APP ( MyApp)
 
 MyApp::MyApp() : checker ( NULL ), server ( NULL ), connection ( NULL ),
-#ifdef __WXMSW__
-       config ( new wxFileConfig ( _T ( ".xmlcopyeditor" ) ) )//( _T ( "SourceForge Project\\XML Copy Editor" ) ) )
+#if defined(__WXMSW__) && !wxCHECK_VERSION(2,9,2)
+        config ( new wxFileConfig ( _T ( ".xmlcopyeditor" ) ) )//( _T ( "SourceForge Project\\XML Copy Editor" ) ) )
 #else
 		config ( new wxFileConfig ( _T ( "xmlcopyeditor" ) ) )
 #endif
@@ -295,6 +295,8 @@ MyApp::MyApp() : checker ( NULL ), server ( NULL ), connection ( NULL ),
 #ifndef __WXMSW__
 	wxString poDir = GetLinuxAppDir::run() + wxFileName::GetPathSeparator() + _T ( "po" ) + wxFileName::GetPathSeparator();
 	wxLocale::AddCatalogLookupPathPrefix ( poDir );
+#else
+    wxLocale::AddCatalogLookupPathPrefix ( wxT ( "po" ) );
 #endif
 
 	if ( !myLocale.AddCatalog ( _T ( "messages" ) ) )
