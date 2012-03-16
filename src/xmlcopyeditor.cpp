@@ -22,6 +22,7 @@
 #include <string>
 #include <wx/aboutdlg.h>
 #include "xmlcopyeditor.h"
+#include "xmlcopyeditorcopy.h"
 #include "readfile.h"
 #include "xmldoc.h"
 #include "xmlctrl.h"

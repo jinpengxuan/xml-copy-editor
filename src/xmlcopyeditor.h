@@ -53,7 +53,6 @@
 #include "myhtmlpane.h"
 #include "xmlencodinghandler.h"
 #include "myipc.h"
-#include "xmlcopyeditorcopy.h"
 #include <wx/aui/framemanager.h>
 
 enum
