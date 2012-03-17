@@ -64,7 +64,6 @@
 									<listOptionValue builtIn="false" value="wxpngd"/>
 									<listOptionValue builtIn="false" value="wxzlibd"/>
 									<listOptionValue builtIn="false" value="wxregexud"/>
-									<listOptionValue builtIn="false" value="wxexpatd"/>
 									<listOptionValue builtIn="false" value="wxscintillad"/>
 									<listOptionValue builtIn="false" value="wxregexud"/>
 									<listOptionValue builtIn="false" value="kernel32"/>
@@ -163,7 +162,6 @@
 									<listOptionValue builtIn="false" value="wxpng"/>
 									<listOptionValue builtIn="false" value="wxzlib"/>
 									<listOptionValue builtIn="false" value="wxregexu"/>
-									<listOptionValue builtIn="false" value="wxexpat"/>
 									<listOptionValue builtIn="false" value="wxscintilla"/>
 									<listOptionValue builtIn="false" value="wxregexu"/>
 									<listOptionValue builtIn="false" value="kernel32"/>
