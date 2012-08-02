@@ -3054,6 +3054,7 @@ bool MyFrame::openFile ( wxString& fileName, bool largeFile )
 	}
 
 	// convert buffer if not UTF-8
+	int nBOM = 0;
 	if ( isUtf8 )
 	{
 		finalBuffer = docBuffer;
@@ -3069,37 +3070,32 @@ bool MyFrame::openFile ( wxString& fileName, bool largeFile )
 		        ( unsigned char ) docBuffer[2] == 0xFE &&
 		        ( unsigned char ) docBuffer[3] == 0xFF )
 		{
-			docBuffer += 4;
-			docBufferLen -= 4;
+			nBOM = 4;
 		}
-		if ( docBuffer && // UTF-32 LE
+		else if ( docBuffer && // UTF-32 LE
 		        ( unsigned char ) docBuffer[0] == 0xFF &&
 		        ( unsigned char ) docBuffer[1] == 0xFE &&
 		        ( unsigned char ) docBuffer[2] == 0x00 &&
 		        ( unsigned char ) docBuffer[3] == 0x00 )
 		{
-			docBuffer += 4;
-			docBufferLen -= 4;
+			nBOM = 4;
 		}
-
-		if ( docBuffer && //UTF-16 BE
+		else if ( docBuffer && //UTF-16 BE
 		        ( unsigned char ) docBuffer[0] == 0xFE &&
 		        ( unsigned char ) docBuffer[1] == 0xFF )
 		{
-			docBuffer += 2;
-			docBufferLen -= 2;
+			nBOM = 2;
 		}
-		if ( docBuffer && //UTF-16 LE
+		else if ( docBuffer && //UTF-16 LE
 		        ( unsigned char ) docBuffer[0] == 0xFF &&
 		        ( unsigned char ) docBuffer[1] == 0xFE )
 		{
-			docBuffer += 2;
-			docBufferLen -= 2;
+			nBOM = 2;
 		}
 
 		if ( !encoding.size() ) // Expat couldn't parse file (e.g. UTF-32)
 		{
-			encoding = getApproximateEncoding ( docBuffer, docBufferLen );
+			encoding = getApproximateEncoding ( docBuffer + nBOM, docBufferLen - nBOM );
 		}
 
 		wxString wideEncoding = wxString (
@@ -3134,7 +3130,7 @@ bool MyFrame::openFile ( wxString& fileName, bool largeFile )
 		}
 
 		size_t iconvBufferLeft, docBufferLeft;
-		iconvBufferLen = iconvBufferLeft = docBufferLen * iconvLenMultiplier + 1;
+		iconvBufferLen = iconvBufferLeft = (docBufferLen - nBOM) * iconvLenMultiplier + 1;
 		docBufferLeft = docBufferLen;
 		iconvBuffer = new char[iconvBufferLen];
 		finalBuffer = iconvBuffer; // iconvBuffer will be incremented by iconv
