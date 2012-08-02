@@ -520,8 +520,9 @@ void XmlPromptGenerator::handleSchema (
 				{
 					attributeValue = XMLString::transcode ( pAttr->getValue() );
 					attributeValueSet.insert ( attributeValue );
-					attributeMap.insert ( make_pair ( attribute, attributeValueSet ) );
 				}
+
+				attributeMap.insert ( make_pair ( attribute, attributeValueSet ) );
 			}
 			if ( !attributeMap.empty() )
 				d->attributeMap.insert( make_pair ( element, attributeMap ) );
