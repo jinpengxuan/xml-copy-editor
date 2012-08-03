@@ -70,7 +70,7 @@ am_xmlcopyeditor_OBJECTS = xmlcopyeditor.$(OBJEXT) \
 	mynotebook.$(OBJEXT) insertpanel.$(OBJEXT) \
 	xmlwordcount.$(OBJEXT) getword.$(OBJEXT) \
 	locationpanel.$(OBJEXT) catalogresolver.$(OBJEXT) \
-	getlinuxappdir.$(OBJEXT) xmlparseschemans.$(OBJEXT) \
+	xmlparseschemans.$(OBJEXT) \
 	xmlshallowvalidator.$(OBJEXT) wrapxerces.$(OBJEXT) \
 	findreplacepanel.$(OBJEXT) commandpanel.$(OBJEXT) \
 	xercescatalogresolver.$(OBJEXT) binaryfile.$(OBJEXT) \
@@ -263,7 +263,7 @@ xmlcopyeditor_SOURCES = xmlcopyeditor.cpp associatedialog.cpp casehandler.cpp \
 	xmlassociatexsl.cpp xmlctrl.cpp xmldoc.cpp xmlencodinghandler.cpp xmlfilterreader.cpp \
 	xmlpromptgenerator.cpp xmlrulereader.cpp xmlschemalocator.cpp xmlutf8reader.cpp xsllocator.cpp \
 	wrapexpat.cpp mypropertysheet.cpp rule.cpp housestylewriter.cpp myipc.cpp aboutdialog.cpp pathresolver.cpp mynotebook.cpp \
-	insertpanel.cpp xmlwordcount.cpp getword.cpp locationpanel.cpp catalogresolver.cpp getlinuxappdir.cpp \
+	insertpanel.cpp xmlwordcount.cpp getword.cpp locationpanel.cpp catalogresolver.cpp \
 	xmlparseschemans.cpp xmlshallowvalidator.cpp wrapxerces.cpp \
 	findreplacepanel.cpp commandpanel.cpp xercescatalogresolver.cpp \
 	binaryfile.cpp xmlencodingspy.cpp wrapaspell.cpp validationthread.cpp \
@@ -414,7 +414,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/contexthandler.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/exportdialog.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/findreplacepanel.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/getlinuxappdir.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/getword.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/globalreplacedialog.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/housestyle.Po@am__quote@

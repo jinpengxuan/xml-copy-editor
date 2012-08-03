@@ -48,7 +48,6 @@
 #include "insertpanel.h"
 #include "xmlwordcount.h"
 #include "mynotebook.h"
-#include "getlinuxappdir.h"
 #include "commandpanel.h"
 #include "binaryfile.h"
 #include "exportdialog.h"
@@ -58,6 +57,7 @@
 #include <wx/artprov.h>
 #include <wx/stockitem.h>
 #include <iconv.h>
+#include <wx/stdpaths.h>
 
 #define ngettext wxGetTranslation
 
@@ -292,12 +292,9 @@ MyApp::MyApp() : checker ( NULL ), server ( NULL ), connection ( NULL ),
 	wxLocale::AddCatalogLookupPathPrefix ( wxT ( "." ) );
 	wxLocale::AddCatalogLookupPathPrefix ( wxT ( ".." ) );
 
-#ifndef __WXMSW__
-	wxString poDir = GetLinuxAppDir::run() + wxFileName::GetPathSeparator() + _T ( "po" ) + wxFileName::GetPathSeparator();
+	wxString poDir = wxStandardPaths::Get().GetDataDir() +
+	        wxFileName::GetPathSeparator() + _T ( "po" ) + wxFileName::GetPathSeparator();
 	wxLocale::AddCatalogLookupPathPrefix ( poDir );
-#else
-    wxLocale::AddCatalogLookupPathPrefix ( wxT ( "po" ) );
-#endif
 
 	if ( !myLocale.AddCatalog ( _T ( "messages" ) ) )
 		;
@@ -643,16 +640,7 @@ MyFrame::MyFrame (
             config->Read ( _T ( "exportFullDaisy" ), (long)true );
 
 		applicationDir =
-		    config->Read ( _T ( "applicationDir" ), wxEmptyString );
-		if ( applicationDir.empty() )
-		{
-#ifdef __WXMSW__
-			applicationDir =
-			    config->Read ( _T ( "InstallPath" ), wxGetCwd() );
-#else
-			applicationDir = GetLinuxAppDir::run();
-#endif
-		}
+		    config->Read ( _T ( "applicationDir" ), wxStandardPaths::Get().GetDataDir() );
 		browserCommand =
 		    config->Read ( _T ( "browserCommand" ), wxEmptyString );
 
@@ -732,11 +720,7 @@ MyFrame::MyFrame (
 		properties.wrap = properties.whitespaceVisible = false;
 		properties.zoom = 0;
 		properties.colorScheme = COLOR_SCHEME_DEFAULT;
-#ifdef __WXMSW__
-		applicationDir = wxGetCwd();
-#else
-		applicationDir = GetLinuxAppDir::run();//getLinuxApplicationDir();
-#endif
+		applicationDir = wxStandardPaths::Get().GetDataDir();
 		ruleSetPreset = _ ( "Default style" );
 		dictionaryPreset = _ ( "en_US" );
 		filterPreset = _ ( "No filter" );
