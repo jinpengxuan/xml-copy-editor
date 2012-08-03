@@ -250,15 +250,23 @@ void XMLCALL XmlPromptGenerator::attlistdeclhandler (
 	std::set<std::string> attributeValues;
 	if ( *att_type == '(' ) // change to exclude _known_ identifiers?
 	{
-		size_t len;
 		char *s, *word;
 		s = ( char * ) att_type;
 
-		while ( ( word = GetWord::run ( &s, &len ) ) != NULL )
-		{
-			std::string currentValue ( word, len );
+		do {
+			s++;
+			while ( wxIsspace( *s ) )
+				s++;
+			word = s;
+			while ( *s != '|' && *s != ')' && !wxIsspace( *s ) )
+				s++;
+
+			std::string currentValue ( word, s - word );
 			attributeValues.insert ( currentValue );
-		}
+
+			while ( *s != '|' && *s != ')')
+				s++;
+		} while ( *s != ')' && *s );
 	}
 
 	if ( attributeValues.empty() )
