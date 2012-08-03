@@ -186,62 +186,23 @@ MyPropertySheet::MyPropertySheet (
 	    generalPanel,
 	    wxID_ANY );
 
-    languageBox->Insert ( _T ( "Catalan" ), INDEX_CATALAN );
-	languageBox->Insert ( _T ( "Chinese Simplified" ), INDEX_CHINESE_SIMPLIFIED );
-	languageBox->Insert ( _T ( "Chinese Traditional" ), INDEX_CHINESE_TRADITIONAL );
-	languageBox->Insert ( _T ( "Dutch" ), INDEX_DUTCH );
-	languageBox->Insert ( _T ( "English (US)" ), INDEX_ENGLISH_US );
-	languageBox->Insert ( _T ( "French" ), INDEX_FRENCH );
-	languageBox->Insert ( _T ( "German" ), INDEX_GERMAN );
-	languageBox->Insert ( _T ( "Italian" ), INDEX_ITALIAN );
-	languageBox->Insert ( _T ( "Russian" ), INDEX_RUSSIAN );
-	languageBox->Insert ( _T ( "Slovak" ), INDEX_SLOVAK );
-	languageBox->Insert ( _T ( "Spanish" ), INDEX_SPANISH );
-	languageBox->Insert ( _T ( "Swedish" ), INDEX_SWEDISH );
-	languageBox->Insert ( _T ( "Ukrainian" ), INDEX_UKRAINIAN );
-
-	switch ( lang )
+	wxTranslations *t = wxTranslations::Get();
+	if ( t != NULL )
 	{
-        case wxLANGUAGE_CATALAN:
-            languageBox->SetSelection ( INDEX_CATALAN );
-            break;
-		case wxLANGUAGE_GERMAN:
-			languageBox->SetSelection ( INDEX_GERMAN );
-			break;
-		case wxLANGUAGE_DUTCH:
-            languageBox->SetSelection ( INDEX_DUTCH );
-            break;
-		case wxLANGUAGE_FRENCH:
-			languageBox->SetSelection ( INDEX_FRENCH );
-			break;
-		case wxLANGUAGE_ITALIAN:
-			languageBox->SetSelection ( INDEX_ITALIAN );
-			break;
-		case wxLANGUAGE_SLOVAK:
-			languageBox->SetSelection ( INDEX_SLOVAK );
-			break;
-		case wxLANGUAGE_SWEDISH:
-			languageBox->SetSelection ( INDEX_SWEDISH );
-			break;
-		case wxLANGUAGE_RUSSIAN:
-			languageBox->SetSelection ( INDEX_RUSSIAN );
-			break;
-		case wxLANGUAGE_CHINESE_SIMPLIFIED:
-			languageBox->SetSelection ( INDEX_CHINESE_SIMPLIFIED );
-			break;
-		case wxLANGUAGE_CHINESE_TRADITIONAL:
-			languageBox->SetSelection ( INDEX_CHINESE_TRADITIONAL );
-			break;
-		case wxLANGUAGE_UKRAINIAN:
-			languageBox->SetSelection ( INDEX_UKRAINIAN );
-			break;
-		case wxLANGUAGE_SPANISH:
-             languageBox->SetSelection ( INDEX_SPANISH );
-             break;
-		default:
-			languageBox->SetSelection ( INDEX_ENGLISH_US );
-			break;
+		int index;
+		const wxLanguageInfo *info;
+		wxArrayString langs = t->GetAvailableTranslations ( _T ( "messages" ) );
+		for ( size_t i = 0; i < langs.Count(); i++ )
+		{
+			info = wxLocale::FindLanguageInfo ( langs[i] );
+			if ( info == NULL ) continue;
+
+			index = languageBox->Append ( info->Description, (void*)info->Language );
+			if (lang == info->Language)
+				languageBox->SetSelection ( index );
+		}
 	}
+
 
 	libxmlNetAccessBox = new wxCheckBox (
 	    generalPanel, wxID_ANY, _ ( "&Enable network access for DTD validation" ) );
@@ -343,48 +304,11 @@ void MyPropertySheet::OnOk ( wxCommandEvent& e )
 	showFullPathOnFrame = fullPathBox->GetValue();
 
 	int languageChoice = languageBox->GetSelection();
-	switch ( languageChoice )
-	{
-        case INDEX_CATALAN:
-            lang = wxLANGUAGE_CATALAN;
-            break;
-		case INDEX_DUTCH:
-            lang = wxLANGUAGE_DUTCH;
-            break;
-        case INDEX_ITALIAN:
-			lang = wxLANGUAGE_ITALIAN;
-			break;
-		case INDEX_GERMAN:
-			lang = wxLANGUAGE_GERMAN;
-			break;
-		case INDEX_CHINESE_SIMPLIFIED:
-			lang = wxLANGUAGE_CHINESE_SIMPLIFIED;
-			break;
-		case INDEX_CHINESE_TRADITIONAL:
-			lang = wxLANGUAGE_CHINESE_TRADITIONAL;
-			break;
-		case INDEX_RUSSIAN:
-			lang = wxLANGUAGE_RUSSIAN;
-			break;
-		case INDEX_FRENCH:
-			lang = wxLANGUAGE_FRENCH;
-			break;
-		case INDEX_SLOVAK:
-			lang = wxLANGUAGE_SLOVAK;
-			break;
-		case INDEX_SPANISH:
-             lang = wxLANGUAGE_SPANISH;
-             break;
-		case INDEX_SWEDISH:
-			lang = wxLANGUAGE_SWEDISH;
-			break;
-		case INDEX_UKRAINIAN:
-			lang = wxLANGUAGE_UKRAINIAN;
-			break;
-		default:
-			lang = wxLANGUAGE_ENGLISH_US;
-			break;
-	}
+	if ( languageChoice != wxNOT_FOUND )
+		lang = (int)languageBox->GetClientData(languageChoice);
+	else
+		lang = wxLANGUAGE_ENGLISH_US;
+
 	e.Skip();
 }
 
