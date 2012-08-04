@@ -347,41 +347,6 @@ void XmlCtrl::handleDelete ( wxKeyEvent& event )
 
 	validationRequired = true;
 
-	// unindent range
-	int start, end, startLine, endLine;
-	start = GetSelectionStart();
-	end = GetSelectionEnd();
-	startLine = LineFromPosition ( start );
-	endLine = LineFromPosition ( end );
-	
-	// add test so range unindentation only happens when caret is flush with left margin
-	int column = GetColumn ( GetCurrentPos() );
-	
-	if ( startLine != endLine && !column)
-	{
-		if ( startLine > endLine )
-		{
-			int temp;
-			temp = startLine;
-			startLine = endLine;
-			endLine = temp;
-			temp = start;
-			start = end;
-			end = temp;
-		}
-		if ( GetColumn ( start ) < GetLineIndentation ( startLine )  &&
-		        GetColumn ( end ) < GetLineIndentation ( endLine ) )
-		{
-			for ( int i = startLine; i <= endLine; i++ )
-			{
-				int current = GetLineIndentation ( i );
-				if ( current > 0 )
-					SetLineIndentation ( i, current - 1 );
-			}
-			return;
-		}
-	}
-
 	if ( !canMoveRightAt ( GetCurrentPos() ) &&
 	        GetSelectionStart() == GetSelectionEnd() )
 	{
