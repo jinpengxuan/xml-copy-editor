@@ -118,9 +118,10 @@ FindReplacePanel::FindReplacePanel (
 	sizer->Add ( spacer2, 0, wxLEFT | wxRIGHT | wxALIGN_CENTER_VERTICAL, sizerOffset );
 	sizer->Add ( matchCaseBox, 0, wxLEFT | wxRIGHT | wxALIGN_CENTER_VERTICAL, sizerOffset );
 	sizer->Add ( regexBox, 0, wxLEFT | wxRIGHT | wxALIGN_CENTER_VERTICAL, sizerOffset );
-	sizer->Layout();
 
 	this->SetSizer ( sizer );
+	sizer->SetSizeHints ( this );
+	sizer->Layout();
 	this->SetSize ( -1, findNextButton->GetSize().GetHeight() + 10 );
 
 	findEditLength = findEdit->GetValue().Length();
