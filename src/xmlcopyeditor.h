@@ -416,8 +416,9 @@ class MyFrame : public wxFrame
 		  lastParent,
 		  lastGrandparent,
 		  commandString,
-          exportStylesheet,
-          exportFolder;
+		  exportStylesheet,
+		  exportFolder,
+		  lastSymbol;
 		bool globalReplaceAllDocuments,
 		toolbarVisible,
 		protectTags,

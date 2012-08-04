@@ -705,6 +705,7 @@ MyFrame::MyFrame (
 		showInsertEntityPane = config->Read ( _T ( "showInsertEntityPane" ), true );
 		expandInternalEntities = config->Read ( _T ( "expandInternalEntities" ), true );
 
+		lastSymbol = config->Read( _T( "lastSymbol" ), _T ( "*" ) );
 	}
 	else // config not found
 	{
@@ -755,6 +756,8 @@ MyFrame::MyFrame (
 		exportQuiet = exportMp3Album = false;
 		exportQuiet = exportMp3Album = exportSuppressOptional = exportHtml =
             exportEpub = exportRtf = exportDoc = exportFullDaisy = true;
+
+		lastSymbol = _T( "*" );
 	}
 
 	largeFileProperties.completion = false;
@@ -1046,6 +1049,9 @@ MyFrame::~MyFrame()
 	config->Write ( _T ( "notebookStyle" ), notebookStyle );
 	config->Write ( _T ( "saveBom" ), saveBom );
 	config->Write ( _T ( "unlimitedUndo" ), unlimitedUndo );
+
+	config->Write ( _T ( "lastSymbol" ), lastSymbol );
+
 	manager.UnInit();
 	wxTheClipboard->Flush();
 }
@@ -1787,13 +1793,14 @@ void MyFrame::OnInsertSymbol ( wxCommandEvent& event )
 	XmlDoc *doc;
 	if ( ( doc = getActiveDocument() ) == NULL )
 		return;
-	wxSymbolPickerDialog dlg ( _T ( "*" ), wxEmptyString, properties.font, this );
 
+	wxSymbolPickerDialog dlg ( lastSymbol, wxEmptyString, properties.font, this );
 	if ( dlg.ShowModal() == wxID_OK )
 	{
 		if ( dlg.HasSelection() )
 		{
-			doc->AddText ( dlg.GetSymbol() );
+			lastSymbol = dlg.GetSymbol();
+			doc->AddText ( lastSymbol );
 		}
 	}
 }
