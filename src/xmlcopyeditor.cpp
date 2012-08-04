@@ -1232,7 +1232,7 @@ void MyFrame::OnAbout ( wxCommandEvent& WXUNUSED ( event ) )
 {
 	wxString description;
 	description = ABOUT_DESCRIPTION;
-	description.Append ( ABOUT_DESCRIPTION_THANKS );
+	description.Append ( ABOUT_CONTRIBUTORS );
 	description.Append ( _T("\n\nFramework version: ") );
 	description.Append ( wxVERSION_STRING );
 	description.Append ( _T("\n") );
