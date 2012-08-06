@@ -26,6 +26,7 @@
 #include <memory>
 #include "wrapexpat.h"
 #include "parserdata.h"
+#include <xercesc/validators/common/ContentSpecNode.hpp>
 
 struct PromptGeneratorData : public ParserData
 {
@@ -109,6 +110,9 @@ class XmlPromptGenerator : public WrapExpat
 		    PromptGeneratorData *d,
 		    const XML_Char *el,
 		    const XML_Char **attr );
+		static void getContent (
+		    const xercesc::ContentSpecNode *spec,
+		    std::set<std::string> &list );
 };
 
 #endif

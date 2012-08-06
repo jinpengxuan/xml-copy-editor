@@ -24,7 +24,6 @@
 #include "xmlencodinghandler.h"
 #include "readfile.h"
 #include "replace.h"
-#include "getword.h"
 #include "pathresolver.h"
 
 #undef XMLCALL
@@ -462,17 +461,20 @@ void XmlPromptGenerator::handleSchema (
 		return;
 	}
 
+	char *s;
 	while ( elemEnum.hasMoreElements() )
 	{
 		const SchemaElementDecl& curElem = elemEnum.nextElement();
 
 		std::string element;
 		std::set<std::string> children;
-		
+
 		const QName *qnm = curElem.getElementName();
 		if ( qnm )
 		{
-			element = XMLString::transcode ( qnm->getRawName() ); // this includes any prefix:localname combinations
+			s = XMLString::transcode ( qnm->getRawName() ); // this includes any prefix:localname combinations
+			element = s;
+			XMLString::release( &s );
 		}
 		if ( element.empty() )
 			continue;
@@ -480,24 +482,20 @@ void XmlPromptGenerator::handleSchema (
 		const XMLCh* fmtCntModel = curElem.getFormattedContentModel();
 		if ( fmtCntModel != NULL ) // tbd: this does not yet pick up prefix:localname combinations
 		{
-			size_t len;
-			char *s, *word;
 			std::string structure;
-			s = ( char * ) XMLString::transcode ( fmtCntModel );
-
+			s = XMLString::transcode ( fmtCntModel );
 			structure = s;
+			XMLString::release( &s );
 			d->elementStructureMap.insert ( make_pair ( element, structure ) );
-	
-			while ( ( word = GetWord::run ( &s, &len ) ) != NULL )
-			{
-				std::string currentValue ( word, len );
-				if ( currentValue.size() )
-					children.insert ( currentValue );
-			}
 		}
-		if ( !children.empty() )
-			d->elementMap.insert ( make_pair ( element, children ) );
-		
+		const ContentSpecNode *spec = curElem.getContentSpec();
+		if ( spec != NULL )
+		{
+			getContent ( spec, children );
+			if ( !children.empty() )
+				d->elementMap.insert ( make_pair ( element, children ) );
+		}
+
 		// fetch attributes
 		if ( curElem.hasAttDefs() && ! ( curElem.getAttDefList().isEmpty() ) )
 		{
@@ -518,7 +516,9 @@ void XmlPromptGenerator::handleSchema (
 				const QName *qnm = pAttr->getAttName();
 				if ( qnm )
 				{
-					attribute = XMLString::transcode ( qnm->getRawName() );
+					s = XMLString::transcode ( qnm->getRawName() );
+					attribute = s;
+					XMLString::release( &s );
 				}
 				if ( attribute.empty() )
 					continue;
@@ -526,7 +526,9 @@ void XmlPromptGenerator::handleSchema (
 				// Value
 				if ( pAttr->getValue() )
 				{
-					attributeValue = XMLString::transcode ( pAttr->getValue() );
+					s = XMLString::transcode ( pAttr->getValue() );
+					attributeValue = s;
+					XMLString::release( &s );
 					attributeValueSet.insert ( attributeValue );
 				}
 
@@ -538,4 +540,25 @@ void XmlPromptGenerator::handleSchema (
 	}
     delete parser;
 	XMLPlatformUtils::Terminate();
+}
+
+void XmlPromptGenerator::getContent (
+    const ContentSpecNode *spec,
+    std::set<std::string> &list )
+{
+	//if ( spec == NULL) return;
+
+	const QName *qnm = spec->getElement();
+	if ( qnm )
+	{
+		char *element = XMLString::transcode ( qnm->getRawName() );
+		if ( element != NULL )
+			list.insert( element );
+		XMLString::release( &element );
+	}
+
+	if ( spec->getFirst() != NULL)
+		getContent( spec->getFirst(), list );
+	if ( spec->getSecond() != NULL)
+		getContent( spec->getSecond(), list );
 }
