@@ -12,7 +12,7 @@
 				</extensions>
 			</storageModule>
 			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
-				<configuration artifactName="${ProjName}" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug,org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe" cleanCommand="rm -rf" description="" id="cdt.managedbuild.config.gnu.mingw.exe.debug.747771716" name="Debug" parent="cdt.managedbuild.config.gnu.mingw.exe.debug" prebuildStep="windres.exe ${RCDEFS} ${RCINCS} -I${WXWIDGETS}/include -i../xmlcopyeditor.rc -Ocoff -oxmlcopyeditor.res">
+				<configuration artifactName="${ProjName}" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug,org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe" cleanCommand="rm -rf" description="" id="cdt.managedbuild.config.gnu.mingw.exe.debug.747771716" name="Debug" parent="cdt.managedbuild.config.gnu.mingw.exe.debug" prebuildStep="windres.exe ${RCDEFS} ${RCINCS} -I${WXWIDGETS}/include -i../xmlcopyeditor.rc -Ocoff -oxmlcopyeditor_rc.o">
 					<folderInfo id="cdt.managedbuild.config.gnu.mingw.exe.debug.747771716." name="/" resourcePath="">
 						<toolChain id="cdt.managedbuild.toolchain.gnu.mingw.exe.debug.1964333246" name="MinGW GCC" superClass="cdt.managedbuild.toolchain.gnu.mingw.exe.debug">
 							<targetPlatform id="cdt.managedbuild.target.gnu.platform.mingw.exe.debug.1899344235" name="Debug Platform" superClass="cdt.managedbuild.target.gnu.platform.mingw.exe.debug"/>
@@ -30,6 +30,11 @@
 									<listOptionValue builtIn="false" value="${WXWIDGETS}\lib\gcc_lib\mswud"/>
 								</option>
 								<option id="gnu.cpp.compiler.option.other.other.1952331323" name="Other flags" superClass="gnu.cpp.compiler.option.other.other" value="-c -fmessage-length=0" valueType="string"/>
+								<option id="gnu.cpp.compiler.option.preprocessor.def.1236209686" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" valueType="definedSymbols">
+									<listOptionValue builtIn="false" value="__WXMSW__"/>
+									<listOptionValue builtIn="false" value="__WXDEBUG__"/>
+									<listOptionValue builtIn="false" value="_UNICODE"/>
+								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.661812090" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.c.compiler.mingw.exe.debug.41071266" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.mingw.exe.debug">
@@ -85,7 +90,7 @@
 									<listOptionValue builtIn="false" value="${WXWIDGETS}\lib\gcc_lib"/>
 								</option>
 								<option id="gnu.cpp.link.option.userobjs.598298270" name="Other objects" superClass="gnu.cpp.link.option.userobjs" valueType="userObjs">
-									<listOptionValue builtIn="false" value="${ConfigName}/xmlcopyeditor.res"/>
+									<listOptionValue builtIn="false" value="${ConfigName}/xmlcopyeditor_rc.o"/>
 								</option>
 								<option id="gnu.cpp.link.option.flags.1824716786" name="Linker flags" superClass="gnu.cpp.link.option.flags" value="-mwindows" valueType="string"/>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.405462048" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
@@ -110,7 +115,7 @@
 				</extensions>
 			</storageModule>
 			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
-				<configuration artifactName="${ProjName}" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release,org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe" cleanCommand="rm -rf" description="" id="cdt.managedbuild.config.gnu.mingw.exe.release.710071756" name="Release" parent="cdt.managedbuild.config.gnu.mingw.exe.release" prebuildStep="windres.exe ${RCDEFS} ${RCINCS} -I${WXWIDGETS}/include -i../xmlcopyeditor.rc -Ocoff -oxmlcopyeditor.res">
+				<configuration artifactName="${ProjName}" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release,org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe" cleanCommand="rm -rf" description="" id="cdt.managedbuild.config.gnu.mingw.exe.release.710071756" name="Release" parent="cdt.managedbuild.config.gnu.mingw.exe.release" prebuildStep="windres.exe ${RCDEFS} ${RCINCS} -I${WXWIDGETS}/include -i../xmlcopyeditor.rc -Ocoff -oxmlcopyeditor_rc.o">
 					<folderInfo id="cdt.managedbuild.config.gnu.mingw.exe.release.710071756." name="/" resourcePath="">
 						<toolChain id="cdt.managedbuild.toolchain.gnu.mingw.exe.release.1386364382" name="MinGW GCC" superClass="cdt.managedbuild.toolchain.gnu.mingw.exe.release">
 							<targetPlatform id="cdt.managedbuild.target.gnu.platform.mingw.exe.release.1941985969" name="Debug Platform" superClass="cdt.managedbuild.target.gnu.platform.mingw.exe.release"/>
@@ -128,6 +133,10 @@
 									<listOptionValue builtIn="false" value="${WXWIDGETS}\lib\gcc_lib\mswu"/>
 								</option>
 								<option id="gnu.cpp.compiler.option.other.other.1853611325" name="Other flags" superClass="gnu.cpp.compiler.option.other.other" value="-c -fmessage-length=0" valueType="string"/>
+								<option id="gnu.cpp.compiler.option.preprocessor.def.1550164037" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" valueType="definedSymbols">
+									<listOptionValue builtIn="false" value="__WXMSW__"/>
+									<listOptionValue builtIn="false" value="_UNICODE"/>
+								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.2060215918" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.c.compiler.mingw.exe.release.13558936" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.mingw.exe.release">
@@ -183,7 +192,7 @@
 									<listOptionValue builtIn="false" value="${WXWIDGETS}\lib\gcc_lib"/>
 								</option>
 								<option id="gnu.cpp.link.option.userobjs.30870315" name="Other objects" superClass="gnu.cpp.link.option.userobjs" valueType="userObjs">
-									<listOptionValue builtIn="false" value="${ConfigName}/xmlcopyeditor.res"/>
+									<listOptionValue builtIn="false" value="${ConfigName}/xmlcopyeditor_rc.o"/>
 								</option>
 								<option id="gnu.cpp.link.option.flags.1247614174" name="Linker flags" superClass="gnu.cpp.link.option.flags" value="-mwindows" valueType="string"/>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.1542313773" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
