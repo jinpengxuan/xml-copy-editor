@@ -56,7 +56,6 @@ XmlPromptGenerator::XmlPromptGenerator (
 	d->catalogPath = catalogPath;
 	d->basePath = basePath;
 	d->auxPath = auxPath;
-	d->elementDeclRecurseLevel = 0;
 	d->isRootElement = true;
 	d->grammarFound = false;
 	d->attributeValueCutoff = 12; // this prevents enums being stored in their thousands
@@ -209,29 +208,64 @@ void XMLCALL XmlPromptGenerator::elementdeclhandler (
 	PromptGeneratorData *d;
 	d = ( PromptGeneratorData * ) data;
 
-	d->elementDeclRecurseLevel += 1;
-
 	std::string myElement = name;
-	unsigned num = model->numchildren;
 
-	for ( unsigned i = 0; i < num; i++ )
+	std::set<std::string> children;
+	getContent ( *model, d->elementStructureMap[myElement], children );
+	if ( !children.empty() )
+		d->elementMap[myElement] = children;
+
+	XML_FreeContentModel ( d->p, model );
+}
+
+void XmlPromptGenerator::getContent (
+    const XML_Content &content,
+    std::string &contentModel,
+    std::set<std::string> &list )
+{
+	switch ( content.type )
 	{
-		XML_Content myContent = model->children[i];
-		XML_Char *myName = myContent.name;
-		if ( myName )
-			d->elementMap[myElement].insert ( ( const char * ) myName );
-		else
+	case XML_CTYPE_EMPTY:
+		contentModel += "EMPTY";
+		return;
+	case XML_CTYPE_ANY:
+		contentModel += "ANY";
+		return;
+	case XML_CTYPE_NAME:
+		list.insert ( content.name );
+		contentModel += content.name;
+		break;
+	case XML_CTYPE_CHOICE:
+	case XML_CTYPE_SEQ:
+	case XML_CTYPE_MIXED:
+	default:
+		std::string sep;
+		sep = ( content.type == XML_CTYPE_CHOICE ) ? "|" : ",";//_T("|") : _T(",");
+		contentModel += ( content.type == XML_CTYPE_MIXED ) ? "(#PCDATA|" : "(";
+		for ( unsigned i = 0; i < content.numchildren; i++ )
 		{
-			// recurse
-			XmlPromptGenerator::elementdeclhandler ( ( void * ) d, name, &myContent );
+			if ( i > 0 )
+				contentModel += sep;
+			getContent ( content.children[i], contentModel, list);
 		}
+		contentModel += ")";//_T(")");
+		break;
 	}
-	d->elementDeclRecurseLevel -= 1;
 
-	// only one call to XML_FreeContentModel per content tree
-	if ( d->elementDeclRecurseLevel == 0 )
+	switch ( content.quant )
 	{
-		XML_FreeContentModel ( d->p, model );
+	case XML_CQUANT_OPT:
+		contentModel += "?";//_T("?");
+		break;
+	case XML_CQUANT_REP:
+		contentModel += "*";//_T("*");
+		break;
+	case XML_CQUANT_PLUS:
+		contentModel += "+";//_T("+");
+		break;
+	case XML_CQUANT_NONE:
+	default:
+		break;
 	}
 }
 
