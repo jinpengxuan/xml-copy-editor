@@ -280,18 +280,16 @@ void XMLCALL XmlPromptGenerator::attlistdeclhandler (
 	PromptGeneratorData *d;
 	d = ( PromptGeneratorData * ) data;
 
-	std::set<std::string> attributeValues;
+	std::set<std::string> &attributeValues = d->attributeMap[elname][attname];
 	if ( *att_type == '(' ) // change to exclude _known_ identifiers?
 	{
-		char *s, *word;
-		s = ( char * ) att_type;
+		const char *s, *word;
+		s = att_type;
 
 		do {
 			s++;
-			while ( wxIsspace( *s ) )
-				s++;
 			word = s;
-			while ( *s != '|' && *s != ')' && !wxIsspace( *s ) )
+			while ( *s != '|' && *s != ')' )
 				s++;
 
 			std::string currentValue ( word, s - word );
@@ -299,17 +297,8 @@ void XMLCALL XmlPromptGenerator::attlistdeclhandler (
 
 			while ( *s != '|' && *s != ')')
 				s++;
-		} while ( *s != ')' && *s );
+		} while ( *s != ')' );
 	}
-
-	if ( attributeValues.empty() )
-	{
-		d->attributeMap[elname][attname].insert ( "" );
-		return;
-	}
-	std::set<std::string>::iterator it;
-	for ( it = attributeValues.begin(); it != attributeValues.end(); it++ )
-		d->attributeMap[elname][attname].insert ( *it );
 
 	if ( isrequired )
 	{
@@ -531,45 +520,41 @@ void XmlPromptGenerator::handleSchema (
 		}
 
 		// fetch attributes
-		if ( curElem.hasAttDefs() && ! ( curElem.getAttDefList().isEmpty() ) )
+		if ( !curElem.hasAttDefs() )
+			continue;
+
+		XMLAttDefList& attIter = curElem.getAttDefList();
+		for ( unsigned int i = 0; i < attIter.getAttDefCount(); i++ )
 		{
-			std::map<std::string, std::set<std::string> > attributeMap;
+			std::string attribute, attributeValue;
 
-			XMLAttDefList& attIter = curElem.getAttDefList();
-			for ( unsigned int i = 0; i < attIter.getAttDefCount(); i++ )
+			XMLAttDef& attr = attIter.getAttDef ( i );
+			XMLAttDef::DefAttTypes ty = attr.getDefaultType();
+			if ( ty == XMLAttDef::Prohibited )
+				continue;
+			SchemaAttDef *pAttr = ( SchemaAttDef * ) &attr;
+
+			const QName *qnm = pAttr->getAttName();
+			if ( qnm )
 			{
-				std::string attribute, attributeValue;
-				std::set<std::string> attributeValueSet;
-
-				XMLAttDef& attr = attIter.getAttDef ( i );
-				XMLAttDef::DefAttTypes ty = attr.getDefaultType();
-				if ( ty == XMLAttDef::Prohibited )
-					continue;
-				SchemaAttDef *pAttr = ( SchemaAttDef * ) &attr;
-
-				const QName *qnm = pAttr->getAttName();
-				if ( qnm )
-				{
-					s = XMLString::transcode ( qnm->getRawName() );
-					attribute = s;
-					XMLString::release( &s );
-				}
-				if ( attribute.empty() )
-					continue;
-
-				// Value
-				if ( pAttr->getValue() )
-				{
-					s = XMLString::transcode ( pAttr->getValue() );
-					attributeValue = s;
-					XMLString::release( &s );
-					attributeValueSet.insert ( attributeValue );
-				}
-
-				attributeMap.insert ( make_pair ( attribute, attributeValueSet ) );
+				s = XMLString::transcode ( qnm->getRawName() );
+				attribute = s;
+				XMLString::release( &s );
 			}
-			if ( !attributeMap.empty() )
-				d->attributeMap.insert( make_pair ( element, attributeMap ) );
+			if ( attribute.empty() )
+				continue;
+
+			// Value
+			if ( pAttr->getValue() )
+			{
+				s = XMLString::transcode ( pAttr->getValue() );
+				attributeValue = s;
+				XMLString::release( &s );
+			}
+
+			d->attributeMap[element][attribute].insert( attributeValue );
+			if ( ty == XMLAttDef::Required || ty == XMLAttDef::Required_And_Fixed)
+				d->requiredAttributeMap[element].insert ( attribute );
 		}
 	}
     delete parser;
