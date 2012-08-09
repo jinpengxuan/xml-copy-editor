@@ -1861,14 +1861,17 @@ void MyFrame::OnDialogReplace ( wxFindDialogEvent& event )
 	if ( ( doc = getActiveDocument() ) == NULL )
 		return;
 
-	int regexWidth = 0;
-	if ( findReplacePanel->getRegex() )
+	if ( !doc->GetSelectedText().IsEmpty() )
 	{
-		regexWidth = doc->ReplaceTargetRE ( event.GetReplaceString() );
-	}
-	else
-	{
-		doc->ReplaceTarget ( event.GetReplaceString() );
+		int regexWidth = 0;
+		if ( findReplacePanel->getRegex() )
+		{
+			regexWidth = doc->ReplaceTargetRE ( event.GetReplaceString() );
+		}
+		else
+		{
+			doc->ReplaceTarget ( event.GetReplaceString() );
+		}
 	}
 	OnDialogFind ( event );
 }
