@@ -5835,7 +5835,7 @@ void MyFrame::OnAssociate ( wxCommandEvent& event )
 	std::string utf8Buffer;
 	getRawText ( doc, utf8Buffer );
 	std::auto_ptr<WrapExpat> wellformedparser ( new WrapExpat() );
-	if ( !wellformedparser->parse ( utf8Buffer ) )
+	if ( !wellformedparser->parse ( utf8Buffer ) ) // FIXME: Set encoding to UTF-8 before parsing.
 	{
 		std::string error = wellformedparser->getLastError();
 		wxString wideError = wxString ( error.c_str(), wxConvUTF8, error.size() );
@@ -5944,36 +5944,15 @@ void MyFrame::openRememberedTabs()
 {
 	if ( openTabsOnClose.empty() )
 		return;
-	wchar_t *s, *it;
-	s = it = ( wchar_t * ) openTabsOnClose.wc_str();
-	std::vector<wxString> v;
-	wxString buffer = wxEmptyString;
-	for ( ; *it; it++ )
-	{
-		if ( *it == L'|' )
-		{
-			if ( !buffer.empty() )
-			{
-				v.push_back ( buffer );
-			}
-			buffer = wxEmptyString;
-		}
-		else
-			buffer += *it;
-	}
-	if ( !buffer.empty() )
-	{
-		v.push_back ( buffer );
-	}
-
+	wxArrayString v = wxSplit ( openTabsOnClose, _T ( '|' ) );
 	if ( v.empty() )
 		return;
 
-	std::vector<wxString>::iterator vit;
+	wxArrayString::iterator vit;
 	for ( vit = v.begin(); vit != v.end(); vit++ )
 	{
-		if ( !openFile ( *vit ) )
-			break;
+		if ( vit->Empty() || !openFile ( *vit ) )
+			continue; //break; // Ignore errors
 	}
 	XmlDoc *doc;
 	if ( ( doc = getActiveDocument() ) != NULL )
