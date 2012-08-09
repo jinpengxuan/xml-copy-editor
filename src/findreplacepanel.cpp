@@ -159,7 +159,7 @@ void FindReplacePanel::OnReplace ( wxCommandEvent& event )
 	replaceEvent.SetFlags ( wxFR_DOWN );
 	replaceEvent.SetFindString ( findEdit->GetValue() );
 	replaceEvent.SetReplaceString ( replaceEdit->GetValue() );
-#if wxCHECK_VERSION(2,9,2)
+#if wxCHECK_VERSION(2,9,0)
 	parent->ProcessWindowEvent( replaceEvent );
 #else
 	parent->ProcessEvent ( replaceEvent );
@@ -172,7 +172,7 @@ void FindReplacePanel::OnReplaceAll ( wxCommandEvent& event )
 	replaceAllEvent.SetFlags ( wxFR_DOWN );
 	replaceAllEvent.SetFindString ( findEdit->GetValue() );
 	replaceAllEvent.SetReplaceString ( replaceEdit->GetValue() );
-#if wxCHECK_VERSION(2,9,2)
+#if wxCHECK_VERSION(2,9,0)
 	parent->ProcessWindowEvent( replaceAllEvent );
 #else
 	parent->ProcessEvent ( replaceAllEvent );
@@ -223,7 +223,7 @@ void FindReplacePanel::sendFindEvent ( size_t flags )
 
 	MyFrame *frame = ( MyFrame * ) parent;
 	frame->setStrictScrolling ( true );
-#if wxCHECK_VERSION(2,9,2)
+#if wxCHECK_VERSION(2,9,0)
 	frame->ProcessWindowEvent(findEvent);
 #else
 	frame->ProcessEvent ( findEvent ); // was parent->

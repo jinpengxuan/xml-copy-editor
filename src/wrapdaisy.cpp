@@ -110,7 +110,7 @@ bool WrapDaisy::run (
     if ( !stdStylesheet.empty() ) // stylesheet found
     {
         // #1: convert to canonical XHTML
-#if wxCHECK_VERSION(2,9,2)
+#if wxCHECK_VERSION(2,9,0)
     	pd->GetEventHandler()->ProcessPendingEvents();
 #else
     	pd->ProcessPendingEvents();
@@ -156,7 +156,7 @@ bool WrapDaisy::run (
     
     if ( suppressOptional )
     {
-#if wxCHECK_VERSION(2,9,2)
+#if wxCHECK_VERSION(2,9,0)
     	pd->GetEventHandler()->ProcessPendingEvents();
 #else
     	pd->ProcessPendingEvents();
@@ -183,7 +183,7 @@ bool WrapDaisy::run (
     if ( quiet )
     {
         // #1.5: apply quiet setting if req'd
-#if wxCHECK_VERSION(2,9,2)
+#if wxCHECK_VERSION(2,9,0)
     	pd->GetEventHandler()->ProcessPendingEvents();
 #else
     	pd->ProcessPendingEvents();
@@ -269,7 +269,7 @@ bool WrapDaisy::run (
     }
         
     // copy images
-#if wxCHECK_VERSION(2,9,2)
+#if wxCHECK_VERSION(2,9,0)
    	pd->GetEventHandler()->ProcessPendingEvents();
 #else
    	pd->ProcessPendingEvents();
@@ -308,7 +308,7 @@ bool WrapDaisy::run (
     canonicalStream.close();
     
     // #2: convert to DTBook
-#if wxCHECK_VERSION(2,9,2)
+#if wxCHECK_VERSION(2,9,0)
    	pd->GetEventHandler()->ProcessPendingEvents();
 #else
    	pd->ProcessPendingEvents();
@@ -365,7 +365,7 @@ bool WrapDaisy::run (
         return false;
         
     // #2.5: create ePub version
-#if wxCHECK_VERSION(2,9,2)
+#if wxCHECK_VERSION(2,9,0)
    	pd->GetEventHandler()->ProcessPendingEvents();
 #else
    	pd->ProcessPendingEvents();
@@ -428,7 +428,7 @@ bool WrapDaisy::run (
     // #2.9: convert to RTF
     if ( rtf || doc )
     {
-#if wxCHECK_VERSION(2,9,2)
+#if wxCHECK_VERSION(2,9,0)
     	pd->GetEventHandler()->ProcessPendingEvents();
 #else
    		pd->ProcessPendingEvents();
@@ -498,7 +498,7 @@ bool WrapDaisy::run (
         // #2.9.5: convert to binary Word
         // (Win only; otherwise create copy with *.doc extension)
     
-#if wxCHECK_VERSION(2,9,2)
+#if wxCHECK_VERSION(2,9,0)
         pd->GetEventHandler()->ProcessPendingEvents();
 #else
    		pd->ProcessPendingEvents();
@@ -553,7 +553,7 @@ bool WrapDaisy::run (
     }
     
     // #3: convert to full DAISY book
-#if wxCHECK_VERSION(2,9,2)
+#if wxCHECK_VERSION(2,9,0)
    	pd->GetEventHandler()->ProcessPendingEvents();
 #else
    	pd->ProcessPendingEvents();
@@ -619,7 +619,7 @@ bool WrapDaisy::run (
         return true;
 
     // #4: create MP3 album
-#if wxCHECK_VERSION(2,9,2)
+#if wxCHECK_VERSION(2,9,0)
    	pd->GetEventHandler()->ProcessPendingEvents();
 #else
    	pd->ProcessPendingEvents();
@@ -700,7 +700,7 @@ bool WrapDaisy::run (
         return false;
         
 
-#if wxCHECK_VERSION(2,9,2)
+#if wxCHECK_VERSION(2,9,0)
    	pd->GetEventHandler()->ProcessPendingEvents();
 #else
    	pd->ProcessPendingEvents();
