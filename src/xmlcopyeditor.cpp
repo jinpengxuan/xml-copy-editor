@@ -1108,31 +1108,33 @@ void MyFrame::handleCommandLine()
 	wordFlag = styleFlag = false;
 	wxChar c;
 
-	int m_argc = wxTheApp->argc;
-	wxChar **m_argv = wxTheApp->argv;
+	int argc = wxTheApp->argc;
+	wxChar **argv = wxTheApp->argv;
 
-	while ( ( --m_argc > 0 && ( *++m_argv ) [0] == L'-' ) != 0 )
+	while ( ( --argc > 0 && ( *++argv ) [0] == L'-' ) != 0 )
 	{
 		wxString wideVersion ( ABOUT_VERSION );
 		std::string version = ( const char * ) wideVersion.mb_str ( wxConvUTF8 );
-		while ( ( c = *++m_argv[0] ) != 0 )
+		const wxChar *s = argv[0];
+		while ( ( c = *++s ) != 0 )
 		{
 			switch ( c )
 			{
-				case L'w':
+				case 'w':
 					wordFlag = true;
 					break;
-				case L's':
+				case 's':
 					styleFlag = true;
 					break;
-				case L'-':
-					if ( *++m_argv[0] == L'v' )
+				case '-':
+					if ( *++s == 'v' )
 					{
 						std::cout << version.c_str() << std::endl;
 					}
 					else
 					{
-						std::cout << "Usage: xmlcopyeditor [--version --help -ws] [<file>] [<file2>]" << std::endl << "Options -w (import Microsoft Word document) and -s (open Spelling and style check) are provided for integration with Microsoft Office and only available on Windows" << std::endl;
+						std::cout << "Usage: xmlcopyeditor [--version --help -ws] [<file>] [<file2>]" << std::endl
+						    << "Options -w (import Microsoft Word document) and -s (open Spelling and style check) are provided for integration with Microsoft Office and only available on Windows" << std::endl;
 					}
 					exit ( 0 );
 				default:
@@ -1143,7 +1145,7 @@ void MyFrame::handleCommandLine()
 		}
 	}
 
-	if ( ! ( *m_argv ) )
+	if ( argc <= 0 )
 	{
 		messagePane ( _ ( "Command line processing incomplete: no file specified" ),
 		              CONST_STOP );
@@ -1157,9 +1159,9 @@ void MyFrame::handleCommandLine()
 	if ( !styleFlag && !wordFlag )
 #endif
 	{
-		for ( ; *m_argv; ++m_argv )
+		for ( ; argc > 0; --argc, ++argv )
 		{
-			fileName = wxString ( *m_argv, wxConvLocal, wcslen ( *m_argv ) );
+			fileName = wxString ( *argv, wxConvLocal );
 			fileName = PathResolver::run ( fileName );
 			if ( isOpen ( fileName ) )
 				continue;
@@ -1170,25 +1172,25 @@ void MyFrame::handleCommandLine()
 	}
 
 	// options only available on Windows
-	fileName = wxString ( *m_argv, wxConvLocal, wcslen ( *m_argv ) );
+	fileName = wxString ( *argv, wxConvLocal );
 
 	// fetch as many parameters as possible
 	for ( ;; )
 	{
-		++m_argv;
-		if ( ! ( *m_argv ) )
+		if ( --argc <= 0 )
 			break;
-		ruleSetPreset = wxString ( *m_argv, wxConvLocal, wcslen ( *m_argv ) );
+		++argv;
+		ruleSetPreset = wxString ( *argv, wxConvLocal );
 
-		++m_argv;
-		if ( ! ( *m_argv ) )
+		if ( --argc <= 0 )
 			break;
-		filterPreset = wxString ( *m_argv, wxConvLocal, wcslen ( *m_argv ) );
+		++argv;
+		filterPreset = wxString ( *argv, wxConvLocal );
 
-		++m_argv;
-		if ( ! ( *m_argv ) )
+		if ( --argc <= 0 )
 			break;
-		applicationDir = wxString ( *m_argv, wxConvLocal, wcslen ( *m_argv ) );
+		++argv;
+		applicationDir = wxString ( *argv, wxConvLocal );
 		updatePaths();
 
 		break;

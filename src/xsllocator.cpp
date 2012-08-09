@@ -59,12 +59,11 @@ void XMLCALL XslLocator::processingInstructionHandler (
 	{
 		if ( *iterator == '"' || *iterator == '\'' )
 		{
-			*iterator = '\0';
 			break;
 		}
 	}
 
-	d->xslLocation = value;
+	d->xslLocation = std::string ( value, iterator - value );
 	XML_StopParser ( d->parser, false );
 }
 
