@@ -5834,6 +5834,8 @@ void MyFrame::OnAssociate ( wxCommandEvent& event )
 
 	std::string utf8Buffer;
 	getRawText ( doc, utf8Buffer );
+	std::string origEncoding = XmlEncodingHandler::get ( utf8Buffer );
+	XmlEncodingHandler::setUtf8 ( utf8Buffer, true );
 	std::auto_ptr<WrapExpat> wellformedparser ( new WrapExpat() );
 	if ( !wellformedparser->parse ( utf8Buffer ) ) // FIXME: Set encoding to UTF-8 before parsing.
 	{
@@ -5936,6 +5938,7 @@ void MyFrame::OnAssociate ( wxCommandEvent& event )
 	}
 	else
 		return;
+	XmlEncodingHandler::set ( modifiedBuffer, origEncoding );
 	doc->SetTextRaw ( modifiedBuffer.c_str() );
 	doc->SetFocus();
 }
@@ -5951,7 +5954,7 @@ void MyFrame::openRememberedTabs()
 	wxArrayString::iterator vit;
 	for ( vit = v.begin(); vit != v.end(); vit++ )
 	{
-		if ( vit->Empty() || !openFile ( *vit ) )
+		if ( vit->IsEmpty() || !openFile ( *vit ) )
 			continue; //break; // Ignore errors
 	}
 	XmlDoc *doc;
