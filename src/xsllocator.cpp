@@ -45,12 +45,8 @@ void XMLCALL XslLocator::processingInstructionHandler (
 	if ( strcmp ( target, "xml-stylesheet" ) )
 		return;
 
-	char *value, *iterator;
-#ifdef __WXMSW__
+	const char *value, *iterator;
 	value = strstr ( ( const char * ) data, "href=" );
-#else
-	value = ( char *) strstr ( data, "href=" );
-#endif
 	if ( !value || strlen ( value ) < 7 )
 		return;
 	value += 6;
@@ -63,7 +59,7 @@ void XMLCALL XslLocator::processingInstructionHandler (
 		}
 	}
 
-	d->xslLocation = std::string ( value, iterator - value );
+	d->xslLocation.assign( value, iterator - value );
 	XML_StopParser ( d->parser, false );
 }
 
