@@ -214,8 +214,7 @@ bool WrapLibxml::parse (
 		return false;
 	}
 
-	if ( indent )
-		xmlKeepBlanksDefault ( 0 );
+	xmlKeepBlanksDefault ( indent ? 0 : 1 );
 
 	xmlChar *buf = NULL;
 	int size;
@@ -250,6 +249,8 @@ bool WrapLibxml::xpath ( const std::string& path, const std::string& fileName )
 
 	xmlParserCtxtPtr ctxt;
 	xmlDocPtr docPtr;
+
+	xmlKeepBlanksDefault ( 0 );
 
 	ctxt = xmlNewParserCtxt();
 	if ( ctxt == NULL )
@@ -290,27 +291,27 @@ bool WrapLibxml::xpath ( const std::string& path, const std::string& fileName )
 
 	result = xmlXPathEvalExpression ( ( const xmlChar * ) path.c_str(), context );
 
-	xmlKeepBlanksDefault ( 0 );
-
 	bool xpathIsValid = ( result ) ? true : false;
 
 	while ( result != NULL )
 	{
 		if ( xmlXPathNodeSetIsEmpty ( result->nodesetval ) )
 			break;
+		xmlBufferPtr bufferPtr = xmlBufferCreate();
+		if ( bufferPtr == NULL )
+			break;
 		nodeset = result->nodesetval;
 		for ( int i = 0; i < nodeset->nodeNr; i++ )
 		{
 			xmlNodePtr node = nodeset->nodeTab[i];
-			xmlBufferPtr bufferPtr = xmlBufferCreate();
-			if ( !node || !bufferPtr )
+			if ( !node )
 				break;
 			xmlNodeDump ( bufferPtr, NULL, node, 0, 1 );
-			std::string nodeBuffer = ( const char * ) xmlBufferContent ( bufferPtr );
 
-			output += nodeBuffer;
+			output += ( const char * ) xmlBufferContent ( bufferPtr );
 			output += '\n';
 		}
+		xmlBufferFree ( bufferPtr );
 		break;
 	}
 	if ( result )

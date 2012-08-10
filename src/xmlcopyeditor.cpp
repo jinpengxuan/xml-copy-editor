@@ -5840,7 +5840,7 @@ void MyFrame::OnAssociate ( wxCommandEvent& event )
 	std::string origEncoding = XmlEncodingHandler::get ( utf8Buffer );
 	XmlEncodingHandler::setUtf8 ( utf8Buffer, true );
 	std::auto_ptr<WrapExpat> wellformedparser ( new WrapExpat() );
-	if ( !wellformedparser->parse ( utf8Buffer ) ) // FIXME: Set encoding to UTF-8 before parsing.
+	if ( !wellformedparser->parse ( utf8Buffer ) )
 	{
 		std::string error = wellformedparser->getLastError();
 		wxString wideError = wxString ( error.c_str(), wxConvUTF8, error.size() );
