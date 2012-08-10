@@ -108,16 +108,16 @@ StyleDialog::StyleDialog (
 		    size,
 		    wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER | wxMAXIMIZE_BOX ),
 		bufferUtf8 ( bufferParameterUtf8 ),
+#if !defined(USE_ENCHANT) && defined(__WXMSW__)
+		aspellDataPath ( aspellDataPathParameter ),
+		aspellDictPath ( aspellDictPathParameter ),
+#endif
 		fileName ( fileNameParameter ),
 		ruleSetDirectory ( ruleSetDirectoryParameter ),
 		filterDirectory ( filterDirectoryParameter ),
 		browser ( browserParameter ),
 		ruleSetPreset ( ruleSetPresetParameter ),
 		filterPreset ( filterPresetParameter ),
-#if !defined(USE_ENCHANT) && defined(__WXMSW__)
-		aspellDataPath ( aspellDataPathParameter ),
-		aspellDictPath ( aspellDictPathParameter ),
-#endif
 		type(typeParameter),
 		readOnly ( readOnlyParameter )
 {
@@ -459,27 +459,21 @@ void StyleDialog::OnReport ( wxCommandEvent& event )
 	ruleSet.Replace ( _(" "), _T("_") );
 	filter = filterPreset + _T ( ".xml" );
 
-	std::string ruleSetDirectoryUtf8,
-	ruleSetUtf8,
-	filterDirectoryUtf8,
-	filterUtf8,
-	pathSeparatorUtf8;
-	ruleSetDirectoryUtf8 = ruleSetDirectory.mb_str ( wxConvUTF8 );
-	ruleSetUtf8 = ruleSet.mb_str ( wxConvUTF8 );
-	filterDirectoryUtf8 = filterDirectory.mb_str ( wxConvUTF8 );
-	filterUtf8 = filter.mb_str ( wxConvUTF8 );
-
+	std::string ruleSetDirectoryLocal ( ruleSetDirectory.mb_str ( wxConvLocal ) );
+	std::string ruleSetUtf8 ( ruleSet.mb_str ( wxConvUTF8 ) );
+	std::string filterDirectoryLocal ( filterDirectory.mb_str ( wxConvLocal ) );
+	std::string filterUtf8 ( filter.mb_str ( wxConvUTF8 ) );
 	wxString separator = wxFileName::GetPathSeparator();
-	pathSeparatorUtf8 = separator.mb_str ( wxConvUTF8 );
+	std::string pathSeparatorLocal ( separator.mb_str ( wxConvLocal ) );
 
 	std::auto_ptr<HouseStyle> hs ( new HouseStyle (
 					   (type == ID_TYPE_SPELL) ? HS_TYPE_SPELL : HS_TYPE_STYLE,
 	                                   bufferUtf8,
-	                                   ruleSetDirectoryUtf8,
+	                                   ruleSetDirectoryLocal,
 	                                   ruleSetUtf8,
-	                                   filterDirectoryUtf8,
+	                                   filterDirectoryLocal,
 	                                   filterUtf8,
-	                                   pathSeparatorUtf8,
+	                                   pathSeparatorLocal,
  #ifdef __WXMSW__
                                        aspellDataPath,
                                        aspellDictPath,
