@@ -243,7 +243,7 @@ StyleDialog::StyleDialog (
 	reportTopSizer->Add ( comboSizer, 0, wxALL | wxALIGN_CENTER_VERTICAL, 5 );
 	reportTopSizer->Add ( table, 1, wxEXPAND | wxALL, 5 );
 	reportTopSizer->Add ( reportButtonSizer, 0, wxALL, 5 );
-	reportTopSizer->Add ( status, 0 );
+	reportTopSizer->Add ( status, 0, wxEXPAND | wxALL );
 	this->SetSizer ( reportTopSizer );
 
 	createReportButton->SetFocus();
