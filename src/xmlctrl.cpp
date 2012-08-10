@@ -95,7 +95,7 @@ XmlCtrl::XmlCtrl (
 		bufferLen = strlen ( DEFAULT_XML_DECLARATION_UTF8 );
 	}
 
-	SendMsg ( 2001, bufferLen, ( long ) ( const char * ) buffer );
+	AddTextRaw ( buffer, bufferLen );
 
 	SetSelection ( 0, 0 );
 
@@ -2057,13 +2057,7 @@ bool XmlCtrl::backgroundValidate (
 
 std::string XmlCtrl::myGetTextRaw()
 {
-	int len  = GetTextLength();
-	char *buf = new char[len+1];
-	SendMsg ( 2182, len+1, ( long ) buf );
-	buf[len] = '\0';
-	std::string ret ( buf );
-	delete[] buf;
-	return ret;
+	return ( const char * ) GetTextRaw();
 }
 
 void XmlCtrl::setErrorIndicator ( int line, int column )
