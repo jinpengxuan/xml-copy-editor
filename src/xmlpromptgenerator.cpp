@@ -435,17 +435,6 @@ void XmlPromptGenerator::handleSchema (
 
 	std::string schemaPath = PathResolver::run ( path, ( d->auxPath.empty() ) ? d->basePath : d->auxPath);
 
-
-	try
-	{
-		XMLPlatformUtils::Initialize();
-	}
-	catch ( const XMLException& toCatch )
-	{
-		XMLPlatformUtils::Terminate();
-		return;
-	}
-
 	XercesDOMParser *parser = new XercesDOMParser();
 	parser->setDoNamespaces ( true );
 	parser->setDoSchema ( true );
@@ -455,8 +444,7 @@ void XmlPromptGenerator::handleSchema (
 	if ( !rootGrammar )
 	{
 		delete parser;
-		XMLPlatformUtils::Terminate();
-        return;
+		return;
 	}
 
 	SchemaGrammar* grammar = ( SchemaGrammar* ) rootGrammar;
@@ -466,7 +454,6 @@ void XmlPromptGenerator::handleSchema (
 	{
 		delete grammar;
 		delete parser;
-		XMLPlatformUtils::Terminate();		
 		return;
 	}
 
@@ -526,7 +513,6 @@ void XmlPromptGenerator::handleSchema (
 		}
 	}
     delete parser;
-	XMLPlatformUtils::Terminate();
 }
 
 void XmlPromptGenerator::getContent (

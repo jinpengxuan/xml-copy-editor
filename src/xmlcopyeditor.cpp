@@ -312,6 +312,9 @@ MyApp::~MyApp()
 	delete checker;
 	delete server;
 	delete connection;
+
+	// Terminate Xerces-C++
+	XMLPlatformUtils::Terminate();
 }
 
 bool MyApp::OnInit()
@@ -371,6 +374,10 @@ bool MyApp::OnInit()
 	{
 		wxImage::AddHandler ( new wxPNGHandler );
 		wxSystemOptions::SetOption ( _T ( "msw.remap" ), 0 );
+
+		// Initialize Xerces-C++
+		XMLPlatformUtils::Initialize();
+
 		frame = new MyFrame (
 		    _ ( "XML Copy Editor" ),
 		    config.get(),
@@ -380,6 +387,14 @@ bool MyApp::OnInit()
 		frame->Show ( true );
 		if ( frame->getHandleCommandLineFlag() )
 			frame->handleCommandLine();
+	}
+	catch ( const XMLException &e )
+	{
+		wxString error;
+		error << _ ( "Failed to initialize Xerces-c:\n" )
+		    << WrapXerces::toString ( e.getMessage() );
+		wxMessageBox ( error, _ ( "Error" ), wxOK | wxICON_ERROR );
+		return false;
 	}
 	catch ( exception &e )
 	{

@@ -33,14 +33,6 @@ using namespace xercesc;
 
 WrapXerces::WrapXerces( std::string catalogPath, std::string catalogUtilityPath )
 {
-	try
-	{
-		XMLPlatformUtils::Initialize();
-	}
-	catch ( XMLException& e )
-	{
-		throw std::runtime_error ( "Cannot initialize Xerces" );
-	}
 	errorPosition = std::make_pair ( 1, 1 );
 	catalogResolver = new XercesCatalogResolver( catalogPath, catalogUtilityPath );
 }
@@ -48,7 +40,6 @@ WrapXerces::WrapXerces( std::string catalogPath, std::string catalogUtilityPath 
 WrapXerces::~WrapXerces()
 {
 	delete catalogResolver;
-	XMLPlatformUtils::Terminate();	
 }
 
 bool WrapXerces::validate ( const std::string& fileName )
