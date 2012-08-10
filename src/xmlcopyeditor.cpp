@@ -1296,10 +1296,8 @@ void MyFrame::OnCheckWellformedness ( wxCommandEvent& event )
 	auto_ptr<WrapExpat> we ( new WrapExpat() );
 	if ( !we->parse ( utf8Buffer.c_str() ) )
 	{
-		std::string error = we->getLastError();
-		wxString werror = wxString ( error.c_str(), wxConvUTF8, error.size() );
 		statusProgress ( wxEmptyString );
-		messagePane ( werror, CONST_WARNING );
+		messagePane ( we->getLastError(), CONST_WARNING );
 		std::pair<int, int> posPair = we->getErrorPosition();
 		-- ( posPair.first );
 		int cursorPos =
@@ -3944,9 +3942,6 @@ void MyFrame::OnValidateSchema ( wxCommandEvent& event )
 	statusProgress ( _ ( "Validation in progress..." ) );
 	doc->clearErrorIndicators();
 
-	std::string error;
-	wxString wideError;
-
 	std::auto_ptr<WrapXerces> validator (
                                         new WrapXerces( catalogPath, catalogUtilityPath )
                               );
@@ -3954,9 +3949,7 @@ void MyFrame::OnValidateSchema ( wxCommandEvent& event )
 	if ( !validator->validate ( fileNameLocal ) )
 	{
 		statusProgress ( wxEmptyString );
-		error = validator->getLastError();
-		wideError = wxString ( error.c_str(), wxConvUTF8, error.size() );
-		messagePane ( wideError, CONST_WARNING );
+		messagePane ( validator->getLastError(), CONST_WARNING );
 		std::pair<int, int> posPair = validator->getErrorPosition();
 
 		int cursorPos =
@@ -4675,11 +4668,9 @@ bool MyFrame::saveFile ( XmlDoc *doc, wxString& fileName, bool checkLastModified
 
 			if ( !we->parse ( utf8Buffer ) )
 			{
-				std::string error = we->getLastError();
-				wxString werror = wxString ( error.c_str(), wxConvUTF8, error.size() );
-				if ( we->isEncodingError() )
-					;
-				messagePane ( werror, CONST_WARNING );
+				//if ( we->isEncodingError() )
+				//	;
+				messagePane ( we->getLastError(), CONST_WARNING );
 			}
 			success = saveRawUtf8 ( fileNameLocal, utf8Buffer, true, isXml );
 			if ( success )
@@ -5842,15 +5833,12 @@ void MyFrame::OnAssociate ( wxCommandEvent& event )
 	std::auto_ptr<WrapExpat> wellformedparser ( new WrapExpat() );
 	if ( !wellformedparser->parse ( utf8Buffer ) )
 	{
-		std::string error = wellformedparser->getLastError();
-		wxString wideError = wxString ( error.c_str(), wxConvUTF8, error.size() );
 		wxString message;
 		message.Printf (
 		    _ ( "Cannot associate %s: %s" ),
 		    type.c_str(),
-		    wideError.c_str() );
-		messagePane ( message,
-		              CONST_STOP );
+		    wellformedparser->getLastError() );
+		messagePane ( message, CONST_STOP );
 		return;
 	}
 

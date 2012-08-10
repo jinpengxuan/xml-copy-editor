@@ -100,15 +100,10 @@ void InsertPanel::update (
 	{
 		list->Clear();
 		lastDoc = doc;
-		std::set<std::string> entitySet = doc->getEntitySet();
-		entitySet.insert ( "amp" );
-		entitySet.insert ( "apos" );
-		entitySet.insert ( "gt" );
-		entitySet.insert ( "lt" );
-		entitySet.insert ( "quot" );
-		std::set<std::string>::iterator it;
+		const std::set<wxString> &entitySet = doc->getEntitySet();
+		std::set<wxString>::const_iterator it;
 		for ( it = entitySet.begin(); it != entitySet.end(); it++ )
-			list->Append ( wxString ( it->c_str(), wxConvUTF8, it->size() ) );
+			list->Append ( *it );
 		list->Show ( true );
 
 		wxSize clientSize = GetClientSize();
@@ -140,14 +135,14 @@ void InsertPanel::update (
 		return;
 	}
 
-	std::set<wxString> elementSet;
-	elementSet = doc->getChildren ( ( type == INSERT_PANEL_TYPE_SIBLING ) ? grandparent : parent );
+	const std::set<wxString> &elementSet = doc->getChildren (
+	            ( type == INSERT_PANEL_TYPE_SIBLING ) ? grandparent : parent );
 	if ( elementSet.empty() )
 	{
 		list->Show ( false );
 		return;
 	}
-	std::set<wxString>::iterator it;
+	std::set<wxString>::const_iterator it;
 	for ( it = elementSet.begin(); it != elementSet.end(); it++ )
 		list->Append ( *it );
 	list->Show ( true );

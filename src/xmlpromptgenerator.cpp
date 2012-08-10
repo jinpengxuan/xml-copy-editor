@@ -42,7 +42,7 @@
 #include <xercesc/validators/schema/SchemaValidator.hpp>
 #include <xercesc/validators/common/ContentSpecNode.hpp>
 #include <xercesc/validators/schema/SchemaSymbols.hpp>
-//#include "wrapxerces.h"
+#include "wrapxerces.h" // Delearation of toString()
 
 using namespace xercesc;
 
@@ -99,34 +99,19 @@ void XMLCALL XmlPromptGenerator::starthandler (
 
 	d->push ( el );
 
-	std::string parent, element;
-	parent = d->getParent();
-	element = el;
+	wxString parent ( d->getParent().c_str(), wxConvUTF8 );
+	wxString element ( el, wxConvUTF8 );
 
 	// update elementMap
-	if ( d->elementMap.find ( parent ) == d->elementMap.end() )
-	{
-		std::set<std::string> childSet;
-		childSet.insert ( element );
-		d->elementMap.insert ( make_pair ( parent, childSet ) );
-	}
-	else
-		d->elementMap[parent].insert ( element );
+	d->elementMap[parent].insert ( element );
 
-	std::string attributeName, attributeValue;
+	wxString attributeName, attributeValue;
 
 	// update attributeMap
-	// case 1: element unknown, no attributes
-	if ( ! ( *attr ) && d->attributeMap.find ( element ) == d->attributeMap.end() )
-	{
-		std::map<std::string, std::set<std::string> > currentAttributeMap;
-		d->attributeMap.insert ( make_pair ( element, currentAttributeMap ) );
-	}
-
 	for ( ; *attr; attr += 2 )
 	{
-		attributeName = *attr;
-		attributeValue = * ( attr + 1 );
+		attributeName = wxString ( *attr, wxConvUTF8 );
+		attributeValue = wxString ( * ( attr + 1 ), wxConvUTF8 );
 
 		if (d->attributeMap[element][attributeName].size() < d->attributeValueCutoff)
 			d->attributeMap[element][attributeName].insert ( attributeValue );
@@ -146,32 +131,32 @@ bool XmlPromptGenerator::getGrammarFound()
 }
 
 void XmlPromptGenerator::getAttributeMap (
-    std::map<std::string, std::map<std::string, std::set<std::string> > >
+    std::map<wxString, std::map<wxString, std::set<wxString> > >
     &attributeMap )
 {
 	attributeMap = d->attributeMap;
 }
 
 void XmlPromptGenerator::getRequiredAttributeMap (
-    std::map<std::string, std::set<std::string> >& requiredAttributeMap )
+    std::map<wxString, std::set<wxString> >& requiredAttributeMap )
 {
 	requiredAttributeMap = d->requiredAttributeMap;
 }
 
 void XmlPromptGenerator::getElementMap (
-    std::map<std::string, std::set<std::string> > &elementMap )
+    std::map<wxString, std::set<wxString> > &elementMap )
 {
 	elementMap = d->elementMap;
 }
 
 void XmlPromptGenerator::getEntitySet (
-    std::set<std::string> &entitySet )
+    std::set<wxString> &entitySet )
 {
 	entitySet = d->entitySet;
 }
 
 void XmlPromptGenerator::getElementStructureMap (
-    std::map<std::string, std::string> &elementStructureMap )
+    std::map<wxString, wxString> &elementStructureMap )
 {
 	elementStructureMap = d->elementStructureMap;
 }
@@ -208,60 +193,59 @@ void XMLCALL XmlPromptGenerator::elementdeclhandler (
 	PromptGeneratorData *d;
 	d = ( PromptGeneratorData * ) data;
 
-	std::string myElement = name;
+	wxString myElement ( name, wxConvUTF8 );
 
-	std::set<std::string> children;
-	getContent ( *model, d->elementStructureMap[myElement], children );
-	if ( !children.empty() )
-		d->elementMap[myElement] = children;
+	getContent ( *model, d->elementStructureMap[myElement], d->elementMap[myElement] );
 
 	XML_FreeContentModel ( d->p, model );
 }
 
 void XmlPromptGenerator::getContent (
     const XML_Content &content,
-    std::string &contentModel,
-    std::set<std::string> &list )
+    wxString &contentModel,
+    std::set<wxString> &list )
 {
+	wxString name;
 	switch ( content.type )
 	{
 	case XML_CTYPE_EMPTY:
-		contentModel += "EMPTY";
+		contentModel += _T("EMPTY");
 		return;
 	case XML_CTYPE_ANY:
-		contentModel += "ANY";
+		contentModel += _T("ANY");
 		return;
 	case XML_CTYPE_NAME:
-		list.insert ( content.name );
-		contentModel += content.name;
+		name = wxString ( content.name, wxConvUTF8 );
+		list.insert ( name );
+		contentModel += name;
 		break;
 	case XML_CTYPE_CHOICE:
 	case XML_CTYPE_SEQ:
 	case XML_CTYPE_MIXED:
 	default:
-		std::string sep;
-		sep = ( content.type == XML_CTYPE_CHOICE ) ? "|" : ",";//_T("|") : _T(",");
-		contentModel += ( content.type == XML_CTYPE_MIXED ) ? "(#PCDATA|" : "(";
+		wxString sep;
+		sep = ( content.type == XML_CTYPE_CHOICE ) ? _T("|") : _T(",");
+		contentModel += ( content.type == XML_CTYPE_MIXED ) ? _T("(#PCDATA|") : _T("(");
 		for ( unsigned i = 0; i < content.numchildren; i++ )
 		{
 			if ( i > 0 )
 				contentModel += sep;
 			getContent ( content.children[i], contentModel, list);
 		}
-		contentModel += ")";//_T(")");
+		contentModel += _T(")");
 		break;
 	}
 
 	switch ( content.quant )
 	{
 	case XML_CQUANT_OPT:
-		contentModel += "?";//_T("?");
+		contentModel += _T("?");
 		break;
 	case XML_CQUANT_REP:
-		contentModel += "*";//_T("*");
+		contentModel += _T("*");
 		break;
 	case XML_CQUANT_PLUS:
-		contentModel += "+";//_T("+");
+		contentModel += _T("+");
 		break;
 	case XML_CQUANT_NONE:
 	default:
@@ -280,7 +264,7 @@ void XMLCALL XmlPromptGenerator::attlistdeclhandler (
 	PromptGeneratorData *d;
 	d = ( PromptGeneratorData * ) data;
 
-	std::set<std::string> &attributeValues = d->attributeMap[elname][attname];
+	std::set<wxString> &attributeValues = d->attributeMap[elname][attname];
 	if ( *att_type == '(' ) // change to exclude _known_ identifiers?
 	{
 		const char *s, *word;
@@ -292,7 +276,7 @@ void XMLCALL XmlPromptGenerator::attlistdeclhandler (
 			while ( *s != '|' && *s != ')' )
 				s++;
 
-			std::string currentValue ( word, s - word );
+			wxString currentValue ( word, wxConvUTF8, s - word );
 			attributeValues.insert ( currentValue );
 
 			while ( *s != '|' && *s != ')')
@@ -302,7 +286,7 @@ void XMLCALL XmlPromptGenerator::attlistdeclhandler (
 
 	if ( isrequired )
 	{
-		d->requiredAttributeMap[elname].insert ( attname );
+		d->requiredAttributeMap[elname].insert ( wxString ( attname, wxConvUTF8 ) );
 	}
 }
 
@@ -407,7 +391,7 @@ void XMLCALL XmlPromptGenerator::entitydeclhandler (
 	    !publicId &&
 	    !notationName )
 	{
-		d->entitySet.insert ( entityName );
+		d->entitySet.insert ( wxString ( entityName, wxConvUTF8 ) );
 	}
 }
 
@@ -416,26 +400,28 @@ void XmlPromptGenerator::handleSchema (
     const XML_Char *el,
     const XML_Char **attr )
 {
+	if ( !d->isRootElement )
+		return;
 	// first check for XML Schema association
-	XML_Char **schemaAttr = ( XML_Char ** ) attr; // now redundant; could use attr
+	const char **schemaAttr = ( const XML_Char ** ) attr; // now redundant; could use attr
 	std::string path;
-	for ( ; d->isRootElement && *schemaAttr; schemaAttr += 2 )
+	for ( ; *schemaAttr; schemaAttr += 2 )
 	{
 		// no namespace
-		if ( !strcmp ( ( const char * ) *schemaAttr, "xsi:noNamespaceSchemaLocation" ) )
+		if ( !strcmp ( *schemaAttr, "xsi:noNamespaceSchemaLocation" ) )
 		{
-			path = ( const char * ) * ( schemaAttr + 1 );
+			path = * ( schemaAttr + 1 );
 			break;
 		}
 		// with namespace -- check if this works
-		else if ( !strcmp ( ( const char * ) *schemaAttr, "xsi:schemaLocation" ) )
+		else if ( !strcmp ( *schemaAttr, "xsi:schemaLocation" ) )
 		{
-			char *searchIterator;
-			for ( searchIterator = ( char * ) * ( schemaAttr + 1 ); *searchIterator && *searchIterator != ' ' && *searchIterator != '\t' && *searchIterator != '\n'; searchIterator++ )
-				;
+			const char *searchIterator = * ( schemaAttr + 1 );
+			while ( *searchIterator && *searchIterator != ' ' && *searchIterator != '\t' && *searchIterator != '\n' )
+				searchIterator++;
 			if ( *searchIterator )
 			{
-				path = ( const char * ) ( searchIterator + 1 );
+				path = searchIterator + 1;
 				break;
 			}
 		}
@@ -484,39 +470,29 @@ void XmlPromptGenerator::handleSchema (
 		return;
 	}
 
-	char *s;
 	while ( elemEnum.hasMoreElements() )
 	{
 		const SchemaElementDecl& curElem = elemEnum.nextElement();
 
-		std::string element;
-		std::set<std::string> children;
+		wxString element;
 
 		const QName *qnm = curElem.getElementName();
-		if ( qnm )
-		{
-			s = XMLString::transcode ( qnm->getRawName() ); // this includes any prefix:localname combinations
-			element = s;
-			XMLString::release( &s );
-		}
+		if ( qnm == NULL )
+			continue;
+		element = WrapXerces::toString ( qnm->getRawName() ); // this includes any prefix:localname combinations
 		if ( element.empty() )
 			continue;
 
 		const XMLCh* fmtCntModel = curElem.getFormattedContentModel();
 		if ( fmtCntModel != NULL ) // tbd: this does not yet pick up prefix:localname combinations
 		{
-			std::string structure;
-			s = XMLString::transcode ( fmtCntModel );
-			structure = s;
-			XMLString::release( &s );
-			d->elementStructureMap.insert ( make_pair ( element, structure ) );
+			wxString structure = WrapXerces::toString ( fmtCntModel );
+			d->elementStructureMap[element] = structure;
 		}
 		const ContentSpecNode *spec = curElem.getContentSpec();
 		if ( spec != NULL )
 		{
-			getContent ( spec, children );
-			if ( !children.empty() )
-				d->elementMap.insert ( make_pair ( element, children ) );
+			getContent ( spec, d->elementMap[element] );
 		}
 
 		// fetch attributes
@@ -526,7 +502,7 @@ void XmlPromptGenerator::handleSchema (
 		XMLAttDefList& attIter = curElem.getAttDefList();
 		for ( unsigned int i = 0; i < attIter.getAttDefCount(); i++ )
 		{
-			std::string attribute, attributeValue;
+			wxString attribute, attributeValue;
 
 			XMLAttDef& attr = attIter.getAttDef ( i );
 			XMLAttDef::DefAttTypes ty = attr.getDefaultType();
@@ -535,24 +511,16 @@ void XmlPromptGenerator::handleSchema (
 			SchemaAttDef *pAttr = ( SchemaAttDef * ) &attr;
 
 			const QName *qnm = pAttr->getAttName();
-			if ( qnm )
-			{
-				s = XMLString::transcode ( qnm->getRawName() );
-				attribute = s;
-				XMLString::release( &s );
-			}
+			if ( qnm == NULL )
+				continue;
+			attribute = WrapXerces::toString ( qnm->getRawName() );
 			if ( attribute.empty() )
 				continue;
 
 			// Value
-			if ( pAttr->getValue() )
-			{
-				s = XMLString::transcode ( pAttr->getValue() );
-				attributeValue = s;
-				XMLString::release( &s );
-			}
-
+			attributeValue = WrapXerces::toString ( pAttr->getValue() );
 			d->attributeMap[element][attribute].insert( attributeValue );
+
 			if ( ty == XMLAttDef::Required || ty == XMLAttDef::Required_And_Fixed)
 				d->requiredAttributeMap[element].insert ( attribute );
 		}
@@ -563,17 +531,16 @@ void XmlPromptGenerator::handleSchema (
 
 void XmlPromptGenerator::getContent (
     const ContentSpecNode *spec,
-    std::set<std::string> &list )
+    std::set<wxString> &list )
 {
 	//if ( spec == NULL) return;
 
 	const QName *qnm = spec->getElement();
 	if ( qnm )
 	{
-		char *element = XMLString::transcode ( qnm->getRawName() );
-		if ( element != NULL )
+		wxString element = WrapXerces::toString ( qnm->getRawName() );
+		if ( !element.IsEmpty() )
 			list.insert( element );
-		XMLString::release( &element );
 	}
 
 	if ( spec->getFirst() != NULL)

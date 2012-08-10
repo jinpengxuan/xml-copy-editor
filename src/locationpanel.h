@@ -34,7 +34,7 @@ class LocationPanel : public wxPanel
 		    XmlDoc *docParameter = NULL,
 		    const wxString& parent = wxEmptyString );
 	private:
-		void indentStructure ( std::string& structure );
+		void indentStructure ( wxString& structure );
 		MyFrame *parentWindow;
 		XmlDoc *doc;
 		wxBoxSizer *sizer;

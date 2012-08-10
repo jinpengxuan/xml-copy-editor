@@ -1,6 +1,7 @@
 #ifndef VALIDATION_THREAD_H
 #define VALIDATION_THREAD_H
 
+#include <wx/wx.h>
 #include <utility>
 #include <string>
 #include <wx/thread.h>
@@ -16,14 +17,14 @@ public:
                      bool *finished,
                      bool *success,
                      bool *release, std::pair<int, int> *position,
-                     std::string *message );
+                     wxString *message );
 	virtual void *Entry();
 	virtual void OnExit();
 private:
 	std::string myBuffer, mySystem, myCatalogPath, myCatalogUtilityPath;
 	bool *myFinishedPtr, *mySuccessPtr, *myReleasePtr;
 	std::pair<int, int> *myPositionPtr;
-	std::string *myMessagePtr;
+	wxString *myMessagePtr;
 };
 
 #endif

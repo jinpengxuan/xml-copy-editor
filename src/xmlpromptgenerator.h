@@ -20,6 +20,7 @@
 #ifndef XML_PROMPT_GENERATOR_H
 #define XML_PROMPT_GENERATOR_H
 
+#include <wx/wx.h>
 //#include <expat.h>
 #include <map>
 #include <set>
@@ -30,12 +31,12 @@
 
 struct PromptGeneratorData : public ParserData
 {
-	std::map<std::string, std::map<std::string, std::set<std::string> > >
+	std::map<wxString, std::map<wxString, std::set<wxString> > >
 	attributeMap;
-	std::map<std::string, std::set<std::string> > elementMap;
-	std::map<std::string, std::set<std::string> > requiredAttributeMap;
-	std::map<std::string, std::string> elementStructureMap;
-	std::set<std::string> entitySet;
+	std::map<wxString, std::set<wxString> > elementMap;
+	std::map<wxString, std::set<wxString> > requiredAttributeMap;
+	std::map<wxString, wxString> elementStructureMap;
+	std::set<wxString> entitySet;
 	std::string catalogPath, basePath, auxPath, rootElement;
 	bool isRootElement, grammarFound;
 	unsigned attributeValueCutoff;
@@ -51,17 +52,17 @@ class XmlPromptGenerator : public WrapExpat
 		    const std::string& auxPath = "" );
 		virtual ~XmlPromptGenerator();
 		void getAttributeMap (
-		    std::map<std::string, std::map<std::string, std::set<std::string> > >
+		    std::map<wxString, std::map<wxString, std::set<wxString> > >
 		    &attributeMap );
 		void getRequiredAttributeMap (
-		    std::map<std::string, std::set<std::string> > &requiredAttributeMap );
+		    std::map<wxString, std::set<wxString> > &requiredAttributeMap );
 		void getElementMap (
-		    std::map<std::string, std::set<std::string> > &elementMap );
+		    std::map<wxString, std::set<wxString> > &elementMap );
 		void getEntitySet (
-		    std::set<std::string> &entitySet );
+		    std::set<wxString> &entitySet );
 		bool getGrammarFound();
 		void getElementStructureMap (
-		    std::map<std::string, std::string> &elementStructureMap );
+		    std::map<wxString, wxString> &elementStructureMap );
 	private:
 		std::auto_ptr<PromptGeneratorData> d;
 		static void XMLCALL starthandler (
@@ -84,8 +85,8 @@ class XmlPromptGenerator : public WrapExpat
 		    XML_Content *model );
 		static void getContent (
 		    const XML_Content &content,
-		    std::string &contentModel,
-		    std::set<std::string> &list );
+		    wxString &contentModel,
+		    std::set<wxString> &list );
 		static void XMLCALL attlistdeclhandler (
 		    void *userData,
 		    const XML_Char *elname,
@@ -115,7 +116,7 @@ class XmlPromptGenerator : public WrapExpat
 		    const XML_Char **attr );
 		static void getContent (
 		    const xercesc::ContentSpecNode *spec,
-		    std::set<std::string> &list );
+		    std::set<wxString> &list );
 };
 
 #endif

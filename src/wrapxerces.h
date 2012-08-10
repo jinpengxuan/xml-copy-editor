@@ -21,6 +21,7 @@
 #define WRAP_XERCES
 #define XERCES_TMPLSINC
 
+#include <wx/wx.h>
 #include <string>
 #include <utility>
 #include <xercesc/sax2/SAX2XMLReader.hpp>
@@ -37,11 +38,12 @@ class WrapXerces
 		~WrapXerces();
 		bool validate ( const std::string& fileName );
 		bool validateMemory ( const char *buffer, const char *system, unsigned len );
-		std::string getLastError();
+		const wxString &getLastError();
 		std::pair<int, int> getErrorPosition();
+		static wxString toString ( const XMLCh *str );
 	private:
 		XercesCatalogResolver *catalogResolver;
-		std::string lastError;
+		wxString lastError;
 		std::pair<int, int> errorPosition;
 };
 

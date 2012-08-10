@@ -80,26 +80,22 @@ bool WrapXerces::validate ( const std::string& fileName )
 	catch ( XMLException& e )
 	{
 		delete parser;
-		char *err = XMLString::transcode ( e.getMessage() );
-		lastError = err;
-		XMLString::release ( &err );
+		lastError = toString ( e.getMessage() );
 		return false;
 	}
 	catch ( SAXParseException& e )
 	{
 		delete parser;
-		char *err = XMLString::transcode ( e.getMessage() );
-		std::stringstream ss;
-		ss << "Validation stopped at line " << e.getLineNumber() << ", column " << e.getColumnNumber() << ": " << err;
-		lastError = ss.str();
+		lastError << _T ( "Validation stopped at line " )
+		    << e.getLineNumber() << _T ( ", column " ) << e.getColumnNumber()
+		    << ": " << toString ( e.getMessage() );
 		errorPosition = std::make_pair ( e.getLineNumber(), e.getColumnNumber() );
-		XMLString::release ( &err );
 		return false;
 	}
 	catch ( ... )
 	{
 		delete parser;
-		lastError = "Unexpected validation error";
+		lastError = _T ( "Unexpected validation error" );
 		return false;
 	}
 	delete parser;
@@ -142,38 +138,33 @@ bool WrapXerces::validateMemory (
 	catch ( XMLException& e )
 	{
 		delete parser;
-		lastError = "";
+		lastError = wxEmptyString;
 		return false;
 	}
 	catch ( SAXParseException& e )
 	{
 		delete parser;
-		char *err = XMLString::transcode ( e.getMessage() );
-		std::stringstream ss;
-		ss << "Ln " << e.getLineNumber() << " Col " << e.getColumnNumber() << ": " << err;
-		lastError = ss.str();
+		lastError << _T ( "Ln " ) << e.getLineNumber() << _T ( " Col " )
+		    << e.getColumnNumber() << _T ( ": " ) << toString ( e.getMessage() );
 		errorPosition = std::make_pair ( e.getLineNumber(), e.getColumnNumber() );
-		XMLString::release ( &err );
 		return false;
 	}
 	catch ( ... )
 	{
 		delete parser;
-		lastError = "";
+		lastError = wxEmptyString;
 		return false;
 	}
 	delete parser;
 	return true;
 }
 
-std::string WrapXerces::getLastError()
+const wxString &WrapXerces::getLastError()
 {
-	char *rawError, *it;
-	rawError = (char *)lastError.c_str();
-	it = strstr ( rawError, "Message:" );
-	if ( it )
+	int i = lastError.Find( _T ( "Message:" ) );
+	if ( i != wxNOT_FOUND )
 	{
-		lastError = it + 8;
+		lastError = lastError.substr( i );
 	}
 
 	return lastError;
@@ -182,4 +173,11 @@ std::string WrapXerces::getLastError()
 std::pair<int, int> WrapXerces::getErrorPosition()
 {
 	return errorPosition;
+}
+
+wxString WrapXerces::toString ( const XMLCh *str )
+{
+	static wxMBConvUTF16 conv;
+
+	return wxString ( ( const char * ) str, conv );
 }

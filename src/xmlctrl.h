@@ -130,10 +130,10 @@ class XmlCtrl: public wxStyledTextCtrl
 		void clearErrorIndicators ( int maxLine = 0 );
 		wxString getParent();
 		wxString getLastElementName ( int pos );
-		std::set<wxString> getChildren ( const wxString& parent );
-		std::set<std::string> getEntitySet();
-		std::set<std::string> getAttributes ( const wxString& parent );
-		std::string getElementStructure ( const wxString& parent );
+		const std::set<wxString> &getChildren ( const wxString& parent );
+		const std::set<wxString> &getEntitySet();
+		const std::set<std::string> &getAttributes ( const wxString& parent );
+		wxString getElementStructure ( const wxString& parent );
 		bool canInsertAt ( int pos );
 		int getTagStartPos ( int pos );
 		void toggleLineBackground();
@@ -153,7 +153,7 @@ class XmlCtrl: public wxStyledTextCtrl
 			validationSuccess;
 		bool *validationReleasePtr;
 		std::pair<int, int> validationPosition;
-		std::string validationMessage;
+		wxString validationMessage;
 	
 		int type;
 		bool *protectTags;
@@ -163,12 +163,12 @@ class XmlCtrl: public wxStyledTextCtrl
 		int currentMaxLine;
 		int lineBackgroundState;
 		wxColour baseBackground, alternateBackground;
-		std::map<std::string, std::map<std::string, std::set<std::string> > >
+		std::map<wxString, std::map<wxString, std::set<wxString> > >
 		attributeMap;
-		std::map<std::string, std::set<std::string> > requiredAttributeMap;
-		std::map<std::string, std::set<std::string> > elementMap;
-		std::set<std::string> entitySet;
-		std::map<std::string, std::string> elementStructureMap;
+		std::map<wxString, std::set<wxString> > requiredAttributeMap;
+		std::map<wxString, std::set<wxString> > elementMap;
+		std::set<wxString> entitySet;
+		std::map<wxString, wxString> elementStructureMap;
 		std::string catalogPath, catalogUtilityPath, basePath, auxPath;
 		XmlCtrlProperties properties;
 		wxString getLastAttributeName ( int pos );

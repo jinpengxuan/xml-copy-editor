@@ -187,7 +187,7 @@ void XmlCtrl::OnIdle ( wxIdleEvent& event )
 			{
 				clearErrorIndicators ( GetLineCount() );
 				setErrorIndicator ( validationPosition.first - 1, 0 );
-				frame->statusProgress ( wxString ( validationMessage.c_str(), wxConvUTF8, validationMessage.size() ) );
+				frame->statusProgress ( validationMessage );
 			}
 		}
 	}
@@ -486,15 +486,14 @@ void XmlCtrl::handleOpenAngleBracket ( wxKeyEvent& event )
 	if ( elementMap.find ( parent ) == elementMap.end() )
 		return;
 
-	wxString choice, conversion;
-	std::set<std::string> childSet = elementMap[parent];
-	std::set<std::string>::iterator it;
+	wxString choice;
+	std::set<wxString> &childSet = elementMap[parent];
+	std::set<wxString>::iterator it;
 	for ( it = childSet.begin(); it != childSet.end(); it++ )
 	{
 		if ( !choice.empty() )
 			choice.append ( _T ( "<" ) );
-		conversion = wxString ( it->c_str(), wxConvUTF8, it->size() );
-		choice.append ( conversion );
+		choice.append ( *it );
 	}
 	if ( !choice.empty() )
 		UserListShow ( 0, choice );
@@ -520,9 +519,7 @@ void XmlCtrl::handleCloseAngleBracket ( wxKeyEvent& event )
 	wxString elementName = getLastElementName ( pos );
 	if ( !elementName.empty() )
 	{
-		std::map<std::string, std::set<std::string> > map;
-		std::string elementNameUtf8 = ( const char * ) elementName.mb_str ( wxConvUTF8 );
-		attributeMap.insert ( make_pair ( elementNameUtf8, map ) );
+		attributeMap[elementName]; // Just want to put it there
 	}
 
 	// exit condition 1
@@ -571,8 +568,6 @@ void XmlCtrl::handleEquals ( wxKeyEvent& event )
 	if ( AutoCompActive() )
 		AutoCompCancel();
 
-	wxString choice, elementName, attributeName, conversion;
-	std::string elementNameUtf8, attributeNameUtf8;
 	int pos = GetCurrentPos();
 	if ( pos <= 0 || getLexerStyleAt ( pos - 1 ) != wxSTC_H_ATTRIBUTE )
 	{
@@ -583,19 +578,15 @@ void XmlCtrl::handleEquals ( wxKeyEvent& event )
 	SetSelection ( pos + 2, pos + 2 );
 
 	// tbd: identify possible attribute values
+	wxString choice, elementName, attributeName;
 	elementName = getLastElementName ( pos );
 	attributeName = getLastAttributeName ( pos );
 
-	elementNameUtf8 = elementName.mb_str ( wxConvUTF8 );
-	attributeNameUtf8 = attributeName.mb_str ( wxConvUTF8 );
-
-	std::set<std::string> valueSet;
-
-	valueSet = attributeMap[elementNameUtf8][attributeNameUtf8];
+	std::set<wxString> &valueSet = attributeMap[elementName][attributeName];
 	if ( valueSet.empty() )
 		return;
 
-	std::set<std::string>::iterator valueSetIterator;
+	std::set<wxString>::iterator valueSetIterator;
 	int cutoff = BUFSIZ;
 	for ( valueSetIterator = valueSet.begin();
 	        valueSetIterator != valueSet.end();
@@ -605,11 +596,7 @@ void XmlCtrl::handleEquals ( wxKeyEvent& event )
 			break;
 		if ( !choice.empty() )
 			choice.Append ( _T ( "<" ) );
-		conversion = wxString (
-		                 valueSetIterator->c_str(),
-		                 wxConvUTF8,
-		                 valueSetIterator->size() );
-		choice.Append ( conversion );
+		choice.Append ( *valueSetIterator );
 	}
 
 	if ( !choice.empty() )
@@ -621,12 +608,7 @@ void XmlCtrl::handleSpace ( wxKeyEvent& event )
 	if ( AutoCompActive() )
 		AutoCompCancel();
 
-	wxString elementName, choice, conversion;
-	std::string elementNameUtf8;
 	int pos = GetCurrentPos();
-	std::map<std::string, std::set<std::string> > currentAttributeMap;
-	std::map<std::string, std::set<std::string> >::iterator
-	attributeIterator;
 	if ( pos <= 2 )
 	{
 		event.Skip();
@@ -665,30 +647,24 @@ void XmlCtrl::handleSpace ( wxKeyEvent& event )
 	}
 
 	AddText ( _T ( " " ) );
-	elementName = getLastElementName ( pos );
-	wxString tag = GetTextRange ( tagStartPos, pos );
 
-	elementNameUtf8 = elementName.mb_str ( wxConvUTF8 );
-	if ( attributeMap.find ( elementNameUtf8 ) == attributeMap.end() )
+	wxString elementName = getLastElementName ( pos );
+	if ( attributeMap.find ( elementName ) == attributeMap.end() )
 		return;
-	currentAttributeMap = attributeMap[elementNameUtf8];
-	for (
-	    attributeIterator = currentAttributeMap.begin();
-	    attributeIterator != currentAttributeMap.end();
-	    attributeIterator++ )
-	{
-		conversion = wxString (
-		                 attributeIterator->first.c_str(),
-		                 wxConvUTF8,
-		                 attributeIterator->first.size() );
 
+	wxString choice;
+	wxString tag = GetTextRange ( tagStartPos, pos );
+	std::map<wxString, std::set<wxString> > &curAttMap = attributeMap[elementName];
+	std::map<wxString, std::set<wxString> >::iterator it;
+	for ( it = curAttMap.begin(); it != curAttMap.end(); it++ )
+	{
 		// avoid duplicate attributes
-		if ( tag.Contains ( conversion + _T ( "=" ) ) )
+		if ( tag.Contains ( it->first + _T ( "=" ) ) )
 			continue;
 
 		if ( !choice.empty() )
 			choice.Append ( _T ( "<" ) );
-		choice.Append ( conversion );
+		choice.Append ( it->first );
 	}
 	if ( !choice.empty() )
 	{
@@ -720,14 +696,13 @@ void XmlCtrl::handleAmpersand ( wxKeyEvent& event )
 	{
 		AddText ( _T ( "&" ) );
 		wxString choice;
-		std::set<std::string>::iterator it;
-		it = entitySet.begin();
-		choice += wxString ( it->c_str(), wxConvUTF8, it->size() );
+		std::set<wxString>::iterator it = entitySet.begin();
+		choice += *it;
 		choice += _T ( ";" );
 		for ( it++; it != entitySet.end(); it++ )
 		{
 			choice += _T ( "<" );
-			choice += wxString ( it->c_str(), wxConvUTF8, it->size() );
+			choice += *it;
 			choice += _T ( ";" );
 		}
 		UserListShow ( 0, choice );
@@ -967,26 +942,13 @@ wxString XmlCtrl::getLastElementName ( int pos )
 	return GetTextRange ( startPos, iteratorPos );
 }
 
-std::set<wxString> XmlCtrl::getChildren ( const wxString& parent )
+const std::set<wxString> &XmlCtrl::getChildren ( const wxString& parent )
 {
-	std::string parentUtf8 = ( const char * ) parent.mb_str ( wxConvUTF8 );
-	std::set<wxString> mySet;
-
-	if ( elementMap.find ( parentUtf8 ) == elementMap.end() )
+	static std::set<wxString> mySet;
+	if ( elementMap.find ( parent ) == elementMap.end() )
 		return mySet;
 
-	std::set<std::string> myUtf8Set = elementMap[parentUtf8];
-	std::string currentUtf8;
-	wxString currentWide;
-
-	std::set<std::string>::iterator it;
-	for ( it = myUtf8Set.begin(); it != myUtf8Set.end(); it++ )
-	{
-		currentUtf8 = *it;
-		currentWide = wxString ( currentUtf8.c_str(), wxConvUTF8, currentUtf8.size() );
-		mySet.insert ( currentWide );
-	}
-	return mySet;
+	return elementMap[parent];
 }
 
 wxString XmlCtrl::getLastAttributeName ( int pos )
@@ -1095,11 +1057,11 @@ void XmlCtrl::updatePromptMaps ( const char *buffer, size_t bufferLen )
 	xpg->getElementStructureMap ( elementStructureMap );
 	xpg->getEntitySet ( entitySet );
 	grammarFound = xpg->getGrammarFound();
-	entitySet.insert ( "amp" );
-	entitySet.insert ( "apos" );
-	entitySet.insert ( "quot" );
-	entitySet.insert ( "lt" );
-	entitySet.insert ( "gt" );
+	entitySet.insert ( _T ( "amp" ) );
+	entitySet.insert ( _T ( "apos" ) );
+	entitySet.insert ( _T ( "quot" ) );
+	entitySet.insert ( _T ( "lt" ) );
+	entitySet.insert ( _T ( "gt" ) );
 }
 
 void XmlCtrl::applyProperties (
@@ -1823,16 +1785,15 @@ wxString XmlCtrl::getOpenTag ( const wxString& element )
 {
 	wxString openTag;
 	openTag = _T ( "<" ) + element;
-	std::set<std::string> requiredAttributeSet;
-	std::set<std::string>::iterator it;
-	std::string key = ( const char * ) element.mb_str ( wxConvUTF8 );
-	requiredAttributeSet = requiredAttributeMap[key];
+	std::set<wxString> requiredAttributeSet;
+	std::set<wxString>::iterator it;
+	requiredAttributeSet = requiredAttributeMap[element];
 	if ( !requiredAttributeSet.empty() )
 	{
 		for ( it = requiredAttributeSet.begin(); it != requiredAttributeSet.end(); it++ )
 		{
 			openTag += _T ( " " );
-			openTag += wxString ( it->c_str(), wxConvUTF8, it->size() );
+			openTag += *it;
 			openTag += _T ( "=\"\"" );
 		}
 	}
@@ -1970,31 +1931,24 @@ void XmlCtrl::toggleLineBackground()
 	SetCaretLineBackground ( ( lineBackgroundState == BACKGROUND_STATE_NORMAL ) ? baseBackground : alternateBackground );
 }
 
-std::set<std::string> XmlCtrl::getEntitySet()
+const std::set<wxString> &XmlCtrl::getEntitySet()
 {
 	return entitySet;
 }
 
-std::set<std::string> XmlCtrl::getAttributes ( const wxString& parent )
+const std::set<std::string> &XmlCtrl::getAttributes ( const wxString& parent )
 {
-	std::set<std::string> retVal;
+	static std::set<std::string> retVal;
 	return retVal;
 }
 
-std::string XmlCtrl::getElementStructure ( const wxString& element )
+wxString XmlCtrl::getElementStructure ( const wxString& element )
 {
-	std::string stdElement, ret;
-	stdElement = element.mb_str ( wxConvUTF8);
-	
-	if ( elementStructureMap.find ( stdElement ) == elementStructureMap.end() )
+	if ( elementStructureMap.find ( element ) == elementStructureMap.end() )
 	{
-		ret = "";
+		return wxEmptyString;
 	}
-	else
-	{
-		ret = elementStructureMap[stdElement];
-	}
-	return ret;
+	return elementStructureMap[element];
 }
 
 bool XmlCtrl::backgroundValidate()

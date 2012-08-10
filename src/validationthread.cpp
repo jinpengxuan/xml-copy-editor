@@ -14,7 +14,7 @@ ValidationThread::ValidationThread (
 	bool *success,
 	bool *release,
 	std::pair<int, int> *position,
-	std::string *message ) : wxThread()
+	wxString *message ) : wxThread()
 {
 	if (!buffer || !success || !position || !message )
 	{
@@ -69,7 +69,7 @@ void *ValidationThread::Entry()
 		{
 			*mySuccessPtr = true;
 			*myPositionPtr = std::make_pair ( 0, 0 );
-			*myMessagePtr = "";
+			*myMessagePtr = wxEmptyString;
 		}
 	}
 	return NULL;

@@ -17,6 +17,7 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
+#include <wx/wx.h>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -27,11 +28,11 @@
 #include "xmlshallowvalidator.h"
 
 XmlShallowValidator::XmlShallowValidator (
-    std::map<std::string, std::set<std::string> > &elementMap,
-    std::map<std::string, std::map<std::string, std::set<std::string> > >
+    std::map<wxString, std::set<wxString> > &elementMap,
+    std::map<wxString, std::map<wxString, std::set<wxString> > >
     &attributeMap,
-    std::map<std::string, std::set<std::string> > &requiredAttributeMap,
-    std::set<std::string> &entitySet,
+    std::map<wxString, std::set<wxString> > &requiredAttributeMap,
+    std::set<wxString> &entitySet,
     int maxLine,
     bool segmentOnly ) : vd ( new XmlShallowValidatorData() )
 {
@@ -71,30 +72,34 @@ void XMLCALL XmlShallowValidator::start ( void *data,
 	++ ( vd->depth );
 
 	//check element ok
-	std::string parent = vd->getParent();
+	wxString parent ( vd->getParent().c_str(), wxConvUTF8 );
 	if ( parent.empty() )
 		return;
 
 	if ( vd->elementMap.empty() )
 		return;
 
-	if ( !vd->elementMap[parent].count ( vd->getElement() ) )
+	wxString element ( vd->getElement().c_str(), wxConvUTF8 );
+	if ( !vd->elementMap[parent].count ( element ) )
 	{
 		vd->isValid = false;
 		vd->positionVector.push_back (
 		    make_pair ( XML_GetCurrentLineNumber ( vd->p ), XML_GetCurrentColumnNumber ( vd->p ) ) );
 	}
 
-	std::map<std::string, std::set<std::string> > attributeMap;
-	size_t requiredAttributeCount = vd->requiredAttributeMap[el].size();
-	std::string currentAttribute;
+	element = wxString ( el, wxConvUTF8 );
+
+	std::map<wxString, std::set<wxString> > attributeMap;
+	size_t requiredAttributeCount = vd->requiredAttributeMap[element].size();
+	wxString currentAttribute;
 
 	while ( *attr )
 	{
-		attributeMap = vd->attributeMap[el];
+		attributeMap = vd->attributeMap[element];
 
 		// check for existence
-		if ( !attributeMap.count ( *attr ) )
+		currentAttribute = wxString ( *attr, wxConvUTF8 );
+		if ( !attributeMap.count ( currentAttribute ) )
 		{
 			vd->isValid = false;
 			vd->positionVector.push_back ( make_pair (
@@ -102,9 +107,8 @@ void XMLCALL XmlShallowValidator::start ( void *data,
 			                                   XML_GetCurrentColumnNumber ( vd->p ) ) );
 		}
 		// check for requirement
-		currentAttribute = ( const char * ) *attr;
-		if ( vd->requiredAttributeMap[el].find ( currentAttribute ) !=
-		        vd->requiredAttributeMap[el].end() )
+		if ( vd->requiredAttributeMap[element].find ( currentAttribute ) !=
+		        vd->requiredAttributeMap[element].end() )
 			--requiredAttributeCount;
 
 		attr += 2;

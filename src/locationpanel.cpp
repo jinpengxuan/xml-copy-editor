@@ -82,15 +82,14 @@ void LocationPanel::update (
 	}
 	else
 	{
-		std::string structure = doc->getElementStructure ( parent );
+		wxString structure = doc->getElementStructure ( parent );
 		
 		if (!structure.empty () )
 		{
 			indentStructure( structure );
 			structureEdit->Show ( true );
-			wxString wideStructure = wxString ( structure.c_str(), wxConvUTF8, structure.size() );
 			structureEdit->SetReadOnly ( false );
-			structureEdit->SetText ( wideStructure );
+			structureEdit->SetText ( structure );
 			structureEdit->SetReadOnly ( true );
 
 			wxSize clientSize = GetClientSize();
@@ -115,12 +114,12 @@ void LocationPanel::update (
 	
 }
 
-void LocationPanel::indentStructure ( std::string& structure )
+void LocationPanel::indentStructure ( wxString& structure )
 {
-	std::string indented;
-	char *s = (char *) structure.c_str();
+	wxString indented;
+	wxString::const_iterator s = structure.begin();
 	int indent = 0;
-	const char *indentMark = "\t";
+	const static wxString indentMark ( _T("\t") );
 
 	int count = 0;
 	bool justSeenContent = false;
@@ -136,7 +135,7 @@ void LocationPanel::indentStructure ( std::string& structure )
 				indented += *s;
 			for ( int i = 0; i < indent; i++ )
 			{
-				indented += (char *)indentMark;
+				indented += indentMark;
 			}
 			if (justSeenContent)
 				indented += *s;
@@ -146,7 +145,7 @@ void LocationPanel::indentStructure ( std::string& structure )
 			indented += '\n';
 		
 			for (int i = 0; indent && i < indent; i++)
-				indented += (char *)indentMark;				
+				indented += indentMark;
 			justSeenContent = false;
 		}
 		else if (*s == ')')
@@ -157,13 +156,13 @@ void LocationPanel::indentStructure ( std::string& structure )
 			}
 			indent--;
 			for (int i = 0; indent && i < indent; i++)
-				indented += (char *)indentMark;
+				indented += indentMark;
 			indented += *s;
 			indented += '\n';
 			if (*( s + 1 ) && *(s + 1) != ')' )
 			{
 				for (int i = 0; i < indent; i++)
-					indented += (char *)indentMark;
+					indented += indentMark;
 			}
 			justSeenContent = false;
 		}

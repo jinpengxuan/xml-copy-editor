@@ -33,11 +33,11 @@ struct XmlShallowValidatorData : public ParserData
 {
 	XmlShallowValidatorData()
 	{}
-	std::map<std::string, std::set<std::string> > elementMap;
-	std::map<std::string, std::map<std::string, std::set<std::string> > >
+	std::map<wxString, std::set<wxString> > elementMap;
+	std::map<wxString, std::map<wxString, std::set<wxString> > >
 	attributeMap;
-	std::map<std::string, std::set<std::string> > requiredAttributeMap;
-	std::set<std::string> entitySet;
+	std::map<wxString, std::set<wxString> > requiredAttributeMap;
+	std::set<wxString> entitySet;
 	std::vector<std::pair<int, int> > positionVector;
 	bool isValid, segmentOnly;
 	int depth, maxLine;
@@ -49,11 +49,11 @@ class XmlShallowValidator : public WrapExpat
 {
 	public:
 		XmlShallowValidator (
-		    std::map<std::string, std::set<std::string> > &elementMap,
-		    std::map<std::string, std::map<std::string, std::set<std::string> > >
+		    std::map<wxString, std::set<wxString> > &elementMap,
+		    std::map<wxString, std::map<wxString, std::set<wxString> > >
 		    &attributeMap,
-		    std::map<std::string, std::set<std::string> > &requiredAttributeMap,
-		    std::set<std::string> &entitySet,
+		    std::map<wxString, std::set<wxString> > &requiredAttributeMap,
+		    std::set<wxString> &entitySet,
 		    int maxLine = 0,
 		    bool segmentOnly = false );
 		virtual ~XmlShallowValidator();
