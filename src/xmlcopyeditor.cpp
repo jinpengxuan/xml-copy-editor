@@ -5646,20 +5646,22 @@ void MyFrame::xmliseWideTextNode ( wxString& s )
 
 int MyFrame::getFileType ( const wxString& fileName )
 {
-	std::string fileNameLocal, fileNameLocalLC;
-	fileNameLocal = fileName.mb_str ( wxConvLocal );
-	fileNameLocalLC = CaseHandler::lowerCase ( fileNameLocal );
+	wxString extension;
+	wxFileName::SplitPath ( fileName, NULL/*Path*/, NULL/*Name*/, &extension );
+	if ( extension.size() != 3 )
+		return FILE_TYPE_XML;
 
-	if ( fileNameLocalLC.find ( ".dtd" ) != std::string::npos ||
-	        fileNameLocalLC.find ( ".ent" ) != std::string::npos )
+	extension.MakeLower();
+
+	if ( extension == _T ( "dtd" ) || extension == _T ( "ent" ) )
 		return FILE_TYPE_DTD;
-	else if ( fileNameLocalLC.find ( ".css" ) != std::string::npos )
+	else if ( extension == _T ( "css" ) )
 		return FILE_TYPE_CSS;
-	else if ( fileNameLocalLC.find ( ".php" ) != std::string::npos )
+	else if ( extension == _T ( "php" ) )
 		return FILE_TYPE_PHP;
-	else if ( fileNameLocalLC.find ( ".exe" ) != std::string::npos )
+	else if ( extension == _T ( "exe" ) )
 		return FILE_TYPE_BINARY;
-	else if ( fileNameLocalLC.find ( ".rnc" ) != std::string::npos )
+	else if ( extension == _T ( "rnc" ) )
 		return FILE_TYPE_RNC;
 	return FILE_TYPE_XML;
 }

@@ -94,7 +94,7 @@ class XmlCtrl: public wxStyledTextCtrl
 	public:
 		XmlCtrl (
 		    wxWindow *parent,
-		    XmlCtrlProperties propertiesParameter,
+		    const XmlCtrlProperties &propertiesParameter,
 		    bool *protectTagsParameter,
 		    int visibilityStateParameter = SHOW_TAGS,
 		    int typeParameter = FILE_TYPE_XML,
@@ -112,7 +112,7 @@ class XmlCtrl: public wxStyledTextCtrl
 		int getType();
 		int getParentCloseAngleBracket ( int pos, int range = USHRT_MAX * 4 );
 		void applyProperties (
-		    XmlCtrlProperties propertiesParameter,
+		    const XmlCtrlProperties &propertiesParameter,
 		    bool zoomOnly = false );
 		void applyVisibilityState ( int state = SHOW_TAGS );
 		void updatePromptMaps();

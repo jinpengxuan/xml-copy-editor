@@ -45,7 +45,7 @@ wxCriticalSection xmlcopyeditorCriticalSection;
 
 XmlCtrl::XmlCtrl (
     wxWindow *parent,
-    XmlCtrlProperties propertiesParameter,
+    const XmlCtrlProperties &propertiesParameter,
     bool *protectTagsParameter,
     int visibilityStateParameter,
     int typeParameter,
@@ -1065,7 +1065,7 @@ void XmlCtrl::updatePromptMaps ( const char *buffer, size_t bufferLen )
 }
 
 void XmlCtrl::applyProperties (
-    XmlCtrlProperties propertiesParameter,
+    const XmlCtrlProperties &propertiesParameter,
     bool zoomOnly )
 {
 	properties = propertiesParameter;
