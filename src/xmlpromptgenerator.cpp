@@ -435,7 +435,7 @@ void XmlPromptGenerator::handleSchema (
 
 	std::string schemaPath = PathResolver::run ( path, ( d->auxPath.empty() ) ? d->basePath : d->auxPath);
 
-	XercesDOMParser *parser = new XercesDOMParser();
+	std::auto_ptr<XercesDOMParser> parser ( new XercesDOMParser() );
 	parser->setDoNamespaces ( true );
 	parser->setDoSchema ( true );
 	parser->setValidationSchemaFullChecking ( true );
@@ -443,7 +443,6 @@ void XmlPromptGenerator::handleSchema (
 	Grammar *rootGrammar = parser->loadGrammar ( schemaPath.c_str(), Grammar::SchemaGrammarType );
 	if ( !rootGrammar )
 	{
-		delete parser;
 		return;
 	}
 
@@ -452,8 +451,6 @@ void XmlPromptGenerator::handleSchema (
 
 	if ( !elemEnum.hasMoreElements() )
 	{
-		delete grammar;
-		delete parser;
 		return;
 	}
 
@@ -512,7 +509,6 @@ void XmlPromptGenerator::handleSchema (
 				d->requiredAttributeMap[element].insert ( attribute );
 		}
 	}
-    delete parser;
 }
 
 void XmlPromptGenerator::getContent (
