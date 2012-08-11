@@ -35,7 +35,7 @@
 "CHUANG KUO-PING, Justin Dearing, Serhij Dubyk,\n"\
 "Antonio Angelo, Jose Luis Rivero, Siarhei Kuchuk,\n"\
 "Ian Abbott, Kev James, Marcos Pérez González, Anh Trinh,\n"\
-"Rob Elemans, Robert Falcó Miramontes and Zane Ji.")
+"Rob Elemans, Robert Falcó Miramontes and Zane U. Ji.")
 #define ABOUT_LICENSE _T(\
 "This program is free software; you can redistribute it\n"\
 "and/or modify it under the terms of the GNU General Public\n"\
