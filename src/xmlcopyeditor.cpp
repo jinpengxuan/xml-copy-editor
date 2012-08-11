@@ -1908,6 +1908,8 @@ void MyFrame::OnDialogReplaceAll ( wxFindDialogEvent& event )
 	doc->SetTargetEnd ( doc->GetLength() );
 	doc->SetSearchFlags ( flags );
 
+	doc->BeginUndoAction();
+
 	int newLocation, replacementCount, regexWidth;
 	newLocation = replacementCount = regexWidth = 0;
 
@@ -1926,8 +1928,10 @@ void MyFrame::OnDialogReplaceAll ( wxFindDialogEvent& event )
 		doc->SetTargetEnd ( doc->GetLength() );
 		++replacementCount;
 	}
-	wxString msg;
 
+	doc->EndUndoAction();
+
+	wxString msg;
 	msg.Printf (
 	    ngettext ( L"%i replacement made", L"%i replacements made", replacementCount ),
 	    replacementCount );
