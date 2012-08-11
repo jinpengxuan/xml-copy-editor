@@ -70,6 +70,18 @@
 #include "xpm/appicon.xpm"
 #endif
 
+typedef size_t universal_iconv (iconv_t cd,
+        char* * inbuf, size_t * inbytesleft,
+        char* * outbuf, size_t * outbytesleft);
+/* On other platform, it could be:
+size_t iconv (iconv_t cd,
+        const char* * inbuf, size_t * inbytesleft,
+        char* * outbuf, size_t * outbytesleft);
+and a char ** can't be assigned to const char **
+    http://c-faq.com/ansi/constmismatch.html
+Let's deal with this mess.
+*/
+
 BEGIN_EVENT_TABLE ( MyFrame, wxFrame )
 	EVT_ACTIVATE_APP ( MyFrame::OnActivateApp )
 	EVT_CLOSE ( MyFrame::OnFrameClose )
@@ -2949,7 +2961,7 @@ bool MyFrame::openFile ( wxString& fileName, bool largeFile )
 	int type = getFileType ( fileName );
 	std::string auxPath = getAuxPath ( ( const char * ) fileName.mb_str ( wxConvLocal ) );
 
-	char *docBuffer = 0;
+	char *docBuffer = NULL;
 	size_t docBufferLen = 0;
 	bool fileEmpty = false;
 
@@ -3111,11 +3123,8 @@ bool MyFrame::openFile ( wxString& fileName, bool largeFile )
 		finalBuffer = iconvBuffer; // iconvBuffer will be incremented by iconv
 		size_t nconv;
 
-		nconv = iconv (
+		nconv = reinterpret_cast < universal_iconv & > ( iconv ) (
 		            cd,
-#if defined(__WXMSW__) && !wxCHECK_VERSION(2,9,0)
-		            ( const char ** )
-#endif
 		            &docBuffer,
 		            &docBufferLeft,
 		            &iconvBuffer,
@@ -4701,7 +4710,7 @@ bool MyFrame::saveFile ( XmlDoc *doc, wxString& fileName, bool checkLastModified
 
 					char *utf8BufferPtr = ( char * ) utf8Buffer.c_str();
 
-					nconv = iconv (
+					nconv = reinterpret_cast < universal_iconv & > ( iconv ) (
 					            cd,
 					            &utf8BufferPtr,
 					            &utf8BufferLeft,
