@@ -403,7 +403,7 @@ void XmlPromptGenerator::handleSchema (
 	if ( !d->isRootElement )
 		return;
 	// first check for XML Schema association
-	const char **schemaAttr = ( const XML_Char ** ) attr; // now redundant; could use attr
+	const char **schemaAttr = ( const char ** ) attr; // now redundant; could use attr
 	std::string path;
 	for ( ; *schemaAttr; schemaAttr += 2 )
 	{
