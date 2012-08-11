@@ -28,7 +28,6 @@
 enum
 {
 	APPLICATION_DIR_BROWSE,
-	BROWSER_COMMAND_BROWSE,
 	FONT_BROWSE
 };
 
@@ -39,7 +38,6 @@ class MyPropertySheet : public wxPropertySheetDialog
 		    wxWindow *parent,
 		    XmlCtrlProperties& propertiesParameter,
 		    wxString& applicationDirParameter,
-		    wxString& browserCommandParameter,
 		    bool rememberOpenTabsParameter,
 		    bool libxmlNetAccess,
 		    bool singleInstanceCheck,
@@ -56,11 +54,9 @@ class MyPropertySheet : public wxPropertySheetDialog
 		    long style = wxDEFAULT_DIALOG_STYLE );
 		~MyPropertySheet();
 		void OnOk ( wxCommandEvent& e );
-		void OnBrowserCommandBrowse ( wxCommandEvent& e );
 		void OnApplicationDirBrowse ( wxCommandEvent& e );
 		XmlCtrlProperties getProperties();
 		wxString getApplicationDir();
-		wxString getBrowserCommand();
 		bool getSingleInstanceCheck();
 		bool getRememberOpenTabs();
 		bool getLibxmlNetAccess();
@@ -93,9 +89,9 @@ class MyPropertySheet : public wxPropertySheetDialog
 		*expandInternalEntitiesBox,
 		*insertCloseTagBox;
 		wxChoice *languageBox, *fontBox;
-		wxTextCtrl *applicationDirEdit, *browserCommandEdit;
+		wxTextCtrl *applicationDirEdit;
 		XmlCtrlProperties properties;
-		wxString applicationDir, browserCommand;
+		wxString applicationDir;
 		bool singleInstanceCheck,
 		rememberOpenTabs,
 		libxmlNetAccess,

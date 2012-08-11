@@ -26,16 +26,12 @@ BEGIN_EVENT_TABLE ( MyPropertySheet, wxPropertySheetDialog )
 	EVT_BUTTON (
 	    APPLICATION_DIR_BROWSE,
 	    MyPropertySheet::OnApplicationDirBrowse )
-	EVT_BUTTON (
-	    BROWSER_COMMAND_BROWSE,
-	    MyPropertySheet::OnBrowserCommandBrowse )
 END_EVENT_TABLE()
 
 MyPropertySheet::MyPropertySheet (
     wxWindow *parent,
     XmlCtrlProperties& propertiesParameter,
     wxString& applicationDirParameter,
-    wxString& browserCommandParameter,
     bool rememberOpenTabsParameter,
     bool libxmlNetAccessParameter,
     bool singleInstanceCheckParameter,
@@ -49,11 +45,11 @@ MyPropertySheet::MyPropertySheet (
     wxString title,
     const wxPoint& position,
     const wxSize& size,
-    long style ) : wxPropertySheetDialog (
-		        parent, id, title, position, size, style ),
-		properties ( propertiesParameter ),
-		applicationDir ( applicationDirParameter ),
-		browserCommand ( browserCommandParameter )
+    long style
+    )
+	: wxPropertySheetDialog ( parent, id, title, position, size, style )
+	, properties ( propertiesParameter )
+	, applicationDir ( applicationDirParameter )
 {
 	CreateButtons ( wxOK | wxCANCEL );
 
@@ -140,7 +136,6 @@ MyPropertySheet::MyPropertySheet (
 	wxPanel *generalPanel = new wxPanel ( GetBookCtrl() );
 	wxBoxSizer *vsizer = new wxBoxSizer ( wxVERTICAL );
 	wxBoxSizer *hsizer = new wxBoxSizer ( wxHORIZONTAL );
-	wxBoxSizer *hsizerBrowser = new wxBoxSizer ( wxHORIZONTAL );
 	wxBoxSizer *hsizerCheckboxes = new wxBoxSizer ( wxHORIZONTAL );
 	wxBoxSizer *vsizerCheckbox1 = new wxBoxSizer ( wxVERTICAL );
 	wxBoxSizer *vsizerCheckbox2 = new wxBoxSizer ( wxVERTICAL );
@@ -161,22 +156,6 @@ MyPropertySheet::MyPropertySheet (
 	    _ ( "Browse" ),
 	    wxDefaultPosition,
 	    wxSize ( -1, applicationDirEdit->GetSize().GetHeight() ) );
-	wxStaticText *labelBrowser = new wxStaticText (
-	    generalPanel,
-	    wxID_ANY,
-	    _ ( "Browser" ) );
-	browserCommandEdit = new wxTextCtrl (
-	    generalPanel,
-	    wxID_ANY,
-	    browserCommand,
-	    wxDefaultPosition,
-	    wxSize ( 240, -1 ) );
-	wxButton *browseCommand = new wxButton (
-	    generalPanel,
-	    BROWSER_COMMAND_BROWSE,
-	    _ ( "Browse" ),
-	    wxDefaultPosition,
-	    wxSize ( -1, browserCommandEdit->GetSize().GetHeight() ) );
 
 	wxStaticText *labelLanguage = new wxStaticText (
 	    generalPanel,
@@ -233,12 +212,8 @@ MyPropertySheet::MyPropertySheet (
 
 	hsizer->Add ( applicationDirEdit, 0, wxALL | wxALIGN_LEFT, 0 );
 	hsizer->Add ( browse, 0, wxLEFT | wxALIGN_LEFT, 5 );
-	hsizerBrowser->Add ( browserCommandEdit, 0, wxALL | wxALIGN_LEFT, 0 );
-	hsizerBrowser->Add ( browseCommand, 0, wxLEFT | wxALIGN_LEFT, 5 );
 	vsizer->Add ( label, 0, wxLEFT | wxTOP | wxALIGN_LEFT, 5 );
 	vsizer->Add ( hsizer, 0, wxALL | wxALIGN_LEFT, 5 );
-	vsizer->Add ( labelBrowser, 0, wxLEFT | wxTOP | wxALIGN_LEFT, 5 );
-	vsizer->Add ( hsizerBrowser, 0, wxALL | wxALIGN_LEFT, 5 );
 
 	vsizer->Add ( labelLanguage, 0, wxLEFT | wxTOP | wxALIGN_LEFT, 5 );
 	vsizer->Add ( languageBox, 0, wxALL | wxALIGN_LEFT, 5 );
@@ -293,7 +268,6 @@ void MyPropertySheet::OnOk ( wxCommandEvent& e )
 	else
 		applicationDir = testDir;
 
-	browserCommand = browserCommandEdit->GetValue(); // permit incorrect value
 	singleInstanceCheck = singleInstanceCheckBox->GetValue();
 	restoreLayout = restoreLayoutBox->GetValue();
 	rememberOpenTabs = rememberOpenTabsBox->GetValue();
@@ -319,13 +293,6 @@ void MyPropertySheet::OnApplicationDirBrowse ( wxCommandEvent& e )
 		applicationDirEdit->SetValue ( browseDialog->GetPath() );
 }
 
-void MyPropertySheet::OnBrowserCommandBrowse ( wxCommandEvent& e )
-{
-	wxFileDialog *browseDialog = new wxFileDialog ( this );
-	if ( browseDialog->ShowModal() == wxID_OK )
-		browserCommandEdit->SetValue ( browseDialog->GetPath() );
-}
-
 XmlCtrlProperties MyPropertySheet::getProperties()
 {
 	return properties;
@@ -334,11 +301,6 @@ XmlCtrlProperties MyPropertySheet::getProperties()
 wxString MyPropertySheet::getApplicationDir()
 {
 	return applicationDir;
-}
-
-wxString MyPropertySheet::getBrowserCommand()
-{
-	return browserCommand;
 }
 
 bool MyPropertySheet::getSingleInstanceCheck()

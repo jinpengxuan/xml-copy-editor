@@ -70,7 +70,6 @@ class StyleDialog : public wxDialog
 		    const wxString& fileNameParameter,
 		    const wxString& ruleSetDirectoryParameter,
 		    const wxString& filterDirectoryParameter,
-		    const wxString& browserParameter,
 		    const wxString& ruleSetPresetParameter,
 		    const wxString& filterPresetParameter,
   #ifdef __WXMSW__
@@ -121,7 +120,7 @@ class StyleDialog : public wxDialog
 		wxStatusBar *status;
 		std::string bufferUtf8, aspellDataPath, aspellDictPath;
 		std::set<wxString> tempFiles;
-		wxString fileName, ruleSetDirectory, filterDirectory, browser;
+		wxString fileName, ruleSetDirectory, filterDirectory;
 		wxString ruleSetPreset, filterPreset;
 		vector<ContextMatch> matchVector;
 		int type;

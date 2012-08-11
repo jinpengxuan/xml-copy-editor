@@ -309,7 +309,6 @@ class MyFrame : public wxFrame
 		    XmlDoc *doc,
 		    const wxString& schemaName,
 		    wxString& fileName );
-		void navigate ( const wxString& url );
 		void closePane();
 		void closeFindReplacePane();
 		void closeCommandPane();
@@ -410,7 +409,6 @@ class MyFrame : public wxFrame
 		  lastRelaxNGSchema,
 		  lastDtdPublicAux,
 		  openTabsOnClose,
-		  browserCommand,
 		  layout,
 		  defaultLayout,
 		  lastParent,
@@ -492,7 +490,6 @@ class MyFrame : public wxFrame
 		    bool checkLastModified = true );
 		int getFileType ( const wxString& fileName );
 		long getNotebookStyleMask();
-		wxString getLinuxBrowser();
 		bool isSpecialFileType ( const wxString& fileName );
 		wxString getHtmlBuffer();
 		void encodingMessage();

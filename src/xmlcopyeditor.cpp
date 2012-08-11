@@ -656,8 +656,6 @@ MyFrame::MyFrame (
 
 		applicationDir =
 		    config->Read ( _T ( "applicationDir" ), wxStandardPaths::Get().GetDataDir() );
-		browserCommand =
-		    config->Read ( _T ( "browserCommand" ), wxEmptyString );
 
 		// if default value != true, type as long int
 		long valZoom, longFalse;
@@ -751,7 +749,6 @@ MyFrame::MyFrame (
 		rememberOpenTabs = true;
 		libxmlNetAccess = false;
 		openTabsOnClose = wxEmptyString;
-		browserCommand = wxEmptyString;
 		notebookStyle = ID_NOTEBOOK_STYLE_VC8_COLOR;
 		saveBom = unlimitedUndo = true;
 		layout = wxEmptyString;
@@ -803,15 +800,6 @@ MyFrame::MyFrame (
 		findFlags |= wxFR_MATCHCASE;
 
 	findData.SetFlags ( findFlags );
-
-	if ( browserCommand.empty() )
-	{
-#ifdef __WXMSW__
-		browserCommand = binDir + _T ( "navigate.exe" );
-#else
-		browserCommand = getLinuxBrowser();
-#endif
-	}
 
 	// initialise document count for tab labels
 	documentCount = 1;
@@ -1023,7 +1011,6 @@ MyFrame::~MyFrame()
 	config->Write ( _T ( "toolbarVisible" ), toolbarVisible );
 	config->Write ( _T ( "protectTags" ), protectTags );
 	config->Write ( _T ( "visibilityState" ), visibilityState );
-	config->Write ( _T ( "browserCommand" ), browserCommand );
  	config->Write ( _T ( "showLocationPane" ), manager.GetPane ( locationPanel ).IsShown() );
 	config->Write ( _T ( "showInsertChildPane" ), manager.GetPane ( insertChildPanel ).IsShown() );
 	config->Write ( _T ( "showInsertSiblingPane" ), manager.GetPane ( insertSiblingPanel ).IsShown() );
@@ -1069,30 +1056,6 @@ MyFrame::~MyFrame()
 
 	manager.UnInit();
 	wxTheClipboard->Flush();
-}
-
-wxString MyFrame::getLinuxBrowser()
-{
-	wxString s;
-	const int stringArrayLen = 9;
-	wxString stringArray[stringArrayLen];
-	stringArray[0] = _T ( "/usr/bin/firefox" );
-	stringArray[1] = _T ( "/usr/bin/mozilla" );
-	stringArray[2] = _T ( "/usr/bin/opera" );
-	stringArray[3] = _T ( "/usr/bin/dillo" );
-	stringArray[4] = _T ( "/opt/gnome/bin/epiphany" );
-	stringArray[5] = _T ( "/opt/gnome/bin/galeon" );
-	stringArray[6] = _T ( "/opt/kde/bin/konqueror" );
-	stringArray[7] = _T ( "/opt/mozilla/bin/firefox" );
-	stringArray[8] = wxEmptyString; // empty option is safe
-
-	for ( int i = 0; i < stringArrayLen; i++ )
-	{
-		s = stringArray[i];
-		if ( wxFileName::FileExists ( s ) )
-			break;
-	}
-	return s;
 }
 
 void MyFrame::showTopBars ( bool b )
@@ -2381,7 +2344,7 @@ void MyFrame::OnBrowser ( wxCommandEvent& WXUNUSED ( event ) )
 		wtfn.setKeepFiles ( true );
 	}
 
-	navigate ( sourceFileName );
+	wxLaunchDefaultBrowser ( sourceFileName );
 }
 
 void MyFrame::OnHelp ( wxCommandEvent& event )
@@ -2533,7 +2496,6 @@ void MyFrame::OnOptions ( wxCommandEvent& WXUNUSED ( event ) )
 	                                          this,
 	                                          properties,
 	                                          applicationDir,
-	                                          browserCommand,
 	                                          rememberOpenTabs,
 	                                          libxmlNetAccess,
 	                                          singleInstanceCheck,
@@ -2550,7 +2512,6 @@ void MyFrame::OnOptions ( wxCommandEvent& WXUNUSED ( event ) )
 		properties = mpsd->getProperties();
 		applyEditorProperties();
 		applicationDir = mpsd->getApplicationDir();
-		browserCommand = mpsd->getBrowserCommand();
 		rememberOpenTabs = mpsd->getRememberOpenTabs();
 		libxmlNetAccess = mpsd->getLibxmlNetAccess();
 		singleInstanceCheck = mpsd->getSingleInstanceCheck();
@@ -3413,7 +3374,6 @@ void MyFrame::OnSpelling ( wxCommandEvent& event )
 	                               doc->getShortFileName(),
 	                               ruleSetDir,
 	                               filterDir,
-	                               browserCommand,
 				                   ( type == ID_TYPE_SPELL ) ? dictionaryPreset : ruleSetPreset,
 	                               filterPreset,
  #ifdef __WXMSW__
@@ -4343,12 +4303,12 @@ void MyFrame::OnEncoding ( wxCommandEvent& event )
 
 void MyFrame::OnHome ( wxCommandEvent& event )
 {
-	navigate ( _T ( "http://xml-copy-editor.sourceforge.net" ) );
+	wxLaunchDefaultBrowser ( _T ( "http://xml-copy-editor.sourceforge.net" ) );
 }
 
 void MyFrame::OnDownloadSource ( wxCommandEvent& event )
 {
-	navigate ( _T ( "http://xml-copy-editor.svn.sourceforge.net/viewvc/xml-copy-editor/" ) );
+	wxLaunchDefaultBrowser ( _T ( "http://xml-copy-editor.svn.sourceforge.net/viewvc/xml-copy-editor/" ) );
 }
 
 void MyFrame::OnToolbarVisible ( wxCommandEvent& event )
@@ -4475,32 +4435,7 @@ void MyFrame::OnFeedback ( wxCommandEvent& event )
 {
 	wxString forumUrl =
 	    _T ( "https://sourceforge.net/forum/forum.php?forum_id=475215" );
-	navigate ( forumUrl );
-}
-
-void MyFrame::navigate ( const wxString& url )
-{
-	wxString testString = browserCommand;
-	testString.Replace ( _T ( " -remote" ), wxEmptyString, true );
-	if ( browserCommand.empty() )
-	{
-		messagePane (
-		    _ ( "Cannot open in browser: no browser defined (see Tools, Options..., General)" ),
-		    CONST_STOP );
-		return;
-	}
-	else if ( !wxFileName::FileExists ( testString ) )
-	{
-		wxString message;
-		message.Printf (
-		    _ ( "Cannot open in browser: %s not found (see Tools, Options..., General)" ),
-		    testString.c_str() );
-		messagePane ( message, CONST_STOP );
-		return;
-	}
-	wxString cmd;
-	cmd = browserCommand + _T ( " \"" ) + url + _T ( "\"" );
-	wxExecute ( cmd, wxEXEC_ASYNC ); // make ASYNC an option?
+	wxLaunchDefaultBrowser ( forumUrl );
 }
 
 void MyFrame::findAgain ( wxString s, int flags )

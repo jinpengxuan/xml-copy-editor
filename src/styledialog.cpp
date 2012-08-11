@@ -89,7 +89,6 @@ StyleDialog::StyleDialog (
     const wxString& fileNameParameter,
     const wxString& ruleSetDirectoryParameter,
     const wxString& filterDirectoryParameter,
-    const wxString& browserParameter,
     const wxString& ruleSetPresetParameter,
     const wxString& filterPresetParameter,
 #if !defined(USE_ENCHANT) && defined(__WXMSW__)
@@ -115,7 +114,6 @@ StyleDialog::StyleDialog (
 		fileName ( fileNameParameter ),
 		ruleSetDirectory ( ruleSetDirectoryParameter ),
 		filterDirectory ( filterDirectoryParameter ),
-		browser ( browserParameter ),
 		ruleSetPreset ( ruleSetPresetParameter ),
 		filterPreset ( filterPresetParameter ),
 		type(typeParameter),
@@ -678,8 +676,7 @@ void StyleDialog::OnStyleWebReport ( wxCommandEvent& event )
 	if ( !wxFileName::FileExists ( tempNameWide ) )
 		return;
 
-	wxString cmd = browser + _T ( " \"" ) + tempNameWide + _T ( "\"" );
-	wxExecute ( cmd, wxEXEC_SYNC );
+	wxLaunchDefaultBrowser ( tempNameWide );
 }
 
 void StyleDialog::OnStyleWebSummary ( wxCommandEvent& event )
@@ -745,8 +742,7 @@ void StyleDialog::OnStyleWebSummary ( wxCommandEvent& event )
 	if ( !wxFileName::FileExists ( tempNameWide ) )
 		return;
 
-	wxString cmd = browser + _T ( " \"" ) + tempNameWide + _T ( "\"" );
-	wxExecute ( cmd, wxEXEC_SYNC );
+	wxLaunchDefaultBrowser ( tempNameWide );
 }
 
 void StyleDialog::styleSetIgnoreAll ( bool ignore )
