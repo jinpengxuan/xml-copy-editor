@@ -376,7 +376,7 @@ bool WrapLibxml::xslt (
 	if ( buf )
 	{
 		output.append ( ( char * ) buf, size );
-		free ( buf ); // as above?
+		xmlFree ( buf );
 	}
 
 	xsltFreeStylesheet ( cur );
@@ -556,6 +556,6 @@ std::string WrapLibxml::lookupPublicId ( const std::string& id )
 
 	ret = s;
 
-	free ( original );
+	xmlFree ( original );
 	return ret;
 }
