@@ -1,0 +1,1305 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: XML Copy Editor\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2007-02-23 11:15+0000\n"
+"PO-Revision-Date: 2007-07-28 20:56+0100\n"
+"Last-Translator: François Badier <frabad@gmail.com>\n"
+"Language-Team: team <team@email.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Poedit-Language: French\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Country: FRANCE\n"
+
+msgid "\tCtrl+%i"
+msgstr "\tCtrl+%i"
+
+msgid ""
+"\n"
+"XML Copy Editor is free software released under the GNU\n"
+"General Public License.\n"
+"\n"
+"Many thanks are due to "
+msgstr ""
+"\n"
+"XML Copy Editor est un logiciel libre publié sous la licence GNU\n"
+"\"General Public License.\n"
+"\n"
+"Nombreux remerciements à "
+
+msgid " "
+msgstr " "
+
+msgid "%g %s saved"
+msgstr "%g %s enregistré"
+
+msgid "%i match"
+msgid_plural "%i matches"
+msgstr[0] "%i correspondance"
+msgstr[1] "%i correspondances"
+
+msgid "%i replacement made"
+msgid_plural "%i replacements made"
+msgstr[0] "%i remplacement effectué"
+msgstr[1] "%i remplacements effectués"
+
+msgid "%s contains %i word"
+msgid_plural "%s contains %i words"
+msgstr[0] "%s contient %i mot"
+msgstr[1] "%s contient %i mots"
+
+msgid "%s is %s"
+msgstr "%s est %s"
+
+msgid "%s is already open"
+msgstr "%s est déjà ouvert"
+
+msgid "&About XML Copy Editor"
+msgstr "À propos de XML Copy Editor"
+
+msgid "&Always insert closing tag"
+msgstr "Insertion des balises de fermeture"
+
+msgid "&Associate"
+msgstr "&Associer"
+
+msgid "&Blue background, white text"
+msgstr "Fond &bleu, texte blanc"
+
+msgid "&Browser\tCtrl+B"
+msgstr "Navigateur\tCtrl+B"
+
+msgid "&Change all"
+msgstr "&Changer tout"
+
+msgid "&Check Well-formedness\tF2"
+msgstr "Vérifier &justesse de forme\tF2"
+
+msgid "&Close\tCtrl+F4"
+msgstr "Fermer\tCtrl+F4"
+
+msgid "&Color Scheme"
+msgstr "S&chéma de couleurs"
+
+msgid "&Command\tCtrl+Alt+C"
+msgstr "&Commande\tCtrl+Alt+C"
+
+msgid "&Cut\tCtrl+X"
+msgstr "&Couper\tCtrl+X"
+
+msgid "&DTD\tF4"
+msgstr "&DTD\tF4"
+
+msgid "&Default"
+msgstr "Par défaut"
+
+msgid "&DocBook to HTML\tAlt+1"
+msgstr "&DocBook vers HTML\tAlt+1"
+
+msgid "&DocBook to XHTML\tAlt+2"
+msgstr "&DocBook vers XHTML\tAlt+2"
+
+msgid "&Download Source"
+msgstr "&Télécharger la source"
+
+msgid "&Edit"
+msgstr "&Édition"
+
+msgid "&Element...\tCtrl+I"
+msgstr "Élém&ent ...\tCtrl+I"
+
+msgid "&Enable network access for DTD validation"
+msgstr "Accès réseau pour la validation sur DTD"
+
+msgid "&Entity...\tCtrl+E"
+msgstr "&Entité ...\tCtrl+E"
+
+msgid "&Evaluate XPath...\tF9"
+msgstr "&Évaluer XPath ...\tF9"
+
+msgid "&Export Microsoft Word Document..."
+msgstr "&Exporter un document Microsoft Word ..."
+
+msgid "&File"
+msgstr "&Fichier"
+
+msgid "&Find what: "
+msgstr "Re&chercher : "
+
+msgid "&Find...\tCtrl+F"
+msgstr "&Trouver ...\tCtrl+F"
+
+msgid "&Fold Tags\tCtrl+Shift+F"
+msgstr "&Plier les balises\tCtrl+Shift+F"
+
+msgid "&Folding"
+msgstr "Pliage du texte"
+
+msgid "&Forum"
+msgstr "&Forum"
+
+msgid "&Global Replace...\tCtrl+Shift+R"
+msgstr "Remplacement &global ...\tCtrl+Shift+R"
+
+msgid "&Help"
+msgstr "Aide"
+
+msgid "&Hide Attributes Only\tCtrl+Shift+A"
+msgstr "&Cacher les attributs seulement\tCtrl+Shift+A"
+
+msgid "&Highlight current line"
+msgstr "Surlignement de la ligne en cours"
+
+msgid "&Home Page"
+msgstr "Page d'accueil"
+
+msgid "&Indentation guides"
+msgstr "Guides d'&indentation"
+
+msgid "&Insert"
+msgstr "&Insertion"
+
+msgid "&Light"
+msgstr "&Léger"
+
+msgid "&Line numbers"
+msgstr "Numéros de &ligne"
+
+msgid "&Lock Tags\tCtrl+L"
+msgstr "Verrouiller les balises\tCtrl+L"
+
+msgid "&Match case"
+msgstr "Respecter la casse"
+
+msgid "&New...\tCtrl+N"
+msgstr "&Nouveau ...\tCtrl+N"
+
+msgid "&Next Document\tCtrl+PgDn"
+msgstr "Document suivant\tCtrl+PgDn"
+
+msgid "&None"
+msgstr "&Aucun"
+
+msgid "&One application instance only"
+msgstr "Instance unique de l'applicati&on"
+
+msgid "&Open...\tCtrl+O"
+msgstr "&Ouvrir ...\tCtrl+O"
+
+msgid "&Options..."
+msgstr "&Options..."
+
+msgid "&Paste\tCtrl+V"
+msgstr "&Coller\tCtrl+V"
+
+msgid "&Pretty-print\tF11"
+msgstr "Formater la source\tF11"
+
+msgid "&Previous Document\tCtrl+PgUp"
+msgstr "Document précédent\tCtrl+PgUp"
+
+msgid "&Printable report"
+msgstr "Ra&pport imprimable"
+
+msgid "&Public DTD..."
+msgstr "DTD &Publique ..."
+
+msgid "&RELAX NG...\tF6"
+msgstr "&RELAX NG...\tF6"
+
+msgid "&Redo\tCtrl+Y"
+msgstr "Rétablir\tCtrl+Y"
+
+msgid "&Regex"
+msgstr "&Regex"
+
+msgid "&Remember open tabs on close"
+msgstr "Mémorisation des onglets ouverts"
+
+msgid "&Replace"
+msgstr "&Remplacer"
+
+msgid "&Replace...\tCtrl+R"
+msgstr "&Remplacer ...\tCtrl+R"
+
+msgid "&Report"
+msgstr "&Rapport"
+
+msgid "&Revert"
+msgstr "&Rétablir"
+
+msgid "&Run"
+msgstr "&Run"
+
+msgid "&Save\tCtrl+S"
+msgstr "Enregi&strer\tCtrl+S"
+
+msgid "&Save UTF-8 byte order mark"
+msgstr "&Enregistrement de la marque d'encodage UTF-8"
+
+msgid "&Show Tags and Attributes\tCtrl+T"
+msgstr "Afficher les balises et les attributs\tCtrl+T"
+
+msgid "&Sibling...\tCtrl+Shift+I"
+msgstr "&Frère ...\tCtrl+Shift+I"
+
+msgid "&Spelling and Style...\tF7"
+msgstr "&Style et orthographe ...\tF7"
+
+msgid "&System DTD..."
+msgstr "DTD &Système ..."
+
+msgid "&TEI to HTML\tAlt+4"
+msgstr "&TEI vers HTML\tAlt+4"
+
+msgid "&Tag completion"
+msgstr "Complé&tion des balises"
+
+msgid "&Text Size"
+msgstr "&Taille du texte"
+
+msgid "&Toggle Fold"
+msgstr "Plier/déplier"
+
+msgid "&Tools"
+msgstr "Ou&tils"
+
+msgid "&Twin\tCtrl+Enter"
+msgstr "&Jumeau\tCtrl+Enter"
+
+msgid "&Undo\tCtrl+Z"
+msgstr "Annuler\tCtrl+Z"
+
+msgid "&Unfold Tags\tCtrl+Shift+U"
+msgstr "Déplier les balises\tCtrl+Shift+U"
+
+msgid "&Use Microsoft rebar control (restart required)"
+msgstr "&Contrôle Microsoft rebar (redémarrage nécessaire)"
+
+msgid "&Validate"
+msgstr "&Valider"
+
+msgid "&Validate as you type"
+msgstr "Validation à la saisie"
+
+msgid "&View"
+msgstr "&Vue"
+
+msgid "&Wait"
+msgstr "&Wait"
+
+msgid "&White space visible"
+msgstr "&Espace visible"
+
+msgid "&Word Count"
+msgstr "Compter les mots"
+
+msgid "&Wrap Words\tCtrl+W"
+msgstr "Renvoi à la ligne\tCtrl+W"
+
+msgid "&XML"
+msgstr "&XML"
+
+msgid "&XML Copy Editor Help\tF1"
+msgstr "Aide de &XML Copy Editor\tF1"
+
+msgid "&XML Schema\tF5"
+msgstr "&XML Schema\tF5"
+
+msgid "&XML Schema..."
+msgstr "Schema &XML ..."
+
+msgid "&XSL Transform...\tF8"
+msgstr "Transformation &XSL ...\tF8"
+
+msgid "&XSLT"
+msgstr "&XSLT"
+
+msgid "'%s' is not a valid line number"
+msgstr "'%s' n'est pas un numéro de ligne valide"
+
+msgid "(No filter)"
+msgstr "(Aucun filtre)"
+
+msgid "(No filters found)"
+msgstr "(Aucun filtre trouvé)"
+
+msgid "(No rule sets found)"
+msgstr "(Aucun ensemble de règles trouvé)"
+
+msgid "(lossless conversion requires version 2003 or later)"
+msgstr "(la conversion sans perte nécessite la version 2003 ou ultérieure)"
+
+msgid "(unknown error)"
+msgstr "(erreur inconnue)"
+
+msgid ""
+".\n"
+"\n"
+"Select \"Abort\" to exit, \"Retry\" to close this window and \"Ignore\" to "
+"continue."
+msgstr ""
+".\n"
+"\n"
+"Sélectionner \"Interrompre\" pour quitter, \"Réessayer\" pour fermer cette "
+"fenêtre et \"Ignorer\" pour continuer."
+
+msgid "A more recent version of Microsoft Word is required"
+msgstr "Une version plus récente de Microsoft Word est nécessaire"
+
+msgid "About"
+msgstr "À propos"
+
+msgid "Action"
+msgstr "Action"
+
+msgid ""
+"All files (*.*)|*.*|XML (*.xml)|*.xml|XHTML (*.html)|*.html|DTD (*.dtd)|*."
+"dtd|XML Schema (*.xsd)|*.xsd|RELAX NG grammar (*.rng)|*.rng|XSL (*.xsl)|*.xsl"
+msgstr ""
+"Tous les fichiers (*.*)|*.*|XML (*.xml)|*.xml|XHTML (*.html)|*.html|DTD (*."
+"dtd)|*.dtd|XML Schema (*.xsd)|*.xsd|Grammaire RELAX NG (*.rng)|*.rng|XSL (*."
+"xsl)|*.xsl"
+
+msgid "Application directory"
+msgstr "Répertoire de l'application"
+
+msgid "Associate %s"
+msgstr "Associer %s"
+
+msgid "Attributes hidden"
+msgstr "Attributs cachés"
+
+msgid "Blue background, white text"
+msgstr "Fond bleu, texte blanc"
+
+msgid "Browse"
+msgstr "Parcourir"
+
+msgid "Browser"
+msgstr "Navigateur"
+
+msgid "C&ancel"
+msgstr "&Annuler"
+
+msgid "C&lose All"
+msgstr "Fermer tous"
+
+msgid "C&lose Message Pane\tAlt+C"
+msgstr "Fermer le panneau de message\tAlt+C"
+
+msgid "C&opy\tCtrl+C"
+msgstr "C&opier\tCtrl+C"
+
+msgid "Cannot access application directory"
+msgstr "Impossible d'accéder au répertoire de l'application"
+
+msgid "Cannot associate %s: %s"
+msgstr "Impossible d'associer %s: %s"
+
+msgid "Cannot compile regular expression '"
+msgstr "Impossible de compiler l'expression régulière '"
+
+msgid "Cannot count words: %s"
+msgstr "Impossible de compter les mots : %s"
+
+msgid "Cannot create report: "
+msgstr "Impossible de créer rapport : "
+
+msgid "Cannot evaluate XPath"
+msgstr "Impossible d'évaluer XPath"
+
+msgid "Cannot find '%s'"
+msgstr "Impossible de trouver '%s'"
+
+msgid "Cannot open %s"
+msgstr "impossible d'ouvrir %s"
+
+msgid "Cannot open %s for import"
+msgstr "Impossible d'ouvrir %s pour importation"
+
+msgid "Cannot open %s: conversion from encoding %s failed"
+msgstr "Impossible d'ouvrir %s: échec de l'encodage %s"
+
+msgid "Cannot open %s: unknown encoding %s"
+msgstr "Impossible d'ouvrir %s : encodage %s inconnu"
+
+msgid "Cannot open application directory: see Tools, Options..., General"
+msgstr ""
+"Impossible d'ouvrir le répertoire de l'application : voir Outils, "
+"Options ..., Général"
+
+msgid "Cannot open clipboard"
+msgstr "Impossible d'ouvrir le presse-papier"
+
+msgid "Cannot open imported file"
+msgstr "Impossible d'ouvrir le fichier importé"
+
+msgid "Cannot open in browser: %s not found (see Tools, Options..., General)"
+msgstr ""
+"Impossible d'ouvrir dans le navigateur : %s introuvable (voir Outils, "
+"Options ..., Général)"
+
+msgid ""
+"Cannot open in browser: no browser defined (see Tools, Options..., General)"
+msgstr ""
+"Impossible d'ouvrir dans le navigateur : aucun navigateur spécifié (voir "
+"Outils, Options ..., Général)"
+
+msgid "Cannot open stylesheet %s"
+msgstr "Impossible d'ouvrir la feuille de style %s"
+
+msgid "Cannot paste as new document: no text on clipboard"
+msgstr ""
+"Impossible de coller dans nouveau document : pas de texte dans le presse-"
+"papier"
+
+msgid "Cannot pretty-print: "
+msgstr "Impossible de formater la source : "
+
+msgid "Cannot replace: "
+msgstr "Impossible de remplacer : "
+
+msgid "Cannot save %s"
+msgstr "Impossible d'enregistrer %s"
+
+msgid "Cannot save %s: conversion to encoding %s failed"
+msgstr "Impossible d'enregistrer %s: échec de l'encodage %s"
+
+msgid "Cannot save %s: unknown encoding %s"
+msgstr "Impossible d'enregistrer %s : encodage %s inconnu"
+
+msgid "Cannot save document in %s: %s (saved in default encoding UTF-8)"
+msgstr ""
+"Impossible d'enregistrer le document dans %s : %s  (enregistré avec encodage "
+"UTF-8 par défaut)"
+
+msgid ""
+"Cannot save temporary copy for validation; please save or discard changes"
+msgstr ""
+"Impossible d'enregistrer une copie temporaire pour validation ; veuillez "
+"enregistrer ou ignorer les modifications"
+
+msgid "Cannot save temporary file"
+msgstr "Impossible d'enregistrer le fichier temporaire"
+
+msgid "Cannot set encoding (cannot open temporary file)"
+msgstr ""
+"Impossible d'établir l'encodage (impossible d'ouvrir le fichier temporaire)"
+
+msgid "Cannot set encoding (cannot parse temporary file)"
+msgstr ""
+"Impossible d'établir l'encodage (impossible d'analyser le fichier temporaire)"
+
+msgid "Cannot set encoding: "
+msgstr "Impossible d'établir l'encodage : "
+
+msgid "Cannot start Microsoft Word"
+msgstr "Impossible de démarrer Microsoft Word"
+
+msgid "Cannot transform: "
+msgstr "Impossible de transformer : "
+
+msgid "Change"
+msgstr "Changer"
+
+msgid "Change all"
+msgstr "Changer tout"
+
+msgid "Change once"
+msgstr "Changer une fois"
+
+msgid "Check Well-formedness"
+msgstr "Vérifier justesse de forme"
+
+msgid "Choose a document type:"
+msgstr "Choisir un type de document :"
+
+msgid "Choose a file:"
+msgstr "Choisir un fichier :"
+
+msgid "Choose a public identifier:"
+msgstr "Choisissez un identifiant public :"
+
+msgid "Choose an encoding:"
+msgstr "Choisissez un encodage :"
+
+msgid "Close"
+msgstr "Fermer"
+
+msgid "Close All"
+msgstr "Fermer tous"
+
+msgid "Close Message Pane"
+msgstr "Fermer le panneau de Message"
+
+msgid "Close all"
+msgstr "Fermer tous"
+
+msgid "Closes the dialog box without saving any changes you have made"
+msgstr "Ferme la boîte de dialogue sans enregistrer aucune modification"
+
+msgid "Closes this dialog without making any changes"
+msgstr "Ferme cette boîte de dialogue sans effectuer de modification"
+
+msgid "Command"
+msgstr "Commande"
+
+msgid "Command line processing incomplete: no file specified"
+msgstr "Opération de ligne de commande incomplète : aucun fichier spécifié"
+
+msgid "Confirmation"
+msgstr "Confirmation"
+
+msgid "Context"
+msgstr "Contexte"
+
+msgid "Copy"
+msgstr "Copier"
+
+msgid "Copyright © 2005-2007 Gerald Schmidt <gnschmidt@users.sourceforge.net>"
+msgstr "Copyright © 2005-2007 Gerald Schmidt <gnschmidt@users.sourceforge.net>"
+
+msgid "Creating document view..."
+msgstr "Préparation de l'aperçu ..."
+
+msgid "Creating report..."
+msgstr "Création de rapport ..."
+
+msgid "Current Element"
+msgstr "Élément en cours"
+
+msgid "Cut"
+msgstr "Couper"
+
+msgid "D&ocBook to XSL-FO\tAlt+3"
+msgstr "D&ocBook vers XSL-FO\tAlt+3"
+
+msgid "DTD"
+msgstr "DTD"
+
+msgid "DTD validation in progress..."
+msgstr "Validation DTD en cours ..."
+
+msgid "David Håsäther (Swedish) <hasather@gmail.com>"
+msgstr "David Håsäther (Swedish) <hasather@gmail.com>"
+
+msgid "Decrease"
+msgstr "Diminuer"
+
+msgid "Decrease\tCtrl+D"
+msgstr "Diminuer\tCtrl+D"
+
+msgid "Default"
+msgstr "Par défaut"
+
+msgid "Default dictionary and style"
+msgstr "Style et dictionnaire par défaut"
+
+msgid "Delete entity reference?"
+msgstr "Supprimer la référence à entité ?"
+
+msgid "Delete tag?"
+msgstr "Supprimer la balise ?"
+
+msgid "Do you want to save the changes to "
+msgstr "Voulez-vous enregistrer les modifications dans "
+
+msgid "DocBook to HTML"
+msgstr "DocBook vers HTML"
+
+msgid "DocBook to XHTML"
+msgstr "DocBook vers XHTML"
+
+msgid "DocBook to XSL-FO"
+msgstr "DocBook vers XSL-FO"
+
+msgid "Document has been modified: save or discard changes"
+msgstr "Le document a été modifié : enregistrer ou ignorer les modifications"
+
+msgid "Document%i"
+msgstr "Document %i"
+
+msgid "Download Source"
+msgstr "Télécharger la source"
+
+msgid "E&ncoding..."
+msgstr "En&codage ..."
+
+msgid "E&xit"
+msgstr "&Quitter"
+
+msgid "E&xpand internal entities on open"
+msgstr "Entités internes déployées à l'ouverture"
+
+msgid "Edited document empty"
+msgstr "Le document modifié est vide"
+
+msgid "Editor"
+msgstr "Éditeur"
+
+msgid "Element..."
+msgstr "Élément ..."
+
+msgid "Encoding"
+msgstr "Encodage"
+
+msgid "Encoding should be one of "
+msgstr "L'encodage devrait être l'un des suivants : "
+
+msgid "Encoding..."
+msgstr "Encodage ..."
+
+msgid "Enter XPath:"
+msgstr "Saisir XPath :"
+
+msgid "Enter line number:"
+msgstr "Saisir le numéro de ligne :"
+
+msgid "Enter new suggestion:"
+msgstr "Saisir nouvelle suggestion :"
+
+msgid "Entity..."
+msgstr "Entité ..."
+
+msgid "Error"
+msgstr "Erreur"
+
+msgid "Evaluate XPath"
+msgstr "Évaluer XPath"
+
+msgid "Evaluate XPath..."
+msgstr "Évaluer XPath ..."
+
+msgid "Exit"
+msgstr "Quitter"
+
+msgid "Export Microsoft Word Document"
+msgstr "Exporter dans un document Microsoft Word"
+
+msgid "Export in progress..."
+msgstr "Exportation en cours ..."
+
+msgid "Extends the scope to all open documents"
+msgstr "Étend la recherche à tous les documents ouverts"
+
+msgid "F&ind Again\tF3"
+msgstr "Trouver suivant"
+
+msgid ""
+"File has been modified by another application.\n"
+"Do you want to proceed?"
+msgstr ""
+"Le fichier a été modifié par une autre application.\n"
+"Voulez-vous continuer ?"
+
+msgid "Find"
+msgstr "Trouver"
+
+msgid "Find &Next"
+msgstr "Trouver Suiva&nt"
+
+msgid "Find Again"
+msgstr "Trouver suivant"
+
+msgid "Find and Replace"
+msgstr "Trouver et remplacer"
+
+msgid "Find..."
+msgstr "Trouver ..."
+
+msgid "Find:"
+msgstr "Trouver :"
+
+msgid ""
+"Finds all instances of the text specified in Find what and replaces them "
+"with the text in Replace with"
+msgstr ""
+"Trouve toutes les instances du texte spécifié dans Trouver et les remplace "
+"par le texte spécifié dans Remplacer par"
+
+msgid ""
+"Finds only text with lowercase and uppercase letters as specified in Find "
+"what"
+msgstr ""
+"Trouve seulement le texte avec minuscules et majuscules tel que spécifié "
+"dans Trouver"
+
+msgid "Fold Tags"
+msgstr "Plier les balises"
+
+msgid "Font"
+msgstr "Police"
+
+msgid "Forum"
+msgstr "Forum"
+
+msgid "François Badier (French) <frabad@gmail.com>"
+msgstr "François Badier (French) <frabad@gmail.com>"
+
+msgid "G&o To...\tCtrl+G"
+msgstr "Aller vers ...\tCtrl+G"
+
+msgid "General"
+msgstr "Général"
+
+msgid "Gerald Schmidt (development) <gnschmidt@users.sourceforge.net>"
+msgstr "Gerald Schmidt (développement) <gnschmidt@users.sourceforge.net>"
+
+msgid "Global Find and Replace"
+msgstr "Recherche et remplacement global"
+
+msgid "Global Replace..."
+msgstr "Remplacement global ..."
+
+msgid "Go To"
+msgstr "Aller vers"
+
+msgid "Go To..."
+msgstr "Aller vers ..."
+
+msgid "H&ide Tags and Attributes\tCtrl+Shift+T"
+msgstr "&Cacher les balises et les attributs\tCtrl+Shift+T"
+
+msgid ""
+"HSU PICHAN, YANG SHUFUN, CHENG PAULIAN, CHUANG KUO-PING, Marcus Bingenheimer "
+"(Chinese Traditional)"
+msgstr ""
+"HSU PICHAN, YANG SHUFUN, CHENG PAULIAN, CHUANG KUO-PING, Marcus Bingenheimer "
+"(Chinese Traditional)"
+
+msgid "Help"
+msgstr "Aide"
+
+msgid "Hi&ghlight syntax"
+msgstr "Surli&gnement de la syntaxe"
+
+msgid "Hide Attributes Only"
+msgstr "Cacher les attributs seulement"
+
+msgid "Hide Tags and Attributes"
+msgstr "Cacher les balises et les attributs"
+
+msgid "Home Page"
+msgstr "Page d'accueil"
+
+msgid "I&gnore"
+msgstr "Ignorer"
+
+msgid "I&gnore all"
+msgstr "I&gnorer tout"
+
+msgid "I&mport Microsoft Word Document..."
+msgstr "I&mporter un document Microsoft Word ..."
+
+msgid "I&nsert"
+msgstr "&Insérer"
+
+msgid "I&ntelligent backspace/delete"
+msgstr "Backspace/suppr i&ntelligents"
+
+msgid "Ignore"
+msgstr "Ignorer"
+
+msgid "Ignore all"
+msgstr "Ignorer tout"
+
+msgid "Ignore once"
+msgstr "Ignorer une fois"
+
+msgid "Import Microsoft Word Document"
+msgstr "Importer Document Microsoft Word"
+
+msgid "Import in progress..."
+msgstr "Importation en cours ..."
+
+msgid "Increase"
+msgstr "Augmenter"
+
+msgid "Increase\tCtrl+U"
+msgstr "Augmenter\tCtrl+U"
+
+msgid "Information"
+msgstr "Information"
+
+msgid "Insert Element"
+msgstr "Insérer élément"
+
+msgid "Insert Entity"
+msgstr "Insérer entité"
+
+msgid "Insert Sibling"
+msgstr "Insérer frère"
+
+msgid "Interprets the text specified in Find what as a regular expression"
+msgstr ""
+"Interprète le texte spécifié dans Trouver comme une expression régulière"
+
+msgid "L&ock hidden tags"
+msgstr "Verrouillage des balises cachées"
+
+msgid "Language (restart required)"
+msgstr "Langue (redémarrage nécessaire)"
+
+msgid "Light"
+msgstr "&Léger"
+
+msgid "Ln %i Col %i"
+msgstr "Ln %i Col %i"
+
+msgid "Lock Tags"
+msgstr "Verrouiller les balises"
+
+msgid "MB"
+msgstr "Mo"
+
+msgid "MSXML validation failed (version 4.0 or later required)"
+msgstr "Échec de la validation MSXML (version 4.0 ou ultérieure requise)"
+
+msgid "Match"
+msgstr "Correspondance"
+
+msgid "Matt Smigielski (testing) <alectrus@users.sourceforge.net>"
+msgstr "Matt Smigielski (test) <alectrus@users.sourceforge.net>"
+
+msgid "Memory low: %s saved in large document mode"
+msgstr "Mémoire faible : %s enregistré en mode document long"
+
+msgid "Message"
+msgstr "Message"
+
+msgid "Microsoft Word cannot save %s"
+msgstr "Microsoft Word ne peut pas enregistrer %s"
+
+msgid "Microsoft Word cannot save %s as XML"
+msgstr "Microsoft Word ne peut pas enregistrer %s en XML"
+
+msgid "Microsoft Word cannot save this document as WordprocessingML "
+msgstr ""
+"Microsoft Word ne peut pas enregistrer ce document en WordprocessingML "
+
+msgid "Modified"
+msgstr "Modifié"
+
+msgid "New"
+msgstr "Nouveau"
+
+msgid "New &document"
+msgstr "Nouveau document"
+
+msgid "New Document"
+msgstr "Nouveau document"
+
+msgid "New Suggestion"
+msgstr "Nouvelle suggestion"
+
+msgid "New suggestion..."
+msgstr "Nouvelle suggestion ..."
+
+msgid "New..."
+msgstr "Nouveau ..."
+
+msgid "Next Document"
+msgstr "Document suivant"
+
+msgid "No filter"
+msgstr "Aucun filtre"
+
+msgid "No items selected"
+msgstr "Aucun item sélectionné"
+
+msgid "No matching nodes found"
+msgstr "Aucun nœud correspondant n'a été trouvé"
+
+msgid "No."
+msgstr "N°."
+
+msgid "None"
+msgstr "Aucun"
+
+msgid "Normal"
+msgstr "Normal"
+
+msgid "Normal\tCtrl+0"
+msgstr "Normal\tCtrl+0"
+
+msgid "O&pen Large Document...\tCtrl+Shift+O"
+msgstr "Ouvrir un document long ...\tCtrl+Shift+O"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Open"
+msgstr "Ouvrir"
+
+msgid "Open Large Document"
+msgstr "Ouvrir document long"
+
+msgid "Open Large Document..."
+msgstr "Ouvrir un document long ..."
+
+msgid "Open..."
+msgstr "Ouvrir ..."
+
+msgid "Opening imported file..."
+msgstr "Ouverture du fichier importé ..."
+
+msgid "Opening spelling and style check in read-only mode: "
+msgstr ""
+"Lancement de la vérification de style et d'orthographe en mode lecture "
+"seule : "
+
+msgid "Opens a standard file dialog"
+msgstr "Ouvre une boîte de dialogue fichier standard"
+
+msgid "Options"
+msgstr "Options"
+
+msgid "Options..."
+msgstr "Options..."
+
+msgid "Out of memory"
+msgstr "Dépassement de mémoire"
+
+msgid "Output document empty"
+msgstr "Document vide"
+
+msgid "Output options"
+msgstr "Options de sortie"
+
+msgid "P&aste As New Document"
+msgstr "Coller dans nouveau document"
+
+msgid "P&rint Preview..."
+msgstr "Ape&rçu avant impression ..."
+
+msgid "Pa&ge Setup..."
+msgstr "Mise en pa&ge ..."
+
+msgid "Page Setup..."
+msgstr "Mise en page ..."
+
+msgid "Parse in progress..."
+msgstr "Analyse en cours ..."
+
+msgid "Paste"
+msgstr "Coller"
+
+msgid "Paste As New Document"
+msgstr "Coller dans nouveau document"
+
+msgid "Pr&int...\tCtrl+P"
+msgstr "Impr&imer ...\tCtrl+P"
+
+msgid "Pr&intable summary"
+msgstr "Résumé &imprimable"
+
+msgid "Preparing Print Preview..."
+msgstr "Préparation de l'aperçu avant impression ..."
+
+msgid "Preparing to print..."
+msgstr "Préparation de l'impression ..."
+
+msgid "Pretty-print"
+msgstr "Formater la source"
+
+msgid "Pretty-print unsuccessful: output document empty"
+msgstr "Échec du formatage de la source : document vide"
+
+msgid "Pretty-printing in progress..."
+msgstr "Formatage de la source en cours ..."
+
+msgid "Previous Document"
+msgstr "Document précédent"
+
+msgid "Print"
+msgstr "Imprimer"
+
+msgid "Print Preview..."
+msgstr "Aperçu avant impression ..."
+
+msgid "Print..."
+msgstr "Imprimer ..."
+
+msgid "Provides a space for you to type additional information"
+msgstr "Fournit un espace pour la saisie d'informations supplémentaires"
+
+msgid "Provides a space for you to type the path of the file"
+msgstr "Fournit un espace pour la saisie du chemin d'accès au fichier"
+
+msgid "Provides a space for you to type the text you want to find"
+msgstr "Fournit un espace pour la saisie du texte à rechercher"
+
+msgid ""
+"Provides a space for you to type the text you want to replace the text you "
+"typed in Find what"
+msgstr ""
+"Fournit un espace pour la saisie du texte en remplacement du texte saisi "
+"dans Rechercher "
+
+msgid "Public DTD"
+msgstr "DTD Publique"
+
+msgid "Public DTD..."
+msgstr "DTD Publique ..."
+
+msgid "Question"
+msgstr "Question"
+
+msgid "R&eplace in all open documents"
+msgstr "R&emplacer dans tous les documents ouverts"
+
+msgid "RELAX NG grammar"
+msgstr "Grammaire RELAX NG"
+
+msgid "RELAX NG validation in progress..."
+msgstr "Validation RELAX NG en cours ..."
+
+msgid "RELAX NG..."
+msgstr "RELAX NG..."
+
+msgid "Re&gex"
+msgstr "Re&gex"
+
+msgid "Re&member layout on close"
+msgstr "Mémorisation du mode affichage"
+
+msgid "Re&tain undo history on save"
+msgstr "Mémorisation des ac&tions après enregistrement"
+
+msgid "Redo"
+msgstr "Rétablir"
+
+msgid "Replace"
+msgstr "Remplacer"
+
+msgid "Replace &All"
+msgstr "Remplacer tout"
+
+msgid "Replace with:"
+msgstr "Remplacer par :"
+
+msgid "Replace with: "
+msgstr "Remplacer par : "
+
+msgid "Replace..."
+msgstr "Remplacer ..."
+
+msgid "Revert"
+msgstr "Rétablir"
+
+msgid "Rule"
+msgstr "Règle"
+
+msgid "S&ave As...\tF12"
+msgstr "Enregistrer sous ..."
+
+msgid "S&how Current Element Pane"
+msgstr "Affic&her le panneau d'élément en cours"
+
+msgid "S&how full path on frame"
+msgstr "C&hemin complet dans la barre de titre"
+
+msgid "S&ymbol..."
+msgstr "S&ymbole ..."
+
+msgid "SHiNE CsyFeK (Chinese Simplified) <csyfek@gmail.com>"
+msgstr "SHiNE CsyFeK (Chinese Simplified) <csyfek@gmail.com>"
+
+msgid "Save"
+msgstr "Enregistrer"
+
+msgid "Save As"
+msgstr "Enregistrer sous"
+
+msgid "Save As..."
+msgstr "Enregistrer sous ..."
+
+msgid "Select "
+msgstr "Sélectionner "
+
+msgid "Select RELAX NG grammar"
+msgstr "Sélectionner grammaire RELAX NG"
+
+msgid "Select stylesheet"
+msgstr "Sélectionner la feuille de style"
+
+msgid "Selects the file specified"
+msgstr "Sélectionne le fichier spécifié"
+
+msgid "Sh&ow Toolbar"
+msgstr "Afficher la barre d'&outils"
+
+msgid "Show Current ElementPane"
+msgstr "Afficher le panneau d'élément en cours"
+
+msgid "Show Tags and Attributes"
+msgstr "Afficher les balises et les attributs"
+
+msgid "Show Toolbar"
+msgstr "Afficher la barre d'outils"
+
+msgid "Sibling..."
+msgstr "Frère ..."
+
+msgid "Spelling and Style"
+msgstr "Style et orthographe"
+
+msgid "Spelling and Style..."
+msgstr "Style et orthographe ..."
+
+msgid "Stopped"
+msgstr "Stoppé"
+
+msgid "Suggestion"
+msgstr "Suggestion"
+
+msgid "Symbol..."
+msgstr "Symbole ..."
+
+msgid "System DTD"
+msgstr "DTD Système"
+
+msgid "System DTD..."
+msgstr "DTD Système ..."
+
+msgid "T&EI to LaTeX\tAlt+5"
+msgstr "T&EI vers LaTeX\tAlt+5"
+
+msgid "TE&I to XHTML\tAlt+6"
+msgstr "TE&I vers XHTML\tAlt+6"
+
+msgid "TEI to &XSL-FO\tAlt+7"
+msgstr "TEI vers &XSL-FO\tAlt+7"
+
+msgid "TEI to HTML"
+msgstr "TEI vers HTML"
+
+msgid "TEI to LaTeX"
+msgstr "TEI vers LaTeX"
+
+msgid "TEI to XHTML"
+msgstr "TEI vers XHTML"
+
+msgid "TEI to XSL-FO"
+msgstr "TEI vers XSL-FO"
+
+msgid "Tags Locked"
+msgstr "Balises verrouillées"
+
+msgid "Tags hidden"
+msgstr "Balises cachées"
+
+msgid "Tags locked"
+msgstr "Balises verrouillées"
+
+msgid "The following error has occurred: "
+msgstr "L'erreur suivante est apparue : "
+
+msgid "The operating system has turned down a request for additional memory"
+msgstr "Le système a bloqué une requête de mémoire additionnelle"
+
+msgid "This functionality requires Microsoft Windows"
+msgstr "Cette fonction nécessite Microsoft Windows"
+
+msgid "Thomas Wenzel (German) <thowen@users.sourceforge.net>"
+msgstr "Thomas Wenzel (German) <thowen@users.sourceforge.net>"
+
+msgid "Toggle Fold"
+msgstr "&Plier les balises\tCtrl+Shift+F"
+
+msgid "Twin"
+msgstr "Jumeau"
+
+msgid "Undo"
+msgstr "Annuler"
+
+msgid "Unknown command line switch (expecting 'w' or 's')"
+msgstr "Option de ligne de commande inconnue (attente de 'w' ou 's')"
+
+msgid "Va&riable highlight in tag free view"
+msgstr "Surlignement va&riable en mode sans balises"
+
+msgid "Validation error"
+msgstr "Erreur de validation"
+
+msgid "Validation in progress..."
+msgstr "Validation en cours ..."
+
+msgid "Variables"
+msgstr "Variables"
+
+msgid "Viliam Búr (Slovak) <viliam@bur.sk>"
+msgstr "Viliam Búr (Slovak) <viliam@bur.sk>"
+
+msgid "Warning"
+msgstr "Avertissement"
+
+msgid "Word Count"
+msgstr "Compter les mots"
+
+msgid "XML Copy Editor"
+msgstr "XML Copy Editor"
+
+msgid "XML Copy Editor has encountered an error and needs to close."
+msgstr "XML Copy Editor a rencontré une erreur et doit être fermé."
+
+msgid ""
+"XML Copy Editor has encountered the following error and needs to close: "
+msgstr "XML Copy Editor a rencontré l'erreur suivante et doit être fermé : "
+
+msgid "XML Schema"
+msgstr "XML Schema"
+
+msgid "XML Schema..."
+msgstr "Schéma XML ..."
+
+msgid "XML document (*.xml)"
+msgstr "Document XML (*.xml)"
+
+msgid "XS&LT stylesheet..."
+msgstr "Feuille de style XS&LT ..."
+
+msgid "XSL Transform..."
+msgstr "Transformation XSL ..."
+
+msgid "XSL transformation in progress..."
+msgstr "Transformation XSL en cours ..."
+
+msgid "XSLT stylesheet"
+msgstr "Feuille de style XSLT"
+
+msgid "XSLT stylesheet..."
+msgstr "Feuille de style XSLT ..."
+
+msgid "byte"
+msgid_plural "bytes"
+msgstr[0] "octet"
+msgstr[1] "octets"
+
+msgid "kB"
+msgstr "ko"
+
+msgid "valid"
+msgstr "valide"
+
+msgid "well-formed"
+msgstr "bien formé"
+
+msgid "{extension}"
+msgstr "{extension}"
+
+msgid "{fullpath}"
+msgstr "{chemincomplet}"
+
+msgid "{name}"
+msgstr "{nom}"
+
+msgid "{path}"
+msgstr "{chemin}"
+
+msgid "|All files (*.*)|*.*"
+msgstr "|Tous les fichiers (*.*)|*.*"

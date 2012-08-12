@@ -1,0 +1,1241 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: XML Copy Editor\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2007-03-06 13:50+0000\n"
+"PO-Revision-Date: 2007-03-10 11:09+0100\n"
+"Last-Translator: Viliam Búr <viliam@bur.sk>\n"
+"Language-Team: Viliam Búr <viliam@bur.sk>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Slovak\n"
+"X-Poedit-Country: SLOVAKIA\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"Plural-Forms: nplurals=3; plural= (n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
+
+msgid "\tCtrl+%i"
+msgstr "\tCtrl+%i"
+
+msgid ""
+"\n"
+"XML Copy Editor is free software released under the GNU\n"
+"General Public License.\n"
+"\n"
+"Many thanks are due to "
+msgstr ""
+"\n"
+"XML Copy Editor je slobodný softvér uverejnený pod\n"
+"Všeobecnou verejnou licenciou GNU.\n"
+"\n"
+"Veľa vďaky patrí: "
+
+msgid " "
+msgstr " "
+
+msgid " in large document mode?"
+msgstr " v režime veľkého dokumentu?"
+
+msgid "%g %s saved"
+msgstr "%g %s uložených"
+
+msgid "%i match"
+msgid_plural "%i matches"
+msgstr[0] "%i nájdených"
+msgstr[1] "%i nájdené"
+msgstr[2] "%i nájdené"
+
+msgid "%i replacement made"
+msgid_plural "%i replacements made"
+msgstr[0] "%i bolo nahradených"
+msgstr[1] "%i bolo nahradené"
+msgstr[2] "%i boli nahradené"
+
+msgid "%s contains %i word"
+msgid_plural "%s contains %i words"
+msgstr[0] "%s obsahuje %i slov"
+msgstr[1] "%s obsahuje %i slovo"
+msgstr[2] "%s obsahuje %i slová"
+
+msgid "%s is %s"
+msgstr "%s je %s"
+
+msgid "%s is already open"
+msgstr "%s je už otvorený"
+
+msgid "&About XML Copy Editor"
+msgstr "&O programe XML Copy Editor"
+
+msgid "&Always insert closing tag"
+msgstr "Vždy vkladaj &koncovú značku"
+
+msgid "&Associate"
+msgstr "&Asociuj"
+
+msgid "&Blue background, white text"
+msgstr "&Modré pozadie, biely text"
+
+msgid "&Browser\tCtrl+B"
+msgstr "&Prezerač\tCtrl+B"
+
+msgid "&Change all"
+msgstr "Zmeň &všetko"
+
+msgid "&Check Well-formedness\tF2"
+msgstr "&Skontroluj dobrú formovanosť\tF2"
+
+msgid "&Close\tCtrl+W"
+msgstr "&Zavri\tCtrl+W"
+
+msgid "&Color Scheme"
+msgstr "&Farebná schéma"
+
+msgid "&Cut\tCtrl+X"
+msgstr "&Vystrihni\tCtrl+X"
+
+msgid "&DTD\tF4"
+msgstr "&DTD\tF4"
+
+msgid "&Default"
+msgstr "Š&tandardné"
+
+msgid "&DocBook to HTML\tAlt+1"
+msgstr "&DocBook na HTML\tAlt+1"
+
+msgid "&DocBook to XHTML\tAlt+2"
+msgstr "&DocBook na XHTML\tAlt+2"
+
+msgid "&Download Source"
+msgstr "&Stiahni zdroj"
+
+msgid "&Edit"
+msgstr "&Edituj"
+
+msgid "&Element...\tCtrl+I"
+msgstr "&Element...\tCtrl+I"
+
+msgid "&Enable network access for DTD validation"
+msgstr "&Umožni prístup na sieť kvôli validácii DTD"
+
+msgid "&Entity...\tCtrl+E"
+msgstr "&Entita...\tCtrl+E"
+
+msgid "&Evaluate XPath...\tF9"
+msgstr "&Vyhodnoť XPath...\tF9"
+
+msgid "&Export Microsoft Word Document..."
+msgstr "&Exportuj dokument programu Microsoft Word..."
+
+msgid "&File"
+msgstr "&Súbor"
+
+msgid "&Find what: "
+msgstr "&Nájdi čo: "
+
+msgid "&Find...\tCtrl+F"
+msgstr "&Nájdi...\tCtrl+F"
+
+msgid "&Fold Tags\tCtrl+Shift+F"
+msgstr "&Zbaľ značky\tCtrl+Shift+F"
+
+msgid "&Folding"
+msgstr "&Zabalenie"
+
+msgid "&Forum"
+msgstr "&Fórum"
+
+msgid "&Global Replace...\tCtrl+Shift+R"
+msgstr "&Globálne nahraď...\tCtrl+Shift+R"
+
+msgid "&Help"
+msgstr "&Návod"
+
+msgid "&Hide Attributes Only\tCtrl+Shift+A"
+msgstr "&Skry atribúty\tCtrl+Shift+A"
+
+msgid "&Highlight current line"
+msgstr "Vy&svieť aktuálny riadok"
+
+msgid "&Home Page"
+msgstr "&Domovská stránka"
+
+msgid "&Indentation guides"
+msgstr "Čiary na &odsadenie"
+
+msgid "&Insert"
+msgstr "&Vlož"
+
+msgid "&Line numbers"
+msgstr "Čísla &riadkov"
+
+msgid "&Lock Tags\tCtrl+L"
+msgstr "&Zamkni značky\tCtrl+L"
+
+msgid "&Match case"
+msgstr "Rozlišuj &veľké a malé"
+
+msgid "&New...\tCtrl+N"
+msgstr "&Nový...\tCtrl+N"
+
+msgid "&Next Document\tCtrl+PgDn"
+msgstr "&Nasledujúci dokument\tCtrl+PgDn"
+
+msgid "&None"
+msgstr "Ž&iadne"
+
+msgid "&One application instance only"
+msgstr "Iba &jedna inštancia aplikácie"
+
+msgid "&Open...\tCtrl+O"
+msgstr "&Otvor...\tCtrl+O"
+
+msgid "&Options..."
+msgstr "&Možnosti..."
+
+msgid "&Paste\tCtrl+V"
+msgstr "V&lož\tCtrl+V"
+
+msgid "&Pretty-print\tF11"
+msgstr "&Pekná tlač\tF11"
+
+msgid "&Previous Document\tCtrl+PgUp"
+msgstr "&Predchádzajúci dokument\tCtrl+PgUp"
+
+msgid "&Printable report"
+msgstr "&Tlačiteľná správa"
+
+msgid "&Public DTD..."
+msgstr "&Verejné DTD..."
+
+msgid "&RELAX NG...\tF6"
+msgstr "&RELAX NG...\tF6"
+
+msgid "&Redo\tCtrl+Y"
+msgstr "&Znova\tCtrl+Y"
+
+msgid "&Regex"
+msgstr "&Regex"
+
+msgid "&Remember open tabs on close"
+msgstr "&Zapamätaj otvorené záložky pri zatvorení"
+
+msgid "&Replace"
+msgstr "&Nahraď"
+
+msgid "&Replace...\tCtrl+R"
+msgstr "N&ahraď...\tCtrl+R"
+
+msgid "&Report"
+msgstr "&Správa"
+
+msgid "&Revert"
+msgstr "Znovu&načítaj"
+
+msgid "&Save\tCtrl+S"
+msgstr "&Ulož\tCtrl+S"
+
+msgid "&Save UTF-8 byte order mark"
+msgstr "Ulož značku poradia &bytov v UTF-8"
+
+msgid "&Show Tags and Attributes\tCtrl+T"
+msgstr "&Ukáž značky a atribúty\tCtrl+T"
+
+msgid "&Sibling...\tCtrl+Shift+I"
+msgstr "&Súrodenec...\tCtrl+Shift+I"
+
+msgid "&Spelling and Style...\tF7"
+msgstr "&Pravopis a štýl...\tF7"
+
+msgid "&System DTD..."
+msgstr "&Systémové DTD..."
+
+msgid "&TEI to HTML\tAlt+4"
+msgstr "&TEI na HTML\tAlt+4"
+
+msgid "&Tag completion"
+msgstr "&Uzavretie značiek"
+
+msgid "&Text Size"
+msgstr "Veľkosť &textu"
+
+msgid "&Toggle Fold"
+msgstr "&Zmeň zbalenie"
+
+msgid "&Tools"
+msgstr "&Nástroje"
+
+msgid "&Twin\tCtrl+Enter"
+msgstr "&Dvojča\tCtrl+Enter"
+
+msgid "&Undo\tCtrl+Z"
+msgstr "&Späť\tCtrl+Z"
+
+msgid "&Unfold Tags\tCtrl+Shift+U"
+msgstr "&Rozbaľ značky\tCtrl+Shift+U"
+
+msgid "&Use Microsoft rebar control (restart required)"
+msgstr "Použi ovládač rebar od &Microsoftu (treba reštartovať)"
+
+msgid "&Validate"
+msgstr "&Validuj"
+
+msgid "&Validate as you type"
+msgstr "&Validuj počas písania"
+
+msgid "&View"
+msgstr "&Pohľad"
+
+msgid "&White space visible"
+msgstr "&Vidno prázdne znaky"
+
+msgid "&Word Count"
+msgstr "Počet &slov"
+
+msgid "&XML"
+msgstr "&XML"
+
+msgid "&XML Copy Editor Help\tF1"
+msgstr "&Návod k XML Copy Editor\tF1"
+
+msgid "&XML Schema\tF5"
+msgstr "&XML Schema\tF5"
+
+msgid "&XML Schema..."
+msgstr "&XML Schema..."
+
+msgid "&XSL Transform...\tF8"
+msgstr "&XSL Transformácia...\tF8"
+
+msgid "&XSLT"
+msgstr "&XSLT"
+
+msgid "'%s' is not a valid line number"
+msgstr "'%s' nie je platné číslo riadku"
+
+msgid "(No filter)"
+msgstr "(Bez filtra)"
+
+msgid "(No filters found)"
+msgstr "(Nenašli sa filtre)"
+
+msgid "(No rule sets found)"
+msgstr "(Nenašli sa množiny pravidiel)"
+
+msgid "(lossless conversion requires version 2003 or later)"
+msgstr "(bezstratová konverzia vyžaduje verziu 2003 alebo novšiu)"
+
+msgid "(unknown error)"
+msgstr "(neznáma chyba)"
+
+msgid ""
+".\n"
+"\n"
+"Select \"Abort\" to exit, \"Retry\" to close this window and \"Ignore\" to "
+"continue."
+msgstr ""
+".\n"
+"\n"
+"Zvoľte \"Abort\" na ukončenie, \"Retry\" na zavretie tohoto okna, a \"Ignore"
+"\" na pokračovanie."
+
+msgid "A more recent version of Microsoft Word is required"
+msgstr "Potrebujem novšiu verziu programu Microsoft Word"
+
+msgid "About"
+msgstr "O programe"
+
+msgid "Action"
+msgstr "Akcia"
+
+msgid ""
+"All files (*.*)|*.*|XML (*.xml)|*.xml|XHTML (*.html)|*.html|DTD (*.dtd)|*."
+"dtd|XML Schema (*.xsd)|*.xsd|RELAX NG grammar (*.rng)|*.rng|XSL (*.xsl)|*.xsl"
+msgstr ""
+"Všetky súbory (*.*)|*.*|XML (*.xml)|*.xml|XHTML (*.html)|*.html|DTD (*.dtd)|"
+"*.dtd|XML Schema (*.xsd)|*.xsd|gramatika RELAX NG (*.rng)|*.rng|XSL (*.xsl)|"
+"*.xsl"
+
+msgid "Application directory"
+msgstr "Adresár aplikácie"
+
+msgid "Associate %s"
+msgstr "Asociuj %s"
+
+msgid "Attributes hidden"
+msgstr "Skryté atribúty"
+
+msgid "Blue background, white text"
+msgstr "Modré pozadie, biely text"
+
+msgid "Browse"
+msgstr "Nalistuj"
+
+msgid "Browser"
+msgstr "Prezerač"
+
+msgid "C&ancel"
+msgstr "&Storno"
+
+msgid "C&lose All"
+msgstr "Zav&ri všetko"
+
+msgid "C&lose Message/Find/Replace Panes\tAlt+C"
+msgstr "Za&vri panely Správa/Nájdi/Nahraď\tAlt+C"
+
+msgid "C&opy\tCtrl+C"
+msgstr "&Kopíruj\tCtrl+C"
+
+msgid "Cannot access application directory"
+msgstr "Neviem otvoriť adresár aplikácie"
+
+msgid "Cannot associate %s: %s"
+msgstr "Neviem asociovať %s: %s"
+
+msgid "Cannot compile regular expression '"
+msgstr "Neviem skompilovať pravidlový výraz '"
+
+msgid "Cannot count words: %s"
+msgstr "Neviem spočítať slová: %s"
+
+msgid "Cannot create report: "
+msgstr "Neviem vytvoriť správu: "
+
+msgid "Cannot evaluate XPath"
+msgstr "Neviem vyhodnotiť XPath"
+
+msgid "Cannot find '%s'"
+msgstr "Neviem nájsť '%s'"
+
+msgid "Cannot open %s"
+msgstr "Neviem otvoriť %s"
+
+msgid "Cannot open %s for import"
+msgstr "Neviem otvoriť %s na import"
+
+msgid "Cannot open application directory: see Tools, Options..., General"
+msgstr "Neviem otvoriť adresár aplikácie: viď Nástroje, Možnosti..., Všeobecné"
+
+msgid "Cannot open clipboard"
+msgstr "Neviem otvoriť schránku"
+
+msgid "Cannot open imported file"
+msgstr "Neviem otvoriť importovaný súbor"
+
+msgid "Cannot open in browser: %s not found (see Tools, Options..., General)"
+msgstr ""
+"Neviem otvoriť prezerač: nenašiel som %s (viď Nástroje, Možnosti..., "
+"Všeobecné)"
+
+msgid ""
+"Cannot open in browser: no browser defined (see Tools, Options..., General)"
+msgstr ""
+"Neviem otvoriť v prezerači: nie je definovaný prezerač (viď Nástroje, "
+"Možnosti..., Všeobecné)"
+
+msgid "Cannot open stylesheet %s"
+msgstr "Neviem otvoriť stylesheet %s"
+
+msgid "Cannot paste as new document: no text on clipboard"
+msgstr "Neviem vložiť ako nový dokument: v schránke nie je text"
+
+msgid "Cannot pretty-print: "
+msgstr "Neviem pekne vytlačiť: "
+
+msgid "Cannot replace: "
+msgstr "Neviem nahradiť: "
+
+msgid "Cannot save %s"
+msgstr "Neviem uložiť %s"
+
+msgid "Cannot save document in %s: %s (saved in default encoding UTF-8)"
+msgstr "Neviem uložiť dokument v %s: %s (uložené v štandardnom kódovaní UTF-8)"
+
+msgid ""
+"Cannot save temporary copy for validation; please save or discard changes"
+msgstr ""
+"Neviem uložiť dočasnú kópiu na validáciu; prosím uložte alebo zrušte zmeny"
+
+msgid "Cannot save temporary file"
+msgstr "Neviem uložiť dočasný súbor"
+
+msgid "Cannot set encoding (cannot open temporary file)"
+msgstr "Neviem nastaviť kódovanie (neviem otvoriť dočasný súbor)"
+
+msgid "Cannot set encoding (cannot parse temporary file)"
+msgstr "Neviem nastaviť kódovanie (neviem parsovať dočasný súbor)"
+
+msgid "Cannot set encoding: "
+msgstr "Neviem nastaviť kódovanie: "
+
+msgid "Cannot start Microsoft Word"
+msgstr "Neviem spustiť Microsoft Word"
+
+msgid "Cannot transform: "
+msgstr "Neviem transformovať: "
+
+msgid "Change"
+msgstr "Zmeň"
+
+msgid "Change all"
+msgstr "Zmeň všetko"
+
+msgid "Change once"
+msgstr "Zmeň raz"
+
+msgid "Check Well-formedness"
+msgstr "Skontroluj dobrú formovanosť"
+
+msgid "Choose a document type:"
+msgstr "Vyberte si typ dokumentu:"
+
+msgid "Choose a file:"
+msgstr "Vyberte si súbor:"
+
+msgid "Choose a public identifier:"
+msgstr "Vyberte si verejný identifikátor:"
+
+msgid "Choose an encoding:"
+msgstr "Vyberte si kódovanie:"
+
+msgid "Close"
+msgstr "Zavri"
+
+msgid "Close All"
+msgstr "Zavri všetko"
+
+msgid "Close Message/Find/Replace Panes"
+msgstr "Zavri panely Správa/Nájdi/Nahraď"
+
+msgid "Close all"
+msgstr "Zavri všetky"
+
+msgid "Closes the dialog box without saving any changes you have made"
+msgstr "Zavrie dialógové okno, a neuloží žiadne zmeny, ktoré ste urobili"
+
+msgid "Closes this dialog without making any changes"
+msgstr "Zavrie tento dialóg, žiadne zmeny sa nevykonajú"
+
+msgid "Command line processing incomplete: no file specified"
+msgstr "Neúplné spracovanie príkazového riadku: nie je zadaný súbor"
+
+msgid "Confirmation"
+msgstr "Potvrdenie"
+
+msgid "Context"
+msgstr "Kontext"
+
+msgid "Copy"
+msgstr "Kopíruj"
+
+msgid "Copyright © 2005-2007 Gerald Schmidt <gnschmidt@users.sourceforge.net>"
+msgstr "Copyright © 2005-2007 Gerald Schmidt <gnschmidt@users.sourceforge.net>"
+
+msgid "Creating report..."
+msgstr "Vytváram správu..."
+
+msgid "Current Element"
+msgstr "Aktuálny prvok"
+
+msgid "Cut"
+msgstr "Vystrihni"
+
+msgid "D&ocBook to XSL-FO\tAlt+3"
+msgstr "D&ocBook na XSL-FO\tAlt+3"
+
+msgid "DTD"
+msgstr "DTD"
+
+msgid "DTD validation in progress..."
+msgstr "Prebieha validácia DTD..."
+
+msgid "David Håsäther (Swedish) <hasather@gmail.com>"
+msgstr "David Håsäther (švédsky) <hasather@gmail.com>"
+
+msgid "Decrease"
+msgstr "Zmenši"
+
+msgid "Decrease\tCtrl+D"
+msgstr "Zmenši\tCtrl+D"
+
+msgid "Default"
+msgstr "Štandardné"
+
+msgid "Default dictionary and style"
+msgstr "Štandardný slovník a štýl"
+
+msgid "Delete entity reference?"
+msgstr "Vymazať odkaz na entitu?"
+
+msgid "Delete tag?"
+msgstr "Vymazať značku?"
+
+msgid "Do you want to open "
+msgstr "Chcete otvoriť "
+
+msgid "Do you want to save the changes to "
+msgstr "Chcete uložiť zmeny v "
+
+msgid "DocBook to HTML"
+msgstr "DocBook na HTML"
+
+msgid "DocBook to XHTML"
+msgstr "DocBook na XHTML"
+
+msgid "DocBook to XSL-FO"
+msgstr "DocBook na XSL-FO"
+
+msgid "Document has been modified: save or discard changes"
+msgstr "Dokument bol zmenený: ulož alebo zahoď zmeny"
+
+msgid "Document%i"
+msgstr "Document%i"
+
+msgid "Download Source"
+msgstr "Stiahni zdroj"
+
+msgid "E&ncoding..."
+msgstr "&Kódovanie..."
+
+msgid "E&xit"
+msgstr "&Koniec"
+
+msgid "E&xpand internal entities on open"
+msgstr "E&xpanduj vnútorné entity pri otvorení"
+
+msgid "Edited document empty"
+msgstr "Editovaný dokument je prázdny"
+
+msgid "Editor"
+msgstr "Editor"
+
+msgid "Element..."
+msgstr "Element..."
+
+msgid "Encoding"
+msgstr "Kódovanie"
+
+msgid "Encoding should be one of "
+msgstr "Kódovanie by malo byť jedno z "
+
+msgid "Encoding should be one of %s (file saved in default encoding UTF-8)"
+msgstr ""
+"Kódovanie by malo byť jedno z %s (súbor je štandardne uložený v kódovaní "
+"UTF-8)"
+
+msgid "Encoding..."
+msgstr "Kódovanie..."
+
+msgid "Enter XPath:"
+msgstr "Zadajte XPath:"
+
+msgid "Enter line number:"
+msgstr "Zadajte číslo riadku:"
+
+msgid "Enter new suggestion:"
+msgstr "Zadajte nové odporúčanie:"
+
+msgid "Entity..."
+msgstr "Entita..."
+
+msgid "Error"
+msgstr "Chyba"
+
+msgid "Evaluate XPath"
+msgstr "Vyhodnoť XPath"
+
+msgid "Evaluate XPath..."
+msgstr "Vyhodnoť XPath..."
+
+msgid "Exit"
+msgstr "Koniec"
+
+msgid "Export Microsoft Word Document"
+msgstr "Exportujem dokument programu Microsoft Word"
+
+msgid "Export in progress..."
+msgstr "Prebieha export..."
+
+msgid "Extends the scope to all open documents"
+msgstr "Rozšíri rozsah hľadania na všetky otvorené dokumenty"
+
+msgid "F&ind Again\tF3"
+msgstr "Ná&jdi ďalšie\tF3"
+
+msgid ""
+"File has been modified by another application.\n"
+"Do you want to proceed?"
+msgstr ""
+"Iná aplikácia zmenila súbor.\n"
+"Chcete pokračovať?"
+
+msgid "Find"
+msgstr "Nájdi"
+
+msgid "Find &Next"
+msgstr "Nájdi ď&alšie"
+
+msgid "Find Again"
+msgstr "Nájdi ďalšie"
+
+msgid "Find and Replace"
+msgstr "Nájdi a nahraď"
+
+msgid "Find..."
+msgstr "Nájdi..."
+
+msgid "Find:"
+msgstr "Nájdi:"
+
+msgid ""
+"Finds all instances of the text specified in Find what and replaces them "
+"with the text in Replace with"
+msgstr ""
+"Nájde všetky výskyty hľadaného textu a nahradí ich textom zadaným na "
+"nahradenie"
+
+msgid ""
+"Finds only text with lowercase and uppercase letters as specified in Find "
+"what"
+msgstr ""
+"Nájde iba text, kde aj veľké a malé písmená zodpovedajú hľadanému textu"
+
+msgid "Fold Tags"
+msgstr "Zbaľ značky"
+
+msgid "Font"
+msgstr "Písmo"
+
+msgid "Forum"
+msgstr "Fórum"
+
+msgid "François Badier (French) <frabad@gmail.com>"
+msgstr "François Badier (francúzsky) <frabad@gmail.com>"
+
+msgid "G&o To...\tCtrl+G"
+msgstr "&Choď na...\tCtrl+G"
+
+msgid "General"
+msgstr "Všeobecné"
+
+msgid "Gerald Schmidt (development) <gnschmidt@users.sourceforge.net>"
+msgstr "Gerald Schmidt (vývoj) <gnschmidt@users.sourceforge.net>"
+
+msgid "Global Find and Replace"
+msgstr "Globálne nájdenie a nahradenie"
+
+msgid "Global Replace..."
+msgstr "Globálne nahraď..."
+
+msgid "Go To"
+msgstr "Choď na"
+
+msgid "Go To..."
+msgstr "Choď na..."
+
+msgid "H&ide Tags and Attributes\tCtrl+Shift+T"
+msgstr "Skry &značky a atribúty\tCtrl+Shift+T"
+
+msgid "Help"
+msgstr "Návod"
+
+msgid "Hide Attributes Only"
+msgstr "Skry atribúty"
+
+msgid "Hide Tags and Attributes"
+msgstr "Skry značky a atribúty"
+
+msgid "Home Page"
+msgstr "Domovská stránka"
+
+msgid "I&gnore all"
+msgstr "I&gnoruj všetko"
+
+msgid "I&mport Microsoft Word Document..."
+msgstr "&Importuj dokument programu Microsoft Word..."
+
+msgid "I&ntelligent backspace/delete"
+msgstr "I&nteligentné vymazávanie/backspace"
+
+msgid "Ignore"
+msgstr "Ignoruj"
+
+msgid "Ignore all"
+msgstr "Ignoruj všetko"
+
+msgid "Ignore once"
+msgstr "Ignoruj raz"
+
+msgid "Import Microsoft Word Document"
+msgstr "Importujem dokument programu Microsoft Word"
+
+msgid "Import in progress..."
+msgstr "Prebieha import..."
+
+msgid "Increase"
+msgstr "Zväčši"
+
+msgid "Increase\tCtrl+U"
+msgstr "Zväčši\tCtrl+U"
+
+msgid "Information"
+msgstr "Informácia"
+
+msgid "Insert Element"
+msgstr "Vlož prvok"
+
+msgid "Insert Entity"
+msgstr "Vlož entitu"
+
+msgid "Insert Sibling"
+msgstr "Vlož súrodenca"
+
+msgid "Interprets the text specified in Find what as a regular expression"
+msgstr ""
+"Interpretuje text zadaný na hľadanie ako pravidlový výraz (regular "
+"expression)"
+
+msgid "L&ock hidden tags"
+msgstr "&Zamkni skryté značky"
+
+msgid "Language (restart required)"
+msgstr "Jazyk (vyžaduje reštart)"
+
+msgid "Ln %i Col %i"
+msgstr "Ria %i Stĺ %i"
+
+msgid "Lock Tags"
+msgstr "Zamkni značky"
+
+msgid "MB"
+msgstr "MB"
+
+msgid "MSXML validation failed (version 4.0 or later required)"
+msgstr "Zlyhala validácia MSXML (potrebujem verziu 4.0 alebo vyššie)"
+
+msgid "Match"
+msgstr "Nájdené"
+
+msgid "Matt Smigielski (testing) <alectrus@users.sourceforge.net>"
+msgstr "Matt Smigielski (testovanie) <alectrus@users.sourceforge.net>"
+
+msgid "Memory low: %s saved in large document mode"
+msgstr "Málo pamäte: %s uložený v režime veľkého dokumentu"
+
+msgid "Message"
+msgstr "Správa"
+
+msgid "Microsoft Word cannot save %s"
+msgstr "Microsoft Word nevie uložiť %s"
+
+msgid "Microsoft Word cannot save %s as XML"
+msgstr "Microsoft Word nemôže uložiť %s ako XML"
+
+msgid "Microsoft Word cannot save this document as WordprocessingML "
+msgstr "Microsoft Word nemôže uložiť tento dokument ako WordprocessingML "
+
+msgid "Modified"
+msgstr "Zmenené"
+
+msgid "New"
+msgstr "Nový"
+
+msgid "New Document"
+msgstr "Nový dokument"
+
+msgid "New Suggestion"
+msgstr "Nové odporúčanie"
+
+msgid "New suggestion..."
+msgstr "Nové odporúčanie..."
+
+msgid "New..."
+msgstr "Nový..."
+
+msgid "Next Document"
+msgstr "Nasledujúci dokument"
+
+msgid "No filter"
+msgstr "Bez filtra"
+
+msgid "No items selected"
+msgstr "Nie je nič označené"
+
+msgid "No matching nodes found"
+msgstr "Nenašiel sa zodpovedajúci uzol"
+
+msgid "No."
+msgstr "Č."
+
+msgid "None"
+msgstr "Žiadne"
+
+msgid "Normal"
+msgstr "Normálne"
+
+msgid "Normal\tCtrl+0"
+msgstr "Normálne\tCtrl+0"
+
+msgid "O&pen Large Document...\tCtrl+Shift+O"
+msgstr "Otvor &veľký dokument...\tCtrl+Shift+O"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Open"
+msgstr "Otvor"
+
+msgid "Open Large Document"
+msgstr "Otvor veľký dokument"
+
+msgid "Open Large Document..."
+msgstr "Otvor veľký dokument..."
+
+msgid "Open..."
+msgstr "Otvor..."
+
+msgid "Opening imported file..."
+msgstr "Otváram importovaný súbor..."
+
+msgid "Opening spelling and style check in read-only mode: "
+msgstr "Otváram kontrolu pravopisu a štýlu v režime iba na čítanie: "
+
+msgid "Opens a standard file dialog"
+msgstr "Otvorí štandardný súborový dialóg"
+
+msgid "Options"
+msgstr "Možnosti"
+
+msgid "Options..."
+msgstr "Možnosti..."
+
+msgid "Out of memory"
+msgstr "Málo pamäte"
+
+msgid "Output document empty"
+msgstr "Výstupný dokument je prázdny"
+
+msgid "P&aste As New Document"
+msgstr "Vlož &ako nový dokument"
+
+msgid "P&rint Preview..."
+msgstr "Ná&hľad tlače..."
+
+msgid "Pa&ge Setup..."
+msgstr "Nastavenie s&tránky..."
+
+msgid "Page Setup..."
+msgstr "Nastavenie stránky..."
+
+msgid "Parse in progress..."
+msgstr "Prebieha parsovanie..."
+
+msgid "Paste"
+msgstr "Vlož"
+
+msgid "Paste As New Document"
+msgstr "Vlož ako nový dokument"
+
+msgid "Pr&int...\tCtrl+P"
+msgstr "&Tlač...\tCtrl+P"
+
+msgid "Pr&intable summary"
+msgstr "Tlačiteľný &súhrn"
+
+msgid "Preparing Print Preview..."
+msgstr "Pripravujem ukážku tlače..."
+
+msgid "Preparing to print..."
+msgstr "Pripravujem tlač..."
+
+msgid "Pretty-print"
+msgstr "Pekná tlač"
+
+msgid "Pretty-print unsuccessful: output document empty"
+msgstr "Nepodarila sa pekná tlač: výstupný dokument je prázdny"
+
+msgid "Pretty-printing in progress..."
+msgstr "Prebieha pekná tlač..."
+
+msgid "Previous Document"
+msgstr "Predchádzajúci dokument"
+
+msgid "Print"
+msgstr "Tlač"
+
+msgid "Print Preview..."
+msgstr "Náhľad tlače..."
+
+msgid "Print..."
+msgstr "Tlač..."
+
+msgid "Provides a space for you to type additional information"
+msgstr "Poskytne miesto, kam môžete napísať ďalšie informácie"
+
+msgid "Provides a space for you to type the path of the file"
+msgstr "Poskytne miesto, kam môžete napísať cestu k súboru"
+
+msgid "Provides a space for you to type the text you want to find"
+msgstr "Poskytne miesto, kam môžete napísať text, ktorý chcete nájsť"
+
+msgid ""
+"Provides a space for you to type the text you want to replace the text you "
+"typed in Find what"
+msgstr ""
+"Poskytne miesto, kam môžete napísať text, ktorým chcete nahradiť nájdený text"
+
+msgid "Public DTD"
+msgstr "Verejné DTD"
+
+msgid "Public DTD..."
+msgstr "Verejné DTD..."
+
+msgid "Question"
+msgstr "Otázka"
+
+msgid "R&eplace in all open documents"
+msgstr "N&ahraď vo všetkých otvorených dokumentoch"
+
+msgid "RELAX NG grammar"
+msgstr "Gramatika RELAX NG"
+
+msgid "RELAX NG validation in progress..."
+msgstr "Prebieha validácia RELAX NG..."
+
+msgid "RELAX NG..."
+msgstr "RELAX NG..."
+
+msgid "Re&gex"
+msgstr "Re&gex"
+
+msgid "Re&member layout on close"
+msgstr "Za&pamätaj rozloženie pri zatvorení"
+
+msgid "Re&tain undo history on save"
+msgstr "&Udržiavaj históriu editovania aj po uložení"
+
+msgid "Redo"
+msgstr "Znova"
+
+msgid "Replace"
+msgstr "Nahraď"
+
+msgid "Replace &All"
+msgstr "Nahraď &všetko"
+
+msgid "Replace with:"
+msgstr "Nahraď:"
+
+msgid "Replace with: "
+msgstr "Nahraď: "
+
+msgid "Replace..."
+msgstr "Nahraď..."
+
+msgid "Revert"
+msgstr "Znovunačítaj"
+
+msgid "Rule"
+msgstr "Pravidlo"
+
+msgid "S&ave As...\tF12"
+msgstr "Ulož &ako...\tF12"
+
+msgid "S&how Current Element Pane"
+msgstr "Ukáž panel aktuálneho &elementu"
+
+msgid "S&how full path on frame"
+msgstr "Ukáž v ráme celú cestu"
+
+msgid "S&ymbol..."
+msgstr "S&ymbol..."
+
+msgid "Save"
+msgstr "Ulož"
+
+msgid "Save As"
+msgstr "Ulož ako"
+
+msgid "Save As..."
+msgstr "Ulož ako..."
+
+msgid "Select "
+msgstr "Označ "
+
+msgid "Select RELAX NG grammar"
+msgstr "Vyberte si gramatiku RELAX NG"
+
+msgid "Select stylesheet"
+msgstr "Vyberte stylesheet"
+
+msgid "Selects the file specified"
+msgstr "Vyberie zadaný súbor"
+
+msgid "Sh&ow Toolbar"
+msgstr "Ukáž &nástrojovú lištu"
+
+msgid "Show Current ElementPane"
+msgstr "Ukáž panel aktuálneho elementu"
+
+msgid "Show Tags and Attributes"
+msgstr "Ukáž značky a atribúty"
+
+msgid "Show Toolbar"
+msgstr "Ukáž nástrojovú lištu"
+
+msgid "Sibling..."
+msgstr "Súrodenec..."
+
+msgid "Spelling and Style"
+msgstr "Pravopis a štýl"
+
+msgid "Spelling and Style..."
+msgstr "Pravopis a štýl..."
+
+msgid "Stopped"
+msgstr "Zastavený"
+
+msgid "Suggestion"
+msgstr "Odporúčané"
+
+msgid "Symbol..."
+msgstr "Symbol..."
+
+msgid "System DTD"
+msgstr "Systémové DTD"
+
+msgid "System DTD..."
+msgstr "Systémové DTD..."
+
+msgid "T&EI to LaTeX\tAlt+5"
+msgstr "T&EI na LaTeX\tAlt+5"
+
+msgid "TE&I to XHTML\tAlt+6"
+msgstr "TE&I na XHTML\tAlt+6"
+
+msgid "TEI to &XSL-FO\tAlt+7"
+msgstr "TEI na &XSL-FO\tAlt+7"
+
+msgid "TEI to HTML"
+msgstr "TEI na HTML"
+
+msgid "TEI to LaTeX"
+msgstr "TEI na LaTeX"
+
+msgid "TEI to XHTML"
+msgstr "TEI na XHTML"
+
+msgid "TEI to XSL-FO"
+msgstr "TEI na XSL-FO"
+
+msgid "Tags Locked"
+msgstr "Značky zamknuté"
+
+msgid "Tags hidden"
+msgstr "Skryté značky"
+
+msgid "Tags locked"
+msgstr "Zamknuté značky"
+
+msgid "The following error has occurred: "
+msgstr "Stala sa nasledujúca chyba: "
+
+msgid "The operating system has turned down a request for additional memory"
+msgstr "Operačný systém zamietol požiadavku na pridelenie ďalšej pamäte"
+
+msgid "This functionality requires Microsoft Windows"
+msgstr "Táto funkcionalita vyžaduje Microsoft Windows"
+
+msgid "Toggle Fold"
+msgstr "Zmeň zbalenie"
+
+msgid "Twin"
+msgstr "Dvojča"
+
+msgid "Undo"
+msgstr "Späť"
+
+msgid "Unknown command line switch (expecting 'w' or 's')"
+msgstr "Neznámy parameter príkazového riadku (očakávam 'w' alebo 's')"
+
+msgid ""
+"Using local encoding because %s is neither valid UTF-8 nor well-formed XML: "
+"%s"
+msgstr ""
+"Používam miestne nastavenie, pretože %s nie je platné UTF-8 ani dobre "
+"formované XML: %s"
+
+msgid "Va&riable highlight in tag free view"
+msgstr "&Premenlivé podfarbenie v zobrazení bez značiek"
+
+msgid "Validation error"
+msgstr "Chyba validácie"
+
+msgid "Validation in progress..."
+msgstr "Prebieha validácia..."
+
+msgid "Viliam Búr (Slovak) <viliam@bur.sk>"
+msgstr "Viliam Búr (Slovenčina) <viliam@bur.sk>"
+
+msgid "Warning"
+msgstr "Varovanie"
+
+msgid "Word Count"
+msgstr "Počet slov"
+
+msgid "Wra&p lines"
+msgstr "&Zalamuj riadky"
+
+msgid "XML Copy Editor"
+msgstr "XML Copy Editor"
+
+msgid "XML Copy Editor has encountered an error and needs to close"
+msgstr "XML Copy Editor narazil na chybu a potrebuje zavrieť"
+
+msgid "XML Copy Editor has encountered an error and needs to close."
+msgstr "XML Copy Editor narazil na chybu a potrebuje zavrieť."
+
+msgid ""
+"XML Copy Editor has encountered the following error and needs to close: "
+msgstr "XML Copy Editor narazil na nasledujúcu chybu a potrebuje zavrieť: "
+
+msgid "XML Schema"
+msgstr "XML Schema"
+
+msgid "XML Schema..."
+msgstr "XML Schema..."
+
+msgid "XML document (*.xml)"
+msgstr "Dokument XML (*.xml)"
+
+msgid "XS&LT stylesheet..."
+msgstr "XS&LT štýl..."
+
+msgid "XSL Transform..."
+msgstr "XSL Transformácia..."
+
+msgid "XSL transformation in progress..."
+msgstr "Prebieha transformácia XSL..."
+
+msgid "XSLT stylesheet"
+msgstr "XSLT štýl"
+
+msgid "XSLT stylesheet..."
+msgstr "XSLT štýl..."
+
+msgid "byte"
+msgid_plural "bytes"
+msgstr[0] "bajtov"
+msgstr[1] "bajt"
+msgstr[2] "bajty"
+
+msgid "kB"
+msgstr "kB"
+
+msgid "valid"
+msgstr "validný"
+
+msgid "well-formed"
+msgstr "dobre-formovaný"
+
+msgid "|All files (*.*)|*.*"
+msgstr "|Všetky súbory (*.*)|*.*"

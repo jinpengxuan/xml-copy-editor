@@ -1,0 +1,912 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: XMLCopyEditor 1.0.9.5\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2007-04-23 23:15+0100\n"
+"PO-Revision-Date: 2007-08-24 02:28+0200\n"
+"Last-Translator: Serhij Dubyk <dubyk@library.lviv.ua>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Poedit-Language: Ukrainian\n"
+"X-Poedit-Country: UKRAINE\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+msgid "\tCtrl+%i"
+msgstr "\tCtrl+%i"
+
+msgid ""
+"\n"
+"XML Copy Editor is free software released under the GNU\n"
+"General Public License.\n"
+"\n"
+"Many thanks are due to "
+msgstr ""
+"\n"
+"XML Copy Editor - вільне прогамне забезпечення, що поширюється \n"
+"під Загальною Вілною Ліцензією GNU.\n"
+"\n"
+"Велика подяка "
+
+msgid " "
+msgstr " "
+
+msgid "%i match"
+msgid_plural "%i matches"
+msgstr[0] "%i знаходження"
+msgstr[1] "%i знаходження"
+msgstr[2] "%i знаходжень"
+
+msgid "%s %s %s %s"
+msgstr "%s %s %s %s"
+
+msgid "%s is already open"
+msgstr "%s вже відкрито"
+
+msgid "&About XML Copy Editor"
+msgstr "&Про XML Copy Editor"
+
+msgid "&Always insert closing tag"
+msgstr "&Завжди вставляти закриваючий теґ"
+
+msgid "&Blue background, white text"
+msgstr "&Блакитний фон, білий текст"
+
+msgid "&Browser\tCtrl+B"
+msgstr "У &броузері\tCtrl+B"
+
+msgid "&Change all"
+msgstr "&Замінити усе"
+
+msgid "&Check Well-formedness\tF2"
+msgstr "&Перевірити чи добре сформовано\tF2"
+
+msgid "&Close\tCtrl+F4"
+msgstr "&Закрити\tCtrl+F4"
+
+msgid "&Color Scheme"
+msgstr "&Кольорова схема"
+
+msgid "&Command\tCtrl+Alt+C"
+msgstr "&Команда\tCtrl+Alt+C"
+
+msgid "&Cut\tCtrl+X"
+msgstr "&Вирізати\tCtrl+X"
+
+msgid "&DTD\tF4"
+msgstr "&DTD\tF4"
+
+msgid "&Default"
+msgstr "&По умовчанню"
+
+msgid "&DocBook to HTML\tAlt+1"
+msgstr "&DocBook у HTML\tAlt+1"
+
+msgid "&DocBook to XHTML\tAlt+2"
+msgstr "&DocBook у XHTML\tAlt+2"
+
+msgid "&Download Source"
+msgstr "&Завантажити джерельний код"
+
+msgid "&Edit"
+msgstr "&Редагування"
+
+msgid "&Element...\tCtrl+I"
+msgstr "&Елемент...\tCtrl+I"
+
+msgid "&Enable network access for DTD validation"
+msgstr "&Задіяти доступ по мережі для перевірки чинності по DTD"
+
+msgid "&Entity...\tCtrl+E"
+msgstr "&Entity...\tCtrl+E"
+
+msgid "&Evaluate XPath...\tF9"
+msgstr "&Вичислити XPath...\tF9"
+
+msgid "&Export Microsoft Word Document..."
+msgstr "&Експорт документа Microsoft Word..."
+
+msgid "&File"
+msgstr "&Файл"
+
+msgid "&Find...\tCtrl+F"
+msgstr "&Пошук...\tCtrl+F"
+
+msgid "&Fold Tags\tCtrl+Shift+F"
+msgstr "&Згорути теґи\tCtrl+Shift+F"
+
+msgid "&Forum"
+msgstr "&Форум"
+
+msgid "&Global Replace...\tCtrl+Shift+R"
+msgstr "&Глобальна заміна...\tCtrl+Shift+R"
+
+msgid "&Help"
+msgstr "&Допомога"
+
+msgid "&Hide Attributes Only\tCtrl+Shift+A"
+msgstr "&Приховати лиш атрибути\tCtrl+Shift+A"
+
+msgid "&Highlight current line"
+msgstr "&Підсвічувати поточний рядок"
+
+msgid "&Home Page"
+msgstr "&Домашня cторінка"
+
+msgid "&Insert"
+msgstr "&Вставка"
+
+msgid "&Light"
+msgstr "&Світла"
+
+msgid "&Line numbers"
+msgstr "&Номери рядків"
+
+msgid "&Lock Tags\tCtrl+L"
+msgstr "&Замкнути теґи\tCtrl+L"
+
+msgid "&Match case"
+msgstr "&Враховувати реґістр"
+
+msgid "&New...\tCtrl+N"
+msgstr "&Новий...\tCtrl+N"
+
+msgid "&Next Document\tCtrl+PgDn"
+msgstr "&Наступний документ\tCtrl+PgDn"
+
+msgid "&None"
+msgstr "&Немає"
+
+msgid "&One application instance only"
+msgstr "&Лише одна копія програми"
+
+msgid "&Open...\tCtrl+O"
+msgstr "&Відкрити...\tCtrl+O"
+
+msgid "&Options..."
+msgstr "&Налаштування..."
+
+msgid "&Paste\tCtrl+V"
+msgstr "&Вставити\tCtrl+V"
+
+msgid "&Pretty-print\tF11"
+msgstr "&Сформатувати для гарного видруку\tF11"
+
+msgid "&Previous Document\tCtrl+PgUp"
+msgstr "&Попередній документ\tCtrl+PgUp"
+
+msgid "&Printable report"
+msgstr "&Звіт для друку"
+
+msgid "&Redo\tCtrl+Y"
+msgstr "&Відміна відкату\tCtrl+Y"
+
+msgid "&Regex"
+msgstr "&Регулярні вирази"
+
+msgid "&Replace"
+msgstr "&Замінити"
+
+msgid "&Replace...\tCtrl+R"
+msgstr "&Замінити...\tCtrl+R"
+
+msgid "&Report"
+msgstr "&Звітувати"
+
+msgid "&Run"
+msgstr "&Виконати"
+
+msgid "&Save\tCtrl+S"
+msgstr "&Зберегти\tCtrl+S"
+
+msgid "&Show Tags and Attributes\tCtrl+T"
+msgstr "&Показувати теґи та атрибути\tCtrl+T"
+
+msgid "&Sibling...\tCtrl+Shift+I"
+msgstr "&Сусід...\tCtrl+Shift+I"
+
+msgid "&TEI to HTML\tAlt+4"
+msgstr "&TEI у HTML\tAlt+4"
+
+msgid "&Text Size"
+msgstr "&Розмір тексту"
+
+msgid "&Toggle Fold"
+msgstr "&Перемкнути згортку/розгортку"
+
+msgid "&Tools"
+msgstr "&Інструменти"
+
+msgid "&Twin\tCtrl+Enter"
+msgstr "&Близнюк\tCtrl+Enter"
+
+msgid "&Undo\tCtrl+Z"
+msgstr "&Відкат\tCtrl+Z"
+
+msgid "&Unfold Tags\tCtrl+Shift+U"
+msgstr "&Розгорнути теґи\tCtrl+Shift+U"
+
+msgid "&Validate"
+msgstr "&Перевірка чинності"
+
+msgid "&Validate as you type"
+msgstr "&Перевірка чинності при вводі"
+
+msgid "&View"
+msgstr "&Вигляд"
+
+msgid "&Wait"
+msgstr "&Чекати"
+
+msgid "&Word Count"
+msgstr "&Підрахунок кількості слів"
+
+msgid "&Wrap Words\tCtrl+W"
+msgstr "&Завертати рядки\tCtrl+W"
+
+msgid "&XML"
+msgstr "&XML"
+
+msgid "&XML Copy Editor Help\tF1"
+msgstr "Довідка  - &XML Copy Editor\tF1"
+
+msgid "&XSL Transform...\tF8"
+msgstr "&XSL-перетворення...\tF8"
+
+msgid "&XSLT"
+msgstr "&XSLT"
+
+msgid "'%s' is not a valid line number"
+msgstr "'%s' не є чинним номером рядка"
+
+msgid "(unknown error)"
+msgstr "(невідома помилка)"
+
+msgid "Action"
+msgstr "Дія"
+
+msgid ""
+"All files (*.*)|*.*|XML (*.xml)|*.xml|XHTML (*.html)|*.html|DTD (*.dtd)|*."
+"dtd|XML Schema (*.xsd)|*.xsd|RELAX NG grammar (*.rng)|*.rng|XSL (*.xsl)|*.xsl"
+msgstr ""
+"Усі файли (*.*)|*.*|XML (*.xml)|*.xml|XHTML (*.html)|*.html|DTD (*.dtd)|*."
+"dtd|XML Schema (*.xsd)|*.xsd|RELAX NG grammar (*.rng)|*.rng|XSL (*.xsl)|*.xsl"
+
+msgid "Application directory"
+msgstr "Тека програми"
+
+msgid "Attributes hidden"
+msgstr "Атрибути приховано"
+
+msgid "Blue background, white text"
+msgstr "Блакитний фон, білий текст"
+
+msgid "Browse"
+msgstr "Перегляд"
+
+msgid "Browser"
+msgstr "У броузері"
+
+msgid "C&ancel"
+msgstr "&Відміна"
+
+msgid "C&lose All"
+msgstr "&Позакривати усі"
+
+msgid "C&lose Message/Find/Command Panes\tAlt+C"
+msgstr "&Закрити шибки повідомлення/пошуку/команди\tAlt+C"
+
+msgid "C&opy\tCtrl+C"
+msgstr "&Копіювати\tCtrl+C"
+
+msgid "Cannot evaluate XPath"
+msgstr "Не вдається вичислити XPath"
+
+msgid "Cannot open %s"
+msgstr "Не вдається відкрити %s"
+
+msgid "Cannot open clipboard"
+msgstr "Не вдається відкрити буфер обміну"
+
+msgid "Cannot open imported file"
+msgstr "Не вдається відкрити імпортований файл"
+
+msgid "Cannot pretty-print: "
+msgstr "Сформатувати для гарного видруку невдалося: "
+
+msgid "Cannot replace: "
+msgstr "Не вдається замінити: "
+
+msgid "Cannot save temporary file"
+msgstr "Не вдається зберегти тимчасовий файл"
+
+msgid "Cannot set encoding (cannot open temporary file)"
+msgstr "Не можливо встановити кодування (не вдається відкрити тимчасовий файл)"
+
+msgid "Cannot set encoding (cannot parse temporary file)"
+msgstr ""
+"Не можливо встановити кодування (не вдається проаналізувати тимчасовий файл)"
+
+msgid "Cannot set encoding: "
+msgstr "Не вдається встановити кодування: "
+
+msgid "Cannot start Microsoft Word"
+msgstr "Не вдається запустити Microsoft Word"
+
+msgid "Cannot transform: "
+msgstr "Не вдалося перетворити: "
+
+msgid "Change"
+msgstr "Замінити"
+
+msgid "Change all"
+msgstr "Замінити усе"
+
+msgid "Change once"
+msgstr "Замінити цього разу"
+
+msgid "Check Well-formedness"
+msgstr "Перевірити чи добре сформовано"
+
+msgid "Choose a document type:"
+msgstr "Виберіть тип документу: "
+
+msgid "Choose a file:"
+msgstr "Виберіть файл: "
+
+msgid "Choose an encoding:"
+msgstr "Виберіть кодування: "
+
+msgid "Close"
+msgstr "Закрити"
+
+msgid "Close All"
+msgstr "Позакривати усі"
+
+msgid "Close Message/Find/Command Panes"
+msgstr "Закрити шибки повідомлення/пошуку/команди"
+
+msgid "Close all"
+msgstr "Позакривати усі"
+
+msgid "Command"
+msgstr "Команда"
+
+msgid "Context"
+msgstr "Контекст"
+
+msgid "Copy"
+msgstr "Копіювати"
+
+msgid "Copyright © 2005-2007 Gerald Schmidt <gnschmidt@users.sourceforge.net>"
+msgstr ""
+"Авторське право © 2005-2007 Ґералд Шмідт (Gerald Schmidt) <gnschmidt@users."
+"sourceforge.net>"
+
+msgid "Current Element"
+msgstr "Поточний елемент"
+
+msgid "Cut"
+msgstr "Вирізати"
+
+msgid "D&ocBook to XSL-FO\tAlt+3"
+msgstr "D&ocBook у XSL-FO\tAlt+3"
+
+msgid "DTD"
+msgstr "DTD"
+
+msgid "DTD validation in progress..."
+msgstr "Перевірка чинності по DTD триває..."
+
+msgid "David Håsäther (Swedish) <hasather@gmail.com>"
+msgstr "David Håsäther (швецька мова) <hasather@gmail.com>"
+
+msgid "Decrease"
+msgstr "Зменшити"
+
+msgid "Decrease\tCtrl+D"
+msgstr "Зменшити\tCtrl+D"
+
+msgid "Default"
+msgstr "По умовчанню"
+
+msgid "DocBook to HTML"
+msgstr "DocBook у HTML"
+
+msgid "DocBook to XHTML"
+msgstr "DocBook у XHTML"
+
+msgid "DocBook to XSL-FO"
+msgstr "DocBook у XSL-FO"
+
+msgid "Document%i"
+msgstr "Документ%i"
+
+msgid "Download Source"
+msgstr "Завантажити джерельний код"
+
+msgid "E&ncoding..."
+msgstr "&Кодування..."
+
+msgid "E&xit"
+msgstr "&Вихід"
+
+msgid "Edited document empty"
+msgstr "Редагований документ пустий"
+
+msgid "Editor"
+msgstr "Редактор"
+
+msgid "Element..."
+msgstr "Елемент..."
+
+msgid "Encoding"
+msgstr "Кодування"
+
+msgid "Encoding should be one of "
+msgstr "Кодування повинно бути одне з "
+
+msgid "Encoding..."
+msgstr "Кодування..."
+
+msgid "Enter XPath:"
+msgstr "Введіть XPath:"
+
+msgid "Enter line number:"
+msgstr "Введіть номер рядка:"
+
+msgid "Enter new suggestion:"
+msgstr "Введіть нову пропозицію: "
+
+msgid "Entity..."
+msgstr "Entity..."
+
+msgid "Error"
+msgstr "Помилка"
+
+msgid "Evaluate XPath"
+msgstr "Вичислити XPath"
+
+msgid "Evaluate XPath..."
+msgstr "Вичислити XPath..."
+
+msgid "Exit"
+msgstr "Вихід"
+
+msgid "Export Microsoft Word Document"
+msgstr "Експорт документа Microsoft Word"
+
+msgid "Export in progress..."
+msgstr "Експорт триває..."
+
+msgid "F&ind Again\tF3"
+msgstr "&Шукати знов\tF3"
+
+msgid "Find"
+msgstr "Шукати"
+
+msgid "Find &Next"
+msgstr "Шукати &далі"
+
+msgid "Find Again"
+msgstr "Шукати знов"
+
+msgid "Find and Replace"
+msgstr "Пошук та заміна"
+
+msgid "Find..."
+msgstr "Пошук..."
+
+msgid "Find:"
+msgstr "Шукати: "
+
+msgid "Fold Tags"
+msgstr "Згорути теґи"
+
+msgid "Font"
+msgstr "Шрифт"
+
+msgid "Forum"
+msgstr "Форум"
+
+msgid "François Badier (French) <frabad@gmail.com>"
+msgstr "François Badier (французька мова) <frabad@gmail.com>"
+
+msgid "G&o To...\tCtrl+G"
+msgstr "&Перейти на рядок...\tCtrl+G"
+
+msgid "General"
+msgstr "Загальне"
+
+msgid "Global Find and Replace"
+msgstr "Глобальний пошук та заміна"
+
+msgid "Global Replace..."
+msgstr "Глобальна заміна..."
+
+msgid "Go To"
+msgstr "Перейти на рядок"
+
+msgid "Go To..."
+msgstr "Перейти на рядок..."
+
+msgid "H&ide Tags and Attributes\tCtrl+Shift+T"
+msgstr "&Приховати теґи і атрибути\tCtrl+Shift+T"
+
+msgid "Help"
+msgstr "Допомога"
+
+msgid "Hide Attributes Only"
+msgstr "Приховати лиш атрибути"
+
+msgid "Hide Tags and Attributes"
+msgstr "Приховати теґи і атрибути "
+
+msgid "Home Page"
+msgstr "Домашня cторінка"
+
+msgid "I&gnore all"
+msgstr "Про&ігнорувати усе"
+
+msgid "I&mport Microsoft Word Document..."
+msgstr "&Імпорт документаMicrosoft Word..."
+
+msgid "I&nsert"
+msgstr "&Вставити"
+
+msgid "Ignore"
+msgstr "Ігнорувати"
+
+msgid "Ignore all"
+msgstr "Проігнорувати усе"
+
+msgid "Ignore once"
+msgstr "Ігнорувати цього разу"
+
+msgid "Import Microsoft Word Document"
+msgstr "Імпорт документа Microsoft Word"
+
+msgid "Import in progress..."
+msgstr "Імпорт триває..."
+
+msgid "Increase"
+msgstr "Збільшити"
+
+msgid "Increase\tCtrl+U"
+msgstr "Збільшити\tCtrl+U"
+
+msgid "Insert Element"
+msgstr "Вставити елемент"
+
+msgid "Insert Entity"
+msgstr "Вставити Entity"
+
+msgid "Insert Sibling"
+msgstr "Вставити сусіда"
+
+msgid "L&ock hidden tags"
+msgstr "&Замкнути приховані теґи"
+
+msgid "Language (restart required)"
+msgstr "Мова (потрібний перезапуск)"
+
+msgid "Light"
+msgstr "Світла"
+
+msgid "Ln %i Col %i"
+msgstr "рядок %i позиція %i"
+
+msgid "Lock Tags"
+msgstr "Замкнути теґи"
+
+msgid "MB"
+msgstr "МБ"
+
+msgid "MSXML validation failed (version 4.0 or later required)"
+msgstr ""
+"Перевірка чинності MSXML зазнала невдачі (потребує 4.0 чи вищої версії)"
+
+msgid "Message"
+msgstr "Повідомлення"
+
+msgid "Modified"
+msgstr "Змінено"
+
+msgid "New"
+msgstr "Новий"
+
+msgid "New &document"
+msgstr "Новий &документ"
+
+msgid "New Document"
+msgstr "Новий документ"
+
+msgid "New Suggestion"
+msgstr "Нова пропозиція"
+
+msgid "New suggestion..."
+msgstr "Нова пропозиція..."
+
+msgid "New..."
+msgstr "Новий..."
+
+msgid "Next Document"
+msgstr "Наступний документ"
+
+msgid "No items selected"
+msgstr "Немає вибраних елементів"
+
+msgid "No."
+msgstr "№"
+
+msgid "None"
+msgstr "Немає"
+
+msgid "Normal"
+msgstr "Нормальний"
+
+msgid "Normal\tCtrl+0"
+msgstr "Нормальний\tCtrl+0"
+
+msgid "O&pen Large Document...\tCtrl+Shift+O"
+msgstr "&Відкрити великий документ...\tCtrl+Shift+O"
+
+msgid "OK"
+msgstr "Гаразд"
+
+msgid "Open"
+msgstr "Відкрити"
+
+msgid "Open Large Document"
+msgstr "Відкрити великий документ"
+
+msgid "Open Large Document..."
+msgstr "Відкрити великий документ..."
+
+msgid "Open..."
+msgstr "Відкрити..."
+
+msgid "Opening imported file..."
+msgstr "Відкриття імпортованого файлу..."
+
+msgid "Options"
+msgstr "Налаштування"
+
+msgid "Options..."
+msgstr "Налаштування..."
+
+msgid "Out of memory"
+msgstr "Вихід за межі доступної пам'яті"
+
+msgid "Output options"
+msgstr "Опції виводу"
+
+msgid "P&aste As New Document"
+msgstr "Вставити як новий документ"
+
+msgid "P&rint Preview..."
+msgstr "Перегляд перед друком..."
+
+msgid "Pa&ge Setup..."
+msgstr "&Лаштунки сторінки..."
+
+msgid "Page Setup..."
+msgstr "Лаштунки сторінки..."
+
+msgid "Parse in progress..."
+msgstr "Аналіз триває..."
+
+msgid "Paste"
+msgstr "Вставити"
+
+msgid "Paste As New Document"
+msgstr "Вставити як новий документ"
+
+msgid "Pr&int...\tCtrl+P"
+msgstr "&Друк...\tCtrl+P"
+
+msgid "Pr&intable summary"
+msgstr "&Зведення для друку"
+
+msgid "Preparing Print Preview..."
+msgstr "Підготовка попереднього перегляду перед друком..."
+
+msgid "Preparing to print..."
+msgstr "Підготовка до друку..."
+
+msgid "Pretty-print"
+msgstr "Сформатувати для гарного видруку"
+
+msgid "Pretty-print unsuccessful: output document empty"
+msgstr "Сформатувати для гарного видруку невдалося: вихідний документ пустий"
+
+msgid "Pretty-printing in progress..."
+msgstr "Форматування для гарного видруку триває..."
+
+msgid "Previous Document"
+msgstr "Попередній документ"
+
+msgid "Print"
+msgstr "Друк"
+
+msgid "Print Preview..."
+msgstr "Перегляд перед друком..."
+
+msgid "Print..."
+msgstr "Друк..."
+
+msgid "Question"
+msgstr "Запитання"
+
+msgid "R&eplace in all open documents"
+msgstr "&Замінити у всіх відкритих документах"
+
+msgid "RELAX NG validation in progress..."
+msgstr "RELAX NG validation in progress..."
+
+msgid "Re&gex"
+msgstr "&Регулярні вирази"
+
+msgid "Redo"
+msgstr "Відміна відкату"
+
+msgid "Replace"
+msgstr "Заміна"
+
+msgid "Replace &All"
+msgstr "Замінити &усе"
+
+msgid "Replace with:"
+msgstr "Замінити на: "
+
+msgid "Replace with: "
+msgstr "Замінити на: "
+
+msgid "Replace..."
+msgstr "Замінити..."
+
+msgid "Rule"
+msgstr "Правило"
+
+msgid "S&ave As...\tF12"
+msgstr "&Зберегти як...\tF12"
+
+msgid "S&how Current Element Pane"
+msgstr "&Показувати шибку з поточним елементом"
+
+msgid "S&ymbol..."
+msgstr "&Символ..."
+
+msgid "Save"
+msgstr "Зберегти"
+
+msgid "Save As"
+msgstr "Зберегти як"
+
+msgid "Save As..."
+msgstr "Зберегти як..."
+
+msgid "Sh&ow Toolbar"
+msgstr "&Показувати панель інструментів"
+
+msgid "Show Current ElementPane"
+msgstr "Показувати шибку з поточним елементом"
+
+msgid "Show Tags and Attributes"
+msgstr "Показувати теґи та атрибути"
+
+msgid "Show Toolbar"
+msgstr "Показувати панель інструментів"
+
+msgid "Sibling..."
+msgstr "Сусід..."
+
+msgid "Stopped"
+msgstr "Зупинено"
+
+msgid "Suggestion"
+msgstr "Пропозиція"
+
+msgid "Symbol..."
+msgstr "Символ..."
+
+msgid "T&EI to LaTeX\tAlt+5"
+msgstr "T&EI у LaTeX\tAlt+5"
+
+msgid "TE&I to XHTML\tAlt+6"
+msgstr "TE&I у XHTML\tAlt+6"
+
+msgid "TEI to &XSL-FO\tAlt+7"
+msgstr "TEI у &XSL-FO\tAlt+7"
+
+msgid "TEI to HTML"
+msgstr "TEI у HTML"
+
+msgid "TEI to LaTeX"
+msgstr "TEI у LaTeX"
+
+msgid "TEI to XHTML"
+msgstr "TEI у XHTML"
+
+msgid "TEI to XSL-FO"
+msgstr "TEI у XSL-FO"
+
+msgid "Tags hidden"
+msgstr "Теґи приховано"
+
+msgid "Tags locked"
+msgstr "Теґи замкнуті"
+
+msgid "Thomas Wenzel (German) <thowen@users.sourceforge.net>"
+msgstr "Thomas Wenzel (німецька мова) <thowen@users.sourceforge.net>"
+
+msgid "Toggle Fold"
+msgstr "Перемкнути згортку/розгортку"
+
+msgid "Twin"
+msgstr "Близнюк"
+
+msgid "Undo"
+msgstr "Відкат"
+
+msgid ""
+"Using local encoding because %s is neither valid UTF-8 nor well-formed XML: "
+"%s"
+msgstr ""
+"Використовується локальне кодування бо %s не є чинним UTF-8 або ж погано "
+"сформований XML: %s"
+
+msgid "Validation error"
+msgstr "Помилка перевірки чинності"
+
+msgid "Validation in progress..."
+msgstr "Перевірка чинності триває..."
+
+msgid "Variables"
+msgstr "Змінні"
+
+msgid "Viliam Búr (Slovak) <viliam@bur.sk>"
+msgstr "Viliam Búr (словацька мова) <viliam@bur.sk>"
+
+msgid "Warning"
+msgstr "Попередження"
+
+msgid "Word Count"
+msgstr "Підрахунок кількості слів"
+
+msgid "XML Copy Editor"
+msgstr "XML Copy Editor"
+
+msgid "XML Copy Editor has encountered an error and needs to close"
+msgstr "XML Copy Editor зіткнувся з помилкою і потрібує закриття"
+
+msgid "XML Copy Editor has encountered an error and needs to close."
+msgstr "XML Copy Editor зіткнувся з помилкою і потрібує закриття."
+
+msgid ""
+"XML Copy Editor has encountered the following error and needs to close: "
+msgstr "XML Copy Editor зіткнувся з наступною помилкою і потрібує закритття: "
+
+msgid "XML document (*.xml)"
+msgstr "XML-документ (*.xml)"
+
+msgid "XSL Transform..."
+msgstr "XSL-перетворення..."
+
+msgid "XSL transformation in progress..."
+msgstr "XSL-перетворення триває..."
+
+msgid "kB"
+msgstr "кБ"
+
+msgid "valid"
+msgstr "чинний"
+
+msgid "well-formed"
+msgstr "добре сформований"
+
+msgid "|All files (*.*)|*.*"
+msgstr "|Усі файли (*.*)|*.*"

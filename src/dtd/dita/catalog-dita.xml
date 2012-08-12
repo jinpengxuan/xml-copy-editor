@@ -1,0 +1,87 @@
+<?xml version="1.0" ?>
+<!--             (C) Copyright OASIS Open 2005.                    -->
+<!--             (C) Copyright IBM Corporation 2001, 2004.         -->
+<!--             All Rights Reserved.                              -->
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog"
+         prefer="public">
+
+<!-- Catalog for Dita -->
+
+<!-- Dita DTDs -->
+
+<group xml:base="dtd">
+
+  <public publicId="-//OASIS//DTD DITA Concept//EN"
+          uri="concept.dtd"/>
+  <public publicId="-//OASIS//ELEMENTS DITA Concept//EN"
+          uri="concept.mod"/>
+
+  <public publicId="-//OASIS//DTD DITA Composite//EN"
+          uri="ditabase.dtd"/>
+
+  <public publicId="-//OASIS//DTD DITA Reference//EN"
+          uri="reference.dtd"/>
+  <public publicId="-//OASIS//ELEMENTS DITA Reference//EN"
+          uri="reference.mod"/>
+
+  <public publicId="-//OASIS//DTD DITA Task//EN"
+          uri="task.dtd"/>
+  <public publicId="-//OASIS//ELEMENTS DITA Task//EN"
+          uri="task.mod"/>
+
+  <public publicId="-//OASIS//DTD DITA Topic//EN"
+          uri="topic.dtd"/>
+  <public publicId="-//OASIS//ELEMENTS DITA Topic//EN"
+          uri="topic.mod"/>
+  <public publicId="-//OASIS//ENTITIES DITA Topic Class//EN"
+          uri="topic_class.ent"/>
+  <public publicId="-//OASIS//ENTITIES DITA Topic Definitions//EN"
+          uri="topic_defn.ent"/>
+
+<!-- Maps -->
+
+  <public publicId="-//OASIS//DTD DITA Map//EN"
+          uri="map.dtd"/>
+  <public publicId="-//OASIS//ELEMENTS DITA Map//EN"
+          uri="map.mod"/>
+  <public publicId="-//OASIS//ENTITIES DITA Map Group Domain//EN"
+          uri="mapgroup.ent"/>
+  <public publicId="-//OASIS//ELEMENTS DITA Map Group Domain//EN"
+          uri="mapgroup.mod"/>
+
+<!-- Domains -->
+
+  <public publicId="-//OASIS//ELEMENTS DITA Highlight Domain//EN"
+          uri="highlight-domain.mod"/>
+  <public publicId="-//OASIS//ENTITIES DITA Highlight Domain//EN"
+          uri="highlight-domain.ent"/>
+
+  <public publicId="-//OASIS//ELEMENTS DITA Programming Domain//EN"
+          uri="programming-domain.mod"/>
+  <public publicId="-//OASIS//ENTITIES DITA Programming Domain//EN"
+          uri="programming-domain.ent"/>
+
+  <public publicId="-//OASIS//ELEMENTS DITA Software Domain//EN"
+          uri="software-domain.mod"/>
+  <public publicId="-//OASIS//ENTITIES DITA Software Domain//EN"
+          uri="software-domain.ent"/>
+
+  <public publicId="-//OASIS//ELEMENTS DITA User Interface Domain//EN"
+          uri="ui-domain.mod"/>
+  <public publicId="-//OASIS//ENTITIES DITA User Interface Domain//EN"
+          uri="ui-domain.ent"/>
+
+  <public publicId="-//OASIS//ELEMENTS DITA Utilities Domain//EN"
+          uri="utilities-domain.mod"/>
+  <public publicId="-//OASIS//ENTITIES DITA Utilities Domain//EN"
+          uri="utilities-domain.ent"/>
+
+<!-- Common -->
+
+  <public publicId="-//OASIS//ELEMENTS DITA Metadata//EN"
+          uri="meta_xml.mod"/>
+  <public publicId="-//OASIS//ELEMENTS DITA CALS Tables//EN"
+          uri="tbl_xml.mod"/>
+</group>
+
+</catalog>

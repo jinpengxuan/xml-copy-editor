@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT Heading (#PCDATA | b | i | u | sup | sub | smallcaps | a)*>
+<!ELEMENT Timing (Hours, Minutes)>
+<!ATTLIST Timing
+	id CDATA #REQUIRED
+>
+<!ELEMENT Question (Paragraph+ | AuthorComment+ | EditorComment+ | BulletedList+ | NumberedList+ | UnNumberedList+ | Figure | Table | Quote | Extract | Equation | SubHeading | SubSubHeading | Verse | MediaContent)+>
+<!ELEMENT MediaContent (Caption?, SourceReference?, Description)>
+<!ATTLIST MediaContent
+	src CDATA #REQUIRED
+	id CDATA #REQUIRED
+	type CDATA #REQUIRED
+	target CDATA #IMPLIED
+	supportDoc CDATA #IMPLIED
+>
+<!ELEMENT Answer (Paragraph | AuthorComment | EditorComment | BulletedList | NumberedList | UnNumberedList | Figure | Table | Quote | Equation | SubHeading | SubSubHeading | Verse | MediaContent)+>
+<!ELEMENT Discussion (Paragraph | AuthorComment | EditorComment | BulletedList | NumberedList | UnNumberedList | Figure | Table | Quote | Equation | SubHeading | SubSubHeading | Verse | MediaContent)+>
+<!ELEMENT Hours (#PCDATA)>
+<!ELEMENT Minutes (#PCDATA)>
+<!ELEMENT Paragraph (#PCDATA | CrossRef | SideNote | FootNote | AuthorComment | EditorComment | InlineEquation | InlineFigure | b | i | u | sup | sub | smallcaps | a)*>
+<!ELEMENT AuthorComment (#PCDATA)>
+<!ELEMENT EditorComment (#PCDATA)>
+<!ELEMENT BulletedList (ListItem+)>
+<!ELEMENT NumberedList (ListItem+)>
+<!ATTLIST NumberedList
+	class CDATA #IMPLIED
+>
+<!ELEMENT UnNumberedList (ListItem+)>
+<!ELEMENT Figure (Image, Caption?, SourceReference?, Description)>
+<!ATTLIST Figure
+	id CDATA #REQUIRED
+>
+<!ELEMENT Table (TableHead, TableBody, TableFootnote*, SourceReference)>
+<!ATTLIST Table
+	id CDATA #REQUIRED
+	class CDATA #IMPLIED
+>
+<!ELEMENT Quote (Heading?, (Paragraph | AuthorComment | EditorComment | SubHeading | SubSubHeading | BulletedList | NumberedList | UnNumberedList | Quote)+, SourceReference?)>
+<!ATTLIST Quote
+	id CDATA #REQUIRED
+>
+<!ELEMENT Equation (Image, Caption?, SourceReference?, Description)>
+<!ATTLIST Equation
+	id CDATA #REQUIRED
+>
+<!ELEMENT SubHeading (#PCDATA | b | i | u | sup | sub | smallcaps | a)*>
+<!ELEMENT SubSubHeading (#PCDATA | b | i | u | sup | sub | smallcaps | a)*>
+<!ELEMENT Verse (Heading?, (Paragraph | AuthorComment | EditorComment)+, SourceReference?)>
+<!ATTLIST Figure
+	id CDATA #REQUIRED
+>
+<!ATTLIST Figure
+	id CDATA #REQUIRED
+>
+<!ELEMENT Extract (Heading?, Introduction?, (Paragraph | AuthorComment | EditorComment | BulletedList | NumberedList | UnNumberedList | Figure | Table | Quote | Equation | SubHeading | SubSubHeading)+, SourceReference?)>
+<!ATTLIST Extract
+	id CDATA #REQUIRED
+	class CDATA #IMPLIED
+>
+<!ELEMENT Glossary (GlossaryItem+)>
+<!ELEMENT References (Reference+)>
+<!ELEMENT Acknowledgements (Heading | SubHeading | Paragraph)+>
+<!ELEMENT Appendices (Appendix+)>
+<!ELEMENT CourseTeam (Paragraph | SubHeading | SubSubHeading)+>
+<!ELEMENT Index (IndexTerm, SubTerm, SubSubTerm)+>
+<!ELEMENT IndexTerm (#PCDATA | b | i | u | sup | sub | smallcaps | a | CrossRef)*>
+<!ELEMENT SubTerm (#PCDATA | b | i | u | sup | sub | smallcaps | a | CrossRef)*>
+<!ELEMENT SubSubTerm (#PCDATA | b | i | u | sup | sub | smallcaps | a | CrossRef)*>
+<!ELEMENT Introduction (Title, (Quote | Table | Equation | Figure | Section | UnNumberedList | NumberedList | BulletedList | Extract | SAQ | Example | CaseStudy | Box | Activity | Verse | EditorComment | AuthorComment | Paragraph)+)>
+<!ELEMENT BulletedSubsidiaryList (SubListItem+)>
+<!ELEMENT NumberedSubsidiaryList (SubListItem+)>
+<!ATTLIST NumberedSubsidiaryList
+	class CDATA #IMPLIED
+>
+<!ELEMENT UnNumberedSubsidiaryList (SubListItem+)>
+<!ELEMENT ListItem (BulletedSubsidiaryList | NumberedSubsidiaryList | UnNumberedSubsidiaryList | Paragraph | Equation)*>
+<!ELEMENT SubListItem (Paragraph | Equation)*>
+<!--Book or Block-->
+<!ELEMENT Item (FrontMatter?, Unit*, BackMatter?)>
+<!ATTLIST Item
+	TextType CDATA #IMPLIED
+>
+<!ELEMENT CrossRef (#PCDATA)>
+<!ATTLIST CrossRef
+	idref CDATA #REQUIRED
+>
+<!ELEMENT SideNote (Paragraph)>
+<!ELEMENT FootNote (Paragraph)+>
+<!ELEMENT InlineEquation (Image, Description)>
+<!ELEMENT InlineFigure (Image, Description)>
+<!ATTLIST CrossRef
+	idref CDATA #REQUIRED
+>
+<!ELEMENT QuoteReference (#PCDATA)>
+<!ELEMENT Reference (#PCDATA | b | i | u | sup | sub | smallcaps | a | CrossRef)*>
+<!ELEMENT GlossaryItem (Term, Definition)>
+<!ELEMENT Term (#PCDATA)>
+<!ELEMENT Definition (#PCDATA | b | i | u | sup | sub | smallcaps | a | CrossRef)*>
+<!ELEMENT Appendix (Title, Introduction?, (Paragraph | AuthorComment | EditorComment | Activity | Box | CaseStudy | Example | SAQ | Extract | BulletedList | NumberedList | UnNumberedList | Section | Figure | Equation | Table | Quote)+, KeyPoints?)>
+<!ATTLIST Appendix
+	id CDATA #REQUIRED
+>
+<!ELEMENT Title (#PCDATA | b | i | u | sup | sub | smallcaps | a)*>
+<!ELEMENT Activity (Heading?, Timing?, Question, MediaContent?, Answer?, Discussion?)>
+<!ATTLIST Activity
+	id CDATA #REQUIRED
+>
+<!ELEMENT Box (Heading?, (Paragraph | AuthorComment | EditorComment | BulletedList | NumberedList | UnNumberedList | Figure | Table | Quote | Equation)+, SourceReference?)>
+<!ATTLIST Box
+	id CDATA #REQUIRED
+>
+<!ELEMENT CaseStudy (Heading?, (AuthorComment | Paragraph | BulletedList | EditorComment | NumberedList | UnNumberedList | Figure | Table | Quote | Equation | SubHeading)+)>
+<!ATTLIST CaseStudy
+	id CDATA #REQUIRED
+>
+<!ELEMENT Example (Heading?, (Paragraph | AuthorComment | EditorComment | BulletedList | NumberedList | UnNumberedList | Figure | Table | Quote | Equation | SubHeading | Answer)+, SourceReference?)>
+<!ATTLIST Example
+	id CDATA #REQUIRED
+>
+<!ELEMENT SAQ (Heading?, Question, Answer)>
+<!ATTLIST SAQ
+	id CDATA #REQUIRED
+>
+<!ATTLIST NumberedList
+	class CDATA #IMPLIED
+>
+<!ELEMENT SubSection (#PCDATA | Title | Paragraph | AuthorComment | EditorComment | Activity | Box | CaseStudy | Example | SAQ | Extract | BulletedList | NumberedList | UnNumberedList | SubSubSection | Figure | Equation | Table | Quote | Verse | MediaContent)*>
+<!ATTLIST SubSection
+	id CDATA #REQUIRED
+>
+<!ATTLIST SAQ
+	id CDATA #REQUIRED
+>
+<!ATTLIST NumberedList
+	class CDATA #IMPLIED
+>
+<!ELEMENT SubSubSection (#PCDATA | Heading | Paragraph | AuthorComment | EditorComment | Activity | Box | CaseStudy | Example | SAQ | Extract | BulletedList | NumberedList | UnNumberedList | Figure | Equation | Table | Quote | Verse | MediaContent)*>
+<!ATTLIST SubSubSection
+	id CDATA #REQUIRED
+>
+<!ELEMENT ByLine (#PCDATA)>
+<!ELEMENT SourceReference (#PCDATA | b | i | u | sup | sub | smallcaps | a | CrossRef)*>
+<!ELEMENT Caption (#PCDATA | b | i | u | sup | sub | smallcaps | a | CrossRef)*>
+<!ELEMENT Description (#PCDATA | b | i | u | sup | sub | smallcaps | a | CrossRef)*>
+<!ELEMENT Image EMPTY>
+<!ATTLIST Image
+	src CDATA #IMPLIED
+	alt CDATA #IMPLIED
+	longdesc CDATA #IMPLIED
+	height CDATA #IMPLIED
+	width CDATA "col_100"
+	id CDATA #IMPLIED
+>
+<!ELEMENT TableHead (#PCDATA | CrossRef | SideNote | FootNote | AuthorComment | EditorComment | InlineEquation | InlineFigure | b | i | u | sup | sub | smallcaps | a)*>
+<!ELEMENT TableBody (table)>
+<!ELEMENT TableFootnote (#PCDATA | CrossRef | SideNote | FootNote | AuthorComment | EditorComment | InlineEquation | InlineFigure | b | i | u | sup | sub | smallcaps | a)*>
+<!ELEMENT tr ((th+) | (td+))+>
+<!ELEMENT table (tr+)>
+<!ATTLIST table
+	class CDATA "TableGrid"
+>
+<!ELEMENT th (#PCDATA | CrossRef | SideNote | FootNote | AuthorComment | EditorComment | InlineEquation | InlineFigure | b | i | u | sup | sub | smallcaps | a)*>
+<!ATTLIST th
+	colspan NMTOKEN #IMPLIED
+	class (ColumnLeft | ColumnCentered | ColumnRight) "ColumnCentered"
+>
+<!ELEMENT td (#PCDATA | CrossRef | SideNote | FootNote | AuthorComment | EditorComment | InlineEquation | InlineFigure | b | i | u | sup | sub | smallcaps | a)*>
+<!ATTLIST td
+	colspan NMTOKEN #IMPLIED
+	class (TableLeft | TableCentered | TableRight) "TableLeft"
+>
+<!ATTLIST NumberedList
+	class CDATA #IMPLIED
+>
+<!ELEMENT KeyPoints (KeyPoint)+>
+<!ELEMENT KeyPoint (#PCDATA)>
+<!ELEMENT Section (Title, (Paragraph | Activity | Box | CaseStudy | Example | SAQ | Extract | AuthorComment | EditorComment | BulletedList | NumberedList | UnNumberedList | SubSection | Figure | Equation | Table | Quote | Verse | MediaContent?)+, KeyPoints?)>
+<!ATTLIST Section
+	id CDATA #REQUIRED
+>
+<!ELEMENT BackMatter (Conclusion?, Glossary?, References?, Acknowledgements?, Appendices?, CourseTeam?, Index?)>
+<!ELEMENT LearningOutcomes (Paragraph, (LearningOutcome)+)>
+<!ELEMENT LearningOutcome (#PCDATA | b | i | u | sup | sub | smallcaps | a | CrossRef)*>
+<!ELEMENT Address (AddressLine)+>
+<!ELEMENT Edition (#PCDATA)>
+<!ELEMENT ISBN (#PCDATA)>
+<!ELEMENT Printed (#PCDATA)>
+<!ELEMENT FirstPublished (#PCDATA)>
+<!ELEMENT Copyright (#PCDATA)>
+<!ELEMENT Typeset (#PCDATA)>
+<!ELEMENT Edited (#PCDATA)>
+<!ELEMENT Rights (Paragraph)+>
+<!ELEMENT AddressLine (#PCDATA)>
+<!ELEMENT FrontMatter (CourseCode, CourseTitle, ItemID, ItemTitle, ByLine?, Imprint, Preface?, Introduction?, LearningOutcomes?)>
+<!ELEMENT CourseCode (#PCDATA)>
+<!ELEMENT CourseTitle (#PCDATA)>
+<!ELEMENT ItemID (#PCDATA)>
+<!ELEMENT ItemTitle (#PCDATA)>
+<!ELEMENT Imprint (Standard | Copublished)>
+<!ELEMENT Preface (Heading | SubHeading | SubSubHeading | Paragraph | BulletedList | NumberedList | UnNumberedList | Figure | Table)+>
+<!ELEMENT Standard (GeneralInfo, Address, FirstPublished, Copyright, Rights, Edited, Typeset, Printed, ISBN, Edition)>
+<!ELEMENT Copublished (CopublisherAddress, Address, FirstPublished, Copyright, Rights, Edited, Typeset, Printed, OUCourseInfo, OUWebAddress, BritishLibraryData, LibraryOfCongressData, ISBN, Edition)>
+<!ELEMENT GeneralInfo (Paragraph)+>
+<!ELEMENT CopublisherAddress (AddressLine)+>
+<!ELEMENT OUCourseInfo (#PCDATA)>
+<!ELEMENT OUWebAddress (#PCDATA)>
+<!ELEMENT BritishLibraryData (#PCDATA)>
+<!ELEMENT LibraryOfCongressData (#PCDATA)>
+<!--Chapter or Unit-->
+<!ELEMENT Unit (UnitID, UnitTitle, ByLine?, Introduction?, LearningOutcomes?, Session+, BackMatter?)>
+<!ELEMENT UnitID (#PCDATA)>
+<!ELEMENT UnitTitle (#PCDATA)>
+<!ELEMENT Session (Title, Introduction?, (Paragraph | AuthorComment | EditorComment | Activity | Box | CaseStudy | Example | SAQ | Extract | BulletedList | NumberedList | UnNumberedList | Section | Figure | Equation | Table | Quote)+, KeyPoints?)>
+<!ATTLIST Session
+	id CDATA #REQUIRED
+>
+<!ELEMENT Conclusion (Title, (Quote | Table | Equation | Figure | Section | UnNumberedList | NumberedList | BulletedList | Extract | SAQ | Example | CaseStudy | Box | Activity | EditorComment | AuthorComment | Paragraph)+)>
+<!--bold-->
+<!ELEMENT b (#PCDATA | b | i | u | sup | sub | smallcaps | a | CrossRef)*>
+<!--italic-->
+<!ELEMENT i (#PCDATA | b | i | u | sup | sub | smallcaps | a | CrossRef)*>
+<!--underline-->
+<!ELEMENT u (#PCDATA | b | i | u | sup | sub | smallcaps | a | CrossRef)*>
+<!--superscript-->
+<!ELEMENT sup (#PCDATA | b | i | u | sup | sub | smallcaps | a | CrossRef)*>
+<!--subscript-->
+<!ELEMENT sub (#PCDATA | b | i | u | sup | sub | smallcaps | a | CrossRef)*>
+<!--small capital letters-->
+<!ELEMENT smallcaps (#PCDATA | b | i | u | sup | sub | smallcaps | a | CrossRef)*>
+<!--anchor-->
+<!ELEMENT a (#PCDATA | b | i | u | sup | sub | smallcaps | a | CrossRef)*>
+<!ATTLIST a
+	href CDATA #IMPLIED
+	name NMTOKEN #IMPLIED
+	type CDATA #IMPLIED
+	target CDATA #IMPLIED
+>
+<!--verse or poem-->
+

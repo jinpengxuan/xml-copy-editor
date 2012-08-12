@@ -1,0 +1,1315 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: XML Copy Editor 1.2.0.4\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-09-23 13:05+0200\n"
+"PO-Revision-Date: 2009-09-30 14:20+0100\n"
+"Last-Translator: Robert Falcó <rfalco@acett.org>\n"
+"Language-Team: Robert Falcó <rfalco@acett.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Language: Catalan\n"
+"X-Poedit-Country: SPAIN\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+msgid "\tCtrl+%i"
+msgstr "\tCtrl+%i"
+
+msgid ""
+"\n"
+"XML Copy Editor is free software released under the GNU\n"
+"General Public License.\n"
+"\n"
+"Many thanks are due to "
+msgstr ""
+"\n"
+"XML Copy Editor is free software released under the GNU\n"
+"General Public License.\n"
+"\n"
+"Many thanks are due to "
+
+msgid " "
+msgstr " "
+
+msgid "%g %s saved"
+msgstr "%g %s desat"
+
+msgid "%i error"
+msgid_plural "%i errors"
+msgstr[0] "%i error"
+msgstr[1] "%i errors"
+
+msgid "%i replacement made"
+msgid_plural "%i replacements made"
+msgstr[0] "%i substitució feta"
+msgstr[1] "%i substitucions fetes"
+
+msgid "%s contains %i word"
+msgid_plural "%s contains %i words"
+msgstr[0] "%s conté %i paraula"
+msgstr[1] "%s conté %i paraules"
+
+msgid "%s is %s"
+msgstr "%s és %s"
+
+msgid "%s is already open"
+msgstr "%s ja està obert"
+
+msgid "%s saved in default encoding UTF-8"
+msgstr "%s desat en codificació per defecte"
+
+msgid "%s saved in default encoding UTF-8: conversion to %s failed"
+msgstr ""
+"%s desat en codificació per defecte UTF-8: no s'ha pogut realitzar la "
+"conversió a %s"
+
+msgid "%s saved in default encoding UTF-8: unknown encoding %s"
+msgstr "%s desat en codificació per defecte UTF-8: %s codificació desconeguda"
+
+msgid "&About XML Copy Editor"
+msgstr "&Sobre XML Copy Editor"
+
+msgid "&Always insert closing tag"
+msgstr "Introdueix sempre etiquet&a de tancament"
+
+msgid "&Apply changes"
+msgstr "&Aplica els canvis"
+
+msgid "&Associate"
+msgstr "&Associa"
+
+msgid "&Blue background, white text"
+msgstr "&Fons blau, text blanc"
+
+msgid "&Browse Source"
+msgstr "&Navega per codi font"
+
+msgid "&Browser\tCtrl+B"
+msgstr "&Navegador\tCtrl+B"
+
+msgid "&Check"
+msgstr "&Comprova"
+
+msgid "&Check Well-formedness\tF2"
+msgstr "&Comprovar correcció estructura XML\tF2"
+
+msgid "&Close\tCtrl+F4"
+msgstr "&Tanca\tCtrl+F4"
+
+msgid "&Color Scheme"
+msgstr "Esquema de &color"
+
+msgid "&Command\tCtrl+Alt+C"
+msgstr "O&rdre\tCtrl+Alt+C"
+
+msgid "&Cut\tCtrl+X"
+msgstr "&Talla\tCtrl+X"
+
+msgid "&DTD/XML Schema\tF5"
+msgstr "&Schema DTD/XML\tF5"
+
+msgid "&Default"
+msgstr "Per &defecte"
+
+msgid "&Edit"
+msgstr "&Edita"
+
+msgid "&Element...\tCtrl+I"
+msgstr "&Element...\tCtrl+I"
+
+msgid "&Enable network access for DTD validation"
+msgstr "P&ermetre accés a la xarxa per validació DTD"
+
+msgid "&Entity...\tCtrl+E"
+msgstr "E&ntitat...\tCtrl+E"
+
+msgid "&Evaluate XPath...\tF9"
+msgstr "A&valua  XPath...\tF9"
+
+msgid "&Export Microsoft Word Document..."
+msgstr "&Exporta document de Microsoft Word..."
+
+msgid "&File"
+msgstr "&Arxiu"
+
+msgid "&Find what: "
+msgstr "Cerca:"
+
+msgid "&Find...\tCtrl+F"
+msgstr "&Cerca...\tCtrl+F"
+
+msgid "&Fold Tags\tCtrl+Shift+F"
+msgstr "&Plega etiquetes\tCtrl+Shift+F"
+
+msgid "&Folding"
+msgstr "P&legar"
+
+msgid "&Forum"
+msgstr "&Fòrum"
+
+msgid "&Global Replace...\tCtrl+Shift+R"
+msgstr "Reemplaçar &global...\tCtrl+Shift+R"
+
+msgid "&Help"
+msgstr "Aj&uda"
+
+msgid "&Hide Attributes Only\tCtrl+Shift+A"
+msgstr "&Oculta només atributs\tCtrl+Shift+A"
+
+msgid "&Highlight current line"
+msgstr "Ressalta la lín&ia actual"
+
+msgid "&Home Page"
+msgstr "Pàg&ina d'inici"
+
+msgid "&Indentation guides"
+msgstr "G&uies de sagnat"
+
+msgid "&Insert"
+msgstr "&Insereix"
+
+msgid "&Light"
+msgstr "C&lar"
+
+msgid "&Line numbers"
+msgstr "Nú&meros de línia"
+
+msgid "&Lock Tags\tCtrl+L"
+msgstr "&Bloqueja etiquetes\tCtrl+L"
+
+msgid "&Match case"
+msgstr "Coincidència &majúscules i minúscules"
+
+msgid "&New...\tCtrl+N"
+msgstr "&Nou...\tCtrl+N"
+
+msgid "&Next Document\tCtrl+PgDn"
+msgstr "Document &següent\tCtrl+PgDn"
+
+msgid "&None"
+msgstr "&Cap"
+
+msgid "&One application instance only"
+msgstr "Una s&ola instància de l'aplicació"
+
+msgid "&Open...\tCtrl+O"
+msgstr "&Obre...\tCtrl+O"
+
+msgid "&Options..."
+msgstr "O&pcions..."
+
+msgid "&Paste\tCtrl+V"
+msgstr "&Enganxa\tCtrl+V"
+
+msgid "&Pretty-print\tF11"
+msgstr "Im&pressió en format vistós\tF11"
+
+msgid "&Previous Document\tCtrl+PgUp"
+msgstr "&Document previ\tCtrl+PgUp"
+
+msgid "&Printable report"
+msgstr "Informe im&primible"
+
+msgid "&Public DTD..."
+msgstr "&DTD Públic..."
+
+msgid "&RELAX NG...\tF6"
+msgstr "&RELAX NG...\tF6"
+
+msgid "&Redo\tCtrl+Y"
+msgstr "&Refés\tCtrl+Y"
+
+msgid "&Regex"
+msgstr "EXPREG"
+
+msgid "&Reload"
+msgstr "Actualit&za"
+
+msgid "&Remember open tabs on close"
+msgstr "&Recordar pestanyes obertes al tancar"
+
+msgid "&Replace"
+msgstr "Ree&mplaça"
+
+msgid "&Replace...\tCtrl+R"
+msgstr "&Reemplça...\tCtrl+R"
+
+msgid "&Revert"
+msgstr "Vés enda&rrere"
+
+msgid "&Run"
+msgstr "&Executa"
+
+msgid "&Save\tCtrl+S"
+msgstr "&Desa\tCtrl+S"
+
+msgid "&Save UTF-8 byte order mark"
+msgstr "De&sar marca d'ordre de bytes d'UTF-8"
+
+msgid "&Show Tags and Attributes\tCtrl+T"
+msgstr "&Mostra etiquetes i atributs\tCtrl+T"
+
+msgid "&Sibling...\tCtrl+Shift+I"
+msgstr "&Germà...\tCtrl+Shift+I"
+
+msgid "&Spelling...\tF7"
+msgstr "&Ortografia...\tF7"
+
+msgid "&Style...\tShift+F7"
+msgstr "&Estil...\tShift+F7"
+
+msgid "&System DTD..."
+msgstr "&Sistema DTD..."
+
+msgid "&Tag completion"
+msgstr "Completa e&tiquetes"
+
+msgid "&Text Size"
+msgstr "&Tamany del text"
+
+msgid "&Toggle Fold\tCtrl+Alt+T"
+msgstr "O&bre o tanca plec\tCtrl+Alt+T"
+
+msgid "&Tools"
+msgstr "Eine&s"
+
+msgid "&Twin\tCtrl+Enter"
+msgstr "&Bessó\tCtrl+Enter"
+
+msgid "&Undo\tCtrl+Z"
+msgstr "&Desfés\tCtrl+Z"
+
+msgid "&Unfold Tags\tCtrl+Shift+U"
+msgstr "Desplega eti&quetes\tCtrl+Shift+U"
+
+msgid "&Validate"
+msgstr "&Valida"
+
+msgid "&Validate as you type"
+msgstr "&Valida mentre escrius"
+
+msgid "&View"
+msgstr "&Visualitza"
+
+msgid "&Wait"
+msgstr "E&spereu"
+
+msgid "&White space visible"
+msgstr "Es&pai en blanc visible"
+
+msgid "&Word Count"
+msgstr "Recompte de &paraules"
+
+msgid "&Wrap Words\tCtrl+W"
+msgstr "&Ajusta paraules\tCtrl+W"
+
+msgid "&XML"
+msgstr "&XML"
+
+msgid "&XML Copy Editor Help\tF1"
+msgstr "&Ajuda XML Copy Editor\tF1"
+
+msgid "&XML Schema..."
+msgstr "&Schema XML..."
+
+msgid "&XSL Transform...\tF8"
+msgstr "&Transforma XSL...\tF8"
+
+msgid "'%s' is not a valid line number"
+msgstr "'%s' no és un número de línia vàlid"
+
+msgid "(No dictionaries found)"
+msgstr "(No s'han trobat diccionaris)"
+
+msgid "(No filter)"
+msgstr "(No hi ha filtre)"
+
+msgid "(No filters found)"
+msgstr "(No s'ha trobat cap filtre)"
+
+msgid "(No rule sets found)"
+msgstr "(No s'han trobat regles)"
+
+msgid "(lossless conversion requires version 2003 or later)"
+msgstr "(la conversió sense pèrdues requereix la versió 2003 o posterior)"
+
+msgid "(unknown error)"
+msgstr "(error desconegut)"
+
+msgid ""
+".\n"
+"\n"
+"Select \"Abort\" to exit, \"Retry\" to close this window and \"Ignore\" to "
+"continue."
+msgstr ""
+".\n"
+"\n"
+"Escolliu \"Avortar\" per sortir, \"reintentar\" per tancar aquesta finestra "
+"i \"Ignorar\" per continuar."
+
+msgid "A more recent version of Microsoft Word is required"
+msgstr "Es requereix una versió de Microsoft Word més recent"
+
+msgid "About"
+msgstr "Quant a"
+
+msgid "Action"
+msgstr "Acció"
+
+msgid ""
+"All files (*)|*|XML (*.xml)|*.xml|XHTML (*.html)|*.html|DTD (*.dtd)|*.dtd|"
+"XML Schema (*.xsd)|*.xsd|RELAX NG grammar (*.rng)|*.rng|XSL (*.xsl)|*.xsl"
+msgstr ""
+"Tots els arxius (*)|*|XML (*.xml)|*.xml|XHTML (*.html)|*.html|DTD (*.dtd)|*."
+"dtd|XML Schema (*.xsd)|*.xsd|RELAX NG grammar (*.rng)|*.rng|XSL (*.xsl)|*.xsl"
+
+msgid ""
+"All files (*.*)|*.*|XML (*.xml)|*.xml|XHTML (*.html)|*.html|DTD (*.dtd)|*."
+"dtd|XML Schema (*.xsd)|*.xsd|RELAX NG grammar (*.rng)|*.rng|XSL (*.xsl)|*.xsl"
+msgstr ""
+"Tots els arxius (*.*)|*.*|XML (*.xml)|*.xml|XHTML (*.html)|*.html|DTD (*."
+"dtd)|*.dtd|XML Schema (*.xsd)|*.xsd|RELAX NG grammar (*.rng)|*.rng|XSL (*."
+"xsl)|*.xsl"
+
+msgid "Anh Trinh (development) <ant271 at users.sourceforge.net>"
+msgstr "Anh Trinh (desenvolupament) <ant271 arrova users.sourceforge.net>"
+
+msgid "Antonio Angelo (Italian) <aangelo at users.sourceforge.net>"
+msgstr "Antonio Angelo (italià) <aangelo arrova users.sourceforge.net>"
+
+msgid "Application directory"
+msgstr "Directori de l'aplicació"
+
+msgid "Associate %s"
+msgstr "Associa %s"
+
+msgid "Attributes hidden"
+msgstr "Atributs ocults"
+
+msgid "Blue background, white text"
+msgstr "Fons blau, text blanc"
+
+msgid "Browse"
+msgstr "Navegar"
+
+msgid "Browse Source"
+msgstr "Navega per codi font"
+
+msgid "Browser"
+msgstr "Navegador"
+
+msgid "C&hange all"
+msgstr "Can&via tot"
+
+msgid "C&lose All"
+msgstr "T&anca tots"
+
+msgid "C&lose Message Pane\tAlt+C"
+msgstr "Tanca fin&estra de missatge\tAlt+C"
+
+msgid "C&opy\tCtrl+C"
+msgstr "C&opia\tCtrl+C"
+
+msgid "Ca&ncel"
+msgstr "Ca&cel·la"
+
+msgid "Cannot access application directory"
+msgstr "No es pot accedir al directori de l'aplicació"
+
+msgid "Cannot associate %s: %s"
+msgstr "No es pot associar %s: %s"
+
+msgid "Cannot check document: "
+msgstr "No es pot comprovar el document:"
+
+msgid "Cannot compile regular expression '"
+msgstr "No es pot compilar expressió regular '"
+
+msgid "Cannot count words: %s"
+msgstr "No es poden comptar paraules: %s"
+
+msgid "Cannot evaluate XPath"
+msgstr "No es pot avaluar Xpath"
+
+msgid "Cannot find '%s'"
+msgstr "No es pot trobar '%s'"
+
+msgid "Cannot open %s"
+msgstr "No es pot obrir %s"
+
+msgid "Cannot open %s for import"
+msgstr "No es pot obrir %s per importar-lo"
+
+msgid "Cannot open %s: conversion from encoding %s failed"
+msgstr ""
+"No es pot obrir %s: no s'ha pogut realitzar la conversió de la codificació %s"
+
+msgid "Cannot open %s: unknown encoding %s"
+msgstr "No es pot obrir %s: codificació desconeguda %s"
+
+msgid "Cannot open application directory: see Edit, Preferences..., General"
+msgstr ""
+"No es pot obrir el directori de l'aplicació: vegeu Editar, Preferències..., "
+"General"
+
+msgid "Cannot open application directory: see Tools, Options..., General"
+msgstr ""
+"No es pot obrir el directori de l'aplicació: vegeu Eines, Opcions..., General"
+
+msgid "Cannot open clipboard"
+msgstr "No es pot obrir el porta-retalls"
+
+msgid "Cannot open imported file"
+msgstr "No es pot obrir l'arxiu importat"
+
+msgid "Cannot open in browser: %s not found (see Tools, Options..., General)"
+msgstr ""
+"No es pot obrir en navegador: no s'ha trobar %s (vegeu Eines, Opcions..., "
+"General)"
+
+msgid ""
+"Cannot open in browser: no browser defined (see Tools, Options..., General)"
+msgstr ""
+"No es pot obrir en navegador: no n'hi ha cap definit (vegeu Eines, "
+"Opcions..., General)"
+
+msgid "Cannot open stylesheet %s"
+msgstr "No es pot obrir el full d'estil %s"
+
+msgid "Cannot paste as new document: no text on clipboard"
+msgstr "No es pot enganxar com a nou document: no hi ha text al porta-retalls"
+
+msgid "Cannot pretty-print: "
+msgstr "No es pot imprimir en format vistós:"
+
+msgid "Cannot replace: "
+msgstr "No es pot reemplaçar:"
+
+msgid "Cannot save %s"
+msgstr "No es pot desar %s"
+
+msgid "Cannot save document in %s: %s (saved in default encoding UTF-8)"
+msgstr ""
+"No es pot desar document en %s: %s (desat en codificació per defecte UTF-8)"
+
+msgid ""
+"Cannot save temporary copy for validation; please save or discard changes"
+msgstr ""
+"No es pot desar la còpia temporal per valiidació; deseu o descarteu els "
+"canvis"
+
+msgid "Cannot save temporary file"
+msgstr "No es pot desar l'arxiu temporal"
+
+msgid "Cannot set encoding (cannot open temporary file)"
+msgstr "No es pot establir codificació (no es pot obrir l'arxiu temporal)"
+
+msgid "Cannot set encoding (cannot parse temporary file)"
+msgstr "No es pot establir codificació (no es pot analitzar l'arxiu temporal)"
+
+msgid "Cannot set encoding: "
+msgstr "No es pot establir codificació:"
+
+msgid "Cannot start Microsoft Word"
+msgstr "No es pot iniciar Microsoft Word"
+
+msgid "Cannot transform: "
+msgstr "No es pot transformar:"
+
+msgid "Change"
+msgstr "Canvia"
+
+msgid "Change all"
+msgstr "Canviar-ho tot"
+
+msgid "Change once"
+msgstr "Canvia un cop"
+
+msgid "Check Well-formedness"
+msgstr "Comprovar correcció estructura XML"
+
+msgid "Checking document..."
+msgstr "Comprovant document:"
+
+msgid "Choose a document type:"
+msgstr "Escollir tipus de document:"
+
+msgid "Choose a file:"
+msgstr "Trieu un fitxer:"
+
+msgid "Choose a public identifier:"
+msgstr "Escollir un identificador públic:"
+
+msgid "Choose an encoding:"
+msgstr "Escollir codificació:"
+
+msgid "Close"
+msgstr "Tanca"
+
+msgid "Close All"
+msgstr "Tanca-ho tot"
+
+msgid "Close Message Pane"
+msgstr "Tanca finestra de missatge"
+
+msgid "Close all"
+msgstr "Tancar tot"
+
+msgid "Closes the dialog box without saving any changes you have made"
+msgstr "Tanca la finestra de diàleg sense desar els canvis fets"
+
+msgid "Closes this dialog without making any changes"
+msgstr "Tanca aquest diàleg sense fer canvis"
+
+msgid "Command"
+msgstr "Ordre"
+
+msgid "Command line processing incomplete: no file specified"
+msgstr ""
+"Processament de la línea d'ordres incomplet: no s'ha especificat cap arxiu"
+
+msgid "Confirmation"
+msgstr "Confirmació"
+
+msgid "Context"
+msgstr "Context"
+
+msgid "Copy"
+msgstr "Copia"
+
+msgid "Copyright © 2005-2009 Gerald Schmidt <gnschmidt@users.sourceforge.net>"
+msgstr "Copyright © 2005-2009 Gerald Schmidt <gnschmidt@users.sourceforge.net>"
+
+msgid "Creating document view..."
+msgstr "Creant visualització de document..."
+
+msgid "Current Element"
+msgstr "Element actual"
+
+msgid "Cut"
+msgstr "Talla"
+
+msgid "DTD Validation in progress..."
+msgstr "Validació DTD en progrés..."
+
+msgid "DTD/XML Schema"
+msgstr "Schema DTD/XML"
+
+msgid "David Håsäther (Swedish) <hasather at gmail.com>"
+msgstr "David Håsäther (suec) <hasather arrova gmail.com>"
+
+msgid "Decrease"
+msgstr "Redueix"
+
+msgid "Decrease\tCtrl+D"
+msgstr "Redueix\tCtrl+D"
+
+msgid "Default"
+msgstr "Per defecte"
+
+msgid "Default style"
+msgstr "Estil per defecte"
+
+msgid "Delete entity reference?"
+msgstr "Esborrar referència d'entitat?"
+
+msgid "Delete tag?"
+msgstr "Esborrar etiqueta?"
+
+msgid "Do you want to save the changes to "
+msgstr "Voleu desar els canvis de"
+
+msgid "Document has been modified: save or discard changes"
+msgstr "El document ha estat modificat: desar o descartar canvis"
+
+msgid "Document%i"
+msgstr "Document%i"
+
+msgid "E&ncoding..."
+msgstr "C&odificació..."
+
+msgid "E&xit"
+msgstr "S&urt"
+
+msgid "E&xpand internal entities on open"
+msgstr "E&xpandir entitats internes en obrir"
+
+msgid "Edited document empty"
+msgstr "Document editat buit"
+
+msgid "Editor"
+msgstr "Editor"
+
+msgid "Element..."
+msgstr "Element..."
+
+msgid "Encoding"
+msgstr "Codificació"
+
+msgid "Encoding should be one of "
+msgstr "La codificació hauria de ser"
+
+msgid "Encoding..."
+msgstr "Codificació..."
+
+msgid "Enter XPath:"
+msgstr "Introdueix XPath:"
+
+msgid "Enter line number:"
+msgstr "Introduïu número de línia:"
+
+msgid "Enter new suggestion:"
+msgstr "Introdueix nova suggerència:"
+
+msgid "Entity..."
+msgstr "Entitat..."
+
+msgid "Error"
+msgstr "Error"
+
+msgid "Evaluate XPath"
+msgstr "Avalua XPath"
+
+msgid "Evaluate XPath..."
+msgstr "Avalua XPath..."
+
+msgid "Exit"
+msgstr "Surt"
+
+msgid "Export Microsoft Word Document"
+msgstr "Exporta document de Microsoft Word"
+
+msgid "Export in progress..."
+msgstr "Exportació en progrés..."
+
+msgid "Extends the scope to all open documents"
+msgstr "Amplia l'abast a tots els documents oberts"
+
+msgid "F&ind Again\tF3"
+msgstr "To&rna a cercar\tF3"
+
+msgid ""
+"File has been modified by another application.\n"
+"Do you want to proceed?"
+msgstr ""
+"L'arxiu ha estat modificat per una altra aplicació.\n"
+"Voleu procedir?"
+
+msgid "Find"
+msgstr "Cerca"
+
+msgid "Find &Next"
+msgstr "Cerca el següe&nt"
+
+msgid "Find Again"
+msgstr "Torna a cercar"
+
+msgid "Find and Replace"
+msgstr "Cerca i reemplaça"
+
+msgid "Find..."
+msgstr "Cerca..."
+
+msgid "Find:"
+msgstr "Cerca:"
+
+msgid ""
+"Finds all instances of the text specified in Find what and replaces them "
+"with the text in Replace with"
+msgstr ""
+"Busca tots els casos del text especificat a Cerca i els reemplaça amb el "
+"text de Reemplaça per"
+
+msgid ""
+"Finds only text with lowercase and uppercase letters as specified in Find "
+"what"
+msgstr ""
+"Cerca només text amb majúscules i minúscules, tal i com has especificat a "
+"Cerca"
+
+msgid "Fold Tags"
+msgstr "Plega etiquetes"
+
+msgid "Font"
+msgstr "Tipus de lletra"
+
+msgid "Forum"
+msgstr "Fòrum"
+
+msgid "François Badier (French) <frabad at gmail.com>"
+msgstr "François Badier (francès) <frabad arrova gmail.com>"
+
+msgid "G&o To...\tCtrl+G"
+msgstr "&Vés a...\tCtrl+G"
+
+msgid "General"
+msgstr "General"
+
+msgid "Gerald Schmidt (development) <gnschmidt at users.sourceforge.net>"
+msgstr ""
+"Gerald Schmidt (desenvolupament) <gnschmidt arrova users.sourceforge.net>"
+
+msgid "Global Find and Replace"
+msgstr "Cerca i reemplaça global"
+
+msgid "Global Replace..."
+msgstr "Reemplaçar global..."
+
+msgid "Go To"
+msgstr "Vés a"
+
+msgid "Go To..."
+msgstr "Vés a..."
+
+msgid "H&ide Tags and Attributes\tCtrl+Shift+T"
+msgstr "Oculta et&iquetes i atributs\tCtrl+Shift+T"
+
+msgid ""
+"HSU PICHAN, YANG SHUFUN, CHENG PAULIAN, CHUANG KUO-PING, Marcus Bingenheimer "
+"(Chinese Traditional)"
+msgstr ""
+"HSU PICHAN, YANG SHUFUN, CHENG PAULIAN, CHUANG KUO-PING, Marcus Bingenheimer "
+"(xinès tradicional)"
+
+msgid "Help"
+msgstr "Ajuda"
+
+msgid "Hi&ghlight syntax"
+msgstr "Su&bratlla sintaxi"
+
+msgid "Hide Attributes Only"
+msgstr "Oculta només atributs"
+
+msgid "Hide Tags and Attributes"
+msgstr "Oculta etiquetes i atributs"
+
+msgid "Home Page"
+msgstr "Pàgina d'inici"
+
+msgid "I&gnore"
+msgstr "I&gnora"
+
+msgid "I&gnore all"
+msgstr "I&gnora-ho tot"
+
+msgid "I&mport Microsoft Word Document..."
+msgstr "Importa document de Microsoft &Word..."
+
+msgid "I&nsert"
+msgstr "I&nsereix"
+
+msgid "I&ntelligent backspace/delete"
+msgstr "Retrocés/esborrar I&ntel·ligent"
+
+msgid "Ignore"
+msgstr "Ignora"
+
+msgid "Ignore all"
+msgstr "Ignorar tot"
+
+msgid "Ignore once"
+msgstr "Ignora un cop"
+
+msgid "Import Microsoft Word Document"
+msgstr "Importar document de Microsoft Word"
+
+msgid "Import in progress..."
+msgstr "Importació en progrés..."
+
+msgid "Increase"
+msgstr "Incrementa"
+
+msgid "Increase\tCtrl+U"
+msgstr "Augmenta\tCtrl+U"
+
+msgid "Information"
+msgstr "Informació"
+
+msgid "Insert Element"
+msgstr "Insereix element"
+
+msgid "Insert Entity"
+msgstr "Insereix entitat"
+
+msgid "Insert Sibling"
+msgstr "Insereix germà"
+
+msgid "Interprets the text specified in Find what as a regular expression"
+msgstr "Interpreta el text especificat a Cerca com una expressió regular"
+
+msgid "Justin Dearing (development) <j-pimp at users.sourceforge.net>"
+msgstr "Justin Dearing (desenvolupament) <j-pimp arrova users.sourceforge.net>"
+
+msgid "Kev James (development) <kmjames at users.sourceforge.net>"
+msgstr "Kev James (desenvolupament) <kmjames arrova users.sourceforge.net>"
+
+msgid "L&ock hidden tags"
+msgstr "Bl&oqueja etiquetes ocultes"
+
+msgid "Language (restart required)"
+msgstr "Idioma (cal reiniciar)"
+
+msgid "Light"
+msgstr "Clar"
+
+msgid "Ln %i Col %i"
+msgstr "  Ln %d, Col. %d"
+
+msgid "Lock Tags"
+msgstr "Bloqueja etiquetes"
+
+msgid "MB"
+msgstr "MB"
+
+msgid "Marcos Pérez González (Spanish) <marcos_pg at yahoo.com>"
+msgstr "Marcos Pérez González (castellà) <marcos_pg arrova yahoo.com>"
+
+msgid "Matt Smigielski (testing) <alectrus at users.sourceforge.net>"
+msgstr "Matt Smigielski (testing) <alectrus arrova users.sourceforge.net>"
+
+msgid "Message"
+msgstr "Missatge"
+
+msgid "Microsoft Word cannot save %s"
+msgstr "Microsoft Word no pot desar %s"
+
+msgid "Microsoft Word cannot save %s as XML"
+msgstr "Microsoft Word no pot desar %s com a XML"
+
+msgid "Microsoft Word cannot save this document as WordprocessingML "
+msgstr "Microsoft Word no pot desar aquest document com a WordprocessingML "
+
+msgid "Modified"
+msgstr "Modificat"
+
+msgid "New"
+msgstr "Nou"
+
+msgid "New &document"
+msgstr "&Document nou"
+
+msgid "New Document"
+msgstr "Document nou"
+
+msgid "New Suggestion"
+msgstr "Nova Suggerència:"
+
+msgid "New suggestion..."
+msgstr "Nova suggerència..."
+
+msgid "New..."
+msgstr "Nou..."
+
+msgid "Next Document"
+msgstr "Document següent"
+
+msgid "No filter"
+msgstr "Cap filtre"
+
+msgid "No items selected"
+msgstr "Cap element seleccionat"
+
+msgid "No matching nodes found"
+msgstr "No s'hat trobat cap node coincident"
+
+msgid "No."
+msgstr "No."
+
+msgid "None"
+msgstr "Cap"
+
+msgid "Normal"
+msgstr "Normal"
+
+msgid "Normal\tCtrl+0"
+msgstr "Normal\tCtrl+0"
+
+msgid "O&pen Large Document...\tCtrl+Shift+O"
+msgstr "O&bre document gran...\tCtrl+Shift+O"
+
+msgid "OK"
+msgstr "D'acord"
+
+msgid "Open"
+msgstr "Obre"
+
+msgid "Open Large Document"
+msgstr "Obre document gran"
+
+msgid "Open Large Document..."
+msgstr "Obre document gran"
+
+msgid "Open..."
+msgstr "Obre..."
+
+msgid "Opening imported file..."
+msgstr "Obrint arxiu importat..."
+
+msgid "Opens a standard file dialog"
+msgstr "Obre un diàleg d'arxiu estàndard"
+
+msgid "Options"
+msgstr "Opcions"
+
+msgid "Options..."
+msgstr "Opcions..."
+
+msgid "Out of memory"
+msgstr "Sense memòria"
+
+msgid "Out of memory: attempt to save in default encoding UTF-8?"
+msgstr ""
+"No hi ha prou memòria: intentar desar en codificació per defecte UTF-8?"
+
+msgid "Output document empty"
+msgstr "Document de sortida buit"
+
+msgid "Output options"
+msgstr "Opcions de sortida"
+
+msgid "P&aste As New Document"
+msgstr "Enganx&a com a document nou"
+
+msgid "Pa&ge Setup..."
+msgstr "Confi&guració de la pàgina..."
+
+msgid "Page Setup..."
+msgstr "Configuració de la pàgina..."
+
+msgid "Parse in progress..."
+msgstr "Anàlisi en curs..."
+
+msgid "Paste"
+msgstr "Enganxa"
+
+msgid "Paste As New Document"
+msgstr "Enganxa com a document nou"
+
+msgid "Pr&eferences..."
+msgstr "Pr&eferències..."
+
+msgid "Pr&int Preview..."
+msgstr "Previsualitza&ció d'impressió..."
+
+msgid "Pr&intable summary"
+msgstr "Resum &imprimible"
+
+msgid "Preferences"
+msgstr "Preferències"
+
+msgid "Preferences..."
+msgstr "Preferències..."
+
+msgid "Preparing Print Preview..."
+msgstr "Preparant previsualització d'impressió..."
+
+msgid "Preparing to print..."
+msgstr "Preparant-se per imprimir..."
+
+msgid "Pretty-print"
+msgstr "impressió en format vistós"
+
+msgid "Pretty-print unsuccessful: output document empty"
+msgstr "No s'ha pogut imprimir en format vistós: document de sortida buit"
+
+msgid "Pretty-printing in progress..."
+msgstr "Impressió en format vistós en progrés..."
+
+msgid "Previous Document"
+msgstr "Document anterior"
+
+msgid "Pri&nt...\tCtrl+P"
+msgstr "I&mprimeix...\tCtrl+P"
+
+msgid "Print"
+msgstr "Imprimeix"
+
+msgid "Print Preview..."
+msgstr "Previsualització d'impressió..."
+
+msgid "Print..."
+msgstr "Imprimeix..."
+
+msgid "Provides a space for you to type additional information"
+msgstr "Proporciona un espai per introduir informació addicional"
+
+msgid "Provides a space for you to type the path of the file"
+msgstr "Proporciona un espai per introduir la ruta de l'arxiu"
+
+msgid "Provides a space for you to type the text you want to find"
+msgstr "Proporciona un espai per introduir el text que vols cercar"
+
+msgid ""
+"Provides a space for you to type the text you want to replace the text you "
+"typed in Find what"
+msgstr ""
+"Proporciona espai per escriure el text amb què vols reemplaçar el text "
+"introduït a Cerca"
+
+msgid "Public DTD"
+msgstr "DTD públic"
+
+msgid "Public DTD..."
+msgstr "DTD Públic..."
+
+msgid "Question"
+msgstr "Pregunta"
+
+msgid "R&eplace in all open documents"
+msgstr "R&eemplaça a tots els documents oberts"
+
+msgid "RELAX NG grammar"
+msgstr "Gramàtica RELAX NG"
+
+msgid "RELAX NG validation in progress..."
+msgstr "Validació RELAX NG en progrés..."
+
+msgid "RELAX NG..."
+msgstr "RELAX NG..."
+
+msgid "Re&gex"
+msgstr "Re&gex"
+
+msgid "Re&member layout on close"
+msgstr "Re&cordar disposició al tancar"
+
+msgid "Re&tain undo history on save"
+msgstr "Conservar his&torial de Desfer al desar"
+
+msgid "Redo"
+msgstr "Refés"
+
+msgid "Reload"
+msgstr "Actualitza"
+
+msgid "Replace"
+msgstr "Reemplaça"
+
+msgid "Replace &All"
+msgstr "Reempl&aça-ho tot"
+
+msgid "Replace with:"
+msgstr "Reemplaça amb:"
+
+msgid "Replace with: "
+msgstr "Ree&mplaça amb:"
+
+msgid "Replace..."
+msgstr "Reemplaça"
+
+msgid "Revert"
+msgstr "Vés endarrere"
+
+msgid "Rule"
+msgstr "Regla"
+
+msgid "S&ave As...\tF12"
+msgstr "Anomena &i desa...\tF12"
+
+msgid "S&how Current Element Pane"
+msgstr "Mostra sub&finestra de l'element actual"
+
+msgid "S&how full path on frame"
+msgstr "Mostrar ruta completa en e&l marc"
+
+msgid "S&ymbol..."
+msgstr "Sí&mbol..."
+
+msgid "SHiNE CsyFeK (Chinese Simplified) <csyfek at gmail.com>"
+msgstr "SHiNE CsyFeK (xinès simplificat) <csyfek arrova gmail.com>"
+
+msgid "Save"
+msgstr "Desa"
+
+msgid "Save As"
+msgstr "Anomena i desa"
+
+msgid "Save As..."
+msgstr "Anomena i desa..."
+
+msgid "Select "
+msgstr "Selecciona"
+
+msgid "Select RELAX NG grammar"
+msgstr "Escollir gramàtica RELAX NG"
+
+msgid "Select stylesheet"
+msgstr "Trieu el full d'estil"
+
+msgid "Selects the file specified"
+msgstr "Escull l'arxiu especificat"
+
+msgid "Serhij Dubyk (Ukrainian) <dubyk at library.lviv.ua>"
+msgstr "Serhij Dubyk (ucraïnès) <dubyk arrova library.lviv.ua>"
+
+msgid "Sh&ow Toolbar"
+msgstr "Mostra ba&rra d'eines"
+
+msgid "Show Current Element Pane"
+msgstr "Mostra subfinestra de l'element actual"
+
+msgid "Show Tags and Attributes"
+msgstr "Mostra etiquetes i atributs"
+
+msgid "Show Toolbar"
+msgstr "Mostra la barra d'eines"
+
+msgid "Siarhei Kuchuk (Russian) <Cuchuk.Sergey at gmail.com>"
+msgstr "Siarhei Kuchuk (rus) <Cuchuk.Sergey arrova gmail.com>"
+
+msgid "Sibling..."
+msgstr "Germà..."
+
+msgid "Spelling"
+msgstr "Ortografia"
+
+msgid "Spelling..."
+msgstr "Ortografia..."
+
+msgid "Stopped"
+msgstr "Aturat"
+
+msgid "Style"
+msgstr "Estil"
+
+msgid "Style..."
+msgstr "Estil..."
+
+msgid "Suggestion"
+msgstr "Suggerència"
+
+msgid "Symbol..."
+msgstr "Símbol..."
+
+msgid "System DTD"
+msgstr "Sistema DTD"
+
+msgid "System DTD..."
+msgstr "Sistema DTD..."
+
+msgid "Tags Locked"
+msgstr "Etiquetes bloquejades"
+
+msgid "Tags hidden"
+msgstr "Etiquetes ocultes"
+
+msgid "Tags locked"
+msgstr "Etiquetes bloquejades"
+
+msgid "The following error has occurred: "
+msgstr "Ha ocorregut el següent error:"
+
+msgid "The operating system has turned down a request for additional memory"
+msgstr "El sistema operatiu ha rebutjat una sol·licitud de memòria addicional"
+
+msgid "This functionality requires Microsoft Windows"
+msgstr "Aquesta funcionalitat requereix Microsoft Windows"
+
+msgid "Thomas Wenzel (German) <thowen at users.sourceforge.net>"
+msgstr "Thomas Wenzel (German) <thowen arrova users.sourceforge.net>"
+
+msgid "Toggle Fold"
+msgstr "Obre o tanca plec"
+
+msgid "Twin"
+msgstr "Bessó"
+
+msgid "Undo"
+msgstr "Desfés"
+
+msgid "Unknown command line switch (expecting 'w', 's', --version or --help)"
+msgstr ""
+"Opció inesperada a la línea d'ordres (s'esperava 'w', 's', --version o --"
+"help)"
+
+msgid "Va&riable highlight in tag free view"
+msgstr "Sub&ratllat variable en vista sense etiquetes"
+
+msgid "Validate"
+msgstr "Valida"
+
+msgid "Validation in progress..."
+msgstr "Validació en progrés..."
+
+msgid "Variables"
+msgstr "Variables"
+
+msgid "Viliam Búr (Slovak) <viliam at bur.sk>"
+msgstr "Viliam Búr (eslovac) <viliam arrova bur.sk>"
+
+msgid "Warning"
+msgstr "Avís"
+
+msgid "Word Count"
+msgstr "Recompte de paraules"
+
+msgid "XML Copy Editor"
+msgstr "XML Copy Editor"
+
+msgid "XML Copy Editor has encountered an error and needs to close."
+msgstr "XML Copy Editor ha trobat un error i s'ha de tancar."
+
+msgid ""
+"XML Copy Editor has encountered the following error and needs to close: "
+msgstr "XML Copy Editor ha trobat el següent error i s'ha de tancar: "
+
+msgid "XML Schema"
+msgstr "XML Schema"
+
+msgid "XML Schema..."
+msgstr "Schema XML..."
+
+msgid "XML document (*.xml)"
+msgstr "Document XML (*.xml)"
+
+msgid "XS&LT stylesheet..."
+msgstr "Full d'estil XS&LT"
+
+msgid "XSL Transform..."
+msgstr "Transforma XSL..."
+
+msgid "XSL transformation in progress..."
+msgstr "Transformació XSL en progrés..."
+
+msgid "XSLT stylesheet"
+msgstr "Full d'extil XSLT"
+
+msgid "XSLT stylesheet..."
+msgstr "Full d'estil XSLT"
+
+msgid "byte"
+msgid_plural "bytes"
+msgstr[0] "byte"
+msgstr[1] "bytes"
+
+msgid "en_US"
+msgstr "en_US"
+
+msgid "kB"
+msgstr "kB"
+
+msgid "unknown error"
+msgstr "error desconegut"
+
+msgid "valid"
+msgstr "vàlid"
+
+msgid "well-formed"
+msgstr "ben format"
+
+msgid "{extension}"
+msgstr "{extension}"
+
+msgid "{fullpath}"
+msgstr "{fullpath}"
+
+msgid "{name}"
+msgstr "{name}"
+
+msgid "{path}"
+msgstr "{path}"
+
+msgid "|All files (*.*)|*.*"
+msgstr "|Tots els fitxers (*.*)|*.*"

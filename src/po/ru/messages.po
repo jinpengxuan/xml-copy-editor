@@ -1,0 +1,1306 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: XML Copy Editor\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2007-02-23 11:15+0000\n"
+"PO-Revision-Date: 2008-04-05 15:51+0200\n"
+"Last-Translator: Siarhei Kuchuk <Cuchuk.Sergey@gmail.com>\n"
+"Language-Team: team <team@email.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Poedit-Language: Russian\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Country: RUSSIAN FEDERATION\n"
+
+msgid "\tCtrl+%i"
+msgstr "\tCtrl+%i"
+
+msgid ""
+"\n"
+"XML Copy Editor is free software released under the GNU\n"
+"General Public License.\n"
+"\n"
+"Many thanks are due to "
+msgstr ""
+"\n"
+"XML Copy Editor - свободное программное обеспечение, \n"
+"которые распространяется под лицензией  GNU GPL\n"
+"\"General Public License.\n"
+"\n"
+"Оргромное спасибо "
+
+msgid " "
+msgstr " "
+
+msgid "%g %s saved"
+msgstr "%g %s сохранён"
+
+msgid "%i match"
+msgid_plural "%i matches"
+msgstr[0] "%i совпадение"
+msgstr[1] "%i совпадений"
+
+msgid "%i replacement made"
+msgid_plural "%i replacements made"
+msgstr[0] "Сделано %i изменение"
+msgstr[1] "Проведены %i изменений"
+
+msgid "%s contains %i word"
+msgid_plural "%s contains %i words"
+msgstr[0] "%s содержит %i слово"
+msgstr[1] "%s содержит %i слова"
+
+msgid "%s is %s"
+msgstr "%s в %s"
+
+msgid "%s is already open"
+msgstr "%s уже открыт!"
+
+msgid "&About XML Copy Editor"
+msgstr "О XML Copy Editor"
+
+msgid "&Always insert closing tag"
+msgstr "&Всегда вставлять закрывающий тег"
+
+msgid "&Associate"
+msgstr "&Ассоциировать"
+
+msgid "&Blue background, white text"
+msgstr "&Белый текст на синем фоне"
+
+msgid "&Browser\tCtrl+B"
+msgstr "Браузер\tCtrl+B"
+
+msgid "&Change all"
+msgstr "&Изменить всё"
+
+msgid "&Check Well-formedness\tF2"
+msgstr "Проверить на &корректность\tF2"
+
+msgid "&Close\tCtrl+F4"
+msgstr "Закрыть\tCtrl+F4"
+
+msgid "&Color Scheme"
+msgstr "Цветовая схема"
+
+msgid "&Command\tCtrl+Alt+C"
+msgstr "&Комманда\tCtrl+Alt+C"
+
+msgid "&Cut\tCtrl+X"
+msgstr "&Вырезать\tCtrl+X"
+
+msgid "&DTD\tF4"
+msgstr "&DTD\tF4"
+
+msgid "&Default"
+msgstr "По умолчанию"
+
+msgid "&DocBook to HTML\tAlt+1"
+msgstr "&DocBook в HTML\tAlt+1"
+
+msgid "&DocBook to XHTML\tAlt+2"
+msgstr "&DocBook в XHTML\tAlt+2"
+
+msgid "&Download Source"
+msgstr "&Источник закачки"
+
+msgid "&Edit"
+msgstr "&Правка"
+
+msgid "&Element...\tCtrl+I"
+msgstr "Элемент ...\tCtrl+I"
+
+msgid "&Enable network access for DTD validation"
+msgstr "&Разрешить доступ к сети для проверки DTD"
+
+msgid "&Entity...\tCtrl+E"
+msgstr "&Сущность ...\tCtrl+E"
+
+msgid "&Evaluate XPath...\tF9"
+msgstr "&Вычислить XPath ...\tF9"
+
+msgid "&Export Microsoft Word Document..."
+msgstr "&Экспорт в формате Microsoft Word ..."
+
+msgid "&File"
+msgstr "&Файл"
+
+msgid "&Find what: "
+msgstr "&Что найти: "
+
+msgid "&Find...\tCtrl+F"
+msgstr "&Найти ...\tCtrl+F"
+
+msgid "&Fold Tags\tCtrl+Shift+F"
+msgstr "&Свернуть теги\tCtrl+Shift+F"
+
+msgid "&Folding"
+msgstr "&Свертка"
+
+msgid "&Forum"
+msgstr "&Форум"
+
+msgid "&Global Replace...\tCtrl+Shift+R"
+msgstr "Глобальная Замена ...\tCtrl+Shift+R"
+
+msgid "&Help"
+msgstr "&Помощь"
+
+msgid "&Hide Attributes Only\tCtrl+Shift+A"
+msgstr "&Спрятать только атрибуты\tCtrl+Shift+A"
+
+msgid "&Highlight current line"
+msgstr "&Подсветка текущей строки"
+
+msgid "&Home Page"
+msgstr "Домашняя страница"
+
+msgid "&Indentation guides"
+msgstr "&Отступы"
+
+msgid "&Insert"
+msgstr "&Вставка"
+
+msgid "&Light"
+msgstr "&Цветовая схема тегов"
+
+msgid "&Line numbers"
+msgstr "&Номера строк"
+
+msgid "&Lock Tags\tCtrl+L"
+msgstr "Заблокировать теги\tCtrl+L"
+
+msgid "&Match case"
+msgstr "&Учитывать регистр"
+
+msgid "&New...\tCtrl+N"
+msgstr "&Новый...\tCtrl+N"
+
+msgid "&Next Document\tCtrl+PgDn"
+msgstr "Следующий документ\tCtrl+PgDn"
+
+msgid "&None"
+msgstr "&Нет"
+
+msgid "&One application instance only"
+msgstr "&Только один экземпляр приложения может быть запущен"
+
+msgid "&Open...\tCtrl+O"
+msgstr "Открыть ...\tCtrl+O"
+
+msgid "&Options..."
+msgstr "&Настройки..."
+
+msgid "&Paste\tCtrl+V"
+msgstr "Вставить\tCtrl+V"
+
+msgid "&Pretty-print\tF11"
+msgstr "Печать\tF11"
+
+msgid "&Previous Document\tCtrl+PgUp"
+msgstr "Предыдущий документ\tCtrl+PgUp"
+
+msgid "&Printable report"
+msgstr "&Отчет для печати"
+
+msgid "&Public DTD..."
+msgstr "&Общая DTD ..."
+
+msgid "&RELAX NG...\tF6"
+msgstr "&RELAX NG...\tF6"
+
+msgid "&Redo\tCtrl+Y"
+msgstr "Повторить\tCtrl+Y"
+
+msgid "&Regex"
+msgstr "&Регулярное выражение"
+
+msgid "&Remember open tabs on close"
+msgstr "&Восстанавливать открытые вкладки при запуске"
+
+msgid "&Replace"
+msgstr "&Замена"
+
+msgid "&Replace...\tCtrl+R"
+msgstr "&Замена ...\tCtrl+R"
+
+msgid "&Report"
+msgstr "&Отчет"
+
+msgid "&Revert"
+msgstr "&Отменить изменения"
+
+msgid "&Run"
+msgstr "&Пуск"
+
+msgid "&Save\tCtrl+S"
+msgstr "&Сохранить\tCtrl+S"
+
+msgid "&Save UTF-8 byte order mark"
+msgstr "&Сохранять как UTF-8"
+
+msgid "&Show Tags and Attributes\tCtrl+T"
+msgstr "Показывать теги с атрибутами\tCtrl+T"
+
+msgid "&Sibling...\tCtrl+Shift+I"
+msgstr "&Сиблинг ...\tCtrl+Shift+I"
+
+msgid "&Spelling and Style...\tF7"
+msgstr "&Стиль и орфография ...\tF7"
+
+msgid "&System DTD..."
+msgstr "&Системная DTD ..."
+
+msgid "&TEI to HTML\tAlt+4"
+msgstr "&TEI в HTML\tAlt+4"
+
+msgid "&Tag completion"
+msgstr "&IntelliSense"
+
+msgid "&Text Size"
+msgstr "&Размер текста"
+
+msgid "&Toggle Fold"
+msgstr "Спрятать/Показать"
+
+msgid "&Tools"
+msgstr "&Инструменты"
+
+msgid "&Twin\tCtrl+Enter"
+msgstr "&Добавить близнеца\tCtrl+Enter"
+
+msgid "&Undo\tCtrl+Z"
+msgstr "Отменить\tCtrl+Z"
+
+msgid "&Unfold Tags\tCtrl+Shift+U"
+msgstr "Развернуть теги\tCtrl+Shift+U"
+
+msgid "&Use Microsoft rebar control (restart required)"
+msgstr "&Использовать контроль Microsoft rebar (потребуется перезапуск)"
+
+msgid "&Validate"
+msgstr "&Проверить"
+
+msgid "&Validate as you type"
+msgstr "&Проверять в процессе редактирования"
+
+msgid "&View"
+msgstr "&Вид"
+
+msgid "&Wait"
+msgstr "&Ожидать завершения комманды"
+
+msgid "&White space visible"
+msgstr "&Видимый пробел"
+
+msgid "&Word Count"
+msgstr "Количество слов"
+
+msgid "&Wrap Words\tCtrl+W"
+msgstr "Перенос строк в редакторе\tCtrl+W"
+
+msgid "&XML"
+msgstr "&XML"
+
+msgid "&XML Copy Editor Help\tF1"
+msgstr "Справка &XML Copy Editor\tF1"
+
+msgid "&XML Schema\tF5"
+msgstr "&Схема XML\tF5"
+
+msgid "&XML Schema..."
+msgstr "Схема &XML ..."
+
+msgid "&XSL Transform...\tF8"
+msgstr "Преобразование &XSL ...\tF8"
+
+msgid "&XSLT"
+msgstr "&XSLT"
+
+msgid "'%s' is not a valid line number"
+msgstr "'%s' - некорректный номер строки!"
+
+msgid "(No filter)"
+msgstr "(без фильтра)"
+
+msgid "(No filters found)"
+msgstr "(Фильтры не найдены)"
+
+msgid "(No rule sets found)"
+msgstr "(Правила не найдены)"
+
+msgid "(lossless conversion requires version 2003 or later)"
+msgstr "(преобразование с потерей информации требует версию 2003 или выше)"
+
+msgid "(unknown error)"
+msgstr "(неизвестная ошибка)"
+
+msgid ""
+".\n"
+"\n"
+"Select \"Abort\" to exit, \"Retry\" to close this window and \"Ignore\" to "
+"continue."
+msgstr ""
+".\n"
+"\n"
+"Выберите \"Отмена\" для выхода, \"Попробовать снова\" для закрытия этого "
+"окошка и  \"Игнорировать\", чтобы продолжить."
+
+msgid "A more recent version of Microsoft Word is required"
+msgstr "Требуется более поздняя версия Microsoft Word"
+
+msgid "About"
+msgstr "О программе"
+
+msgid "Action"
+msgstr "Действие"
+
+msgid ""
+"All files (*.*)|*.*|XML (*.xml)|*.xml|XHTML (*.html)|*.html|DTD (*.dtd)|*."
+"dtd|XML Schema (*.xsd)|*.xsd|RELAX NG grammar (*.rng)|*.rng|XSL (*.xsl)|*.xsl"
+msgstr ""
+"Все файлы (*.*)|*.*|XML (*.xml)|*.xml|XHTML (*.html)|*.html|DTD (*.dtd)|*."
+"dtd|Схема XML (*.xsd)|*.xsd|Грамматика RELAX NG (*.rng)|*.rng|XSL (*.xsl)|*."
+"xsl"
+
+msgid "Application directory"
+msgstr "Каталог приложения"
+
+msgid "Associate %s"
+msgstr "Ассоциировать %s"
+
+msgid "Attributes hidden"
+msgstr "Скрытые атрибуты"
+
+msgid "Blue background, white text"
+msgstr "Белый текст на синем фоне"
+
+msgid "Browse"
+msgstr "Обзор"
+
+msgid "Browser"
+msgstr "Браузер"
+
+msgid "C&ancel"
+msgstr "&Отмена"
+
+msgid "C&lose All"
+msgstr "Закрыть всё"
+
+msgid "C&lose Message Pane\tAlt+C"
+msgstr "Убрать панель сообщений\tAlt+C"
+
+msgid "C&opy\tCtrl+C"
+msgstr "Копировать\tCtrl+C"
+
+msgid "Cannot access application directory"
+msgstr "Не могу получить доступ к каталогу приложения"
+
+msgid "Cannot associate %s: %s"
+msgstr "Не получается ассоциировать %s: %s"
+
+msgid "Cannot compile regular expression '"
+msgstr "Не могу откомпилировать регулярное выражение  '"
+
+msgid "Cannot count words: %s"
+msgstr "Не получается подсчитать количество слов : %s"
+
+msgid "Cannot create report: "
+msgstr "Не могу создать отчет : "
+
+msgid "Cannot evaluate XPath"
+msgstr "Не могу вычилсть XPath"
+
+msgid "Cannot find '%s'"
+msgstr "'%s' не существует"
+
+msgid "Cannot open %s"
+msgstr "Не получилось открыть %s"
+
+msgid "Cannot open %s for import"
+msgstr "Не могу открыть для импорта %s"
+
+msgid "Cannot open %s: conversion from encoding %s failed"
+msgstr ""
+"Не получается открыть %s: конвертирование из кодировки %s завершилось "
+"неудачно"
+
+msgid "Cannot open %s: unknown encoding %s"
+msgstr "Не получается открыть %s : непонятная кодировка %s"
+
+msgid "Cannot open application directory: see Tools, Options..., General"
+msgstr ""
+"Не могу открыть каталог приложения: смотрите Инструменты, Настройки ..., "
+"Главные"
+
+msgid "Cannot open clipboard"
+msgstr "Не могу работать с буфером обмена"
+
+msgid "Cannot open imported file"
+msgstr "Импортируемый файл не открывается!"
+
+msgid "Cannot open in browser: %s not found (see Tools, Options..., General)"
+msgstr ""
+"Не получается открыть в браузере, так как файла %s нет (смотрите Интрументы, "
+"Настройки ..., Главные)"
+
+msgid ""
+"Cannot open in browser: no browser defined (see Tools, Options..., General)"
+msgstr ""
+"Не получается открыть в браузере, так как браузер не указан в настройках "
+"(Инструменты, Опции ..., Главные)"
+
+msgid "Cannot open stylesheet %s"
+msgstr "Не получается открыть таблицу стилей %s"
+
+msgid "Cannot paste as new document: no text on clipboard"
+msgstr ""
+"Не могу вставить текст из буфера обмена как новый документ: текста в буфере "
+"нет"
+
+msgid "Cannot pretty-print: "
+msgstr "Не получается распечатать : "
+
+msgid "Cannot replace: "
+msgstr "Не получилось заменить : "
+
+msgid "Cannot save %s"
+msgstr "Не получается сохранить %s"
+
+msgid "Cannot save %s: conversion to encoding %s failed"
+msgstr "Не получается сохранить %s: файл не конвертируетвся в  %s"
+
+msgid "Cannot save %s: unknown encoding %s"
+msgstr "Не получается сохранить %s : указана непонятная кодировка %s"
+
+msgid "Cannot save document in %s: %s (saved in default encoding UTF-8)"
+msgstr ""
+"Не получается сохранить документ в %s : %s  (сохранён в кодировке UTF-8 по "
+"умолчанию)"
+
+msgid ""
+"Cannot save temporary copy for validation; please save or discard changes"
+msgstr ""
+"Не получается создать временную копию для проверки: попробуйте либо "
+"сохранить документ, либо отменить в нем все привнесённые изменения"
+
+msgid "Cannot save temporary file"
+msgstr "Не могу сохранить временный файл"
+
+msgid "Cannot set encoding (cannot open temporary file)"
+msgstr ""
+"Не получается установить кодироку, так как временный файл не открывается"
+
+msgid "Cannot set encoding (cannot parse temporary file)"
+msgstr ""
+"Не получается установить кодироку, так как разбор временного файла "
+"завершился неудачно"
+
+msgid "Cannot set encoding: "
+msgstr "Не получается применить кодировку : "
+
+msgid "Cannot start Microsoft Word"
+msgstr "Microsoft Word не запускается!"
+
+msgid "Cannot transform: "
+msgstr "Не получается преобразовать : "
+
+msgid "Change"
+msgstr "Изменить"
+
+msgid "Change all"
+msgstr "Изменить всё"
+
+msgid "Change once"
+msgstr "Заменить только одно"
+
+msgid "Check Well-formedness"
+msgstr "Проверит на корректность"
+
+msgid "Choose a document type:"
+msgstr "Выберите тип документа :"
+
+msgid "Choose a file:"
+msgstr "Укажите файл :"
+
+msgid "Choose a public identifier:"
+msgstr "Выберите общий идентификатор :"
+
+msgid "Choose an encoding:"
+msgstr "Выберите кодировку :"
+
+msgid "Close"
+msgstr "Закрыть"
+
+msgid "Close All"
+msgstr "Закрывает все вкладки"
+
+msgid "Close Message Pane"
+msgstr "Спрячет панель сообщений"
+
+msgid "Close all"
+msgstr "Закрыть всё"
+
+msgid "Closes the dialog box without saving any changes you have made"
+msgstr "Закрывает это окно без сохранения каких бы то ни было изменений"
+
+msgid "Closes this dialog without making any changes"
+msgstr ""
+"Закроет диалоговое окно без осуществления каких бы то ни было изменений"
+
+msgid "Command"
+msgstr "Комманда"
+
+msgid "Command line processing incomplete: no file specified"
+msgstr "В коммандной строке не указано самое главное: имя файла"
+
+msgid "Confirmation"
+msgstr "Подтверждение"
+
+msgid "Context"
+msgstr "Контекст"
+
+msgid "Copy"
+msgstr "Копировать"
+
+msgid "Copyright © 2005-2007 Gerald Schmidt <gnschmidt@users.sourceforge.net>"
+msgstr "© 2005-2008 Gerald Schmidt <gnschmidt@users.sourceforge.net>"
+
+msgid "Creating document view..."
+msgstr "Идёт создание отображения документа ..."
+
+msgid "Creating report..."
+msgstr "Создание отчета ..."
+
+msgid "Current Element"
+msgstr "Текущий Элемент"
+
+msgid "Cut"
+msgstr "Вырезать"
+
+msgid "D&ocBook to XSL-FO\tAlt+3"
+msgstr "D&ocBook в XSL-FO\tAlt+3"
+
+msgid "DTD"
+msgstr "DTD"
+
+msgid "DTD validation in progress..."
+msgstr "Идёт проверка DTD ..."
+
+msgid "David Håsäther (Swedish) <hasather@gmail.com>"
+msgstr "David Håsäther (Swedish) <hasather@gmail.com>"
+
+msgid "Decrease"
+msgstr "Уменьшение"
+
+msgid "Decrease\tCtrl+D"
+msgstr "Уменьшить\tCtrl+D"
+
+msgid "Default"
+msgstr "По умолчанию"
+
+msgid "Default dictionary and style"
+msgstr "Словарь и стиль по умолчанию"
+
+msgid "Delete entity reference?"
+msgstr "Удалить ссылку на сущность?"
+
+msgid "Delete tag?"
+msgstr "Удалить тег ?"
+
+msgid "Do you want to save the changes to "
+msgstr "Сохранить изменения в "
+
+msgid "DocBook to HTML"
+msgstr "DocBook в HTML"
+
+msgid "DocBook to XHTML"
+msgstr "DocBook в XHTML"
+
+msgid "DocBook to XSL-FO"
+msgstr "DocBook в XSL-FO"
+
+msgid "Document has been modified: save or discard changes"
+msgstr "Документ модифицирован: сохранить?"
+
+msgid "Document%i"
+msgstr "Документ %i"
+
+msgid "Download Source"
+msgstr "Источник данных"
+
+msgid "E&ncoding..."
+msgstr "&Кодировка ..."
+
+msgid "E&xit"
+msgstr "&Выход"
+
+msgid "E&xpand internal entities on open"
+msgstr "&При открытии тега показывать все внутренние теги"
+
+msgid "Edited document empty"
+msgstr "Редактируемый документ пуст"
+
+msgid "Editor"
+msgstr "Редактор"
+
+msgid "Element..."
+msgstr "Элемент ..."
+
+msgid "Encoding"
+msgstr "Кодировка"
+
+msgid "Encoding should be one of "
+msgstr "Только следующие кодировки допустимы : "
+
+msgid "Encoding..."
+msgstr "Кодировка..."
+
+msgid "Enter XPath:"
+msgstr "Введите XPath :"
+
+msgid "Enter line number:"
+msgstr "Введите номер строки :"
+
+msgid "Enter new suggestion:"
+msgstr "Введите новое предположение :"
+
+msgid "Entity..."
+msgstr "Сущность ..."
+
+msgid "Error"
+msgstr "Ошибка"
+
+msgid "Evaluate XPath"
+msgstr "Вычислить XPath"
+
+msgid "Evaluate XPath..."
+msgstr "Вычислит XPath ..."
+
+msgid "Exit"
+msgstr "Завершение работы"
+
+msgid "Export Microsoft Word Document"
+msgstr "Экспорт в формате документа Microsoft Word"
+
+msgid "Export in progress..."
+msgstr "Идёт экспорт ..."
+
+msgid "Extends the scope to all open documents"
+msgstr "Расширяет область действия на все открытые документы"
+
+msgid "F&ind Again\tF3"
+msgstr "Найти следующий\tF3"
+
+msgid ""
+"File has been modified by another application.\n"
+"Do you want to proceed?"
+msgstr ""
+"Файл был изменен вне приложения.\n"
+"Всё ещё хотите продолжить ?"
+
+msgid "Find"
+msgstr "Найти"
+
+msgid "Find &Next"
+msgstr "Найти &Далее"
+
+msgid "Find Again"
+msgstr "Ищет снова"
+
+msgid "Find and Replace"
+msgstr "Найти и Заменить"
+
+msgid "Find..."
+msgstr "Найти ..."
+
+msgid "Find:"
+msgstr "Найти :"
+
+msgid ""
+"Finds all instances of the text specified in Find what and replaces them "
+"with the text in Replace with"
+msgstr ""
+"Ищет все вхождения в текст поискового запроса и заменяет его на текст Замены"
+
+msgid ""
+"Finds only text with lowercase and uppercase letters as specified in Find "
+"what"
+msgstr ""
+"Ищет текст только в нижнем или верхнем регистре как указано в поле поиска"
+
+msgid "Fold Tags"
+msgstr "Свернёт теги"
+
+msgid "Font"
+msgstr "Шрифт"
+
+msgid "Forum"
+msgstr "Форум"
+
+msgid "François Badier (French) <frabad@gmail.com>"
+msgstr "François Badier (French) <frabad@gmail.com>"
+
+msgid "G&o To...\tCtrl+G"
+msgstr "Перейти к ...\tCtrl+G"
+
+msgid "General"
+msgstr "Главные"
+
+msgid "Gerald Schmidt (development) <gnschmidt@users.sourceforge.net>"
+msgstr "Gerald Schmidt (разработчик) <gnschmidt@users.sourceforge.net>"
+
+msgid "Global Find and Replace"
+msgstr "Глобальный Поиск и Замена"
+
+msgid "Global Replace..."
+msgstr "Глобальная замена ..."
+
+msgid "Go To"
+msgstr "Переход"
+
+msgid "Go To..."
+msgstr "Переход к ..."
+
+msgid "H&ide Tags and Attributes\tCtrl+Shift+T"
+msgstr "Спрятать теги с артибутами\tCtrl+Shift+T"
+
+msgid ""
+"HSU PICHAN, YANG SHUFUN, CHENG PAULIAN, CHUANG KUO-PING, Marcus Bingenheimer "
+"(Chinese Traditional)"
+msgstr ""
+"HSU PICHAN, YANG SHUFUN, CHENG PAULIAN, CHUANG KUO-PING, Marcus Bingenheimer "
+"(Chinese Traditional)"
+
+msgid "Help"
+msgstr "Помощь"
+
+msgid "Hi&ghlight syntax"
+msgstr "&Подсвечивать лексемы"
+
+msgid "Hide Attributes Only"
+msgstr "Спрячет только атрибуты"
+
+msgid "Hide Tags and Attributes"
+msgstr "Спрячет и теги, и артибуты"
+
+msgid "Home Page"
+msgstr "Домашняя страничка"
+
+msgid "I&gnore"
+msgstr "&Игнорировать"
+
+msgid "I&gnore all"
+msgstr "&Игнорировать всё"
+
+msgid "I&mport Microsoft Word Document..."
+msgstr "&Импортировать документ Microsoft Word ..."
+
+msgid "I&nsert"
+msgstr "&Вставить"
+
+msgid "I&ntelligent backspace/delete"
+msgstr "&Умный backspace/удаление"
+
+msgid "Ignore"
+msgstr "Игнорировать"
+
+msgid "Ignore all"
+msgstr "Игнорировать всё"
+
+msgid "Ignore once"
+msgstr "Игнорировать один раз"
+
+msgid "Import Microsoft Word Document"
+msgstr "Импортировать документ Microsoft Word"
+
+msgid "Import in progress..."
+msgstr "Идёт импорт ..."
+
+msgid "Increase"
+msgstr "Увеличение"
+
+msgid "Increase\tCtrl+U"
+msgstr "Увеличить\tCtrl+U"
+
+msgid "Information"
+msgstr "Информация"
+
+msgid "Insert Element"
+msgstr "Вставить Элемент"
+
+msgid "Insert Entity"
+msgstr "Вставить Сущность"
+
+msgid "Insert Sibling"
+msgstr "Вставить Сиблинг"
+
+msgid "Interprets the text specified in Find what as a regular expression"
+msgstr "Интерпретирует указанный в поле поиска текст как регулярное выражение"
+
+msgid "L&ock hidden tags"
+msgstr "&Блокировать скрытые теги"
+
+msgid "Language (restart required)"
+msgstr "Язык (требуется перезагрузка)"
+
+msgid "Light"
+msgstr "Цветовая схема тегов"
+
+msgid "Ln %i Col %i"
+msgstr "Строка %i Колонка %i"
+
+msgid "Lock Tags"
+msgstr "Блокирует теги"
+
+msgid "MB"
+msgstr "Мб"
+
+msgid "MSXML validation failed (version 4.0 or later required)"
+msgstr "Проверка MSXML не осуществлена (у вас старая (<4.0) версия)"
+
+msgid "Match"
+msgstr "Совпадение"
+
+msgid "Matt Smigielski (testing) <alectrus@users.sourceforge.net>"
+msgstr "Matt Smigielski (тестировщик) <alectrus@users.sourceforge.net>"
+
+msgid "Memory low: %s saved in large document mode"
+msgstr "Не хватает памяти : %s сохранен в режиме \"большой документ\""
+
+msgid "Message"
+msgstr "Сообщение"
+
+msgid "Microsoft Word cannot save %s"
+msgstr "Microsoft Word не смог сохранить %s!"
+
+msgid "Microsoft Word cannot save %s as XML"
+msgstr "Microsoft Word не может сохранить %s в XML"
+
+msgid "Microsoft Word cannot save this document as WordprocessingML "
+msgstr "Microsoft Word не может сохранить этот документ как WordprocessingML "
+
+msgid "Modified"
+msgstr "Изменён"
+
+msgid "New"
+msgstr "Новый"
+
+msgid "New &document"
+msgstr "Новый &документ"
+
+msgid "New Document"
+msgstr "Новый документ"
+
+msgid "New Suggestion"
+msgstr "Новое предположение"
+
+msgid "New suggestion..."
+msgstr "Новое предположение ..."
+
+msgid "New..."
+msgstr "Новый ..."
+
+msgid "Next Document"
+msgstr "Следующий документ"
+
+msgid "No filter"
+msgstr "Нет фильтра"
+
+msgid "No items selected"
+msgstr "Ничего не выбрано"
+
+msgid "No matching nodes found"
+msgstr "Ничего не найдено!"
+
+msgid "No."
+msgstr "N°."
+
+msgid "None"
+msgstr "Нет"
+
+msgid "Normal"
+msgstr "Средний"
+
+msgid "Normal\tCtrl+0"
+msgstr "Нормальный\tCtrl+0"
+
+msgid "O&pen Large Document...\tCtrl+Shift+O"
+msgstr "Открыть большой документ ...\tCtrl+Shift+O"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Open"
+msgstr "Открыть"
+
+msgid "Open Large Document"
+msgstr "Открыть большой документ"
+
+msgid "Open Large Document..."
+msgstr "Открывает большой документ ..."
+
+msgid "Open..."
+msgstr "Открывает документ ..."
+
+msgid "Opening imported file..."
+msgstr "Идёт открытие импортируемого файла ..."
+
+msgid "Opening spelling and style check in read-only mode: "
+msgstr ""
+"Идёт проведение проверок орфографии и  стиля в режиме \"только для чтения"
+"\" : "
+
+msgid "Opens a standard file dialog"
+msgstr "Отобразит стандартное диалоговое окно открытия файла"
+
+msgid "Options"
+msgstr "Опции"
+
+msgid "Options..."
+msgstr "Настройки..."
+
+msgid "Out of memory"
+msgstr "Не хватает памяти"
+
+msgid "Output document empty"
+msgstr "Итоговый документ пуст"
+
+msgid "Output options"
+msgstr "Настройки вывода"
+
+msgid "P&aste As New Document"
+msgstr "Вставить в новый документ"
+
+msgid "P&rint Preview..."
+msgstr "Предпросмотр перед печатью ..."
+
+msgid "Pa&ge Setup..."
+msgstr "Настройка страницы ..."
+
+msgid "Page Setup..."
+msgstr "Настройка страницы  ..."
+
+msgid "Parse in progress..."
+msgstr "Идёт разбор документа ..."
+
+msgid "Paste"
+msgstr "Вставить"
+
+msgid "Paste As New Document"
+msgstr "Создать новый документ и вставить в него!"
+
+msgid "Pr&int...\tCtrl+P"
+msgstr "&Печать ...\tCtrl+P"
+
+msgid "Pr&intable summary"
+msgstr "&Итоги для печати"
+
+msgid "Preparing Print Preview..."
+msgstr "Идет подготовка предпросмотра ..."
+
+msgid "Preparing to print..."
+msgstr "Идёт подготовка для печати ..."
+
+msgid "Pretty-print"
+msgstr "Печать"
+
+msgid "Pretty-print unsuccessful: output document empty"
+msgstr "Напечатать не получилось, так итоговый документ пуст"
+
+msgid "Pretty-printing in progress..."
+msgstr "Идёт печать ..."
+
+msgid "Previous Document"
+msgstr "Предыдущий документ"
+
+msgid "Print"
+msgstr "Печать"
+
+msgid "Print Preview..."
+msgstr "Предпросмотр перед печатью..."
+
+msgid "Print..."
+msgstr "Печать..."
+
+msgid "Provides a space for you to type additional information"
+msgstr "Предоставит место для ввода дополнительной информации"
+
+msgid "Provides a space for you to type the path of the file"
+msgstr "Предоставляет место ввода имени файла"
+
+msgid "Provides a space for you to type the text you want to find"
+msgstr "Предоставит место для ввода текста, который Вы хотите найти"
+
+msgid ""
+"Provides a space for you to type the text you want to replace the text you "
+"typed in Find what"
+msgstr "Предоставит место для ввода текста замены"
+
+msgid "Public DTD"
+msgstr "Общий DTD"
+
+msgid "Public DTD..."
+msgstr "Общая DTD ..."
+
+msgid "Question"
+msgstr "Вопрос"
+
+msgid "R&eplace in all open documents"
+msgstr "&Заменить во всех открытых документах"
+
+msgid "RELAX NG grammar"
+msgstr "Грамматика RELAX NG"
+
+msgid "RELAX NG validation in progress..."
+msgstr "Идёт проверка RELAX NG  ..."
+
+msgid "RELAX NG..."
+msgstr "RELAX NG..."
+
+msgid "Re&gex"
+msgstr "&Регулярное выражение"
+
+msgid "Re&member layout on close"
+msgstr "&Запоминать позицию окна"
+
+msgid "Re&tain undo history on save"
+msgstr "&Не очищать иторию редактирования при сохранении файла"
+
+msgid "Redo"
+msgstr "Повторить"
+
+msgid "Replace"
+msgstr "Заменить"
+
+msgid "Replace &All"
+msgstr "Заменить &Всё"
+
+msgid "Replace with:"
+msgstr "Заменить на:"
+
+msgid "Replace with: "
+msgstr "Заменить на: "
+
+msgid "Replace..."
+msgstr "Замена ..."
+
+msgid "Revert"
+msgstr "Отменяет все проделанные изменения(которые есть в истории)"
+
+msgid "Rule"
+msgstr "Правило"
+
+msgid "S&ave As...\tF12"
+msgstr "Сохранить как...\tF12"
+
+msgid "S&how Current Element Pane"
+msgstr "&Показать панель Элементов"
+
+msgid "S&how full path on frame"
+msgstr "&Показывать полный путь в заголовке вкладки"
+
+msgid "S&ymbol..."
+msgstr "&Символ ..."
+
+msgid "SHiNE CsyFeK (Chinese Simplified) <csyfek@gmail.com>"
+msgstr "SHiNE CsyFeK (Chinese Simplified) <csyfek@gmail.com>"
+
+msgid "Save"
+msgstr "Сохраняет документ"
+
+msgid "Save As"
+msgstr "Сохранить как"
+
+msgid "Save As..."
+msgstr "Сохраняет под другим именем ..."
+
+msgid "Select "
+msgstr "Выбрать"
+
+msgid "Select RELAX NG grammar"
+msgstr "Выберите грамматику RELAX NG"
+
+msgid "Select stylesheet"
+msgstr "Выберите таблицу стилей"
+
+msgid "Selects the file specified"
+msgstr "Выберет выбранный файл"
+
+msgid "Sh&ow Toolbar"
+msgstr "&Показать Панель Инструментов"
+
+msgid "Show Current ElementPane"
+msgstr "Показать панель Элементов"
+
+msgid "Show Tags and Attributes"
+msgstr "Покажет и теги, и атрибуты"
+
+msgid "Show Toolbar"
+msgstr "Покажет Панель Инструментов"
+
+msgid "Sibling..."
+msgstr "Сиблинг ..."
+
+msgid "Spelling and Style"
+msgstr "Орфография и стиль"
+
+msgid "Spelling and Style..."
+msgstr "Стиль и орфография ..."
+
+msgid "Stopped"
+msgstr "Остановлено"
+
+msgid "Suggestion"
+msgstr "Предположение"
+
+msgid "Symbol..."
+msgstr "Символ ..."
+
+msgid "System DTD"
+msgstr "Системный DTD"
+
+msgid "System DTD..."
+msgstr "Системная DTD ..."
+
+msgid "T&EI to LaTeX\tAlt+5"
+msgstr "T&EI в LaTeX\tAlt+5"
+
+msgid "TE&I to XHTML\tAlt+6"
+msgstr "TE&I в XHTML\tAlt+6"
+
+msgid "TEI to &XSL-FO\tAlt+7"
+msgstr "TEI в &XSL-FO\tAlt+7"
+
+msgid "TEI to HTML"
+msgstr "TEI в HTML"
+
+msgid "TEI to LaTeX"
+msgstr "TEI в LaTeX"
+
+msgid "TEI to XHTML"
+msgstr "TEI в XHTML"
+
+msgid "TEI to XSL-FO"
+msgstr "TEI в XSL-FO"
+
+msgid "Tags Locked"
+msgstr "Теги заблокированы"
+
+msgid "Tags hidden"
+msgstr "Скрытые теги"
+
+msgid "Tags locked"
+msgstr "Заблокированные теги"
+
+msgid "The following error has occurred: "
+msgstr "Возникла следующая ошибка : "
+
+msgid "The operating system has turned down a request for additional memory"
+msgstr "ОС отказала в выделении памяти"
+
+msgid "This functionality requires Microsoft Windows"
+msgstr "Для этой функциональности требуется  Microsoft Windows"
+
+msgid "Thomas Wenzel (German) <thowen@users.sourceforge.net>"
+msgstr "Thomas Wenzel (German) <thowen@users.sourceforge.net>"
+
+msgid "Toggle Fold"
+msgstr "Прячет или показывает"
+
+msgid "Twin"
+msgstr "Добавляет еще один такой же тег ниже"
+
+msgid "Undo"
+msgstr "Отменить"
+
+msgid "Unknown command line switch (expecting 'w' or 's')"
+msgstr "Не известный ключ в коммандной строке (ожидался 'w' или 's')"
+
+msgid "Va&riable highlight in tag free view"
+msgstr "&Подсвечивать переменные при просмотре без тегов"
+
+msgid "Validation error"
+msgstr "Ошибка"
+
+msgid "Validation in progress..."
+msgstr "Идёт проверка ..."
+
+msgid "Variables"
+msgstr "Переменные"
+
+msgid "Viliam Búr (Slovak) <viliam@bur.sk>"
+msgstr "Viliam Búr (Slovak) <viliam@bur.sk>"
+
+msgid "Warning"
+msgstr "Предупреждение"
+
+msgid "Word Count"
+msgstr "Считает число слов в документе"
+
+msgid "XML Copy Editor"
+msgstr "XML Copy Editor"
+
+msgid "XML Copy Editor has encountered an error and needs to close."
+msgstr ""
+"В XML Copy Editor произошла критическая ошибка, работа будет завершено."
+
+msgid ""
+"XML Copy Editor has encountered the following error and needs to close: "
+msgstr ""
+"В XML Copy Editor произошла критическая ошибка, приложение будет завершено: "
+
+msgid "XML Schema"
+msgstr "Схема XML"
+
+msgid "XML Schema..."
+msgstr "Схема XML ..."
+
+msgid "XML document (*.xml)"
+msgstr "Документ XML (*.xml)"
+
+msgid "XS&LT stylesheet..."
+msgstr "Таблица стилей XS&LT ..."
+
+msgid "XSL Transform..."
+msgstr "Преобразование XSL ..."
+
+msgid "XSL transformation in progress..."
+msgstr "Идёт преобразование XSL ..."
+
+msgid "XSLT stylesheet"
+msgstr "XSLT таблица стилей"
+
+msgid "XSLT stylesheet..."
+msgstr "Таблица стилей XSLT ..."
+
+msgid "byte"
+msgid_plural "bytes"
+msgstr[0] "байт"
+msgstr[1] "байтов"
+
+msgid "kB"
+msgstr "кБ"
+
+msgid "valid"
+msgstr "корректен"
+
+msgid "well-formed"
+msgstr "хорошо-оформленный"
+
+msgid "{extension}"
+msgstr "{расширение}"
+
+msgid "{fullpath}"
+msgstr "{полныйПуть}"
+
+msgid "{name}"
+msgstr "{имя}"
+
+msgid "{path}"
+msgstr "{путь}"
+
+msgid "|All files (*.*)|*.*"
+msgstr "|Все файлы (*.*)|*.*"

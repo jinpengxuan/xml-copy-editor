@@ -1,0 +1,54 @@
+-- Catalog for Dita --
+--             (C) Copyright OASIS Open 2005.                    --
+--             (C) Copyright IBM Corporation 2001, 2004.         --
+--             All Rights Reserved.                              --
+
+-- Dita DTDs --
+
+PUBLIC "-//OASIS//DTD DITA Concept//EN" "concept.dtd"
+PUBLIC "-//OASIS//ELEMENTS DITA Concept//EN" "concept.mod"
+
+PUBLIC "-//OASIS//DTD DITA Composite//EN" "ditabase.dtd"
+
+PUBLIC "-//OASIS//DTD DITA Reference//EN" "reference.dtd"
+PUBLIC "-//OASIS//ELEMENTS DITA Reference//EN" "reference.mod"
+
+PUBLIC "-//OASIS//DTD DITA Task//EN" "task.dtd"
+PUBLIC "-//OASIS//ELEMENTS DITA Task//EN" "task.mod"
+
+PUBLIC "-//OASIS//DTD DITA Topic//EN" "topic.dtd"
+PUBLIC "-//OASIS//ELEMENTS DITA Topic//EN" "topic.mod"
+PUBLIC "-//OASIS//ENTITIES DITA Topic Class//EN" "topic_class.ent"
+PUBLIC "-//OASIS//ENTITIES DITA Topic Definitions//EN" "topic_defn.ent"
+
+-- Maps --
+
+PUBLIC "-//OASIS//DTD DITA Map//EN" "map.dtd"
+PUBLIC "-//OASIS//ELEMENTS DITA Map//EN" "map.mod"
+PUBLIC "-//OASIS//ENTITIES DITA Map Group Domain//EN" "mapgroup.ent"
+PUBLIC "-//OASIS//ELEMENTS DITA Map Group Domain//EN" "mapgroup.mod"
+
+-- Domains --
+
+PUBLIC "-//OASIS//ELEMENTS DITA Highlight Domain//EN" "highlight-domain.mod"
+PUBLIC "-//OASIS//ENTITIES DITA Highlight Domain//EN" "highlight-domain.ent"
+
+PUBLIC "-//OASIS//ELEMENTS DITA Programming Domain//EN" "programming-domain.mod"
+PUBLIC "-//OASIS//ENTITIES DITA Programming Domain//EN" "programming-domain.ent"
+
+PUBLIC "-//OASIS//ELEMENTS DITA Software Domain//EN" "software-domain.mod"
+PUBLIC "-//OASIS//ENTITIES DITA Software Domain//EN" "software-domain.ent"
+
+PUBLIC "-//OASIS//ELEMENTS DITA User Interface Domain//EN" "ui-domain.mod"
+PUBLIC "-//OASIS//ENTITIES DITA User Interface Domain//EN" "ui-domain.ent"
+
+PUBLIC "-//OASIS//ELEMENTS DITA User Interface Domain//EN" "ui-domain.mod"
+PUBLIC "-//OASIS//ENTITIES DITA User Interface Domain//EN" "ui-domain.ent"
+
+PUBLIC "-//OASIS//ELEMENTS DITA Utilities Domain//EN" "utilities-domain.mod"
+PUBLIC "-//OASIS//ENTITIES DITA Utilities Domain//EN" "utilities-domain.ent"
+
+-- Common --
+
+PUBLIC "-//OASIS//ELEMENTS DITA Metadata//EN" "meta_xml.mod"
+PUBLIC "-//OASIS//ELEMENTS DITA CALS Tables//EN" "tbl_xml.mod"

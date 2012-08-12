@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+  <public publicId="-//W3C//DTD XHTML 1.0 Transitional//EN" uri="file:///C:/Program%20Files/XML%20Copy%20Editor/dtd/xhtml1-transitional.dtd"/>
+  <public publicId="-//W3C//DTD XHTML 1.0 Strict//EN" uri="file:///C:/Program%20Files/XML%20Copy%20Editor/dtd/xhtml1-strict.dtd"/>
+  <public publicId="-//W3C//DTD XHTML 1.0 Frameset//EN" uri="file:///C:/Program%20Files/XML%20Copy%20Editor/dtd/xhtml1-frameset.dtd"/>
+  <public publicId="-//OASIS//DTD DocBook XML 5.0b3//EN" uri="file:///C:/Program%20Files/XML%20Copy%20Editor/dtd/docbook/5.0b/docbook.dtd"/>
+  <public publicId="-//OASIS//DTD DocBook XML 4.4//EN" uri="file:///C:/Program%20Files/XML%20Copy%20Editor/dtd/docbook/4.4/docbookx.dtd"/>
+  <public publicId="-//TEI P4//DTD Main Document Type//EN" uri="file:///C:/Program%20Files/XML%20Copy%20Editor/dtd/tei/p4/tei2.dtd"/>
+  <public publicId="-//TEI P5//DTD Main Document Type//EN" uri="file:///C:/Program%20Files/XML%20Copy%20Editor/dtd/tei/p5/tei_all.dtd"/>
+  <public publicId="-//OASIS//DTD DITA Map//EN" uri="file:///C:/Program%20Files/XML%20Copy%20Editor/dtd/dita/map.dtd"/>
+  <public publicId="-//OASIS//DTD DITA Task//EN" uri="file:///C:/Program%20Files/XML%20Copy%20Editor/dtd/dita/task.dtd"/>
+  <public publicId="-//OASIS//DTD DITA Topic//EN" uri="file:///C:/Program%20Files/XML%20Copy%20Editor/dtd/dita/topic.dtd"/>
+  <public publicId="-//OASIS//DTD DITA Concept//EN" uri="file:///C:/Program%20Files/XML%20Copy%20Editor/dtd/dita/concept.dtd"/>
+  <public publicId="-//OpenLaszlo//DTD Main Document Type//EN" uri="file:///C:/Program%20Files/XML%20Copy%20Editor/dtd/lzx.dtd"/>
+  <public publicId="urn:newsml:iptc.org:20021018:NewsMLv1.2:1" uri="file:///C:/Program%20Files/XML%20Copy%20Editor/dtd/NewsML_1.2.dtd"/>
+  <public publicId="-//TopicMaps.Org//DTD XML Topic Map (XTM) 1.0//EN" uri="file:///C:/Program%20Files/XML%20Copy%20Editor/dtd/xtm1.dtd"/>
+  <public publicId="ISO/IEC 13250-3:2005//DTD XML Topic Maps (XTM) 2.0//EN" uri="file:///C:/Program%20Files/XML%20Copy%20Editor/dtd/xtm2.dtd"/>
+  <public publicId="-//OpenLearn//DTD" uri="file:///C:/Program%20Files/XML%20Copy%20Editor/dtd/OUGenericFull.dtd"/>
+  <public publicId="-//Moodle Glossary//DTD" uri="file:///C:/Program%20Files/XML%20Copy%20Editor/dtd/moodle_glossary.dtd"/>
+  <public publicId="-//Moodle XML//DTD" uri="file:///C:/Program%20Files/XML%20Copy%20Editor/dtd/moodle_xml.dtd"/>
+</catalog>

@@ -1,0 +1,1259 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: XML Copy Editor 1.1.0.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2007-10-13 18:02+0800\n"
+"PO-Revision-Date: 2012-03-17 00:01+0800\n"
+"Last-Translator: Zane U. Ji <ZaneUJi@gmail.com>\n"
+"Language-Team: SHiNE CsyFeK <csyfek@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"X-Poedit-Language: Chinese\n"
+"X-Poedit-Country: CHINA\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+msgid "\tCtrl+%i"
+msgstr "\tCtrl+%i"
+
+msgid ""
+"\n"
+"XML Copy Editor is free software released under the GNU\n"
+"General Public License.\n"
+"\n"
+"Many thanks are due to "
+msgstr ""
+"\n"
+"XML Copy Editor 是在 GNU 通用公共许可证下发布的自由软件.\n"
+"\n"
+"衷心感谢 "
+
+msgid "%g %s saved"
+msgstr "%g %s 已保存"
+
+msgid "%i match"
+msgid_plural "%i matches"
+msgstr[0] "%i 项匹配"
+msgstr[1] "%i 项匹配"
+
+msgid "%i replacement made"
+msgid_plural "%i replacements made"
+msgstr[0] "%i 项被替换"
+msgstr[1] "%i 项被替换"
+
+msgid "%s contains %i word"
+msgid_plural "%s contains %i words"
+msgstr[0] "%s 包含 %i 个字词"
+msgstr[1] "%s 包含 %i 个字词"
+
+msgid "%s is %s"
+msgstr "%s 是 %s"
+
+msgid "%s is already open"
+msgstr "%s 已经打开"
+
+msgid "%s saved in default encoding UTF-8"
+msgstr "%s 以默认的 UTF-8 编码保存"
+
+msgid "%s saved in default encoding UTF-8: conversion to %s failed"
+msgstr "%s 以默认的 UTF-8 编码保存:从 %s 编码转换失败"
+
+msgid "%s saved in default encoding UTF-8: unknown encoding %s"
+msgstr "%s 以默认的 UTF-8 编码保存:未知的编码 %s"
+
+msgid "&About XML Copy Editor"
+msgstr "关于 XML Copy Editor(&A)"
+
+msgid "&Always insert closing tag"
+msgstr "总是插入关闭标签(&A)"
+
+msgid "&Associate"
+msgstr "关联(&A)"
+
+msgid "&Blue background, white text"
+msgstr "蓝色背景,白色字体(&B)"
+
+msgid "&Browse Source"
+msgstr "浏览源代码(&B)"
+
+msgid "&Browser\tCtrl+B"
+msgstr "浏览器(&B)\tCtrl+B"
+
+msgid "&Change all"
+msgstr "改变所有(&C)"
+
+msgid "&Check Well-formedness\tF2"
+msgstr "检查是否形式良好(&C)\tF2"
+
+msgid "&Close\tCtrl+F4"
+msgstr "关闭(&C)\tCtrl+F4"
+
+msgid "&Color Scheme"
+msgstr "配色方案(&C)"
+
+msgid "&Command\tCtrl+Alt+C"
+msgstr "命令(&C)\tCtrl+Alt+C"
+
+msgid "&Cut\tCtrl+X"
+msgstr "剪切(&C)\tCtrl+X"
+
+msgid "&DTD\tF4"
+msgstr "DTD(&D)\tF4"
+
+msgid "&Default"
+msgstr "默认(&D)"
+
+msgid "&DocBook to HTML\tAlt+1"
+msgstr "DocBook 转为 HTML(&D)\tAlt+1"
+
+msgid "&DocBook to XHTML\tAlt+2"
+msgstr "DocBook 转为 XHTML(&D)\tAlt+2"
+
+msgid "&Edit"
+msgstr "编辑(&E)"
+
+msgid "&Element...\tCtrl+I"
+msgstr "元素(&E)...\tCtrl+I"
+
+msgid "&Enable network access for DTD validation"
+msgstr "允许访问网络来进行 DTD 验证(&E)"
+
+msgid "&Entity...\tCtrl+E"
+msgstr "实体(&E)...\tCtrl+E"
+
+msgid "&Evaluate XPath...\tF9"
+msgstr "鉴定 XPath(&E)...\tF9"
+
+msgid "&Export Microsoft Word Document..."
+msgstr "导出 Microsoft Word 文档(&E)..."
+
+msgid "&File"
+msgstr "文件(&F)"
+
+msgid "&Find what: "
+msgstr "查找内容(&F):"
+
+msgid "&Find...\tCtrl+F"
+msgstr "查找(&F)...\tCtrl+F"
+
+msgid "&Fold Tags\tCtrl+Shift+F"
+msgstr "折叠标签(&F)\tCtrl+Shift+F"
+
+msgid "&Folding"
+msgstr "折叠(&F)"
+
+msgid "&Forum"
+msgstr "论坛(&F)"
+
+msgid "&Global Replace...\tCtrl+Shift+R"
+msgstr "全局替换(&G)...\tCtrl+Shift+R"
+
+msgid "&Help"
+msgstr "帮助(&H)"
+
+msgid "&Hide Attributes Only\tCtrl+Shift+A"
+msgstr "仅隐藏属性(&H)\tCtrl+Shift+A"
+
+msgid "&Highlight current line"
+msgstr "高亮当前行(&H)"
+
+msgid "&Home Page"
+msgstr "主页(&H)"
+
+msgid "&Indentation guides"
+msgstr "缩进辅助线(&I)"
+
+msgid "&Insert"
+msgstr "插入(&I)"
+
+msgid "&Light"
+msgstr "淡色的(&L)"
+
+msgid "&Line numbers"
+msgstr "行号(&L)"
+
+msgid "&Lock Tags\tCtrl+L"
+msgstr "锁定标签(&L)\tCtrl+L"
+
+msgid "&Match case"
+msgstr "匹配大小写(&M)"
+
+msgid "&New...\tCtrl+N"
+msgstr "新建(&N)...\tCtrl+N"
+
+msgid "&Next Document\tCtrl+PgDn"
+msgstr "后一个文档(&N)\tCtrl+PgDn"
+
+msgid "&None"
+msgstr "不使用(&N)"
+
+msgid "&One application instance only"
+msgstr "只允许一个应用程序实例(&O)"
+
+msgid "&Open...\tCtrl+O"
+msgstr "打开(&O)...\tCtrl+O"
+
+msgid "&Options..."
+msgstr "选项(&O)..."
+
+msgid "&Paste\tCtrl+V"
+msgstr "粘贴(&P)\tCtrl+V"
+
+msgid "&Pretty-print\tF11"
+msgstr "整齐打印(&P)\tF11"
+
+msgid "&Previous Document\tCtrl+PgUp"
+msgstr "前一个文档(&P)\tCtrl+PgUp"
+
+msgid "&Printable report"
+msgstr "可打印的报告(&P)"
+
+msgid "&Public DTD..."
+msgstr "公共 DTD(&P)..."
+
+msgid "&RELAX NG...\tF6"
+msgstr "RELAX NG(&R)...\tF6"
+
+msgid "&Redo\tCtrl+Y"
+msgstr "重做(&R)\tCtrl+Y"
+
+msgid "&Regex"
+msgstr "正则表达式(&R)"
+
+msgid "&Remember open tabs on close"
+msgstr "关闭时记住已打开的标签(&R)"
+
+msgid "&Replace"
+msgstr "替换(&R)"
+
+msgid "&Replace...\tCtrl+R"
+msgstr "替换(&R)...\tCtrl+R"
+
+msgid "&Report"
+msgstr "报告(&R)"
+
+msgid "&Revert"
+msgstr "恢复(&R)"
+
+msgid "&Run"
+msgstr "运行(&R)"
+
+msgid "&Save\tCtrl+S"
+msgstr "保存(&S)\tCtrl+S"
+
+msgid "&Save UTF-8 byte order mark"
+msgstr "保存 UTF-8 字节顺序标记(&S)"
+
+msgid "&Show Tags and Attributes\tCtrl+T"
+msgstr "显示标签和属性(&S)\tCtrl+T"
+
+msgid "&Sibling...\tCtrl+Shift+I"
+msgstr "兄弟结点(&S)...\tCtrl+Shift+I"
+
+msgid "&Spelling and Style...\tF7"
+msgstr "拼写和风格(&S)...\tF7"
+
+msgid "&System DTD..."
+msgstr "系统 DTD(&S)..."
+
+msgid "&TEI to HTML\tAlt+4"
+msgstr "TEI 转为 HTML(&T)\tAlt+4"
+
+msgid "&Tag completion"
+msgstr "标签补全(&T)"
+
+msgid "&Text Size"
+msgstr "字体大小(&T)"
+
+msgid "&Toggle Fold"
+msgstr "切换折叠(&T)"
+
+msgid "&Tools"
+msgstr "工具(&T)"
+
+msgid "&Twin\tCtrl+Enter"
+msgstr "孪生结点(&T)\tCtrl+Enter"
+
+msgid "&Undo\tCtrl+Z"
+msgstr "撤销(&U)\tCtrl+Z"
+
+msgid "&Unfold Tags\tCtrl+Shift+U"
+msgstr "展开标签(&U)\tCtrl+Shift+U"
+
+msgid "&Use Microsoft rebar control (restart required)"
+msgstr "使用 Microsoft 可升降工具栏(需要重新启动)"
+
+msgid "&Validate"
+msgstr "验证(&V)"
+
+msgid "&Validate as you type"
+msgstr "验证您所输入的内容(&V)"
+
+msgid "&View"
+msgstr "查看(&V)"
+
+msgid "&Wait"
+msgstr "等待(&W)"
+
+msgid "&White space visible"
+msgstr "空白字符可见(&W)"
+
+msgid "&Word Count"
+msgstr "字词统计(&W)"
+
+msgid "&Wrap Words\tCtrl+W"
+msgstr "文字自动换行(&W)\tCtrl+W"
+
+msgid "&XML"
+msgstr "XML(&X)"
+
+msgid "&XML Copy Editor Help\tF1"
+msgstr "XML Copy Editor 帮助(&X)\tF1"
+
+msgid "&XML Schema\tF5"
+msgstr "XML Schema(&X)\tF5"
+
+msgid "&XML Schema..."
+msgstr "XML Schema(&X)..."
+
+msgid "&XSL Transform...\tF8"
+msgstr "XSL 转换(&X)...\tF8"
+
+msgid "&XSLT"
+msgstr "XSLT(&X)"
+
+msgid "'%s' is not a valid line number"
+msgstr "'%s' 不是一个有效的行号"
+
+msgid "(No filter)"
+msgstr "(不过滤)"
+
+msgid "(No filters found)"
+msgstr "(没有找到过滤器)"
+
+msgid "(No rule sets found)"
+msgstr "(没有找到合符规则的集合)"
+
+msgid "(lossless conversion requires version 2003 or later)"
+msgstr "(无损转换需要2003或其后的版本)"
+
+msgid "(unknown error)"
+msgstr "(未知错误)"
+
+msgid ""
+".\n"
+"\n"
+"Select \"Abort\" to exit, \"Retry\" to close this window and \"Ignore\" to continue."
+msgstr ""
+".\n"
+"\n"
+"选择\"中止\"来退出,\"重试\"来关闭这个窗口,\"忽略\"以继续."
+
+msgid "A more recent version of Microsoft Word is required"
+msgstr "需要更新版本的 Microsoft Word"
+
+msgid "About"
+msgstr "关于"
+
+msgid "Action"
+msgstr "动作"
+
+msgid "All files (*.*)|*.*|XML (*.xml)|*.xml|XHTML (*.html)|*.html|DTD (*.dtd)|*.dtd|XML Schema (*.xsd)|*.xsd|RELAX NG grammar (*.rng)|*.rng|XSL (*.xsl)|*.xsl"
+msgstr "所有文件(*.*)|*.*|XML (*.xml)|*.xml|XHTML (*.html)|*.html|DTD (*.dtd)|*.dtd|XML Schema (*.xsd)|*.xsd|RELAX NG grammar (*.rng)|*.rng|XSL (*.xsl)|*.xsl"
+
+msgid "Application directory"
+msgstr "应用程序目录"
+
+msgid "Associate %s"
+msgstr "关联 %s"
+
+msgid "Attributes hidden"
+msgstr "隐藏属性"
+
+msgid "Blue background, white text"
+msgstr "蓝色背景,白色字体"
+
+msgid "Browse"
+msgstr "浏览"
+
+msgid "Browse Source"
+msgstr "浏览源代码"
+
+msgid "Browser"
+msgstr "浏览"
+
+msgid "C&ancel"
+msgstr "取消(&a)"
+
+msgid "C&lose All"
+msgstr "关闭全部(&l)"
+
+msgid "C&lose Message Pane\tAlt+C"
+msgstr "关闭消息窗格(&l)\tAlt+C"
+
+msgid "C&opy\tCtrl+C"
+msgstr "复制(&o)\tCtrl+C"
+
+msgid "Cannot access application directory"
+msgstr "不能访问应用程序目录"
+
+msgid "Cannot associate %s: %s"
+msgstr "不能关联 %s: %s"
+
+msgid "Cannot compile regular expression '"
+msgstr "不能够识别正则表达式 '"
+
+msgid "Cannot count words: %s"
+msgstr "不能统计字词: %s"
+
+msgid "Cannot create report: "
+msgstr "不能生成报告:"
+
+msgid "Cannot evaluate XPath"
+msgstr "不能鉴定 XPath"
+
+msgid "Cannot find '%s'"
+msgstr "未能找到 '%s'"
+
+msgid "Cannot open %s"
+msgstr "不能打开 %s"
+
+msgid "Cannot open %s for import"
+msgstr "不能打开 %s 以导入"
+
+msgid "Cannot open %s: conversion from encoding %s failed"
+msgstr "不能打开 %s:从 %s 编码转换失败"
+
+msgid "Cannot open %s: unknown encoding %s"
+msgstr "不能打开 %s:未知的编码 %s"
+
+msgid "Cannot open application directory: see Tools, Options..., General"
+msgstr "不能打开应用程序目录: 检查\"工具\",\"选项...\",\"常规\""
+
+msgid "Cannot open clipboard"
+msgstr "不能打开剪贴板"
+
+msgid "Cannot open imported file"
+msgstr "不能打开导入的文件"
+
+msgid "Cannot open in browser: %s not found (see Tools, Options..., General)"
+msgstr "不能在浏览器中打开: 没有找到 %s (检查\"工具\",\"选项...\",\"常规\")"
+
+msgid "Cannot open in browser: no browser defined (see Tools, Options..., General)"
+msgstr "不能在浏览器中打开: 没有预定的浏览器(检查\"工具\",\"选项...\",\"常规\")"
+
+msgid "Cannot open stylesheet %s"
+msgstr "不能打开样式表 %s"
+
+msgid "Cannot paste as new document: no text on clipboard"
+msgstr "不能粘贴为新文档: 剪贴板上没有文本"
+
+msgid "Cannot pretty-print: "
+msgstr "不能整齐打印:"
+
+msgid "Cannot replace: "
+msgstr "不能替换:"
+
+msgid "Cannot save %s"
+msgstr "不能保存 %s"
+
+msgid "Cannot save document in %s: %s (saved in default encoding UTF-8)"
+msgstr "不能以 %s 保存文档: %s (以默认编码 UTF-8 保存)"
+
+msgid "Cannot save temporary copy for validation; please save or discard changes"
+msgstr "不能保存临时副本以验证;请保存或者忽略改变"
+
+msgid "Cannot save temporary file"
+msgstr "不能保存临时文件"
+
+msgid "Cannot set encoding (cannot open temporary file)"
+msgstr "不能设置编码(不能打开临时文件)"
+
+msgid "Cannot set encoding (cannot parse temporary file)"
+msgstr "不能设置编码(不能分析临时文件)"
+
+msgid "Cannot set encoding: "
+msgstr "不能设置编码:"
+
+msgid "Cannot start Microsoft Word"
+msgstr "不能启动 Microsoft Word"
+
+msgid "Cannot transform: "
+msgstr "不能转换:"
+
+msgid "Change"
+msgstr "改变"
+
+msgid "Change all"
+msgstr "改变所有"
+
+msgid "Change once"
+msgstr "改变一次"
+
+msgid "Check Well-formedness"
+msgstr "检查是否形式良好"
+
+msgid "Choose a document type:"
+msgstr "选择一项文档类型:"
+
+msgid "Choose a file:"
+msgstr "选择一个文件:"
+
+msgid "Choose a public identifier:"
+msgstr "选择一个公共标识符:"
+
+msgid "Choose an encoding:"
+msgstr "选择一种编码:"
+
+msgid "Close"
+msgstr "关闭"
+
+msgid "Close All"
+msgstr "关闭全部"
+
+msgid "Close Message Pane"
+msgstr "关闭消息窗格"
+
+msgid "Close all"
+msgstr "全部关闭"
+
+msgid "Closes the dialog box without saving any changes you have made"
+msgstr "关闭对话框时不保存您所作的任何改变"
+
+msgid "Closes this dialog without making any changes"
+msgstr "关闭这个对话框而不作任何改变"
+
+msgid "Command"
+msgstr "命令"
+
+msgid "Command line processing incomplete: no file specified"
+msgstr "命令行补全未完成: 没有指定的文件"
+
+msgid "Confirmation"
+msgstr "确认"
+
+msgid "Context"
+msgstr "上下文"
+
+msgid "Copy"
+msgstr "复制"
+
+msgid "Copyright © 2005-2007 Gerald Schmidt <gnschmidt@users.sourceforge.net>"
+msgstr "版权所有 © 2005-2007 Gerald Schmidt <gnschmidt@users.sourceforge.net>"
+
+msgid "Creating document view..."
+msgstr "正在准备文档预览..."
+
+msgid "Creating report..."
+msgstr "正在生成报告..."
+
+msgid "Current Element"
+msgstr "当前元素"
+
+msgid "Cut"
+msgstr "剪切"
+
+msgid "D&ocBook to XSL-FO\tAlt+3"
+msgstr "DocBook 转为 XSL-FO(&o)\tAlt+3"
+
+msgid "DTD"
+msgstr "DTD"
+
+msgid "DTD validation in progress..."
+msgstr "DTD验证中..."
+
+msgid "David Håsäther (Swedish) <hasather@gmail.com>"
+msgstr "David Håsäther (瑞典语) <hasather@gmail.com>"
+
+msgid "Decrease"
+msgstr "减少"
+
+msgid "Decrease\tCtrl+D"
+msgstr "减少\tCtrl+D"
+
+msgid "Default"
+msgstr "默认"
+
+msgid "Default dictionary and style"
+msgstr "默认字典和风格"
+
+msgid "Delete entity reference?"
+msgstr "删除实体参考吗?"
+
+msgid "Delete tag?"
+msgstr "删除标签吗?"
+
+msgid "Do you want to save the changes to "
+msgstr "您想要保存改变到"
+
+msgid "DocBook to HTML"
+msgstr "DocBook 转为 HTML"
+
+msgid "DocBook to XHTML"
+msgstr "DocBook 转为 XHTML"
+
+msgid "DocBook to XSL-FO"
+msgstr "DocBook 转为 XSL-FO"
+
+msgid "Document has been modified: save or discard changes"
+msgstr "文档已经更改:保存还是忽略改变呢"
+
+msgid "Document%i"
+msgstr "文档 %i"
+
+msgid "E&ncoding..."
+msgstr "编码(&n)..."
+
+msgid "E&xit"
+msgstr "退出(&x)"
+
+msgid "E&xpand internal entities on open"
+msgstr "打开时展开内部的实体(&x)"
+
+msgid "Edited document empty"
+msgstr "编辑中的文档被清空"
+
+msgid "Editor"
+msgstr "编辑器"
+
+msgid "Element..."
+msgstr "元素..."
+
+msgid "Encoding"
+msgstr "编码"
+
+msgid "Encoding should be one of "
+msgstr "编码应为如下的一种:"
+
+msgid "Encoding..."
+msgstr "编码..."
+
+msgid "Enter XPath:"
+msgstr "输入 XPath:"
+
+msgid "Enter line number:"
+msgstr "输入行号:"
+
+msgid "Enter new suggestion:"
+msgstr "输入新的建议:"
+
+msgid "Entity..."
+msgstr "实体..."
+
+msgid "Error"
+msgstr "错误"
+
+msgid "Evaluate XPath"
+msgstr "鉴定 XPath"
+
+msgid "Evaluate XPath..."
+msgstr "鉴定 XPath..."
+
+msgid "Exit"
+msgstr "退出"
+
+msgid "Export Microsoft Word Document"
+msgstr "导出 Microsoft Word 文档"
+
+msgid "Export in progress..."
+msgstr "导出中..."
+
+msgid "Extends the scope to all open documents"
+msgstr "扩展范围到所有已打开的文档"
+
+msgid "F&ind Again\tF3"
+msgstr "重新查找(&i)\tF3"
+
+msgid ""
+"File has been modified by another application.\n"
+"Do you want to proceed?"
+msgstr ""
+"文件已被另一个程序修改.\n"
+"您想要继续吗?"
+
+msgid "Find"
+msgstr "查找"
+
+msgid "Find &Next"
+msgstr "查找下一个(&N)"
+
+msgid "Find Again"
+msgstr "重新查找"
+
+msgid "Find and Replace"
+msgstr "查找并替换"
+
+msgid "Find..."
+msgstr "查找..."
+
+msgid "Find:"
+msgstr "查找:"
+
+msgid "Finds all instances of the text specified in Find what and replaces them with the text in Replace with"
+msgstr "在\"查找内容\"中查找所有该文本的实例并以\"替换\"中的文本替换它们"
+
+msgid "Finds only text with lowercase and uppercase letters as specified in Find what"
+msgstr "仅在“查找内容”中查找符合指定的大小写字母的文本"
+
+msgid "Fold Tags"
+msgstr "折叠标签"
+
+msgid "Font"
+msgstr "字体"
+
+msgid "Forum"
+msgstr "论坛"
+
+msgid "François Badier (French) <frabad@gmail.com>"
+msgstr "François Badier (法语) <frabad@gmail.com>"
+
+msgid "G&o To...\tCtrl+G"
+msgstr "转到(G&)...\tCtrl+G"
+
+msgid "General"
+msgstr "常规"
+
+msgid "Gerald Schmidt (development) <gnschmidt@users.sourceforge.net>"
+msgstr "Gerald Schmidt (开发) <gnschmidt@users.sourceforge.net>"
+
+msgid "Global Find and Replace"
+msgstr "全局搜索并替换"
+
+msgid "Global Replace..."
+msgstr "全局替换..."
+
+msgid "Go To"
+msgstr "转到"
+
+msgid "Go To..."
+msgstr "转到..."
+
+msgid "H&ide Tags and Attributes\tCtrl+Shift+T"
+msgstr "隐藏标签和属性(&i)\tCtrl+Shift+T"
+
+msgid "HSU PICHAN, YANG SHUFUN, CHENG PAULIAN, CHUANG KUO-PING, Marcus Bingenheimer (Chinese Traditional)"
+msgstr "HSU PICHAN, YANG SHUFUN, CHENG PAULIAN, CHUANG KUO-PING, Marcus Bingenheimer (繁体中文)"
+
+msgid "Help"
+msgstr "帮助"
+
+msgid "Hi&ghlight syntax"
+msgstr "语法高亮(&g)"
+
+msgid "Hide Attributes Only"
+msgstr "仅隐藏属性"
+
+msgid "Hide Tags and Attributes"
+msgstr "隐藏标签和属性"
+
+msgid "Home Page"
+msgstr "主页"
+
+msgid "I&gnore"
+msgstr "忽略(&g)"
+
+msgid "I&gnore all"
+msgstr "忽略所有(&g)"
+
+msgid "I&mport Microsoft Word Document..."
+msgstr "导入 Microsoft Word 文档(&m)..."
+
+msgid "I&nsert"
+msgstr "插入(&n)"
+
+msgid "I&ntelligent backspace/delete"
+msgstr "智能的退格/删除(&n)"
+
+msgid "Ignore"
+msgstr "忽略"
+
+msgid "Ignore all"
+msgstr "忽略所有"
+
+msgid "Ignore once"
+msgstr "忽略一次"
+
+msgid "Import Microsoft Word Document"
+msgstr "导入 Microsoft Word 文档"
+
+msgid "Import in progress..."
+msgstr "导入中..."
+
+msgid "Increase"
+msgstr "增加"
+
+msgid "Increase\tCtrl+U"
+msgstr "增加\tCtrl+U"
+
+msgid "Information"
+msgstr "信息"
+
+msgid "Insert Element"
+msgstr "插入元素"
+
+msgid "Insert Entity"
+msgstr "插入实体"
+
+msgid "Insert Sibling"
+msgstr "插入兄弟节点"
+
+msgid "Interprets the text specified in Find what as a regular expression"
+msgstr "把“查找内容”中的文本作为正则表达式来解释"
+
+msgid "Justin Dearing (development) <j-pimp@users.sourceforge.net>"
+msgstr "Justin Dearing (开发) <j-pimp@users.sourceforge.net>"
+
+msgid "L&ock hidden tags"
+msgstr "锁定隐藏的标签(&L)"
+
+msgid "Language (restart required)"
+msgstr "语言 (需要重新启动)"
+
+msgid "Light"
+msgstr "淡色的"
+
+msgid "Ln %i Col %i"
+msgstr "行 %i 列 %i"
+
+msgid "Lock Tags"
+msgstr "锁定标签"
+
+msgid "MSXML validation failed (version 4.0 or later required)"
+msgstr "MSXML 验证失败(需要4.0甚至更高的版本)"
+
+msgid "Match"
+msgstr "匹配"
+
+msgid "Matt Smigielski (testing) <alectrus@users.sourceforge.net>"
+msgstr "Matt Smigielski (测试) <alectrus@users.sourceforge.net>"
+
+msgid "Message"
+msgstr "消息"
+
+msgid "Microsoft Word cannot save %s"
+msgstr "Microsoft Word 不能保存 %s"
+
+msgid "Microsoft Word cannot save %s as XML"
+msgstr "Microsoft Word 不能保存 %s 为 XML"
+
+msgid "Microsoft Word cannot save this document as WordprocessingML "
+msgstr "Microsoft Word 不能保存这个文档为 WordprocessingML "
+
+msgid "Modified"
+msgstr "已修改"
+
+msgid "New"
+msgstr "新建"
+
+msgid "New &document"
+msgstr "新文档(&d)"
+
+msgid "New Document"
+msgstr "新文档"
+
+msgid "New Suggestion"
+msgstr "新建议"
+
+msgid "New suggestion..."
+msgstr "新建议..."
+
+msgid "New..."
+msgstr "新建..."
+
+msgid "Next Document"
+msgstr "后一个文档"
+
+msgid "No filter"
+msgstr "不用过滤"
+
+msgid "No items selected"
+msgstr "没有项目被选择"
+
+msgid "No matching nodes found"
+msgstr "没有找到匹配的结点"
+
+msgid "No."
+msgstr "No."
+
+msgid "None"
+msgstr "不使用"
+
+msgid "Normal"
+msgstr "普通"
+
+msgid "Normal\tCtrl+0"
+msgstr "普通\tCtrl+0"
+
+msgid "O&pen Large Document...\tCtrl+Shift+O"
+msgstr "打开大型文档(&p)...\tCtrl+Shift+O"
+
+msgid "OK"
+msgstr "确定"
+
+msgid "Open"
+msgstr "打开"
+
+msgid "Open Large Document"
+msgstr "打开大型文档"
+
+msgid "Open Large Document..."
+msgstr "打开大型文档..."
+
+msgid "Open..."
+msgstr "打开..."
+
+msgid "Opening imported file..."
+msgstr "正在打开导入的文件..."
+
+msgid "Opening spelling and style check in read-only mode: "
+msgstr "正在以只读模式打开拼写和风格检查:"
+
+msgid "Opens a standard file dialog"
+msgstr "打开一个标准的文件对话框"
+
+msgid "Options"
+msgstr "选项"
+
+msgid "Options..."
+msgstr "选项..."
+
+msgid "Out of memory"
+msgstr "内存不足"
+
+msgid "Out of memory: attempt to save in default encoding UTF-8?"
+msgstr "内存不足:尝试以默认的 UTF-8 编码保存?"
+
+msgid "Output document empty"
+msgstr "输出文档被清空"
+
+msgid "Output options"
+msgstr "输出选项"
+
+msgid "P&aste As New Document"
+msgstr "粘贴为新文档(&a)"
+
+msgid "P&rint Preview..."
+msgstr "打印预览(&r)..."
+
+msgid "Pa&ge Setup..."
+msgstr "页面设置(&g)..."
+
+msgid "Page Setup..."
+msgstr "页面设置..."
+
+msgid "Parse in progress..."
+msgstr "分析中..."
+
+msgid "Paste"
+msgstr "粘贴"
+
+msgid "Paste As New Document"
+msgstr "粘贴为新文档"
+
+msgid "Pr&int...\tCtrl+P"
+msgstr "打印(&i)...\tCtrl+P"
+
+msgid "Pr&intable summary"
+msgstr "可打印的摘要(&i)"
+
+msgid "Preparing Print Preview..."
+msgstr "正在准备打印预览..."
+
+msgid "Preparing to print..."
+msgstr "准备打印..."
+
+msgid "Pretty-print"
+msgstr "整齐打印"
+
+msgid "Pretty-print unsuccessful: output document empty"
+msgstr "整齐打印不成功:输出文档被清空"
+
+msgid "Pretty-printing in progress..."
+msgstr "整齐打印中..."
+
+msgid "Previous Document"
+msgstr "前一个文档"
+
+msgid "Print"
+msgstr "打印"
+
+msgid "Print Preview..."
+msgstr "打印预览..."
+
+msgid "Print..."
+msgstr "打印..."
+
+msgid "Provides a space for you to type additional information"
+msgstr "提供一个空白栏让您输入额外的信息"
+
+msgid "Provides a space for you to type the path of the file"
+msgstr "提供一个空白栏让您输入该文件的路径"
+
+msgid "Provides a space for you to type the text you want to find"
+msgstr "提供一个空白栏让您输入您想查找的文本"
+
+msgid "Provides a space for you to type the text you want to replace the text you typed in Find what"
+msgstr "提供一个空白栏来输入新的文本以替换刚才在“查找内容”中输入的文本"
+
+msgid "Public DTD"
+msgstr "公共 DTD"
+
+msgid "Public DTD..."
+msgstr "公共 DTD..."
+
+msgid "Question"
+msgstr "问题"
+
+msgid "R&eplace in all open documents"
+msgstr "在所有打开的文件中替换(&e)"
+
+msgid "RELAX NG grammar"
+msgstr "RELAX NG 语法"
+
+msgid "RELAX NG validation in progress..."
+msgstr "RELAX NG 验证中..."
+
+msgid "RELAX NG..."
+msgstr "RELAX NG..."
+
+msgid "Re&gex"
+msgstr "正则表达式(&g)"
+
+msgid "Re&member layout on close"
+msgstr "关闭时记住版面布局(&m)"
+
+msgid "Re&tain undo history on save"
+msgstr "保存时保留撤销历史(&t)"
+
+msgid "Redo"
+msgstr "重做"
+
+msgid "Replace"
+msgstr "替换"
+
+msgid "Replace &All"
+msgstr "全部替换(&A)"
+
+msgid "Replace with:"
+msgstr "替换为:"
+
+msgid "Replace with: "
+msgstr "替换为:"
+
+msgid "Replace..."
+msgstr "替换..."
+
+msgid "Revert"
+msgstr "恢复"
+
+msgid "Rule"
+msgstr "规则"
+
+msgid "S&ave As...\tF12"
+msgstr "另存为(&a)...\tF12"
+
+msgid "S&how Current Element Pane"
+msgstr "显示当前元素窗格(&h)"
+
+msgid "S&how full path on frame"
+msgstr "在框架上显示完整路径(&h)"
+
+msgid "S&ymbol..."
+msgstr "特殊符号(&y)..."
+
+msgid "SHiNE CsyFeK (Chinese Simplified) <csyfek@gmail.com>"
+msgstr "SHiNE CsyFeK (简体中文) <csyfek@gmail.com>"
+
+msgid "Save"
+msgstr "保存"
+
+msgid "Save As"
+msgstr "另存为"
+
+msgid "Save As..."
+msgstr "另存为..."
+
+msgid "Select "
+msgstr "选择"
+
+msgid "Select RELAX NG grammar"
+msgstr "选择 RELAX NG 语法"
+
+msgid "Select stylesheet"
+msgstr "选择样式表"
+
+msgid "Selects the file specified"
+msgstr "选择指定的文件"
+
+msgid "Serhij Dubyk (Ukrainian) <dubyk@library.lviv.ua>"
+msgstr "Serhij Dubyk (乌克兰语) <dubyk@library.lviv.ua>"
+
+msgid "Sh&ow Toolbar"
+msgstr "显示工具栏(&o)"
+
+msgid "Show Current ElementPane"
+msgstr "显示当前元素窗格"
+
+msgid "Show Tags and Attributes"
+msgstr "显示标签和属性"
+
+msgid "Show Toolbar"
+msgstr "显示工具栏"
+
+msgid "Sibling..."
+msgstr "兄弟结点..."
+
+msgid "Spelling and Style"
+msgstr "拼写和风格"
+
+msgid "Spelling and Style..."
+msgstr "拼写和风格..."
+
+msgid "Stopped"
+msgstr "停止"
+
+msgid "Suggestion"
+msgstr "建议"
+
+msgid "Symbol..."
+msgstr "特殊符号..."
+
+msgid "System DTD"
+msgstr "系统 DTD"
+
+msgid "System DTD..."
+msgstr "系统 DTD..."
+
+msgid "T&EI to LaTeX\tAlt+5"
+msgstr "TEI 转为 LaTeX(&E)\tAlt+5"
+
+msgid "TE&I to XHTML\tAlt+6"
+msgstr "TEI 转为 XHTML(&I)\tAlt+6"
+
+msgid "TEI to &XSL-FO\tAlt+7"
+msgstr "TEI 转为 XSL-FO(&X)\tAlt+7"
+
+msgid "TEI to HTML"
+msgstr "TEI 转为 HTML"
+
+msgid "TEI to LaTeX"
+msgstr "TEI 转为 LaTeX"
+
+msgid "TEI to XHTML"
+msgstr "TEI 转为 XHTML"
+
+msgid "TEI to XSL-FO"
+msgstr "TEI 转为 XSL-FO"
+
+msgid "Tags Locked"
+msgstr "标签已锁定"
+
+msgid "Tags hidden"
+msgstr "隐藏标签"
+
+msgid "Tags locked"
+msgstr "锁定标签"
+
+msgid "The following error has occurred: "
+msgstr "出现如下的错误:"
+
+msgid "The operating system has turned down a request for additional memory"
+msgstr "操作系统已经拒绝额外内存的请求"
+
+msgid "This functionality requires Microsoft Windows"
+msgstr "这项功能需要 Microsoft Windows"
+
+msgid "Thomas Wenzel (German) <thowen@users.sourceforge.net>"
+msgstr "Thomas Wenzel (德语) <thowen@users.sourceforge.net>"
+
+msgid "Toggle Fold"
+msgstr "切换折叠"
+
+msgid "Twin"
+msgstr "孪生结点"
+
+msgid "Undo"
+msgstr "撤销"
+
+msgid "Unknown command line switch (expecting 'w', 's', --version or --help)"
+msgstr "未知的命令行开关(预期为 'w' 或 's', --version or --help)"
+
+msgid "Va&riable highlight in tag free view"
+msgstr "在隐藏标签视图中高亮变量(&r)"
+
+msgid "Validation error"
+msgstr "验证错误"
+
+msgid "Validation in progress..."
+msgstr "验证中..."
+
+msgid "Variables"
+msgstr "变量"
+
+msgid "Viliam Búr (Slovak) <viliam@bur.sk>"
+msgstr "Viliam Búr (斯洛伐克语) <viliam@bur.sk>"
+
+msgid "Warning"
+msgstr "警告"
+
+msgid "Word Count"
+msgstr "字词统计"
+
+msgid "XML Copy Editor"
+msgstr "XML Copy Editor"
+
+msgid "XML Copy Editor has encountered an error and needs to close."
+msgstr "XML Copy Editor 遇到一个错误并需要关闭."
+
+msgid "XML Copy Editor has encountered the following error and needs to close: "
+msgstr "XML Copy Editor 遇到如下错误并需要关闭:"
+
+msgid "XML Schema"
+msgstr "XML Schema"
+
+msgid "XML Schema..."
+msgstr "XML Schema..."
+
+msgid "XML document (*.xml)"
+msgstr "XML 文档 (*.xml)"
+
+msgid "XS&LT stylesheet..."
+msgstr "XSLT 样式表(&L)..."
+
+msgid "XSL Transform..."
+msgstr "XSL 转换..."
+
+msgid "XSL transformation in progress..."
+msgstr "XSL 转换中..."
+
+msgid "XSLT stylesheet"
+msgstr "XSLT 样式表"
+
+msgid "XSLT stylesheet..."
+msgstr "XSLT 样式表..."
+
+msgid "unknown error"
+msgstr "未知错误"
+
+msgid "valid"
+msgstr "有效的"
+
+msgid "well-formed"
+msgstr "格式良好的"
+
+msgid "{extension}"
+msgstr "{扩展名}"
+
+msgid "{fullpath}"
+msgstr "{完整路径}"
+
+msgid "{name}"
+msgstr "{名称}"
+
+msgid "{path}"
+msgstr "{路径}"
+
+msgid "|All files (*.*)|*.*"
+msgstr "|所有文件 (*.*)|*.*"
+

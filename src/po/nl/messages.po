@@ -1,0 +1,1293 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: XML Copy Editor 1.2.0.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2007-07-27 00:13+0100\n"
+"PO-Revision-Date: 2009-08-06 16:31+0100\n"
+"Last-Translator: Rob Elemans <relemans@gmail.com>\n"
+"Language-Team: Rob Elemans <relemans@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"X-Poedit-Language: Dutch\n"
+"X-Poedit-Country: NETHERLANDS\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+msgid "\tCtrl+%i"
+msgstr "\tCtrl+%i"
+
+msgid ""
+"\n"
+"XML Copy Editor is free software released under the GNU\n"
+"General Public License.\n"
+"\n"
+"Many thanks are due to "
+msgstr ""
+"\n"
+"XML Copy Editor is vrije software vrijgegeven onder de GNU\n"
+"General Public License.\n"
+"\n"
+"Dank gaat uit naar "
+
+msgid " "
+msgstr " "
+
+msgid "%g %s saved"
+msgstr "%g %s opgeslagen"
+
+msgid "%i match"
+msgid_plural "%i matches"
+msgstr[0] "%i overeenkomst"
+msgstr[1] "%i overeenkomsten"
+
+msgid "%i replacement made"
+msgid_plural "%i replacements made"
+msgstr[0] "%i keer vervangen"
+msgstr[1] "%i keer vervangen"
+
+msgid "%s contains %i word"
+msgid_plural "%s contains %i words"
+msgstr[0] "%s bevat %i woord"
+msgstr[1] "%s bevat %i woorden"
+
+msgid "%s is %s"
+msgstr "%s is %s"
+
+msgid "%s is already open"
+msgstr "%s is al geopend"
+
+msgid "&About XML Copy Editor"
+msgstr "&Over XML Copy Editor"
+
+msgid "&Always insert closing tag"
+msgstr "&Altijd sluitende tag toevoegen"
+
+msgid "&Associate"
+msgstr "&Koppelen"
+
+msgid "&Blue background, white text"
+msgstr "&Blauwe achtergrond, witte tekst"
+
+msgid "&Browser\tCtrl+B"
+msgstr "&Browser\tCtrl+B"
+
+msgid "&Change all"
+msgstr "&Verander alle"
+
+msgid "&Check Well-formedness\tF2"
+msgstr "&Controleer geldigheid\tF2"
+
+msgid "&Close\tCtrl+F4"
+msgstr "&Sluiten\tCtrl+F4"
+
+msgid "&Color Scheme"
+msgstr "&Kleurenschema"
+
+msgid "&Command\tCtrl+Alt+C"
+msgstr "&Commando\tCtrl+Alt+C"
+
+msgid "&Cut\tCtrl+X"
+msgstr "&Knippen\tCtrl+X"
+
+msgid "&DTD\tF4"
+msgstr "&DTD\tF4"
+
+msgid "&Default"
+msgstr "Stan&daard"
+
+msgid "&DocBook to HTML\tAlt+1"
+msgstr "&DocBook naar HTML\tAlt+1"
+
+msgid "&DocBook to XHTML\tAlt+2"
+msgstr "&DocBook naar XHTML\tAlt+2"
+
+msgid "&Download Source"
+msgstr "&Download broncode"
+
+msgid "&Edit"
+msgstr "&Bewerken"
+
+msgid "&Element...\tCtrl+I"
+msgstr "&Element...\tCtrl+I"
+
+msgid "&Enable network access for DTD validation"
+msgstr "N&etwerktoegang toestaan voor DTD-validatie"
+
+msgid "&Entity...\tCtrl+E"
+msgstr "&Entiteit...\tCtrl+E"
+
+msgid "&Evaluate XPath...\tF9"
+msgstr "&Evalueer XPath...\tF9"
+
+msgid "&Export Microsoft Word Document..."
+msgstr "&Exporteer Microsoft Word Document..."
+
+msgid "&File"
+msgstr "&Bestand"
+
+msgid "&Find what: "
+msgstr "&Zoeken naar: "
+
+msgid "&Find...\tCtrl+F"
+msgstr "&Zoek...\tCtrl+F"
+
+msgid "&Fold Tags\tCtrl+Shift+F"
+msgstr "Tags &invouwen\tCtrl+Shift+F"
+
+msgid "&Folding"
+msgstr "&In- en uitvouwen"
+
+msgid "&Forum"
+msgstr "&Forum"
+
+msgid "&Global Replace...\tCtrl+Shift+R"
+msgstr "&Globaal vervangen...\tCtrl+Shift+R"
+
+msgid "&Help"
+msgstr "&Help"
+
+msgid "&Hide Attributes Only\tCtrl+Shift+A"
+msgstr "&Verberg alleen attributen\tCtrl+Shift+A"
+
+msgid "&Highlight current line"
+msgstr "&Huidige regel markeren"
+
+msgid "&Home Page"
+msgstr "&Homepagina"
+
+msgid "&Indentation guides"
+msgstr "&Inspring-hulp"
+
+msgid "&Insert"
+msgstr "&Invoegen"
+
+msgid "&Light"
+msgstr "Licht"
+
+msgid "&Line numbers"
+msgstr "&Lijnnummering"
+
+msgid "&Lock Tags\tCtrl+L"
+msgstr "&Vergrendel Tags\tCtrl+L"
+
+msgid "&Match case"
+msgstr "&Hoofdlettergevoelig"
+
+msgid "&New...\tCtrl+N"
+msgstr "&Nieuw...\tCtrl+N"
+
+msgid "&Next Document\tCtrl+PgDn"
+msgstr "&Volgend document\tCtrl+PgDn"
+
+msgid "&None"
+msgstr "&Geen"
+
+msgid "&One application instance only"
+msgstr "&Slechts een instantie van applicatie toestaan"
+
+msgid "&Open...\tCtrl+O"
+msgstr "&Open...\tCtrl+O"
+
+msgid "&Options..."
+msgstr "&Opties..."
+
+msgid "&Paste\tCtrl+V"
+msgstr "&Plakken\tCtrl+V"
+
+msgid "&Pretty-print\tF11"
+msgstr "&Pretty-print\tF11"
+
+msgid "&Previous Document\tCtrl+PgUp"
+msgstr "&Vorig document\tCtrl+PgUp"
+
+msgid "&Printable report"
+msgstr "&Printbaar rapport"
+
+msgid "&Public DTD..."
+msgstr "&Publiek DTD..."
+
+msgid "&RELAX NG...\tF6"
+msgstr "&RELAX NG...\tF6"
+
+msgid "&Redo\tCtrl+Y"
+msgstr "&Opnieuw uitvoeren\tCtrl+Y"
+
+msgid "&Regex"
+msgstr "&Regex"
+
+msgid "&Remember open tabs on close"
+msgstr "Onthoud &tabs bij sluiten"
+
+msgid "&Replace"
+msgstr "&Vervang"
+
+msgid "&Replace...\tCtrl+R"
+msgstr "&Vervangen...\tCtrl+R"
+
+msgid "&Report"
+msgstr "&Rapporteren"
+
+msgid "&Revert"
+msgstr "&Heropenen"
+
+msgid "&Run"
+msgstr "&Uitvoeren"
+
+msgid "&Save\tCtrl+S"
+msgstr "&Opslaan\tCtrl+S"
+
+msgid "&Save UTF-8 byte order mark"
+msgstr "Sla UTF-8 byte-volgorde op"
+
+msgid "&Show Tags and Attributes\tCtrl+T"
+msgstr "&Toon tags en attributen\tCtrl+T"
+
+msgid "&Sibling...\tCtrl+Shift+I"
+msgstr "&Naastliggend element...\tCtrl+Shift+I"
+
+msgid "&Spelling and Style...\tF7"
+msgstr "&Spelling en stijl...\tF7"
+
+msgid "&System DTD..."
+msgstr "&Systeem DTD..."
+
+msgid "&TEI to HTML\tAlt+4"
+msgstr "&TEI naar HTML\tAlt+4"
+
+msgid "&Tag completion"
+msgstr "&Tags volledig maken"
+
+msgid "&Text Size"
+msgstr "&Lettergrootte"
+
+msgid "&Toggle Fold"
+msgstr "&In- of uitvouwen"
+
+msgid "&Tools"
+msgstr "&Extra"
+
+msgid "&Twin\tCtrl+Enter"
+msgstr "&Dupliceren\tCtrl+Enter"
+
+msgid "&Undo\tCtrl+Z"
+msgstr "&Ongedaan maken\tCtrl+Z"
+
+msgid "&Unfold Tags\tCtrl+Shift+U"
+msgstr "Tags &uitvouwen\tCtrl+Shift+U"
+
+msgid "&Use Microsoft rebar control (restart required)"
+msgstr "Gebruik &Microsoft's rebar control (opnieuw opstarten vereist)"
+
+msgid "&Validate"
+msgstr "&Valideren"
+
+msgid "&Validate as you type"
+msgstr "&Valideren tijdens typen"
+
+msgid "&View"
+msgstr "&Beeld"
+
+msgid "&Wait"
+msgstr "&Wacht"
+
+msgid "&White space visible"
+msgstr "&Witruimte zichtbaar"
+
+msgid "&Word Count"
+msgstr "&Woordenaantal"
+
+msgid "&Wrap Words\tCtrl+W"
+msgstr "&Automatische terugloop"
+
+msgid "&XML"
+msgstr "&XML"
+
+msgid "&XML Copy Editor Help\tF1"
+msgstr "&XML Copy Editor Help\tF1"
+
+msgid "&XML Schema\tF5"
+msgstr "&XML Schema\tF5"
+
+msgid "&XML Schema..."
+msgstr "&XML Schema..."
+
+msgid "&XSL Transform...\tF8"
+msgstr "&XSL Transformatie...\tF8"
+
+msgid "&XSLT"
+msgstr "&XSLT"
+
+msgid "'%s' is not a valid line number"
+msgstr "'%s' is geen geldig lijnnummer"
+
+msgid "(No filter)"
+msgstr "(Geen filter)"
+
+msgid "(No filters found)"
+msgstr "(Geen filters gevonden)"
+
+msgid "(No rule sets found)"
+msgstr "(Geen regelsets gevonden)"
+
+msgid "(lossless conversion requires version 2003 or later)"
+msgstr "(verliesloze compressie vereist versie 2003 of later)"
+
+msgid "(unknown error)"
+msgstr "(onbekende fout)"
+
+msgid ""
+".\n"
+"\n"
+"Select \"Abort\" to exit, \"Retry\" to close this window and \"Ignore\" to "
+"continue."
+msgstr ""
+".\n"
+"\n"
+"Kies \"Stoppen\" om het programma te sluiten, \"Opnieuw proberen\" om dit "
+"venster te sluiten of \"Negeren\" om verder te gaan."
+
+msgid "A more recent version of Microsoft Word is required"
+msgstr "Een recentere versie van Microsoft Word is vereist"
+
+msgid "About"
+msgstr "Over"
+
+msgid "Action"
+msgstr "Actie"
+
+msgid ""
+"All files (*.*)|*.*|XML (*.xml)|*.xml|XHTML (*.html)|*.html|DTD (*.dtd)|*."
+"dtd|XML Schema (*.xsd)|*.xsd|RELAX NG grammar (*.rng)|*.rng|XSL (*.xsl)|*.xsl"
+msgstr ""
+"Alle bestanden (*.*)|*.*|XML (*.xml)|*.xml|XHTML (*.html)|*.html|DTD (*.dtd)|"
+"*.dtd|XML Schema (*.xsd)|*.xsd|RELAX NG grammar (*.rng)|*.rng|XSL (*.xsl)|*."
+"xsl"
+
+msgid "Application directory"
+msgstr "Applicatiemap"
+
+msgid "Associate %s"
+msgstr "Koppel %s"
+
+msgid "Attributes hidden"
+msgstr "Attributen verborgen"
+
+msgid "Blue background, white text"
+msgstr "Blauwe achtergrond, witte tekst"
+
+msgid "Browse"
+msgstr "Bladeren"
+
+msgid "Browser"
+msgstr "Browser"
+
+msgid "C&ancel"
+msgstr "&Annuleren"
+
+msgid "C&lose All"
+msgstr "Alle s&luiten"
+
+msgid "C&lose Message Pane\tAlt+C"
+msgstr "Sluit &berichtenvenster\tAlt+C"
+
+msgid "C&opy\tCtrl+C"
+msgstr "Kopiëren\tCtrl+C"
+
+msgid "Cannot access application directory"
+msgstr "Geen toegang tot applicatiemap"
+
+msgid "Cannot associate %s: %s"
+msgstr "Kan %s niet koppelen: %s"
+
+msgid "Cannot compile regular expression '"
+msgstr "Kan reguliere expressie niet compileren '"
+
+msgid "Cannot count words: %s"
+msgstr "Kan woorden niet tellen: %s"
+
+msgid "Cannot create report: "
+msgstr "Kan rapport niet opstellen: "
+
+msgid "Cannot evaluate XPath"
+msgstr "Kan XPath niet evalueren"
+
+msgid "Cannot find '%s'"
+msgstr "Kan '%s' niet vinden"
+
+msgid "Cannot open %s"
+msgstr "Kan %s niet openen"
+
+msgid "Cannot open %s for import"
+msgstr "Kan %s niet openen voor importeren"
+
+msgid "Cannot open %s: conversion from encoding %s failed"
+msgstr "Kan %s niet openen: conversie van codering %s mislukt"
+
+msgid "Cannot open %s: unknown encoding %s"
+msgstr "Kan %s niet openen: coding %s onbekend"
+
+msgid "Cannot open application directory: see Tools, Options..., General"
+msgstr "Kan applicatiemap niet openen: zie Extra, Opties..., Algemeen"
+
+msgid "Cannot open clipboard"
+msgstr "Kan klembord niet openen"
+
+msgid "Cannot open imported file"
+msgstr "Kan geïmporteerd bestand niet openen"
+
+msgid "Cannot open in browser: %s not found (see Tools, Options..., General)"
+msgstr ""
+"Kan document niet in browser openen: %s niet gevonden (zie Extra, Opties..., "
+"Algemeen)"
+
+msgid ""
+"Cannot open in browser: no browser defined (see Tools, Options..., General)"
+msgstr ""
+"Kan document niet in browser openen: geen browser ingesteld (zie Extra, "
+"Opties..., Algemeen)"
+
+msgid "Cannot open stylesheet %s"
+msgstr "Kan stylesheet %s niet openen"
+
+msgid "Cannot paste as new document: no text on clipboard"
+msgstr "Kan niet plakken als nieuw document: geen tekst in het klembord"
+
+msgid "Cannot pretty-print: "
+msgstr "Kan pretty-print niet voltooien: "
+
+msgid "Cannot replace: "
+msgstr "Kan niet vervangen: "
+
+msgid "Cannot save %s"
+msgstr "Kan %s niet opslaan"
+
+msgid "Cannot save %s: conversion to encoding %s failed"
+msgstr "Kan %s niet opslaan: conversie naar codering %s mislukt"
+
+msgid "Cannot save %s: unknown encoding %s"
+msgstr "Kan %s niet opslaan: onbekende codering %s"
+
+msgid "Cannot save document in %s: %s (saved in default encoding UTF-8)"
+msgstr ""
+"Kan document niet in opslaan in %s: %s (opgeslagen in standaardcodering "
+"UTF-8)"
+
+msgid ""
+"Cannot save temporary copy for validation; please save or discard changes"
+msgstr ""
+"Kan tijdelijke kopie niet opslaan voor validatie; bewaar of negeer uw "
+"wijzigingen"
+
+msgid "Cannot save temporary file"
+msgstr "Kan tijdelijk bestand niet opslaan"
+
+msgid "Cannot set encoding (cannot open temporary file)"
+msgstr ""
+"Kan codering niet instellen (tijdelijk bestand kan niet worden geopend)"
+
+msgid "Cannot set encoding (cannot parse temporary file)"
+msgstr ""
+"Kan codering niet instellen (tijdelijk bestand kan niet worden geparst)"
+
+msgid "Cannot set encoding: "
+msgstr "Kan codering niet instellen: "
+
+msgid "Cannot start Microsoft Word"
+msgstr "Kan Microsoft Word niet starten"
+
+msgid "Cannot transform: "
+msgstr "Kan niet transformeren: "
+
+msgid "Change"
+msgstr "Verander"
+
+msgid "Change all"
+msgstr "Verander alle"
+
+msgid "Change once"
+msgstr "Eerstvolgende veranderen"
+
+msgid "Check Well-formedness"
+msgstr "Controleer geldigheid"
+
+msgid "Choose a document type:"
+msgstr "Kies een documenttype:"
+
+msgid "Choose a file:"
+msgstr "Kies een bestand:"
+
+msgid "Choose a public identifier:"
+msgstr "Kies een publieke identifier"
+
+msgid "Choose an encoding:"
+msgstr "Kies een codering:"
+
+msgid "Close"
+msgstr "Sluiten"
+
+msgid "Close All"
+msgstr "Alle sluiten"
+
+msgid "Close Message Pane"
+msgstr "Sluit berichtenvenster"
+
+msgid "Close all"
+msgstr "Sluit alle"
+
+msgid "Closes the dialog box without saving any changes you have made"
+msgstr "Sluit het dialoogvenster zonder eventuele wijzingen op te slaan"
+
+msgid "Closes this dialog without making any changes"
+msgstr "Sluit dit dialoog zonder eventuele wijzigingen op te slaan"
+
+msgid "Command"
+msgstr "Commando"
+
+msgid "Command line processing incomplete: no file specified"
+msgstr "Verwerking opdrachtregel niet voltooid: geen bestandsnaam opgegeven"
+
+msgid "Confirmation"
+msgstr "Bevestiging"
+
+msgid "Context"
+msgstr "Context"
+
+msgid "Copy"
+msgstr "Kopiëren"
+
+msgid "Copyright © 2005-2007 Gerald Schmidt <gnschmidt@users.sourceforge.net>"
+msgstr "Copyright © 2005-2007 Gerald Schmidt <gnschmidt@users.sourceforge.net>"
+
+msgid "Creating document view..."
+msgstr "Bezig met maken van documentaanzicht"
+
+msgid "Creating report..."
+msgstr "Bezig met opstellen van rapport..."
+
+msgid "Current Element"
+msgstr "Huidig element"
+
+msgid "Cut"
+msgstr "Knippen"
+
+msgid "D&ocBook to XSL-FO\tAlt+3"
+msgstr "D&ocBook naar XSL-FO\tAlt+3"
+
+msgid "DTD"
+msgstr "DTD"
+
+msgid "DTD validation in progress..."
+msgstr "Bezig met valideren DTD..."
+
+msgid "David Håsäther (Swedish) <hasather@gmail.com>"
+msgstr "David Håsäther (Swedish) <hasather@gmail.com>"
+
+msgid "Decrease"
+msgstr "Verkleinen"
+
+msgid "Decrease\tCtrl+D"
+msgstr "Verkleinen\tCtrl+D"
+
+msgid "Default"
+msgstr "Standaard"
+
+msgid "Default dictionary and style"
+msgstr "Standaard woordenboek en stijl"
+
+msgid "Delete entity reference?"
+msgstr "Verwijder referentie van entiteit?"
+
+msgid "Delete tag?"
+msgstr "Verwijder tag?"
+
+msgid "Do you want to save the changes to "
+msgstr "Wilt u de wijzigingen opslaan in "
+
+msgid "DocBook to HTML"
+msgstr "DocBook naar HTML"
+
+msgid "DocBook to XHTML"
+msgstr "DocBook to XHTML"
+
+msgid "DocBook to XSL-FO"
+msgstr "DocBook naar XSL-FO"
+
+msgid "Document has been modified: save or discard changes"
+msgstr "Document is gewijzigd: wijzigingen opslaan of negeren"
+
+msgid "Document%i"
+msgstr "Document%i"
+
+msgid "Download Source"
+msgstr "Download broncode"
+
+msgid "E&ncoding..."
+msgstr "Coderi&ng..."
+
+msgid "E&xit"
+msgstr "&Afsluiten"
+
+msgid "E&xpand internal entities on open"
+msgstr "&Interne entiteiten uitvouwen  bij openen"
+
+msgid "Edited document empty"
+msgstr "Bewerkt document leeg"
+
+msgid "Editor"
+msgstr "Editor"
+
+msgid "Element..."
+msgstr "Element..."
+
+msgid "Encoding"
+msgstr "Codering"
+
+msgid "Encoding should be one of "
+msgstr "Codering een van de volgende moeten zijn "
+
+msgid "Encoding..."
+msgstr "Codering..."
+
+msgid "Enter XPath:"
+msgstr "XPath:"
+
+msgid "Enter line number:"
+msgstr "Vul lijnnummer in:"
+
+msgid "Enter new suggestion:"
+msgstr "Vul nieuwe suggestie in:"
+
+msgid "Entity..."
+msgstr "Entiteit"
+
+msgid "Error"
+msgstr "Fout"
+
+msgid "Evaluate XPath"
+msgstr "XPath evalueren"
+
+msgid "Evaluate XPath..."
+msgstr "Evalueer XPath..."
+
+msgid "Exit"
+msgstr "Afsluiten"
+
+msgid "Export Microsoft Word Document"
+msgstr "Exporteer Microsoft Word document"
+
+msgid "Export in progress..."
+msgstr "Bezig met exporteren..."
+
+msgid "Extends the scope to all open documents"
+msgstr "Verruimt de omvang naar alle geopende documenten"
+
+msgid "F&ind Again\tF3"
+msgstr "Volgende zoeken\tF3"
+
+msgid ""
+"File has been modified by another application.\n"
+"Do you want to proceed?"
+msgstr "Bestand is door een andere applicatie gewijzigd.Wilt u doorgaan?"
+
+msgid "Find"
+msgstr "Zoek"
+
+msgid "Find &Next"
+msgstr "Zoek &volgende"
+
+msgid "Find Again"
+msgstr "Volgende zoeken"
+
+msgid "Find and Replace"
+msgstr "Zoek en vervang"
+
+msgid "Find..."
+msgstr "Zoek..."
+
+msgid "Find:"
+msgstr "Zoeken naar:"
+
+msgid ""
+"Finds all instances of the text specified in Find what and replaces them "
+"with the text in Replace with"
+msgstr ""
+"Zoekt alle instanties van de tekst in Zoeken naar, en vervangt deze met de "
+"tekst uit Vervangen door"
+
+msgid ""
+"Finds only text with lowercase and uppercase letters as specified in Find "
+"what"
+msgstr ""
+"Zoekt hoofdlettergevoelig naar de tekst die u opgegeven heeft in Zoeken naar"
+
+msgid "Fold Tags"
+msgstr "Tags invouwen"
+
+msgid "Font"
+msgstr "Lettertype"
+
+msgid "Forum"
+msgstr "Forum"
+
+msgid "François Badier (French) <frabad@gmail.com>"
+msgstr "François Badier (French) <frabad@gmail.com>"
+
+msgid "G&o To...\tCtrl+G"
+msgstr "G&a naar...\tCtrl+G"
+
+msgid "General"
+msgstr "Algemeen"
+
+msgid "Gerald Schmidt (development) <gnschmidt@users.sourceforge.net>"
+msgstr "Gerald Schmidt (ontwikkeling) <gnschmidt@users.sourceforge.net>"
+
+msgid "Global Find and Replace"
+msgstr "Globaal zoeken en vervangen"
+
+msgid "Global Replace..."
+msgstr "Globaal vervangen"
+
+msgid "Go To"
+msgstr "Ga naar"
+
+msgid "Go To..."
+msgstr "Ga naar..."
+
+msgid "H&ide Tags and Attributes\tCtrl+Shift+T"
+msgstr "V&erberg tags en attributen\tCtrl+Shift+T"
+
+msgid ""
+"HSU PICHAN, YANG SHUFUN, CHENG PAULIAN, CHUANG KUO-PING, Marcus Bingenheimer "
+"(Chinese Traditional)"
+msgstr ""
+"HSU PICHAN, YANG SHUFUN, CHENG PAULIAN, CHUANG KUO-PING, Marcus Bingenheimer "
+"(Chinese Traditional)"
+
+msgid "Help"
+msgstr "Help"
+
+msgid "Hi&ghlight syntax"
+msgstr "&Syntaxis markeren"
+
+msgid "Hide Attributes Only"
+msgstr "Verberg alleen attributen"
+
+msgid "Hide Tags and Attributes"
+msgstr "Verberg tags en attributen"
+
+msgid "Home Page"
+msgstr "Homepagina"
+
+msgid "I&gnore"
+msgstr "Ne&geren"
+
+msgid "I&gnore all"
+msgstr "Ne&geer alle"
+
+msgid "I&mport Microsoft Word Document..."
+msgstr "I&mporteer Microsoft Word Document..."
+
+msgid "I&nsert"
+msgstr "I&nvoegen"
+
+msgid "I&ntelligent backspace/delete"
+msgstr "&Slimme backspace/delete"
+
+msgid "Ignore"
+msgstr "Negeren"
+
+msgid "Ignore all"
+msgstr "Alle egeren"
+
+msgid "Ignore once"
+msgstr "Eerstvolgende negeren"
+
+msgid "Import Microsoft Word Document"
+msgstr "Importeer Microsoft Word Document"
+
+msgid "Import in progress..."
+msgstr "Bezig met importeren..."
+
+msgid "Increase"
+msgstr "Vergroten"
+
+msgid "Increase\tCtrl+U"
+msgstr "Vergroten\tCtrl+U"
+
+msgid "Information"
+msgstr "Informatie"
+
+msgid "Insert Element"
+msgstr "Element invoegen"
+
+msgid "Insert Entity"
+msgstr "Entiteit invoegen"
+
+msgid "Insert Sibling"
+msgstr "Element naast huidig invoegen"
+
+msgid "Interprets the text specified in Find what as a regular expression"
+msgstr "Interpreteert de tekst in Zoeken naar als reguliere expressie"
+
+msgid "L&ock hidden tags"
+msgstr "Verb&orgen tags vastzetten"
+
+msgid "Language (restart required)"
+msgstr "Taal (herstart nodig)"
+
+msgid "Light"
+msgstr "Licht"
+
+msgid "Ln %i Col %i"
+msgstr "Ln %i Col %i"
+
+msgid "Lock Tags"
+msgstr "Vergrendel Tags"
+
+msgid "MB"
+msgstr "MB"
+
+msgid "MSXML validation failed (version 4.0 or later required)"
+msgstr "MSXML-validatie mislukt (versie 4.0 of hoger vereist)"
+
+msgid "Match"
+msgstr "Overeenkomst"
+
+msgid "Matt Smigielski (testing) <alectrus@users.sourceforge.net>"
+msgstr "Matt Smigielski (testen) <alectrus@users.sourceforge.net>"
+
+msgid "Memory low: %s saved in large document mode"
+msgstr "Weinig geheugen beschikbaar: %s opgeslagen in groot-document-modus"
+
+msgid "Message"
+msgstr "Bericht"
+
+msgid "Microsoft Word cannot save %s"
+msgstr "Microsoft Word kan %s niet opslaan"
+
+msgid "Microsoft Word cannot save %s as XML"
+msgstr "Microsoft Word kan %s niet opslaan als XML"
+
+msgid "Microsoft Word cannot save this document as WordprocessingML "
+msgstr "Microsoft Word kan dit document niet opslaan als WordprocessingML"
+
+msgid "Modified"
+msgstr "Gewijzigd"
+
+msgid "New"
+msgstr "Nieuw"
+
+msgid "New &document"
+msgstr "Nieuw &document"
+
+msgid "New Document"
+msgstr "Nieuw document"
+
+msgid "New Suggestion"
+msgstr "Nieuwe suggestie"
+
+msgid "New suggestion..."
+msgstr "Nieuwe suggestie..."
+
+msgid "New..."
+msgstr "Nieuw..."
+
+msgid "Next Document"
+msgstr "Volgend document"
+
+msgid "No filter"
+msgstr "Geen filter"
+
+msgid "No items selected"
+msgstr "Geen item geselecteerd"
+
+msgid "No matching nodes found"
+msgstr "Geen overeenkomstige nodes gevonden"
+
+msgid "No."
+msgstr "Nee."
+
+msgid "None"
+msgstr "Geen"
+
+msgid "Normal"
+msgstr "Normaal"
+
+msgid "Normal\tCtrl+0"
+msgstr "Normaal\tCtrl+0"
+
+msgid "O&pen Large Document...\tCtrl+Shift+O"
+msgstr "O&pen groot document...\tCtrl+Shift+O"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Open"
+msgstr "Openen"
+
+msgid "Open Large Document"
+msgstr "Open groot document"
+
+msgid "Open Large Document..."
+msgstr "Open groot document..."
+
+msgid "Open..."
+msgstr "&Open...\tCtrl+O"
+
+msgid "Opening imported file..."
+msgstr "Bezig geïmporteerd bestand te openen..."
+
+msgid "Opening spelling and style check in read-only mode: "
+msgstr "Open spelling en style check in alleen-lezenmodus: "
+
+msgid "Opens a standard file dialog"
+msgstr "Opent een standaard bestandsdialoog"
+
+msgid "Options"
+msgstr "Opties"
+
+msgid "Options..."
+msgstr "Opties..."
+
+msgid "Out of memory"
+msgstr "Geen geheugen meer beschikbaar"
+
+msgid "Output document empty"
+msgstr "Uitvoerdocument leeg"
+
+msgid "Output options"
+msgstr "Uitvoeropties"
+
+msgid "P&aste As New Document"
+msgstr "Pl&akken als nieuw document"
+
+msgid "P&rint Preview..."
+msgstr "Afd&rukvoorbeeld"
+
+msgid "Pa&ge Setup..."
+msgstr "Pa&ginainstelling"
+
+msgid "Page Setup..."
+msgstr "Paginainstelling"
+
+msgid "Parse in progress..."
+msgstr "Bezig met parsen..."
+
+msgid "Paste"
+msgstr "Plakken"
+
+msgid "Paste As New Document"
+msgstr "Plakken als nieuw document"
+
+msgid "Pr&int...\tCtrl+P"
+msgstr "&Afdrukken..\tCtrl+P"
+
+msgid "Pr&intable summary"
+msgstr "Pr&intbare samenvatting"
+
+msgid "Preparing Print Preview..."
+msgstr "Voorbereiden printvoorbeeld..."
+
+msgid "Preparing to print..."
+msgstr "Printen voorbereiden..."
+
+msgid "Pretty-print"
+msgstr "Pretty-print"
+
+msgid "Pretty-print unsuccessful: output document empty"
+msgstr "Pretty-print niet gelukt: uitvoerdocument is leeg"
+
+msgid "Pretty-printing in progress..."
+msgstr "Bezig met pretty-printing..."
+
+msgid "Previous Document"
+msgstr "Vorig document"
+
+msgid "Print"
+msgstr "Afdrukken"
+
+msgid "Print Preview..."
+msgstr "Afd&rukvoorbeeld"
+
+msgid "Print..."
+msgstr "Afdrukken..."
+
+msgid "Provides a space for you to type additional information"
+msgstr "Biedt ruimte voor extra informatie"
+
+msgid "Provides a space for you to type the path of the file"
+msgstr "Biedt ruimte voor het pad van het bestand"
+
+msgid "Provides a space for you to type the text you want to find"
+msgstr "Biedt ruimte voor de tekst die u wilt zoeken"
+
+msgid ""
+"Provides a space for you to type the text you want to replace the text you "
+"typed in Find what"
+msgstr "Biedt ruimte voor tekst waarmee u de gezochte tekst wilt vervangen"
+
+msgid "Public DTD"
+msgstr "Publieke DTD"
+
+msgid "Public DTD..."
+msgstr "Publiek DTD..."
+
+msgid "Question"
+msgstr "Vraag"
+
+msgid "R&eplace in all open documents"
+msgstr "Vervang in &alle geopende documenten"
+
+msgid "RELAX NG grammar"
+msgstr "RELAX NG grammatica"
+
+msgid "RELAX NG validation in progress..."
+msgstr "Bezig met validatie RELAX NG..."
+
+msgid "RELAX NG..."
+msgstr "RELAX NG..."
+
+msgid "Re&gex"
+msgstr "Re&gex"
+
+msgid "Re&member layout on close"
+msgstr "Onthoud &layout bij sluiten"
+
+msgid "Re&tain undo history on save"
+msgstr "Bewerkhistorie bewaren na opslaan"
+
+msgid "Redo"
+msgstr "Opnieuw uitvoeren"
+
+msgid "Replace"
+msgstr "Vervang"
+
+msgid "Replace &All"
+msgstr "Vervang &alle"
+
+msgid "Replace with:"
+msgstr "Vervangen met:"
+
+msgid "Replace with: "
+msgstr "Vervangen met: "
+
+msgid "Replace..."
+msgstr "Vervangen"
+
+msgid "Revert"
+msgstr "Heropenen"
+
+msgid "Rule"
+msgstr "Regel"
+
+msgid "S&ave As...\tF12"
+msgstr "Opsl&aan als...\tF12"
+
+msgid "S&how Current Element Pane"
+msgstr "T&oon huidig elementvenster"
+
+msgid "S&how full path on frame"
+msgstr "Toon &volledig pad in venster"
+
+msgid "S&ymbol..."
+msgstr "S&ymbool..."
+
+msgid "SHiNE CsyFeK (Chinese Simplified) <csyfek@gmail.com>"
+msgstr "SHiNE CsyFeK (Chinese Simplified) <csyfek@gmail.com>"
+
+msgid "Save"
+msgstr "Opslaan"
+
+msgid "Save As"
+msgstr "Opslaan als"
+
+msgid "Save As..."
+msgstr "Opslaan als..."
+
+msgid "Select "
+msgstr "Selecteer"
+
+msgid "Select RELAX NG grammar"
+msgstr "Kies RELAX NG grammatica"
+
+msgid "Select stylesheet"
+msgstr "Kies stylesheet"
+
+msgid "Selects the file specified"
+msgstr "Selecteert het bestand"
+
+msgid "Sh&ow Toolbar"
+msgstr "Toon &werkbalk"
+
+msgid "Show Current ElementPane"
+msgstr "Toon huidig elementvenster"
+
+msgid "Show Tags and Attributes"
+msgstr "Toon tags en attributen"
+
+msgid "Show Toolbar"
+msgstr "Toon werkbalk"
+
+msgid "Sibling..."
+msgstr "Naastliggend element"
+
+msgid "Spelling and Style"
+msgstr "Spelling en stijl"
+
+msgid "Spelling and Style..."
+msgstr "Spelling en stijl..."
+
+msgid "Stopped"
+msgstr "Gestopt"
+
+msgid "Suggestion"
+msgstr "Suggestie"
+
+msgid "Symbol..."
+msgstr "Symbool..."
+
+msgid "System DTD"
+msgstr "Systeem DTD"
+
+msgid "System DTD..."
+msgstr "Systeem DTD..."
+
+msgid "T&EI to LaTeX\tAlt+5"
+msgstr "T&EI naar LaTeX\tAlt+5"
+
+msgid "TE&I to XHTML\tAlt+6"
+msgstr "TE&I naar XHTML\tAlt+6"
+
+msgid "TEI to &XSL-FO\tAlt+7"
+msgstr "TEI naar &XSL-FO\tAlt+7"
+
+msgid "TEI to HTML"
+msgstr "TEI naar HTML"
+
+msgid "TEI to LaTeX"
+msgstr "TEI naar LaTeX"
+
+msgid "TEI to XHTML"
+msgstr "TEI naar XHTML"
+
+msgid "TEI to XSL-FO"
+msgstr "TEI naar XSL-FO"
+
+msgid "Tags Locked"
+msgstr "Tags vergrendeld"
+
+msgid "Tags hidden"
+msgstr "Tags verborgen"
+
+msgid "Tags locked"
+msgstr "Tags vergrendeld"
+
+msgid "The following error has occurred: "
+msgstr "De volgende fout is opgetreden: "
+
+msgid "The operating system has turned down a request for additional memory"
+msgstr "Het besturingssysteem heeft een verzoek om meer geheugen geweigerd"
+
+msgid "This functionality requires Microsoft Windows"
+msgstr "Deze functie vereist Microsoft Windows"
+
+msgid "Thomas Wenzel (German) <thowen@users.sourceforge.net>"
+msgstr "Thomas Wenzel (German) <thowen@users.sourceforge.net>"
+
+msgid "Toggle Fold"
+msgstr "In- of uitvouwen"
+
+msgid "Twin"
+msgstr "Dupliceren"
+
+msgid "Undo"
+msgstr "Ongedaan maken"
+
+msgid "Unknown command line switch (expecting 'w' or 's')"
+msgstr "Ongeldig argument uit opdrachtregel (verwacht 'w' of 's')"
+
+msgid "Va&riable highlight in tag free view"
+msgstr "Ma&rkeer variabel in vrije tag zicht"
+
+msgid "Validation error"
+msgstr "Fout bij validatie"
+
+msgid "Validation in progress..."
+msgstr "Bezig met valideren..."
+
+msgid "Variables"
+msgstr "Variabelen"
+
+msgid "Viliam Búr (Slovak) <viliam@bur.sk>"
+msgstr "Viliam Búr (Slovak) <viliam@bur.sk>"
+
+msgid "Warning"
+msgstr "Waarschuwing"
+
+msgid "Word Count"
+msgstr "Woordenaantal"
+
+msgid "XML Copy Editor"
+msgstr "XML Copy Editor"
+
+msgid "XML Copy Editor has encountered an error and needs to close."
+msgstr "Er is een fout opgetreden, XML Copy Editor moet worden gesloten."
+
+msgid ""
+"XML Copy Editor has encountered the following error and needs to close: "
+msgstr ""
+"XML Copy Editor heeft de volgende fout gevonden, en moet gesloten worden: "
+
+msgid "XML Schema"
+msgstr "XML Schema"
+
+msgid "XML Schema..."
+msgstr "XML Schema..."
+
+msgid "XML document (*.xml)"
+msgstr "XML document (*.xml)"
+
+msgid "XS&LT stylesheet..."
+msgstr "XS&LT stylesheet..."
+
+msgid "XSL Transform..."
+msgstr "XSL Transformatie..."
+
+msgid "XSL transformation in progress..."
+msgstr "Bezig met XSL-transformatie..."
+
+msgid "XSLT stylesheet"
+msgstr "XSLT stylesheet"
+
+msgid "XSLT stylesheet..."
+msgstr "XSLT stylesheet..."
+
+msgid "byte"
+msgid_plural "bytes"
+msgstr[0] "byte"
+msgstr[1] "bytes"
+
+msgid "kB"
+msgstr "kB"
+
+msgid "valid"
+msgstr "geldig"
+
+msgid "well-formed"
+msgstr "geldig"
+
+msgid "{extension}"
+msgstr "{extensie}"
+
+msgid "{fullpath}"
+msgstr "{volledigpad}"
+
+msgid "{name}"
+msgstr "{naam}"
+
+msgid "{path}"
+msgstr "{pad}"
+
+msgid "|All files (*.*)|*.*"
+msgstr "|Alle bestanden (*.*)|*.*"

@@ -1,0 +1,1154 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: XML Copy Editor\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2007-03-06 13:50+0000\n"
+"PO-Revision-Date: 2007-01-23 19:52+CET\n"
+"Last-Translator: David Håsäther <hzr@users.sourceforge.net>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: Swedish\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "\tCtrl+%i"
+msgstr "\tCtrl+%i"
+
+msgid " in large document mode?"
+msgstr " i stort-dokumentläge?"
+
+msgid "%g %s saved"
+msgstr "%g %s sparad"
+
+msgid "%i match"
+msgid_plural "%i matches"
+msgstr[0] "%i träff"
+msgstr[1] "%i träffar"
+
+msgid "%i replacement made"
+msgid_plural "%i replacements made"
+msgstr[0] "%i ersättning gjord"
+msgstr[1] "%i ersättningar gjorda"
+
+msgid "%s contains %i word"
+msgid_plural "%s contains %i words"
+msgstr[0] "%s innehåller %i ord"
+msgstr[1] "%s innehåller %i ord"
+
+msgid "%s is %s"
+msgstr "%s är %s"
+
+msgid "%s is already open"
+msgstr "%s är redan öppnat"
+
+msgid "&About XML Copy Editor"
+msgstr "&Om XML Copy Editor"
+
+msgid "&Always insert closing tag"
+msgstr "In&foga alltid sluttagg"
+
+msgid "&Associate"
+msgstr "&Associera"
+
+msgid "&Blue background, white text"
+msgstr "&Blå bakgrund, vit text"
+
+msgid "&Browser\tCtrl+B"
+msgstr "&Webbläsare\tCtrl+B"
+
+msgid "&Change all"
+msgstr "Ä&ndra alla"
+
+msgid "&Check Well-formedness\tF2"
+msgstr "&Kontrollera välformighet\tF2"
+
+msgid "&Close\tCtrl+W"
+msgstr "St&äng\tCtrl+W"
+
+msgid "&Color Scheme"
+msgstr "Fä&rgschema"
+
+msgid "&Cut\tCtrl+X"
+msgstr "&Klipp ut\tCtrl+X"
+
+msgid "&DTD\tF4"
+msgstr "&DTD\tF4"
+
+msgid "&Default"
+msgstr "&Standard"
+
+msgid "&DocBook to HTML\tAlt+1"
+msgstr "&DocBook till HTML\tAlt+1"
+
+msgid "&DocBook to XHTML\tAlt+2"
+msgstr "D&ocBook till XHTML\tAlt+2"
+
+msgid "&Download Source"
+msgstr "&Ladda ner källkod"
+
+msgid "&Edit"
+msgstr "&Ändra"
+
+msgid "&Element...\tCtrl+I"
+msgstr "&Element...\tCtrl+I"
+
+msgid "&Enable network access for DTD validation"
+msgstr "&Tillåt nätverksåtkomst vid DTD-validering"
+
+msgid "&Entity...\tCtrl+E"
+msgstr "E&ntitet...\tCtrl+E"
+
+msgid "&Evaluate XPath...\tF9"
+msgstr "&Evaluera XPath...\tF9"
+
+msgid "&Export Microsoft Word Document..."
+msgstr "&Exportera Microsoft Word-dokument..."
+
+msgid "&File"
+msgstr "&Arkiv"
+
+msgid "&Find what: "
+msgstr "&Sök efter: "
+
+msgid "&Find...\tCtrl+F"
+msgstr "&Sök...\tCtrl+F"
+
+msgid "&Fold Tags\tCtrl+Shift+F"
+msgstr "F&äll ihop element\tCtrl+Shift+F"
+
+msgid "&Folding"
+msgstr "&Ihopfällning"
+
+msgid "&Forum"
+msgstr "&Forum"
+
+msgid "&Global Replace...\tCtrl+Shift+R"
+msgstr "&Global ersättning...\tCtrl+Shift+R"
+
+msgid "&Help"
+msgstr "&Hjälp"
+
+msgid "&Hide Attributes Only\tCtrl+Shift+A"
+msgstr "&Göm endast attribut\tCtrl+Shift+A"
+
+msgid "&Highlight current line"
+msgstr "&Markera aktiv rad"
+
+msgid "&Home Page"
+msgstr "H&emsida"
+
+msgid "&Indentation guides"
+msgstr "In&denteringsguider"
+
+msgid "&Insert"
+msgstr "&Infoga"
+
+msgid "&Line numbers"
+msgstr "&Radnummer"
+
+msgid "&Lock Tags\tCtrl+L"
+msgstr "&Lås taggar\tCtrl+L"
+
+msgid "&Match case"
+msgstr "&Matcha gemener/VERSALER"
+
+msgid "&New...\tCtrl+N"
+msgstr "&Nytt...\tCtrl+N"
+
+msgid "&Next Document\tCtrl+PgDn"
+msgstr "&Nästa dokument\tCtrl+PgDn"
+
+msgid "&None"
+msgstr "&Inget"
+
+msgid "&One application instance only"
+msgstr "&Endast en programinstans"
+
+msgid "&Open...\tCtrl+O"
+msgstr "&Öppna...\tCtrl+O"
+
+msgid "&Options..."
+msgstr "&Inställningar..."
+
+msgid "&Paste\tCtrl+V"
+msgstr "K&listra in\tCtrl+V"
+
+msgid "&Pretty-print\tF11"
+msgstr "&Formatera kod\tF11"
+
+msgid "&Previous Document\tCtrl+PgUp"
+msgstr "&Föregående dokument\tCtrl+PgUp"
+
+msgid "&Public DTD..."
+msgstr "&Publik DTD..."
+
+msgid "&RELAX NG...\tF6"
+msgstr "&RELAX NG...\tF6"
+
+msgid "&Redo\tCtrl+Y"
+msgstr "&Upprepa\tCtrl+Y"
+
+msgid "&Remember open tabs on close"
+msgstr "&Kom ihåg öppna flikar vid avslut"
+
+msgid "&Replace...\tCtrl+R"
+msgstr "&Ersätt...\tCtrl+R"
+
+msgid "&Report"
+msgstr "&Rapportera"
+
+msgid "&Revert"
+msgstr "&Återgå"
+
+msgid "&Save\tCtrl+S"
+msgstr "&Spara\tCtrl+S"
+
+msgid "&Save UTF-8 byte order mark"
+msgstr "&Spara UTF-8 BOM"
+
+msgid "&Show Tags and Attributes\tCtrl+T"
+msgstr "&Visa taggar och attribut\tCtrl+T"
+
+msgid "&Sibling...\tCtrl+Shift+I"
+msgstr "&Syskonelement...\tCtrl+Shift+I"
+
+msgid "&Spelling and Style...\tF7"
+msgstr "&Stavning och språkstil...\tF7"
+
+msgid "&System DTD..."
+msgstr "&System-DTD..."
+
+msgid "&TEI to HTML\tAlt+4"
+msgstr "&TEI till HTML\tAlt+4"
+
+msgid "&Tag completion"
+msgstr "&Taggkomplettering"
+
+msgid "&Text Size"
+msgstr "&Textstorlek"
+
+msgid "&Toggle Fold"
+msgstr "Vä&xla ihopfällning"
+
+msgid "&Tools"
+msgstr "&Verktyg"
+
+msgid "&Twin\tCtrl+Enter"
+msgstr "&Tvillingnod\tCtrl+Enter"
+
+msgid "&Undo\tCtrl+Z"
+msgstr "&Ångra\tCtrl+Z"
+
+msgid "&Unfold Tags\tCtrl+Shift+U"
+msgstr "Fä&ll ut element"
+
+msgid "&Use Microsoft rebar control (restart required)"
+msgstr "Anv&änd flyttningsbara verktygsfält (omstart krävs)"
+
+msgid "&Validate"
+msgstr "&Validera"
+
+msgid "&Validate as you type"
+msgstr "Realtids&validering"
+
+msgid "&View"
+msgstr "&Visa"
+
+msgid "&White space visible"
+msgstr "&Synliga mellanrum"
+
+msgid "&Word Count"
+msgstr "&Räkna ord"
+
+msgid "&XML"
+msgstr "&XML"
+
+msgid "&XML Copy Editor Help\tF1"
+msgstr "&Hjälvavsnitt\tF1"
+
+msgid "&XML Schema\tF5"
+msgstr "&XML Schema\tF5"
+
+msgid "&XML Schema..."
+msgstr "&XML Schema..."
+
+msgid "&XSL Transform...\tF8"
+msgstr "&XSL-transformering...\tF8"
+
+msgid "'%s' is not a valid line number"
+msgstr "'%s' är inte ett giltigt radnummer"
+
+msgid "(No filter)"
+msgstr "(Inga filter)"
+
+msgid "(No filters found)"
+msgstr "(Inga filter funna)"
+
+msgid "(No rule sets found)"
+msgstr "(Inga regelverk funna)"
+
+msgid "(lossless conversion requires version 2003 or later)"
+msgstr "(ickeförstörande konvertering kräver version 2003 eller senare)"
+
+msgid "(unknown error)"
+msgstr "(Okänt fel)"
+
+msgid ""
+".\n"
+"\n"
+"Select \"Abort\" to exit, \"Retry\" to close this window and \"Ignore\" to "
+"continue."
+msgstr ""
+".\n"
+"\n"
+"Välj \"Avbryt\" för att avsluta, \"Försök igen\" för att stänga det här "
+"fönstret och \"Ignorera\" för att fortsätta."
+
+msgid "A more recent version of Microsoft Word is required"
+msgstr "En nyare version av Microsoft Word krävs"
+
+msgid "About"
+msgstr "Om"
+
+msgid "Action"
+msgstr "Åtgärd"
+
+msgid ""
+"All files (*.*)|*.*|XML (*.xml)|*.xml|XHTML (*.html)|*.html|DTD (*.dtd)|*."
+"dtd|XML Schema (*.xsd)|*.xsd|RELAX NG grammar (*.rng)|*.rng|XSL (*.xsl)|*.xsl"
+msgstr ""
+"Alla filer (*.*)|*.*|XML (*.xml)|*.xml|XHTML (*.html)|*.html|DTD (*.dtd)|*."
+"dtd|XML Schema (*.xsd)|*.xsd|RELAX NG-schema (*.rng)|*.rng|XSL (*.xsl)|*.xsl"
+
+msgid "Application directory"
+msgstr "Programkatalog"
+
+msgid "Associate %s"
+msgstr "Associera %s"
+
+msgid "Attributes hidden"
+msgstr "Gömda attribut"
+
+msgid "Blue background, white text"
+msgstr "Blå bakgrund, vit text"
+
+msgid "Browse"
+msgstr "Bläddra"
+
+msgid "Browser"
+msgstr "Webbläsare"
+
+msgid "C&ancel"
+msgstr "&Avbryt"
+
+msgid "C&lose All"
+msgstr "Stäng a&lla"
+
+msgid "C&opy\tCtrl+C"
+msgstr "K&opiera\tCtrl+C"
+
+msgid "Cannot access application directory"
+msgstr "Kommer inte åt programkatalogen"
+
+msgid "Cannot associate %s: %s"
+msgstr "Kan inte associera %s: %s"
+
+msgid "Cannot compile regular expression '"
+msgstr "Kan inte kompilera det reguljära uttrycket '"
+
+msgid "Cannot count words: %s"
+msgstr "Kan inte räkna ord: %s"
+
+msgid "Cannot create report: "
+msgstr "Kan inte skapa rapport: "
+
+msgid "Cannot evaluate XPath"
+msgstr "Kan inte evaluera XPath"
+
+msgid "Cannot find '%s'"
+msgstr "Kan inte hitta '%s'"
+
+msgid "Cannot open %s"
+msgstr "Kan inte öppna %s"
+
+msgid "Cannot open %s for import"
+msgstr "Kan inte öppna %s för importering"
+
+msgid "Cannot open application directory: see Tools, Options..., General"
+msgstr "Kan inte öppna programkatalogen: se Verktyg, Inställningar..., Allmänt"
+
+msgid "Cannot open clipboard"
+msgstr "Kan inte öppna urklipp"
+
+msgid "Cannot open imported file"
+msgstr "Kan inte öppna importerad fil"
+
+msgid "Cannot open in browser: %s not found (see Tools, Options..., General)"
+msgstr ""
+"Kan inte öppna i webbläsare: kan inte hitta %s (se Verktyg, "
+"Inställningar..., Allmänt)"
+
+msgid ""
+"Cannot open in browser: no browser defined (see Tools, Options..., General)"
+msgstr ""
+"Kan inte öppna i webbläsare: ingen webbläsare vald (se Verktyg, "
+"Inställningar..., Allmänt)"
+
+msgid "Cannot open stylesheet %s"
+msgstr "Kan inte öppna följande stilmall: %s"
+
+msgid "Cannot paste as new document: no text on clipboard"
+msgstr "Kan inte klistra in som nytt dokument: ingen text i urklipp"
+
+msgid "Cannot pretty-print: "
+msgstr "Kan inte formatera koden: "
+
+msgid "Cannot replace: "
+msgstr "Kan inte ersätta: "
+
+msgid "Cannot save %s"
+msgstr "Kan inte spara %s"
+
+msgid "Cannot save document in %s: %s (saved in default encoding UTF-8)"
+msgstr "Kan inte spara dokumentet som %s: %s (filen sparad som UTF-8)"
+
+msgid ""
+"Cannot save temporary copy for validation; please save or discard changes"
+msgstr ""
+"Kan inte spara temporär kopia för validering; spara eller kasta ändringar"
+
+msgid "Cannot save temporary file"
+msgstr "Kan inte spara temporär fil"
+
+msgid "Cannot set encoding (cannot open temporary file)"
+msgstr "Kan inte specificera teckenkodning (kan inte öppna temporär fil)"
+
+msgid "Cannot set encoding (cannot parse temporary file)"
+msgstr "Kan inte specificera teckenkodning (kan inte tolka temporär fil)"
+
+msgid "Cannot set encoding: "
+msgstr "Kan inte specificera teckenkodning: "
+
+msgid "Cannot start Microsoft Word"
+msgstr "Kan inte starta Microsoft Word"
+
+msgid "Cannot transform: "
+msgstr "Kan inte transformera: "
+
+msgid "Change"
+msgstr "Ändra"
+
+msgid "Change all"
+msgstr "Ändra alla"
+
+msgid "Change once"
+msgstr "Ändra en"
+
+msgid "Check Well-formedness"
+msgstr "Kontrollera välformighet"
+
+msgid "Choose a document type:"
+msgstr "Välj en dokumenttyp"
+
+msgid "Choose a file:"
+msgstr "Välj en fil:"
+
+msgid "Choose a public identifier:"
+msgstr "Välj en publik identifierare:"
+
+msgid "Choose an encoding:"
+msgstr "Välj en teckenkodning:"
+
+msgid "Close"
+msgstr "Stäng"
+
+msgid "Close All"
+msgstr "Stäng alla"
+
+msgid "Close all"
+msgstr "Stäng alla"
+
+msgid "Closes the dialog box without saving any changes you have made"
+msgstr "Stänger dialogrutan utan att spara några ändringar"
+
+msgid "Closes this dialog without making any changes"
+msgstr "Stänger dialogrutan utan att spara några ändringar"
+
+msgid "Command line processing incomplete: no file specified"
+msgstr "Ofullständigt kommando: ingen fil specificerad"
+
+msgid "Confirmation"
+msgstr "Bekräftelse"
+
+msgid "Context"
+msgstr "Kontext"
+
+msgid "Copy"
+msgstr "Kopiera"
+
+msgid "Creating report..."
+msgstr "Skapar rapport..."
+
+msgid "Current Element"
+msgstr "Aktivt element"
+
+msgid "Cut"
+msgstr "Klipp ut"
+
+msgid "D&ocBook to XSL-FO\tAlt+3"
+msgstr "Do&cBook till XSL-FO\tAlt+3"
+
+msgid "DTD"
+msgstr "DTD"
+
+msgid "DTD validation in progress..."
+msgstr "Validerar mot DTD..."
+
+msgid "David Håsäther (Swedish) <hasather@gmail.com>"
+msgstr "David Håsäther (Swedish) <hasather@gmail.com>"
+
+msgid "Decrease"
+msgstr "Minska"
+
+msgid "Default"
+msgstr "Standard"
+
+msgid "Default dictionary and style"
+msgstr "Standardordlista och stil"
+
+msgid "Delete entity reference?"
+msgstr "Ta bort entitetsreferens?"
+
+msgid "Delete tag?"
+msgstr "Ta bort tagg?"
+
+msgid "Do you want to open "
+msgstr "Vill du öppna "
+
+msgid "Do you want to save the changes to "
+msgstr "Vill du spara ändringarna för "
+
+msgid "DocBook to HTML"
+msgstr "DocBook till HTML"
+
+msgid "DocBook to XHTML"
+msgstr "DocBook till XHTML"
+
+msgid "DocBook to XSL-FO"
+msgstr "DocBook till XSL-FO"
+
+msgid "Document has been modified: save or discard changes"
+msgstr "Dokumenter har ändrats: spara eller kasta ändringar"
+
+msgid "Document%i"
+msgstr "Dokument%1"
+
+msgid "Download Source"
+msgstr "Ladda ner källkod"
+
+msgid "E&ncoding..."
+msgstr "&Teckenkodning..."
+
+msgid "E&xit"
+msgstr "&Avsluta"
+
+msgid "E&xpand internal entities on open"
+msgstr "E&xpandera interna entitetsrefenser vid öppnande"
+
+msgid "Edited document empty"
+msgstr "Redigerat dokument är tomt"
+
+msgid "Editor"
+msgstr "Editor"
+
+msgid "Element..."
+msgstr "Element..."
+
+msgid "Encoding"
+msgstr "Teckenkodning"
+
+msgid "Encoding should be one of "
+msgstr "Teckenkodningen ska vara en av "
+
+msgid "Encoding should be one of %s (file saved in default encoding UTF-8)"
+msgstr "Teckenkodningen ska vara en av %s (filen sparad som UTF-8)"
+
+msgid "Encoding..."
+msgstr "Teckenkodning..."
+
+msgid "Enter XPath:"
+msgstr "Skriv in XPath:"
+
+msgid "Enter line number:"
+msgstr "Ange radnummer:"
+
+msgid "Enter new suggestion:"
+msgstr "Skriv in nytt förslag:"
+
+msgid "Entity..."
+msgstr "Entitet..."
+
+msgid "Error"
+msgstr "Fel"
+
+msgid "Evaluate XPath"
+msgstr "Evaluera XPath"
+
+msgid "Evaluate XPath..."
+msgstr "Evaluera XPath..."
+
+msgid "Exit"
+msgstr "Avsluta"
+
+msgid "Export Microsoft Word Document"
+msgstr "Exportera Microsoft Word-dokument"
+
+msgid "Export in progress..."
+msgstr "Exporterar..."
+
+msgid "Extends the scope to all open documents"
+msgstr "Söker och ersätter i alla öppna dokument"
+
+msgid "F&ind Again\tF3"
+msgstr "S&ök nästa\tF3"
+
+msgid ""
+"File has been modified by another application.\n"
+"Do you want to proceed?"
+msgstr ""
+"Filen har ändrats av ett annat program.\n"
+"Vill du fortsätta?"
+
+msgid "Find"
+msgstr "Sök"
+
+msgid "Find Again"
+msgstr "Sök nästa"
+
+msgid "Find and Replace"
+msgstr "Sök och ersätt"
+
+msgid "Find..."
+msgstr "Sök..."
+
+msgid "Find:"
+msgstr "Sök:"
+
+msgid ""
+"Finds all instances of the text specified in Find what and replaces them "
+"with the text in Replace with"
+msgstr ""
+"Söker efter alla förekomster av texten i Sök efter och ersätter den med "
+"texten i Ersätt med."
+
+msgid ""
+"Finds only text with lowercase and uppercase letters as specified in Find "
+"what"
+msgstr ""
+"Söker efter ord med den fördelning av stora och små bokstäver som du har "
+"angett i Sök efter"
+
+msgid "Fold Tags"
+msgstr "Fäll ihop element"
+
+msgid "Font"
+msgstr "Teckensnitt"
+
+msgid "Forum"
+msgstr "Forum"
+
+msgid "G&o To...\tCtrl+G"
+msgstr "Gå &till...\tCtrl+G"
+
+msgid "General"
+msgstr "Allmänt"
+
+msgid "Gerald Schmidt (development) <gnschmidt@users.sourceforge.net>"
+msgstr "Gerald Schmidt (utveckling) <gnschmidt@users.sourceforge.net>"
+
+msgid "Global Find and Replace"
+msgstr "Sök och ersätt globalt"
+
+msgid "Global Replace..."
+msgstr "Global ersättning..."
+
+msgid "Go To"
+msgstr "Gå till"
+
+msgid "Go To..."
+msgstr "Gå till..."
+
+msgid "H&ide Tags and Attributes\tCtrl+Shift+T"
+msgstr "Göm &taggar och attribut\tCtrl+Shift+T"
+
+msgid "Help"
+msgstr "Hjälp"
+
+msgid "Hide Attributes Only"
+msgstr "Göm endast attribut"
+
+msgid "Hide Tags and Attributes"
+msgstr "Göm taggar och attribut"
+
+msgid "Home Page"
+msgstr "Hemsida"
+
+msgid "I&mport Microsoft Word Document..."
+msgstr "I&mportera Microsoft Word-dokument..."
+
+msgid "Ignore"
+msgstr "Ignorera"
+
+msgid "Ignore all"
+msgstr "Ignorera alla"
+
+msgid "Ignore once"
+msgstr "Ignorera en"
+
+msgid "Import Microsoft Word Document"
+msgstr "Importera Microsoft Word-dokument"
+
+msgid "Import in progress..."
+msgstr "Importerar..."
+
+msgid "Increase"
+msgstr "Öka"
+
+msgid "Information"
+msgstr "Information"
+
+msgid "Insert Element"
+msgstr "Infoga element"
+
+msgid "Insert Entity"
+msgstr "Infoga entitet"
+
+msgid "Insert Sibling"
+msgstr "Infoga syskonelement"
+
+msgid "Interprets the text specified in Find what as a regular expression"
+msgstr "Tolkar texten i Sök efter som ett reguljärt uttryck"
+
+msgid "L&ock hidden tags"
+msgstr "L&ås gömda taggar"
+
+msgid "Language (restart required)"
+msgstr "Språk (omstart krävs)"
+
+msgid "Ln %i Col %i"
+msgstr "Rad %i Kol %i"
+
+msgid "Lock Tags"
+msgstr "Lås taggar"
+
+msgid "MB"
+msgstr "MB"
+
+msgid "MSXML validation failed (version 4.0 or later required)"
+msgstr "MSXML-validering misslyckades (version 4.0 eller senare krävs)"
+
+msgid "Match"
+msgstr "Träff"
+
+msgid "Matt Smigielski (testing) <alectrus@users.sourceforge.net>"
+msgstr "Matt Smigielski (testare) <alectrus@users.sourceforge.net>"
+
+msgid "Memory low: %s saved in large document mode"
+msgstr "Lite minne: %s sparad i stort-dokumentläge"
+
+msgid "Message"
+msgstr "Meddeladnde"
+
+msgid "Microsoft Word cannot save %s"
+msgstr "Microsoft Word kan inte spara %s"
+
+msgid "Microsoft Word cannot save %s as XML"
+msgstr "Microsoft Word kan inte spara %s som XML"
+
+msgid "Microsoft Word cannot save this document as WordprocessingML "
+msgstr "Microsoft Word kan inte spara det här dokumentet som WordprocessingML "
+
+msgid "Modified"
+msgstr "Ändrad"
+
+msgid "New"
+msgstr "Nytt"
+
+msgid "New Document"
+msgstr "Nytt dokument"
+
+msgid "New Suggestion"
+msgstr "Nytt förslag"
+
+msgid "New suggestion..."
+msgstr "Nytt förslag..."
+
+msgid "New..."
+msgstr "Nytt..."
+
+msgid "Next Document"
+msgstr "Nästa dokument"
+
+msgid "No filter"
+msgstr "Inget filter"
+
+msgid "No items selected"
+msgstr "Inga poster valda"
+
+msgid "No matching nodes found"
+msgstr "Inga noder matchade"
+
+msgid "No."
+msgstr "Nr."
+
+msgid "None"
+msgstr "Ingen"
+
+msgid "Normal"
+msgstr "Normal"
+
+msgid "Normal\tCtrl+0"
+msgstr "Normal\tCtrl+0"
+
+msgid "O&pen Large Document...\tCtrl+Shift+O"
+msgstr "Ö&ppna stort dokument...\tCtrl+Shift+O"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Open"
+msgstr "Öppna"
+
+msgid "Open Large Document"
+msgstr "Öppna stort dokument"
+
+msgid "Open Large Document..."
+msgstr "Öppna stort dokument..."
+
+msgid "Open..."
+msgstr "Öppna..."
+
+msgid "Opening imported file..."
+msgstr "Öppnar importerad fil..."
+
+msgid "Opening spelling and style check in read-only mode: "
+msgstr "Öppnar stavning och stil i läsläge: "
+
+msgid "Opens a standard file dialog"
+msgstr "Öppnar en fildialog"
+
+msgid "Options"
+msgstr "Inställningar"
+
+msgid "Options..."
+msgstr "Inställningar..."
+
+msgid "Out of memory"
+msgstr "Slut på minne"
+
+msgid "Output document empty"
+msgstr "Resultatdokumentet är tomt"
+
+msgid "P&aste As New Document"
+msgstr "Klistra in som &nytt dokument"
+
+msgid "P&rint Preview..."
+msgstr "Förhands&granska..."
+
+msgid "Pa&ge Setup..."
+msgstr "Utskrifts&format..."
+
+msgid "Page Setup..."
+msgstr "Utskriftsformat..."
+
+msgid "Parse in progress..."
+msgstr "Tolkar..."
+
+msgid "Paste"
+msgstr "Klistra in"
+
+msgid "Paste As New Document"
+msgstr "Klistra in som nytt dokument"
+
+msgid "Pr&int...\tCtrl+P"
+msgstr "Skriv &ut...\tCtrl+P"
+
+msgid "Preparing Print Preview..."
+msgstr "Förbereder förhandsgranskning..."
+
+msgid "Preparing to print..."
+msgstr "Förbereder utskrift..."
+
+msgid "Pretty-print"
+msgstr "Formatera kod"
+
+msgid "Pretty-print unsuccessful: output document empty"
+msgstr "Kodformatering lyckades inte: resultatdokumentet är tomt"
+
+msgid "Pretty-printing in progress..."
+msgstr "Formaterar koden..."
+
+msgid "Previous Document"
+msgstr "Föregående dokument"
+
+msgid "Print"
+msgstr "Skriv ut"
+
+msgid "Print Preview..."
+msgstr "Förhandsgranska..."
+
+msgid "Print..."
+msgstr "Skriv ut..."
+
+msgid "Provides a space for you to type additional information"
+msgstr "Här skriver du ytterligare information"
+
+msgid "Provides a space for you to type the path of the file"
+msgstr "Här skriver du sökvägen till filen"
+
+msgid "Provides a space for you to type the text you want to find"
+msgstr "Här skriver du den text du söker efter"
+
+msgid ""
+"Provides a space for you to type the text you want to replace the text you "
+"typed in Find what"
+msgstr "Här skriver du den text som du vill ersätta texten i Sök efter med"
+
+msgid "Public DTD"
+msgstr "Publik DTD"
+
+msgid "Public DTD..."
+msgstr "Publik DTD..."
+
+msgid "Question"
+msgstr "Fråga"
+
+msgid "R&eplace in all open documents"
+msgstr "&Ersätt i alla öppna dokument"
+
+msgid "RELAX NG grammar"
+msgstr "RELAX NG-schema"
+
+msgid "RELAX NG validation in progress..."
+msgstr "Validerar mot RELAX NG-schema"
+
+msgid "RELAX NG..."
+msgstr "RELAX NG..."
+
+msgid "Re&gex"
+msgstr "&Reguljära uttryck"
+
+msgid "Re&member layout on close"
+msgstr "K&om ihåg layout vid avslut"
+
+msgid "Re&tain undo history on save"
+msgstr "&Behåll ändringshistorik vid sparande"
+
+msgid "Redo"
+msgstr "Upprepa"
+
+msgid "Replace"
+msgstr "Ersätt"
+
+msgid "Replace with:"
+msgstr "Ersätt med:"
+
+msgid "Replace with: "
+msgstr "Ersätt med: "
+
+msgid "Replace..."
+msgstr "Ersätt..."
+
+msgid "Revert"
+msgstr "Upprepa"
+
+msgid "Rule"
+msgstr "Regel"
+
+msgid "S&ave As...\tF12"
+msgstr "S&para som...\tF12"
+
+msgid "S&how Current Element Pane"
+msgstr "Visa panel för aktivt element"
+
+msgid "S&how full path on frame"
+msgstr "&Visa fullständig sökväg i namnlisten"
+
+msgid "Save"
+msgstr "Spara"
+
+msgid "Save As"
+msgstr "Spara som"
+
+msgid "Save As..."
+msgstr "Spara som..."
+
+msgid "Select "
+msgstr "Välj "
+
+msgid "Select RELAX NG grammar"
+msgstr "Välj RELAX NG-schema"
+
+msgid "Select stylesheet"
+msgstr "Välj stilmall"
+
+msgid "Selects the file specified"
+msgstr "Associerar den valda filen med dokumentet"
+
+msgid "Sh&ow Toolbar"
+msgstr "V&isa verktygsrad"
+
+msgid "Show Current ElementPane"
+msgstr "Visa panel för aktivt element"
+
+msgid "Show Tags and Attributes"
+msgstr "Visa taggar och attribut"
+
+msgid "Show Toolbar"
+msgstr "Visa verktygsrad"
+
+msgid "Sibling..."
+msgstr "Syskonelement..."
+
+msgid "Spelling and Style"
+msgstr "Stavning och språkstil"
+
+msgid "Spelling and Style..."
+msgstr "Stavning och språkstil..."
+
+msgid "Stopped"
+msgstr "Stannade"
+
+msgid "Suggestion"
+msgstr "Förslag"
+
+msgid "System DTD"
+msgstr "System-DTD"
+
+msgid "System DTD..."
+msgstr "System-DTD..."
+
+msgid "T&EI to LaTeX\tAlt+5"
+msgstr "T&EI till LaTeX\tAlt+5"
+
+msgid "TE&I to XHTML\tAlt+6"
+msgstr "TE&I till XHTML\tAlt+6"
+
+msgid "TEI to &XSL-FO\tAlt+7"
+msgstr "TEI till &XSL-FO\tAlt+7"
+
+msgid "TEI to HTML"
+msgstr "TEI till HTML"
+
+msgid "TEI to LaTeX"
+msgstr "TEI till LaTeX"
+
+msgid "TEI to XHTML"
+msgstr "TEI till XHTML"
+
+msgid "TEI to XSL-FO"
+msgstr "TEI till XSL-FO"
+
+msgid "Tags Locked"
+msgstr "Låsta taggar"
+
+msgid "Tags hidden"
+msgstr "Gömda taggar"
+
+msgid "Tags locked"
+msgstr "Låsta taggar"
+
+msgid "The following error has occurred: "
+msgstr "Följande fel har inträffat: "
+
+msgid "The operating system has turned down a request for additional memory"
+msgstr "Operativsystemet har avslagit en förfrågan om ytterligare minne"
+
+msgid "This functionality requires Microsoft Windows"
+msgstr "Den här funktionaliteten kräver Microsoft Windows"
+
+msgid "Toggle Fold"
+msgstr "Växla ihopfällning"
+
+msgid "Twin"
+msgstr "Tvillingnod"
+
+msgid "Undo"
+msgstr "Ångra"
+
+msgid "Unknown command line switch (expecting 'w' or 's')"
+msgstr "Ökänd kommandoradsväxel (förväntade 'w' eller 's')"
+
+msgid ""
+"Using local encoding because %s is neither valid UTF-8 nor well-formed XML: "
+"%s"
+msgstr ""
+"Använder lokal teckenkodning eftersom %s varken är giltig UTF-8 "
+"ellervälformig XML: %s"
+
+msgid "Va&riable highlight in tag free view"
+msgstr "&Olikfärgade radmarkeringar vid taggfri vy"
+
+msgid "Validation error"
+msgstr "Valideringsfel"
+
+msgid "Validation in progress..."
+msgstr "Validerar..."
+
+msgid "Viliam Búr (Slovak) <viliam@bur.sk>"
+msgstr "Viliam Búr (Slovak) <viliam@bur.sk>"
+
+msgid "Warning"
+msgstr "Varning"
+
+msgid "Word Count"
+msgstr "Räkna ord"
+
+msgid "Wra&p lines"
+msgstr "&Automatiskt radbyte"
+
+msgid "XML Copy Editor"
+msgstr "XML Copy Editor"
+
+msgid "XML Copy Editor has encountered an error and needs to close"
+msgstr "XML Copy Editor har råkat ut för ett fel och måste stängas"
+
+msgid "XML Copy Editor has encountered an error and needs to close."
+msgstr "XML Copy Editor har råkat ut för ett fel och måste stängas."
+
+msgid ""
+"XML Copy Editor has encountered the following error and needs to close: "
+msgstr "XML Copy Editor har råkat ut för följande fel och måste stängas: "
+
+msgid "XML Schema"
+msgstr "XML Schema"
+
+msgid "XML Schema..."
+msgstr "XML Schema"
+
+msgid "XML document (*.xml)"
+msgstr "XML-dokument (*.xml)"
+
+msgid "XSL Transform..."
+msgstr "XSL-transformering..."
+
+msgid "XSL transformation in progress..."
+msgstr "Transformerar (XSLT)..."
+
+msgid "byte"
+msgid_plural "bytes"
+msgstr[0] "byte"
+msgstr[1] "bytes"
+
+msgid "kB"
+msgstr "kB"
+
+msgid "valid"
+msgstr "giltig"
+
+msgid "well-formed"
+msgstr "välformad"
+
+msgid "|All files (*.*)|*.*"
+msgstr "|Alla filer (*.*)|*.*"
