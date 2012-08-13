@@ -18,7 +18,6 @@
  */
 
 #include "wrapxerces.h"
-#define XERCES_TMPLSINC
 
 #include <xercesc/sax2/XMLReaderFactory.hpp>
 #include <xercesc/sax2/SAX2XMLReader.hpp>

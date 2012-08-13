@@ -30,9 +30,7 @@
 #include "catalogresolver.h"
 
 // Xerces-C req'd for Schema parsing
-#ifdef __WXMSW__
-#define XERCES_TMPLSINC
-#endif
+#include "wrapxerces.h" // Declaration of toString() and XERCES_TMPLSINC definition
 
 #include <xercesc/util/NameIdPool.hpp>
 #include <xercesc/util/PlatformUtils.hpp>
@@ -42,7 +40,6 @@
 #include <xercesc/validators/schema/SchemaValidator.hpp>
 #include <xercesc/validators/common/ContentSpecNode.hpp>
 #include <xercesc/validators/schema/SchemaSymbols.hpp>
-#include "wrapxerces.h" // Delearation of toString()
 
 using namespace xercesc;
 
