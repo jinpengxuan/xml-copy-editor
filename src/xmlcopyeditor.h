@@ -345,7 +345,11 @@ class MyFrame : public wxFrame
         wxLocale& myLocale;
 		bool singleInstanceCheck;
 		int lang, lastPos;
+#ifdef __WXDEBUG__
+		wxLogStderr logTarget;
+#else
 		wxLogNull logTarget;
+#endif
 		std::auto_ptr<wxHtmlEasyPrinting> htmlPrinting;
 		std::auto_ptr<wxFindReplaceDialog> findDialog;
 		std::auto_ptr<wxHtmlHelpController> helpController;

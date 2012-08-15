@@ -27,6 +27,7 @@ BEGIN_EVENT_TABLE ( MyNotebook, wxAuiNotebook )
 	EVT_RIGHT_DOWN ( MyNotebook::OnRightDown )
 	EVT_MENU ( ID_MENU_CLOSE, MyNotebook::OnMenuClose )
 	EVT_MENU ( ID_MENU_CLOSE_ALL, MyNotebook::OnMenuCloseAll )
+	//EVT_KEY_DOWN ( MyNotebook::OnKeyDown )
 END_EVENT_TABLE()
 
 MyNotebook::MyNotebook (
@@ -37,6 +38,9 @@ MyNotebook::MyNotebook (
     int style ) : wxAuiNotebook ( parent, id, position, size, style )
 {
 	rightClickPage = -1;
+
+	wxApp::GetInstance()->Connect ( wxEVT_KEY_DOWN,
+	    wxKeyEventHandler ( MyNotebook::OnKeyDown ), NULL, this );
 }
 
 void MyNotebook::OnLeftDown ( wxMouseEvent& event )
@@ -103,4 +107,25 @@ void MyNotebook::OnMenuCloseAll ( wxCommandEvent& WXUNUSED ( event ) )
 		return;
 	wxCommandEvent e;
 	frame->OnCloseAll ( e );
+}
+
+void MyNotebook::OnKeyDown ( wxKeyEvent &event )
+{
+#if defined __WXGTK__
+	if ( event.m_keyCode != WXK_TAB || !event.m_altDown )
+#elif defined __WXOSX__
+	if ( event.m_uniChar != ',' || !event.m_controlDown )
+#else
+	if ( event.m_keyCode != WXK_TAB || !event.m_controlDown )
+#endif
+	{
+		event.Skip();
+		return;
+	}
+
+	AdvanceSelection ( !event.m_shiftDown );
+
+	XmlDoc *doc = ( XmlDoc * ) GetCurrentPage();
+	if ( doc != NULL )
+		doc->SetFocus();
 }

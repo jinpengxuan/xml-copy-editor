@@ -592,18 +592,18 @@ MyFrame::MyFrame (
 		mainBook ( 0 ),
 		restoreFocusToNotebook ( false )
 {
+#ifdef __WXDEBUG__
+	wxLog::SetActiveTarget ( &logTarget );
+	wxLog::SetLogLevel ( wxLOG_Max );
+#endif
+
 	manager.SetManagedWindow ( this );
 
 	lastPos = 0;
 	htmlReport = NULL;
 	lastDoc = NULL;
 
-	wxString defaultFont =
-#ifdef __WXMSW__
-	    _T ( "Arial" );
-#else
-	    _T ( "Bitstream Vera Sans" );
-#endif
+	wxString defaultFont = wxSystemSettings::GetFont ( wxSYS_SYSTEM_FONT ).GetFaceName();
 
 	bool findMatchCase;
 
@@ -850,6 +850,7 @@ MyFrame::MyFrame (
 	long style = wxAUI_NB_TOP |
 	             wxAUI_NB_TAB_SPLIT |
 	             wxAUI_NB_TAB_MOVE |
+	             wxAUI_NB_SCROLL_BUTTONS |
 	             wxAUI_NB_WINDOWLIST_BUTTON |
 	             wxAUI_NB_CLOSE_ON_ALL_TABS |
 	             wxNO_BORDER;
@@ -987,6 +988,10 @@ MyFrame::MyFrame (
 
 MyFrame::~MyFrame()
 {
+#ifdef __WXDEBUG__
+	wxLog::SetActiveTarget ( NULL );
+#endif
+
 	std::vector<wxString>::iterator it;
 	for ( it = tempFileVector.begin(); it != tempFileVector.end(); it++ )
 		wxRemoveFile ( *it );

@@ -43,6 +43,7 @@ class MyNotebook : public wxAuiNotebook
 		void OnRightDown ( wxMouseEvent& event );
 		void OnMenuClose ( wxCommandEvent& event );
 		void OnMenuCloseAll ( wxCommandEvent& event );
+		void OnKeyDown ( wxKeyEvent &event );
 	private:
 		int rightClickPage;
 		DECLARE_EVENT_TABLE()
