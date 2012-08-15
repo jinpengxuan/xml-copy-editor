@@ -38,6 +38,7 @@
 class WrapLibxml
 {
 	public:
+		static void Init() throw();
 		WrapLibxml (
 		    bool netAccessParameter = false,
 		    const std::string& catalogPathParameter = "catalog" );

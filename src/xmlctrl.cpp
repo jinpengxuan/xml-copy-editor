@@ -25,6 +25,8 @@
 #include "xmlcopyeditor.h" // needed to enable validation-as-you-type alerts
 #include <utility>
 #include <memory>
+#include "validationthread.h"
+
 
 // adapted from wxSTEdit (c) 2005 John Labenski, Otto Wyss
 #define XMLCTRL_HASBIT(value, bit) (((value) & (bit)) != 0)
@@ -38,6 +40,7 @@ BEGIN_EVENT_TABLE ( XmlCtrl, wxStyledTextCtrl )
 	EVT_LEFT_UP ( XmlCtrl::OnMouseLeftUp )
 	EVT_RIGHT_UP ( XmlCtrl::OnMouseRightUp )
 	EVT_MIDDLE_DOWN ( XmlCtrl::OnMiddleDown )
+	EVT_THREAD(wxEVT_COMMAND_VALIDATION_COMPLETED, XmlCtrl::OnValidationCompleted)
 END_EVENT_TABLE()
 
 // global protection for validation threads
@@ -68,14 +71,10 @@ XmlCtrl::XmlCtrl (
 		auxPath ( auxPathParameter )
 {
 	validationThread = NULL;
-	validationStarted = false;
-	validationFinished = false;
+
 	grammarFound = false;
 	validationRequired = (buffer) ? true : false; // NULL for plain XML template
 
-	validationReleasePtr = new bool;
-	*validationReleasePtr = false;
-	
 	currentMaxLine = 1;
 
 	applyProperties ( propertiesParameter );
@@ -120,10 +119,10 @@ XmlCtrl::XmlCtrl (
 	applyVisibilityState ( visibilityState );
 	lineBackgroundState = BACKGROUND_STATE_NORMAL;
 
-	for ( int i = 0; i < wxSTC_INDIC_MAX; ++i ) 
+	for ( int i = 0; i < wxSTC_INDIC_MAX; ++i )
 		IndicatorSetStyle ( i, wxSTC_INDIC_HIDDEN );
 	IndicatorSetStyle ( 2, wxSTC_INDIC_SQUIGGLE );
-	IndicatorSetForeground ( 0, *wxRED );
+	IndicatorSetForeground ( 2, *wxRED );
 }
 
 
@@ -133,17 +132,11 @@ XmlCtrl::~XmlCtrl()
 	elementMap.clear();
 	entitySet.clear();
 
-	if ( validationStarted && !validationFinished )
+	if ( validationThread != NULL )
 	{
-		*validationReleasePtr = true;
-
-		// don't delete validationReleasePtr because the thread will check the value before exiting
-		// this means that 1 variable of type bool will be leaked in this case
-		// the alternative is waiting for the validation thread to finish, which can take anything up to several minutes
-		return;
+		validationThread->Kill();
+		delete validationThread;
 	}
-	
-	delete validationReleasePtr;
 }
 
 
@@ -169,28 +162,30 @@ void XmlCtrl::OnIdle ( wxIdleEvent& event )
 {
 	if ( properties.number && type != FILE_TYPE_BINARY )
 		adjustNoColumnWidth(); // exits if unchanged
+}
 
-	// poll validation thread output if any
-	
+void XmlCtrl::OnValidationCompleted ( wxThreadEvent &event )
+{
+	wxCriticalSectionLocker locker ( xmlcopyeditorCriticalSection );
+
+	if ( validationThread == NULL )
+		return;
+
+	MyFrame *frame = (MyFrame *)GetGrandParent();
+	clearErrorIndicators ( GetLineCount() );
+	if ( validationThread->isSucceeded() )
 	{
-		wxCriticalSectionLocker locker ( xmlcopyeditorCriticalSection );
-		if (validationStarted && validationFinished)
-		{
-			validationStarted = false;
-			MyFrame *frame = (MyFrame *)GetGrandParent();
-			if ( validationSuccess )
-			{
-				clearErrorIndicators ( GetLineCount() );
-				frame->statusProgress ( wxEmptyString );
-			}
-			else
-			{
-				clearErrorIndicators ( GetLineCount() );
-				setErrorIndicator ( validationPosition.first - 1, 0 );
-				frame->statusProgress ( validationMessage );
-			}
-		}
+		frame->statusProgress ( wxEmptyString );
 	}
+	else
+	{
+		setErrorIndicator ( validationThread->getPosition().first - 1, 0 );
+		frame->statusProgress ( validationThread->getMessage() );
+	}
+
+	validationThread->Wait();
+	delete validationThread;
+	validationThread = NULL;
 }
 
 void XmlCtrl::OnChar ( wxKeyEvent& event )
@@ -1974,38 +1969,31 @@ bool XmlCtrl::backgroundValidate (
 {
 	if ( !validationRequired )
 		return true;
-	
+
 	wxCriticalSectionLocker locker ( xmlcopyeditorCriticalSection );
-	if ( validationStarted && !validationFinished )
+
+	if ( validationThread != NULL )
 	{
-		*validationReleasePtr = true;
 		return true; // wait for next idle cycle call from main app frame
 	}
 	validationRequired = false;
-	
-	*validationReleasePtr = false;
+
 	validationThread = new ValidationThread(
+		GetEventHandler(),
 		buffer,
 		system,
 		catalogPath.c_str(),
-		catalogUtilityPath.c_str(),
-		&validationFinished,
-		&validationSuccess,
-		validationReleasePtr,
-		&validationPosition,
-		&validationMessage
+		catalogUtilityPath.c_str()
 	);
 
-	if ( validationThread->Create() != wxTHREAD_NO_ERROR )
+	if ( validationThread->Create() != wxTHREAD_NO_ERROR
+	    || validationThread->Run() != wxTHREAD_NO_ERROR )
 	{
-		validationStarted = false;
-		validationFinished = true;
+		delete validationThread;
+		validationThread = NULL;
 		return false;
 	}
-	
-	validationStarted = true;
-	validationFinished = false;
-	validationThread->Run();
+
 	return true;
 }
 

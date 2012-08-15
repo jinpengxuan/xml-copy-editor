@@ -5,31 +5,28 @@
 #include <stdexcept>
 #include <memory>
 
+
+wxDEFINE_EVENT(wxEVT_COMMAND_VALIDATION_COMPLETED, wxThreadEvent);
+
 ValidationThread::ValidationThread (
+	wxEvtHandler *handler,
 	const char *buffer,
 	const char *system,
 	const char *catalogPath,
-	const char *catalogUtilityPath,
-	bool *finished,
-	bool *success,
-	bool *release,
-	std::pair<int, int> *position,
-	wxString *message ) : wxThread()
+	const char *catalogUtilityPath )
+	: wxThread ( wxTHREAD_JOINABLE )
 {
-	if (!buffer || !success || !position || !message )
+	if ( buffer == NULL )
 	{
 		throw;
 	}
 
+	myEventHandler = handler;
 	myBuffer = buffer;
 	mySystem = system;
 	myCatalogPath = catalogPath;
 	myCatalogUtilityPath = catalogUtilityPath;
-	myFinishedPtr = finished;
-	mySuccessPtr = success;
-	myReleasePtr = release;
-	myPositionPtr = position;
-	myMessagePtr = message;
+	myIsSucceeded = false;
 }
 
 void *ValidationThread::Entry()
@@ -40,47 +37,38 @@ void *ValidationThread::Entry()
 	
 	{
 		//wxCriticalSectionLocker locker ( xmlcopyeditorCriticalSection );
-		if ( *myReleasePtr || TestDestroy()  )
+		if ( TestDestroy()  )
 		{
-			Exit();
 			return NULL;
 		}
 	}
-	
-	bool res = validator->validateMemory (
+
+	myIsSucceeded = validator->validateMemory (
 		myBuffer.c_str(),
 		mySystem.c_str(),
 		myBuffer.size() );
-	{
-		//wxCriticalSectionLocker locker ( xmlcopyeditorCriticalSection );
-		if ( *myReleasePtr  || TestDestroy() )
-		{
-			Exit();
-			return NULL;
-		}
-	
-		if ( !res )
-		{
-			*mySuccessPtr = res;
-			*myPositionPtr = validator->getErrorPosition();
-			*myMessagePtr = validator->getLastError();		
-		}
-		else
-		{
-			*mySuccessPtr = true;
-			*myPositionPtr = std::make_pair ( 0, 0 );
-			*myMessagePtr = wxEmptyString;
-		}
-	}
-	return NULL;
-}
 
-void ValidationThread::OnExit()
-{
+	if ( TestDestroy() )
 	{
-		//wxCriticalSectionLocker locker ( xmlcopyeditorCriticalSection );
-		if ( *myReleasePtr )
-			return;
-		*myFinishedPtr = true;
+		return NULL;
 	}
+
+	extern wxCriticalSection xmlcopyeditorCriticalSection;
+	wxCriticalSectionLocker locker ( xmlcopyeditorCriticalSection );
+
+	if ( myIsSucceeded )
+	{
+		myPosition = std::make_pair ( 0, 0 );
+		myMessage = wxEmptyString;
+	}
+	else
+	{
+		myPosition = validator->getErrorPosition();
+		myMessage = validator->getLastError();
+	}
+
+	wxEvent *event = new wxThreadEvent(wxEVT_THREAD, wxEVT_COMMAND_VALIDATION_COMPLETED);
+	wxQueueEvent ( myEventHandler, event );
+
+	return NULL;
 }

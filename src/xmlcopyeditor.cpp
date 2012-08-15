@@ -324,9 +324,6 @@ MyApp::~MyApp()
 	delete checker;
 	delete server;
 	delete connection;
-
-	// Terminate Xerces-C++
-	XMLPlatformUtils::Terminate();
 }
 
 bool MyApp::OnInit()
@@ -387,8 +384,11 @@ bool MyApp::OnInit()
 		wxImage::AddHandler ( new wxPNGHandler );
 		wxSystemOptions::SetOption ( _T ( "msw.remap" ), 0 );
 
+		// Initialize libxml
+		WrapLibxml::Init();
+
 		// Initialize Xerces-C++
-		XMLPlatformUtils::Initialize();
+		WrapXerces::Init();
 
 		frame = new MyFrame (
 		    _ ( "XML Copy Editor" ),

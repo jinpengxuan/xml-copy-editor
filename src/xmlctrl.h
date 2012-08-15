@@ -27,7 +27,8 @@
 #include <string>
 #include <set>
 #include <map>
-#include "validationthread.h"
+
+class ValidationThread;
 
 struct XmlCtrlProperties
 {
@@ -146,15 +147,8 @@ class XmlCtrl: public wxStyledTextCtrl
 		bool getValidationRequired();
 		void setValidationRequired ( bool b );
 	private:
-		// the following are used for background validation
-		ValidationThread *validationThread;
-		bool validationStarted,
-			validationFinished,
-			validationSuccess;
-		bool *validationReleasePtr;
-		std::pair<int, int> validationPosition;
-		wxString validationMessage;
-	
+		ValidationThread *validationThread; // used for background validation
+
 		int type;
 		bool *protectTags;
 		bool validationRequired, grammarFound;
@@ -191,6 +185,7 @@ class XmlCtrl: public wxStyledTextCtrl
 		void OnMarginClick ( wxStyledTextEvent& event );
 		void OnChar ( wxKeyEvent& event );
 		void OnIdle ( wxIdleEvent& event );
+		void OnValidationCompleted (wxThreadEvent &event);
 		void OnKeyPressed ( wxKeyEvent& event );
 		void OnMouseLeftDown ( wxMouseEvent& event );
 		void OnMouseLeftUp ( wxMouseEvent& event );

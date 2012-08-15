@@ -27,18 +27,67 @@
 
 #include <wx/wx.h>
 
+void WrapLibxml::Init() throw()
+{
+	static class Initializer
+	{
+	public:
+		Initializer () throw ()
+		{
+			xmlSetGenericErrorFunc ( xmlGenericErrorContext, &Initializer::OnXmlGenericError );
+
+			LIBXML_TEST_VERSION
+			xmlInitializeCatalog();
+
+			initGenericErrorDefaultFunc ( NULL );
+		}
+		~Initializer ()
+		{
+			xsltCleanupGlobals();
+			xmlCatalogCleanup();
+			xmlCleanupParser();
+		}
+
+		static void XMLCDECL OnXmlGenericError (void *ctx, const char *msg, ...) throw()
+		{
+			va_list args;
+
+			size_t size = 128;
+			std::string buffer;
+			int chars;
+			for (;;)
+			{
+				buffer.resize ( size );
+				if ( buffer.size() < size )
+					throw std::runtime_error ( "Out of memory" );
+
+				va_start(args, msg);
+				chars = vsnprintf( (char *) buffer.c_str(), size, msg, args);
+				va_end(args);
+
+				if ( chars >= 0 && ( size_t ) chars < size )
+				{
+					buffer.resize ( chars );
+					throw std::runtime_error ( buffer );
+				}
+				if ( chars >= 0 )
+					size = chars + 1;
+				else
+					throw std::runtime_error (
+					    std::string ( "Can't format message: " ) + msg );
+			}
+		}
+	} dummy;
+}
+
 WrapLibxml::WrapLibxml ( bool netAccessParameter, const std::string& catalogPathParameter )
 		: netAccess ( netAccessParameter ), catalogPath ( catalogPathParameter )
 {
-	LIBXML_TEST_VERSION
-	xmlInitializeCatalog();
+	WrapLibxml::Init();
 }
 
 WrapLibxml::~WrapLibxml()
 {
-	xsltCleanupGlobals();
-	xmlCleanupParser();
-	xmlCatalogCleanup();
 }
 
 bool WrapLibxml::validate ( const std::string& fileName )
@@ -81,8 +130,6 @@ bool WrapLibxml::validateRelaxNG (
     const std::string& fileName )
 {
 	output = "";
-
-	xmlCleanupParser();
 
 	xmlRelaxNGValidCtxtPtr ctxtPtr;
 	xmlDocPtr docPtr;
@@ -133,7 +180,6 @@ bool WrapLibxml::validateW3CSchema (
 {
 	output = "";
 
-	xmlCleanupParser();
 	xmlSchemaValidCtxtPtr ctxtPtr;
 	xmlDocPtr docPtr;
 	xmlSchemaParserCtxtPtr schemaParserCtxtPtr;
@@ -184,7 +230,6 @@ bool WrapLibxml::parse (
 {
 	output = "";
 
-	xmlCleanupParser();
 	xmlParserCtxtPtr ctxt;
 	xmlDocPtr docPtr;
 
@@ -244,8 +289,6 @@ bool WrapLibxml::parse (
 bool WrapLibxml::xpath ( const std::string& path, const std::string& fileName )
 {
 	output = "";
-
-	xmlCleanupParser();
 
 	xmlParserCtxtPtr ctxt;
 	xmlDocPtr docPtr;
@@ -320,8 +363,6 @@ bool WrapLibxml::xpath ( const std::string& path, const std::string& fileName )
 	xmlFreeDoc ( docPtr );
 	xmlFreeParserCtxt ( ctxt );
 
-	xmlCleanupParser();
-
 	return xpathIsValid;
 }
 
@@ -330,7 +371,6 @@ bool WrapLibxml::xslt (
     const std::string& fileName
 )
 {
-	xmlCleanupParser();
 	output = "";
 
 	xsltStylesheetPtr cur;
@@ -388,8 +428,6 @@ bool WrapLibxml::xslt (
 
 bool WrapLibxml::bufferWellFormed ( const std::string& buffer )
 {
-	xmlCleanupParser();
-
 	xmlParserCtxtPtr ctxt = xmlNewParserCtxt();
 	if ( !ctxt )
 		return false;
@@ -415,8 +453,6 @@ int WrapLibxml::saveEncoding (
     const std::string& fileName,
     const std::string& encoding )
 {
-	xmlCleanupParser();
-
 	xmlParserCtxtPtr ctxt = xmlNewParserCtxt();
 	if ( !ctxt )
 		return -1;
@@ -455,8 +491,6 @@ int WrapLibxml::saveEncodingFromFile (
     const std::string& fileNameDestination,
     const std::string& encoding )
 {
-	xmlCleanupParser();
-
 	xmlParserCtxtPtr ctxt = xmlNewParserCtxt();
 	if ( !ctxt )
 		return -1;

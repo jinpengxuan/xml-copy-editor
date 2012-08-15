@@ -30,8 +30,26 @@
 
 using namespace xercesc;
 
+void WrapXerces::Init() throw()
+{
+	static class Initializer
+	{
+	public:
+		Initializer()
+		{
+			XMLPlatformUtils::Initialize();
+		}
+		~Initializer()
+		{
+			XMLPlatformUtils::Terminate();
+		}
+	} dummy;
+}
+
 WrapXerces::WrapXerces( std::string catalogPath, std::string catalogUtilityPath )
 {
+	WrapXerces::Init();
+
 	errorPosition = std::make_pair ( 1, 1 );
 	catalogResolver = new XercesCatalogResolver( catalogPath, catalogUtilityPath );
 }
@@ -98,7 +116,7 @@ bool WrapXerces::validateMemory (
 	const char *system,
 	unsigned len )
 {
-	SAX2XMLReader *parser = XMLReaderFactory::createXMLReader();
+	std::auto_ptr<SAX2XMLReader> parser ( XMLReaderFactory::createXMLReader() );
 
 	parser->setFeature ( XMLUni::fgSAX2CoreNameSpaces, true );
 	parser->setFeature ( XMLUni::fgSAX2CoreValidation, true );
@@ -116,24 +134,19 @@ bool WrapXerces::validateMemory (
 	parser->setEntityResolver ( catalogResolver );
 
 	XMLByte* xmlBuffer = (XMLByte*) buffer;
-        MemBufInputSource source (
-		xmlBuffer,
-                len,
-		system );
-  
+	MemBufInputSource source ( xmlBuffer, len, system );
+
 	try
 	{
 		parser->parse ( source );
 	}
 	catch ( XMLException& e )
 	{
-		delete parser;
 		lastError = wxEmptyString;
 		return false;
 	}
 	catch ( SAXParseException& e )
 	{
-		delete parser;
 		lastError << _T ( "Ln " ) << e.getLineNumber() << _T ( " Col " )
 		    << e.getColumnNumber() << _T ( ": " ) << toString ( e.getMessage() );
 		errorPosition = std::make_pair ( e.getLineNumber(), e.getColumnNumber() );
@@ -141,11 +154,9 @@ bool WrapXerces::validateMemory (
 	}
 	catch ( ... )
 	{
-		delete parser;
 		lastError = wxEmptyString;
 		return false;
 	}
-	delete parser;
 	return true;
 }
 

@@ -36,6 +36,7 @@ using namespace xercesc;
 class WrapXerces
 {
 	public:
+		static void Init() throw ();
 		WrapXerces( std::string catalogPath = "",
                     std::string catalogUtilityPath = "" );
 		~WrapXerces();
