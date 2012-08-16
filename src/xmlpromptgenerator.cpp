@@ -451,6 +451,9 @@ void XmlPromptGenerator::handleSchema (
 		return;
 	}
 
+	SubstitutionMap substitutions;
+	buildSubstitutionMap ( substitutions, *grammar );
+
 	while ( elemEnum.hasMoreElements() )
 	{
 		const SchemaElementDecl& curElem = elemEnum.nextElement();
@@ -473,7 +476,7 @@ void XmlPromptGenerator::handleSchema (
 		const ContentSpecNode *spec = curElem.getContentSpec();
 		if ( spec != NULL )
 		{
-			getContent ( spec, d->elementMap[element] );
+			getContent ( d->elementMap[element], spec, substitutions );
 		}
 
 		// fetch attributes
@@ -508,22 +511,64 @@ void XmlPromptGenerator::handleSchema (
 	}
 }
 
+void XmlPromptGenerator::buildSubstitutionMap (
+    SubstitutionMap &substitutions,
+    const SchemaGrammar &grammar )
+{
+	substitutions.clear();
+
+	RefHash2KeysTableOfEnumerator<ElemVector> list ( grammar.getValidSubstitutionGroups() );
+	if ( !list.hasMoreElements() )
+		return;
+
+	while ( list.hasMoreElements() )
+	{
+		const ElemVector &elmts = list.nextElement();
+
+		const QName *qnm;
+		const SchemaElementDecl *cur, *substitution;
+		substitution = elmts.elementAt ( 0 )->getSubstitutionGroupElem();
+
+		size_t index = elmts.size();
+		while ( index-- > 0 )
+		{
+			cur = elmts.elementAt ( index );
+			qnm = cur->getElementName();
+			wxString element = WrapXerces::toString ( qnm->getRawName() );
+
+			substitutions[substitution].insert ( element );
+		}
+	}
+}
+
 void XmlPromptGenerator::getContent (
+    std::set<wxString> &list,
     const ContentSpecNode *spec,
-    std::set<wxString> &list )
+    SubstitutionMap &substitutions )
 {
 	//if ( spec == NULL) return;
 
 	const QName *qnm = spec->getElement();
 	if ( qnm )
 	{
-		wxString element = WrapXerces::toString ( qnm->getRawName() );
-		if ( !element.IsEmpty() )
-			list.insert( element );
+		const SchemaElementDecl *elem = (const SchemaElementDecl *)spec->getElementDecl();
+		SubstitutionMap::const_iterator itr = substitutions.find ( elem );
+		if ( itr == substitutions.end() )
+			itr = substitutions.find ( elem->getSubstitutionGroupElem() );
+		if ( itr != substitutions.end() )
+		{
+			list.insert ( itr->second.begin(), itr->second.end() );
+		}
+		else
+		{
+			wxString element = WrapXerces::toString ( qnm->getRawName() );
+			if ( !element.IsEmpty() )
+				list.insert( element );
+		}
 	}
 
 	if ( spec->getFirst() != NULL)
-		getContent( spec->getFirst(), list );
+		getContent( list, spec->getFirst(), substitutions );
 	if ( spec->getSecond() != NULL)
-		getContent( spec->getSecond(), list );
+		getContent( list, spec->getSecond(), substitutions );
 }

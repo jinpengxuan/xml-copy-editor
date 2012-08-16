@@ -28,6 +28,7 @@
 #include "wrapexpat.h"
 #include "parserdata.h"
 #include <xercesc/validators/common/ContentSpecNode.hpp>
+#include <xercesc/validators/schema/SchemaGrammar.hpp>
 
 struct PromptGeneratorData : public ParserData
 {
@@ -42,6 +43,9 @@ struct PromptGeneratorData : public ParserData
 	unsigned attributeValueCutoff;
 	XML_Parser p;
 };
+
+typedef std::map<const xercesc::SchemaElementDecl *, std::set<wxString> >
+        SubstitutionMap;
 
 class XmlPromptGenerator : public WrapExpat
 {
@@ -114,9 +118,13 @@ class XmlPromptGenerator : public WrapExpat
 		    PromptGeneratorData *d,
 		    const XML_Char *el,
 		    const XML_Char **attr );
+		static void buildSubstitutionMap (
+		    SubstitutionMap &substitutions,
+		    const xercesc::SchemaGrammar &grammar );
 		static void getContent (
+		    std::set<wxString> &list,
 		    const xercesc::ContentSpecNode *spec,
-		    std::set<wxString> &list );
+		    SubstitutionMap &substitutions );
 };
 
 #endif
