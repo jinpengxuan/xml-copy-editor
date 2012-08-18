@@ -20,6 +20,7 @@
 #ifndef WRAP_EXPAT
 #define WRAP_EXPAT
 
+#include <wx/wx.h>
 #include <expat.h>
 #include <string>
 #include <vector>
@@ -36,7 +37,7 @@ class WrapExpat
 		bool parse ( const string &buffer, bool isFinal = true );
 		bool parse ( const char *buffer, size_t size, bool isFinal = true );
 		pair<int, int> getErrorPosition();
-		string getLastError();
+		wxString getLastError();
 		bool isEncodingError();
 		static string xmliseTextNode ( const string &textnode );
 		static string xmliseAttribute ( const string &attribute );

@@ -185,7 +185,7 @@ class XmlCtrl: public wxStyledTextCtrl
 		void OnMarginClick ( wxStyledTextEvent& event );
 		void OnChar ( wxKeyEvent& event );
 		void OnIdle ( wxIdleEvent& event );
-		void OnValidationCompleted (wxThreadEvent &event);
+		void OnValidationCompleted (wxCommandEvent &event);
 		void OnKeyPressed ( wxKeyEvent& event );
 		void OnMouseLeftDown ( wxMouseEvent& event );
 		void OnMouseLeftUp ( wxMouseEvent& event );

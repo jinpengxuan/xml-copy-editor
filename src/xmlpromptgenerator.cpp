@@ -261,7 +261,9 @@ void XMLCALL XmlPromptGenerator::attlistdeclhandler (
 	PromptGeneratorData *d;
 	d = ( PromptGeneratorData * ) data;
 
-	std::set<wxString> &attributeValues = d->attributeMap[elname][attname];
+	wxString element ( elname, wxConvUTF8 );
+	wxString attribute ( attname, wxConvUTF8 );
+	std::set<wxString> &attributeValues = d->attributeMap[element][attribute];
 	if ( *att_type == '(' ) // change to exclude _known_ identifiers?
 	{
 		const char *s, *word;
@@ -283,7 +285,7 @@ void XMLCALL XmlPromptGenerator::attlistdeclhandler (
 
 	if ( isrequired )
 	{
-		d->requiredAttributeMap[elname].insert ( wxString ( attname, wxConvUTF8 ) );
+		d->requiredAttributeMap[element].insert ( attribute );
 	}
 }
 

@@ -173,8 +173,7 @@ bool WrapDaisy::run (
     	if ( !xsp->parse ( output.c_str() ) )
     	{
             frame->newDocument ( output );
-            std::string stdError = xsp->getLastError();
-            error = wxString ( stdError.c_str(), wxConvUTF8, stdError.size() );
+            error = xsp->getLastError();
             return false;
         }
         output = xsp->getBuffer();
@@ -200,8 +199,7 @@ bool WrapDaisy::run (
     	if ( !xp->parse ( output.c_str() ) )
     	{
             frame->newDocument ( output );
-            std::string stdError = xp->getLastError();
-            error = wxString ( stdError.c_str(), wxConvUTF8, stdError.size() );
+            error = xp->getLastError();
             return false;
         }
         output = xp->getBuffer();
@@ -289,8 +287,7 @@ bool WrapDaisy::run (
 	if ( !xci->parse ( output.c_str() ) )
 	{
         frame->newDocument ( output );
-        std::string stdError = xci->getLastError();
-        error = wxString ( stdError.c_str(), wxConvUTF8, stdError.size() );
+        error = xci->getLastError();
         return false;
     }
     output = xci->getBuffer();
@@ -301,7 +298,7 @@ bool WrapDaisy::run (
     std::ofstream canonicalStream ( stdCanonicalFile.c_str() );//canonicalFile.name().c_str() );
     if ( !canonicalStream )
     {
-        error = _T( "Cannot write canonical XHTML file" );
+        error = _ ( "Cannot write canonical XHTML file" );
         return false;   
     }
     canonicalStream << output.c_str() << std::endl;
@@ -316,9 +313,9 @@ bool WrapDaisy::run (
     while (wxTheApp->Pending())
         wxTheApp->Dispatch();
 
-    if ( !pd->Update ( 40, _T("Preparing DTBook...") ) )
+    if ( !pd->Update ( 40, _ ("Preparing DTBook...") ) )
     {
-        error = _T ( "Cancelled" );
+        error = _ ( "Cancelled" );
         return false;   
     }
 

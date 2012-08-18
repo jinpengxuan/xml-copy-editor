@@ -176,6 +176,9 @@ class MyApp : public wxApp
 #ifndef __WXMSW__
 		virtual void HandleEvent ( wxEvtHandler *handler, wxEventFunction func, wxEvent& event ) const;
 #endif
+		const wxArrayString &getAvailableTranslations (
+		    const wxArrayString *catalogLookupPathPrefixes = NULL,
+		    const wxString *catelog = NULL );
 	protected:
 		wxLocale myLocale;
 	private:

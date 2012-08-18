@@ -40,7 +40,7 @@ BEGIN_EVENT_TABLE ( XmlCtrl, wxStyledTextCtrl )
 	EVT_LEFT_UP ( XmlCtrl::OnMouseLeftUp )
 	EVT_RIGHT_UP ( XmlCtrl::OnMouseRightUp )
 	EVT_MIDDLE_DOWN ( XmlCtrl::OnMiddleDown )
-	EVT_THREAD(wxEVT_COMMAND_VALIDATION_COMPLETED, XmlCtrl::OnValidationCompleted)
+	EVT_COMMAND(wxID_ANY, wxEVT_COMMAND_VALIDATION_COMPLETED, XmlCtrl::OnValidationCompleted)
 END_EVENT_TABLE()
 
 // global protection for validation threads
@@ -94,7 +94,11 @@ XmlCtrl::XmlCtrl (
 		bufferLen = strlen ( DEFAULT_XML_DECLARATION_UTF8 );
 	}
 
+#if wxCHECK_VERSION(2,9,0)
 	AddTextRaw ( buffer, bufferLen );
+#else
+	SendMsg ( 2001, bufferLen, ( long ) ( const char * ) buffer );
+#endif
 
 	SetSelection ( 0, 0 );
 
@@ -164,7 +168,7 @@ void XmlCtrl::OnIdle ( wxIdleEvent& event )
 		adjustNoColumnWidth(); // exits if unchanged
 }
 
-void XmlCtrl::OnValidationCompleted ( wxThreadEvent &event )
+void XmlCtrl::OnValidationCompleted ( wxCommandEvent &event )
 {
 	wxCriticalSectionLocker locker ( xmlcopyeditorCriticalSection );
 
@@ -472,12 +476,7 @@ void XmlCtrl::handleOpenAngleBracket ( wxKeyEvent& event )
 	if ( parentCloseAngleBracket < 0 )
 		return;
 
-	wxString wideParent = getLastElementName ( parentCloseAngleBracket );
-	if ( wideParent.empty() )
-		return;
-
-	std::string parent = ( const char * ) wideParent.mb_str ( wxConvUTF8 );
-
+	wxString parent = getLastElementName ( parentCloseAngleBracket );
 	if ( elementMap.find ( parent ) == elementMap.end() )
 		return;
 

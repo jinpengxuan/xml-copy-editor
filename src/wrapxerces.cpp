@@ -96,7 +96,7 @@ bool WrapXerces::validate ( const std::string& fileName )
 		delete parser;
 		lastError << _T ( "Validation stopped at line " )
 		    << e.getLineNumber() << _T ( ", column " ) << e.getColumnNumber()
-		    << ": " << toString ( e.getMessage() );
+		    << _T ( ": " ) << toString ( e.getMessage() );
 		errorPosition = std::make_pair ( e.getLineNumber(), e.getColumnNumber() );
 		return false;
 	}

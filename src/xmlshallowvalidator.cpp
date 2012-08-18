@@ -145,9 +145,9 @@ void XMLCALL XmlShallowValidator::skippedentity (
 {
 	if ( is_parameter_entity )
 		return;
-	XmlShallowValidatorData *vd;
-	vd = ( XmlShallowValidatorData * ) data;
-	if ( vd->entitySet.find ( entityName ) != vd->entitySet.end() )
+	XmlShallowValidatorData *vd = ( XmlShallowValidatorData * ) data;
+	wxString entity ( entityName, wxConvUTF8 );
+	if ( vd->entitySet.find ( entity ) != vd->entitySet.end() )
 		return;
 	
 	vd->isValid = false;

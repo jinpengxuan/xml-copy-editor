@@ -58,6 +58,8 @@
 #include <wx/stockitem.h>
 #include <iconv.h>
 #include <wx/stdpaths.h>
+#include <wx/tokenzr.h>
+#include <wx/dir.h>
 
 #define ngettext wxGetTranslation
 
@@ -301,14 +303,23 @@ MyApp::MyApp() : checker ( NULL ), server ( NULL ), connection ( NULL ),
 	}
 
 	myLocale.Init ( lang, wxLOCALE_LOAD_DEFAULT );
-	wxLocale::AddCatalogLookupPathPrefix ( wxT ( "." ) );
-	wxLocale::AddCatalogLookupPathPrefix ( wxT ( ".." ) );
 
+	wxArrayString prefixes;
+#ifdef __WXGTK__
+	prefixes.Add ( wxT ( "/usr/share/locale" ) );
+	prefixes.Add ( wxT ( "/usr/local/share/locale" ) );
+#endif
 	wxString poDir = wxStandardPaths::Get().GetDataDir() +
 	        wxFileName::GetPathSeparator() + _T ( "po" ) + wxFileName::GetPathSeparator();
-	wxLocale::AddCatalogLookupPathPrefix ( poDir );
+	prefixes.Add ( poDir );
+	wxArrayString::const_iterator itr;
+	for ( itr = prefixes.begin(); itr != prefixes.end(); itr++ )
+		wxLocale::AddCatalogLookupPathPrefix ( *itr );
 
-	if ( !myLocale.AddCatalog ( _T ( "messages" ) ) )
+	wxString catalog = _T ( "messages" );
+	getAvailableTranslations ( &prefixes, &catalog );
+
+	if ( !myLocale.AddCatalog ( catalog ) )
 		;
 
 #ifndef __WXMSW__
@@ -328,7 +339,6 @@ MyApp::~MyApp()
 
 bool MyApp::OnInit()
 {
-
 	wxString name, service, hostName;
 	name.Printf ( _T ( "xmlcopyeditor-%s" ), wxGetUserId().c_str() );
 	service = IPC_SERVICE;
@@ -347,14 +357,8 @@ bool MyApp::OnInit()
 				break;
 			else
 			{
-				wxString argument, what;
-				wxChar *whatBuffer;
-				what = _T ( "Data" );
-#if wxCHECK_VERSION(2,9,0)
-				whatBuffer = (wxChar *)what.wchar_str();
-#else
-				whatBuffer = (wxChar *)what.c_str();
-#endif
+				wxString argument;
+				wxChar whatBuffer[] = _T ( "Data" );
 				if ( this->argc > 1 )
 				{
 					for ( int i = 1; i < this->argc; i++ )
@@ -403,7 +407,7 @@ bool MyApp::OnInit()
 	catch ( const XMLException &e )
 	{
 		wxString error;
-		error << _ ( "Failed to initialize Xerces-c:\n" )
+		error << _ ( "Failed to initialize Xerces-C:\n" )
 		    << WrapXerces::toString ( e.getMessage() );
 		wxMessageBox ( error, _ ( "Error" ), wxOK | wxICON_ERROR );
 		return false;
@@ -567,6 +571,66 @@ void MyApp::HandleEvent ( wxEvtHandler *handler, wxEventFunction func, wxEvent& 
 	}
 }
 #endif
+
+const wxArrayString &MyApp::getAvailableTranslations (
+    const wxArrayString *catalogLookupPathPrefixes /*= NULL*/,
+    const wxString *catalog /*= NULL*/ )
+{
+	static class Translations // Most of the code was copied from wxTranslations
+	{
+	public:
+		Translations ( const wxArrayString *catalogLookupPathPrefixes,
+		    const wxString *catalog )
+		{
+			if ( catalogLookupPathPrefixes == NULL )
+				throw std::invalid_argument ( "catalogLookupPathPrefixes" );
+			if ( catalog == NULL )
+				throw std::invalid_argument ( "catelog" );
+
+#if wxCHECK_VERSION(2,9,0)
+			wxTranslations *t = wxTranslations::Get();
+			if ( t != NULL )
+				translations = t->GetAvailableTranslations ( *catalog );
+#else
+			wxArrayString::const_iterator i = catalogLookupPathPrefixes->begin();
+			for ( i = catalogLookupPathPrefixes->begin();
+			    i != catalogLookupPathPrefixes->end(); ++i )
+			{
+				if ( i->empty() )
+					continue;
+
+				wxDir dir;
+				if ( !dir.Open(*i) )
+					continue;
+
+				wxString lang;
+				for ( bool ok = dir.GetFirst ( &lang, wxEmptyString, wxDIR_DIRS ); ok;
+						ok = dir.GetNext (&lang) ) {
+					const wxString langdir = *i + wxFILE_SEP_PATH + lang;
+					if ( HasMsgCatalogInDir ( langdir, *catalog ) ) {
+#ifdef __WXOSX__
+						wxString rest;
+						if ( lang.EndsWith(".lproj", &rest) )
+						lang = rest;
+#endif // __WXOSX__
+						translations.push_back(lang);
+					}
+				}
+			}
+#endif
+		}
+		bool HasMsgCatalogInDir ( const wxString &dir, const wxString &catelog )
+		{
+			return wxFileName ( dir, catelog, _T ( "mo" ) ).FileExists()
+				|| wxFileName ( dir + wxFILE_SEP_PATH + _T ( "LC_MESSAGES" ), catelog, _T ( "mo" ) ).FileExists();
+		}
+		const wxArrayString &operator()() { return translations; }
+	protected:
+		wxArrayString translations;
+	} translations ( catalogLookupPathPrefixes, catalog );
+
+	return translations();
+}
 
 MyFrame::MyFrame (
     const wxString& title,
@@ -2509,6 +2573,7 @@ void MyFrame::OnOptions ( wxCommandEvent& WXUNUSED ( event ) )
 #else
 	( _ ( "Preferences" ) );
 #endif
+	MyApp *app = ( MyApp * ) wxTheApp;
 	std::auto_ptr<MyPropertySheet> mpsd ( new MyPropertySheet (
 	                                          this,
 	                                          properties,
@@ -2522,6 +2587,7 @@ void MyFrame::OnOptions ( wxCommandEvent& WXUNUSED ( event ) )
 	                                          expandInternalEntities,
 	                                          showFullPathOnFrame,
 	                                          lang,
+	                                          app->getAvailableTranslations(),
 	                                          wxID_ANY,
 	                                          title ) );
 	if ( mpsd->ShowModal() == wxID_OK )
@@ -2859,10 +2925,11 @@ void MyFrame::newDocument ( const std::string& s, const std::string& path, bool 
 	          catalogUtilityPath,
 	          path,
 	          auxPath );
-	mainBook->AddPage ( ( wxWindow * ) doc, documentLabel, true );
+	mainBook->AddPage ( ( wxWindow * ) doc, documentLabel );
 	Thaw();
 
-	mainBook->Refresh();
+	mainBook->Layout();
+
 	if ( properties.completion )
 		doc->updatePromptMaps();
 	doc->setShortFileName ( documentLabel );
@@ -2915,9 +2982,12 @@ void MyFrame::OnOpen ( wxCommandEvent& event )
 	size_t count = paths.Count();
 	if ( !count )
 		return;
+	Freeze();
 	for ( size_t i = 0; i < count; ++i )
 		if ( !openFile ( paths[i], largeFile ) )
 			break;
+	Thaw();
+	mainBook->Layout();
 }
 
 bool MyFrame::openFile ( wxString& fileName, bool largeFile )
@@ -3186,7 +3256,7 @@ bool MyFrame::openFile ( wxString& fileName, bool largeFile )
 	Thaw();
 	statusProgress ( wxEmptyString );
 
-	mainBook->Refresh();
+	mainBook->Layout();
 
 	wxFileName fn ( fileName );
 	doc->setLastModified ( fn.GetModificationTime() );
@@ -3247,11 +3317,9 @@ bool MyFrame::openFile ( wxString& fileName, bool largeFile )
 
 	if ( !optimisedParseSuccess )
 	{
-		std::string error = we->getLastError();
-		wideError = wxString ( error.c_str(), wxConvUTF8, error.size() );
 		posPair = we->getErrorPosition();
 		-- ( posPair.first );
-		messagePane ( wideError, CONST_WARNING );
+		messagePane ( we->getLastError(), CONST_WARNING );
 
 		int newPosition = doc->PositionFromLine ( posPair.first );
 		doc->SetSelection ( newPosition, newPosition );
@@ -5250,7 +5318,7 @@ wxMenuBar *MyFrame::getMenuBar()
 	    _ ( "&Spelling...\tF7" ),
 	    _ ( "Spelling..." ) );
 	spellingItem->SetBitmap ( spelling16Bitmap );
-	
+
 	wxMenuItem *styleItem = 
 	    new wxMenuItem (
 	    NULL,
@@ -5266,6 +5334,7 @@ wxMenuBar *MyFrame::getMenuBar()
 	    _ ( "&Word Count" ),
 	    _ ( "Word Count" ) );
 	wordCountItem->SetBitmap ( wxNullBitmap );
+
 
 	wxMenuItem *commandItem =
 	    new wxMenuItem (
@@ -5300,6 +5369,8 @@ wxMenuBar *MyFrame::getMenuBar()
 	    new wxMenuItem ( NULL, wxID_HELP,
 	                     _ ( "&XML Copy Editor Help\tF1" ), _ ( "Help" ) );
 	helpItem->SetBitmap ( helpBitmap );
+
+
 	wxMenuItem *homeItem =
 	    new wxMenuItem ( NULL, ID_HOME,
 	                     _ ( "&Home Page" ), _ ( "Home Page" ) );
@@ -5316,6 +5387,7 @@ wxMenuBar *MyFrame::getMenuBar()
 	                     _ ( "&Browse Source" ), _ ( "Browse Source" ) );
 	downloadSourceItem->SetBitmap ( wxNullBitmap );
 	helpMenu->Append ( helpItem );
+
 	helpMenu->AppendSeparator();
 	helpMenu->Append ( homeItem );
 	helpMenu->Append ( feedbackItem );
@@ -5364,7 +5436,6 @@ void MyFrame::updateFileMenu ( bool deleteExisting )
 	wxMenuItem *saveItem =
 	    new wxMenuItem ( NULL, wxID_SAVE, _ ( "&Save\tCtrl+S" ), _ ( "Save" ) );
 	saveItem->SetBitmap ( save16Bitmap );
-
 	wxMenuItem *saveAsItem =
 	    new wxMenuItem ( NULL, wxID_SAVEAS, _ ( "S&ave As...\tF12" ), _ ( "Save As..." ) );
 	saveAsItem->SetBitmap ( wxNullBitmap );
@@ -5423,6 +5494,7 @@ void MyFrame::updateFileMenu ( bool deleteExisting )
 	fileMenu->Append ( exportMSWordItem );
 #endif
 	history.AddFilesToMenu ( fileMenu );
+
 	fileMenu->AppendSeparator();
 	fileMenu->Append ( exitItem );
 }
@@ -5808,7 +5880,7 @@ void MyFrame::OnAssociate ( wxCommandEvent& event )
 		message.Printf (
 		    _ ( "Cannot associate %s: %s" ),
 		    type.c_str(),
-		    wellformedparser->getLastError() );
+		    wellformedparser->getLastError().c_str() );
 		messagePane ( message, CONST_STOP );
 		return;
 	}
@@ -5907,18 +5979,19 @@ void MyFrame::OnAssociate ( wxCommandEvent& event )
 
 void MyFrame::openRememberedTabs()
 {
-	if ( openTabsOnClose.empty() )
-		return;
-	wxArrayString v = wxSplit ( openTabsOnClose, _T ( '|' ) );
-	if ( v.empty() )
-		return;
+	Freeze();
 
-	wxArrayString::iterator vit;
-	for ( vit = v.begin(); vit != v.end(); vit++ )
+	wxStringTokenizer files ( openTabsOnClose, _T ( "|" ) );
+	while ( files.HasMoreTokens() )
 	{
-		if ( vit->IsEmpty() || !openFile ( *vit ) )
+		wxString file = files.GetNextToken();
+		if ( file.IsEmpty() || !openFile ( file ) )
 			continue; //break; // Ignore errors
 	}
+
+	Thaw();
+	mainBook->Layout();
+
 	XmlDoc *doc;
 	if ( ( doc = getActiveDocument() ) != NULL )
 		doc->SetFocus();
@@ -5948,11 +6021,8 @@ void MyFrame::OnWordCount ( wxCommandEvent& event )
 	wxString msg;
 	if ( !xwc->parse ( buffer.c_str() ) )
 	{
-		std::string error = xwc->getLastError();
-		wxString werror = wxString ( error.c_str(), wxConvUTF8, error.size() );
 		statusProgress ( wxEmptyString );
-
-		msg.Printf ( _ ( "Cannot count words: %s" ), werror.c_str() );
+		msg.Printf ( _ ( "Cannot count words: %s" ), xwc->getLastError().c_str() );
 		messagePane ( msg, CONST_STOP );
 		return;
 	}

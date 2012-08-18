@@ -26,8 +26,9 @@
 								<option id="gnu.cpp.compiler.mingw.exe.debug.option.debugging.level.693304093" name="Debug Level" superClass="gnu.cpp.compiler.mingw.exe.debug.option.debugging.level" value="gnu.cpp.compiler.debugging.level.max" valueType="enumerated"/>
 								<option id="gnu.cpp.compiler.option.include.paths.334981297" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="${BOOSTINC}"/>
-									<listOptionValue builtIn="false" value="${WXWIDGETS}\include"/>
-									<listOptionValue builtIn="false" value="${WXWIDGETS}\lib\gcc_lib\mswud"/>
+									<listOptionValue builtIn="false" value="${WXWIDGETS}/include"/>
+									<listOptionValue builtIn="false" value="${WXWIDGETS}/contrib/include"/>
+									<listOptionValue builtIn="false" value="${WXWIDGETS}/lib/gcc_lib/mswud"/>
 								</option>
 								<option id="gnu.cpp.compiler.option.other.other.1952331323" name="Other flags" superClass="gnu.cpp.compiler.option.other.other" value="-c -fmessage-length=0" valueType="string"/>
 								<option id="gnu.cpp.compiler.option.preprocessor.def.1236209686" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" valueType="definedSymbols">
@@ -51,23 +52,21 @@
 									<listOptionValue builtIn="false" value="pcre"/>
 									<listOptionValue builtIn="false" value="xerces-c"/>
 									<listOptionValue builtIn="false" value="aspell"/>
-									<listOptionValue builtIn="false" value="wxmsw29ud_richtext"/>
-									<listOptionValue builtIn="false" value="wxmsw29ud_html"/>
-									<listOptionValue builtIn="false" value="wxmsw29ud_stc"/>
-									<listOptionValue builtIn="false" value="wxmsw29ud_aui"/>
-									<listOptionValue builtIn="false" value="wxmsw29ud_adv"/>
-									<listOptionValue builtIn="false" value="wxmsw29ud_stc"/>
-									<listOptionValue builtIn="false" value="wxmsw29ud_core"/>
-									<listOptionValue builtIn="false" value="wxmsw29ud_richtext"/>
-									<listOptionValue builtIn="false" value="wxbase29ud_xml"/>
-									<listOptionValue builtIn="false" value="wxbase29ud_net"/>
-									<listOptionValue builtIn="false" value="wxbase29ud"/>
+									<listOptionValue builtIn="false" value="wxmsw28ud_richtext"/>
+									<listOptionValue builtIn="false" value="wxmsw28ud_html"/>
+									<listOptionValue builtIn="false" value="wxmsw28ud_stc"/>
+									<listOptionValue builtIn="false" value="wxmsw28ud_aui"/>
+									<listOptionValue builtIn="false" value="wxmsw28ud_adv"/>
+									<listOptionValue builtIn="false" value="wxmsw28ud_stc"/>
+									<listOptionValue builtIn="false" value="wxmsw28ud_core"/>
+									<listOptionValue builtIn="false" value="wxmsw28ud_richtext"/>
+									<listOptionValue builtIn="false" value="wxbase28ud_xml"/>
+									<listOptionValue builtIn="false" value="wxbase28ud_net"/>
+									<listOptionValue builtIn="false" value="wxbase28ud"/>
 									<listOptionValue builtIn="false" value="wxtiffd"/>
 									<listOptionValue builtIn="false" value="wxjpegd"/>
 									<listOptionValue builtIn="false" value="wxpngd"/>
 									<listOptionValue builtIn="false" value="wxzlibd"/>
-									<listOptionValue builtIn="false" value="wxregexud"/>
-									<listOptionValue builtIn="false" value="wxscintillad"/>
 									<listOptionValue builtIn="false" value="wxregexud"/>
 									<listOptionValue builtIn="false" value="kernel32"/>
 									<listOptionValue builtIn="false" value="user32"/>
@@ -87,7 +86,7 @@
 									<listOptionValue builtIn="false" value="pthread"/>
 								</option>
 								<option id="gnu.cpp.link.option.paths.1556491407" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
-									<listOptionValue builtIn="false" value="${WXWIDGETS}\lib\gcc_lib"/>
+									<listOptionValue builtIn="false" value="${WXWIDGETS}/lib/gcc_lib"/>
 								</option>
 								<option id="gnu.cpp.link.option.userobjs.598298270" name="Other objects" superClass="gnu.cpp.link.option.userobjs" valueType="userObjs">
 									<listOptionValue builtIn="false" value="${ConfigName}/xmlcopyeditor_rc.o"/>
@@ -129,8 +128,9 @@
 								<option id="gnu.cpp.compiler.mingw.exe.release.option.debugging.level.1567946828" name="Debug Level" superClass="gnu.cpp.compiler.mingw.exe.release.option.debugging.level" value="gnu.cpp.compiler.debugging.level.none" valueType="enumerated"/>
 								<option id="gnu.cpp.compiler.option.include.paths.1851942004" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="${BOOSTINC}"/>
-									<listOptionValue builtIn="false" value="${WXWIDGETS}\include"/>
-									<listOptionValue builtIn="false" value="${WXWIDGETS}\lib\gcc_lib\mswu"/>
+									<listOptionValue builtIn="false" value="${WXWIDGETS}/include"/>
+									<listOptionValue builtIn="false" value="${WXWIDGETS}/contrib/include"/>
+									<listOptionValue builtIn="false" value="${WXWIDGETS}/lib/gcc_lib/mswu"/>
 								</option>
 								<option id="gnu.cpp.compiler.option.other.other.1853611325" name="Other flags" superClass="gnu.cpp.compiler.option.other.other" value="-c -fmessage-length=0" valueType="string"/>
 								<option id="gnu.cpp.compiler.option.preprocessor.def.1550164037" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" valueType="definedSymbols">
@@ -153,23 +153,21 @@
 									<listOptionValue builtIn="false" value="pcre"/>
 									<listOptionValue builtIn="false" value="xerces-c"/>
 									<listOptionValue builtIn="false" value="aspell"/>
-									<listOptionValue builtIn="false" value="wxmsw29u_richtext"/>
-									<listOptionValue builtIn="false" value="wxmsw29u_html"/>
-									<listOptionValue builtIn="false" value="wxmsw29u_stc"/>
-									<listOptionValue builtIn="false" value="wxmsw29u_aui"/>
-									<listOptionValue builtIn="false" value="wxmsw29u_adv"/>
-									<listOptionValue builtIn="false" value="wxmsw29u_stc"/>
-									<listOptionValue builtIn="false" value="wxmsw29u_core"/>
-									<listOptionValue builtIn="false" value="wxmsw29u_richtext"/>
-									<listOptionValue builtIn="false" value="wxbase29u_xml"/>
-									<listOptionValue builtIn="false" value="wxbase29u_net"/>
-									<listOptionValue builtIn="false" value="wxbase29u"/>
+									<listOptionValue builtIn="false" value="wxmsw28u_richtext"/>
+									<listOptionValue builtIn="false" value="wxmsw28u_html"/>
+									<listOptionValue builtIn="false" value="wxmsw28u_stc"/>
+									<listOptionValue builtIn="false" value="wxmsw28u_aui"/>
+									<listOptionValue builtIn="false" value="wxmsw28u_adv"/>
+									<listOptionValue builtIn="false" value="wxmsw28u_stc"/>
+									<listOptionValue builtIn="false" value="wxmsw28u_core"/>
+									<listOptionValue builtIn="false" value="wxmsw28u_richtext"/>
+									<listOptionValue builtIn="false" value="wxbase28u_xml"/>
+									<listOptionValue builtIn="false" value="wxbase28u_net"/>
+									<listOptionValue builtIn="false" value="wxbase28u"/>
 									<listOptionValue builtIn="false" value="wxtiff"/>
 									<listOptionValue builtIn="false" value="wxjpeg"/>
 									<listOptionValue builtIn="false" value="wxpng"/>
 									<listOptionValue builtIn="false" value="wxzlib"/>
-									<listOptionValue builtIn="false" value="wxregexu"/>
-									<listOptionValue builtIn="false" value="wxscintilla"/>
 									<listOptionValue builtIn="false" value="wxregexu"/>
 									<listOptionValue builtIn="false" value="kernel32"/>
 									<listOptionValue builtIn="false" value="user32"/>
@@ -189,7 +187,7 @@
 									<listOptionValue builtIn="false" value="pthread"/>
 								</option>
 								<option id="gnu.cpp.link.option.paths.161756907" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
-									<listOptionValue builtIn="false" value="${WXWIDGETS}\lib\gcc_lib"/>
+									<listOptionValue builtIn="false" value="${WXWIDGETS}/lib/gcc_lib"/>
 								</option>
 								<option id="gnu.cpp.link.option.userobjs.30870315" name="Other objects" superClass="gnu.cpp.link.option.userobjs" valueType="userObjs">
 									<listOptionValue builtIn="false" value="${ConfigName}/xmlcopyeditor_rc.o"/>
@@ -238,6 +236,6 @@
 		</scannerConfigBuildInfo>
 	</storageModule>
 	<storageModule moduleId="refreshScope" versionNumber="1">
-		<resource resourceType="PROJECT" workspacePath="/XmlCopyEditor"/>
+			<resource resourceType="PROJECT" workspacePath="/XmlCopyEditor"/>
 	</storageModule>
 </cproject>

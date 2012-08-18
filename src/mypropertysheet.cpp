@@ -41,6 +41,7 @@ MyPropertySheet::MyPropertySheet (
     bool expandInternalEntitiesParameter,
     bool showFullPathOnFrameParameter,
     int lang,
+    const wxArrayString &translations,
     wxWindowID id,
     wxString title,
     const wxPoint& position,
@@ -165,23 +166,18 @@ MyPropertySheet::MyPropertySheet (
 	    generalPanel,
 	    wxID_ANY );
 
-	wxTranslations *t = wxTranslations::Get();
-	if ( t != NULL )
+	int index;
+	const wxLanguageInfo *info;
+	wxArrayString::const_iterator trans = translations.begin();
+	for ( ; trans != translations.end(); trans++ )
 	{
-		int index;
-		const wxLanguageInfo *info;
-		wxArrayString langs = t->GetAvailableTranslations ( _T ( "messages" ) );
-		for ( size_t i = 0; i < langs.Count(); i++ )
-		{
-			info = wxLocale::FindLanguageInfo ( langs[i] );
-			if ( info == NULL ) continue;
+		info = wxLocale::FindLanguageInfo ( *trans );
+		if ( info == NULL ) continue;
 
-			index = languageBox->Append ( info->Description, (void*)info->Language );
-			if (lang == info->Language)
-				languageBox->SetSelection ( index );
-		}
+		index = languageBox->Append ( info->Description, (void*)info->Language );
+		if (lang == info->Language)
+			languageBox->SetSelection ( index );
 	}
-
 
 	libxmlNetAccessBox = new wxCheckBox (
 	    generalPanel, wxID_ANY, _ ( "&Enable network access for DTD validation" ) );

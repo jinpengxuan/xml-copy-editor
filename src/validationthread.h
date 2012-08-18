@@ -6,7 +6,7 @@
 #include <string>
 #include <wx/thread.h>
 
-wxDECLARE_EVENT(wxEVT_COMMAND_VALIDATION_COMPLETED, wxThreadEvent);
+DECLARE_EVENT_TYPE(wxEVT_COMMAND_VALIDATION_COMPLETED, wxID_ANY);
 
 class ValidationThread : public wxThread
 {

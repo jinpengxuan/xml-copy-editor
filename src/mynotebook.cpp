@@ -39,7 +39,7 @@ MyNotebook::MyNotebook (
 {
 	rightClickPage = -1;
 
-	wxApp::GetInstance()->Connect ( wxEVT_KEY_DOWN,
+	wxTheApp->Connect ( wxEVT_KEY_DOWN,
 	    wxKeyEventHandler ( MyNotebook::OnKeyDown ), NULL, this );
 }
 
@@ -125,7 +125,8 @@ void MyNotebook::OnKeyDown ( wxKeyEvent &event )
 
 	AdvanceSelection ( !event.m_shiftDown );
 
-	XmlDoc *doc = ( XmlDoc * ) GetCurrentPage();
+	int cur = GetSelection();
+	XmlDoc *doc = ( XmlDoc * ) GetPage ( cur );
 	if ( doc != NULL )
 		doc->SetFocus();
 }

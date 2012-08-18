@@ -68,17 +68,17 @@ pair<int, int> WrapExpat::getErrorPosition()
 	           XML_GetCurrentColumnNumber ( p ) );
 }
 
-string WrapExpat::getLastError()
+wxString WrapExpat::getLastError()
 {
 	if ( !p )
-		return "Unable to create parser instance";
+		return _ ( "Unable to create parser instance" );
 
 	stringstream ss;
 	ss << "Error at line ";
 	ss << XML_GetCurrentLineNumber ( p );
 	ss << ", column " << XML_GetCurrentColumnNumber ( p ) + 1 << ":" << endl;
 	ss << XML_ErrorString ( XML_GetErrorCode ( p ) );
-	return ss.str();
+	return wxString ( ss.str().c_str(), wxConvUTF8 );
 }
 
 string WrapExpat::xmliseTextNode ( const string &textnode )

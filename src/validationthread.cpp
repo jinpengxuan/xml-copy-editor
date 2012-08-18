@@ -6,7 +6,7 @@
 #include <memory>
 
 
-wxDEFINE_EVENT(wxEVT_COMMAND_VALIDATION_COMPLETED, wxThreadEvent);
+DEFINE_EVENT_TYPE(wxEVT_COMMAND_VALIDATION_COMPLETED);
 
 ValidationThread::ValidationThread (
 	wxEvtHandler *handler,
@@ -67,8 +67,8 @@ void *ValidationThread::Entry()
 		myMessage = validator->getLastError();
 	}
 
-	wxEvent *event = new wxThreadEvent(wxEVT_THREAD, wxEVT_COMMAND_VALIDATION_COMPLETED);
-	wxQueueEvent ( myEventHandler, event );
+	wxCommandEvent event ( wxEVT_COMMAND_VALIDATION_COMPLETED );
+	wxPostEvent ( myEventHandler, event );
 
 	return NULL;
 }

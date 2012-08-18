@@ -146,7 +146,7 @@ void HouseStyle::collectRules ( string& fileName,
 		if ( report != "" )
 			throw runtime_error ( report.c_str() );
 		else
-			throw runtime_error ( xrr->getLastError().c_str() );
+			throw runtime_error ( ( const char * ) xrr->getLastError().utf8_str() );
 	}
 
 	// add current file to exclude set
