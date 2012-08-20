@@ -212,7 +212,17 @@ MyApp::MyApp() : checker ( NULL ), server ( NULL ), connection ( NULL ),
 	int fdnull = open ( "/dev/null", O_WRONLY, 0 );
 	dup2 ( fdnull, STDERR_FILENO );
 #endif
-	//myLocale.Init();
+}
+
+MyApp::~MyApp()
+{
+	delete checker;
+	delete server;
+	delete connection;
+}
+
+bool MyApp::OnInit()
+{
 	int systemLocale = myLocale.GetSystemLanguage();
 	switch ( systemLocale )
 	{
@@ -231,8 +241,8 @@ MyApp::MyApp() : checker ( NULL ), server ( NULL ), connection ( NULL ),
 			systemLocale = wxLANGUAGE_CHINESE_TRADITIONAL;
 			break;
 		case wxLANGUAGE_CATALAN:
-            systemLocale = wxLANGUAGE_CATALAN;
-            break;
+			systemLocale = wxLANGUAGE_CATALAN;
+			break;
 		case wxLANGUAGE_SPANISH:
 		case wxLANGUAGE_SPANISH_ARGENTINA:
 		case wxLANGUAGE_SPANISH_BOLIVIA:
@@ -302,43 +312,6 @@ MyApp::MyApp() : checker ( NULL ), server ( NULL ), connection ( NULL ),
 #endif
 	}
 
-	myLocale.Init ( lang, wxLOCALE_LOAD_DEFAULT );
-
-	wxArrayString prefixes;
-#ifdef __WXGTK__
-	prefixes.Add ( wxT ( "/usr/share/locale" ) );
-	prefixes.Add ( wxT ( "/usr/local/share/locale" ) );
-#endif
-	wxString poDir = wxStandardPaths::Get().GetDataDir() +
-	        wxFileName::GetPathSeparator() + _T ( "po" ) + wxFileName::GetPathSeparator();
-	prefixes.Add ( poDir );
-	wxArrayString::const_iterator itr;
-	for ( itr = prefixes.begin(); itr != prefixes.end(); itr++ )
-		wxLocale::AddCatalogLookupPathPrefix ( *itr );
-
-	wxString catalog = _T ( "messages" );
-	getAvailableTranslations ( &prefixes, &catalog );
-
-	if ( !myLocale.AddCatalog ( catalog ) )
-		;
-
-#ifndef __WXMSW__
-	{
-		wxLogNull noLog;
-		myLocale.AddCatalog ( _T ( "fileutils" ) );
-	}
-#endif
-}
-
-MyApp::~MyApp()
-{
-	delete checker;
-	delete server;
-	delete connection;
-}
-
-bool MyApp::OnInit()
-{
 	wxString name, service, hostName;
 	name.Printf ( _T ( "xmlcopyeditor-%s" ), wxGetUserId().c_str() );
 	service = IPC_SERVICE;
@@ -346,7 +319,7 @@ bool MyApp::OnInit()
 
 	if ( singleInstanceCheck )
 	{
-        checker = new wxSingleInstanceChecker ( name );
+		checker = new wxSingleInstanceChecker ( name );
 		while ( checker->IsAnotherRunning() )
 		{
 			// attempt calling server
@@ -381,6 +354,38 @@ bool MyApp::OnInit()
 
 	server = new MyServer;
 	server->Create ( service );
+
+	myLocale.Init ( lang, wxLOCALE_LOAD_DEFAULT );
+
+	wxArrayString prefixes;
+#ifdef __WXGTK__
+	prefixes.Add ( _T ( "/usr/share/locale" ) );
+	prefixes.Add ( _T ( "/usr/share/locale-langpack" ) );
+	prefixes.Add ( _T ( "/usr/local/share/locale" ) );
+#endif
+	wxString poDir = wxStandardPaths::Get().GetDataDir() +
+	        wxFileName::GetPathSeparator() + _T ( "po" ) + wxFileName::GetPathSeparator();
+	prefixes.Add ( poDir );
+	for ( size_t i = 0; i < prefixes.Count(); )
+	{
+		if ( wxDirExists ( prefixes[i] ) )
+			wxLocale::AddCatalogLookupPathPrefix ( prefixes[i++] );
+		else
+			prefixes.RemoveAt ( i );
+	}
+	
+	wxString catalog = _T ( "messages" );
+	getAvailableTranslations ( &prefixes, &catalog );
+
+	if ( !myLocale.AddCatalog ( catalog ) )
+		;
+
+#ifndef __WXMSW__
+	{
+		wxLogNull noLog;
+		myLocale.AddCatalog ( _T ( "coreutils" ) );
+	}
+#endif
 
 	MyFrame *frame;
 	try
@@ -572,7 +577,7 @@ void MyApp::HandleEvent ( wxEvtHandler *handler, wxEventFunction func, wxEvent& 
 }
 #endif
 
-const wxArrayString &MyApp::getAvailableTranslations (
+const std::set<const wxLanguageInfo *> &MyApp::getAvailableTranslations (
     const wxArrayString *catalogLookupPathPrefixes /*= NULL*/,
     const wxString *catalog /*= NULL*/ )
 {
@@ -587,10 +592,20 @@ const wxArrayString &MyApp::getAvailableTranslations (
 			if ( catalog == NULL )
 				throw std::invalid_argument ( "catelog" );
 
+			const wxLanguageInfo *info;
 #if wxCHECK_VERSION(2,9,0)
 			wxTranslations *t = wxTranslations::Get();
 			if ( t != NULL )
+			{
 				translations = t->GetAvailableTranslations ( *catalog );
+				wxArrayString::const_iterator trans = translations.begin();
+				for ( ; trans != translations.end(); trans++ )
+				{
+					info = wxLocale::FindLanguageInfo ( *trans );
+					if ( info != NULL )
+						translations.insert ( info );
+				}
+			}
 #else
 			wxArrayString::const_iterator i = catalogLookupPathPrefixes->begin();
 			for ( i = catalogLookupPathPrefixes->begin();
@@ -613,7 +628,9 @@ const wxArrayString &MyApp::getAvailableTranslations (
 						if ( lang.EndsWith(".lproj", &rest) )
 						lang = rest;
 #endif // __WXOSX__
-						translations.push_back(lang);
+						info = wxLocale::FindLanguageInfo ( lang );
+						if ( info != NULL )
+							translations.insert ( info );
 					}
 				}
 			}
@@ -624,9 +641,9 @@ const wxArrayString &MyApp::getAvailableTranslations (
 			return wxFileName ( dir, catelog, _T ( "mo" ) ).FileExists()
 				|| wxFileName ( dir + wxFILE_SEP_PATH + _T ( "LC_MESSAGES" ), catelog, _T ( "mo" ) ).FileExists();
 		}
-		const wxArrayString &operator()() { return translations; }
+		const std::set<const wxLanguageInfo *> &operator()() { return translations; }
 	protected:
-		wxArrayString translations;
+		std::set<const wxLanguageInfo *> translations;
 	} translations ( catalogLookupPathPrefixes, catalog );
 
 	return translations();
@@ -2573,7 +2590,6 @@ void MyFrame::OnOptions ( wxCommandEvent& WXUNUSED ( event ) )
 #else
 	( _ ( "Preferences" ) );
 #endif
-	MyApp *app = ( MyApp * ) wxTheApp;
 	std::auto_ptr<MyPropertySheet> mpsd ( new MyPropertySheet (
 	                                          this,
 	                                          properties,
@@ -2587,7 +2603,7 @@ void MyFrame::OnOptions ( wxCommandEvent& WXUNUSED ( event ) )
 	                                          expandInternalEntities,
 	                                          showFullPathOnFrame,
 	                                          lang,
-	                                          app->getAvailableTranslations(),
+	                                          wxGetApp().getAvailableTranslations(),
 	                                          wxID_ANY,
 	                                          title ) );
 	if ( mpsd->ShowModal() == wxID_OK )

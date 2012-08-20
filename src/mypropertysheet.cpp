@@ -41,7 +41,7 @@ MyPropertySheet::MyPropertySheet (
     bool expandInternalEntitiesParameter,
     bool showFullPathOnFrameParameter,
     int lang,
-    const wxArrayString &translations,
+    const std::set<const wxLanguageInfo *> &translations,
     wxWindowID id,
     wxString title,
     const wxPoint& position,
@@ -165,17 +165,18 @@ MyPropertySheet::MyPropertySheet (
 	languageBox = new wxChoice (
 	    generalPanel,
 	    wxID_ANY );
+	languageBox->SetExtraStyle ( languageBox->GetExtraStyle() | wxCB_SORT );
+
+	languageBox->Append ( _ ( "Default" ), ( void* ) wxLANGUAGE_ENGLISH_US );
+	languageBox->SetSelection ( 0 );
 
 	int index;
-	const wxLanguageInfo *info;
-	wxArrayString::const_iterator trans = translations.begin();
-	for ( ; trans != translations.end(); trans++ )
+	std::set<const wxLanguageInfo *>::const_iterator t = translations.begin();
+	for ( ; t != translations.end(); t++ )
 	{
-		info = wxLocale::FindLanguageInfo ( *trans );
-		if ( info == NULL ) continue;
-
-		index = languageBox->Append ( info->Description, (void*)info->Language );
-		if (lang == info->Language)
+		index = languageBox->Append ( wxGetTranslation ( ( **t ).Description ),
+		                              ( void* )( **t ).Language );
+		if (lang == ( **t ).Language)
 			languageBox->SetSelection ( index );
 	}
 

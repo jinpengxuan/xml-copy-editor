@@ -176,7 +176,7 @@ class MyApp : public wxApp
 #ifndef __WXMSW__
 		virtual void HandleEvent ( wxEvtHandler *handler, wxEventFunction func, wxEvent& event ) const;
 #endif
-		const wxArrayString &getAvailableTranslations (
+		const std::set<const wxLanguageInfo *> &getAvailableTranslations (
 		    const wxArrayString *catalogLookupPathPrefixes = NULL,
 		    const wxString *catelog = NULL );
 	protected:

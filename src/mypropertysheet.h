@@ -47,7 +47,7 @@ class MyPropertySheet : public wxPropertySheetDialog
 		    bool expandInternalEntities,
 		    bool showFullPathOnFrame,
 		    int lang,
-		    const wxArrayString &translations,
+		    const std::set<const wxLanguageInfo *> &translations,
 		    wxWindowID id = wxID_ANY,
 		    wxString title = _T ( "" ),
 		    const wxPoint& position = wxDefaultPosition,
