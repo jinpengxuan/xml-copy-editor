@@ -814,6 +814,8 @@ MyFrame::MyFrame (
 		expandInternalEntities = config->Read ( _T ( "expandInternalEntities" ), true );
 
 		lastSymbol = config->Read( _T( "lastSymbol" ), _T ( "*" ) );
+
+		xercescSSE2Warning = config->Read ( _T ( "xercescSSE2Warning" ), true );
 	}
 	else // config not found
 	{
@@ -865,6 +867,24 @@ MyFrame::MyFrame (
             exportEpub = exportRtf = exportDoc = exportFullDaisy = true;
 
 		lastSymbol = _T( "*" );
+		xercescSSE2Warning = true;
+	}
+
+	if ( XMLPlatformUtils::fgSSE2ok
+		&& xercescSSE2Warning
+		&& wxTheApp->argc == 1 )
+	{
+		xercescSSE2Warning = wxMessageBox (
+			_ ("SSE2 is enabled in Xerces-C++ library. Xerces-C++ doesn't "\
+			   "use them in a thread-safe way. It may cause program crashes "\
+			   "(segmentation faults).\n\n"\
+			   "If it happens, please try compiling Xerces-C++ with SSE2 "\
+			   "disabled.\n\n"\
+			   "OK:\tShow this warning next time\n"\
+			   "Cancel:\tDisable the warning\n"),
+			_ ("SSE2 problem in Xerces-C++"),
+			wxOK | wxCANCEL | wxICON_WARNING
+		) == wxOK;
 	}
 
 	largeFileProperties.completion = false;
@@ -1153,6 +1173,7 @@ MyFrame::~MyFrame()
 	config->Write ( _T ( "unlimitedUndo" ), unlimitedUndo );
 
 	config->Write ( _T ( "lastSymbol" ), lastSymbol );
+	config->Write ( _T ( "xercescSSE2Warning" ), xercescSSE2Warning );
 
 	manager.UnInit();
 	wxTheClipboard->Flush();
