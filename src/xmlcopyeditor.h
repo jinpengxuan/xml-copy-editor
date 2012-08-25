@@ -120,6 +120,7 @@ enum
 	ID_VALIDATE_DTD,
 	ID_VALIDATE_RELAX_NG,
 	ID_VALIDATE_W3C_SCHEMA,
+	ID_CREATE_SCHEMA,
 	ID_XPATH,
 	ID_XSLT,
 	ID_XSLT_TEI_FO,
@@ -286,6 +287,7 @@ class MyFrame : public wxFrame
 		void OnValidateDTD ( wxCommandEvent& event );
 		void OnValidateRelaxNG ( wxCommandEvent& event );
 		void OnValidateSchema ( wxCommandEvent& event );
+		void OnCreateSchema ( wxCommandEvent& event );
 		void OnXPath ( wxCommandEvent& event );
 		void OnXslt ( wxCommandEvent& event );
 		void OnValidatePreset ( wxCommandEvent& event );

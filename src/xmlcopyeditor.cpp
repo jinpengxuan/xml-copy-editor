@@ -60,6 +60,7 @@
 #include <wx/stdpaths.h>
 #include <wx/tokenzr.h>
 #include <wx/dir.h>
+#include "xmlschemagenerator.h"
 
 #define ngettext wxGetTranslation
 
@@ -135,6 +136,7 @@ BEGIN_EVENT_TABLE ( MyFrame, wxFrame )
 	EVT_MENU ( ID_CHECK_WELLFORMED, MyFrame::OnCheckWellformedness )
 	EVT_MENU ( ID_VALIDATE_RELAX_NG, MyFrame::OnValidateRelaxNG )
 	EVT_MENU ( ID_VALIDATE_W3C_SCHEMA, MyFrame::OnValidateSchema )
+	EVT_MENU ( ID_CREATE_SCHEMA, MyFrame::OnCreateSchema )
 	EVT_MENU ( ID_XPATH, MyFrame::OnXPath )
 	EVT_MENU_RANGE ( ID_XSLT, ID_XSLT_WORDML_DOCBOOK, MyFrame::OnXslt )
 	EVT_MENU ( ID_PRETTYPRINT, MyFrame::OnPrettyPrint )
@@ -4039,6 +4041,38 @@ void MyFrame::OnValidateSchema ( wxCommandEvent& event )
 		documentOk ( _ ( "valid" ) );
 }
 
+void MyFrame::OnCreateSchema ( wxCommandEvent& event )
+{
+	statusProgress ( wxEmptyString );
+
+	XmlDoc *doc = getActiveDocument();
+	if ( doc == NULL )
+		return;
+
+	std::string rawBufferUtf8;
+	getRawText ( doc, rawBufferUtf8 );
+	if ( !XmlEncodingHandler::setUtf8 ( rawBufferUtf8 ) )
+	{
+		encodingMessage();
+		return;
+	}
+
+	int ret = wxMessageBox ( _("Create W3C schema?\n\nYes:\tW3C Schema\nNo:\tDTD"),
+			_("Schema type"), wxYES_NO | wxCANCEL | wxICON_QUESTION);
+	if ( ret == wxCANCEL ) return;
+
+	Grammar::GrammarType type = ( ret == wxYES ) ?
+			Grammar::SchemaGrammarType : Grammar::DTDGrammarType;
+	std::auto_ptr<XmlSchemaGenerator> gen ( new XmlSchemaGenerator() );
+	const wxString &schema = gen->generate(type, doc->getFullFileName(),
+	    rawBufferUtf8.c_str(), rawBufferUtf8.size() );
+	if (schema.IsEmpty()) {
+		messagePane ( gen->getLastError(), CONST_WARNING );
+		return;
+	}
+	newDocument ( schema );
+}
+
 void MyFrame::OnXPath ( wxCommandEvent& event )
 {
 	statusProgress ( wxEmptyString );
@@ -5296,6 +5330,8 @@ wxMenuBar *MyFrame::getMenuBar()
 	    wxID_ANY,
 	    _ ( "&Validate" ),
 	    validationMenu );
+	xmlMenu->Append ( ID_CREATE_SCHEMA, _ ( "Create &Schema...\tF10" ),
+	    _ ( "Create schema" ) );
 	xmlMenu->AppendSeparator();
 	xmlMenu->Append (
 	    wxID_ANY,
