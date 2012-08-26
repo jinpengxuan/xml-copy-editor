@@ -26,6 +26,9 @@
 #include <xercesc/dom/DOMNamedNodeMap.hpp>
 #include <xercesc/dom/DOMAttr.hpp>
 
+const static size_t maxReservedSchemaBuffer = 1024 * 1024;
+const static size_t maxElementSchemaBuffer = 1024;
+
 XmlSchemaGenerator::XmlSchemaGenerator ( bool inlineSimpleType /*= true*/)
 		: mInlineSimpleType ( inlineSimpleType )
 		, mGrammarType ( Grammar::SchemaGrammarType )
@@ -68,6 +71,10 @@ const wxString &XmlSchemaGenerator::generate ( Grammar::GrammarType grammarType,
 		return mSchema;
 	}
 
+	size_t size = len / 3;
+	if ( size > maxReservedSchemaBuffer ) size = maxReservedSchemaBuffer;
+	mSchema.Alloc ( size );
+
 	mSchema << _T("<?xml version=\"1.0\" encoding=\"UTF-8\"?>") << getEOL();
 	if ( mGrammarType == Grammar::SchemaGrammarType )
 		mSchema << _T("<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" elementFormDefault=\"qualified\">")
@@ -84,6 +91,8 @@ const wxString &XmlSchemaGenerator::generate ( Grammar::GrammarType grammarType,
 
 	if ( mGrammarType == Grammar::SchemaGrammarType )
 		mSchema << _T("</xs:schema>") << getEOL();
+
+	mSchema.Shrink();
 
 	return mSchema;
 }
@@ -251,6 +260,9 @@ void XmlSchemaGenerator::generateSchema ( ElmtData &data, size_t nIndent )
 		}
 		return;
 	}
+
+	schema.Alloc ( maxElementSchemaBuffer );
+
 	addIndent ( schema, nIndent++ );
 	schema << _T("<xs:element name=\"") << data.name << _T("\">") << getEOL();
 	if ( data.children.size() > 0 )
@@ -353,11 +365,14 @@ void XmlSchemaGenerator::generateSchema ( ElmtData &data, size_t nIndent )
 	schema << _T("</xs:complexType>") << getEOL();
 	addIndent ( schema, --nIndent );
 	schema << _T("</xs:element>") << getEOL();
+
+	schema.Shrink();
 }
 
 void XmlSchemaGenerator::generateDTD ( ElmtData &data, size_t WXUNUSED ( nIndent ) )
 {
 	wxString &schema = data.schema;
+	schema.Alloc ( maxElementSchemaBuffer );
 
 	schema << _T("<!ELEMENT ") << data.name;
 	if (data.sequence.empty())
@@ -417,6 +432,7 @@ void XmlSchemaGenerator::generateDTD ( ElmtData &data, size_t WXUNUSED ( nIndent
 		}
 		schema << _T(">") << getEOL();
 	}
+	schema.Shrink();
 }
 
 bool XmlSchemaGenerator::getSequence ( std::vector<wxString> &sequence,
