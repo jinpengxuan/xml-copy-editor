@@ -113,8 +113,9 @@ bool WrapXerces::validate ( const std::string& fileName )
 // tbd: cache grammar
 bool WrapXerces::validateMemory (
 	const char *buffer,
+	size_t len,
 	const char *system,
-	unsigned len )
+	wxThread *thread /*= NULL*/ )
 {
 	std::auto_ptr<SAX2XMLReader> parser ( XMLReaderFactory::createXMLReader() );
 
@@ -125,7 +126,7 @@ bool WrapXerces::validateMemory (
 	//parser->setFeature ( XMLUni::fgXercesSchemaFullChecking, true );
 	parser->setFeature ( XMLUni::fgXercesValidationErrorAsFatal, true );
 	parser->setFeature ( XMLUni::fgXercesLoadExternalDTD, true );
-	
+
 	DefaultHandler handler;
 	MySAX2Handler mySAX2Handler;
 	parser->setContentHandler ( &handler );
@@ -138,7 +139,17 @@ bool WrapXerces::validateMemory (
 
 	try
 	{
-		parser->parse ( source );
+		if ( thread == NULL )
+		{
+			parser->parse ( source );
+		}
+		else if ( !thread->TestDestroy() )
+		{
+			XMLPScanToken token;
+			if ( parser->parseFirst ( source, token ) )
+				while ( (!thread->TestDestroy()) && parser->parseNext ( token ) )
+					continue;
+		}
 	}
 	catch ( XMLException& e )
 	{

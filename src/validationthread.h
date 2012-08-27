@@ -22,12 +22,21 @@ public:
 	bool isSucceeded () { return myIsSucceeded; }
 	const std::pair<int, int> &getPosition() { return myPosition; }
 	const wxString &getMessage() { return myMessage; }
-private:
+
+	void PendingDelete();
+	// Since we can't call wxThread::m_internal->Cancel(), the original
+	// TestDestroy() is useless. Here is the work around.
+	virtual void Cancel() { mStopping = true; }
+	virtual bool TestDestroy() { return mStopping || wxThread::TestDestroy(); }
+
+protected:
 	wxEvtHandler *myEventHandler;
 	std::string myBuffer, mySystem, myCatalogPath, myCatalogUtilityPath;
 	bool myIsSucceeded;
 	std::pair<int, int> myPosition;
 	wxString myMessage;
+
+	bool mStopping;
 };
 
 #endif

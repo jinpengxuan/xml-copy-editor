@@ -4,7 +4,9 @@
 #include "wrapxerces.h"
 #include <stdexcept>
 #include <memory>
+#include "threadreaper.h"
 
+extern wxCriticalSection xmlcopyeditorCriticalSection;
 
 DEFINE_EVENT_TYPE(wxEVT_COMMAND_VALIDATION_COMPLETED);
 
@@ -15,6 +17,7 @@ ValidationThread::ValidationThread (
 	const char *catalogPath,
 	const char *catalogUtilityPath )
 	: wxThread ( wxTHREAD_JOINABLE )
+	, mStopping ( false )
 {
 	if ( buffer == NULL )
 	{
@@ -35,25 +38,22 @@ void *ValidationThread::Entry()
                               myCatalogPath,
                               myCatalogUtilityPath ) );
 	
+	if ( TestDestroy()  )
 	{
-		//wxCriticalSectionLocker locker ( xmlcopyeditorCriticalSection );
-		if ( TestDestroy()  )
-		{
-			return NULL;
-		}
+		return NULL;
 	}
 
 	myIsSucceeded = validator->validateMemory (
 		myBuffer.c_str(),
+		myBuffer.size(),
 		mySystem.c_str(),
-		myBuffer.size() );
+		this );
 
 	if ( TestDestroy() )
 	{
 		return NULL;
 	}
 
-	extern wxCriticalSection xmlcopyeditorCriticalSection;
 	wxCriticalSectionLocker locker ( xmlcopyeditorCriticalSection );
 
 	if ( myIsSucceeded )
@@ -67,8 +67,18 @@ void *ValidationThread::Entry()
 		myMessage = validator->getLastError();
 	}
 
-	wxCommandEvent event ( wxEVT_COMMAND_VALIDATION_COMPLETED );
-	wxPostEvent ( myEventHandler, event );
+	if ( !TestDestroy() )
+	{
+		wxCommandEvent event ( wxEVT_COMMAND_VALIDATION_COMPLETED );
+		wxPostEvent ( myEventHandler, event );
+	}
 
 	return NULL;
+}
+
+void ValidationThread::PendingDelete ()
+{
+	Cancel();
+
+	ThreadReaper::get().add ( this );
 }

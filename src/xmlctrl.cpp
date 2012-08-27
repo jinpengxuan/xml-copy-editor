@@ -138,8 +138,7 @@ XmlCtrl::~XmlCtrl()
 
 	if ( validationThread != NULL )
 	{
-		validationThread->Kill();
-		delete validationThread;
+		validationThread->PendingDelete();
 	}
 }
 

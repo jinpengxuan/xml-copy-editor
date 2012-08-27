@@ -3123,7 +3123,7 @@ bool MyFrame::openFile ( wxString& fileName, bool largeFile )
 
 	statusProgress ( wxEmptyString );
 
-	char *iconvBuffer = 0;
+	wxCharBuffer iconvBuffer;
 	size_t iconvBufferLen = 0;
 
 	char *finalBuffer;
@@ -3230,21 +3230,21 @@ bool MyFrame::openFile ( wxString& fileName, bool largeFile )
 			iconvLenMultiplier = 1;
 		}
 
+		size_t nconv;
+		char *buffer;
 		size_t iconvBufferLeft, docBufferLeft;
 		iconvBufferLen = iconvBufferLeft = (docBufferLen - nBOM) * iconvLenMultiplier + 1;
 		docBufferLeft = docBufferLen;
-		iconvBuffer = new char[iconvBufferLen];
-		finalBuffer = iconvBuffer; // iconvBuffer will be incremented by iconv
-		size_t nconv;
-
+		iconvBuffer.extend ( iconvBufferLen );
+		finalBuffer = buffer = iconvBuffer.data(); // buffer will be incremented by iconv
 		nconv = reinterpret_cast < universal_iconv & > ( iconv ) (
 		            cd,
 		            &docBuffer,
 		            &docBufferLeft,
-		            &iconvBuffer,
+		            &buffer,
 		            &iconvBufferLeft );
 
-		*iconvBuffer = '\0';
+		*buffer = '\0';
 
 		iconv_close ( cd );
 
@@ -3255,7 +3255,6 @@ bool MyFrame::openFile ( wxString& fileName, bool largeFile )
 			                 fileName.c_str(),
 			                 wideEncoding.c_str() );
 			messagePane ( message, CONST_STOP );
-			delete[] finalBuffer;
 			delete binaryfile; //delete memorymap;
 			return false;
 		}

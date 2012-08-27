@@ -41,7 +41,8 @@ class WrapXerces
                     std::string catalogUtilityPath = "" );
 		~WrapXerces();
 		bool validate ( const std::string& fileName );
-		bool validateMemory ( const char *buffer, const char *system, unsigned len );
+		bool validateMemory ( const char *buffer, size_t len,
+		    const char *system, wxThread *thread = NULL );
 		const wxString &getLastError();
 		std::pair<int, int> getErrorPosition();
 		static wxString toString ( const XMLCh *str );

@@ -299,6 +299,7 @@ int XMLCALL XmlPromptGenerator::externalentityrefhandler (
 	PromptGeneratorData *d;
 	d = ( PromptGeneratorData * ) p; // arg is set to user data in c'tor
 
+	int ret;
 	std::string buffer;
 
 	// auxPath req'd?
@@ -307,15 +308,17 @@ int XMLCALL XmlPromptGenerator::externalentityrefhandler (
 		ReadFile::run ( d->auxPath, buffer );
 		if ( buffer.empty() )
 		{
-			return false;
+			return XML_STATUS_ERROR;
 		}
 
 		std::string encoding = XmlEncodingHandler::get ( buffer );
 		XML_Parser dtdParser = XML_ExternalEntityParserCreate ( d->p, context, encoding.c_str() );
 		if ( !dtdParser )
-			return false;
+			return XML_STATUS_ERROR;
 		XML_SetBase ( dtdParser, d->auxPath.c_str() );
-		return XML_Parse ( dtdParser, buffer.c_str(), buffer.size(), true );
+		ret = XML_Parse ( dtdParser, buffer.c_str(), buffer.size(), true );
+		XML_ParserFree ( dtdParser );
+		return ret;
 	}
 
 	std::string stdPublicId;
@@ -358,7 +361,7 @@ int XMLCALL XmlPromptGenerator::externalentityrefhandler (
 	std::string encoding = XmlEncodingHandler::get ( buffer );
 	XML_Parser dtdParser = XML_ExternalEntityParserCreate ( d->p, context, encoding.c_str() );
 	if ( !dtdParser )
-		return false;
+		return XML_STATUS_ERROR;
 
 	wxString wideName, wideDir;
 	wideName = wxString ( stdSystemId.c_str(), wxConvUTF8, stdSystemId.size() );
@@ -366,7 +369,9 @@ int XMLCALL XmlPromptGenerator::externalentityrefhandler (
 	wideDir = fn.GetPath();
 	XML_SetBase ( dtdParser, wideName.mb_str ( wxConvUTF8 ) );
 
-	return XML_Parse ( dtdParser, buffer.c_str(), buffer.size(), true );
+	ret = XML_Parse ( dtdParser, buffer.c_str(), buffer.size(), true );
+	XML_ParserFree ( dtdParser );
+	return ret;
 }
 
 void XMLCALL XmlPromptGenerator::entitydeclhandler (
