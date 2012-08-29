@@ -56,10 +56,10 @@ am_xmlcopyeditor_OBJECTS = xmlcopyeditor.$(OBJEXT) \
 	housestyle.$(OBJEXT) housestylereader.$(OBJEXT) \
 	myhtmlpane.$(OBJEXT) nocasecompare.$(OBJEXT) \
 	readfile.$(OBJEXT) replace.$(OBJEXT) styledialog.$(OBJEXT) \
-	wraplibxml.$(OBJEXT) wrapregex.$(OBJEXT) \
-	wraptempfilename.$(OBJEXT) xmlassociatedtd.$(OBJEXT) \
-	xmlassociatexsd.$(OBJEXT) xmlassociatexsl.$(OBJEXT) \
-	xmlctrl.$(OBJEXT) xmldoc.$(OBJEXT) \
+	threadreaper.$(OBJEXT) wraplibxml.$(OBJEXT) \
+	wrapregex.$(OBJEXT) wraptempfilename.$(OBJEXT) \
+	xmlassociatedtd.$(OBJEXT) xmlassociatexsd.$(OBJEXT) \
+	xmlassociatexsl.$(OBJEXT) xmlctrl.$(OBJEXT) xmldoc.$(OBJEXT) \
 	xmlencodinghandler.$(OBJEXT) xmlfilterreader.$(OBJEXT) \
 	xmlpromptgenerator.$(OBJEXT) xmlrulereader.$(OBJEXT) \
 	xmlschemalocator.$(OBJEXT) xmlutf8reader.$(OBJEXT) \
@@ -70,15 +70,14 @@ am_xmlcopyeditor_OBJECTS = xmlcopyeditor.$(OBJEXT) \
 	mynotebook.$(OBJEXT) insertpanel.$(OBJEXT) \
 	xmlwordcount.$(OBJEXT) getword.$(OBJEXT) \
 	locationpanel.$(OBJEXT) catalogresolver.$(OBJEXT) \
-	xmlparseschemans.$(OBJEXT) \
-	xmlshallowvalidator.$(OBJEXT) wrapxerces.$(OBJEXT) \
-	findreplacepanel.$(OBJEXT) commandpanel.$(OBJEXT) \
-	xercescatalogresolver.$(OBJEXT) binaryfile.$(OBJEXT) \
-	xmlencodingspy.$(OBJEXT) wrapaspell.$(OBJEXT) \
-	validationthread.$(OBJEXT) wrapdaisy.$(OBJEXT) \
-	exportdialog.$(OBJEXT) mp3album.$(OBJEXT) \
+	xmlparseschemans.$(OBJEXT) xmlshallowvalidator.$(OBJEXT) \
+	wrapxerces.$(OBJEXT) findreplacepanel.$(OBJEXT) \
+	commandpanel.$(OBJEXT) xercescatalogresolver.$(OBJEXT) \
+	binaryfile.$(OBJEXT) xmlencodingspy.$(OBJEXT) \
+	wrapaspell.$(OBJEXT) validationthread.$(OBJEXT) \
+	wrapdaisy.$(OBJEXT) exportdialog.$(OBJEXT) mp3album.$(OBJEXT) \
 	xmlprodnote.$(OBJEXT) xmlsuppressprodnote.$(OBJEXT) \
-	xmlcopyimg.$(OBJEXT)
+	xmlcopyimg.$(OBJEXT) xmlschemagenerator.$(OBJEXT)
 xmlcopyeditor_OBJECTS = $(am_xmlcopyeditor_OBJECTS)
 xmlcopyeditor_LDADD = $(LDADD)
 xmlcopyeditor_LINK = $(LIBTOOL) --tag=CXX $(AM_LIBTOOLFLAGS) \
@@ -258,17 +257,19 @@ applicationsdir = /usr/share/applications
 xmlcopyeditor_SOURCES = xmlcopyeditor.cpp associatedialog.cpp casehandler.cpp \
 	contexthandler.cpp globalreplacedialog.cpp housestyle.cpp \
 	housestylereader.cpp myhtmlpane.cpp nocasecompare.cpp readfile.cpp \
-	replace.cpp styledialog.cpp wraplibxml.cpp \
+	replace.cpp styledialog.cpp threadreaper.cpp wraplibxml.cpp \
 	wrapregex.cpp wraptempfilename.cpp xmlassociatedtd.cpp xmlassociatexsd.cpp \
-	xmlassociatexsl.cpp xmlctrl.cpp xmldoc.cpp xmlencodinghandler.cpp xmlfilterreader.cpp \
-	xmlpromptgenerator.cpp xmlrulereader.cpp xmlschemalocator.cpp xmlutf8reader.cpp xsllocator.cpp \
-	wrapexpat.cpp mypropertysheet.cpp rule.cpp housestylewriter.cpp myipc.cpp aboutdialog.cpp pathresolver.cpp mynotebook.cpp \
-	insertpanel.cpp xmlwordcount.cpp getword.cpp locationpanel.cpp catalogresolver.cpp \
+	xmlassociatexsl.cpp xmlctrl.cpp xmldoc.cpp xmlencodinghandler.cpp \
+	xmlfilterreader.cpp xmlpromptgenerator.cpp xmlrulereader.cpp \
+	xmlschemalocator.cpp xmlutf8reader.cpp xsllocator.cpp \
+	wrapexpat.cpp mypropertysheet.cpp rule.cpp housestylewriter.cpp myipc.cpp \
+	aboutdialog.cpp pathresolver.cpp mynotebook.cpp insertpanel.cpp \
+	xmlwordcount.cpp getword.cpp locationpanel.cpp catalogresolver.cpp \
 	xmlparseschemans.cpp xmlshallowvalidator.cpp wrapxerces.cpp \
 	findreplacepanel.cpp commandpanel.cpp xercescatalogresolver.cpp \
 	binaryfile.cpp xmlencodingspy.cpp wrapaspell.cpp validationthread.cpp \
 	wrapdaisy.cpp exportdialog.cpp mp3album.cpp xmlprodnote.cpp \
-	xmlsuppressprodnote.cpp xmlcopyimg.cpp \
+	xmlsuppressprodnote.cpp xmlcopyimg.cpp xmlschemagenerator.cpp \
 	rulesets png rng xpm templates copying help po \
 	xmlcopyeditor.spec xmlcopyeditor.png custom.xpm \
 	xmlcopyeditor.desktop
@@ -432,6 +433,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/replace.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/rule.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/styledialog.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/threadreaper.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/validationthread.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/wrapaspell.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/wrapdaisy.Po@am__quote@
@@ -455,6 +457,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xmlprodnote.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xmlpromptgenerator.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xmlrulereader.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xmlschemagenerator.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xmlschemalocator.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xmlshallowvalidator.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xmlsuppressprodnote.Po@am__quote@

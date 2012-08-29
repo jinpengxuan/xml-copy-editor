@@ -16,17 +16,19 @@ applicationsdir = /usr/share/applications
 xmlcopyeditor_SOURCES = xmlcopyeditor.cpp associatedialog.cpp casehandler.cpp \
 	contexthandler.cpp globalreplacedialog.cpp housestyle.cpp \
 	housestylereader.cpp myhtmlpane.cpp nocasecompare.cpp readfile.cpp \
-	replace.cpp styledialog.cpp wraplibxml.cpp \
+	replace.cpp styledialog.cpp threadreaper.cpp wraplibxml.cpp \
 	wrapregex.cpp wraptempfilename.cpp xmlassociatedtd.cpp xmlassociatexsd.cpp \
-	xmlassociatexsl.cpp xmlctrl.cpp xmldoc.cpp xmlencodinghandler.cpp xmlfilterreader.cpp \
-	xmlpromptgenerator.cpp xmlrulereader.cpp xmlschemalocator.cpp xmlutf8reader.cpp xsllocator.cpp \
-	wrapexpat.cpp mypropertysheet.cpp rule.cpp housestylewriter.cpp myipc.cpp aboutdialog.cpp pathresolver.cpp mynotebook.cpp \
-	insertpanel.cpp xmlwordcount.cpp getword.cpp locationpanel.cpp catalogresolver.cpp \
+	xmlassociatexsl.cpp xmlctrl.cpp xmldoc.cpp xmlencodinghandler.cpp \
+	xmlfilterreader.cpp xmlpromptgenerator.cpp xmlrulereader.cpp \
+	xmlschemalocator.cpp xmlutf8reader.cpp xsllocator.cpp \
+	wrapexpat.cpp mypropertysheet.cpp rule.cpp housestylewriter.cpp myipc.cpp \
+	aboutdialog.cpp pathresolver.cpp mynotebook.cpp insertpanel.cpp \
+	xmlwordcount.cpp getword.cpp locationpanel.cpp catalogresolver.cpp \
 	xmlparseschemans.cpp xmlshallowvalidator.cpp wrapxerces.cpp \
 	findreplacepanel.cpp commandpanel.cpp xercescatalogresolver.cpp \
 	binaryfile.cpp xmlencodingspy.cpp wrapaspell.cpp validationthread.cpp \
 	wrapdaisy.cpp exportdialog.cpp mp3album.cpp xmlprodnote.cpp \
-	xmlsuppressprodnote.cpp xmlcopyimg.cpp \
+	xmlsuppressprodnote.cpp xmlcopyimg.cpp xmlschemagenerator.cpp \
 	rulesets png rng xpm templates copying help po \
 	xmlcopyeditor.spec xmlcopyeditor.png custom.xpm \
 	xmlcopyeditor.desktop
