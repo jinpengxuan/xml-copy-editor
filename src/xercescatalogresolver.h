@@ -5,42 +5,23 @@
 #include <string>
 #include <xercesc/sax/EntityResolver.hpp>
 #include <xercesc/sax/InputSource.hpp>
-
-#ifndef __WXMSW__
+#include <xercesc/sax/Locator.hpp>
 #include "catalogresolver.h"
-#endif
 
 using namespace xercesc;
 
-class XercesCatalogResolver : public EntityResolver
+class XercesCatalogResolver : public EntityResolver, public CatalogResolver
 {
 	public:
-		XercesCatalogResolver( std::string catalogPath = "",
-                               std::string catalogUtilityPath = "" )
+		XercesCatalogResolver()
 		{
-#ifndef __WXMSW__
-			cr = new CatalogResolver ( catalogPath );
-#else
-			myCatalogPath = catalogPath;
-			myCatalogUtilityPath = catalogUtilityPath;
-#endif
 		}
 		~XercesCatalogResolver()
 		{
-#ifndef __WXMSW__
-			delete cr;
-#endif
 		}
-		InputSource *resolveEntity (
+		virtual InputSource *resolveEntity (
 			const XMLCh * const publicID,
 			const XMLCh* const systemId );
-	private:
-#ifndef __WXMSW__
-		CatalogResolver *cr;
-#else
-		std::string myCatalogPath;
-		std::string myCatalogUtilityPath;
-#endif
 };
 
 #endif

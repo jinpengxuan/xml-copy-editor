@@ -37,9 +37,8 @@ class WrapXerces
 {
 	public:
 		static void Init() throw ();
-		WrapXerces( std::string catalogPath = "",
-                    std::string catalogUtilityPath = "" );
-		~WrapXerces();
+		WrapXerces();
+		virtual ~WrapXerces();
 		bool validate ( const std::string& fileName );
 		bool validateMemory ( const char *buffer, size_t len,
 		    const char *system, wxThread *thread = NULL );

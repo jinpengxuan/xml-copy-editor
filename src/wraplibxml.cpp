@@ -26,62 +26,70 @@
 #endif
 
 #include <wx/wx.h>
+#include <wx/filesys.h>
+#include <wx/uri.h>
 
-void WrapLibxml::Init() throw()
+class Initializer
 {
-	static class Initializer
+public:
+	Initializer ( const std::string &catalogPath ) throw ()
 	{
-	public:
-		Initializer () throw ()
+		xmlSetGenericErrorFunc ( xmlGenericErrorContext,
+				&Initializer::OnXmlGenericError );
+
+		LIBXML_TEST_VERSION
+
+		xmlInitializeCatalog();
+		xmlLoadCatalog ( catalogPath.c_str() );
+
+		initGenericErrorDefaultFunc ( NULL );
+	}
+
+	~Initializer ()
+	{
+		xsltCleanupGlobals();
+		xmlCatalogCleanup();
+		xmlCleanupParser();
+	}
+
+	static void XMLCDECL OnXmlGenericError (void *ctx, const char *msg, ...) throw()
+	{
+		va_list args;
+
+		size_t size = 128;
+		std::string buffer;
+		int chars;
+		for (;;)
 		{
-			xmlSetGenericErrorFunc ( xmlGenericErrorContext, &Initializer::OnXmlGenericError );
+			buffer.resize ( size );
+			if ( buffer.size() < size )
+				throw std::runtime_error ( "Out of memory" );
 
-			LIBXML_TEST_VERSION
-			xmlInitializeCatalog();
+			va_start(args, msg);
+			chars = vsnprintf( (char *) buffer.c_str(), size, msg, args);
+			va_end(args);
 
-			initGenericErrorDefaultFunc ( NULL );
-		}
-		~Initializer ()
-		{
-			xsltCleanupGlobals();
-			xmlCatalogCleanup();
-			xmlCleanupParser();
-		}
-
-		static void XMLCDECL OnXmlGenericError (void *ctx, const char *msg, ...) throw()
-		{
-			va_list args;
-
-			size_t size = 128;
-			std::string buffer;
-			int chars;
-			for (;;)
+			if ( chars >= 0 && ( size_t ) chars < size )
 			{
-				buffer.resize ( size );
-				if ( buffer.size() < size )
-					throw std::runtime_error ( "Out of memory" );
-
-				va_start(args, msg);
-				chars = vsnprintf( (char *) buffer.c_str(), size, msg, args);
-				va_end(args);
-
-				if ( chars >= 0 && ( size_t ) chars < size )
-				{
-					buffer.resize ( chars );
-					throw std::runtime_error ( buffer );
-				}
-				if ( chars >= 0 )
-					size = chars + 1;
-				else
-					throw std::runtime_error (
-					    std::string ( "Can't format message: " ) + msg );
+				buffer.resize ( chars );
+				throw std::runtime_error ( buffer );
 			}
+			if ( chars >= 0 )
+				size = chars + 1;
+			else
+				throw std::runtime_error (
+					std::string ( "Can't format message: " ) + msg );
 		}
-	} dummy;
+	}
+};
+
+void WrapLibxml::Init ( const std::string &catalogPath ) throw()
+{
+	static Initializer dummy ( catalogPath );
 }
 
-WrapLibxml::WrapLibxml ( bool netAccessParameter, const std::string& catalogPathParameter )
-		: netAccess ( netAccessParameter ), catalogPath ( catalogPathParameter )
+WrapLibxml::WrapLibxml ( bool netAccessParameter )
+		: netAccess ( netAccessParameter )
 {
 	WrapLibxml::Init();
 }
@@ -106,7 +114,6 @@ bool WrapLibxml::validate ( const std::string& fileName )
 
 	bool returnValue = false;
 
-	loadCatalog();
 	docPtr = xmlCtxtReadFile (
 	             ctxt,
 	             fileName.c_str(),
@@ -239,8 +246,6 @@ bool WrapLibxml::parse (
 		return false;
 	}
 
-	loadCatalog();
-
 	int flags = XML_PARSE_DTDLOAD;
 	if ( resolveEntities )
 		flags |= XML_PARSE_NOENT;
@@ -301,7 +306,6 @@ bool WrapLibxml::xpath ( const std::string& path, const std::string& fileName )
 		return false;
 	}
 
-	loadCatalog();
 	docPtr = xmlCtxtReadFile (
 	             ctxt,
 	             fileName.c_str(),
@@ -384,7 +388,6 @@ bool WrapLibxml::xslt (
 		return false;
 	}
 
-	loadCatalog();
 	doc = xmlParseFile ( fileName.c_str() );
 	if ( !doc )
 	{
@@ -432,7 +435,6 @@ bool WrapLibxml::bufferWellFormed ( const std::string& buffer )
 	if ( !ctxt )
 		return false;
 
-	loadCatalog();
 	xmlDocPtr docPtr = xmlCtxtReadMemory (
 	                       ctxt,
 	                       buffer.c_str(),
@@ -458,8 +460,6 @@ int WrapLibxml::saveEncoding (
 		return -1;
 
 	xmlSubstituteEntitiesDefault ( 0 );
-
-	loadCatalog();
 
 	xmlKeepBlanksDefault ( 1 ); // prevents single-line output
 
@@ -496,9 +496,6 @@ int WrapLibxml::saveEncodingFromFile (
 		return -1;
 
 	xmlSubstituteEntitiesDefault ( 0 );
-
-	loadCatalog();
-
 	xmlKeepBlanksDefault ( 1 ); // prevents single-line output
 
 	xmlDocPtr docPtr = xmlCtxtReadFile (
@@ -564,32 +561,21 @@ std::string WrapLibxml::getOutput()
 	return output;
 }
 
-void WrapLibxml::loadCatalog()
-{
-#ifdef __WXMSW__
-	xmlLoadCatalog ( catalogPath.c_str() );
-#endif
-}
-
 std::string WrapLibxml::lookupPublicId ( const std::string& id )
 {
-	loadCatalog();
 	std::string ret;
 	char *s = ( char * ) xmlCatalogResolvePublic ( ( const xmlChar * ) id.c_str() );
-	if ( !s )
+	if ( s == NULL )
 		return ret;
 
-	char *original, *it;
-	original = s;
+	wxString url ( s, wxConvUTF8 );
+	wxFileName file = wxFileSystem::URLToFileName ( url );
+	if ( file.IsFileReadable() )
+		ret = file.GetFullPath().mb_str ( wxConvLocal );
+	else
+		ret = s;
 
-	it = strstr ( s, "file://" );
-	if ( it )
-	{
-		s = it + 6;
-	}
+	xmlFree ( s );
 
-	ret = s;
-
-	xmlFree ( original );
 	return ret;
 }

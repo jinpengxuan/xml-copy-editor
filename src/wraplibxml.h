@@ -38,10 +38,9 @@
 class WrapLibxml
 {
 	public:
-		static void Init() throw();
-		WrapLibxml (
-		    bool netAccessParameter = false,
-		    const std::string& catalogPathParameter = "catalog" );
+		static void Init ( const std::string &catalogPath = "catalog" ) throw();
+
+		WrapLibxml ( bool netAccessParameter = false );
 		virtual ~WrapLibxml();
 		bool validate ( const std::string& fileName );
 		bool validateRelaxNG (
@@ -71,9 +70,8 @@ class WrapLibxml
 		std::string lookupPublicId ( const std::string& id );
 	private:
 		bool netAccess;
-		std::string catalogPath, output, nonParserError;
+		std::string output, nonParserError;
 		int errorLine;
-		void loadCatalog();
 };
 
 #endif

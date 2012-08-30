@@ -19,25 +19,25 @@
 
 #include <wx/filename.h>
 #include "pathresolver.h"
+#include <wx/stdpaths.h>
 
 wxString PathResolver::run ( const wxString& path, const wxString& anchor )
 {
 	if ( path.empty() ) // no hope for empty paths
 		return wxEmptyString;
 	
-	wxString myPath, myAnchor;
-	myPath = path;
-	myAnchor = anchor;
-	wxFileName pathObject ( myPath );
-	if ( pathObject.IsAbsolute() ||
-	        myPath.Contains ( _T ( "http://" ) ) )
-		return myPath;
+	wxFileName pathObject ( path );
+	if ( pathObject.IsAbsolute() || path.Contains ( _T ( "http://" ) ) )
+		return path;
 
 	// check anchor
+	wxString myAnchor;
+	myAnchor = anchor;
 	wxFileName anchorObject ( myAnchor );
 	if ( myAnchor.empty() )
 	{
-		myAnchor = wxFileName::GetCwd();
+		//myAnchor = wxFileName::GetCwd();
+		myAnchor = wxStandardPaths::Get().GetDataDir();
 	}
 	else if ( !anchorObject.IsDir() )
 	{

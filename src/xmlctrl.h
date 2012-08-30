@@ -102,8 +102,6 @@ class XmlCtrl: public wxStyledTextCtrl
 		    wxWindowID id = wxID_ANY,
 		    const char *buffer = NULL,
 		    size_t bufferLen = 0,
-		    const std::string& catalogPath = "",
-		    const std::string& catalogUtilityPath = "",
 		    const std::string& basePath = "",
 		    const std::string& auxPath = "",
 		    const wxPoint &position = wxDefaultPosition,
@@ -163,7 +161,7 @@ class XmlCtrl: public wxStyledTextCtrl
 		std::map<wxString, std::set<wxString> > elementMap;
 		std::set<wxString> entitySet;
 		std::map<wxString, wxString> elementStructureMap;
-		std::string catalogPath, catalogUtilityPath, basePath, auxPath;
+		std::string basePath, auxPath;
 		XmlCtrlProperties properties;
 		wxString getLastAttributeName ( int pos );
 		int getAttributeStartPos ( int pos );

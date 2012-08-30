@@ -46,12 +46,12 @@ void WrapXerces::Init() throw()
 	} dummy;
 }
 
-WrapXerces::WrapXerces( std::string catalogPath, std::string catalogUtilityPath )
+WrapXerces::WrapXerces()
 {
 	WrapXerces::Init();
 
 	errorPosition = std::make_pair ( 1, 1 );
-	catalogResolver = new XercesCatalogResolver( catalogPath, catalogUtilityPath );
+	catalogResolver = new XercesCatalogResolver();
 }
 
 WrapXerces::~WrapXerces()
@@ -165,6 +165,8 @@ bool WrapXerces::validateMemory (
 	}
 	catch ( ... )
 	{
+		if ( thread != NULL && thread->TestDestroy() )
+			throw;
 		lastError = wxEmptyString;
 		return false;
 	}

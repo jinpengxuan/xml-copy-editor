@@ -24,7 +24,7 @@ void *CatalogResolverThread::Entry()
 	{
 		wxCriticalSectionLocker locker ( catalogResolverCriticalSection );
 
-		std::auto_ptr<WrapLibxml> libxml ( new WrapLibxml ( false, myCatalogPath ) );
+		std::auto_ptr<WrapLibxml> libxml ( new WrapLibxml ( false ) );
 		*mySystemIdPtr = libxml->lookupPublicId ( *myPublicIdPtr );
 	}
 	Exit();

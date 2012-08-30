@@ -34,6 +34,8 @@ public:
 	static ThreadReaper &get();
 
 	void add ( wxThread *thread );
+	// Kills all threads in the list.
+	void clear();
 
 protected:
 	std::vector<boost::shared_ptr<wxThread> > mList;

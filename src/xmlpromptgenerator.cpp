@@ -44,13 +44,11 @@
 using namespace xercesc;
 
 XmlPromptGenerator::XmlPromptGenerator (
-    const std::string& catalogPath,
     const std::string& basePath,
     const std::string& auxPath ) : d ( new PromptGeneratorData() )
 {
 	XML_SetUserData ( p, d.get() );
 	d->p = p;
-	d->catalogPath = catalogPath;
 	d->basePath = basePath;
 	d->auxPath = auxPath;
 	d->isRootElement = true;
@@ -325,21 +323,10 @@ int XMLCALL XmlPromptGenerator::externalentityrefhandler (
 	if ( publicId )
 		stdPublicId = publicId;
 
-	CatalogResolver cr ( d->catalogPath );
+	CatalogResolver cr;
 	std::string stdSystemId = cr.lookupPublicId ( stdPublicId );
-	
-	if ( !stdSystemId.empty() )
-	{
-		Replace::run ( stdSystemId, "file://", "", false );
-		Replace::run ( stdSystemId, "%20", " ", false );
 
-#ifdef __WXMSW__
-       Replace::run ( stdSystemId, "//C:/", "C:\\", false );
-       Replace::run ( stdSystemId, "/C:/", "C:\\", false );
-       Replace::run ( stdSystemId, "/", "\\", false );
-#endif
-	}
-	else
+	if ( stdSystemId.empty() )
 	{
 		if ( systemId )
 			stdSystemId = systemId;

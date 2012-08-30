@@ -13,9 +13,7 @@ DEFINE_EVENT_TYPE(wxEVT_COMMAND_VALIDATION_COMPLETED);
 ValidationThread::ValidationThread (
 	wxEvtHandler *handler,
 	const char *buffer,
-	const char *system,
-	const char *catalogPath,
-	const char *catalogUtilityPath )
+	const char *system )
 	: wxThread ( wxTHREAD_JOINABLE )
 	, mStopping ( false )
 {
@@ -27,16 +25,12 @@ ValidationThread::ValidationThread (
 	myEventHandler = handler;
 	myBuffer = buffer;
 	mySystem = system;
-	myCatalogPath = catalogPath;
-	myCatalogUtilityPath = catalogUtilityPath;
 	myIsSucceeded = false;
 }
 
 void *ValidationThread::Entry()
 {
-	std::auto_ptr<WrapXerces> validator ( new WrapXerces(
-                              myCatalogPath,
-                              myCatalogUtilityPath ) );
+	std::auto_ptr<WrapXerces> validator ( new WrapXerces() );
 	
 	if ( TestDestroy()  )
 	{

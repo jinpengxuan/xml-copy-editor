@@ -23,15 +23,13 @@
 #include <string>
 #include "wraplibxml.h"
 
-class CatalogResolver
+class CatalogResolver : protected WrapLibxml
 {
 	public:
-		CatalogResolver( const std::string& catalogPath );
+		CatalogResolver();
 		~CatalogResolver();
 		std::string lookupPublicId (
 		    const std::string& publicId);
-	private:
-		WrapLibxml *wl;
 };
 
 #endif

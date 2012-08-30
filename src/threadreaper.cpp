@@ -27,13 +27,7 @@ ThreadReaper::ThreadReaper ()
 
 ThreadReaper::~ThreadReaper ()
 {
-	//wxCriticalSectionLocker lock ( xmlcopyeditorCriticalSection );
-
-	std::vector<boost::shared_ptr<wxThread> >::iterator itr;
-	for ( itr = mList.begin(); itr != mList.end(); itr++)
-	{
-		(**itr).Kill();
-	}
+	clear();
 }
 
 ThreadReaper &ThreadReaper::get()
@@ -57,5 +51,27 @@ void ThreadReaper::add ( wxThread *thread )
 			itr++;
 		else
 			itr = mList.erase ( itr );
+	}
+}
+
+void ThreadReaper::clear()
+{
+	xmlcopyeditorCriticalSection.Enter();
+
+	std::vector<boost::shared_ptr<wxThread> > threads = mList;
+	mList.clear();
+
+	xmlcopyeditorCriticalSection.Leave();
+
+	// It's safe to call wxThread::Wait() now
+	std::vector<boost::shared_ptr<wxThread> >::iterator itr;
+	for ( itr = threads.begin(); itr != threads.end(); itr++)
+	{
+		// This will cause the whole program to abort in linux with early
+		// versions of wxWidgets. A easy way to fix this is to rethrow
+		// abi::__forced_unwind& exceptions and avoid calling pthread_exit
+		// in such a condition.
+		(**itr).Kill();
+		(**itr).Wait();
 	}
 }

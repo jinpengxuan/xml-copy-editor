@@ -68,11 +68,19 @@ nobase_xmlcopyeditor_DATA = png/*.png \
 	po/de/messages.mo \
 	po/ru/messages.mo \
 	po/es/messages.mo \
-        po/zh_CN/messages.mo \
-        po/zh_TW/messages.mo \
+	po/zh_CN/messages.mo \
+	po/zh_TW/messages.mo \
 	po/uk_UA/messages.mo \
-        po/ca/messages.mo \
-        po/en_us/messages.po
+	po/ca/messages.mo \
+	po/en_us/messages.po \
+	catalog/catalog \
+	dtd/*.* dtd/dita/* \
+	dtd/docbook/4.4/*.* \
+	dtd/docbook/4.4/ent/* \
+	dtd/docbook/5.0b/* \
+	dtd/tei/p4/* \
+	dtd/tei/p5/* \
+	xsl/openlearn2daisyhtml/*
 
 pixmap_DATA = xmlcopyeditor.png
 

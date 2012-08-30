@@ -25,6 +25,7 @@
 #include <xercesc/parsers/XercesDOMParser.hpp>
 #include <xercesc/dom/DOMNamedNodeMap.hpp>
 #include <xercesc/dom/DOMAttr.hpp>
+#include "xercescatalogresolver.h"
 
 const static size_t maxReservedSchemaBuffer = 1024 * 1024;
 const static size_t maxElementSchemaBuffer = 1024;
@@ -47,10 +48,12 @@ const wxString &XmlSchemaGenerator::generate ( Grammar::GrammarType grammarType,
 	mElements.clear();
 	mSchema.Clear();
 
+	XercesCatalogResolver catalogResolver;
 	std::auto_ptr<XercesDOMParser> parser ( new XercesDOMParser() );
 	parser->setDoNamespaces ( true );
 	parser->setDoSchema ( true );
 	parser->setValidationSchemaFullChecking ( false );
+	parser->setEntityResolver ( &catalogResolver );
 
 	MemBufInputSource source ( ( const XMLByte * ) buffer, len,
 			filepath.mb_str( wxConvLocal ) );

@@ -13,7 +13,7 @@ InputSource *XercesCatalogResolver::resolveEntity (
 {
 /* the following _should_ work but doesn't always, so drop it for now
 #ifndef __WXMSW__
-	resolved = cr->lookupPublicId ( narrowPublicId );
+	resolved = lookupPublicId ( narrowPublicId );
 #else
      return NULL;
 	std::string stdPublicId = narrowPublicId;
@@ -69,15 +69,12 @@ InputSource *XercesCatalogResolver::resolveEntity (
 #endif	
 */
 
-#ifdef __WXMSW__
-       return NULL;
-#else
 	char *narrowPublicId = XMLString::transcode ( publicID );
 	std::string resolved;
-	resolved = cr->lookupPublicId ( narrowPublicId );
+	resolved = lookupPublicId ( narrowPublicId );
 
 	XMLString::release ( &narrowPublicId );
-	
+
 	if ( resolved.empty() )
 		return NULL;
 
@@ -87,5 +84,4 @@ InputSource *XercesCatalogResolver::resolveEntity (
 	XMLString::release ( &wideResolved );
 
 	return source;
-#endif
 }

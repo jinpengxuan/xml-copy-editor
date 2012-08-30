@@ -30,8 +30,6 @@ XmlDoc::XmlDoc (
     //const std::string& buffer,
     const char *buffer,
     size_t bufferLen,
-    const std::string& catalogPath,
-    const std::string& catalogUtilityPath,
     const std::string& basePath,
     const std::string& auxPath,
     const wxPoint &position,
@@ -46,8 +44,6 @@ XmlDoc::XmlDoc (
 		    id,
 		    buffer,
 		    bufferLen, // new
-		    catalogPath,
-		    catalogUtilityPath,
 		    basePath,
 		    auxPath,
 		    position,

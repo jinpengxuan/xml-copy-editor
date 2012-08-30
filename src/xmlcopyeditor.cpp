@@ -61,6 +61,7 @@
 #include <wx/tokenzr.h>
 #include <wx/dir.h>
 #include "xmlschemagenerator.h"
+#include "threadreaper.h"
 
 #define ngettext wxGetTranslation
 
@@ -218,6 +219,8 @@ MyApp::MyApp() : checker ( NULL ), server ( NULL ), connection ( NULL ),
 
 MyApp::~MyApp()
 {
+	ThreadReaper::get().clear();
+
 	delete checker;
 	delete server;
 	delete connection;
@@ -394,9 +397,6 @@ bool MyApp::OnInit()
 	{
 		wxImage::AddHandler ( new wxPNGHandler );
 		wxSystemOptions::SetOption ( _T ( "msw.remap" ), 0 );
-
-		// Initialize libxml
-		WrapLibxml::Init();
 
 		// Initialize Xerces-C++
 		WrapXerces::Init();
@@ -599,9 +599,9 @@ const std::set<const wxLanguageInfo *> &MyApp::getAvailableTranslations (
 			wxTranslations *t = wxTranslations::Get();
 			if ( t != NULL )
 			{
-				translations = t->GetAvailableTranslations ( *catalog );
-				wxArrayString::const_iterator trans = translations.begin();
-				for ( ; trans != translations.end(); trans++ )
+				wxArrayString all = t->GetAvailableTranslations ( *catalog );
+				wxArrayString::const_iterator trans = all.begin();
+				for ( ; trans != all.end(); trans++ )
 				{
 					info = wxLocale::FindLanguageInfo ( *trans );
 					if ( info != NULL )
@@ -907,6 +907,9 @@ MyFrame::MyFrame (
 
 	updatePaths();
 	loadBitmaps();
+
+	// Initialize libxml
+	WrapLibxml::Init ( catalogPath );
 
 	size_t findFlags = 0;
 	findFlags |= wxFR_DOWN;
@@ -2960,8 +2963,6 @@ void MyFrame::newDocument ( const std::string& s, const std::string& path, bool 
 	          wxID_ANY,
 	          s.c_str(), // modified
 	          s.size(), // new
-	          catalogPath,
-	          catalogUtilityPath,
 	          path,
 	          auxPath );
 	mainBook->AddPage ( ( wxWindow * ) doc, documentLabel );
@@ -3272,8 +3273,6 @@ bool MyFrame::openFile ( wxString& fileName, bool largeFile )
 	    wxID_ANY,
 	    finalBuffer,
 	    finalBufferLen,
-	    catalogPath,
-	    catalogUtilityPath,
 	    ( const char * ) fileName.mb_str ( wxConvLocal ),
 	    auxPath );
 #ifdef __WXMSW__
@@ -3829,8 +3828,6 @@ void MyFrame::OnValidateDTD ( wxCommandEvent& event )
 	if ( ( doc = getActiveDocument() ) == NULL )
 		return;
 
-	updatePaths(); // needed to ensure catalog is available
-
 	wxString fname = doc->getFullFileName();
 
 	WrapTempFileName wtfn ( fname );
@@ -3856,7 +3853,7 @@ void MyFrame::OnValidateDTD ( wxCommandEvent& event )
 	doc->clearErrorIndicators();
 	statusProgress ( _ ( "DTD Validation in progress..." ) );
 
-	auto_ptr<WrapLibxml> wl ( new WrapLibxml ( libxmlNetAccess, catalogPath ) );
+	auto_ptr<WrapLibxml> wl ( new WrapLibxml ( libxmlNetAccess ) );
 
 	if ( !wl->validate ( fnameLocal ) )
 	{
@@ -3950,7 +3947,7 @@ void MyFrame::validateRelaxNG (
 	doc->clearErrorIndicators();
 	statusProgress ( _ ( "RELAX NG validation in progress..." ) );
 
-	auto_ptr<WrapLibxml> wl ( new WrapLibxml ( libxmlNetAccess, catalogPath ) );
+	auto_ptr<WrapLibxml> wl ( new WrapLibxml ( libxmlNetAccess ) );
 
 	std::string schemaFileNameLocal = ( const char * ) schemaName.mb_str ( wxConvLocal );
 	std::string fileNameLocal = ( const char * ) fileName.mb_str ( wxConvLocal );
@@ -4042,9 +4039,7 @@ void MyFrame::OnValidateSchema ( wxCommandEvent& event )
 	statusProgress ( _ ( "Validation in progress..." ) );
 	doc->clearErrorIndicators();
 
-	std::auto_ptr<WrapXerces> validator (
-                                        new WrapXerces( catalogPath, catalogUtilityPath )
-                              );
+	std::auto_ptr<WrapXerces> validator ( new WrapXerces() );
 	std::string fileNameLocal = ( const char * ) fileName.mb_str ( wxConvLocal );
 	if ( !validator->validate ( fileNameLocal ) )
 	{
@@ -4131,7 +4126,7 @@ void MyFrame::OnXPath ( wxCommandEvent& event )
 	rawBufferStream << rawBufferUtf8;
 	rawBufferStream.close();
 
-	auto_ptr<WrapLibxml> wl ( new WrapLibxml ( libxmlNetAccess, catalogPath ) );
+	auto_ptr<WrapLibxml> wl ( new WrapLibxml ( libxmlNetAccess ) );
 
 	bool success = wl->xpath ( valUtf8, tempFileName.name() );
 
@@ -4276,7 +4271,7 @@ void MyFrame::OnXslt ( wxCommandEvent& event )
 
 	std::string stylefnameLocal = ( const char * ) path.mb_str ( wxConvLocal );
 
-	auto_ptr<WrapLibxml> wl ( new WrapLibxml ( libxmlNetAccess, catalogPath ) );
+	auto_ptr<WrapLibxml> wl ( new WrapLibxml ( libxmlNetAccess ) );
 	if ( !wl->xslt ( stylefnameLocal, tempFileName.name() ) )
 	{
 		std::string error = wl->getLastError();
@@ -4331,7 +4326,7 @@ void MyFrame::OnPrettyPrint ( wxCommandEvent& event )
 		rawBufferStream << rawBufferUtf8;
 		rawBufferStream.close();
 
-		auto_ptr<WrapLibxml> wl ( new WrapLibxml ( libxmlNetAccess, catalogPath ) );
+		auto_ptr<WrapLibxml> wl ( new WrapLibxml ( libxmlNetAccess ) );
 		bool success = wl->parse ( tempFileName.name(), true );
 
 		if ( !success )
@@ -5872,8 +5867,6 @@ void MyFrame::updatePaths()
 	    applicationDir + wxFileName::GetPathSeparator() + _T ( "catalog" ) +
 	    wxFileName::GetPathSeparator() + _T ( "catalog" );
 	catalogPath = wideCatalogPath.mb_str ( wxConvLocal );
-	wxString wideCatalogUtilityPath = applicationDir + wxFileName::GetPathSeparator() + _T ( "xmlcatalog" );
-	catalogUtilityPath = wideCatalogUtilityPath.mb_str ( wxConvLocal );
 	wxString wideXslDtdPath =
 	    applicationDir + wxFileName::GetPathSeparator() + _T ( "dtd" ) +
 	    wxFileName::GetPathSeparator() + _T ( "xslt10.dtd" );

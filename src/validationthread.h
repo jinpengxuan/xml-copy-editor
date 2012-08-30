@@ -14,9 +14,7 @@ public:
 	ValidationThread (
 	                 wxEvtHandler *handler,
 	                 const char *buffer,
-	                 const char *system,
-	                 const char *catalogPath,
-	                 const char *catalogUtilityPath );
+	                 const char *system );
 	virtual void *Entry();
 	void setBuffer ( const char *buffer, const char *system );
 	bool isSucceeded () { return myIsSucceeded; }
@@ -31,7 +29,7 @@ public:
 
 protected:
 	wxEvtHandler *myEventHandler;
-	std::string myBuffer, mySystem, myCatalogPath, myCatalogUtilityPath;
+	std::string myBuffer, mySystem;
 	bool myIsSucceeded;
 	std::pair<int, int> myPosition;
 	wxString myMessage;

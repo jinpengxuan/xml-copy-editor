@@ -55,20 +55,18 @@ XmlCtrl::XmlCtrl (
     wxWindowID id,
     const char *buffer, // could be NULL
     size_t bufferLen,
-    const std::string& catalogPathParameter,
-    const std::string& catalogUtilityPathParameter,
     const std::string& basePathParameter,
     const std::string& auxPathParameter,
     const wxPoint& position,
     const wxSize& size,
-    long style ) : wxStyledTextCtrl ( parent, id, position, size, style ),
-		type ( typeParameter ),
-		protectTags ( protectTagsParameter ),
-		visibilityState ( visibilityStateParameter ),
-		catalogPath ( catalogPathParameter ),
-		catalogUtilityPath ( catalogUtilityPathParameter ),
-		basePath ( basePathParameter ),
-		auxPath ( auxPathParameter )
+    long style
+    )
+	: wxStyledTextCtrl ( parent, id, position, size, style )
+	, type ( typeParameter )
+	, protectTags ( protectTagsParameter )
+	, visibilityState ( visibilityStateParameter )
+	, basePath ( basePathParameter )
+	, auxPath ( auxPathParameter )
 {
 	validationThread = NULL;
 
@@ -139,6 +137,8 @@ XmlCtrl::~XmlCtrl()
 	if ( validationThread != NULL )
 	{
 		validationThread->PendingDelete();
+		//validationThread->Delete();
+		//delete validationThread;
 	}
 }
 
@@ -1040,7 +1040,6 @@ void XmlCtrl::updatePromptMaps ( const char *buffer, size_t bufferLen )
 	elementMap.clear();
 	elementStructureMap.clear();
 	std::auto_ptr<XmlPromptGenerator> xpg ( new XmlPromptGenerator (
-	                                            catalogPath,
 	                                            basePath,
 	                                            auxPath ) );
 	xpg->parse ( buffer, bufferLen );
@@ -1979,9 +1978,7 @@ bool XmlCtrl::backgroundValidate (
 	validationThread = new ValidationThread(
 		GetEventHandler(),
 		buffer,
-		system,
-		catalogPath.c_str(),
-		catalogUtilityPath.c_str()
+		system
 	);
 
 	if ( validationThread->Create() != wxTHREAD_NO_ERROR
