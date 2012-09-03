@@ -350,9 +350,7 @@ class MyFrame : public wxFrame
         wxLocale& myLocale;
 		bool singleInstanceCheck;
 		int lang, lastPos;
-#ifdef __WXDEBUG__
-		wxLogStderr logTarget;
-#else
+#ifndef __WXDEBUG__
 		wxLogNull logTarget;
 #endif
 		std::auto_ptr<wxHtmlEasyPrinting> htmlPrinting;

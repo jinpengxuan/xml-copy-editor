@@ -211,7 +211,7 @@ MyApp::MyApp() : checker ( NULL ), server ( NULL ), connection ( NULL ),
 {
 	lang = 0;
 
-#ifdef __WXGTK__
+#if defined ( __WXGTK__ ) && !defined ( __WXDEBUG__ )
 	int fdnull = open ( "/dev/null", O_WRONLY, 0 );
 	dup2 ( fdnull, STDERR_FILENO );
 #endif
@@ -228,6 +228,11 @@ MyApp::~MyApp()
 
 bool MyApp::OnInit()
 {
+#ifdef __WXDEBUG__
+	wxLog::SetActiveTarget ( new wxLogStderr() );
+	wxLog::SetLogLevel ( wxLOG_Max );
+#endif
+
 	int systemLocale = myLocale.GetSystemLanguage();
 	switch ( systemLocale )
 	{
@@ -675,11 +680,6 @@ MyFrame::MyFrame (
 		mainBook ( 0 ),
 		restoreFocusToNotebook ( false )
 {
-#ifdef __WXDEBUG__
-	wxLog::SetActiveTarget ( &logTarget );
-	wxLog::SetLogLevel ( wxLOG_Max );
-#endif
-
 	manager.SetManagedWindow ( this );
 
 	lastPos = 0;
@@ -1094,10 +1094,6 @@ MyFrame::MyFrame (
 
 MyFrame::~MyFrame()
 {
-#ifdef __WXDEBUG__
-	wxLog::SetActiveTarget ( NULL );
-#endif
-
 	std::vector<wxString>::iterator it;
 	for ( it = tempFileVector.begin(); it != tempFileVector.end(); it++ )
 		wxRemoveFile ( *it );
