@@ -22,9 +22,6 @@
 #	include <enchant.h>
 #else
 #	include "aspell.h"
-#	ifdef __WXMSW__
-#		include "aspellpaths.h"
-#	endif
 #endif
 #include "styledialog.h"
 #include "nocasecompare.h"

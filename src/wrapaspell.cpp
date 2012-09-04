@@ -29,10 +29,6 @@
 #include "contexthandler.h"
 #include "getword.h"
 
-#ifdef __WXMSW__
-       #include "aspellpaths.h"
-#endif
-
 WrapAspell::WrapAspell (
                        std::string lang
 #if !defined(USE_ENCHANT) && defined(__WXMSW__)
