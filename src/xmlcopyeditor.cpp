@@ -875,7 +875,7 @@ MyFrame::MyFrame (
 		&& wxTheApp->argc == 1 )
 	{
 		xercescSSE2Warning = wxMessageBox (
-			_ ("SSE2 is enabled in Xerces-C++ library. Xerces-C++ doesn't "\
+			_ ("SSE2 is enabled in Xerces-C++ library. Xerces-C++ didn't "\
 			   "use them in a thread-safe way. It may cause program crashes "\
 			   "(segmentation faults).\n\n"\
 			   "If it happens, please try compiling Xerces-C++ with SSE2 "\
@@ -4068,11 +4068,14 @@ void MyFrame::OnCreateSchema ( wxCommandEvent& event )
 		return;
 	}
 
-	int ret = wxMessageBox ( _("Create W3C schema?\n\nYes:\tW3C Schema\nNo:\tDTD"),
-			_("Schema type"), wxYES_NO | wxCANCEL | wxICON_QUESTION);
-	if ( ret == wxCANCEL ) return;
+	const static wxString types[] = { _ ( "W3C Schema" ), _ ( "DTD" ) };
+	const static wxString message = _ ( "Please choose a shema type");
+	wxSingleChoiceDialog dlg ( this, message, _ ( "Schema type" ),
+			( int ) sizeof ( types ) / sizeof ( types[0] ), types );
+	int ret = dlg.ShowModal();
+	if ( ret == wxID_CANCEL ) return;
 
-	Grammar::GrammarType type = ( ret == wxYES ) ?
+	Grammar::GrammarType type = ( dlg.GetSelection() == 0 ) ?
 			Grammar::SchemaGrammarType : Grammar::DTDGrammarType;
 	std::auto_ptr<XmlSchemaGenerator> gen ( new XmlSchemaGenerator() );
 	const wxString &schema = gen->generate(type, doc->getFullFileName(),
