@@ -441,7 +441,7 @@ bool WrapLibxml::bufferWellFormed ( const std::string& buffer )
 	                       buffer.size(),
 	                       "",
 	                       "UTF-8",
-	                       0 );
+	                       ( netAccess ) ? XML_PARSE_DTDLOAD : XML_PARSE_DTDLOAD | XML_PARSE_NONET );
 	bool returnValue = ( docPtr ) ? true : false;
 
 	xmlFreeDoc ( docPtr );

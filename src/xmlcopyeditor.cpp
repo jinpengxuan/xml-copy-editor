@@ -3018,12 +3018,9 @@ void MyFrame::OnOpen ( wxCommandEvent& event )
 	size_t count = paths.Count();
 	if ( !count )
 		return;
-	Freeze();
 	for ( size_t i = 0; i < count; ++i )
 		if ( !openFile ( paths[i], largeFile ) )
 			break;
-	Thaw();
-	mainBook->Layout();
 }
 
 bool MyFrame::openFile ( wxString& fileName, bool largeFile )
@@ -6043,8 +6040,6 @@ void MyFrame::OnAssociate ( wxCommandEvent& event )
 
 void MyFrame::openRememberedTabs()
 {
-	Freeze();
-
 	wxStringTokenizer files ( openTabsOnClose, _T ( "|" ) );
 	while ( files.HasMoreTokens() )
 	{
@@ -6052,9 +6047,6 @@ void MyFrame::openRememberedTabs()
 		if ( file.IsEmpty() || !openFile ( file ) )
 			continue; //break; // Ignore errors
 	}
-
-	Thaw();
-	mainBook->Layout();
 
 	XmlDoc *doc;
 	if ( ( doc = getActiveDocument() ) != NULL )
