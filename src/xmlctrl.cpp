@@ -2017,14 +2017,15 @@ void XmlCtrl::clearErrorIndicators ( int maxLine )
 	if ( maxLine < 0 )
 		return;
 
-	int documentLength = GetLength();
-	if ( !documentLength )
+	int length = GetLength();
+	if ( !length )
 		return;
 
 	StartStyling ( 0, wxSTC_INDIC2_MASK );
 
-	int length;
-	length = ( maxLine ) ? GetLineEndPosition ( maxLine ) : documentLength;
+	int end = GetEndStyled();
+	length = ( maxLine ) ? GetLineEndPosition ( maxLine ) : length;
+	if ( length > end ) length = end;
 	SetStyling ( length, 0 );
 }
 
