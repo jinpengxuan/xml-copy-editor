@@ -121,6 +121,45 @@ END
 #endif    // APSTUDIO_INVOKED
 
 
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,2,0,8
+ PRODUCTVERSION 1,2,0,8
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x40004L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904B0"
+        BEGIN
+            VALUE "CompanyName", "XML Copy Editor Team"
+            VALUE "FileDescription", "XML Copy Editor is a fast, free, validating XML editor"
+            VALUE "FileVersion", ""
+            VALUE "InternalName", "xmlcopyeditor.exe"
+            VALUE "LegalCopyright", "Copyright (c) 2012 Gerald Schmidt"
+            VALUE "OriginalFilename", "xmlcopyeditor.exe"
+            VALUE "ProductName", "XML Copy Editor"
+            VALUE "ProductVersion", ""
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+
 //////////////////////////////////////////////////////////////////////////////
 //
 // Generated from the TEXTINCLUDE 3 resource.
