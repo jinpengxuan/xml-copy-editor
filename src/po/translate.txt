@@ -1,0 +1,75 @@
+=== How To Make Translation Files of XML-Copy-Editor ===
+
+1. Translate
+1) For Linux users
+That's quite easy. Download Xml-copy-editor(called XCE below :P),
+unpack it. Go to that source dirctory. Here you can see many ".cpp" 
+files and ".h" files. input command:
+
+$ xgettext -k_ --from-code=utf-8  *.cpp *.h
+
+then you get a "messages.po" in the dirctory. That's the ".po" file we 
+need to translate. You need a tool to help you finish the translation 
+job. I recommend poedit, a fast and light-weight translation tool.
+You can get it from http://www.poedit.net/ or http://poedit.sf.net/ .
+They are the same. Install it then use to open the ".po" file, 
+
+There're a few things need to be filled into the poedit. Run poedit, 
+select "File"-"Preferences", fill in your name and email address blanks.
+Back to main window, select "Catalog"-"Settings", fill the items like 
+below:
+
+"Project name and version:" -> "XML Copy Editor (your source version)"
+"Team:" -> "(your translation team)"
+"Team's email address:" -> "(your team's email address)"
+"Language:" -> "(your native language)"
+"Country:" -> "(your country)"
+"Charset:" -> "(charset you currently using. utf-8 would be better)"
+"Source code and charset:" -> "utf-8"
+"Plurals Forms:" -> "nplurals=2; plural=(n != 1)"
+
+OK! Now go to the main window and the rest thing is ... translate them
+all! :P
+
+When you've finished translating the ".po" file, you can use:
+
+$ msgfmt messages.po
+
+to get the ".mo" file. Semd the ".po" and ".mo" files to XCE's authors 
+email box.
+
+2) For Windows users
+Like in Linux, we should get XCE's source code and poedit windows 
+version. Uncompress the source and install poedit in "c:\poedit", then 
+open a "Command Window" by executing "cmd.exe". Go to the XCE's source 
+directory, run:
+
+c:\poedit\bin\xgettext.exe -k_ --from-code=utf-8  *.cpp *.h
+
+to a messages.po file. Setup poedit the same as in the Linux part, then 
+open the ".po" file you just created and translate all items. When you 
+close poedit, a "messages.mo" will be made automatically.
+
+
+2. Update translation
+1) For Linux users
+Create a new version of "messages.po" file and rename it to "msg-new.po".
+Copy the old version ".po" file to the same directory and rename it to 
+"msg-old.po", then run:
+
+$ msgmerge msg-old.po msg-new.po >output.po
+
+the "output.po" file is the new version of ".po" file with old 
+translations added. Then translate the "output.po" file.
+
+2) For Windows users
+Do the first part as Linux users, then run:
+
+c:\poedit\bin\msgmerge.exe msg-old.po msg-new.po > output.po
+
+translate the "output.po" file.
+
+-= End =-
+
+Written by SHiNE CsyFeK <csyfek@gmail.com>
+2007.10.13
