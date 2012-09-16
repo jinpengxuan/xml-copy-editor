@@ -1,5 +1,5 @@
 # these are the headers for your project
-noinst_HEADERS = *.h
+noinst_HEADERS = $(srcdir)/*.h
 
 #########################################################################
 # APPLICATION SECTION
@@ -29,58 +29,26 @@ xmlcopyeditor_SOURCES = xmlcopyeditor.cpp associatedialog.cpp casehandler.cpp \
 	binaryfile.cpp xmlencodingspy.cpp wrapaspell.cpp validationthread.cpp \
 	wrapdaisy.cpp exportdialog.cpp mp3album.cpp xmlprodnote.cpp \
 	xmlsuppressprodnote.cpp xmlcopyimg.cpp xmlschemagenerator.cpp \
-	rulesets png rng xpm templates copying help po \
 	xmlcopyeditor.spec xmlcopyeditor.png custom.xpm \
 	xmlcopyeditor.desktop
+
 xmlcopyeditor_LDFLAGS = $(WX_LIBS) \
 	-lexpat -lxslt -lxml2 -lpcre -lxerces-c $(ASPELL_LIBS) $(ENCHANT_LIBS)
 
-nobase_xmlcopyeditor_DATA = png/*.png \
-	rulesets/*.* \
-	rng/*.rng \
-	rng/*.rnc \
-	rng/exclude/*.rng \
-	rng/modules/*.rng \
-	xpm/*.xpm \
-	templates/*.xml \
-	templates/*.dtd \
-	templates/*.xsl \
-	templates/*.rss \
-	templates/*.html \
-	templates/*.xtm \
-	templates/*.xsd \
-	templates/*.rng \
-	templates/*.lzx \
-	templates/*.xlf \
-	help/*.* help/html/*.* \
-	copying/*.txt copying/boost_shared_ptr/* \
-	copying/Expat/* copying/libxml2/* copying/libxslt/* \
-	copying/PCRE/* copying/Scintilla/* \
-	copying/wxStyledTextCtrl/* \
-	copying/wxStEditor/* \
-	copying/xmlcopyeditor/* \
-	copying/Aspell/* \
-	copying/Apache/LICENSE-2.0 \
-	copying/Apache/LICENSE-2_files/* \
-	po/sk/messages.mo \
-	po/sv/messages.mo \
-	po/fr/messages.mo \
-	po/de/messages.mo \
-	po/ru/messages.mo \
-	po/es/messages.mo \
-	po/zh_CN/messages.mo \
-	po/zh_TW/messages.mo \
-	po/uk_UA/messages.mo \
-	po/ca/messages.mo \
-	po/en_us/messages.po \
-	catalog/catalog \
-	dtd/*.* dtd/dita/* \
-	dtd/docbook/4.4/*.* \
-	dtd/docbook/4.4/ent/* \
-	dtd/docbook/5.0b/* \
-	dtd/tei/p4/* \
-	dtd/tei/p5/* \
-	xsl/openlearn2daisyhtml/*
+dist_xmlcopyeditor_DATA = $(srcdir)/catalog/* \
+	$(srcdir)/copying/* \
+	$(srcdir)/dtd/* \
+	$(srcdir)/help/* \
+	$(srcdir)/png/*.png \
+	$(srcdir)/po/*/messages.mo \
+	$(srcdir)/rng/*.rnc \
+	$(srcdir)/rng/*.rng \
+	$(srcdir)/rng/exclude/*.rng \
+	$(srcdir)/rng/modules/*.rng \
+	$(srcdir)/rulesets/* \
+	$(srcdir)/templates/* \
+	$(srcdir)/xpm/*.xpm \
+	$(srcdir)/xsl/*
 
 pixmap_DATA = xmlcopyeditor.png
 

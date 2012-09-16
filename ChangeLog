@@ -1,2 +1,6 @@
+xmlcopyeditor (1.2.0.8) unstable; urgency=low
 
+  * Supported creating schema
+  * Many bug fixes
 
+ -- Zane U. Ji <ZaneUJi@gmail.com>  Fri, 15 Sep 2012 00:00:20 +0800
