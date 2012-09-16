@@ -35,20 +35,48 @@ xmlcopyeditor_SOURCES = xmlcopyeditor.cpp associatedialog.cpp casehandler.cpp \
 xmlcopyeditor_LDFLAGS = $(WX_LIBS) \
 	-lexpat -lxslt -lxml2 -lpcre -lxerces-c $(ASPELL_LIBS) $(ENCHANT_LIBS)
 
-dist_xmlcopyeditor_DATA = $(srcdir)/catalog/* \
-	$(srcdir)/copying/* \
-	$(srcdir)/dtd/* \
-	$(srcdir)/help/* \
+nobase_dist_xmlcopyeditor_DATA = $(srcdir)/catalog/catalog \
+	$(srcdir)/copying/*.txt \
+	$(srcdir)/copying/Apache/LICENSE-2.0 \
+	$(srcdir)/copying/Apache/LICENSE-2_files/* \
+	$(srcdir)/copying/Aspell/* \
+	$(srcdir)/copying/boost_shared_ptr/* \
+	$(srcdir)/copying/Expat/* \
+	$(srcdir)/copying/libxml2/* \
+	$(srcdir)/copying/libxslt/* \
+	$(srcdir)/copying/PCRE/* \
+	$(srcdir)/copying/Scintilla/* \
+	$(srcdir)/copying/wxStEditor/* \
+	$(srcdir)/copying/wxStyledTextCtrl/* \
+	$(srcdir)/copying/xmlcopyeditor/* \
+	$(srcdir)/dtd/*.* \
+	$(srcdir)/dtd/dita/*.* \
+	$(srcdir)/dtd/docbook/4.4/*.* \
+	$(srcdir)/dtd/docbook/4.4/ent/*.* \
+	$(srcdir)/dtd/docbook/5.0b/*.* \
+	$(srcdir)/dtd/tei/p4/*.* \
+	$(srcdir)/dtd/tei/p5/*.* \
+	$(srcdir)/help/*.* \
+	$(srcdir)/help/html/*.* \
 	$(srcdir)/png/*.png \
 	$(srcdir)/po/*/messages.mo \
 	$(srcdir)/rng/*.rnc \
 	$(srcdir)/rng/*.rng \
 	$(srcdir)/rng/exclude/*.rng \
 	$(srcdir)/rng/modules/*.rng \
-	$(srcdir)/rulesets/* \
-	$(srcdir)/templates/* \
+	$(srcdir)/rulesets/*.* \
+	$(srcdir)/templates/*.dtd \
+	$(srcdir)/templates/*.html \
+	$(srcdir)/templates/*.lzx \
+	$(srcdir)/templates/*.rng \
+	$(srcdir)/templates/*.rss \
+	$(srcdir)/templates/*.xlf \
+	$(srcdir)/templates/*.xml \
+	$(srcdir)/templates/*.xsd \
+	$(srcdir)/templates/*.xsl \
+	$(srcdir)/templates/*.xtm \
 	$(srcdir)/xpm/*.xpm \
-	$(srcdir)/xsl/*
+	$(srcdir)/xsl/openlearn2daisyhtml/*.*
 
 pixmap_DATA = xmlcopyeditor.png
 
