@@ -67,7 +67,7 @@ const wxString &XmlSchemaGenerator::generate ( Grammar::GrammarType grammarType,
 		return mSchema;
 	}
 
-	DOMDocument *doc = parser->getDocument();
+	xercesc::DOMDocument *doc = parser->getDocument();
 	if ( doc == NULL )
 	{
 		mLastError = _ ("Failed to load xml file.");
@@ -83,7 +83,7 @@ const wxString &XmlSchemaGenerator::generate ( Grammar::GrammarType grammarType,
 		mSchema << _T("<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" elementFormDefault=\"qualified\">")
 				<< getEOL();
 
-	DOMElement *root = doc->getDocumentElement();
+	xercesc::DOMElement *root = doc->getDocumentElement();
 	if ( root != NULL )
 	{
 		findAllElements ( *root );
