@@ -102,7 +102,6 @@ bool WrapLibxml::validate ( const std::string& fileName )
 {
 	output = "";
 
-	xmlCleanupParser();
 	xmlParserCtxtPtr ctxt;
 	xmlDocPtr docPtr;
 
