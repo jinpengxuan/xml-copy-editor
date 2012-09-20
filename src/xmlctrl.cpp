@@ -1999,15 +1999,16 @@ std::string XmlCtrl::myGetTextRaw()
 
 void XmlCtrl::setErrorIndicator ( int line, int column )
 {
-	int startPos, endPos;
+	int startPos, endPos, endStyled;
 	startPos = PositionFromLine ( line ) + column;
 	endPos = GetLineEndPosition ( line );
-	StartStyling ( startPos, wxSTC_INDIC2_MASK );
+	endStyled = GetEndStyled();
+	if ( endPos > endStyled ) endPos = endStyled;
 
 	int length = endPos - startPos;
-
-	if ( length == 0 || ( length > 0 && length + startPos < GetLength() ) )
+	if ( length > 0 && length + startPos < GetLength() )
 	{
+		StartStyling ( startPos, wxSTC_INDIC2_MASK );
 		SetStyling ( length, wxSTC_INDIC2_MASK );
 	}
 }
@@ -2021,11 +2022,11 @@ void XmlCtrl::clearErrorIndicators ( int maxLine )
 	if ( !length )
 		return;
 
-	StartStyling ( 0, wxSTC_INDIC2_MASK );
-
 	int end = GetEndStyled();
 	length = ( maxLine ) ? GetLineEndPosition ( maxLine ) : length;
-	if ( length > end ) length = end;
+	if ( end > 0 && length > end ) length = end;
+
+	StartStyling ( 0, wxSTC_INDIC2_MASK );
 	SetStyling ( length, 0 );
 }
 

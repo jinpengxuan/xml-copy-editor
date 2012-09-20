@@ -3354,6 +3354,7 @@ bool MyFrame::openFile ( wxString& fileName, bool largeFile )
 		int newPosition = doc->PositionFromLine ( posPair.first );
 		doc->SetSelection ( newPosition, newPosition );
 		doc->SetFocus();
+		doc->setErrorIndicator ( posPair.first, posPair.second );
 	}
 	else
 	{
