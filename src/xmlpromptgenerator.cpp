@@ -547,7 +547,7 @@ void XmlPromptGenerator::getContent (
 	{
 		const SchemaElementDecl *elem = (const SchemaElementDecl *)spec->getElementDecl();
 		SubstitutionMap::const_iterator itr = substitutions.find ( elem );
-		if ( itr == substitutions.end() )
+		if ( itr == substitutions.end() && elem != NULL )
 			itr = substitutions.find ( elem->getSubstitutionGroupElem() );
 		if ( itr != substitutions.end() )
 		{
