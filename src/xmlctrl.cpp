@@ -95,7 +95,7 @@ XmlCtrl::XmlCtrl (
 #if wxCHECK_VERSION(2,9,0)
 	AddTextRaw ( buffer, bufferLen );
 #else
-	SendMsg ( 2001, bufferLen, ( long ) ( const char * ) buffer );
+	SendMsg ( 2001, bufferLen, ( wxIntPtr ) buffer );
 #endif
 
 	SetSelection ( 0, 0 );

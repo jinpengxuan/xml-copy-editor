@@ -20,13 +20,14 @@
 #ifndef WRAP_XERCES
 #define WRAP_XERCES
 
-#if __GNUC__ < 4 || ( __GNUC__ == 4 && __GNUC_MINOR__ < 7 )
-#define XERCES_TMPLSINC
-#endif
-
 #include <wx/wx.h>
 #include <string>
 #include <utility>
+
+#if !wxCHECK_GCC_VERSION(4,7)
+#define XERCES_TMPLSINC
+#endif
+
 #include <xercesc/sax2/SAX2XMLReader.hpp>
 #include <xercesc/sax2/DefaultHandler.hpp>
 #include "xercescatalogresolver.h"

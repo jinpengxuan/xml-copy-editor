@@ -22,7 +22,7 @@
 #define MyAppPublisher "Zane U. Ji"
 #define MyAppURL "https://sourceforge.net/projects/xml-copy-editor/"
 #define MyAppExeName "xmlcopyeditor.exe"
-#define MinGW "D:\MinGW"
+#define MinGW "D:\MinGW32"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
@@ -105,13 +105,14 @@ Source: ".\rulesets\*"; DestDir: "{app}\rulesets"; Flags: ignoreversion recurses
 Source: ".\templates\*"; DestDir: "{app}\templates"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: ".\xsl\*"; DestDir: "{app}\xsl"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "{#MinGW}\bin\libexpat-1.dll"; DestDir: "{app}"
+Source: "{#MinGW}\bin\libgcc_s_sjlj-1.dll"; DestDir: "{app}"
 Source: "{#MinGW}\bin\libiconv-2.dll"; DestDir: "{app}"
 Source: "{#MinGW}\bin\libpcre-1.dll"; DestDir: "{app}"
+Source: "{#MinGW}\bin\libstdc++-6.dll"; DestDir: "{app}"
 Source: "{#MinGW}\bin\libxml2-2.dll"; DestDir: "{app}"
 Source: "{#MinGW}\bin\libxslt-1.dll"; DestDir: "{app}"
-Source: "{#MinGW}\bin\libgcc_s_dw2-1.dll"; DestDir: "{app}"
-Source: "{#MinGW}\bin\libstdc++-6.dll"; DestDir: "{app}"
-Source: "{#MinGW}\bin\pthreadgc2.dll"; DestDir: "{app}"
+Source: "{#MinGW}\bin\pthreadGC2.dll"; DestDir: "{app}"
+Source: "{#MinGW}\bin\zlib1.dll"; DestDir: "{app}"
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"

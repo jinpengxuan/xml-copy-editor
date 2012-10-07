@@ -134,9 +134,15 @@ class StyleDialog : public wxDialog
 		static bool reportCompareFunction ( ContextMatch m1, ContextMatch m2 );
 
 		static int wxCALLBACK MyCompareFunction (
+#if wxCHECK_VERSION(2,9,0) || defined (_WIN64) || defined (__x86_64__)
+		    wxIntPtr item1,
+		    wxIntPtr item2,
+		    wxIntPtr sortData );
+#else
 		    long item1,
 		    long item2,
 		    long sortData );
+#endif
 		void getAllMatches ( vector<ContextMatch> &v );
 		void getSelectedMatches ( vector<ContextMatch> &v );
 		void updateSizeInformation();

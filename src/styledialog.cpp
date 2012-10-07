@@ -387,7 +387,7 @@ void StyleDialog::OnColumnClick ( wxListEvent& event )
 	std::auto_ptr<SortData> data ( new SortData );
 	data->column = event.GetColumn();
 	data->table = table;
-	table->SortItems ( MyCompareFunction, ( long ) data.get() );
+	table->SortItems ( MyCompareFunction, ( wxIntPtr ) data.get() );
 
 	long itemCount = table->GetItemCount();
 	for ( int i = 0; i < itemCount; ++i )
@@ -795,9 +795,15 @@ void StyleDialog::getSelectedMatches ( vector<ContextMatch> &v )
 }
 
 int wxCALLBACK StyleDialog::MyCompareFunction (
+#if wxCHECK_VERSION(2,9,0) || defined (_WIN64) || defined (__x86_64__)
+    wxIntPtr item1,
+    wxIntPtr item2,
+    wxIntPtr sortData )
+#else
     long item1,
     long item2,
     long sortData )
+#endif
 {
 	SortData *data = ( SortData * ) sortData;
 	int column;

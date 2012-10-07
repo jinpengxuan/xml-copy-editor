@@ -276,7 +276,7 @@ void MyPropertySheet::OnOk ( wxCommandEvent& e )
 
 	int languageChoice = languageBox->GetSelection();
 	if ( languageChoice != wxNOT_FOUND )
-		lang = (int)languageBox->GetClientData(languageChoice);
+		lang = (wxIntPtr)languageBox->GetClientData(languageChoice);
 	else
 		lang = wxLANGUAGE_ENGLISH_US;
 
