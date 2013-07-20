@@ -61,19 +61,18 @@ class HouseStyle
 		std::vector<ContextMatch> getMatchVector();
 	private:
 		int type;
-		std::string
-		           buffer,
-		           ruleDirectory,
-		           ruleFile,
-		           filterDirectory,
-		           filterFile,
-		           pathSeparator,
-		           error,
+		std::string buffer
+		          , ruleDirectory
+		          , ruleFile
+		          , filterDirectory
+		          , filterFile
+		          , pathSeparator
+		          , error
 #ifdef __WXMSW__
-                   aspellDataPath,
-                   aspellDictPath
+                  , aspellDataPath
+                  , aspellDictPath
 #endif
-                   ;
+                  ;
 		int contextRange;
 		boost::shared_ptr<std::vector<boost::shared_ptr<Rule> > > ruleVector;
 		std::map<std::string, std::map<std::string, std::set<std::string> > >
