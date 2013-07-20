@@ -356,6 +356,7 @@ bool WrapLibxml::xpath ( const std::string& path, const std::string& fileName )
 
 			output += ( const char * ) xmlBufferContent ( bufferPtr );
 			output += '\n';
+			xmlBufferEmpty ( bufferPtr );
 		}
 		xmlBufferFree ( bufferPtr );
 		break;
