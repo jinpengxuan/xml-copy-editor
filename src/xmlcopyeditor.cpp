@@ -202,15 +202,19 @@ END_EVENT_TABLE()
 
 IMPLEMENT_APP ( MyApp)
 
-MyApp::MyApp() : checker ( NULL ), server ( NULL ), connection ( NULL ),
+MyApp::MyApp()
+	: checker ( NULL )
+	, server ( NULL )
+	, client ( NULL )
+	, connection ( NULL )
+	, singleInstanceCheck ( false )
+	, lang ( 0 )
 #if defined(__WXMSW__) && !wxCHECK_VERSION(2,9,0)
-        config ( new wxFileConfig ( _T ( ".xmlcopyeditor" ) ) )//( _T ( "SourceForge Project\\XML Copy Editor" ) ) )
+	, config ( new wxFileConfig ( _T ( ".xmlcopyeditor" ) ) )//( _T ( "SourceForge Project\\XML Copy Editor" ) ) )
 #else
-		config ( new wxFileConfig ( _T ( "xmlcopyeditor" ) ) )
+	, config ( new wxFileConfig ( _T ( "xmlcopyeditor" ) ) )
 #endif
 {
-	lang = 0;
-
 #if defined ( __WXGTK__ ) && !defined ( __WXDEBUG__ )
 	int fdnull = open ( "/dev/null", O_WRONLY, 0 );
 	dup2 ( fdnull, STDERR_FILENO );

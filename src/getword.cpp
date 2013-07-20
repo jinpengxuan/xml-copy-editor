@@ -97,7 +97,7 @@ bool GetWord::isWordCharacter ( char *s, size_t *bytes )
 		// Unicode punctuation marks
 		// Based on http://www1.tip.nl/~t876506/utf8tbl.html
 		return (
-		           *us == 226 && * ( us + 1 ) == 128 ||
+		           ( *us == 226 && * ( us + 1 ) == 128 ) ||
 		           *us == 194 ||
 		           *us == 203
 		       ) ? false : true;
