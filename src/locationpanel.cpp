@@ -61,7 +61,7 @@ LocationPanel::LocationPanel ( wxWindow *parentWindowParameter, int id ) :
 	structureEdit->SetIndentationGuides ( true );
 
 	sizer->Add ( edit, 0, wxGROW | wxTOP, 0 );
-	sizer->Add ( structureEdit, 0, wxGROW | wxTOP, 0 );
+	sizer->Add ( structureEdit, 1, wxGROW | wxTOP, 0 );
 	sizer->Layout();
 	structureEdit->Show ( false );
 }
@@ -91,15 +91,11 @@ void LocationPanel::update (
 			structureEdit->SetReadOnly ( false );
 			structureEdit->SetText ( structure );
 			structureEdit->SetReadOnly ( true );
-
-			wxSize clientSize = GetClientSize();
-			wxSize editSize = edit->GetSize();
-			wxSize structureSize =
-				wxSize ( clientSize.GetWidth(), clientSize.GetHeight() - editSize.GetHeight() );
-
-			if ( clientSize.IsFullySpecified() && editSize.IsFullySpecified() )
-			structureEdit->SetSize ( structureSize );
+#if wxCHECK_VERSION(2,9,0)
 			structureEdit->Update();
+#else
+			sizer->Layout();
+#endif
 		}
 		else
 		{

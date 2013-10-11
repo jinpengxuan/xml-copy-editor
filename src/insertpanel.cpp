@@ -63,7 +63,7 @@ InsertPanel::InsertPanel (
 	    wxLB_SORT | wxLB_HSCROLL );
 
 	sizer->Add ( edit, 0, wxGROW | wxTOP, 0 );
-	sizer->Add ( list, 0, wxGROW | wxTOP, 0 );
+	sizer->Add ( list, 1, wxGROW | wxTOP, 0 );
 	sizer->Layout();
 	list->Show ( false );
 }
@@ -105,15 +105,11 @@ void InsertPanel::update (
 		for ( it = entitySet.begin(); it != entitySet.end(); it++ )
 			list->Append ( *it );
 		list->Show ( true );
-
-		wxSize clientSize = GetClientSize();
-		wxSize editSize = edit->GetSize();
-		wxSize listSize =
-		    wxSize ( clientSize.GetWidth(), clientSize.GetHeight() - editSize.GetHeight() );
-		list->SetSize ( listSize );
+#if wxCHECK_VERSION(2,9,0)
 		list->Update();
-
-		//sizer->Layout();
+#else
+		sizer->Layout();
+#endif
 		return;
 	}
 
@@ -146,15 +142,11 @@ void InsertPanel::update (
 	for ( it = elementSet.begin(); it != elementSet.end(); it++ )
 		list->Append ( *it );
 	list->Show ( true );
-
-	wxSize clientSize = GetClientSize();
-	wxSize editSize = edit->GetSize();
-	wxSize listSize =
-	    wxSize ( clientSize.GetWidth(), clientSize.GetHeight() - editSize.GetHeight() );
-
-	if ( clientSize.IsFullySpecified() && editSize.IsFullySpecified() )
-		list->SetSize ( listSize );
+#if wxCHECK_VERSION(2,9,0)
 	list->Update();
+#else
+	sizer->Layout();
+#endif
 }
 
 void InsertPanel::OnEnter ( wxCommandEvent& event )
