@@ -2,20 +2,21 @@
 <?fileVersion 4.0.0?><cproject storage_type_id="org.eclipse.cdt.core.XmlProjectDescriptionStorage">
 	<storageModule moduleId="org.eclipse.cdt.core.settings">
 		<cconfiguration id="cdt.managedbuild.config.gnu.mingw.exe.debug.747771716">
-			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="cdt.managedbuild.config.gnu.mingw.exe.debug.747771716" moduleId="org.eclipse.cdt.core.settings" name="DebugWx29">
+			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="cdt.managedbuild.config.gnu.mingw.exe.debug.747771716" moduleId="org.eclipse.cdt.core.settings" name="DebugWx">
 				<macros>
+					<stringMacro name="WXVER" type="VALUE_TEXT" value="30"/>
 					<stringMacro name="WXWIDGETS" type="VALUE_TEXT" value="E:/wxWidgets"/>
 				</macros>
 				<externalSettings/>
 				<extensions>
-					<extension id="org.eclipse.cdt.core.PE" point="org.eclipse.cdt.core.BinaryParser"/>
 					<extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.PE" point="org.eclipse.cdt.core.BinaryParser"/>
 				</extensions>
 			</storageModule>
 			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
-				<configuration artifactName="${ProjName}" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug,org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe" cleanCommand="rm -rf" description="" id="cdt.managedbuild.config.gnu.mingw.exe.debug.747771716" name="DebugWx29" parent="cdt.managedbuild.config.gnu.mingw.exe.debug" prebuildStep="">
+				<configuration artifactName="${ProjName}" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug,org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe" cleanCommand="rm -rf" description="" id="cdt.managedbuild.config.gnu.mingw.exe.debug.747771716" name="DebugWx" parent="cdt.managedbuild.config.gnu.mingw.exe.debug" prebuildStep="">
 					<folderInfo id="cdt.managedbuild.config.gnu.mingw.exe.debug.747771716." name="/" resourcePath="">
 						<toolChain id="cdt.managedbuild.toolchain.gnu.mingw.exe.debug.1964333246" name="MinGW GCC" superClass="cdt.managedbuild.toolchain.gnu.mingw.exe.debug">
 							<targetPlatform id="cdt.managedbuild.target.gnu.platform.mingw.exe.debug.1899344235" name="Debug Platform" superClass="cdt.managedbuild.target.gnu.platform.mingw.exe.debug"/>
@@ -55,17 +56,17 @@
 									<listOptionValue builtIn="false" value="pcre"/>
 									<listOptionValue builtIn="false" value="xerces-c"/>
 									<listOptionValue builtIn="false" value="aspell"/>
-									<listOptionValue builtIn="false" value="wxmsw29ud_richtext"/>
-									<listOptionValue builtIn="false" value="wxmsw29ud_html"/>
-									<listOptionValue builtIn="false" value="wxmsw29ud_stc"/>
-									<listOptionValue builtIn="false" value="wxmsw29ud_aui"/>
-									<listOptionValue builtIn="false" value="wxmsw29ud_adv"/>
-									<listOptionValue builtIn="false" value="wxmsw29ud_stc"/>
-									<listOptionValue builtIn="false" value="wxmsw29ud_core"/>
-									<listOptionValue builtIn="false" value="wxmsw29ud_richtext"/>
-									<listOptionValue builtIn="false" value="wxbase29ud_xml"/>
-									<listOptionValue builtIn="false" value="wxbase29ud_net"/>
-									<listOptionValue builtIn="false" value="wxbase29ud"/>
+									<listOptionValue builtIn="false" value="wxmsw${WXVER}ud_richtext"/>
+									<listOptionValue builtIn="false" value="wxmsw${WXVER}ud_html"/>
+									<listOptionValue builtIn="false" value="wxmsw${WXVER}ud_stc"/>
+									<listOptionValue builtIn="false" value="wxmsw${WXVER}ud_aui"/>
+									<listOptionValue builtIn="false" value="wxmsw${WXVER}ud_adv"/>
+									<listOptionValue builtIn="false" value="wxmsw${WXVER}ud_stc"/>
+									<listOptionValue builtIn="false" value="wxmsw${WXVER}ud_core"/>
+									<listOptionValue builtIn="false" value="wxmsw${WXVER}ud_richtext"/>
+									<listOptionValue builtIn="false" value="wxbase${WXVER}ud_xml"/>
+									<listOptionValue builtIn="false" value="wxbase${WXVER}ud_net"/>
+									<listOptionValue builtIn="false" value="wxbase${WXVER}ud"/>
 									<listOptionValue builtIn="false" value="wxscintillad"/>
 									<listOptionValue builtIn="false" value="wxtiffd"/>
 									<listOptionValue builtIn="false" value="wxjpegd"/>
@@ -120,10 +121,10 @@
 				</macros>
 				<externalSettings/>
 				<extensions>
-					<extension id="org.eclipse.cdt.core.PE" point="org.eclipse.cdt.core.BinaryParser"/>
 					<extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.PE" point="org.eclipse.cdt.core.BinaryParser"/>
 				</extensions>
 			</storageModule>
 			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
@@ -230,10 +231,10 @@
 				</macros>
 				<externalSettings/>
 				<extensions>
-					<extension id="org.eclipse.cdt.core.PE" point="org.eclipse.cdt.core.BinaryParser"/>
 					<extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.PE" point="org.eclipse.cdt.core.BinaryParser"/>
 				</extensions>
 			</storageModule>
 			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
@@ -279,17 +280,17 @@
 									<listOptionValue builtIn="false" value="pcre"/>
 									<listOptionValue builtIn="false" value="xerces-c"/>
 									<listOptionValue builtIn="false" value="aspell"/>
-									<listOptionValue builtIn="false" value="wxmsw29ud_richtext"/>
-									<listOptionValue builtIn="false" value="wxmsw29ud_html"/>
-									<listOptionValue builtIn="false" value="wxmsw29ud_stc"/>
-									<listOptionValue builtIn="false" value="wxmsw29ud_aui"/>
-									<listOptionValue builtIn="false" value="wxmsw29ud_adv"/>
-									<listOptionValue builtIn="false" value="wxmsw29ud_stc"/>
-									<listOptionValue builtIn="false" value="wxmsw29ud_core"/>
-									<listOptionValue builtIn="false" value="wxmsw29ud_richtext"/>
-									<listOptionValue builtIn="false" value="wxbase29ud_xml"/>
-									<listOptionValue builtIn="false" value="wxbase29ud_net"/>
-									<listOptionValue builtIn="false" value="wxbase29ud"/>
+									<listOptionValue builtIn="false" value="wxmsw${WXVER}ud_richtext"/>
+									<listOptionValue builtIn="false" value="wxmsw${WXVER}ud_html"/>
+									<listOptionValue builtIn="false" value="wxmsw${WXVER}ud_stc"/>
+									<listOptionValue builtIn="false" value="wxmsw${WXVER}ud_aui"/>
+									<listOptionValue builtIn="false" value="wxmsw${WXVER}ud_adv"/>
+									<listOptionValue builtIn="false" value="wxmsw${WXVER}ud_stc"/>
+									<listOptionValue builtIn="false" value="wxmsw${WXVER}ud_core"/>
+									<listOptionValue builtIn="false" value="wxmsw${WXVER}ud_richtext"/>
+									<listOptionValue builtIn="false" value="wxbase${WXVER}ud_xml"/>
+									<listOptionValue builtIn="false" value="wxbase${WXVER}ud_net"/>
+									<listOptionValue builtIn="false" value="wxbase${WXVER}ud"/>
 									<listOptionValue builtIn="false" value="wxscintillad"/>
 									<listOptionValue builtIn="false" value="wxtiffd"/>
 									<listOptionValue builtIn="false" value="wxjpegd"/>
@@ -344,10 +345,10 @@
 				</macros>
 				<externalSettings/>
 				<extensions>
-					<extension id="org.eclipse.cdt.core.PE" point="org.eclipse.cdt.core.BinaryParser"/>
 					<extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.PE" point="org.eclipse.cdt.core.BinaryParser"/>
 				</extensions>
 			</storageModule>
 			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
@@ -449,20 +450,21 @@
 			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
 		</cconfiguration>
 		<cconfiguration id="cdt.managedbuild.config.gnu.mingw.exe.release.710071756.384493523">
-			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="cdt.managedbuild.config.gnu.mingw.exe.release.710071756.384493523" moduleId="org.eclipse.cdt.core.settings" name="ReleaseWx29">
+			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="cdt.managedbuild.config.gnu.mingw.exe.release.710071756.384493523" moduleId="org.eclipse.cdt.core.settings" name="ReleaseWx">
 				<macros>
+					<stringMacro name="WXVER" type="VALUE_TEXT" value="30"/>
 					<stringMacro name="WXWIDGETS" type="VALUE_TEXT" value="E:/wxWidgets"/>
 				</macros>
 				<externalSettings/>
 				<extensions>
-					<extension id="org.eclipse.cdt.core.PE" point="org.eclipse.cdt.core.BinaryParser"/>
 					<extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.PE" point="org.eclipse.cdt.core.BinaryParser"/>
 				</extensions>
 			</storageModule>
 			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
-				<configuration artifactName="${ProjName}" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release,org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe" cleanCommand="rm -rf" description="" id="cdt.managedbuild.config.gnu.mingw.exe.release.710071756.384493523" name="ReleaseWx29" parent="cdt.managedbuild.config.gnu.mingw.exe.release" postbuildStep="strip ${ProjName}.exe" prebuildStep="">
+				<configuration artifactName="${ProjName}" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release,org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe" cleanCommand="rm -rf" description="" id="cdt.managedbuild.config.gnu.mingw.exe.release.710071756.384493523" name="ReleaseWx" parent="cdt.managedbuild.config.gnu.mingw.exe.release" postbuildStep="strip ${ProjName}.exe" prebuildStep="">
 					<folderInfo id="cdt.managedbuild.config.gnu.mingw.exe.release.710071756.384493523." name="/" resourcePath="">
 						<toolChain id="cdt.managedbuild.toolchain.gnu.mingw.exe.release.1523176033" name="MinGW GCC" superClass="cdt.managedbuild.toolchain.gnu.mingw.exe.release">
 							<targetPlatform id="cdt.managedbuild.target.gnu.platform.mingw.exe.release.1727143624" name="Debug Platform" superClass="cdt.managedbuild.target.gnu.platform.mingw.exe.release"/>
@@ -501,17 +503,17 @@
 									<listOptionValue builtIn="false" value="pcre"/>
 									<listOptionValue builtIn="false" value="xerces-c"/>
 									<listOptionValue builtIn="false" value="aspell"/>
-									<listOptionValue builtIn="false" value="wxmsw29u_richtext"/>
-									<listOptionValue builtIn="false" value="wxmsw29u_html"/>
-									<listOptionValue builtIn="false" value="wxmsw29u_stc"/>
-									<listOptionValue builtIn="false" value="wxmsw29u_aui"/>
-									<listOptionValue builtIn="false" value="wxmsw29u_adv"/>
-									<listOptionValue builtIn="false" value="wxmsw29u_stc"/>
-									<listOptionValue builtIn="false" value="wxmsw29u_core"/>
-									<listOptionValue builtIn="false" value="wxmsw29u_richtext"/>
-									<listOptionValue builtIn="false" value="wxbase29u_xml"/>
-									<listOptionValue builtIn="false" value="wxbase29u_net"/>
-									<listOptionValue builtIn="false" value="wxbase29u"/>
+									<listOptionValue builtIn="false" value="wxmsw${WXVER}u_richtext"/>
+									<listOptionValue builtIn="false" value="wxmsw${WXVER}u_html"/>
+									<listOptionValue builtIn="false" value="wxmsw${WXVER}u_stc"/>
+									<listOptionValue builtIn="false" value="wxmsw${WXVER}u_aui"/>
+									<listOptionValue builtIn="false" value="wxmsw${WXVER}u_adv"/>
+									<listOptionValue builtIn="false" value="wxmsw${WXVER}u_stc"/>
+									<listOptionValue builtIn="false" value="wxmsw${WXVER}u_core"/>
+									<listOptionValue builtIn="false" value="wxmsw${WXVER}u_richtext"/>
+									<listOptionValue builtIn="false" value="wxbase${WXVER}u_xml"/>
+									<listOptionValue builtIn="false" value="wxbase${WXVER}u_net"/>
+									<listOptionValue builtIn="false" value="wxbase${WXVER}u"/>
 									<listOptionValue builtIn="false" value="wxscintilla"/>
 									<listOptionValue builtIn="false" value="wxtiff"/>
 									<listOptionValue builtIn="false" value="wxjpeg"/>
@@ -566,9 +568,11 @@
 	<storageModule moduleId="refreshScope" versionNumber="2">
 		<configuration configurationName="DebugWx28"/>
 		<configuration configurationName="DebugWx29"/>
+		<configuration configurationName="ReleaseWx30"/>
 		<configuration configurationName="ReleaseWx28"/>
 		<configuration configurationName="ReleaseWx29"/>
 		<configuration configurationName="DebugStatic"/>
+		<configuration configurationName="DebugWx30"/>
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
 	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
