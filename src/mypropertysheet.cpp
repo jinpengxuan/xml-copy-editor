@@ -167,7 +167,7 @@ MyPropertySheet::MyPropertySheet (
 	    wxID_ANY );
 	languageBox->SetExtraStyle ( languageBox->GetExtraStyle() | wxCB_SORT );
 
-	languageBox->Append ( _ ( "Default" ), ( void* ) wxLANGUAGE_ENGLISH_US );
+	languageBox->Append ( _ ( "Default" ), ( void* ) wxLANGUAGE_DEFAULT );
 	languageBox->SetSelection ( 0 );
 
 	int index;
@@ -278,7 +278,7 @@ void MyPropertySheet::OnOk ( wxCommandEvent& e )
 	if ( languageChoice != wxNOT_FOUND )
 		lang = (wxIntPtr)languageBox->GetClientData(languageChoice);
 	else
-		lang = wxLANGUAGE_ENGLISH_US;
+		lang = wxLANGUAGE_DEFAULT;
 
 	e.Skip();
 }

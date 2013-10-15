@@ -299,7 +299,7 @@ bool MyApp::OnInit()
 			systemLocale = wxLANGUAGE_DUTCH;
 			break;
 		default:
-			systemLocale = wxLANGUAGE_ENGLISH_US;
+			systemLocale = wxLANGUAGE_DEFAULT;
 			break;
 	}
 
