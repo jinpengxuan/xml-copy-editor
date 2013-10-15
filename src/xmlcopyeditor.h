@@ -185,8 +185,6 @@ class MyApp : public wxApp
 	private:
 		wxSingleInstanceChecker *checker;
 		MyServer *server;
-		MyClient *client;
-		MyClientConnection *connection;
 		bool singleInstanceCheck;
 		int lang;
 		std::auto_ptr<wxFileConfig> config;

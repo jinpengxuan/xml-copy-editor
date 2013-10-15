@@ -40,7 +40,17 @@ class MyServerConnection : public wxConnection
 	public:
 		MyServerConnection();
 		~MyServerConnection();
-		bool OnPoke ( const wxString& topic, const wxString& item, wxChar *data, int size, wxIPCFormat format );
+		bool OnPoke ( const wxString& topic
+					, const wxString& item
+#if wxCHECK_VERSION(2,9,0)
+					, const void *data
+					, size_t size
+#else
+					, wxChar *data
+					, int size
+#endif
+					, wxIPCFormat format
+					);
 		bool OnStartAdvise ( const wxString& topic, const wxString& item );
 };
 
@@ -48,7 +58,16 @@ class MyClientConnection: public wxConnection
 {
 	public:
 		MyClientConnection();
-		bool OnAdvise ( const wxString& topic, const wxString& item, wxChar *data, int size, wxIPCFormat format );
+		bool OnAdvise ( const wxString& topic
+					, const wxString& item
+#if wxCHECK_VERSION(2,9,0)
+					, const void *data
+					, size_t size
+#else
+					, wxChar *data
+					, int size
+#endif
+					, wxIPCFormat format );
 		bool OnDisconnect();
 };
 

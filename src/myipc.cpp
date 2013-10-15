@@ -46,11 +46,17 @@ MyServerConnection::~MyServerConnection()
 }
 
 bool MyServerConnection::OnPoke (
-    const wxString& WXUNUSED ( topic ),
-    const wxString& item,
-    wxChar *data,
-    int size,
-    wxIPCFormat WXUNUSED ( format ) )
+	const wxString& WXUNUSED ( topic )
+	, const wxString& item
+#if wxCHECK_VERSION(2,9,0)
+	, const void *data
+	, size_t size
+#else
+	, wxChar *data
+	, int size
+#endif
+	, wxIPCFormat WXUNUSED ( format )
+	)
 {
 	if ( !wxTheApp )
 		return false;
@@ -90,7 +96,18 @@ wxConnectionBase *MyClient::OnMakeConnection()
 	return new MyClientConnection;
 }
 
-bool MyClientConnection::OnAdvise ( const wxString& WXUNUSED ( topic ), const wxString& WXUNUSED ( item ), wxChar *data, int WXUNUSED ( size ), wxIPCFormat WXUNUSED ( format ) )
+bool MyClientConnection::OnAdvise (
+	const wxString& WXUNUSED ( topic )
+	, const wxString& WXUNUSED ( item )
+#if wxCHECK_VERSION(2,9,0)
+	, const void * WXUNUSED ( data )
+	, size_t WXUNUSED ( size )
+#else
+	, wxChar * WXUNUSED ( data )
+	, int WXUNUSED ( size )
+#endif
+	, wxIPCFormat WXUNUSED ( format )
+	)
 {
 	return true;
 }

@@ -205,8 +205,6 @@ IMPLEMENT_APP ( MyApp)
 MyApp::MyApp()
 	: checker ( NULL )
 	, server ( NULL )
-	, client ( NULL )
-	, connection ( NULL )
 	, singleInstanceCheck ( false )
 	, lang ( 0 )
 #if defined(__WXMSW__) && !wxCHECK_VERSION(2,9,0)
@@ -227,7 +225,6 @@ MyApp::~MyApp()
 
 	delete checker;
 	delete server;
-	delete connection;
 }
 
 bool MyApp::OnInit()
@@ -337,9 +334,9 @@ bool MyApp::OnInit()
 		while ( checker->IsAnotherRunning() )
 		{
 			// attempt calling server
-			client = new MyClient();
-			connection = ( MyClientConnection * )
-			             client->MakeConnection ( hostName, service, IPC_TOPIC );
+			MyClient client;
+			MyClientConnection *connection = ( MyClientConnection * )
+			             client.MakeConnection ( hostName, service, IPC_TOPIC );
 			if ( !connection || !connection->StartAdvise ( IPC_ADVISE_NAME ) )
 				break;
 			else
