@@ -69,7 +69,13 @@ InputSource *XercesCatalogResolver::resolveEntity (
 #endif	
 */
 
+	if ( publicID == NULL || *publicID == '\0' )
+		return NULL;
+
 	char *narrowPublicId = XMLString::transcode ( publicID );
+	if ( narrowPublicId == NULL )
+		return NULL;
+
 	std::string resolved;
 	resolved = lookupPublicId ( narrowPublicId );
 
@@ -79,8 +85,8 @@ InputSource *XercesCatalogResolver::resolveEntity (
 		return NULL;
 
 	XMLCh *wideResolved = XMLString::transcode ( resolved.c_str() );
-	
-    InputSource *source = (InputSource *)new LocalFileInputSource ( wideResolved );
+
+	InputSource *source = (InputSource *)new LocalFileInputSource ( wideResolved );
 	XMLString::release ( &wideResolved );
 
 	return source;
