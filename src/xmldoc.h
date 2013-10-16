@@ -38,8 +38,8 @@ class XmlDoc : public XmlCtrl
 		    //const std::string& buffer = DEFAULT_XML_DECLARATION_UTF8,
 		    const char *buffer = NULL,
 		    size_t bufferLen = 0,
-		    const std::string& basePath = "",
-		    const std::string& auxPath = "",
+		    const wxString& basePath = wxEmptyString,
+		    const wxString& auxPath = wxEmptyString,
 		    const wxPoint& position = wxDefaultPosition,
 		    const wxSize& size = wxDefaultSize,
 		    long style = 0 );

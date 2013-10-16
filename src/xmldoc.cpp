@@ -30,8 +30,8 @@ XmlDoc::XmlDoc (
     //const std::string& buffer,
     const char *buffer,
     size_t bufferLen,
-    const std::string& basePath,
-    const std::string& auxPath,
+    const wxString& basePath,
+    const wxString& auxPath,
     const wxPoint &position,
     const wxSize& size,
     long style )

@@ -44,8 +44,8 @@
 using namespace xercesc;
 
 XmlPromptGenerator::XmlPromptGenerator (
-    const std::string& basePath,
-    const std::string& auxPath ) : d ( new PromptGeneratorData() )
+    const wxString& basePath,
+    const wxString& auxPath ) : d ( new PromptGeneratorData() )
 {
 	XML_SetUserData ( p, d.get() );
 	d->p = p;
@@ -62,7 +62,7 @@ XmlPromptGenerator::XmlPromptGenerator (
 	XML_SetEntityDeclHandler ( p, entitydeclhandler );
 	XML_SetExternalEntityRefHandlerArg ( p, d.get() );
 	XML_SetExternalEntityRefHandler ( p, externalentityrefhandler );
-	XML_SetBase ( p, basePath.c_str() );
+	XML_SetBase ( p, d->basePath.utf8_str() );
 
 	if ( !auxPath.empty() )
 		XML_UseForeignDTD ( p, true );
@@ -303,17 +303,17 @@ int XMLCALL XmlPromptGenerator::externalentityrefhandler (
 	// auxPath req'd?
 	if ( !systemId && !publicId )
 	{
-		ReadFile::run ( d->auxPath, buffer );
+		ReadFile::run ( ( const char * ) d->auxPath.mb_str(), buffer );
 		if ( buffer.empty() )
 		{
 			return XML_STATUS_ERROR;
 		}
 
-		std::string encoding = XmlEncodingHandler::get ( buffer );
-		XML_Parser dtdParser = XML_ExternalEntityParserCreate ( d->p, context, encoding.c_str() );
+		d->encoding = XmlEncodingHandler::get ( buffer );
+		XML_Parser dtdParser = XML_ExternalEntityParserCreate ( d->p, context, d->encoding.c_str() );
 		if ( !dtdParser )
 			return XML_STATUS_ERROR;
-		XML_SetBase ( dtdParser, d->auxPath.c_str() );
+		XML_SetBase ( dtdParser, d->auxPath.utf8_str() );
 		ret = XML_Parse ( dtdParser, buffer.c_str(), buffer.size(), true );
 		XML_ParserFree ( dtdParser );
 		return ret;
@@ -395,13 +395,13 @@ void XmlPromptGenerator::handleSchema (
 		return;
 	// first check for XML Schema association
 	const char **schemaAttr = ( const char ** ) attr; // now redundant; could use attr
-	std::string path;
+	wxString path;
 	for ( ; *schemaAttr; schemaAttr += 2 )
 	{
 		// no namespace
 		if ( !strcmp ( *schemaAttr, "xsi:noNamespaceSchemaLocation" ) )
 		{
-			path = * ( schemaAttr + 1 );
+			path = wxString ( schemaAttr[1], wxConvUTF8 );
 			break;
 		}
 		// with namespace -- check if this works
@@ -412,7 +412,7 @@ void XmlPromptGenerator::handleSchema (
 				searchIterator++;
 			if ( *searchIterator )
 			{
-				path = searchIterator + 1;
+				path = wxString ( searchIterator + 1, wxConvUTF8 );
 				break;
 			}
 		}
@@ -422,16 +422,16 @@ void XmlPromptGenerator::handleSchema (
 	{
 		return;
 	}
-	
 
-	std::string schemaPath = PathResolver::run ( path, ( d->auxPath.empty() ) ? d->basePath : d->auxPath);
+
+	wxString schemaPath = PathResolver::run ( path, ( d->auxPath.empty() ) ? d->basePath : d->auxPath);
 
 	std::auto_ptr<XercesDOMParser> parser ( new XercesDOMParser() );
 	parser->setDoNamespaces ( true );
 	parser->setDoSchema ( true );
 	parser->setValidationSchemaFullChecking ( true );
 
-	Grammar *rootGrammar = parser->loadGrammar ( schemaPath.c_str(), Grammar::SchemaGrammarType );
+	Grammar *rootGrammar = parser->loadGrammar ( schemaPath.mb_str(), Grammar::SchemaGrammarType );
 	if ( !rootGrammar )
 	{
 		return;

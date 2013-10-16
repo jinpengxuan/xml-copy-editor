@@ -55,8 +55,8 @@ XmlCtrl::XmlCtrl (
     wxWindowID id,
     const char *buffer, // could be NULL
     size_t bufferLen,
-    const std::string& basePathParameter,
-    const std::string& auxPathParameter,
+    const wxString& basePathParameter,
+    const wxString& auxPathParameter,
     const wxPoint& position,
     const wxSize& size,
     long style
@@ -1954,7 +1954,7 @@ bool XmlCtrl::backgroundValidate()
 	
 	return backgroundValidate (
 		bufferUtf8.c_str(),
-		basePath.c_str(),
+		basePath.mb_str(),
 		bufferUtf8.size() );
 }
 

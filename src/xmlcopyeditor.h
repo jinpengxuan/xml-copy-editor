@@ -328,7 +328,7 @@ class MyFrame : public wxFrame
 		// public to allow access from CommandPanel
 		XmlDoc *getActiveDocument();
 		void newDocument ( const wxString& s, const wxString& path = wxEmptyString, bool canSave = false );
-		void newDocument ( const std::string& s, const std::string& path = "", bool canSave = false );
+		void newDocument ( const std::string& s, const wxString& path = wxEmptyString, bool canSave = false );
 		void statusProgress ( const wxString& s );
 
 		// public to allow InsertPanel access
@@ -523,7 +523,7 @@ class MyFrame : public wxFrame
 		    bool ignoreEncoding = false,
 		    bool isXml = true );
 		void removeUtf8Bom ( std::string& buffer );
-		std::string getAuxPath ( const std::string& fileName );
+		wxString getAuxPath ( const wxString& fileName );
 		wxMenuBar *getMenuBar();
 		wxToolBar *getToolBar();
 

@@ -38,7 +38,8 @@ struct PromptGeneratorData : public ParserData
 	std::map<wxString, std::set<wxString> > requiredAttributeMap;
 	std::map<wxString, wxString> elementStructureMap;
 	std::set<wxString> entitySet;
-	std::string basePath, auxPath, rootElement;
+	wxString basePath, auxPath;
+	std::string encoding, rootElement;
 	bool isRootElement, grammarFound;
 	unsigned attributeValueCutoff;
 	XML_Parser p;
@@ -51,8 +52,8 @@ class XmlPromptGenerator : public WrapExpat
 {
 	public:
 		XmlPromptGenerator (
-		    const std::string& basePath = "",
-		    const std::string& auxPath = "" );
+		    const wxString& basePath = wxEmptyString,
+		    const wxString& auxPath = wxEmptyString );
 		virtual ~XmlPromptGenerator();
 		void getAttributeMap (
 		    std::map<wxString, std::map<wxString, std::set<wxString> > >

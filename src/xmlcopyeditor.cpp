@@ -2920,25 +2920,23 @@ void MyFrame::OnNew ( wxCommandEvent& WXUNUSED ( event ) )
 	ReadFile::run ( templateFileLocal, buffer );
 	wxString documentContents = wxString ( buffer.c_str(), wxConvUTF8, buffer.size() );
 
-	newDocument ( documentContents,
-	              wxString ( templateFileLocal.c_str(), wxConvUTF8, templateFileLocal.size() ) );
+	newDocument ( buffer, templateFile );
 }
 
 void MyFrame::newDocument ( const wxString& s, const wxString& path, bool canSave )
 {
 	std::string bufferUtf8 = ( const char * ) s.mb_str ( wxConvUTF8 );
-	std::string pathUtf8 = ( const char * ) path.mb_str ( wxConvUTF8 );
-	newDocument ( bufferUtf8, pathUtf8, canSave );
+	newDocument ( bufferUtf8, path, canSave );
 }
 
-void MyFrame::newDocument ( const std::string& s, const std::string& path, bool canSave )
+void MyFrame::newDocument ( const std::string& s, const wxString& path, bool canSave )
 {
 	XmlDoc *doc;
 
 	wxString documentLabel;
 	documentLabel.Printf ( _ ( "Document%i" ), documentCount++ );
 
-	std::string auxPath = getAuxPath ( path );
+	wxString auxPath = getAuxPath ( path );
 
 	Freeze();
 	doc = ( s.empty() ) ?
@@ -3068,7 +3066,7 @@ bool MyFrame::openFile ( wxString& fileName, bool largeFile )
 	XmlDoc *doc;
 
 	int type = getFileType ( fileName );
-	std::string auxPath = getAuxPath ( ( const char * ) fileName.mb_str ( wxConvLocal ) );
+	wxString auxPath = getAuxPath ( fileName );
 
 	char *docBuffer = NULL;
 	size_t docBufferLen = 0;
@@ -3267,7 +3265,7 @@ bool MyFrame::openFile ( wxString& fileName, bool largeFile )
 	    wxID_ANY,
 	    finalBuffer,
 	    finalBufferLen,
-	    ( const char * ) fileName.mb_str ( wxConvLocal ),
+	    fileName,
 	    auxPath );
 #ifdef __WXMSW__
 	doc->SetUndoCollection ( false );
@@ -6183,26 +6181,26 @@ void MyFrame::OnDropFiles ( wxDropFilesEvent& event )
 }
 #endif
 
-std::string MyFrame::getAuxPath ( const std::string& fileName )
+wxString MyFrame::getAuxPath ( const wxString& fileName )
 {
-	if ( fileName.find ( ".xsl" ) != std::string::npos ||
-	        fileName.find ( ".XSL" ) != std::string::npos )
-		return xslDtdPath;
-	else if ( fileName.find ( ".rss" ) != std::string::npos ||
-	          fileName.find ( ".RSS" ) != std::string::npos )
-		return rssDtdPath;
-	else if ( fileName.find ( ".xtm" ) != std::string::npos ||
-	          fileName.find ( ".xtmm" ) != std::string::npos ||
-	          fileName.find ( ".XTM" ) != std::string::npos ||
-	          fileName.find ( ".XTMM" ) != std::string::npos )
-		return xtmDtdPath;
-	else if ( fileName.find ( ".lzx" ) != std::string::npos ||
-	          fileName.find ( ".LZX" ) != std::string::npos )
-		return lzxDtdPath;
-	else if ( fileName.find ( ".xlf" ) != std::string::npos ||
-	          fileName.find ( ".XLF" ) != std::string::npos )
-		return xliffDtdPath;
-	return "";
+	if ( fileName.Find ( _T ( ".xsl" ) ) != wxNOT_FOUND ||
+	        fileName.Find ( _T ( ".XSL" ) ) != wxNOT_FOUND )
+		return wxString ( xslDtdPath.c_str(), wxConvUTF8 );
+	else if ( fileName.Find ( _T ( ".rss" ) ) != wxNOT_FOUND ||
+	          fileName.Find ( _T ( ".RSS" ) ) != wxNOT_FOUND )
+		return wxString ( rssDtdPath.c_str(), wxConvUTF8 );
+	else if ( fileName.Find ( _T ( ".xtm" ) ) != wxNOT_FOUND ||
+	          fileName.Find ( _T ( ".xtmm" ) ) != wxNOT_FOUND ||
+	          fileName.Find ( _T ( ".XTM" ) ) != wxNOT_FOUND ||
+	          fileName.Find ( _T ( ".XTMM" ) ) != wxNOT_FOUND )
+		return wxString ( xtmDtdPath.c_str(), wxConvUTF8 );
+	else if ( fileName.Find ( _T ( ".lzx" ) ) != wxNOT_FOUND ||
+	          fileName.Find ( _T ( ".LZX" ) ) != wxNOT_FOUND )
+		return wxString ( lzxDtdPath.c_str(), wxConvUTF8 );
+	else if ( fileName.Find ( _T ( ".xlf" ) ) != wxNOT_FOUND ||
+	          fileName.Find ( _T ( ".XLF" ) ) != wxNOT_FOUND )
+		return wxString ( xliffDtdPath.c_str(), wxConvUTF8 );
+	return wxEmptyString;
 }
 
 void MyFrame::OnActivateApp ( wxActivateEvent& event )

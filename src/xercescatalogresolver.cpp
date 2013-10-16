@@ -72,6 +72,8 @@ InputSource *XercesCatalogResolver::resolveEntity (
 	if ( publicID == NULL || *publicID == '\0' )
 		return NULL;
 
+	// Since public IDs consist of ANSII characters, it doesn't matter how
+	// publicID is encoded as long as it's a multibyte string
 	char *narrowPublicId = XMLString::transcode ( publicID );
 	if ( narrowPublicId == NULL )
 		return NULL;
