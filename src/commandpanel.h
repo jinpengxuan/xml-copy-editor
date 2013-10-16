@@ -63,7 +63,7 @@ class CommandPanel : public wxPanel
 		wxButton *runButton;
 		wxCheckBox *syncBox;
 		wxRadioButton *outputIgnore, *outputInsert, *outputNewDocument;
-		wxBoxSizer *topSizer, *bottomSizer, *mainSizer;
+		wxBoxSizer *bottomSizer, *mainSizer;
 		MyFrame *parent;
 		DECLARE_EVENT_TABLE()
 };

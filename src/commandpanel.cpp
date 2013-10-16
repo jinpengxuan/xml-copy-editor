@@ -54,18 +54,7 @@ CommandPanel::CommandPanel (
 	wxButton *fullpathButton = new wxButton ( this, ID_BUTTON_FULLPATH, fullpath,     wxDefaultPosition, wxDefaultSize, wxBU_EXACTFIT | wxNO_BORDER );
 
 
-	int editWidth, editHeight;
-	parent->GetSize( &editWidth, &editHeight);
-	editWidth -= sizerOffset * 2;
-
-	commandEdit = new wxTextCtrl (
-	    this,
-	    wxID_ANY,
-	    _T ( "" ),
-	    wxDefaultPosition,
-	    wxSize ( editWidth, -1 )
-	);
-
+	commandEdit = new wxTextCtrl ( this, wxID_ANY );
 	commandEdit->SetValue ( cmd );
 
 	runButton = new wxButton (
@@ -137,27 +126,19 @@ CommandPanel::CommandPanel (
 	variablesSizer->Add ( extensionButton, 0, wxLEFT | wxRIGHT | wxALIGN_CENTER_VERTICAL, sizerOffset );
 	variablesSizer->Add ( fullpathButton, 0, wxLEFT | wxRIGHT | wxALIGN_CENTER_VERTICAL, sizerOffset );
 
-	topSizer = new wxBoxSizer ( wxHORIZONTAL );
-	topSizer->Add ( commandEdit, 0, wxLEFT | wxRIGHT | wxALIGN_CENTER_VERTICAL | wxEXPAND, sizerOffset );
-
-	topSizer->Layout();
-
 	bottomSizer = new wxBoxSizer ( wxHORIZONTAL );
 	bottomSizer->Add ( runButton, 0, wxLEFT | wxRIGHT | wxALIGN_CENTER_VERTICAL, sizerOffset );
 	bottomSizer->Add ( syncBox, 0, wxLEFT | wxRIGHT | wxALIGN_CENTER_VERTICAL, sizerOffset );
 	bottomSizer->Add ( variablesSizer, 0, wxLEFT | wxRIGHT | wxALIGN_CENTER_VERTICAL, sizerOffset );
 	bottomSizer->Add ( outputSizer, 0, wxLEFT | wxRIGHT | wxALIGN_CENTER_VERTICAL, sizerOffset );
 
-	bottomSizer->Layout();
-
 	mainSizer = new wxBoxSizer ( wxVERTICAL );
-	mainSizer->Add ( topSizer );
+	mainSizer->Add ( commandEdit, 0, wxLEFT | wxRIGHT | wxALIGN_CENTER_VERTICAL | wxEXPAND, sizerOffset );
 	mainSizer->Add ( bottomSizer );
-	mainSizer->Layout();
 
 
 	this->SetSizer ( mainSizer );
-	this->SetSize ( -1, ( runButton->GetSize().GetHeight() * 2 ) + 25 );
+	mainSizer->SetSizeHints ( this );
 }
 
 CommandPanel::~CommandPanel()
