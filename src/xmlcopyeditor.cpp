@@ -3076,13 +3076,14 @@ bool MyFrame::openFile ( wxString& fileName, bool largeFile )
 	//wxMemoryMappedFile *memorymap = NULL;
 	BinaryFile *binaryfile = NULL;
 
-	binaryfile = new BinaryFile ( ( const char * ) fileName.mb_str ( wxConvLocal ) );
+	binaryfile = new BinaryFile ( fileName );
 	if ( !binaryfile->getData() )
 	{
 		wxString message;
 		message.Printf ( _ ( "Cannot open %s" ), fileName.c_str() );
 		messagePane ( message, CONST_STOP );
 		statusProgress ( wxEmptyString );
+		delete binaryfile;
 		return false;
 	}
 	/*
@@ -5859,36 +5860,28 @@ void MyFrame::updatePaths()
 	         wxFileName::GetPathSeparator();
     daisyDir = applicationDir + wxFileName::GetPathSeparator() + _T ( "daisy" ) +
         wxFileName::GetPathSeparator();
-	wxString wideCatalogPath =
+	catalogPath =
 	    applicationDir + wxFileName::GetPathSeparator() + _T ( "catalog" ) +
 	    wxFileName::GetPathSeparator() + _T ( "catalog" );
-	catalogPath = wideCatalogPath.mb_str ( wxConvLocal );
-	wxString wideXslDtdPath =
+	xslDtdPath =
 	    applicationDir + wxFileName::GetPathSeparator() + _T ( "dtd" ) +
 	    wxFileName::GetPathSeparator() + _T ( "xslt10.dtd" );
-	xslDtdPath = wideXslDtdPath.mb_str ( wxConvLocal );
-	wxString wideRssDtdPath =
+	rssDtdPath =
 	    applicationDir + wxFileName::GetPathSeparator() + _T ( "dtd" ) +
 	    wxFileName::GetPathSeparator() + _T ( "rss2.dtd" );
-	rssDtdPath = wideRssDtdPath.mb_str ( wxConvLocal );
-	wxString wideXtmDtdPath =
+	xtmDtdPath =
 	    applicationDir + wxFileName::GetPathSeparator() + _T ( "dtd" ) +
 	    wxFileName::GetPathSeparator() + _T ( "xtm1.dtd" );
-	xtmDtdPath = wideXtmDtdPath.mb_str ( wxConvLocal );
-	wxString wideLzxDtdPath =
+	lzxDtdPath =
 	    applicationDir + wxFileName::GetPathSeparator() + _T ( "dtd" ) +
 	    wxFileName::GetPathSeparator() + _T ( "lzx.dtd" );
-	lzxDtdPath = wideLzxDtdPath.mb_str ( wxConvLocal );
-	wxString wideXliffDtdPath =
+	xliffDtdPath =
 	    applicationDir + wxFileName::GetPathSeparator() + _T ( "dtd" ) +
 	    wxFileName::GetPathSeparator() + _T ( "xliff.dtd" );
-	xliffDtdPath = wideXliffDtdPath.mb_str ( wxConvLocal );
-	wxString wideAspellDataPath = applicationDir + wxFileName::GetPathSeparator() +
+	aspellDataPath = applicationDir + wxFileName::GetPathSeparator() +
         _T ( "aspell" ) + wxFileName::GetPathSeparator() + _T ( "data" );
-    aspellDataPath = wideAspellDataPath.mb_str ( wxConvLocal );
-	wxString wideAspellDictPath = applicationDir + wxFileName::GetPathSeparator() +
+    aspellDictPath = applicationDir + wxFileName::GetPathSeparator() +
         _T ( "aspell" ) + wxFileName::GetPathSeparator() + _T ( "dict" );
-    aspellDictPath = wideAspellDictPath.mb_str ( wxConvLocal );
 }
 
 void MyFrame::OnAssociate ( wxCommandEvent& event )
@@ -6185,21 +6178,21 @@ wxString MyFrame::getAuxPath ( const wxString& fileName )
 {
 	if ( fileName.Find ( _T ( ".xsl" ) ) != wxNOT_FOUND ||
 	        fileName.Find ( _T ( ".XSL" ) ) != wxNOT_FOUND )
-		return wxString ( xslDtdPath.c_str(), wxConvUTF8 );
+		return xslDtdPath;
 	else if ( fileName.Find ( _T ( ".rss" ) ) != wxNOT_FOUND ||
 	          fileName.Find ( _T ( ".RSS" ) ) != wxNOT_FOUND )
-		return wxString ( rssDtdPath.c_str(), wxConvUTF8 );
+		return rssDtdPath;
 	else if ( fileName.Find ( _T ( ".xtm" ) ) != wxNOT_FOUND ||
 	          fileName.Find ( _T ( ".xtmm" ) ) != wxNOT_FOUND ||
 	          fileName.Find ( _T ( ".XTM" ) ) != wxNOT_FOUND ||
 	          fileName.Find ( _T ( ".XTMM" ) ) != wxNOT_FOUND )
-		return wxString ( xtmDtdPath.c_str(), wxConvUTF8 );
+		return xtmDtdPath;
 	else if ( fileName.Find ( _T ( ".lzx" ) ) != wxNOT_FOUND ||
 	          fileName.Find ( _T ( ".LZX" ) ) != wxNOT_FOUND )
-		return wxString ( lzxDtdPath.c_str(), wxConvUTF8 );
+		return lzxDtdPath;
 	else if ( fileName.Find ( _T ( ".xlf" ) ) != wxNOT_FOUND ||
 	          fileName.Find ( _T ( ".XLF" ) ) != wxNOT_FOUND )
-		return wxString ( xliffDtdPath.c_str(), wxConvUTF8 );
+		return xliffDtdPath;
 	return wxEmptyString;
 }
 
