@@ -356,7 +356,7 @@
 					<folderInfo id="cdt.managedbuild.config.gnu.mingw.exe.debug.747771716.73095692." name="/" resourcePath="">
 						<toolChain id="cdt.managedbuild.toolchain.gnu.mingw.exe.debug.257822489" name="MinGW GCC" superClass="cdt.managedbuild.toolchain.gnu.mingw.exe.debug">
 							<targetPlatform id="cdt.managedbuild.target.gnu.platform.mingw.exe.debug.1612720961" name="Debug Platform" superClass="cdt.managedbuild.target.gnu.platform.mingw.exe.debug"/>
-							<builder buildPath="${workspace_loc:/XmlCopyEditor/Debug}" id="cdt.managedbuild.tool.gnu.builder.mingw.base.1312230760" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="CDT Internal Builder" superClass="cdt.managedbuild.tool.gnu.builder.mingw.base"/>
+							<builder buildPath="${workspace_loc:/XmlCopyEditor}/DebugWx28" id="org.eclipse.cdt.build.core.internal.builder.1337615939" superClass="org.eclipse.cdt.build.core.internal.builder"/>
 							<tool command="as" commandLinePattern="${COMMAND} ${FLAGS} ${OUTPUT_FLAG} ${OUTPUT_PREFIX}${OUTPUT} ${INPUTS}" id="cdt.managedbuild.tool.gnu.assembler.mingw.exe.debug.825294006" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.mingw.exe.debug">
 								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.1486689484" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
 							</tool>
@@ -567,12 +567,10 @@
 	</storageModule>
 	<storageModule moduleId="refreshScope" versionNumber="2">
 		<configuration configurationName="DebugWx28"/>
-		<configuration configurationName="DebugWx29"/>
-		<configuration configurationName="ReleaseWx30"/>
+		<configuration configurationName="ReleaseWx"/>
+		<configuration configurationName="DebugWx"/>
 		<configuration configurationName="ReleaseWx28"/>
-		<configuration configurationName="ReleaseWx29"/>
 		<configuration configurationName="DebugStatic"/>
-		<configuration configurationName="DebugWx30"/>
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
 	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
