@@ -30,11 +30,11 @@
 #include "getword.h"
 
 WrapAspell::WrapAspell (
-                       std::string lang
+                       const wxString lang
 #if !defined(USE_ENCHANT) && defined(__WXMSW__)
                        ,
-                       const std::string& aspellDataPathParameter,
-                       const std::string& aspellDictPathParameter
+                       const wxString& aspellDataPathParameter,
+                       const wxString& aspellDictPathParameter
 #endif
 )
 {
@@ -45,11 +45,11 @@ WrapAspell::WrapAspell (
 	spell_config = new_aspell_config();
 	
 #ifdef __WXMSW__
-       aspell_config_replace ( spell_config, "data-dir", aspellDataPathParameter.c_str() );//ASPELL_DATA_PATH );
-       aspell_config_replace ( spell_config, "dict-dir", aspellDictPathParameter.c_str() );//ASPELL_DICT_PATH );
+       aspell_config_replace ( spell_config, "data-dir", aspellDataPathParameter.mb_str() );//ASPELL_DATA_PATH );
+       aspell_config_replace ( spell_config, "dict-dir", aspellDictPathParameter.mb_str() );//ASPELL_DICT_PATH );
 #endif
 	
-	aspell_config_replace ( spell_config, "lang", lang.c_str() );	
+	aspell_config_replace ( spell_config, "lang", lang.mb_str() );
 	AspellCanHaveError * possible_err = new_aspell_speller ( spell_config );
 	spell_checker = 0;
 	if ( aspell_error_number ( possible_err ) != 0)

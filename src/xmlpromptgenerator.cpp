@@ -431,7 +431,10 @@ void XmlPromptGenerator::handleSchema (
 	parser->setDoSchema ( true );
 	parser->setValidationSchemaFullChecking ( true );
 
-	Grammar *rootGrammar = parser->loadGrammar ( schemaPath.mb_str(), Grammar::SchemaGrammarType );
+	Grammar *rootGrammar = parser->loadGrammar
+			( ( const XMLCh * ) ( const char * ) schemaPath.mb_str ( WrapXerces::getMBConv() )
+			, Grammar::SchemaGrammarType
+			);
 	if ( !rootGrammar )
 	{
 		return;

@@ -32,7 +32,7 @@
 class Initializer
 {
 public:
-	Initializer ( const std::string &catalogPath ) throw ()
+	Initializer ( const wxString &catalogPath ) throw ()
 	{
 		xmlSetGenericErrorFunc ( xmlGenericErrorContext,
 				&Initializer::OnXmlGenericError );
@@ -40,7 +40,7 @@ public:
 		LIBXML_TEST_VERSION
 
 		xmlInitializeCatalog();
-		xmlLoadCatalog ( catalogPath.c_str() );
+		xmlLoadCatalog ( catalogPath.mb_str() );
 
 		initGenericErrorDefaultFunc ( NULL );
 	}
@@ -83,7 +83,7 @@ public:
 	}
 };
 
-void WrapLibxml::Init ( const std::string &catalogPath ) throw()
+void WrapLibxml::Init ( const wxString &catalogPath ) throw()
 {
 	static Initializer dummy ( catalogPath );
 }

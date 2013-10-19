@@ -22,11 +22,12 @@
 
 #include <cstdio>
 #include <cstdlib>
+#include <wx/wx.h>
 
 class BinaryFile
 {
 	public:
-		BinaryFile ( const char *fname );
+		BinaryFile ( const wxString &fname );
 		~BinaryFile();
 		const char *getData();
 		size_t getDataLen();

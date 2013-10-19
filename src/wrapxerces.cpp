@@ -27,6 +27,7 @@
 #include <sstream>
 #include <utility>
 #include <stdexcept>
+#include <boost/static_assert.hpp>
 
 using namespace xercesc;
 
@@ -114,7 +115,7 @@ bool WrapXerces::validate ( const std::string& fileName )
 bool WrapXerces::validateMemory (
 	const char *buffer,
 	size_t len,
-	const char *system,
+	const wxString &system,
 	wxThread *thread /*= NULL*/ )
 {
 	std::auto_ptr<SAX2XMLReader> parser ( XMLReaderFactory::createXMLReader() );
@@ -135,8 +136,11 @@ bool WrapXerces::validateMemory (
 	parser->setEntityResolver ( catalogResolver );
 
 	XMLByte* xmlBuffer = (XMLByte*) buffer;
-	MemBufInputSource source ( xmlBuffer, len, system );
-
+	MemBufInputSource source
+			( xmlBuffer
+			, len
+			, ( const XMLCh * ) ( const char * ) system.mb_str ( getMBConv() )
+			);
 	try
 	{
 		if ( thread == NULL )
@@ -189,9 +193,31 @@ std::pair<int, int> WrapXerces::getErrorPosition()
 	return errorPosition;
 }
 
+const wxMBConv &WrapXerces::getMBConv()
+{
+	switch ( sizeof ( XMLCh ) )
+	{
+	case 1:
+		return wxConvUTF8;
+	case 2:
+	{
+		const static wxMBConvUTF16 conv;
+		return conv;
+	}
+	case 4:
+	{
+		const static wxMBConvUTF32 conv;
+		return conv;
+	}
+	default:
+		BOOST_STATIC_ASSERT_MSG ( sizeof ( XMLCh ) == 2
+			, "Xerces-C doesn't use UTF-16 strings any more");
+		break;
+	}
+	return wxConvUTF8;
+}
+
 wxString WrapXerces::toString ( const XMLCh *str )
 {
-	static wxMBConvUTF16 conv;
-
-	return wxString ( ( const char * ) str, conv );
+	return wxString ( ( const char * ) str, getMBConv() );
 }

@@ -372,7 +372,7 @@ class MyFrame : public wxFrame
 		MyNotebook *mainBook;
 		MyHtmlPane *htmlReport;
 
-		std::string catalogPath, xslDtdPath, rssDtdPath, lzxDtdPath, xtmDtdPath,
+		wxString catalogPath, xslDtdPath, rssDtdPath, lzxDtdPath, xtmDtdPath,
 		xliffDtdPath, aspellDataPath, aspellDictPath;
 		std::pair<int, int> controlCoordinates;
 		std::map<std::string, std::map<std::string, std::set<std::string> > >

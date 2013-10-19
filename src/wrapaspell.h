@@ -22,6 +22,7 @@
 
 #include <string>
 #include <vector>
+#include <wx/wx.h>
 #include "contexthandler.h"
 #if !defined(USE_ENCHANT)
 #include "aspell.h"
@@ -37,10 +38,10 @@ class WrapAspell
 {
 	public:
 		WrapAspell (
-                   std::string lang// = "en_US",
+                   const wxString lang// = "en_US",
 #if !defined(USE_ENCHANT) && defined(__WXMSW__)
-                   , const std::string& aspellDataPathParameter,
-                   const std::string& aspellDictPath
+                   , const wxString& aspellDataPathParameter,
+                   const wxString& aspellDictPath
 #endif
                    );
 		~WrapAspell();

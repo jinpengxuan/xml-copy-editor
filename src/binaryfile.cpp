@@ -18,25 +18,20 @@
  */
 
 #include "binaryfile.h"
-#include <stdexcept>
+#include <wx/wfstream.h>
 
-BinaryFile::BinaryFile ( const char *fname ) : m_data ( 0 ), m_dataLen ( 0 )
+BinaryFile::BinaryFile ( const wxString &fname ) : m_data ( 0 ), m_dataLen ( 0 )
 {
-	FILE *pFile;
+	wxFileInputStream stream ( fname );
 	size_t lSize;
 	char *buffer;
-	size_t result;
 
-	pFile = fopen ( fname, "rb" );
-	if ( pFile == NULL )
+	if ( !stream.IsOk() )
 	{
 		return;
 	}
 
-	// obtain file size
-	fseek ( pFile , 0 , SEEK_END );
-	lSize = ftell ( pFile );
-	rewind ( pFile );
+	lSize = stream.GetSize();
 
 	// allocate memory to contain the whole file:
 
@@ -48,17 +43,14 @@ BinaryFile::BinaryFile ( const char *fname ) : m_data ( 0 ), m_dataLen ( 0 )
 	}
 
 	// copy the file into the buffer:
-	result = fread ( buffer, 1, lSize, pFile );
-	if ( result != lSize )
+	stream.Read ( buffer, lSize );
+	if ( stream.LastRead() != lSize )
 	{
-		if ( !feof ( pFile ) )
+		if ( !stream.Eof() )
 			return;
 	}
 
 	/* the whole file is now loaded in the memory buffer. */
-
-	// terminate
-	fclose ( pFile );
 
 	m_data = buffer;
 	m_dataLen = lSize;

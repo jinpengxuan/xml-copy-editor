@@ -21,6 +21,7 @@
 #define WRAP_XERCES
 
 #include <wx/wx.h>
+#include <wx/strconv.h>
 #include <string>
 #include <utility>
 
@@ -42,9 +43,10 @@ class WrapXerces
 		virtual ~WrapXerces();
 		bool validate ( const std::string& fileName );
 		bool validateMemory ( const char *buffer, size_t len,
-		    const char *system, wxThread *thread = NULL );
+		    const wxString &system, wxThread *thread = NULL );
 		const wxString &getLastError();
 		std::pair<int, int> getErrorPosition();
+		static const wxMBConv &getMBConv();
 		static wxString toString ( const XMLCh *str );
 	private:
 		XercesCatalogResolver *catalogResolver;

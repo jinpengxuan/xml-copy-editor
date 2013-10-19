@@ -25,14 +25,14 @@
 HouseStyle::HouseStyle (
     int typeParameter,
     const std::string& bufferParameter,
-    const std::string& ruleDirectoryParameter,
-    const std::string& ruleFileParameter,
-    const std::string& filterDirectoryParameter,
-    const std::string& filterFileParameter,
-    const std::string& pathSeparatorParameter,
+    const wxString& ruleDirectoryParameter,
+    const wxString& ruleFileParameter,
+    const wxString& filterDirectoryParameter,
+    const wxString& filterFileParameter,
+    const wxString& pathSeparatorParameter,
 #ifdef __WXMSW__
-    const std::string& aspellDataPathParameter,
-    const std::string& aspellDictPathParameter,
+    const wxString& aspellDataPathParameter,
+    const wxString& aspellDictPathParameter,
 #endif
     int contextRangeParameter ) :
 		type ( typeParameter ),
@@ -43,21 +43,21 @@ HouseStyle::HouseStyle (
 		filterFile ( filterFileParameter ),
 		pathSeparator ( pathSeparatorParameter ),
 #ifdef __WXMSW__
-       aspellDataPath ( aspellDataPathParameter ),
-       aspellDictPath ( aspellDictPathParameter ),
+		aspellDataPath ( aspellDataPathParameter ),
+		aspellDictPath ( aspellDictPathParameter ),
 #endif
 		contextRange ( contextRangeParameter ),
 		ruleVector ( new std::vector<boost::shared_ptr<Rule> > ),
 		dictionary ( new StringSet<char> ),
 		passiveDictionary ( new StringSet<char> )
-{     
+{
 }
 
 HouseStyle::~HouseStyle()
 {}
 
 void HouseStyle::collectFilter (
-    std::string& fileName,
+    const std::string& fileName,
     std::set<std::string>& excludeSet,
     int *filterCount )
 {
@@ -123,7 +123,7 @@ void HouseStyle::collectFilter (
 */
 }
 
-void HouseStyle::collectRules ( string& fileName,
+void HouseStyle::collectRules ( const std::string& fileName,
                                 boost::shared_ptr<std::vector<boost::shared_ptr<Rule> > > ruleVector,
                                 std::set<string>& excludeSet,
                                 int *ruleCount )
@@ -132,7 +132,7 @@ void HouseStyle::collectRules ( string& fileName,
 		return;
 	
 	std::string filePath, buffer;
-	filePath = ruleDirectory + pathSeparator + fileName;
+	filePath = (const char *) ( ruleDirectory + pathSeparator ).mb_str() + fileName;
 	if ( !ReadFile::run ( filePath, buffer ) )
 		return;
 
@@ -180,7 +180,7 @@ bool HouseStyle::createReport()
 {
 	if ( type == HS_TYPE_STYLE && !updateRules() )
 	{
-		error = "no rules found";
+		error = _ ( "no rules found" );
 		return false;
 	}
 
@@ -190,7 +190,7 @@ bool HouseStyle::createReport()
 	auto_ptr<HouseStyleReader> xtr ( new HouseStyleReader ( filterMap ) );
 	if ( !xtr->parse ( buffer ) )
 	{
-		error = "file is not well-formed";
+		error = _ ( "file is not well-formed" );
 		return false;
 	}
 */
@@ -219,7 +219,7 @@ bool HouseStyle::createReport()
 	}
 	catch (...)
 	{
-		error = "Cannot initialise spellcheck";
+		error = _ ( "Cannot initialise spellcheck" );
 		return false;
 	}
 
@@ -314,12 +314,12 @@ bool HouseStyle::createReport()
 	return true;
 }
 
-std::string HouseStyle::getLastError()
+const wxString &HouseStyle::getLastError()
 {
 	return error;
 }
 
-std::vector<ContextMatch> HouseStyle::getMatchVector()
+const std::vector<ContextMatch> &HouseStyle::getMatchVector()
 {
 	return matchVector;
 }
@@ -332,7 +332,7 @@ int HouseStyle::updateRules()
 
 	int ruleCount = 0;
 	set<string> excludeSet;
-	collectRules ( ruleFile, ruleVector, excludeSet, &ruleCount );
+	collectRules ( ( const char * ) ruleFile.mb_str(), ruleVector, excludeSet, &ruleCount );
 	return ruleCount;
 }
 
@@ -341,7 +341,7 @@ int HouseStyle::updateFilter()
 	filterMap.clear();
 	int filterCount = 0;
 	set<string> excludeSet;
-	collectFilter ( filterFile, excludeSet, &filterCount );
+	collectFilter ( ( const char * ) filterFile.mb_str(), excludeSet, &filterCount );
 
 	return filterCount;
 }

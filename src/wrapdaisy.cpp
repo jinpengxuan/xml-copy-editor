@@ -145,9 +145,9 @@ bool WrapDaisy::run (
     }
     else // no stylesheet
     {
-        BinaryFile bf( stdFileIn.c_str() );
-	if ( !bf.getData() )
-	{
+        BinaryFile bf( fileIn );
+        if ( !bf.getData() )
+        {
             output.append ( bf.getData(), bf.getDataLen() );
             error = _( "Cannot read [b]" ) + fileIn + ( _("[/b]") );
             return false;
@@ -727,15 +727,13 @@ bool WrapDaisy::run (
         _T("z3986") + wxFileName::GetPathSeparator();
     fileWithSmilAttribs = folderWithSmilFile + fn.GetFullName();
 
-    std::string file = ( const char *) fileWithSmilAttribs.mb_str ( wxConvUTF8 );
-
 	auto_ptr<Mp3Album> ma ( new Mp3Album() );
 	
 	BinaryFile *binaryfile;
-	binaryfile = new BinaryFile ( file.c_str() );
+	binaryfile = new BinaryFile ( fileWithSmilAttribs );
 	if ( !binaryfile->getData() )
 	{
-		error.Printf ( _ ( "Cannot open %s" ), file.c_str() );
+		error.Printf ( _ ( "Cannot open %s" ), fileWithSmilAttribs.c_str() );
 		return false;
 	}
     
@@ -800,7 +798,7 @@ bool WrapDaisy::run (
     return true;
 }
 
-wxString WrapDaisy::getLastError()
+const wxString &WrapDaisy::getLastError()
 {
     return error;   
 }

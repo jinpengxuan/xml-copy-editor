@@ -203,9 +203,8 @@ void XmlSchemaGenerator::generateData ( const wxString &elementName,
 			continue;
 		for ( attrItr = attrMap.begin(); attrItr != attrMap.end(); attrItr++ )
 		{
-			const static wxMBConvUTF16 conv;
 			if ( attrs->getNamedItem ( ( const XMLCh * ) ( const char * )
-					attrItr->first.mb_str ( conv ) ) == NULL )
+					attrItr->first.mb_str ( WrapXerces::getMBConv() ) ) == NULL )
 			{
 				optAttrs.insert ( attrItr->first );
 			}

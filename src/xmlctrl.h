@@ -139,7 +139,7 @@ class XmlCtrl: public wxStyledTextCtrl
 		bool backgroundValidate (  );
 		bool backgroundValidate (
 			const char *buffer,
-			const char *system,
+			const wxString &system,
 			size_t bufferLen );
 		std::string myGetTextRaw(); // alternative to faulty stc implementation
 		bool getValidationRequired();

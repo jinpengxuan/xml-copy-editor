@@ -23,7 +23,7 @@ public:
         bool doc,
         bool fullDaisy,
         bool mp3Album );
-    wxString getLastError();
+    const wxString &getLastError();
 private:
     MyFrame *frame;
     wxString daisyDir, path, blankImage, classPath, commandLineUI, baseCmd, error,

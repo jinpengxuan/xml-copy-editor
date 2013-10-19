@@ -45,46 +45,46 @@ class HouseStyle
 		HouseStyle (
 		    int type,
 		    const std::string& bufferParameter,
-		    const std::string& ruleDirectoryParameter,
-		    const std::string& ruleFileParameter,
-		    const std::string& filterDirectoryParameter,
-		    const std::string& filterFileParameter,
-		    const std::string& pathSeparatorParameter,
+		    const wxString& ruleDirectoryParameter,
+		    const wxString& ruleFileParameter,
+		    const wxString& filterDirectoryParameter,
+		    const wxString& filterFileParameter,
+		    const wxString& pathSeparatorParameter,
 #ifdef __WXMSW__
-                const std::string& aspellDataPathParameter,
-                const std::string& aspellDictPathParameter,
+		    const wxString& aspellDataPathParameter,
+		    const wxString& aspellDictPathParameter,
 #endif
 		    int contextRangeParameter );
 		~HouseStyle();
 		bool createReport();
-		std::string getLastError();
-		std::vector<ContextMatch> getMatchVector();
+		const wxString &getLastError();
+		const std::vector<ContextMatch> &getMatchVector();
 	private:
 		int type;
-		std::string buffer
-		          , ruleDirectory
-		          , ruleFile
-		          , filterDirectory
-		          , filterFile
-		          , pathSeparator
-		          , error
+		std::string buffer;
+		wxString ruleDirectory
+		       , ruleFile
+		       , filterDirectory
+		       , filterFile
+		       , pathSeparator
+		       , error
 #ifdef __WXMSW__
-                  , aspellDataPath
-                  , aspellDictPath
+               , aspellDataPath
+               , aspellDictPath
 #endif
-                  ;
+               ;
 		int contextRange;
 		boost::shared_ptr<std::vector<boost::shared_ptr<Rule> > > ruleVector;
 		std::map<std::string, std::map<std::string, std::set<std::string> > >
-		filterMap;
+		    filterMap;
 		std::vector<ContextMatch> matchVector;
 		boost::shared_ptr<StringSet<char> > dictionary, passiveDictionary;
 		void collectFilter (
-		    std::string& fileName,
+		    const std::string& fileName,
 		    std::set<std::string>& excludeSet,
 		    int *filterCount );
 		void collectRules (
-		    string& fileName,
+		    const std::string& fileName,
 		    boost::shared_ptr<std::vector<boost::shared_ptr<Rule> > > ruleVector,
 		    std::set<string>& excludeSet,
 		    int *ruleCount );

@@ -13,7 +13,7 @@ DEFINE_EVENT_TYPE(wxEVT_COMMAND_VALIDATION_COMPLETED);
 ValidationThread::ValidationThread (
 	wxEvtHandler *handler,
 	const char *buffer,
-	const char *system )
+	const wxString &system )
 	: wxThread ( wxTHREAD_JOINABLE )
 	, mStopping ( false )
 {
@@ -40,7 +40,7 @@ void *ValidationThread::Entry()
 	myIsSucceeded = validator->validateMemory (
 		myBuffer.c_str(),
 		myBuffer.size(),
-		mySystem.c_str(),
+		mySystem,
 		this );
 
 	if ( TestDestroy() )

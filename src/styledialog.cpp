@@ -89,8 +89,8 @@ StyleDialog::StyleDialog (
     const wxString& ruleSetPresetParameter,
     const wxString& filterPresetParameter,
 #if !defined(USE_ENCHANT) && defined(__WXMSW__)
-    const std::string& aspellDataPathParameter,
-    const std::string& aspellDictPathParameter,
+    const wxString& aspellDataPathParameter,
+    const wxString& aspellDictPathParameter,
 #endif
     int typeParameter,
     bool readOnlyParameter,
@@ -278,8 +278,8 @@ StyleDialog::StyleDialog (
 		config = new_aspell_config();
 		
 #ifdef __WXMSW__
-		aspell_config_replace ( config, "data-dir", aspellDataPath.c_str() ); //ASPELL_DATA_PATH );
-		aspell_config_replace ( config, "dict-dir", aspellDictPath.c_str() ); //ASPELL_DICT_PATH );
+		aspell_config_replace ( config, "data-dir", aspellDataPath.mb_str() ); //ASPELL_DATA_PATH );
+		aspell_config_replace ( config, "dict-dir", aspellDictPath.mb_str() ); //ASPELL_DICT_PATH );
 #endif
 		dlist = get_aspell_dict_info_list( config );
 		
@@ -454,32 +454,26 @@ void StyleDialog::OnReport ( wxCommandEvent& event )
 	ruleSet.Replace ( _(" "), _T("_") );
 	filter = filterPreset + _T ( ".xml" );
 
-	std::string ruleSetDirectoryLocal ( ruleSetDirectory.mb_str ( wxConvLocal ) );
-	std::string ruleSetUtf8 ( ruleSet.mb_str ( wxConvUTF8 ) );
-	std::string filterDirectoryLocal ( filterDirectory.mb_str ( wxConvLocal ) );
-	std::string filterUtf8 ( filter.mb_str ( wxConvUTF8 ) );
 	wxString separator = wxFileName::GetPathSeparator();
-	std::string pathSeparatorLocal ( separator.mb_str ( wxConvLocal ) );
 
 	std::auto_ptr<HouseStyle> hs ( new HouseStyle (
 					   (type == ID_TYPE_SPELL) ? HS_TYPE_SPELL : HS_TYPE_STYLE,
 	                                   bufferUtf8,
-	                                   ruleSetDirectoryLocal,
-	                                   ruleSetUtf8,
-	                                   filterDirectoryLocal,
-	                                   filterUtf8,
-	                                   pathSeparatorLocal,
+	                                   ruleSetDirectory,
+	                                   ruleSet,
+	                                   filterDirectory,
+	                                   filter,
+	                                   separator,
  #ifdef __WXMSW__
-                                       aspellDataPath,
-                                       aspellDictPath,
+	                                   aspellDataPath,
+	                                   aspellDictPath,
  #endif
 	                                   5 ) );
 
 	status->SetStatusText ( _ ( "Checking document..." ) );
 	if ( !hs->createReport() )
 	{
-		std::string lastError = hs->getLastError();
-		wxString error = wxString ( lastError.c_str(), wxConvUTF8, lastError.size() );
+		const wxString &error = hs->getLastError();
 		status->SetStatusText ( _ ( "Cannot check document: " ) + error );
 		return;
 	}

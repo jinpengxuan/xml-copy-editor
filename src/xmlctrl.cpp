@@ -1954,14 +1954,14 @@ bool XmlCtrl::backgroundValidate()
 	
 	return backgroundValidate (
 		bufferUtf8.c_str(),
-		basePath.mb_str(),
+		basePath,
 		bufferUtf8.size() );
 }
 
 bool XmlCtrl::backgroundValidate (
 				const char *buffer,
-				const char *system,
-                size_t bufferLen
+				const wxString &system,
+				size_t bufferLen
 				)
 {
 	if ( !validationRequired )

@@ -108,6 +108,21 @@ AC_LANG(C++)
 AC_CHECK_HEADER(xercesc/util/PlatformUtils.hpp, ,
 	AC_MSG_ERROR([Xerces-C headers not found]))
 
+# Check unicode strings used in xercesc
+AC_MSG_CHECKING([if we support the unicode strings used in xercesc])
+AC_COMPILE_IFELSE([AC_LANG_SOURCE([[
+	#include <boost/static_assert.hpp>
+	#include <xercesc/util/XMLChar.hpp>
+
+	int main() {
+		BOOST_STATIC_ASSERT(sizeof(XMLCh) == 1 || sizeof(XMLCh) == 2 || sizeof(XMLCh) == 4);
+		return 0;
+	}
+	]])],
+	[AC_MSG_RESULT([yes])],
+	[AC_MSG_ERROR([no])
+])
+
 # Check expat is available
 AC_LANG(C++)
 AC_CHECK_HEADER(expat.h, ,

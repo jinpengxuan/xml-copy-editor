@@ -34,11 +34,12 @@
 #include <libxslt/xsltInternals.h>
 #include <libxslt/transform.h>
 #include <libxslt/xsltutils.h>
+#include <wx/wx.h>
 
 class WrapLibxml
 {
 	public:
-		static void Init ( const std::string &catalogPath = "catalog" ) throw();
+		static void Init ( const wxString &catalogPath = _T ( "catalog" ) ) throw();
 
 		WrapLibxml ( bool netAccessParameter = false );
 		virtual ~WrapLibxml();
