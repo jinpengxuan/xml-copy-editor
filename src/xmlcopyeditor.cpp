@@ -4452,7 +4452,7 @@ void MyFrame::OnHome ( wxCommandEvent& event )
 
 void MyFrame::OnDownloadSource ( wxCommandEvent& event )
 {
-	wxLaunchDefaultBrowser ( _T ( "http://xml-copy-editor.svn.sourceforge.net/viewvc/xml-copy-editor/" ) );
+	wxLaunchDefaultBrowser ( _T ( "http://sourceforge.net/p/xml-copy-editor/code/" ) );
 }
 
 void MyFrame::OnToolbarVisible ( wxCommandEvent& event )
