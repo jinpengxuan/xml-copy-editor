@@ -71,6 +71,9 @@ void ThreadReaper::clear()
 		// versions of wxWidgets. A easy way to fix this is to rethrow
 		// abi::__forced_unwind& exceptions and avoid calling pthread_exit
 		// in such a condition.
+#if defined(__WXGTK__) && !wxCHECK_VERSION(2,9,5)
+		wxPrintf ( _T ( "Expecting crash..." ) );
+#endif
 		(**itr).Kill();
 		(**itr).Wait();
 	}
