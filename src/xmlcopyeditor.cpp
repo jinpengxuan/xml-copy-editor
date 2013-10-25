@@ -221,8 +221,6 @@ MyApp::MyApp()
 
 MyApp::~MyApp()
 {
-	ThreadReaper::get().clear();
-
 	delete checker;
 	delete server;
 }
@@ -1095,6 +1093,8 @@ MyFrame::MyFrame (
 
 MyFrame::~MyFrame()
 {
+	ThreadReaper::get().clear();
+
 	std::vector<wxString>::iterator it;
 	for ( it = tempFileVector.begin(); it != tempFileVector.end(); it++ )
 		wxRemoveFile ( *it );
