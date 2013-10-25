@@ -3123,76 +3123,75 @@ bool MyFrame::openFile ( wxString& fileName, bool largeFile )
 	char *finalBuffer;
 	size_t finalBufferLen;
 
-	// adjust for UTF-8 BOM
-	if ( docBuffer &&
-	        ( unsigned char ) docBuffer[0] == 0xEF &&
-	        ( unsigned char ) docBuffer[1] == 0xBB &&
-	        ( unsigned char ) docBuffer[2] == 0xBF )
+	std::string encoding;
+	if ( docBufferLen >= 4 && // UTF-32 BE
+			( unsigned char ) docBuffer[0] == 0x00 &&
+			( unsigned char ) docBuffer[1] == 0x00 &&
+			( unsigned char ) docBuffer[2] == 0xFE &&
+			( unsigned char ) docBuffer[3] == 0xFF )
+	{
+		docBuffer += 4;
+		docBufferLen -= 4;
+		encoding = "UTF-32BE";
+	}
+	else if ( docBufferLen >= 4 && // UTF-32 LE
+			( unsigned char ) docBuffer[0] == 0xFF &&
+			( unsigned char ) docBuffer[1] == 0xFE &&
+			( unsigned char ) docBuffer[2] == 0x00 &&
+			( unsigned char ) docBuffer[3] == 0x00 )
+	{
+		docBuffer += 4;
+		docBufferLen -= 4;
+		encoding = "UTF-32LE";
+	}
+	else if ( docBufferLen >= 2 && //UTF-16 BE
+			( unsigned char ) docBuffer[0] == 0xFE &&
+			( unsigned char ) docBuffer[1] == 0xFF )
+	{
+		docBuffer += 2;
+		docBufferLen -= 2;
+		encoding = "UTF-16BE";
+	}
+	else if ( docBufferLen >= 2 && //UTF-16 LE
+			( unsigned char ) docBuffer[0] == 0xFF &&
+			( unsigned char ) docBuffer[1] == 0xFE )
+	{
+		docBuffer += 2;
+		docBufferLen -= 2;
+		encoding = "UTF-16LE";
+	}
+	else if ( docBufferLen >= 3 && //UTF-8
+			( unsigned char ) docBuffer[0] == 0xEF &&
+			( unsigned char ) docBuffer[1] == 0xBB &&
+			( unsigned char ) docBuffer[2] == 0xBF )
 	{
 		docBuffer += 3;
 		docBufferLen -= 3;
-		isUtf8 = true;
+		encoding = "UTF-8";
 	}
 
-	// no UTF-8 BOM found
-	std::string encoding;
-	if ( !isUtf8 || !binaryfile->getDataLen() )
+	if ( encoding.empty() )
 	{
 		XmlEncodingSpy es;
 		es.parse ( docBuffer, docBufferLen );
 		encoding = es.getEncoding();
-		if ( encoding == "UTF-8" ||
-			encoding == "utf-8" ||
-			encoding == "US-ASCII" ||
-			encoding == "us-ascii" ) // US-ASCII is a subset of UTF-8
-			isUtf8 = true;
+		if ( encoding.empty() )  // Expat couldn't parse file (e.g. UTF-32)
+			encoding = getApproximateEncoding ( docBuffer, docBufferLen );
 	}
 
 	// convert buffer if not UTF-8
-	int nBOM = 0;
-	if ( isUtf8 )
+	if ( encoding == "UTF-8" ||
+		encoding == "utf-8" ||
+		encoding == "US-ASCII" ||
+		encoding == "us-ascii" || // US-ASCII is a subset of UTF-8
+		docBufferLen == 0 )
 	{
 		finalBuffer = docBuffer;
 		finalBufferLen = docBufferLen;
+		isUtf8 = true;
 	}
 	else
 	{
-		// clear any other BOMs
-
-		if ( docBuffer && // UTF-32 BE
-		        ( unsigned char ) docBuffer[0] == 0x00 &&
-		        ( unsigned char ) docBuffer[1] == 0x00 &&
-		        ( unsigned char ) docBuffer[2] == 0xFE &&
-		        ( unsigned char ) docBuffer[3] == 0xFF )
-		{
-			nBOM = 4;
-		}
-		else if ( docBuffer && // UTF-32 LE
-		        ( unsigned char ) docBuffer[0] == 0xFF &&
-		        ( unsigned char ) docBuffer[1] == 0xFE &&
-		        ( unsigned char ) docBuffer[2] == 0x00 &&
-		        ( unsigned char ) docBuffer[3] == 0x00 )
-		{
-			nBOM = 4;
-		}
-		else if ( docBuffer && //UTF-16 BE
-		        ( unsigned char ) docBuffer[0] == 0xFE &&
-		        ( unsigned char ) docBuffer[1] == 0xFF )
-		{
-			nBOM = 2;
-		}
-		else if ( docBuffer && //UTF-16 LE
-		        ( unsigned char ) docBuffer[0] == 0xFF &&
-		        ( unsigned char ) docBuffer[1] == 0xFE )
-		{
-			nBOM = 2;
-		}
-
-		if ( !encoding.size() ) // Expat couldn't parse file (e.g. UTF-32)
-		{
-			encoding = getApproximateEncoding ( docBuffer + nBOM, docBufferLen - nBOM );
-		}
-
 		wxString wideEncoding = wxString (
 		                            encoding.c_str(),
 		                            wxConvLocal,
@@ -3227,7 +3226,7 @@ bool MyFrame::openFile ( wxString& fileName, bool largeFile )
 		size_t nconv;
 		char *buffer;
 		size_t iconvBufferLeft, docBufferLeft;
-		iconvBufferLen = iconvBufferLeft = (docBufferLen - nBOM) * iconvLenMultiplier + 1;
+		iconvBufferLen = iconvBufferLeft = docBufferLen * iconvLenMultiplier + 1;
 		docBufferLeft = docBufferLen;
 		iconvBuffer.extend ( iconvBufferLen );
 		finalBuffer = buffer = iconvBuffer.data(); // buffer will be incremented by iconv
@@ -3302,10 +3301,8 @@ bool MyFrame::openFile ( wxString& fileName, bool largeFile )
 	statusProgress ( _T ( "Parsing document..." ) );
 	std::auto_ptr<WrapExpat> we ( new WrapExpat() );
 
-	bool optimisedParseSuccess = false;
-
 	// omit XML declaration
-	if ( !isUtf8 && finalBufferLen &&
+	if ( !isUtf8 && finalBufferLen > 5 &&
 	        finalBuffer[0] == '<' &&
 	        finalBuffer[1] == '?' &&
 	        finalBuffer[2] == 'x' &&
@@ -3323,6 +3320,7 @@ bool MyFrame::openFile ( wxString& fileName, bool largeFile )
 		}
 	}
 
+	bool optimisedParseSuccess = false;
 	if ( finalBuffer )
 	{
 		optimisedParseSuccess = we->parse ( finalBuffer, finalBufferLen );
@@ -3998,6 +3996,11 @@ void MyFrame::OnValidateSchema ( wxCommandEvent& event )
 	{
 		std::string rawBuffer, schemaLocation;
 		getRawText ( doc, rawBuffer );
+		if ( !XmlEncodingHandler::setUtf8 ( rawBuffer ) )
+		{
+			encodingMessage();
+			return;
+		}
 		auto_ptr<XmlSchemaLocator> xsl ( new XmlSchemaLocator() );
 		xsl->parse ( rawBuffer.c_str() );
 		if ( ( xsl->getSchemaLocation() ) . empty() )
@@ -4034,8 +4037,7 @@ void MyFrame::OnValidateSchema ( wxCommandEvent& event )
 	doc->clearErrorIndicators();
 
 	std::auto_ptr<WrapXerces> validator ( new WrapXerces() );
-	std::string fileNameLocal = ( const char * ) fileName.mb_str ( wxConvLocal );
-	if ( !validator->validate ( fileNameLocal ) )
+	if ( !validator->validate ( fileName ) )
 	{
 		statusProgress ( wxEmptyString );
 		messagePane ( validator->getLastError(), CONST_WARNING );

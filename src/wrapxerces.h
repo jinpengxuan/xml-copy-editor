@@ -22,6 +22,7 @@
 
 #include <wx/wx.h>
 #include <wx/strconv.h>
+#include <wx/buffer.h>
 #include <string>
 #include <utility>
 
@@ -41,14 +42,22 @@ class WrapXerces
 		static void Init() throw ();
 		WrapXerces();
 		virtual ~WrapXerces();
-		bool validate ( const std::string& fileName );
+		bool validate ( const wxString &fileName );
 		bool validateMemory ( const char *buffer, size_t len,
 		    const wxString &system, wxThread *thread = NULL );
 		const wxString &getLastError();
 		std::pair<int, int> getErrorPosition();
-		static const wxMBConv &getMBConv();
 		static wxString toString ( const XMLCh *str );
+		// Convert Unicode string to const XMLCh *
+//#if wxCHECK_VERSION(2,9,0)
+//		static wxCharTypeBuffer<XMLCh> toString ( const wxString &str );
+//#else
+		static wxMemoryBuffer toString ( const wxString &str );
+//#endif
+
 	private:
+		static const wxMBConv &getMBConv();
+
 		XercesCatalogResolver *catalogResolver;
 		wxString lastError;
 		std::pair<int, int> errorPosition;

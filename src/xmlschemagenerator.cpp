@@ -203,8 +203,8 @@ void XmlSchemaGenerator::generateData ( const wxString &elementName,
 			continue;
 		for ( attrItr = attrMap.begin(); attrItr != attrMap.end(); attrItr++ )
 		{
-			if ( attrs->getNamedItem ( ( const XMLCh * ) ( const char * )
-					attrItr->first.mb_str ( WrapXerces::getMBConv() ) ) == NULL )
+			if ( attrs->getNamedItem ( ( const XMLCh * )
+					WrapXerces::toString ( attrItr->first ).GetData() ) == NULL )
 			{
 				optAttrs.insert ( attrItr->first );
 			}

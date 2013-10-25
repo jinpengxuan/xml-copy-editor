@@ -60,7 +60,7 @@ WrapXerces::~WrapXerces()
 	delete catalogResolver;
 }
 
-bool WrapXerces::validate ( const std::string& fileName )
+bool WrapXerces::validate ( const wxString& fileName )
 {
 	SAX2XMLReader *parser = XMLReaderFactory::createXMLReader();
 
@@ -84,7 +84,7 @@ bool WrapXerces::validate ( const std::string& fileName )
 
 	try
 	{
-		parser->parse ( fileName.c_str() );
+		parser->parse ( (const XMLCh *) toString ( fileName ).GetData() );
 	}
 	catch ( XMLException& e )
 	{
@@ -220,4 +220,23 @@ const wxMBConv &WrapXerces::getMBConv()
 wxString WrapXerces::toString ( const XMLCh *str )
 {
 	return wxString ( ( const char * ) str, getMBConv() );
+}
+
+wxMemoryBuffer WrapXerces::toString ( const wxString &str )
+{
+	const static XMLCh chNull = '\0'; // Xerces-C crashes when the file name is NULL. We'd better return something other than NULL.
+	wxMemoryBuffer buffer ( 0 );
+	const size_t lenWC = str.length() + 1; // Plus '\0'. This is important. Otherwise we can call wxString::mb_str(getMBConv()).
+	size_t lenMB = getMBConv().FromWChar ( NULL, 0, str.c_str(), lenWC );
+	if ( lenMB == wxCONV_FAILED )
+	{
+		buffer.AppendData ( &chNull, sizeof chNull );
+		return buffer;
+	}
+
+	buffer.SetBufSize ( lenMB );
+	lenMB = getMBConv().FromWChar ( ( char * ) buffer.GetData(), lenMB, str.c_str(), lenWC );
+	buffer.SetDataLen ( lenMB );
+
+	return buffer;
 }
