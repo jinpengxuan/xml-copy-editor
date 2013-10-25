@@ -4838,7 +4838,7 @@ bool MyFrame::saveFile ( XmlDoc *doc, wxString& fileName, bool checkLastModified
 					                     utf8BufferLen * iconvLenMultiplier + 4; // worst case scenario
 
 					char *finalBuffer;
-					char *iconvBuffer = new char[iconvBufferLen];
+					char *iconvBuffer;
 
 					utf8BufferLeft = utf8BufferLen;
 					iconvBuffer = new char[iconvBufferLen];
