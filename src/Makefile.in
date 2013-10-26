@@ -326,7 +326,7 @@ nobase_dist_xmlcopyeditor_DATA = $(srcdir)/catalog/catalog \
 	$(srcdir)/dtd/dita/*.* \
 	$(srcdir)/dtd/docbook/4.4/*.* \
 	$(srcdir)/dtd/docbook/4.4/ent/*.* \
-	$(srcdir)/dtd/docbook/5.0b/*.* \
+	$(srcdir)/dtd/docbook/5.0/*.* \
 	$(srcdir)/dtd/tei/p4/*.* \
 	$(srcdir)/dtd/tei/p5/*.* \
 	$(srcdir)/help/*.* \
