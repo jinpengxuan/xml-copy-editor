@@ -7,8 +7,10 @@
 #include "replace.h"
 #endif
 
+#include "wrapxerces.h"
+
 InputSource *XercesCatalogResolver::resolveEntity (
-			const XMLCh* const publicID,
+			const XMLCh* const publicId,
 			const XMLCh* const systemId )
 {
 /* the following _should_ work but doesn't always, so drop it for now
@@ -69,27 +71,15 @@ InputSource *XercesCatalogResolver::resolveEntity (
 #endif	
 */
 
-	if ( publicID == NULL || *publicID == '\0' )
-		return NULL;
-
-	// Since public IDs consist of ANSII characters, it doesn't matter how
-	// publicID is encoded as long as it's a multibyte string
-	char *narrowPublicId = XMLString::transcode ( publicID );
-	if ( narrowPublicId == NULL )
-		return NULL;
-
-	std::string resolved;
-	resolved = lookupPublicId ( narrowPublicId );
-
-	XMLString::release ( &narrowPublicId );
-
+	wxString pubId, sysId, resolved;
+	pubId = WrapXerces::toString ( publicId );
+	sysId = WrapXerces::toString ( systemId );
+	resolved = catalogResolve ( pubId, sysId );
 	if ( resolved.empty() )
 		return NULL;
 
-	XMLCh *wideResolved = XMLString::transcode ( resolved.c_str() );
-
-	InputSource *source = (InputSource *)new LocalFileInputSource ( wideResolved );
-	XMLString::release ( &wideResolved );
+	InputSource *source = new LocalFileInputSource (
+			( const XMLCh * ) WrapXerces::toString ( resolved ).GetData() );
 
 	return source;
 }

@@ -28,8 +28,10 @@ CatalogResolver::~CatalogResolver()
 {
 }
 
-std::string CatalogResolver::lookupPublicId ( const std::string &publicId )
+wxString CatalogResolver::catalogResolve (
+    const wxString &publicId,
+    const wxString &systemId )
 {
 	//std::auto_ptr<WrapLibxml> libxml ( new WrapLibxml ( false, catalogPath ) );
-	return WrapLibxml::lookupPublicId ( publicId );
+	return WrapLibxml::catalogResolve ( publicId, systemId );
 }

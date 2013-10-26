@@ -6,8 +6,8 @@
   <public publicId="-//W3C//ENTITIES Latin 1 for XHTML//EN" uri="../dtd/xhtml-lat1.ent"/>
   <public publicId="-//W3C//ENTITIES Symbols for XHTML//EN" uri="../dtd/xhtml-symbol.ent"/>
   <public publicId="-//W3C//ENTITIES Special for XHTML//EN" uri="../dtd/xhtml-special.ent"/>
-  <public publicId="-//OASIS//DTD DocBook XML 5.0b3//EN" uri="../dtd/docbook/5.0b/docbook.dtd"/>
-  <public publicId="-//OASIS//DTD DocBook XML 4.4//EN" uri="../dtd/docbook/4.4/docbookx.dtd"/>
+  <public publicId="-//OASIS//DTD DocBook XML V5.0b3//EN" uri="../dtd/docbook/5.0b/docbook.dtd"/>
+  <public publicId="-//OASIS//DTD DocBook XML V4.4//EN" uri="../dtd/docbook/4.4/docbookx.dtd"/>
   <public publicId="-//TEI P4//DTD Main Document Type//EN" uri="../dtd/tei/p4/tei2.dtd"/>
   <public publicId="-//TEI P5//DTD Main Document Type//EN" uri="../dtd/tei/p5/tei_all.dtd"/>
   <public publicId="-//OASIS//DTD DITA Map//EN" uri="../dtd/dita/map.dtd"/>
@@ -21,4 +21,5 @@
   <public publicId="-//OpenLearn//DTD" uri="../dtd/OUGenericFull.dtd"/>
   <public publicId="-//Moodle Glossary//DTD" uri="../dtd/moodle_glossary.dtd"/>
   <public publicId="-//Moodle XML//DTD" uri="../dtd/moodle_xml.dtd"/>
+  <rewriteSystem systemIdStartString="http://www.w3.org/TR/xhtml1/DTD/" rewritePrefix="../dtd/"/>
 </catalog>

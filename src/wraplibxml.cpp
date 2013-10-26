@@ -561,21 +561,23 @@ std::string WrapLibxml::getOutput()
 	return output;
 }
 
-std::string WrapLibxml::lookupPublicId ( const std::string& id )
+wxString WrapLibxml::catalogResolve
+    ( const wxString &publicId
+    , const wxString &systemId
+    )
 {
-	std::string ret;
-	char *s = ( char * ) xmlCatalogResolvePublic ( ( const xmlChar * ) id.c_str() );
+	char *s = ( char * ) xmlCatalogResolve (
+			( const xmlChar * ) ( const char *) publicId.mb_str ( wxConvUTF8 ),
+			( const xmlChar * ) ( const char *) systemId.mb_str ( wxConvUTF8 ) );
 	if ( s == NULL )
-		return ret;
+		return wxEmptyString;
 
 	wxString url ( s, wxConvUTF8 );
-	wxFileName file = wxFileSystem::URLToFileName ( url );
-	if ( file.IsFileReadable() )
-		ret = file.GetFullPath().mb_str ( wxConvLocal );
-	else
-		ret = s;
-
 	xmlFree ( s );
 
-	return ret;
+	wxFileName file = wxFileSystem::URLToFileName ( url );
+	if ( file.IsFileReadable() )
+		return file.GetFullPath();
+
+	return url;
 }

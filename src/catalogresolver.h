@@ -28,8 +28,10 @@ class CatalogResolver : protected WrapLibxml
 	public:
 		CatalogResolver();
 		~CatalogResolver();
-		std::string lookupPublicId (
-		    const std::string& publicId);
+		wxString catalogResolve
+		    ( const wxString &pubIdUtf8
+		    , const wxString &sysIdUtf8
+		    );
 };
 
 #endif

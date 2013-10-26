@@ -68,7 +68,9 @@ class WrapLibxml
 		    const std::string& fileNameSource,
 		    const std::string& fileNameDestination,
 		    const std::string& encoding );
-		std::string lookupPublicId ( const std::string& id );
+		wxString catalogResolve (
+		    const wxString &publicId,
+		    const wxString &systemId );
 	private:
 		bool netAccess;
 		std::string output, nonParserError;

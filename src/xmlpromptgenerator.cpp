@@ -319,30 +319,31 @@ int XMLCALL XmlPromptGenerator::externalentityrefhandler (
 		return ret;
 	}
 
-	std::string stdPublicId;
-	if ( publicId )
-		stdPublicId = publicId;
-
+	wxString widePublicId ( publicId, wxConvUTF8 );
+	wxString wideSystemId ( systemId, wxConvUTF8 );
 	CatalogResolver cr;
-	std::string stdSystemId = cr.lookupPublicId ( stdPublicId );
+	wideSystemId = cr.catalogResolve ( widePublicId, wideSystemId );
 
-	if ( stdSystemId.empty() )
+	if ( wideSystemId.empty() )
 	{
 		if ( systemId )
-			stdSystemId = systemId;
+			wideSystemId = wxString ( systemId, wxConvUTF8 );
 		if ( base )
 		{
-			std::string test = PathResolver::run ( stdSystemId, base );
+			wxString test = PathResolver::run ( wideSystemId,
+					wxString ( base, wxConvUTF8 ) );
 			if ( !test.empty() )
 			{
-				stdSystemId = test;
+				wideSystemId = test;
 			}
 		}
 	}
 
-	if ( !stdSystemId.empty() )
+	std::string localName;
+	localName = wideSystemId.mb_str ( wxConvLocal );
+	if ( !localName.empty() )
 	{
-		ReadFile::run ( stdSystemId, buffer );
+		ReadFile::run ( localName, buffer );
 	}
 
 	std::string encoding = XmlEncodingHandler::get ( buffer );
@@ -350,11 +351,7 @@ int XMLCALL XmlPromptGenerator::externalentityrefhandler (
 	if ( !dtdParser )
 		return XML_STATUS_ERROR;
 
-	wxString wideName, wideDir;
-	wideName = wxString ( stdSystemId.c_str(), wxConvUTF8, stdSystemId.size() );
-	wxFileName fn ( wideName );
-	wideDir = fn.GetPath();
-	XML_SetBase ( dtdParser, wideName.mb_str ( wxConvUTF8 ) );
+	XML_SetBase ( dtdParser, wideSystemId.utf8_str() );
 
 	ret = XML_Parse ( dtdParser, buffer.c_str(), buffer.size(), true );
 	XML_ParserFree ( dtdParser );
