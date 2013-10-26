@@ -2856,12 +2856,12 @@ void MyFrame::OnNew ( wxCommandEvent& WXUNUSED ( event ) )
 	if ( wxFileName::DirExists ( templateDir ) )
 	{
 		wxString templateMask, name, extension, entry;
+		wxFileName fn;
 		templateMask = templateDir + wxFileName::GetPathSeparator() + _T ( "*.*" );
 		templateFile = wxFindFirstFile ( templateMask, wxFILE );
-		wxFileName fn;
-
-		if ( !templateFile.empty() )
+		while ( !templateFile.empty() )
 		{
+			templateFile.Replace ( _T("_"), _T(" ") );
 			fn.Assign ( templateFile );
 			name = fn.GetName();
 			extension = fn.GetExt();
@@ -2869,19 +2869,7 @@ void MyFrame::OnNew ( wxCommandEvent& WXUNUSED ( event ) )
 			entry.Printf ( _T ( "%s (*.%s)" ), name.c_str(), extension.c_str() );
 			templateArray.Add ( entry );
 
-			for ( ;; )
-			{
-				templateFile = wxFindNextFile();
-				if ( templateFile.empty() )
-					break;
-				templateFile.Replace ( _T("_"), _T(" ") );
-				fn.Assign ( templateFile );
-				name = fn.GetName();
-				extension = fn.GetExt();
-
-				entry.Printf ( _T ( "%s (*.%s)" ), name.c_str(), extension.c_str() );
-				templateArray.Add ( entry );
-			}
+			templateFile = wxFindNextFile();
 		}
 		templateArray.Sort();
 		templateArray.Insert ( defaultSelection, 0 );
