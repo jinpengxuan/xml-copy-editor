@@ -29,6 +29,8 @@
 #include <wx/filesys.h>
 #include <wx/uri.h>
 
+static xmlCatalogPtr catalog = NULL;
+
 class Initializer
 {
 public:
@@ -40,13 +42,16 @@ public:
 		LIBXML_TEST_VERSION
 
 		xmlInitializeCatalog();
-		xmlLoadCatalog ( catalogPath.mb_str() );
+		::catalog = xmlLoadACatalog ( catalogPath.mb_str() );
 
 		initGenericErrorDefaultFunc ( NULL );
 	}
 
 	~Initializer ()
 	{
+		xmlFreeCatalog ( ::catalog );
+		::catalog = NULL;
+
 		xsltCleanupGlobals();
 		xmlCatalogCleanup();
 		xmlCleanupParser();
@@ -566,9 +571,20 @@ wxString WrapLibxml::catalogResolve
     , const wxString &systemId
     )
 {
-	char *s = ( char * ) xmlCatalogResolve (
-			( const xmlChar * ) ( const char *) publicId.mb_str ( wxConvUTF8 ),
-			( const xmlChar * ) ( const char *) systemId.mb_str ( wxConvUTF8 ) );
+	// According to 7.1.2. Resolution of External Identifiers
+	// from http://www.oasis-open.org/committees/entity/spec-2001-08-06.html,
+	// our catalog may not be used if the system catalog, which is specified
+	// in a delegateSystem entry, is out of date, such as the catalog for
+	// resolving public ID "-//OASIS//DTD DocBook XML V5.0//EN"
+	char *s = ( char * ) xmlACatalogResolve ( ::catalog,
+			( const xmlChar * ) ( const char *) publicId.utf8_str(),
+			( const xmlChar * ) ( const char *) systemId.utf8_str() );
+#ifndef __WXMSW__
+	if ( s == NULL )
+		s = ( char * ) xmlCatalogResolve (
+				( const xmlChar * ) ( const char *) publicId.utf8_str(),
+				( const xmlChar * ) ( const char *) systemId.utf8_str() );
+#endif
 	if ( s == NULL )
 		return wxEmptyString;
 
