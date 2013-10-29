@@ -34,6 +34,7 @@ void *ValidationThread::Entry()
 	
 	if ( TestDestroy()  )
 	{
+		myBuffer.clear();
 		return NULL;
 	}
 
@@ -42,6 +43,8 @@ void *ValidationThread::Entry()
 		myBuffer.size(),
 		mySystem,
 		this );
+
+	myBuffer.clear();
 
 	if ( TestDestroy() )
 	{

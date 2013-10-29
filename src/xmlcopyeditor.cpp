@@ -62,6 +62,7 @@
 #include <wx/dir.h>
 #include "xmlschemagenerator.h"
 #include "threadreaper.h"
+#include <wx/wupdlock.h>
 
 #define ngettext wxGetTranslation
 
@@ -2926,30 +2927,32 @@ void MyFrame::newDocument ( const std::string& s, const wxString& path, bool can
 
 	wxString auxPath = getAuxPath ( path );
 
-	Freeze();
-	doc = ( s.empty() ) ?
-	      new XmlDoc (
-	          mainBook,
-	          properties,
-	          &protectTags,
-	          visibilityState,
-	          FILE_TYPE_XML,
-	          wxID_ANY,
-	          NULL, 0 // new: NULL pointer leads to default document
-	      )
-	      : new XmlDoc (
-	          mainBook,
-	          properties,
-	          &protectTags,
-	          visibilityState,
-	          FILE_TYPE_XML,
-	          wxID_ANY,
-	          s.c_str(), // modified
-	          s.size(), // new
-	          path,
-	          auxPath );
-	mainBook->AddPage ( ( wxWindow * ) doc, documentLabel );
-	Thaw();
+	{
+		wxWindowUpdateLocker noupdate (this);
+
+		doc = ( s.empty() ) ?
+			  new XmlDoc (
+				  mainBook,
+				  properties,
+				  &protectTags,
+				  visibilityState,
+				  FILE_TYPE_XML,
+				  wxID_ANY,
+				  NULL, 0 // new: NULL pointer leads to default document
+			  )
+			  : new XmlDoc (
+				  mainBook,
+				  properties,
+				  &protectTags,
+				  visibilityState,
+				  FILE_TYPE_XML,
+				  wxID_ANY,
+				  s.c_str(), // modified
+				  s.size(), // new
+				  path,
+				  auxPath );
+		mainBook->AddPage ( ( wxWindow * ) doc, documentLabel );
+	}
 
 	mainBook->Layout();
 
@@ -3061,25 +3064,21 @@ bool MyFrame::openFile ( wxString& fileName, bool largeFile )
 	bool fileEmpty = false;
 
 	statusProgress ( _T ( "Opening file..." ) );
-	//wxMemoryMappedFile *memorymap = NULL;
-	BinaryFile *binaryfile = NULL;
-
-	binaryfile = new BinaryFile ( fileName );
-	if ( !binaryfile->getData() )
+	BinaryFile binaryfile ( fileName );
+	if ( !binaryfile.getData() )
 	{
 		wxString message;
 		message.Printf ( _ ( "Cannot open %s" ), fileName.c_str() );
 		messagePane ( message, CONST_STOP );
 		statusProgress ( wxEmptyString );
-		delete binaryfile;
 		return false;
 	}
 	/*
-	    memorymap = new wxMemoryMappedFile(
-	      fileName,
-	      true, // readOnly
-	      true // fread
-	    );
+	//wxMemoryMappedFile memorymap (
+	  fileName,
+	  true, // readOnly
+	  true // fread
+	);
 	*/
 
 	/*
@@ -3093,8 +3092,8 @@ bool MyFrame::openFile ( wxString& fileName, bool largeFile )
 
 	if ( !fileEmpty )
 	{
-		docBuffer = ( char * ) binaryfile->getData();//memorymap->GetStream();
-		docBufferLen = binaryfile->getDataLen();//memorymap->GetMapSize();
+		docBuffer = ( char * ) binaryfile.getData();//memorymap->GetStream();
+		docBufferLen = binaryfile.getDataLen();//memorymap->GetMapSize();
 	}
 	else
 	{
@@ -3112,7 +3111,11 @@ bool MyFrame::openFile ( wxString& fileName, bool largeFile )
 	size_t finalBufferLen;
 
 	std::string encoding;
-	if ( docBufferLen >= 4 && // UTF-32 BE
+	if ( largeFile )
+	{
+		encoding = "UTF-8";
+	}
+	else if ( docBufferLen >= 4 && // UTF-32 BE
 			( unsigned char ) docBuffer[0] == 0x00 &&
 			( unsigned char ) docBuffer[1] == 0x00 &&
 			( unsigned char ) docBuffer[2] == 0xFE &&
@@ -3192,7 +3195,6 @@ bool MyFrame::openFile ( wxString& fileName, bool largeFile )
 			                 fileName.c_str(),
 			                 wideEncoding.c_str() );
 			messagePane ( message, CONST_STOP );
-			delete binaryfile;//memorymap;
 			return false;
 		};
 
@@ -3216,7 +3218,16 @@ bool MyFrame::openFile ( wxString& fileName, bool largeFile )
 		size_t iconvBufferLeft, docBufferLeft;
 		iconvBufferLen = iconvBufferLeft = docBufferLen * iconvLenMultiplier + 1;
 		docBufferLeft = docBufferLen;
-		iconvBuffer.extend ( iconvBufferLen );
+		if ( ( ( ( size_t ) -1 ) - 1 ) / iconvLenMultiplier < docBufferLen
+			|| !iconvBuffer.extend ( iconvBufferLen ) )
+		{
+			wxString message;
+			message.Printf ( _ ( "Cannot open %s: out of memory" ),
+					fileName.c_str() );
+			messagePane ( message, CONST_STOP );
+			statusProgress ( wxEmptyString );
+			return false;
+		}
 		finalBuffer = buffer = iconvBuffer.data(); // buffer will be incremented by iconv
 		nconv = reinterpret_cast < universal_iconv & > ( iconv ) (
 		            cd,
@@ -3236,41 +3247,42 @@ bool MyFrame::openFile ( wxString& fileName, bool largeFile )
 			                 fileName.c_str(),
 			                 wideEncoding.c_str() );
 			messagePane ( message, CONST_STOP );
-			delete binaryfile; //delete memorymap;
 			return false;
 		}
 		finalBufferLen = iconvBufferLen - iconvBufferLeft;
 	}
 
 	statusProgress ( _ ( "Creating document view..." ) );
-	Freeze();
-	doc = new XmlDoc (
-	    mainBook,
-	    ( largeFile ) ? largeFileProperties: properties,
-	    &protectTags,
-	    visibilityState,
-	    ( !binaryfile->getDataLen() ) ? FILE_TYPE_XML : type,
-	    wxID_ANY,
-	    finalBuffer,
-	    finalBufferLen,
-	    fileName,
-	    auxPath );
+	{
+		wxWindowUpdateLocker noupdate ( this );
+
+		doc = new XmlDoc (
+			mainBook,
+			( largeFile ) ? largeFileProperties: properties,
+			&protectTags,
+			visibilityState,
+			( !binaryfile.getDataLen() ) ? FILE_TYPE_XML : type,
+			wxID_ANY,
+			finalBuffer,
+			finalBufferLen,
+			fileName,
+			auxPath );
 #ifdef __WXMSW__
-	doc->SetUndoCollection ( false );
-	doc->SetUndoCollection ( true );
+		doc->SetUndoCollection ( false );
+		doc->SetUndoCollection ( true );
 #endif
 
-	doc->setFullFileName ( fileName );
-	doc->setShortFileName ( name );
-	doc->setDirectory ( directory );
-	openFileSet.insert ( fileName );
-	history.AddFileToHistory ( fileName );
-	updateFileMenu();
-	wxFileName ofn ( fileName );
-	doc->setLastModified ( ofn.GetModificationTime() );
+		doc->setFullFileName ( fileName );
+		doc->setShortFileName ( name );
+		doc->setDirectory ( directory );
+		openFileSet.insert ( fileName );
+		history.AddFileToHistory ( fileName );
+		updateFileMenu();
+		wxFileName ofn ( fileName );
+		doc->setLastModified ( ofn.GetModificationTime() );
 
-	mainBook->AddPage ( ( wxWindow * ) doc, name, _T ( "" ) );
-	Thaw();
+		mainBook->AddPage ( ( wxWindow * ) doc, name, _T ( "" ) );
+	}
 	statusProgress ( wxEmptyString );
 
 	mainBook->Layout();
@@ -3279,9 +3291,8 @@ bool MyFrame::openFile ( wxString& fileName, bool largeFile )
 	doc->setLastModified ( fn.GetModificationTime() );
 	doc->SetFocus();
 
-	if ( type != FILE_TYPE_XML || !binaryfile->getDataLen() )
+	if ( type != FILE_TYPE_XML || !binaryfile.getDataLen() )
 	{
-		delete binaryfile;//memorymap;
 		return true;
 	}
 
@@ -3346,7 +3357,6 @@ bool MyFrame::openFile ( wxString& fileName, bool largeFile )
 	{
 		closePane();
 	}
-	delete binaryfile; //delete memorymap;
 	return true;
 }
 
