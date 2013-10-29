@@ -2986,7 +2986,7 @@ void MyFrame::OnOpen ( wxCommandEvent& event )
 		}
 	}
 
-	wxFileDialog *fd = new wxFileDialog (
+	wxFileDialog fd (
 	    this,
 	    ( largeFile ) ? _ ( "Open Large Document" ) : _ ( "Open" ),
 	    defaultDir,
@@ -3000,11 +3000,11 @@ void MyFrame::OnOpen ( wxCommandEvent& event )
 	    );
 
 
-	if ( fd->ShowModal() == wxID_CANCEL )
+	if ( fd.ShowModal() == wxID_CANCEL )
 		return;
 
 	wxArrayString paths;
-	fd->GetPaths ( paths );
+	fd.GetPaths ( paths );
 	size_t count = paths.Count();
 	if ( !count )
 		return;
