@@ -1,5 +1,5 @@
 ;
-; Copyright 2012 Zane U. Ji.
+; Copyright 2012-2013 Zane U. Ji.
 ;
 ; This file is part of Xml Copy Editor.
 ;
@@ -18,9 +18,10 @@
 ;
 
 #define MyAppName "XML Copy Editor"
-#define MyAppVersion GetFileVersion(".\Release\XmlCopyEditor.exe")
+#define MyAppVersion GetFileVersion(".\ReleaseWx28\XmlCopyEditor.exe")
 #define MyAppPublisher "Zane U. Ji"
 #define MyAppURL "https://sourceforge.net/projects/xml-copy-editor/"
+#define MyAppDir "ReleaseWx28"
 #define MyAppExeName "xmlcopyeditor.exe"
 #define MinGW "D:\MinGW32"
 
@@ -89,7 +90,7 @@ Root: HKCR; Subkey: ".xlf"; ValueType: string; ValueData: "Software\SourceForge 
 
 [Files]
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
-Source: ".\Release\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
+Source: ".\{#MyAppDir}\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
 Source: ".\aspell\*"; DestDir: "{app}\aspell"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: ".\bin\*"; DestDir: "{app}\bin"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: ".\catalog\*"; DestDir: "{app}\catalog"; Flags: ignoreversion recursesubdirs createallsubdirs
@@ -104,14 +105,15 @@ Source: ".\rng\*"; DestDir: "{app}\rng"; Flags: ignoreversion recursesubdirs cre
 Source: ".\rulesets\*"; DestDir: "{app}\rulesets"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: ".\templates\*"; DestDir: "{app}\templates"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: ".\xsl\*"; DestDir: "{app}\xsl"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "{#MinGW}\bin\libaspell-15.dll"; DestDir: "{app}"
 Source: "{#MinGW}\bin\libexpat-1.dll"; DestDir: "{app}"
 Source: "{#MinGW}\bin\libgcc_s_sjlj-1.dll"; DestDir: "{app}"
 Source: "{#MinGW}\bin\libiconv-2.dll"; DestDir: "{app}"
 Source: "{#MinGW}\bin\libpcre-1.dll"; DestDir: "{app}"
 Source: "{#MinGW}\bin\libstdc++-6.dll"; DestDir: "{app}"
+Source: "{#MinGW}\bin\libwinpthread-1.dll"; DestDir: "{app}"
 Source: "{#MinGW}\bin\libxml2-2.dll"; DestDir: "{app}"
 Source: "{#MinGW}\bin\libxslt-1.dll"; DestDir: "{app}"
-Source: "{#MinGW}\bin\pthreadGC2.dll"; DestDir: "{app}"
 Source: "{#MinGW}\bin\zlib1.dll"; DestDir: "{app}"
 
 [Icons]
