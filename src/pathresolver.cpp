@@ -36,8 +36,7 @@ wxString PathResolver::run ( const wxString& path, const wxString& anchor )
 	wxFileName anchorObject ( myAnchor );
 	if ( myAnchor.empty() )
 	{
-		//myAnchor = wxFileName::GetCwd();
-		myAnchor = wxStandardPaths::Get().GetDataDir();
+		myAnchor = wxFileName::GetCwd();
 	}
 	else if ( !anchorObject.IsDir() )
 	{
