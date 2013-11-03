@@ -76,7 +76,6 @@ XmlCtrl::XmlCtrl (
 	currentMaxLine = 1;
 
 	applyProperties ( propertiesParameter );
-	applyVisibilityState ( visibilityState );
 
 	SetTabWidth ( 2 );
 	SetWrapStartIndent ( 2 );
@@ -119,6 +118,7 @@ XmlCtrl::XmlCtrl (
 	SetUndoCollection ( true );
 	AutoCompSetSeparator ( '<' );
 
+	applyVisibilityState ( visibilityState );
 	lineBackgroundState = BACKGROUND_STATE_NORMAL;
 
 	for ( int i = 0; i < wxSTC_INDIC_MAX; ++i )
