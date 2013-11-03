@@ -2899,7 +2899,7 @@ fi
 
 # Define the identity of the package.
  PACKAGE=xmlcopyeditor
- VERSION=1.2.0.10
+ VERSION=1.2.0.11
 
 
 cat >>confdefs.h <<_ACEOF
