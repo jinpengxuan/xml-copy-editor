@@ -30,7 +30,7 @@
 #include "getword.h"
 
 WrapAspell::WrapAspell (
-                       const wxString lang
+                       const wxString& lang
 #if !defined(USE_ENCHANT) && defined(__WXMSW__)
                        ,
                        const wxString& aspellDataPathParameter,
@@ -40,7 +40,7 @@ WrapAspell::WrapAspell (
 {
 #ifdef USE_ENCHANT
 	spell_broker = enchant::Broker::instance();
-	spell_checker = spell_broker->request_dict( lang ); 
+	spell_checker = spell_broker->request_dict( std::string ( lang.mb_str() ) );
 #else
 	spell_config = new_aspell_config();
 	

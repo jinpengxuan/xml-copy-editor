@@ -38,7 +38,7 @@ class WrapAspell
 {
 	public:
 		WrapAspell (
-                   const wxString lang// = "en_US",
+                   const wxString& lang// = "en_US",
 #if !defined(USE_ENCHANT) && defined(__WXMSW__)
                    , const wxString& aspellDataPathParameter,
                    const wxString& aspellDictPath
