@@ -42,6 +42,7 @@ public:
 		LIBXML_TEST_VERSION
 
 		xmlInitializeCatalog();
+		xmlLoadCatalog ( catalogPath.mb_str() );
 		::catalog = xmlLoadACatalog ( catalogPath.mb_str() );
 
 		initGenericErrorDefaultFunc ( NULL );
@@ -579,14 +580,16 @@ wxString WrapLibxml::catalogResolve
 	char *s = ( char * ) xmlACatalogResolve ( ::catalog,
 			( const xmlChar * ) ( const char *) publicId.utf8_str(),
 			( const xmlChar * ) ( const char *) systemId.utf8_str() );
-#ifndef __WXMSW__
 	if ( s == NULL )
+	{
+#ifndef __WXMSW__
 		s = ( char * ) xmlCatalogResolve (
 				( const xmlChar * ) ( const char *) publicId.utf8_str(),
 				( const xmlChar * ) ( const char *) systemId.utf8_str() );
+		if ( s == NULL )
 #endif
-	if ( s == NULL )
-		return wxEmptyString;
+			return wxEmptyString;
+	}
 
 	wxString url ( s, wxConvUTF8 );
 	xmlFree ( s );
