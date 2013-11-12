@@ -31,7 +31,9 @@ Rule::Rule (
 		        matchCase,
 		        replace,
 		        arrayLength )
-{ }
+{
+	adjustCaseAttribute = tentativeAttribute = false;
+}
 
 bool Rule::getAdjustCaseAttribute()
 {

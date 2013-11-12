@@ -41,9 +41,9 @@ class ContextHandler
 {
 	public:
 		static ContextMatch getContext (
-		    char *s,
+		    const char *s,
 		    int len,
-		    char *origin,
+		    const char *origin,
 		    int context );
 };
 

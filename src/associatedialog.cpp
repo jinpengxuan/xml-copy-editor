@@ -114,26 +114,25 @@ void AssociateDialog::OnOk ( wxCommandEvent& e )
 
 void AssociateDialog::OnContextHelp ( wxHelpEvent& e )
 {
-	wxTipWindow *tw;
 	int id = e.GetId();
 	if ( id == ID_URL )
-		tw = new wxTipWindow (
+		new wxTipWindow (
 		    this,
 		    _ ( "Provides a space for you to type the path of the file" ) );
 	else if ( id == ID_BROWSE )
-		tw = new wxTipWindow (
+		new wxTipWindow (
 		    this,
 		    _ ( "Opens a standard file dialog" ) );
 	else if ( id == ID_AUX )
-		tw = new wxTipWindow (
+		new wxTipWindow (
 		    this,
 		    _ ( "Provides a space for you to type additional information" ) );
 	else if ( id == wxID_CANCEL )
-		tw = new wxTipWindow (
+		new wxTipWindow (
 		    this,
 		    _ ( "Closes this dialog without making any changes" ) );
 	else if ( id == wxID_OK )
-		tw = new wxTipWindow (
+		new wxTipWindow (
 		    this,
 		    _ ( "Selects the file specified" ) );
 	else

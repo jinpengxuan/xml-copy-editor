@@ -71,7 +71,6 @@ class ExportDialog : public wxDialog
 		};
 
 	private:
-		wxStaticText *urlLabel, *folderLabel;
 		wxString url, folder;
 		wxCheckBox *quietCheckbox,
 		*suppressOptionalCheckbox,

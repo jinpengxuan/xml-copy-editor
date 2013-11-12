@@ -104,7 +104,7 @@ void XMLCALL XmlAssociateXsd::start ( void *data,
 		        !strcmp ( *attr, "xmlns" ) ||
 		        !strcmp ( *attr, "xsi:noNamespaceSchemaLocation" ) ||
 		        !strcmp ( *attr, "xsi:schemaLocation" ) )
-			;
+		{}
 		else
 		{
 			d->buffer += " ";

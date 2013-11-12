@@ -96,6 +96,7 @@ void WrapLibxml::Init ( const wxString &catalogPath ) throw()
 
 WrapLibxml::WrapLibxml ( bool netAccessParameter )
 		: netAccess ( netAccessParameter )
+		, errorLine ( 0 )
 {
 	WrapLibxml::Init();
 }
@@ -117,19 +118,13 @@ bool WrapLibxml::validate ( const std::string& fileName )
 		return false;
 	}
 
-	bool returnValue = false;
-
 	docPtr = xmlCtxtReadFile (
 	             ctxt,
 	             fileName.c_str(),
 	             NULL,
 	             ( netAccess ) ? XML_PARSE_DTDVALID : XML_PARSE_DTDVALID | XML_PARSE_NONET );
-	if ( docPtr == NULL )
-		;
-	else if ( ctxt->valid == 0 )
-		;
-	else
-		returnValue = true;
+
+	bool returnValue = docPtr != NULL && ctxt->valid != 0;
 
 	xmlFreeDoc ( docPtr );
 	xmlFreeParserCtxt ( ctxt );

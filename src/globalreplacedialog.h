@@ -53,7 +53,6 @@ class GlobalReplaceDialog : public wxDialog
 
 	private:
 		wxTextCtrl *findCtrl, *replaceCtrl;
-		wxStaticText *findLabel, *replaceLabel;
 		wxCheckBox *matchCaseBox, *allDocumentsBox, *regexBox;
 		wxString find, replace;
 		bool matchCase, allDocuments, regex;

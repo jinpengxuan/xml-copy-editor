@@ -24,11 +24,12 @@
 #include <string>
 #include <vector>
 #include <pcre.h>
+#include <boost/utility.hpp>
 #include "contexthandler.h"
 
 using namespace std;
 
-class WrapRegex
+class WrapRegex : private boost::noncopyable
 {
 	public:
 		WrapRegex (
@@ -55,8 +56,9 @@ class WrapRegex
 		pcre_extra *patternExtraStructure;
 		int *matchArray;
 
-		string getInterpolatedString_ ( char *buffer, char *source );
-		string getSubpattern_ ( char *buffer, unsigned subpattern );
+		string getInterpolatedString_ ( const char *buffer,
+		    const char *source );
+		string getSubpattern_ ( const char *buffer, unsigned subpattern );
 		int matchPatternGlobal_ (
 		    const char *buffer,
 		    size_t buflen,

@@ -47,7 +47,6 @@ void XMLCALL Mp3Album::start ( void *data,
 	Mp3AlbumData *ad;
 	ad = ( Mp3AlbumData * ) data;
 
-    std::string value;
     char noArray[5];
     int currentNo;
 

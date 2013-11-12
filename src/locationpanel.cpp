@@ -67,10 +67,9 @@ LocationPanel::LocationPanel ( wxWindow *parentWindowParameter, int id ) :
 }
 
 void LocationPanel::update (
-    XmlDoc *docParameter,
+    XmlDoc *doc,
     const wxString& parentParameter )
 {
-	doc = docParameter;
 	parent = parentParameter;
 	wxString previous = edit->GetValue();
 

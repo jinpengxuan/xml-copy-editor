@@ -388,7 +388,7 @@ bool MyApp::OnInit()
 	getAvailableTranslations ( &prefixes, &catalog );
 
 	if ( !myLocale.AddCatalog ( catalog ) )
-		;
+	{}
 
 #ifndef __WXMSW__
 	{
@@ -862,7 +862,6 @@ MyFrame::MyFrame (
 		commandString = wxEmptyString;
 		
 		exportStylesheet = exportFolder = wxEmptyString;
-		exportQuiet = exportMp3Album = false;
 		exportQuiet = exportMp3Album = exportSuppressOptional = exportHtml =
             exportEpub = exportRtf = exportDoc = exportFullDaisy = true;
 
@@ -893,7 +892,6 @@ MyFrame::MyFrame (
 	largeFileProperties.wrap = false;
 	largeFileProperties.indentLines = false;
 	largeFileProperties.protectHiddenElements = false;
-	largeFileProperties.toggleLineBackground = false;
 	largeFileProperties.toggleLineBackground = false;
 	largeFileProperties.insertCloseTag = false;
 	largeFileProperties.deleteWholeTag = false;
@@ -1437,7 +1435,8 @@ void MyFrame::OnPageClosing ( wxAuiNotebookEvent& event ) //wxNotebookEvent& eve
 	{
 		int selection;
 		wxString fileName;
-		if ( ( selection = mainBook->GetSelection() ) != -1 )
+		selection = mainBook->GetSelection();
+		if ( selection != -1 )
 			fileName = doc->getShortFileName();
 
 		int answer = wxMessageBox (
@@ -1962,10 +1961,9 @@ void MyFrame::OnDialogReplace ( wxFindDialogEvent& event )
 
 	if ( !doc->GetSelectedText().IsEmpty() )
 	{
-		int regexWidth = 0;
 		if ( findReplacePanel->getRegex() )
 		{
-			regexWidth = doc->ReplaceTargetRE ( event.GetReplaceString() );
+			doc->ReplaceTargetRE ( event.GetReplaceString() );
 		}
 		else
 		{
@@ -2049,7 +2047,7 @@ void MyFrame::OnPrintPreview ( wxCommandEvent &WXUNUSED ( event ) )
 	wxString htmlBuffer = getHtmlBuffer();
 	statusProgress ( wxEmptyString );
 	if ( ! ( htmlPrinting->PreviewText ( htmlBuffer ) ) )
-		;
+	{}
 }
 
 void MyFrame::OnPrint ( wxCommandEvent &WXUNUSED ( event ) )
@@ -2070,7 +2068,7 @@ void MyFrame::OnPrint ( wxCommandEvent &WXUNUSED ( event ) )
 	wxString htmlBuffer = getHtmlBuffer();
 	statusProgress ( wxEmptyString );
 	if ( ! ( htmlPrinting->PrintText ( htmlBuffer ) ) )
-		;
+	{}
 }
 
 wxString MyFrame::getHtmlBuffer()
@@ -2632,18 +2630,7 @@ void MyFrame::OnOptions ( wxCommandEvent& WXUNUSED ( event ) )
 	                                          title ) );
 	if ( mpsd->ShowModal() == wxID_OK )
 	{
-		properties = mpsd->getProperties();
 		applyEditorProperties();
-		applicationDir = mpsd->getApplicationDir();
-		rememberOpenTabs = mpsd->getRememberOpenTabs();
-		libxmlNetAccess = mpsd->getLibxmlNetAccess();
-		singleInstanceCheck = mpsd->getSingleInstanceCheck();
-		saveBom = mpsd->getSaveBom();
-		unlimitedUndo = mpsd->getUnlimitedUndo();
-		restoreLayout = mpsd->getRestoreLayout();
-		expandInternalEntities = mpsd->getExpandInternalEntities();
-		showFullPathOnFrame = mpsd->getShowFullPathOnFrame();
-		lang = mpsd->getLang();
 		updatePaths();
 	}
 	if ( doc )
@@ -2734,8 +2721,7 @@ void MyFrame::OnFindReplace ( wxCommandEvent& WXUNUSED ( event ) )
 
 void MyFrame::OnGlobalReplace ( wxCommandEvent& event )
 {
-	XmlDoc *doc;
-	if ( ( doc = getActiveDocument() ) == NULL )
+	if ( getActiveDocument() == NULL )
 		return;
 
 	size_t flags = findData.GetFlags();
@@ -3052,7 +3038,6 @@ bool MyFrame::openFile ( wxString& fileName, bool largeFile )
 	}
 
 	wxString wideError;
-	std::string buffer;
 	pair<int, int> posPair;
 	XmlDoc *doc;
 
@@ -3363,7 +3348,7 @@ bool MyFrame::openFile ( wxString& fileName, bool largeFile )
 std::string MyFrame::getApproximateEncoding ( char *docBuffer,
         size_t docBufferLen )
 {
-	std::string line, encoding;
+	std::string line;
 	char *it;
 	size_t i;
 
@@ -3573,7 +3558,7 @@ void MyFrame::save()
 	}
 
 	if ( !saveFile ( doc, fileName, true ) )
-		; // handle messages in saveFile
+	{} // handle messages in saveFile
 }
 
 void MyFrame::OnReload ( wxCommandEvent& event )
@@ -3679,13 +3664,7 @@ void MyFrame::OnUpdateReload ( wxUpdateUIEvent& event )
 
 void MyFrame::OnUpdateCutCopy ( wxUpdateUIEvent& event )
 {
-	XmlDoc *doc;
-	if ( ( doc = getActiveDocument() ) == NULL )
-	{
-		event.Enable ( false );
-		return;
-	}
-	event.Enable ( true );
+	event.Enable ( getActiveDocument() != NULL );
 }
 
 void MyFrame::OnUpdateLocationPaneVisible ( wxUpdateUIEvent& event )
@@ -3704,30 +3683,17 @@ void MyFrame::OnUpdateSavedOnly ( wxUpdateUIEvent& event )
 		event.Enable ( false );
 		return;
 	}
-	event.Enable (
-	    ( doc->getFullFileName().empty() ) ? false : true );
+	event.Enable ( !doc->getFullFileName().empty() );
 }
 
 void MyFrame::OnUpdateDocRange ( wxUpdateUIEvent& event )
 {
-	XmlDoc *doc;
-	if ( ( doc = getActiveDocument() ) == NULL )
-	{
-		event.Enable ( false );
-		return;
-	}
-	event.Enable ( true );
+	event.Enable ( getActiveDocument() != NULL );
 }
 
 void MyFrame::OnUpdateReplaceRange ( wxUpdateUIEvent& event )
 {
-	XmlDoc *doc;
-	if ( ( doc = getActiveDocument() ) == NULL ) // || protectTags)
-	{
-		event.Enable ( false );
-		return;
-	}
-	event.Enable ( true );
+	event.Enable ( getActiveDocument() != NULL );
 }
 
 void MyFrame::OnUpdateFindAgain ( wxUpdateUIEvent& event )
@@ -3768,13 +3734,7 @@ void MyFrame::OnUpdateRedo ( wxUpdateUIEvent& event )
 
 void MyFrame::OnUpdatePaste ( wxUpdateUIEvent& event )
 {
-	XmlDoc *doc;
-	if ( ( doc = getActiveDocument() ) == NULL )
-	{
-		event.Enable ( false );
-		return;
-	}
-	event.Enable ( true );
+	event.Enable ( getActiveDocument() != NULL );
 }
 
 void MyFrame::OnUpdatePreviousDocument ( wxUpdateUIEvent& event )
@@ -3992,7 +3952,7 @@ void MyFrame::OnValidateSchema ( wxCommandEvent& event )
 	// XMLCatalogResolver
 #ifdef __WXMSW__
 	{
-		std::string rawBuffer, schemaLocation;
+		std::string rawBuffer;
 		getRawText ( doc, rawBuffer );
 		if ( !XmlEncodingHandler::setUtf8 ( rawBuffer ) )
 		{
@@ -4010,7 +3970,6 @@ void MyFrame::OnValidateSchema ( wxCommandEvent& event )
 #endif
 
 	wxString fileName;
-	std::string tempFileNameLocal;
 	fileName = doc->getFullFileName();
 
 	WrapTempFileName wtfn ( fileName );

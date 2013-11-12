@@ -32,15 +32,15 @@ MyPropertySheet::MyPropertySheet (
     wxWindow *parent,
     XmlCtrlProperties& propertiesParameter,
     wxString& applicationDirParameter,
-    bool rememberOpenTabsParameter,
-    bool libxmlNetAccessParameter,
-    bool singleInstanceCheckParameter,
-    bool saveBomParameter,
-    bool unlimitedUndoParameter,
-    bool restoreLayoutParameter,
-    bool expandInternalEntitiesParameter,
-    bool showFullPathOnFrameParameter,
-    int lang,
+    bool &rememberOpenTabsParameter,
+    bool &libxmlNetAccessParameter,
+    bool &singleInstanceCheckParameter,
+    bool &saveBomParameter,
+    bool &unlimitedUndoParameter,
+    bool &restoreLayoutParameter,
+    bool &expandInternalEntitiesParameter,
+    bool &showFullPathOnFrameParameter,
+    int &lang,
     const std::set<const wxLanguageInfo *> &translations,
     wxWindowID id,
     wxString title,
@@ -51,6 +51,15 @@ MyPropertySheet::MyPropertySheet (
 	: wxPropertySheetDialog ( parent, id, title, position, size, style )
 	, properties ( propertiesParameter )
 	, applicationDir ( applicationDirParameter )
+	, rememberOpenTabs ( rememberOpenTabsParameter )
+	, libxmlNetAccess ( libxmlNetAccessParameter )
+	, singleInstanceCheck ( singleInstanceCheckParameter )
+	, saveBom ( saveBomParameter )
+	, unlimitedUndo ( unlimitedUndoParameter )
+	, restoreLayout ( restoreLayoutParameter )
+	, expandInternalEntities ( expandInternalEntitiesParameter )
+	, showFullPathOnFrame ( showFullPathOnFrameParameter )
+	, lang ( lang )
 {
 	CreateButtons ( wxOK | wxCANCEL );
 
@@ -241,6 +250,15 @@ MyPropertySheet::~MyPropertySheet()
 
 void MyPropertySheet::OnOk ( wxCommandEvent& e )
 {
+	wxString testDir = applicationDirEdit->GetValue();
+	if ( !wxFileName::DirExists ( testDir ) )
+	{
+		wxMessageBox ( _ ( "Cannot access application directory" ), _ ( "Options" ) );
+		// tbd: show general tab
+		return;
+	}
+	applicationDir = testDir;
+
 	properties.completion = completionBox->GetValue();
 	properties.fold = foldBox->GetValue();
 	properties.number = numberBox->GetValue();
@@ -255,16 +273,6 @@ void MyPropertySheet::OnOk ( wxCommandEvent& e )
 	properties.font = fontBox->GetStringSelection();
 	properties.highlightSyntax = highlightSyntaxBox->GetValue();
 
-	wxString testDir = applicationDirEdit->GetValue();
-	if ( !wxFileName::DirExists ( testDir ) )
-	{
-		wxMessageBox ( _ ( "Cannot access application directory" ), _ ( "Options" ) );
-		// tbd: show general tab
-		return;
-	}
-	else
-		applicationDir = testDir;
-
 	singleInstanceCheck = singleInstanceCheckBox->GetValue();
 	restoreLayout = restoreLayoutBox->GetValue();
 	rememberOpenTabs = rememberOpenTabsBox->GetValue();
@@ -276,7 +284,7 @@ void MyPropertySheet::OnOk ( wxCommandEvent& e )
 
 	int languageChoice = languageBox->GetSelection();
 	if ( languageChoice != wxNOT_FOUND )
-		lang = (wxIntPtr)languageBox->GetClientData(languageChoice);
+		lang =  ( wxIntPtr ) languageBox->GetClientData ( languageChoice );
 	else
 		lang = wxLANGUAGE_DEFAULT;
 
@@ -288,59 +296,4 @@ void MyPropertySheet::OnApplicationDirBrowse ( wxCommandEvent& e )
 	wxDirDialog *browseDialog = new wxDirDialog ( this );
 	if ( browseDialog->ShowModal() == wxID_OK )
 		applicationDirEdit->SetValue ( browseDialog->GetPath() );
-}
-
-XmlCtrlProperties MyPropertySheet::getProperties()
-{
-	return properties;
-}
-
-wxString MyPropertySheet::getApplicationDir()
-{
-	return applicationDir;
-}
-
-bool MyPropertySheet::getSingleInstanceCheck()
-{
-	return singleInstanceCheck;
-}
-
-bool MyPropertySheet::getRememberOpenTabs()
-{
-	return rememberOpenTabs;
-}
-
-bool MyPropertySheet::getLibxmlNetAccess()
-{
-	return libxmlNetAccess;
-}
-
-bool MyPropertySheet::getSaveBom()
-{
-	return saveBom;
-}
-
-bool MyPropertySheet::getUnlimitedUndo()
-{
-	return unlimitedUndo;
-}
-
-int MyPropertySheet::getLang()
-{
-	return lang;
-}
-
-bool MyPropertySheet::getRestoreLayout()
-{
-	return restoreLayout;
-}
-
-bool MyPropertySheet::getExpandInternalEntities()
-{
-	return expandInternalEntities;
-}
-
-bool MyPropertySheet::getShowFullPathOnFrame()
-{
-	return showFullPathOnFrame;
 }

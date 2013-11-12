@@ -103,6 +103,7 @@ StyleDialog::StyleDialog (
 		    position,
 		    size,
 		    wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER | wxMAXIMIZE_BOX ),
+		indexForContextMenu ( -1 ),
 		bufferUtf8 ( bufferParameterUtf8 ),
 #if !defined(USE_ENCHANT) && defined(__WXMSW__)
 		aspellDataPath ( aspellDataPathParameter ),

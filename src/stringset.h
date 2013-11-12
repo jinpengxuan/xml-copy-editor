@@ -30,9 +30,10 @@
 #ifdef __WXMSW__
 #include <mem.h>
 #endif
+#include <boost/utility.hpp>
 
 template<class T>
-class StringSetNode
+class StringSetNode : private boost::noncopyable
 {
 	public:
 		StringSetNode ( T *keyParameter, size_t lenParameter )

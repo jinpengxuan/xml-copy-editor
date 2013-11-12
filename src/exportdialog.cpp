@@ -156,7 +156,6 @@ ExportDialog::~ExportDialog()
 
 void ExportDialog::OnOk ( wxCommandEvent& e )
 {
-	std::string urlUtf8, urlParamsUtf8;
 #ifdef __WXMSW__
 	url = urlCtrl->GetTextCtrlValue();
 #else
@@ -171,30 +170,27 @@ void ExportDialog::OnOk ( wxCommandEvent& e )
     rtf = rtfCheckbox->IsChecked();
     doc = docCheckbox->IsChecked();
     fullDaisy = fullDaisyCheckbox->IsChecked();
-	urlUtf8 = ( const char * ) url.mb_str ( wxConvUTF8 );
 
 	e.Skip();
 }
 
 void ExportDialog::OnContextHelp ( wxHelpEvent& e )
 {
-	wxTipWindow *tw;
-
 	int id = e.GetId();
 	if ( id == ID_URL )
-		tw = new wxTipWindow (
+		new wxTipWindow (
 		    this,
 		    _ ( "Provides a space for you to enter or select a stylesheet for conversion to canonical XHTML" ) );
 	if ( id == ID_FOLDER )
-		tw = new wxTipWindow (
+		new wxTipWindow (
 		    this,
 		    _ ( "Provides a space for you to enter or select the output folder" ) );
 	else if ( id == wxID_OK )
-		tw = new wxTipWindow (
+		new wxTipWindow (
 		    this,
 		    _ ( "Starts the export" ) );
 	else if ( id == wxID_CANCEL )
-		tw = new wxTipWindow (
+		new wxTipWindow (
 		    this,
 		    _ ( "Closes the dialog box without exporting the file" ) );
 	else

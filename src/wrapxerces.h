@@ -25,6 +25,7 @@
 #include <wx/buffer.h>
 #include <string>
 #include <utility>
+#include <boost/utility.hpp>
 
 #if !wxCHECK_GCC_VERSION(4,7)
 #define XERCES_TMPLSINC
@@ -36,7 +37,7 @@
 
 using namespace xercesc;
 
-class WrapXerces
+class WrapXerces : private boost::noncopyable
 {
 	public:
 		static void Init() throw ();

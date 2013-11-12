@@ -33,11 +33,15 @@ WrapRegex::WrapRegex (
     const string& replaceParameter,
     const int arrayLengthParameter ) :
 		replace ( replaceParameter ),
-		arrayLength ( arrayLengthParameter )
+		arrayLength ( arrayLengthParameter ),
+		returnValue ( 0 )
 {
 	if ( pattern.empty() || pattern == ".*" )
 	{
 		disabled = true;
+		matchArray = NULL;
+		patternStructure = NULL;
+		patternExtraStructure = NULL;
 		return;
 	}
 	disabled = false;
@@ -67,16 +71,9 @@ WrapRegex::~WrapRegex()
 	if ( disabled )
 		return;
 
-	try
-	{
-		pcre_free ( patternStructure );
-		pcre_free ( patternExtraStructure );
-		delete[] matchArray;
-	}
-	catch ( ... )
-	{
-		throw runtime_error ( "Wrapregex::~WrapRegex" );
-	}
+	pcre_free ( patternStructure );
+	pcre_free ( patternExtraStructure );
+	delete[] matchArray;
 }
 
 int WrapRegex::matchPatternGlobal (
@@ -105,7 +102,7 @@ string WrapRegex::replaceGlobal (
 	if ( disabled )
 		return buffer;
 
-	char *s = ( char * ) buffer.c_str();
+	const char *s = buffer.c_str();
 
 	string output, match;
 
@@ -143,12 +140,12 @@ int WrapRegex::matchPatternGlobal_ (
 	if ( disabled )
 		return 0;
 
-	char *s, *origin;
+	const char *s, *origin;
 	int matchcount;
 	size_t offset;
 	ContextMatch match;
 
-	s = origin = ( char * ) buffer;
+	s = origin = buffer;
 	matchcount = 0;
 	offset = 0;
 
@@ -193,13 +190,12 @@ int WrapRegex::matchPatternGlobal_ (
 	return matchcount;
 }
 
-string WrapRegex::getInterpolatedString_ ( char *buffer, char *source )
+string WrapRegex::getInterpolatedString_ ( const char *buffer, const char *source )
 {
 	if ( disabled )
 		return "";
 
-	char *s, *origin;
-	s = origin = ( char * ) source;
+	const char *s = source;
 
 	string interpol_string;
 
@@ -213,7 +209,7 @@ string WrapRegex::getInterpolatedString_ ( char *buffer, char *source )
 			{
 				if ( isdigit ( * ( s + 1 ) ) )
 				{
-					char *number, *it;
+					const char *number, *it;
 					number = s + 1;
 					for ( it = number; *it && isdigit ( * ( it + 1 ) ); ++it )
 						;
@@ -253,7 +249,7 @@ string WrapRegex::getInterpolatedString_ ( char *buffer, char *source )
 	return interpol_string;
 }
 
-string WrapRegex::getSubpattern_ ( char *s, unsigned subpattern )
+string WrapRegex::getSubpattern_ ( const char *s, unsigned subpattern )
 {
 	if ( disabled )
 		return "";
@@ -263,6 +259,6 @@ string WrapRegex::getSubpattern_ ( char *s, unsigned subpattern )
 	if ( ret == PCRE_ERROR_NOSUBSTRING || ret == PCRE_ERROR_NOMEMORY )
 		return "";
 	string subString ( sub );
-	pcre_free ( ( char * ) sub );
+	pcre_free_substring ( sub );
 	return subString;
 }

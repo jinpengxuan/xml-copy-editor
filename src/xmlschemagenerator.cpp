@@ -252,7 +252,7 @@ void XmlSchemaGenerator::generateSchema ( ElmtData &data, size_t nIndent )
 {
 	wxString &schema = data.schema;
 
-	if ( data.children.size() == 0 && data.attrMap.size() == 0 )
+	if ( data.children.empty() && data.attrMap.empty() )
 	{
 		if ( !mInlineSimpleType )
 		{
@@ -267,7 +267,7 @@ void XmlSchemaGenerator::generateSchema ( ElmtData &data, size_t nIndent )
 
 	addIndent ( schema, nIndent++ );
 	schema << _T("<xs:element name=\"") << data.name << _T("\">") << getEOL();
-	if ( data.children.size() > 0 )
+	if ( !data.children.empty() )
 	{
 		addIndent ( schema, nIndent++ );
 		schema << _T("<xs:complexType>") << getEOL();
@@ -305,8 +305,8 @@ void XmlSchemaGenerator::generateSchema ( ElmtData &data, size_t nIndent )
 			if ( mInlineSimpleType )
 			{ // Check if it's a simple type
 				const ElmtData *childElmt = &mElements[*seqItr];
-				if ( childElmt->children.size() == 0
-						&& childElmt->attrMap.size() == 0 )
+				if ( childElmt->children.empty()
+						&& childElmt->attrMap.empty() )
 				{
 					schema << _T("<xs:element name=\"") << *seqItr
 							<< _T("\" type=\"xs:string\"/>") << getEOL();
@@ -338,7 +338,7 @@ void XmlSchemaGenerator::generateSchema ( ElmtData &data, size_t nIndent )
 			schema << _T("</xs:choice>") << getEOL();
 		}
 	}
-	else if ( data.attrMap.size() != 0 )
+	else if ( !data.attrMap.empty() )
 	{
 		addIndent ( schema, nIndent++ );
 		schema << _T("<xs:complexType>") << getEOL();

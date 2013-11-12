@@ -32,7 +32,12 @@
 struct XmlShallowValidatorData : public ParserData
 {
 	XmlShallowValidatorData()
-	{}
+	{
+		isValid = segmentOnly = false;
+		depth = maxLine = 0;
+		p = 0;
+		overrideFailure = false;
+	}
 	std::map<wxString, std::set<wxString> > elementMap;
 	std::map<wxString, std::map<wxString, std::set<wxString> > >
 	attributeMap;

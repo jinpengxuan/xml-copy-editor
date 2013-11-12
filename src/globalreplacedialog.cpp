@@ -138,35 +138,33 @@ void GlobalReplaceDialog::OnOk ( wxCommandEvent& e )
 
 void GlobalReplaceDialog::OnContextHelp ( wxHelpEvent& e )
 {
-	wxTipWindow *tw;
-
 	int id = e.GetId();
 	if ( id == ID_FIND )
-		tw = new wxTipWindow (
+		new wxTipWindow (
 		    this,
 		    _ ( "Provides a space for you to type the text you want to find" ) );
 	else if ( id == ID_REPLACE )
-		tw = new wxTipWindow (
+		new wxTipWindow (
 		    this,
 		    _ ( "Provides a space for you to type the text you want to replace the text you typed in Find what" ) );
 	else if ( id == ID_MATCHCASE )
-		tw = new wxTipWindow (
+		new wxTipWindow (
 		    this,
 		    _ ( "Finds only text with lowercase and uppercase letters as specified in Find what" ) );
 	else if ( id == ID_ALLDOCUMENTS )
-		tw = new wxTipWindow (
+		new wxTipWindow (
 		    this,
 		    _ ( "Extends the scope to all open documents" ) );
 	else if ( id == ID_REGEX )
-		tw = new wxTipWindow (
+		new wxTipWindow (
 		    this,
 		    _ ( "Interprets the text specified in Find what as a regular expression" ) );
 	else if ( id == wxID_OK )
-		tw = new wxTipWindow (
+		new wxTipWindow (
 		    this,
 		    _ ( "Finds all instances of the text specified in Find what and replaces them with the text in Replace with" ) );
 	else if ( id == wxID_CANCEL )
-		tw = new wxTipWindow (
+		new wxTipWindow (
 		    this,
 		    _ ( "Closes the dialog box without saving any changes you have made" ) );
 	else

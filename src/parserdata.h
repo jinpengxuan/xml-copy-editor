@@ -28,6 +28,7 @@ class ParserData
 	public:
 		ParserData()
 		{
+			state = 0;
 			count = 0;
 		}
 		~ParserData()

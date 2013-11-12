@@ -1291,13 +1291,11 @@ bool XmlCtrl::canMoveLeftAt ( int pos )
 void XmlCtrl::adjustPosRight()
 {
 	int pos, max;
-	bool canInsert = false;
 	pos = GetCurrentPos();
 	max = GetLength();
 	for ( ; pos <= max; pos++ )
 		if ( canInsertAt ( pos ) )
 		{
-			canInsert = true;
 			break;
 		}
 	SetSelection ( pos, pos );
@@ -1306,7 +1304,6 @@ void XmlCtrl::adjustPosRight()
 void XmlCtrl::adjustPosLeft()
 {
 	int pos;
-	bool canInsert = false;
 	pos = GetCurrentPos() - 1;
 	if ( pos < 0 )
 	{
@@ -1316,7 +1313,6 @@ void XmlCtrl::adjustPosLeft()
 	for ( ; pos > 0; pos-- )
 		if ( canInsertAt ( pos ) )
 		{
-			canInsert = true;
 			break;
 		}
 	SetSelection ( pos, pos );

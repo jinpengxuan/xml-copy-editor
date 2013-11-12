@@ -38,15 +38,15 @@ class MyPropertySheet : public wxPropertySheetDialog
 		    wxWindow *parent,
 		    XmlCtrlProperties& propertiesParameter,
 		    wxString& applicationDirParameter,
-		    bool rememberOpenTabsParameter,
-		    bool libxmlNetAccess,
-		    bool singleInstanceCheck,
-		    bool saveBom,
-		    bool unlimitedUndo,
-		    bool restoreLayout,
-		    bool expandInternalEntities,
-		    bool showFullPathOnFrame,
-		    int lang,
+		    bool &rememberOpenTabsParameter,
+		    bool &libxmlNetAccess,
+		    bool &singleInstanceCheck,
+		    bool &saveBom,
+		    bool &unlimitedUndo,
+		    bool &restoreLayout,
+		    bool &expandInternalEntities,
+		    bool &showFullPathOnFrame,
+		    int &lang,
 		    const std::set<const wxLanguageInfo *> &translations,
 		    wxWindowID id = wxID_ANY,
 		    wxString title = _T ( "" ),
@@ -56,19 +56,8 @@ class MyPropertySheet : public wxPropertySheetDialog
 		~MyPropertySheet();
 		void OnOk ( wxCommandEvent& e );
 		void OnApplicationDirBrowse ( wxCommandEvent& e );
-		XmlCtrlProperties getProperties();
-		wxString getApplicationDir();
-		bool getSingleInstanceCheck();
-		bool getRememberOpenTabs();
-		bool getLibxmlNetAccess();
-		bool getSaveBom();
-		bool getUnlimitedUndo();
-		bool getRestoreLayout();
-		bool getExpandInternalEntities();
-		bool getShowFullPathOnFrame();
-		int getLang();
 	private:
-		int lang;
+		int &lang;
 		wxCheckBox *completionBox,
 		*currentLineBox,
 		*foldBox,
@@ -91,17 +80,17 @@ class MyPropertySheet : public wxPropertySheetDialog
 		*insertCloseTagBox;
 		wxChoice *languageBox, *fontBox;
 		wxTextCtrl *applicationDirEdit;
-		XmlCtrlProperties properties;
-		wxString applicationDir;
-		bool singleInstanceCheck,
-		rememberOpenTabs,
-		libxmlNetAccess,
-		saveBom,
-		unlimitedUndo,
-		restoreLayout,
-		expandInternalEntities,
-		showFullPathOnFrame,
-		insertCloseTag;
+		XmlCtrlProperties &properties;
+		wxString &applicationDir;
+		bool &singleInstanceCheck,
+		&rememberOpenTabs,
+		&libxmlNetAccess,
+		&saveBom,
+		&unlimitedUndo,
+		&restoreLayout,
+		&expandInternalEntities,
+		&showFullPathOnFrame;
+
 		DECLARE_EVENT_TABLE()
 };
 

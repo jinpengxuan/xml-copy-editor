@@ -36,7 +36,6 @@ class LocationPanel : public wxPanel
 	private:
 		void indentStructure ( wxString& structure );
 		MyFrame *parentWindow;
-		XmlDoc *doc;
 		wxBoxSizer *sizer;
 		wxTextCtrl *edit;
 		wxStyledTextCtrl *structureEdit;

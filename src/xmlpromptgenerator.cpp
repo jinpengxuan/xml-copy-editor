@@ -165,8 +165,8 @@ void XMLCALL XmlPromptGenerator::doctypedeclstarthandler (
     const XML_Char *pubid,
     int has_internal_subset )
 {
-	PromptGeneratorData *d;
-	d = ( PromptGeneratorData * ) data;
+	//PromptGeneratorData *d;
+	//d = ( PromptGeneratorData * ) data;
 }
 
 void XMLCALL XmlPromptGenerator::doctypedeclendhandler ( void *data )

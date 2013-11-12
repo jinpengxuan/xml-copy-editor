@@ -21,12 +21,12 @@
 #include "contexthandler.h"
 
 ContextMatch ContextHandler::getContext (
-    char *s,
+    const char *s,
     int len,
-    char *origin,
+    const char *origin,
     int context )
 {
-	char *t, *u;
+	const char *t, *u;
 	int maxrange = context * 20;
 
 	int range = context + 1, i = 0;

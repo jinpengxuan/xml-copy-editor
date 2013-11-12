@@ -35,6 +35,7 @@ RuleData::RuleData (
 		passiveDictionary ( passiveDictionaryParameter ),
 		ruleVector ( ruleVectorParameter )
 {
+	cipher = false;
 	dictionaryFound = false;
 	initialiseAttributes();
 	ruleCount = 0;
