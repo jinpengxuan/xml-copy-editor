@@ -293,7 +293,8 @@ void MyPropertySheet::OnOk ( wxCommandEvent& e )
 
 void MyPropertySheet::OnApplicationDirBrowse ( wxCommandEvent& e )
 {
-	wxDirDialog *browseDialog = new wxDirDialog ( this );
-	if ( browseDialog->ShowModal() == wxID_OK )
-		applicationDirEdit->SetValue ( browseDialog->GetPath() );
+	wxDirDialog browseDir ( this );
+	browseDir.SetPath ( applicationDirEdit->GetValue() );
+	if ( browseDir.ShowModal() == wxID_OK )
+		applicationDirEdit->SetValue ( browseDir.GetPath() );
 }
