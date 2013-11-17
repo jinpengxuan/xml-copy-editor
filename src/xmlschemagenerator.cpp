@@ -78,9 +78,10 @@ const wxString &XmlSchemaGenerator::generate ( Grammar::GrammarType grammarType,
 	if ( size > maxReservedSchemaBuffer ) size = maxReservedSchemaBuffer;
 	mSchema.Alloc ( size );
 
-	mSchema << _T("<?xml version=\"1.0\" encoding=\"UTF-8\"?>") << getEOL();
 	if ( mGrammarType == Grammar::SchemaGrammarType )
-		mSchema << _T("<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" elementFormDefault=\"qualified\">")
+		mSchema << _T("<?xml version=\"1.0\" encoding=\"UTF-8\"?>")
+				<< getEOL()
+				<< _T("<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" elementFormDefault=\"qualified\">")
 				<< getEOL();
 
 	xercesc::DOMElement *root = doc->getDocumentElement();
