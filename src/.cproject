@@ -58,12 +58,10 @@
 									<listOptionValue builtIn="false" value="aspell"/>
 									<listOptionValue builtIn="false" value="wxmsw${WXVER}ud_richtext"/>
 									<listOptionValue builtIn="false" value="wxmsw${WXVER}ud_html"/>
-									<listOptionValue builtIn="false" value="wxmsw${WXVER}ud_stc"/>
 									<listOptionValue builtIn="false" value="wxmsw${WXVER}ud_aui"/>
 									<listOptionValue builtIn="false" value="wxmsw${WXVER}ud_adv"/>
 									<listOptionValue builtIn="false" value="wxmsw${WXVER}ud_stc"/>
 									<listOptionValue builtIn="false" value="wxmsw${WXVER}ud_core"/>
-									<listOptionValue builtIn="false" value="wxmsw${WXVER}ud_richtext"/>
 									<listOptionValue builtIn="false" value="wxbase${WXVER}ud_xml"/>
 									<listOptionValue builtIn="false" value="wxbase${WXVER}ud_net"/>
 									<listOptionValue builtIn="false" value="wxbase${WXVER}ud"/>
@@ -169,12 +167,10 @@
 									<listOptionValue builtIn="false" value="aspell"/>
 									<listOptionValue builtIn="false" value="wxmsw28u_richtext"/>
 									<listOptionValue builtIn="false" value="wxmsw28u_html"/>
-									<listOptionValue builtIn="false" value="wxmsw28u_stc"/>
 									<listOptionValue builtIn="false" value="wxmsw28u_aui"/>
 									<listOptionValue builtIn="false" value="wxmsw28u_adv"/>
 									<listOptionValue builtIn="false" value="wxmsw28u_stc"/>
 									<listOptionValue builtIn="false" value="wxmsw28u_core"/>
-									<listOptionValue builtIn="false" value="wxmsw28u_richtext"/>
 									<listOptionValue builtIn="false" value="wxbase28u_xml"/>
 									<listOptionValue builtIn="false" value="wxbase28u_net"/>
 									<listOptionValue builtIn="false" value="wxbase28u"/>
@@ -282,12 +278,10 @@
 									<listOptionValue builtIn="false" value="aspell"/>
 									<listOptionValue builtIn="false" value="wxmsw${WXVER}ud_richtext"/>
 									<listOptionValue builtIn="false" value="wxmsw${WXVER}ud_html"/>
-									<listOptionValue builtIn="false" value="wxmsw${WXVER}ud_stc"/>
 									<listOptionValue builtIn="false" value="wxmsw${WXVER}ud_aui"/>
 									<listOptionValue builtIn="false" value="wxmsw${WXVER}ud_adv"/>
 									<listOptionValue builtIn="false" value="wxmsw${WXVER}ud_stc"/>
 									<listOptionValue builtIn="false" value="wxmsw${WXVER}ud_core"/>
-									<listOptionValue builtIn="false" value="wxmsw${WXVER}ud_richtext"/>
 									<listOptionValue builtIn="false" value="wxbase${WXVER}ud_xml"/>
 									<listOptionValue builtIn="false" value="wxbase${WXVER}ud_net"/>
 									<listOptionValue builtIn="false" value="wxbase${WXVER}ud"/>
@@ -394,12 +388,10 @@
 									<listOptionValue builtIn="false" value="aspell"/>
 									<listOptionValue builtIn="false" value="wxmsw28ud_richtext"/>
 									<listOptionValue builtIn="false" value="wxmsw28ud_html"/>
-									<listOptionValue builtIn="false" value="wxmsw28ud_stc"/>
 									<listOptionValue builtIn="false" value="wxmsw28ud_aui"/>
 									<listOptionValue builtIn="false" value="wxmsw28ud_adv"/>
 									<listOptionValue builtIn="false" value="wxmsw28ud_stc"/>
 									<listOptionValue builtIn="false" value="wxmsw28ud_core"/>
-									<listOptionValue builtIn="false" value="wxmsw28ud_richtext"/>
 									<listOptionValue builtIn="false" value="wxbase28ud_xml"/>
 									<listOptionValue builtIn="false" value="wxbase28ud_net"/>
 									<listOptionValue builtIn="false" value="wxbase28ud"/>
@@ -505,12 +497,10 @@
 									<listOptionValue builtIn="false" value="aspell"/>
 									<listOptionValue builtIn="false" value="wxmsw${WXVER}u_richtext"/>
 									<listOptionValue builtIn="false" value="wxmsw${WXVER}u_html"/>
-									<listOptionValue builtIn="false" value="wxmsw${WXVER}u_stc"/>
 									<listOptionValue builtIn="false" value="wxmsw${WXVER}u_aui"/>
 									<listOptionValue builtIn="false" value="wxmsw${WXVER}u_adv"/>
 									<listOptionValue builtIn="false" value="wxmsw${WXVER}u_stc"/>
 									<listOptionValue builtIn="false" value="wxmsw${WXVER}u_core"/>
-									<listOptionValue builtIn="false" value="wxmsw${WXVER}u_richtext"/>
 									<listOptionValue builtIn="false" value="wxbase${WXVER}u_xml"/>
 									<listOptionValue builtIn="false" value="wxbase${WXVER}u_net"/>
 									<listOptionValue builtIn="false" value="wxbase${WXVER}u"/>
