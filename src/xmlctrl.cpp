@@ -125,6 +125,9 @@ XmlCtrl::XmlCtrl (
 		IndicatorSetStyle ( i, wxSTC_INDIC_HIDDEN );
 	IndicatorSetStyle ( 2, wxSTC_INDIC_SQUIGGLE );
 	IndicatorSetForeground ( 2, *wxRED );
+#if wxCHECK_VERSION(2,9,0)
+	SetIndicatorCurrent ( 2 );
+#endif
 }
 
 
@@ -2004,8 +2007,12 @@ void XmlCtrl::setErrorIndicator ( int line, int column )
 	int length = endPos - startPos;
 	if ( length > 0 && length + startPos < GetLength() )
 	{
+#if wxCHECK_VERSION(2,9,0)
+		IndicatorFillRange ( startPos, length );
+#else
 		StartStyling ( startPos, wxSTC_INDIC2_MASK );
 		SetStyling ( length, wxSTC_INDIC2_MASK );
+#endif
 	}
 }
 
@@ -2022,8 +2029,12 @@ void XmlCtrl::clearErrorIndicators ( int maxLine )
 	length = ( maxLine ) ? GetLineEndPosition ( maxLine ) : length;
 	if ( end > 0 && length > end ) length = end;
 
+#if wxCHECK_VERSION(2,9,0)
+	IndicatorClearRange ( 0, length );
+#else
 	StartStyling ( 0, wxSTC_INDIC2_MASK );
 	SetStyling ( length, 0 );
+#endif
 }
 
 bool XmlCtrl::getValidationRequired()
@@ -2080,7 +2091,9 @@ int XmlCtrl::getTagType ( int pos )
 int XmlCtrl::getLexerStyleAt ( int pos )
 {
 	int style = GetStyleAt ( pos );
+#if !wxCHECK_VERSION(2,9,0)
 	style &= ~wxSTC_INDIC2_MASK;
+#endif
 	return style;
 }
 
