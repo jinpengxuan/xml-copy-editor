@@ -14,7 +14,7 @@ applicationsdir = /usr/share/applications
 
 # the application source, library search path, and link libraries
 xmlcopyeditor_SOURCES = xmlcopyeditor.cpp associatedialog.cpp casehandler.cpp \
-	contexthandler.cpp globalreplacedialog.cpp housestyle.cpp \
+	contexthandler.cpp dtd2schema.cpp globalreplacedialog.cpp housestyle.cpp \
 	housestylereader.cpp myhtmlpane.cpp nocasecompare.cpp readfile.cpp \
 	replace.cpp styledialog.cpp threadreaper.cpp wraplibxml.cpp \
 	wrapregex.cpp wraptempfilename.cpp xmlassociatedtd.cpp xmlassociatexsd.cpp \

@@ -63,6 +63,7 @@
 #include "xmlschemagenerator.h"
 #include "threadreaper.h"
 #include <wx/wupdlock.h>
+#include "dtd2schema.h"
 
 #define ngettext wxGetTranslation
 
@@ -139,6 +140,7 @@ BEGIN_EVENT_TABLE ( MyFrame, wxFrame )
 	EVT_MENU ( ID_VALIDATE_RELAX_NG, MyFrame::OnValidateRelaxNG )
 	EVT_MENU ( ID_VALIDATE_W3C_SCHEMA, MyFrame::OnValidateSchema )
 	EVT_MENU ( ID_CREATE_SCHEMA, MyFrame::OnCreateSchema )
+	EVT_MENU ( ID_DTD_TO_SCHEMA, MyFrame::OnDtd2Schema )
 	EVT_MENU ( ID_XPATH, MyFrame::OnXPath )
 	EVT_MENU_RANGE ( ID_XSLT, ID_XSLT_WORDML_DOCBOOK, MyFrame::OnXslt )
 	EVT_MENU ( ID_PRETTYPRINT, MyFrame::OnPrettyPrint )
@@ -4044,6 +4046,37 @@ void MyFrame::OnCreateSchema ( wxCommandEvent& event )
 	newDocument ( schema );
 }
 
+void MyFrame::OnDtd2Schema ( wxCommandEvent& event )
+{
+	closePane();
+
+#if wxCHECK_VERSION(2,9,0)
+	long style = wxFD_OPEN | wxFD_FILE_MUST_EXIST;
+#else
+	long style = wxOPEN | wxFILE_MUST_EXIST;
+#endif
+	wxFileDialog fd ( this, _ ( "Please select a DTD file" ), wxEmptyString,
+	    wxEmptyString, _T ( "DTD files (*.dtd)|*.dtd|All files (*.*)|*.*" ),
+	    style );
+	if (fd.ShowModal() != wxID_OK)
+		return;
+
+	statusProgress ( _ ( "Converting..." ) );
+
+	Dtd2Schema dtd2xsd;
+	const wxString &schema = dtd2xsd.convert ( fd.GetPath() );
+	const wxString &error = dtd2xsd.getErrors();
+	if ( !error.empty() )
+		messagePane ( error, CONST_STOP );
+	if ( !schema.empty() )
+	{
+		statusProgress ( _ ( "Creating view..." ) );
+		newDocument ( schema );
+	}
+
+	statusProgress ( wxEmptyString );
+}
+
 void MyFrame::OnXPath ( wxCommandEvent& event )
 {
 	statusProgress ( wxEmptyString );
@@ -5302,7 +5335,9 @@ wxMenuBar *MyFrame::getMenuBar()
 	    _ ( "&Validate" ),
 	    validationMenu );
 	xmlMenu->Append ( ID_CREATE_SCHEMA, _ ( "Create &Schema...\tF10" ),
-	    _ ( "Create schema" ) );
+	    _ ( "Create schema..." ) );
+	xmlMenu->Append ( ID_DTD_TO_SCHEMA, _ ( "DTD -> Schema..." ),
+	    _ ( "DTD -> Schema..." ) );
 	xmlMenu->AppendSeparator();
 	xmlMenu->Append (
 	    wxID_ANY,
@@ -5662,13 +5697,14 @@ void MyFrame::messagePane ( const wxString& s, int iconType, bool forcePane )
 	htmlString.Replace ( _T ( "&" ), _T ( "&amp;" ), true );
 	htmlString.Replace ( _T ( "<" ), _T ( "&lt;" ), true );
 	htmlString.Replace ( _T ( ">" ), _T ( "&gt;" ), true );
-	
-    htmlString.Replace ( _T("[br/]"), _T("<br/>"), true );
-    htmlString.Replace ( _T("[b]"), _T("<b>"), true );
-    htmlString.Replace ( _T("[/b]"), _T("</b>"), true );
-    htmlString.Replace ( _T("[i]"), _T("<i>"), true );
-    htmlString.Replace ( _T("[/i]"), _T("</i>"), true );
-    
+
+	// have to use <br> on Ubuntu
+	htmlString.Replace ( _T("[br]"), _T("<br>"), true );
+	htmlString.Replace ( _T("[br/]"), _T("<br/>"), true );
+	htmlString.Replace ( _T("[b]"), _T("<b>"), true );
+	htmlString.Replace ( _T("[/b]"), _T("</b>"), true );
+	htmlString.Replace ( _T("[i]"), _T("<i>"), true );
+	htmlString.Replace ( _T("[/i]"), _T("</i>"), true );
 
 	wxString htmlBuffer;
 	htmlBuffer += _T ( "<html><body><table><tr><td width=\"5%\"><img src=\"" );

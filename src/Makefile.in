@@ -68,8 +68,8 @@ am__installdirs = "$(DESTDIR)$(bindir)" "$(DESTDIR)$(applicationsdir)" \
 	"$(DESTDIR)$(xmlcopyeditordir)" "$(DESTDIR)$(pixmapdir)"
 PROGRAMS = $(bin_PROGRAMS)
 am_xmlcopyeditor_OBJECTS = xmlcopyeditor.$(OBJEXT) \
-	associatedialog.$(OBJEXT) casehandler.$(OBJEXT) \
-	contexthandler.$(OBJEXT) globalreplacedialog.$(OBJEXT) \
+	associatedialog.$(OBJEXT) casehandler.$(OBJEXT) contexthandler.$(OBJEXT)\
+	dtd2schema.$(OBJEXT) globalreplacedialog.$(OBJEXT) \
 	housestyle.$(OBJEXT) housestylereader.$(OBJEXT) \
 	myhtmlpane.$(OBJEXT) nocasecompare.$(OBJEXT) \
 	readfile.$(OBJEXT) replace.$(OBJEXT) styledialog.$(OBJEXT) \
@@ -287,7 +287,7 @@ applicationsdir = /usr/share/applications
 
 # the application source, library search path, and link libraries
 xmlcopyeditor_SOURCES = xmlcopyeditor.cpp associatedialog.cpp casehandler.cpp \
-	contexthandler.cpp globalreplacedialog.cpp housestyle.cpp \
+	contexthandler.cpp dtd2schema.cpp globalreplacedialog.cpp housestyle.cpp \
 	housestylereader.cpp myhtmlpane.cpp nocasecompare.cpp readfile.cpp \
 	replace.cpp styledialog.cpp threadreaper.cpp wraplibxml.cpp \
 	wrapregex.cpp wraptempfilename.cpp xmlassociatedtd.cpp xmlassociatexsd.cpp \
