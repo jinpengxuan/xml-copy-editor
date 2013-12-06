@@ -59,8 +59,9 @@ const wxString &Dtd2Schema::convert ( const wxString &dtdFile )
 		return mSchema;
 	}
 
-	mSchema << _T("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n")
-			_T("<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"");
+	mSchema << _T("<?xml version=\"1.0\" encoding=\"UTF-8\"?>")
+			<< wxTextFile::GetEOL()
+			<< _T("<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\"");
 
 	wxString elements;
 	const size_t nIndent = 1;
@@ -83,8 +84,10 @@ const wxString &Dtd2Schema::convert ( const wxString &dtdFile )
 					targetNS.c_str(), mTargetNameSpace.c_str() );
 	}
 	if ( !mTargetNameSpace.empty() )
-		mSchema << _T("\n    targetNamespace=\"") << mTargetNameSpace
-				<< _T("\"\n    xmlns=\"") << mTargetNameSpace << _T("\"");
+		mSchema << wxTextFile::GetEOL()
+				<< _T("    targetNamespace=\"") << mTargetNameSpace << _T("\"")
+				<< wxTextFile::GetEOL()
+				<< _T("    xmlns=\"") << mTargetNameSpace << _T("\"");
 	wxString importNS;
 	std::map<wxString, wxString>::iterator itr;
 	itr = mNameSpaceMap.find ( _T("xml") );
@@ -92,15 +95,18 @@ const wxString &Dtd2Schema::convert ( const wxString &dtdFile )
 		itr->second = wxString::FromUTF8 ( (const char *) XML_XML_NAMESPACE );
 	for ( itr = mNameSpaceMap.begin(); itr != mNameSpaceMap.end(); ++itr )
 	{
-		mSchema << _T("\n    xmlns:") << itr->first << _T("=\"")
+		mSchema << wxTextFile::GetEOL()
+				<< _T("    xmlns:") << itr->first << _T("=\"")
 				<< itr->second << _T("\"");
 		importNS << _T("  <xs:import namespace=\"")
 				<< ( itr->second.empty() ? itr->first : itr->second )
-				<< _T("\"/>\n");
+				<< _T("\"/>")
+				<< wxTextFile::GetEOL();
 	}
-	mSchema << _T(">\n")
+	mSchema << _T(">")
+			<< wxTextFile::GetEOL()
 			<< importNS
-			<< _T("\n")
+			<< wxTextFile::GetEOL()
 			<< elements;
 
 #if 0
@@ -119,7 +125,7 @@ const wxString &Dtd2Schema::convert ( const wxString &dtdFile )
 		mSchema << convertNotation ( notationEnum.nextElement(), nIndent );
 	}
 
-	mSchema << _T("</xs:schema>\n");
+	mSchema << _T("</xs:schema>") << wxTextFile::GetEOL();
 
 	return mSchema;
 }
@@ -154,17 +160,20 @@ wxString Dtd2Schema::convertElement
 		}
 		if ( pcdata )
 		{
-			schema << _T("\" type=\"xs:string\"/>\n\n");
+			schema << _T("\" type=\"xs:string\"/>")
+					<< wxTextFile::GetEOL()
+					<< wxTextFile::GetEOL();
 			return schema;
 		}
 	}
 
 	// else Complex type
-	schema << _T("\">\n");
+	schema << _T("\">") << wxTextFile::GetEOL();
 
 	// Content
 	XmlSchemaGenerator::addIndent ( schema, nIndent + 1 );
-	schema << _T("<xs:complexType>\n")
+	schema << _T("<xs:complexType>")
+			<< wxTextFile::GetEOL()
 			<< convertContent ( contentSpec, nIndent + 2 );
 
 	// Attributes
@@ -178,10 +187,12 @@ wxString Dtd2Schema::convertElement
 	}
 
 	XmlSchemaGenerator::addIndent ( schema, nIndent + 1);
-	schema << _T("</xs:complexType>\n");
+	schema << _T("</xs:complexType>") << wxTextFile::GetEOL();
 
 	XmlSchemaGenerator::addIndent ( schema, nIndent );
-	schema << _T("</xs:element>\n\n");
+	schema << _T("</xs:element>")
+			<< wxTextFile::GetEOL()
+			<< wxTextFile::GetEOL();
 
 	return schema;
 }
@@ -206,9 +217,9 @@ wxString Dtd2Schema::convertContent
 			break;
 		}
 		XmlSchemaGenerator::addIndent ( schema, nIndent );
-		schema << _T("<xs:sequence minOccurs=\"0\">\n");
+		schema << _T("<xs:sequence minOccurs=\"0\">") << wxTextFile::GetEOL();
 		XmlSchemaGenerator::addIndent ( suffix, nIndent );
-		suffix << _T("</xs:sequence>\n");
+		suffix << _T("</xs:sequence>") << wxTextFile::GetEOL();
 		break;
 
 	case ContentSpecNode::ZeroOrMore:
@@ -218,9 +229,10 @@ wxString Dtd2Schema::convertContent
 			break;
 		}
 		XmlSchemaGenerator::addIndent ( schema, nIndent );
-		schema << _T("<xs:sequence minOccurs=\"0\" maxOccurs=\"unbounded\">\n");
+		schema << _T("<xs:sequence minOccurs=\"0\" maxOccurs=\"unbounded\">")
+				<< wxTextFile::GetEOL();
 		XmlSchemaGenerator::addIndent ( suffix, nIndent );
-		suffix << _T("</xs:sequence>\n");
+		suffix << _T("</xs:sequence>") << wxTextFile::GetEOL();
 		break;
 
 	case ContentSpecNode::OneOrMore:
@@ -230,9 +242,10 @@ wxString Dtd2Schema::convertContent
 			break;
 		}
 		XmlSchemaGenerator::addIndent ( schema, nIndent );
-		schema << _T("<xs:sequence maxOccurs=\"unbounded\">\n");
+		schema << _T("<xs:sequence maxOccurs=\"unbounded\">")
+				<< wxTextFile::GetEOL();
 		XmlSchemaGenerator::addIndent ( suffix, nIndent );
-		suffix << _T("</xs:sequence>\n");
+		suffix << _T("</xs:sequence>") << wxTextFile::GetEOL();
 		break;
 
 	case ContentSpecNode::Choice:
@@ -245,10 +258,10 @@ wxString Dtd2Schema::convertContent
 			break;
 		}
 		XmlSchemaGenerator::addIndent ( schema, nIndent );
-		schema << _T("<xs:choice")
-				<< convertOccurrence ( content ) << _T(">\n");
+		schema << _T("<xs:choice") << convertOccurrence ( content ) << _T(">")
+				<< wxTextFile::GetEOL();
 		XmlSchemaGenerator::addIndent ( suffix, nIndent );
-		suffix << _T("</xs:choice>\n");
+		suffix << _T("</xs:choice>") << wxTextFile::GetEOL();
 		break;
 
 	case ContentSpecNode::Sequence:
@@ -261,17 +274,18 @@ wxString Dtd2Schema::convertContent
 			break;
 		}
 		XmlSchemaGenerator::addIndent ( schema, nIndent );
-		schema << _T("<xs:sequence")
-				<< convertOccurrence ( content ) << _T(">\n");
+		schema << _T("<xs:sequence") << convertOccurrence ( content )
+				<< _T(">") << wxTextFile::GetEOL();
 		XmlSchemaGenerator::addIndent ( suffix, nIndent );
-		suffix << _T("</xs:sequence>\n");
+		suffix << _T("</xs:sequence>") << wxTextFile::GetEOL();
 		break;
 
 	case ContentSpecNode::Any:
 		XmlSchemaGenerator::addIndent ( schema, nIndent );
-		schema << _T("<xs:any") << convertOccurrence ( content ) << _T(">\n");
+		schema << _T("<xs:any") << convertOccurrence ( content ) << _T(">")
+				<< wxTextFile::GetEOL();
 		XmlSchemaGenerator::addIndent ( suffix, nIndent );
-		suffix << _T("</xs:any>\n");
+		suffix << _T("</xs:any>") << wxTextFile::GetEOL();
 		break;
 
 	case ContentSpecNode::All:
@@ -284,9 +298,10 @@ wxString Dtd2Schema::convertContent
 			break;
 		}
 		XmlSchemaGenerator::addIndent ( schema, nIndent );
-		schema << _T("<xs:all") << convertOccurrence ( content ) << _T(">\n");
+		schema << _T("<xs:all") << convertOccurrence ( content ) << _T(">")
+				<< wxTextFile::GetEOL();
 		XmlSchemaGenerator::addIndent ( suffix, nIndent );
-		suffix << _T("</xs:all>\n");
+		suffix << _T("</xs:all>") << wxTextFile::GetEOL();
 		break;
 
 	default:
@@ -306,11 +321,10 @@ wxString Dtd2Schema::convertContent
 		}
 
 		XmlSchemaGenerator::addIndent ( schema, nIndent );
-		schema << _T("<xs:element ref=\"")
-				<< name
-				<< _T("\"")
+		schema << _T("<xs:element ref=\"") << name << _T("\"")
 				<< convertOccurrence ( content )
-				<< _T("/>\n");
+				<< _T("/>")
+				<< wxTextFile::GetEOL();
 
 		size_t index = name.Index ( ':' );
 		if ( index != wxString::npos )
@@ -362,7 +376,7 @@ wxString Dtd2Schema::convertAttribute
 	if ( att.getType() == XMLAttDef::Any_Any )
 	{
 		XmlSchemaGenerator::addIndent ( schema, nIndent );
-		schema << _T("<xs:anyAttribute/>\n");
+		schema << _T("<xs:anyAttribute/>") << wxTextFile::GetEOL();
 		return schema;
 	}
 
@@ -406,7 +420,8 @@ wxString Dtd2Schema::convertAttribute
 			mNameSpaceMap [ ns ]; // Initialize it
 		}
 		XmlSchemaGenerator::addIndent ( schema, nIndent );
-		schema << _T("<xs:attribute ref=\"") << name << _T("\"/>\n");
+		schema << _T("<xs:attribute ref=\"") << name << _T("\"/>")
+				<< wxTextFile::GetEOL();
 		return schema;
 	}
 
@@ -417,16 +432,18 @@ wxString Dtd2Schema::convertAttribute
 	//if ( att.getType() == XMLAttDef::Enumeration )
 	{
 		schema << convertAttValue ( att )
-			<< _T(">\n")
+			<< _T(">")
+			<< wxTextFile::GetEOL()
 			<< convertAttType ( att, nIndent + 1 );
 		XmlSchemaGenerator::addIndent ( schema, nIndent );
-		schema << _T("</xs:attribute>\n");
+		schema << _T("</xs:attribute>") << wxTextFile::GetEOL();
 	}
 	else
 	{
 		schema << convertAttType ( att, nIndent + 1 )
 				<< convertAttValue ( att )
-				<< _T("/>\n");
+				<< _T("/>")
+				<< wxTextFile::GetEOL();
 	}
 
 	return schema;
@@ -441,9 +458,10 @@ wxString Dtd2Schema::convertAttType ( const XMLAttDef &att, size_t nIndent )
 	//case XMLAttDef::Enumeration:
 	{
 		XmlSchemaGenerator::addIndent ( type, nIndent );
-		type << _T("<xs:simpleType>\n");
+		type << _T("<xs:simpleType>") << wxTextFile::GetEOL();
 		XmlSchemaGenerator::addIndent ( type, nIndent + 1 );
-		type << _T("<xs:restriction base=\"xs:string\">\n");
+		type << _T("<xs:restriction base=\"xs:string\">")
+				<< wxTextFile::GetEOL();
 
 		wxStringTokenizer tokens (
 				WrapXerces::toString ( att.getEnumeration() ), _T(" ") );
@@ -452,13 +470,14 @@ wxString Dtd2Schema::convertAttType ( const XMLAttDef &att, size_t nIndent )
 			XmlSchemaGenerator::addIndent ( type, nIndent + 2);
 			type << _T("<xs:enumeration value=\"")
 					<< tokens.GetNextToken()
-					<< _T("\"/>\n");
+					<< _T("\"/>")
+					<< wxTextFile::GetEOL();
 		}
 
 		XmlSchemaGenerator::addIndent ( type, nIndent + 1 );
-		type << _T("</xs:restriction>\n");
+		type << _T("</xs:restriction>") << wxTextFile::GetEOL();
 		XmlSchemaGenerator::addIndent ( type, nIndent );
-		type << _T("</xs:simpleType>\n");
+		type << _T("</xs:simpleType>") << wxTextFile::GetEOL();
 		return type;
 	}
 
@@ -580,7 +599,7 @@ wxString Dtd2Schema::convertNotation
 	if ( id != NULL )
 		schema << _T("\" system=\"")
 				<< WrapXerces::toString ( id );
-	schema << _T("\"/>\n\n");
+	schema << _T("\"/>") << wxTextFile::GetEOL() << wxTextFile::GetEOL();
 
 	return schema;
 }
