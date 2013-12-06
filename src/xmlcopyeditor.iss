@@ -37,7 +37,7 @@ AppPublisher={#MyAppPublisher}
 AppPublisherURL={#MyAppURL}
 AppSupportURL={#MyAppURL}
 AppUpdatesURL={#MyAppURL}
-DefaultDirName={pf}\{#MyAppName}
+DefaultDirName={code:DefDirRoot}\{#MyAppName}
 DefaultGroupName={#MyAppName}
 AllowNoIcons=yes
 LicenseFile=.\copying\xmlcopyeditor\copying.txt
@@ -46,6 +46,7 @@ OutputBaseFilename=xmlcopyeditor-{#MyAppVersion}-install
 ;SetupIconFile=.\res\appicon.ico
 Compression=lzma
 SolidCompression=yes
+PrivilegesRequired=none
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
@@ -54,7 +55,7 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked; OnlyBelowVersion: 0,6.1
 Name: "disable_registry"; Description: "Install without administrator privileges"; GroupDescription: "Other tasks"; Flags: unchecked exclusive
-Name: "create_registry_entry"; Description: "Full desktop installation"; GroupDescription: "Other tasks"; Flags: exclusive
+Name: "create_registry_entry"; Description: "Full desktop installation"; GroupDescription: "Other tasks"; Flags: exclusive; Check: IsAdmin
 Name: "create_registry_entry\main"; Description: "Create Windows registry entry"
 Name: "create_registry_entry\associate_xml"; Description: "Associate XML documents (*.xml)"
 Name: "create_registry_entry\associate_dtd"; Description: "Associate DTDs (*.dtd)"
@@ -120,8 +121,10 @@ Source: "{#MinGW}\bin\zlib1.dll"; DestDir: "{app}"
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
 Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"
 Name: "{group}\XML Copy Editor Help"; Filename: "{app}\help\xmlcopyeditor.chm"
-Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
-Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: quicklaunchicon
+Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon; Check: IsAdmin
+Name: "{userdesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon; Check: not IsAdmin
+Name: "{commonappdata}\Microsoft\Internet Explorer\Quick Launch\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: quicklaunchicon; Check: IsAdmin
+Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: quicklaunchicon; Check: not IsAdmin
 
 [Run]
 Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent
@@ -154,4 +157,17 @@ begin
         Exec(sUninstall, '/SILENT /NORESTART /SUPPRESSMSGBOXES','', SW_SHOWNORMAL, ewWaitUntilTerminated, iResult);
     end;
   end;
+end;
+
+function IsAdmin(): Boolean;
+begin
+	Result := IsAdminLoggedOn or IsPowerUserLoggedOn;
+end;
+
+function DefDirRoot(Param: String): String;
+begin
+	if not IsAdmin then
+		Result := ExpandConstant('{localappdata}')
+	else
+		Result := ExpandConstant('{pf}')
 end;
