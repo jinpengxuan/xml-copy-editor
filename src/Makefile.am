@@ -82,5 +82,5 @@ pixmap_DATA = xmlcopyeditor.png
 
 applications_DATA = xmlcopyeditor.desktop
 
-INCLUDES = -I/usr/include/libxml2 $(ENCHANT_CFLAGS)
+AM_CPPFLAGS = -I/usr/include/libxml2 $(ENCHANT_CFLAGS)
 

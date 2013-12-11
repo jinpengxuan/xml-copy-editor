@@ -83,7 +83,7 @@ DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/Makefile.am \
 	ChangeLog INSTALL NEWS README TODO config.guess config.sub \
 	depcomp install-sh missing ltmain.sh
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
-am__aclocal_m4_deps = $(top_srcdir)/configure.in
+am__aclocal_m4_deps = $(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 am__CONFIG_DISTCLEAN_FILES = config.status config.cache config.log \
@@ -318,7 +318,7 @@ top_srcdir = @top_srcdir@
 AUTOMAKE_OPTIONS = foreign
 EXTRA_DIST = autogen.sh checkinstall.sh gpl-2.0.txt
 SUBDIRS = src
-INCLUDES = -I$(top_srcdir)/. -I$(top_srcdir)/src
+AM_CPPFLAGS = -I$(top_srcdir)/. -I$(top_srcdir)/src
 all: all-recursive
 
 .SUFFIXES:

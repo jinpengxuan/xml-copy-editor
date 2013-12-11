@@ -1,5 +1,6 @@
-AC_INIT(src/xmlcopyeditor.cpp)
-AM_INIT_AUTOMAKE(xmlcopyeditor, 1.2.0.12)
+AC_INIT([xmlcopyeditor], [1.2.0.12])
+AC_CONFIG_SRCDIR([src/xmlcopyeditor.cpp])
+AM_INIT_AUTOMAKE
 
 AC_PROG_CXX
 AC_PROG_INSTALL
