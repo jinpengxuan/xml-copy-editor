@@ -1661,8 +1661,8 @@ void MyFrame::OnIdle ( wxIdleEvent& event )
 	// check if document loaded
 	wxString frameTitle = GetTitle();
 
-	XmlDoc *doc;
-	if ( ( doc = getActiveDocument() ) == NULL )
+	XmlDoc *doc = getActiveDocument();
+	if ( doc == NULL )
 	{
 		if ( lastDoc != NULL )
 		{
@@ -1691,19 +1691,7 @@ void MyFrame::OnIdle ( wxIdleEvent& event )
 		restoreFocusToNotebook = false;
 	}
 
-	wxString docTitle;
-	if ( doc->getFullFileName().empty() || !showFullPathOnFrame )
-		docTitle = doc->getShortFileName();
-	else
-		docTitle = doc->getFullFileName();
-
-	docTitle += _T ( " - " );
-	docTitle += _ ( "XML Copy Editor" );
-
-	if ( frameTitle != docTitle )
-		SetTitle ( docTitle );
-
-    // update modified field
+	// update modified field
 	if ( !mainBook )
 		return;
 	int index = mainBook->GetSelection();
@@ -1738,20 +1726,15 @@ void MyFrame::OnIdle ( wxIdleEvent& event )
 	}
 
 	// update coordinates field
-	std::pair<int, int> myControlCoordinates;
 	int current = doc->GetCurrentPos();
-	myControlCoordinates.first = doc->LineFromPosition ( current ) + 1;
-	myControlCoordinates.second = doc->GetColumn ( current ) + 1;
-
-	if ( myControlCoordinates != controlCoordinates )
+	if ( current != lastPos )
 	{
 		wxString coordinates;
 		coordinates.Printf (
 		    _ ( "Ln %i Col %i" ),
-		    myControlCoordinates.first,
-		    myControlCoordinates.second );
+			doc->LineFromPosition ( current ) + 1,
+			doc->GetColumn ( current ) + 1 );
 		GetStatusBar()->SetStatusText ( coordinates, STATUS_POSITION );
-		controlCoordinates = myControlCoordinates;
 	}
 
 	// update parent element field
@@ -1762,6 +1745,17 @@ void MyFrame::OnIdle ( wxIdleEvent& event )
 	lastPos = current;
 	lastDoc = doc;
 
+	wxString docTitle;
+	if ( doc->getFullFileName().empty() || !showFullPathOnFrame )
+		docTitle = doc->getShortFileName();
+	else
+		docTitle = doc->getFullFileName();
+
+	docTitle += _T ( " - " );
+	docTitle += _ ( "XML Copy Editor" );
+
+	if ( frameTitle != docTitle )
+		SetTitle ( docTitle );
 
 	// don't try to find parent if pane is not shown
 	if ( !manager.GetPane ( insertChildPanel ).IsShown() && !properties.validateAsYouType )

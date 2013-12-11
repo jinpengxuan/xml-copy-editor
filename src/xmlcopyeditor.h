@@ -376,7 +376,6 @@ class MyFrame : public wxFrame
 
 		wxString catalogPath, xslDtdPath, rssDtdPath, lzxDtdPath, xtmDtdPath,
 		xliffDtdPath, aspellDataPath, aspellDictPath;
-		std::pair<int, int> controlCoordinates;
 		std::map<std::string, std::map<std::string, std::set<std::string> > >
 		promptMap;
 		std::map<int, wxString> validationPresetMap;
