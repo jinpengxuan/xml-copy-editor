@@ -527,6 +527,7 @@ class MyFrame : public wxFrame
 		wxString getAuxPath ( const wxString& fileName );
 		wxMenuBar *getMenuBar();
 		wxToolBar *getToolBar();
+		void validatePaths();
 
 		DECLARE_EVENT_TABLE()
 };

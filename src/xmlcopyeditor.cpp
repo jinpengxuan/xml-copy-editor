@@ -1053,12 +1053,7 @@ MyFrame::MyFrame (
 	    ( wxWindow * ) commandPanel,
 	    wxAuiPaneInfo().Bottom().Hide().Caption ( _T ( "Command" ) ).DestroyOnClose ( false ).Layer ( 3 ) );
 
-	if ( !wxDirExists ( applicationDir ) )
-#ifdef __WXMSW__
-		GetStatusBar()->SetStatusText ( _ ( "Cannot open application directory: see Tools, Options..., General" ) );
-#else
-		GetStatusBar()->SetStatusText ( _ ( "Cannot open application directory: see Edit, Preferences..., General" ) );
-#endif
+	validatePaths();
 
 	// handle command line and, on Windows, MS Word integration
 	handleCommandLineFlag = ( wxTheApp->argc > 1 ) ? true : false;
@@ -6223,4 +6218,47 @@ void MyFrame::setStrictScrolling ( bool b )
 void MyFrame::addToFileQueue ( wxString& fileName )
 {
      fileQueue.push_back ( fileName );
+}
+
+void MyFrame::validatePaths()
+{
+	bool valid = true;
+	wxString msg;
+
+	// Warning: Don't put a space between 'CHECK' and '('
+#define CHECK( check, path ) \
+	if ( !( check ) ( path ) )\
+	{\
+		valid = false;\
+		msg << _ ( "Invalid path: " ) << path << wxTextFile::GetEOL();\
+	}
+	CHECK ( wxDirExists, ruleSetDir );
+	//CHECK ( wxDirExists, filterDir );
+	CHECK ( wxDirExists, templateDir );
+	//CHECK ( wxDirExists, binDir );
+	CHECK ( wxDirExists, helpDir );
+	CHECK ( wxDirExists, rngDir );
+	//CHECK ( wxDirExists, htmlDir );
+	CHECK ( wxDirExists, pngDir );
+	//CHECK ( wxDirExists, daisyDir );
+	CHECK ( wxFileExists, catalogPath );
+	CHECK ( wxFileExists, xslDtdPath );
+	CHECK ( wxFileExists, rssDtdPath );
+	CHECK ( wxFileExists, xtmDtdPath );
+	CHECK ( wxFileExists, lzxDtdPath );
+	CHECK ( wxFileExists, xliffDtdPath );
+	CHECK ( wxDirExists, aspellDataPath );
+	CHECK ( wxDirExists, aspellDictPath );
+#undef CHECK
+
+	if ( valid )
+		return;
+
+	msg << wxTextFile::GetEOL()
+#ifdef __WXMSW__
+		<< _ ( "To change application directory, see Tools, Options..., General" );
+#else
+		<< _ ( "To change application directory, see Edit, Preferences..., General" );
+#endif
+	wxMessageBox ( msg, GetTitle(), wxOK | wxICON_ERROR, this );
 }
