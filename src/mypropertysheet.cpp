@@ -49,17 +49,17 @@ MyPropertySheet::MyPropertySheet (
     long style
     )
 	: wxPropertySheetDialog ( parent, id, title, position, size, style )
+	, lang ( lang )
 	, properties ( propertiesParameter )
 	, applicationDir ( applicationDirParameter )
+	, singleInstanceCheck ( singleInstanceCheckParameter )
 	, rememberOpenTabs ( rememberOpenTabsParameter )
 	, libxmlNetAccess ( libxmlNetAccessParameter )
-	, singleInstanceCheck ( singleInstanceCheckParameter )
 	, saveBom ( saveBomParameter )
 	, unlimitedUndo ( unlimitedUndoParameter )
 	, restoreLayout ( restoreLayoutParameter )
 	, expandInternalEntities ( expandInternalEntitiesParameter )
 	, showFullPathOnFrame ( showFullPathOnFrameParameter )
-	, lang ( lang )
 {
 	CreateButtons ( wxOK | wxCANCEL );
 
@@ -251,7 +251,7 @@ MyPropertySheet::~MyPropertySheet()
 void MyPropertySheet::OnOk ( wxCommandEvent& e )
 {
 	wxString testDir = applicationDirEdit->GetValue();
-	if ( !wxFileName::DirExists ( testDir ) )
+	if ( !wxDirExists ( testDir ) )
 	{
 		wxMessageBox ( _ ( "Cannot access application directory" ), _ ( "Options" ) );
 		// tbd: show general tab
