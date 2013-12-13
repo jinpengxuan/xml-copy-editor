@@ -315,7 +315,7 @@ StyleDialog::StyleDialog (
 	}
 
 	// all other branches
-	if ( wxFileName::DirExists ( ruleSetDirectory ) )
+	if ( wxDirExists ( ruleSetDirectory ) )
 	{
 		wxString ruleMask, ruleFile;
 		ruleMask = ruleSetDirectory + wxFileName::GetPathSeparator() + _T ( "*.xml" );
@@ -346,7 +346,7 @@ StyleDialog::StyleDialog (
 		ruleSetCombo->Select ( 0 );
 	}
 
-	if ( wxFileName::DirExists ( filterDirectory ) )
+	if ( wxDirExists ( filterDirectory ) )
 	{
 		filterCombo->Append ( _ ( "(No filter)" ) );
 		wxString filterMask, filterFile;

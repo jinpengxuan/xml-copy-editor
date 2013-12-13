@@ -1053,7 +1053,7 @@ MyFrame::MyFrame (
 	    ( wxWindow * ) commandPanel,
 	    wxAuiPaneInfo().Bottom().Hide().Caption ( _T ( "Command" ) ).DestroyOnClose ( false ).Layer ( 3 ) );
 
-	if ( !wxFileName::DirExists ( applicationDir ) )
+	if ( !wxDirExists ( applicationDir ) )
 #ifdef __WXMSW__
 		GetStatusBar()->SetStatusText ( _ ( "Cannot open application directory: see Tools, Options..., General" ) );
 #else
@@ -2836,7 +2836,7 @@ void MyFrame::OnNew ( wxCommandEvent& WXUNUSED ( event ) )
 	wxString defaultSelection, typeSelection, templateFile;
 	defaultSelection = _ ( "XML document (*.xml)" );
 	wxArrayString templateArray;
-	if ( wxFileName::DirExists ( templateDir ) )
+	if ( wxDirExists ( templateDir ) )
 	{
 		wxString templateMask, name, extension, entry;
 		wxFileName fn;
@@ -5259,7 +5259,7 @@ wxMenuBar *MyFrame::getMenuBar()
 	associateMenu->Append ( ID_ASSOCIATE_W3C_SCHEMA, _ ( "&XML Schema..." ), _ ( "XML Schema..." ) );
 	associateMenu->Append ( ID_ASSOCIATE_XSL, _ ( "XS&LT stylesheet..." ), _ ( "XSLT stylesheet..." ) );
 
-	if ( wxFileName::DirExists ( rngDir ) )
+	if ( wxDirExists ( rngDir ) )
 	{
 		wxString rngMask, rngFile, displayName, shortcutString;
 		rngMask = rngDir + wxFileName::GetPathSeparator() + _T ( "*.rng" );
