@@ -6247,8 +6247,10 @@ void MyFrame::validatePaths()
 	CHECK ( wxFileExists, xtmDtdPath );
 	CHECK ( wxFileExists, lzxDtdPath );
 	CHECK ( wxFileExists, xliffDtdPath );
+#ifdef __WXMSW__
 	CHECK ( wxDirExists, aspellDataPath );
 	CHECK ( wxDirExists, aspellDictPath );
+#endif // __WXMSW__
 #undef CHECK
 
 	if ( valid )
