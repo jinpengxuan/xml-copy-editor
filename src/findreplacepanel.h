@@ -49,7 +49,6 @@ class FindReplacePanel : public wxPanel
 		void OnReplace ( wxCommandEvent& event );
 		void OnReplaceAll ( wxCommandEvent& event );
 		void focusOnFind();
-		bool getIncrementalFind();
 		bool getRegex();
 		void refresh();
 		void setReplaceVisible ( bool b );
@@ -67,7 +66,7 @@ class FindReplacePanel : public wxPanel
 		wxWindow *parent;
 		size_t findEditLength;
 		bool matchCaseMemory, regexMemory;
-		bool incrementalFind, isReplaceDialog, notFoundSet, isRegex;
+		bool isReplaceDialog, notFoundSet, isRegex;
 
 		void OnIdle ( wxIdleEvent& event );
 		void sendFindEvent ( size_t flags );

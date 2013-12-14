@@ -1950,16 +1950,20 @@ void MyFrame::OnDialogReplace ( wxFindDialogEvent& event )
 	if ( ( doc = getActiveDocument() ) == NULL )
 		return;
 
-	if ( !doc->GetSelectedText().IsEmpty() )
+	int start = doc->GetTargetStart();
+	int end = doc->GetTargetEnd();
+	if ( start != end )
 	{
 		if ( findReplacePanel->getRegex() )
 		{
-			doc->ReplaceTargetRE ( event.GetReplaceString() );
+			start += doc->ReplaceTargetRE ( event.GetReplaceString() );
 		}
 		else
 		{
-			doc->ReplaceTarget ( event.GetReplaceString() );
+			start += doc->ReplaceTarget ( event.GetReplaceString() );
 		}
+		// Move to the next position
+		doc->SetEmptySelection ( start );
 	}
 	OnDialogFind ( event );
 }
@@ -4587,15 +4591,11 @@ void MyFrame::findAgain ( wxString s, int flags )
 	if ( findReplacePanel->getRegex() )
 		myFlags |= wxSTC_FIND_REGEXP;
 
-	bool incrementalFind =
-	    ( findReplacePanel->getIncrementalFind() ) ? true : false;
-
 	//doc->SetYCaretPolicy(wxSTC_CARET_SLOP | wxSTC_CARET_STRICT, 10);
 
 	if ( flags & wxFR_DOWN ) // find next
 	{
-		doc->SetTargetStart ( ( incrementalFind ) ?
-		                      doc->GetSelectionStart() : doc->GetSelectionEnd() );
+		doc->SetTargetStart ( doc->GetSelectionStart() );
 		doc->SetTargetEnd ( doc->GetLength() );
 		doc->SetSearchFlags ( myFlags );
 		newLocation = doc->SearchInTarget ( s );
