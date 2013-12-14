@@ -379,7 +379,19 @@ class MyFrame : public wxFrame
 		std::map<std::string, std::map<std::string, std::set<std::string> > >
 		promptMap;
 		std::map<int, wxString> validationPresetMap;
+#ifdef __WXMSW__
+		struct MyCompare
+				: public std::binary_function<wxString, wxString, bool>
+		{
+			bool operator() ( const wxString &x, const wxString &y ) const
+			{
+				return x.CmpNoCase ( y ) < 0;
+			}
+		};
+		std::set<wxString, MyCompare> openFileSet;
+#else
 		std::set<wxString> openFileSet;
+#endif
 		std::set<wxString> openLargeFileSet;
 		std::vector<wxString> tempFileVector, fileQueue;
 		int documentCount,
