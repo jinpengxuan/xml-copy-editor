@@ -3006,7 +3006,7 @@ bool MyFrame::openFile ( wxString& fileName, bool largeFile )
 	}
 #endif
 
-	if ( !wxFileName::FileExists ( fileName ) )
+	if ( !wxFileExists ( fileName ) )
 	{
 		wxString message;
 		message.Printf ( _ ( "Cannot open %s." ), fileName.c_str() );
@@ -4175,7 +4175,7 @@ void MyFrame::OnXslt ( wxCommandEvent& event )
 
 		path = PathResolver::run ( path, doc->getFullFileName() );
 
-		if ( !wxFileName::FileExists ( path ) )
+		if ( !wxFileExists ( path ) )
 		{
 			if ( !path.empty() )
 			{

@@ -665,7 +665,7 @@ void StyleDialog::OnStyleWebReport ( wxCommandEvent& event )
 	ofs.close();
 
 	// display file in browser
-	if ( !wxFileName::FileExists ( tempNameWide ) )
+	if ( !wxFileExists ( tempNameWide ) )
 		return;
 
 	wxLaunchDefaultBrowser ( tempNameWide );
@@ -731,7 +731,7 @@ void StyleDialog::OnStyleWebSummary ( wxCommandEvent& event )
 	ofs.close();
 
 	// display file in browser
-	if ( !wxFileName::FileExists ( tempNameWide ) )
+	if ( !wxFileExists ( tempNameWide ) )
 		return;
 
 	wxLaunchDefaultBrowser ( tempNameWide );

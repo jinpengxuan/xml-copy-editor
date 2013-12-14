@@ -113,7 +113,7 @@ void XMLCALL XmlCopyImg::start ( void *data,
                 wideFile = fn.GetFullPath();
             }
 
-            if ( !wxFileName::FileExists ( wideFile ) )
+            if ( !wxFileExists ( wideFile ) )
             {
                 wideDestination = pd->blankImage;
                 value = "images/blank.jpg";
@@ -166,7 +166,7 @@ void XMLCALL XmlCopyImg::start ( void *data,
                 fn.MakeAbsolute ( pd->path );
                 wideFile = fn.GetFullPath();
             }
-            if ( !wxFileName::FileExists ( wideFile ) )
+            if ( !wxFileExists ( wideFile ) )
             {
                 value = "images/blank.jpg";   
             }
