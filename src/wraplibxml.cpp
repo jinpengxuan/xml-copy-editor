@@ -309,7 +309,7 @@ bool WrapLibxml::xpath ( const std::string& path, const std::string& fileName )
 	docPtr = xmlCtxtReadFile (
 	             ctxt,
 	             fileName.c_str(),
-	             NULL,
+	             "UTF-8",
 	             //(netAccess) ? XML_PARSE_DTDLOAD | XML_PARSE_NOENT : XML_PARSE_DTDLOAD | XML_PARSE_NONET | XML_PARSE_NOENT
 	             XML_PARSE_NOENT | XML_PARSE_NONET | XML_PARSE_NSCLEAN
 	         );
