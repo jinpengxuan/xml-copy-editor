@@ -1963,7 +1963,7 @@ void MyFrame::OnDialogReplace ( wxFindDialogEvent& event )
 			start += doc->ReplaceTarget ( event.GetReplaceString() );
 		}
 		// Move to the next position
-		doc->SetEmptySelection ( start );
+		doc->SetSelection ( start, start );
 	}
 	OnDialogFind ( event );
 }
