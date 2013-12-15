@@ -43,20 +43,41 @@ class WrapLibxml
 
 		WrapLibxml ( bool netAccessParameter = false );
 		virtual ~WrapLibxml();
-		bool validate ( const std::string& fileName );
+		bool validate ( const std::string &utf8DocBuf, const wxString &docUrl );
 		bool validateRelaxNG (
-		    const std::string& schemaFileName,
-		    const std::string& fileName );
+		    const wxString &schemaFileName,
+		    const std::string &utf8DocBuf,
+		    const wxString &docUrl );
 		bool validateW3CSchema (
-		    const std::string& schemaFileName,
-		    const std::string& fileName );
+		    const wxString &schemaFileName,
+		    const std::string &utf8DocBuf,
+		    const wxString &docUrl );
 		bool parse (
-		    const std::string& fileName,
+		    const std::string &utf8DocBuf,
+		    const wxString &docUrl,
 		    bool indent = false,
 		    bool resolveEntities = false );
-		bool bufferWellFormed ( const std::string& buffer );
-		bool xpath ( const std::string& path, const std::string& fileName );
-		bool xslt ( const std::string& styleFileName, const std::string& fileName );
+		bool parse (
+		    const wxString &fileName,
+		    bool indent = false,
+		    bool resolveEntities = false );
+		bool parse (
+		    const char *utf8DocBuf,
+		    size_t utf8DocBufSize,
+		    const wxString &fileName,
+		    bool indent = false,
+		    bool resolveEntities = false );
+		bool bufferWellFormed ( const std::string& utf8Buffer );
+		bool xpath ( const wxString &xpath, const std::string &utf8DocBuf,
+		    const wxString &docUrl );
+		bool xslt ( const wxString &styleFileName,
+		    const std::string &utf8DocBuf,
+		    const wxString &docUrl );
+		bool xslt ( const wxString &styleFileName, const wxString &docUrl );
+		bool xslt ( const wxString &styleFileName,
+		    const char *utf8DocBuf,
+		    size_t utf8DocBufSize,
+		    const wxString &docUrl );
 		std::string getLastError();
 		std::pair<int, int> getErrorPosition();
 		std::string getOutput();

@@ -103,11 +103,9 @@ bool WrapDaisy::run (
         return false;
     }
 
-    std::string output, stdStylesheet, stdFileIn;
-    stdStylesheet = stylesheet.mb_str ( wxConvUTF8 );
-    stdFileIn = fileIn.mb_str ( wxConvUTF8 );
+    std::string output;
 
-    if ( !stdStylesheet.empty() ) // stylesheet found
+    if ( !stylesheet.empty() ) // stylesheet found
     {
         // #1: convert to canonical XHTML
 #if wxCHECK_VERSION(2,9,0)
@@ -126,7 +124,7 @@ bool WrapDaisy::run (
     
         WrapLibxml wrapLibxml;
             
-        bool success = wrapLibxml.xslt ( stdStylesheet, stdFileIn );
+        bool success = wrapLibxml.xslt ( stylesheet, fileIn );
        
         if ( !success )
         {

@@ -2319,7 +2319,7 @@ void MyFrame::importMSWord ( const wxString& path )
 	if ( result != 5 ) // Word 2003 or later
 	{
 		std::auto_ptr<WrapLibxml> prettyPrinter ( new WrapLibxml ( libxmlNetAccess ) );
-		prettyPrinter->parse ( tempFileName.name(), true );
+		prettyPrinter->parse ( tempFileName.wideName(), true );
 		buffer = prettyPrinter->getOutput();
 		displayBuffer = wxString ( buffer.c_str(), wxConvUTF8, buffer.size() );
 	}
@@ -3773,34 +3773,13 @@ void MyFrame::OnValidateDTD ( wxCommandEvent& event )
 	if ( ( doc = getActiveDocument() ) == NULL )
 		return;
 
-	wxString fname = doc->getFullFileName();
-
-	WrapTempFileName wtfn ( fname );
-	if ( fname.empty() || doc->GetModify() )
-	{
-		wxString wideBuffer = doc->GetText();
-
-		std::string buffer = ( const char * ) wideBuffer.mb_str ( wxConvUTF8 );
-		if ( !saveRawUtf8 (
-		            wtfn.name(),
-		            buffer ) )
-		{
-			messagePane (
-			    _ ( "Cannot save temporary copy for validation; please save or discard changes" ),
-			    CONST_STOP );
-			return;
-		}
-		fname = wtfn.wideName();
-	}
-
-	std::string fnameLocal = ( const char * ) fname.mb_str ( wxConvLocal );
 
 	doc->clearErrorIndicators();
 	statusProgress ( _ ( "DTD Validation in progress..." ) );
 
 	auto_ptr<WrapLibxml> wl ( new WrapLibxml ( libxmlNetAccess ) );
-
-	if ( !wl->validate ( fnameLocal ) )
+	wxString fname = doc->getFullFileName();
+	if ( !wl->validate ( doc->myGetTextRaw(), fname ) )
 	{
 		std::string error = wl->getLastError();
 		wxString wideError = wxString ( error.c_str(), wxConvUTF8, error.size() );
@@ -3871,32 +3850,13 @@ void MyFrame::validateRelaxNG (
 	if ( !doc )
 		return;
 
-	WrapTempFileName wtfn ( fileName );
-	if ( fileName.empty() || doc->GetModify() )
-	{
-		wxString wideBuffer = doc->GetText();
-
-		std::string buffer = ( const char * ) wideBuffer.mb_str ( wxConvUTF8 );
-		if ( !saveRawUtf8 (
-		            wtfn.name(),
-		            buffer ) )
-		{
-			messagePane (
-			    _ ( "Cannot save temporary copy for validation; please save or discard changes" ),
-			    CONST_STOP );
-			return;
-		}
-		fileName = wtfn.wideName();
-	}
 
 	doc->clearErrorIndicators();
 	statusProgress ( _ ( "RELAX NG validation in progress..." ) );
 
 	auto_ptr<WrapLibxml> wl ( new WrapLibxml ( libxmlNetAccess ) );
 
-	std::string schemaFileNameLocal = ( const char * ) schemaName.mb_str ( wxConvLocal );
-	std::string fileNameLocal = ( const char * ) fileName.mb_str ( wxConvLocal );
-	if ( !wl->validateRelaxNG ( schemaFileNameLocal, fileNameLocal ) )
+	if ( !wl->validateRelaxNG ( schemaName, doc->myGetTextRaw(), fileName ) )
 	{
 		std::string error = wl->getLastError();
 		wxString wideError = wxString ( error.c_str(), wxConvUTF8, error.size() );
@@ -4089,28 +4049,14 @@ void MyFrame::OnXPath ( wxCommandEvent& event )
 	if ( ret == wxID_CANCEL )
 		return;
 	xpathExpression = dlg->GetValue();
-	std::string valUtf8 = ( const char * ) xpathExpression.mb_str ( wxConvUTF8 );
 
 	// fetch document contents
-	std::string rawBufferUtf8;
-	getRawText ( doc, rawBufferUtf8 );
-	if ( !XmlEncodingHandler::setUtf8 ( rawBufferUtf8 ) )
-	{
-		encodingMessage();
-		return;
-	}
-
-	WrapTempFileName tempFileName ( doc->getFullFileName() );
-
-	ofstream rawBufferStream ( tempFileName.name().c_str() );
-	if ( !rawBufferStream )
-		return;
-	rawBufferStream << rawBufferUtf8;
-	rawBufferStream.close();
+	std::string utf8Buffer;
+	getRawText ( doc, utf8Buffer );
 
 	auto_ptr<WrapLibxml> wl ( new WrapLibxml ( libxmlNetAccess ) );
-
-	bool success = wl->xpath ( valUtf8, tempFileName.name() );
+	bool success = wl->xpath ( xpathExpression, utf8Buffer,
+			doc->getFullFileName() );
 
 	if ( !success )
 	{
@@ -4145,24 +4091,10 @@ void MyFrame::OnXslt ( wxCommandEvent& event )
 	XmlDoc *doc;
 	if ( ( doc = getActiveDocument() ) == NULL )
 		return;
-	std::string rawBufferUtf8;
-	getRawText ( doc, rawBufferUtf8 );
-	if ( !XmlEncodingHandler::setUtf8 ( rawBufferUtf8 ) )
-	{
-		encodingMessage();
-		return;
-	}
 
-	WrapTempFileName tempFileName ( doc->getFullFileName() );
-
-	ofstream rawBufferStream ( tempFileName.name().c_str() );
-	if ( !rawBufferStream )
-		return;
-	rawBufferStream << rawBufferUtf8;
-	rawBufferStream.close();
+	std::string rawBufferUtf8 = doc->myGetTextRaw();
 
 	wxString path;
-
 	int id = event.GetId();
 	if ( id == ID_XSLT )
 	{
@@ -4254,7 +4186,8 @@ void MyFrame::OnXslt ( wxCommandEvent& event )
 	std::string stylefnameLocal = ( const char * ) path.mb_str ( wxConvLocal );
 
 	auto_ptr<WrapLibxml> wl ( new WrapLibxml ( libxmlNetAccess ) );
-	if ( !wl->xslt ( stylefnameLocal, tempFileName.name() ) )
+	wxString fileName = doc->getFullFileName();
+	if ( !wl->xslt ( path, rawBufferUtf8, fileName ) )
 	{
 		std::string error = wl->getLastError();
 		wxString wideError = wxString ( error.c_str(), wxConvUTF8, error.size() );
@@ -4298,20 +4231,12 @@ void MyFrame::OnPrettyPrint ( wxCommandEvent& event )
 
 	statusProgress ( _ ( "Pretty-printing in progress..." ) );
 
+	wxString fileName = doc->getFullFileName();
+	auto_ptr<WrapLibxml> wl ( new WrapLibxml ( libxmlNetAccess ) );
 	for ( int i = 0; i < 2; i++ ) // perform two iterations
 	{
-		WrapTempFileName tempFileName ( doc->getFullFileName() );
 
-		ofstream rawBufferStream ( tempFileName.name().c_str() );
-		if ( !rawBufferStream )
-			return;
-		rawBufferStream << rawBufferUtf8;
-		rawBufferStream.close();
-
-		auto_ptr<WrapLibxml> wl ( new WrapLibxml ( libxmlNetAccess ) );
-		bool success = wl->parse ( tempFileName.name(), true );
-
-		if ( !success )
+		if ( !wl->parse ( rawBufferUtf8, fileName, true ) )
 		{
 			std::string error = wl->getLastError();
 			wxString wideError = wxString ( error.c_str(), wxConvUTF8, error.size() );
