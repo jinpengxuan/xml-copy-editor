@@ -3781,8 +3781,7 @@ void MyFrame::OnValidateDTD ( wxCommandEvent& event )
 	wxString fname = doc->getFullFileName();
 	if ( !wl->validate ( doc->myGetTextRaw(), fname ) )
 	{
-		std::string error = wl->getLastError();
-		wxString wideError = wxString ( error.c_str(), wxConvUTF8, error.size() );
+		wxString wideError = wl->getLastError();
 		statusProgress ( wxEmptyString );
 		messagePane ( wideError, CONST_WARNING );
 
@@ -3858,8 +3857,7 @@ void MyFrame::validateRelaxNG (
 
 	if ( !wl->validateRelaxNG ( schemaName, doc->myGetTextRaw(), fileName ) )
 	{
-		std::string error = wl->getLastError();
-		wxString wideError = wxString ( error.c_str(), wxConvUTF8, error.size() );
+		wxString wideError = wl->getLastError();
 		statusProgress ( wxEmptyString );
 
 		std::pair<int, int> posPair = wl->getErrorPosition();
@@ -4060,8 +4058,7 @@ void MyFrame::OnXPath ( wxCommandEvent& event )
 
 	if ( !success )
 	{
-		std::string error = wl->getLastError();
-		wxString wideError = wxString ( error.c_str(), wxConvUTF8, error.size() );
+		wxString wideError = wl->getLastError();
 		if ( !wideError.empty() )
 			wideError.Prepend ( _T ( ": " ) );
 		wideError.Prepend ( _ ( "Cannot evaluate XPath" ) );
@@ -4189,8 +4186,7 @@ void MyFrame::OnXslt ( wxCommandEvent& event )
 	wxString fileName = doc->getFullFileName();
 	if ( !wl->xslt ( path, rawBufferUtf8, fileName ) )
 	{
-		std::string error = wl->getLastError();
-		wxString wideError = wxString ( error.c_str(), wxConvUTF8, error.size() );
+		wxString wideError = wl->getLastError();
 		wideError.Prepend ( _ ( "Cannot transform: " ) );
 		statusProgress ( wxEmptyString );
 		messagePane ( wideError, CONST_WARNING );
@@ -4238,8 +4234,7 @@ void MyFrame::OnPrettyPrint ( wxCommandEvent& event )
 
 		if ( !wl->parse ( rawBufferUtf8, fileName, true ) )
 		{
-			std::string error = wl->getLastError();
-			wxString wideError = wxString ( error.c_str(), wxConvUTF8, error.size() );
+			wxString wideError = wl->getLastError();
 			wideError.Prepend ( _ ( "Cannot pretty-print: " ) );
 			statusProgress ( wxEmptyString );
 			messagePane ( wideError, CONST_WARNING );
@@ -4323,8 +4318,7 @@ void MyFrame::OnEncoding ( wxCommandEvent& event )
 	res = wl->saveEncodingFromFile ( sourceFileName.name(), tempFileName.name(), selectionUtf8 );
 	if ( res == -1 )
 	{
-		std::string error = wl->getLastError();
-		wxString wideError = wxString ( error.c_str(), wxConvUTF8, error.size() );
+		wxString wideError = wl->getLastError();
 		wideError.Prepend ( _ ( "Cannot set encoding: " ) );
 		messagePane ( wideError, CONST_STOP );
 		return;
@@ -4818,12 +4812,11 @@ bool MyFrame::saveFile ( XmlDoc *doc, wxString& fileName, bool checkLastModified
 					success = saveRawUtf8 ( fileNameLocal, utf8Buffer, false, isXml );
 					if ( success )
 					{
-						std::string libxmlError = wl->getLastError();
+						wxString wideError = wl->getLastError();
 						bytes = utf8Buffer.size();
-						wxString msg, wideEncoding, wideError;
+						wxString msg, wideEncoding;
 						wideEncoding =
 						    wxString ( encoding.c_str(), wxConvUTF8, encoding.size() );
-						wideError = wxString ( libxmlError.c_str(), wxConvUTF8, libxmlError.size() );
 						if ( wideError.empty() )
 							wideError = _ ( "unknown error" );
 

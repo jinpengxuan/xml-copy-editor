@@ -103,7 +103,6 @@ void WrapLibxml::Init ( const wxString &catalogPath ) throw()
 
 WrapLibxml::WrapLibxml ( bool netAccessParameter )
 		: netAccess ( netAccessParameter )
-		, errorLine ( 0 )
 {
 	WrapLibxml::Init();
 }
@@ -500,8 +499,8 @@ bool WrapLibxml::xslt (
 	} while ( false );
 
 	xmlFreeDoc ( doc );
-	xmlFreeDoc ( res );
 	xmlFreeParserCtxt ( ctxt );
+	xmlFreeDoc ( res );
 	xsltFreeStylesheet ( cur );
 
 	return ret;
@@ -592,33 +591,28 @@ int WrapLibxml::saveEncodingFromFile (
 
 	// ensure entity warnings are treated as errors!
 	if ( !getLastError().empty() )
-		return -1;
+		result = -1;
 
 	xmlFreeDoc ( docPtr );
 	xmlFreeParserCtxt ( ctxt );
+
 	return result;
 }
 
-std::string WrapLibxml::getLastError()
+wxString WrapLibxml::getLastError()
 {
 	xmlErrorPtr err = xmlGetLastError();
 
 	if ( !err )
-	{
 		return nonParserError;
-	}
 
-	std::stringstream ss;
-	ss << "Error at line ";
-	ss << err->line;
+	wxString error ( err->message, wxConvLocal );
 	if ( err->int2 )
-	{
-		ss << ", column ";
-		ss << err->int2;
-	}
-	ss << ": ";
-	ss << err->message;
-	return ss.str();
+		return wxString::Format ( _("Error at line %d, column %d: %s"),
+				err->line, err->int2, error.c_str() );
+
+	return wxString::Format ( _("Error at line %d: %s"),
+			err->line, error.c_str() );
 }
 
 std::pair<int, int> WrapLibxml::getErrorPosition()

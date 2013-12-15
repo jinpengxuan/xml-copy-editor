@@ -78,7 +78,7 @@ class WrapLibxml
 		    const char *utf8DocBuf,
 		    size_t utf8DocBufSize,
 		    const wxString &docUrl );
-		std::string getLastError();
+		wxString getLastError();
 		std::pair<int, int> getErrorPosition();
 		std::string getOutput();
 		int saveEncoding (
@@ -94,8 +94,8 @@ class WrapLibxml
 		    const wxString &systemId );
 	private:
 		bool netAccess;
-		std::string output, nonParserError;
-		int errorLine;
+		std::string output;
+		wxString nonParserError;
 };
 
 #endif

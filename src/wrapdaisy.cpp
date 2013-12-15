@@ -128,8 +128,7 @@ bool WrapDaisy::run (
        
         if ( !success )
         {
-            std::string stdError = wrapLibxml.getLastError();
-            error = wxString ( stdError.c_str(), wxConvUTF8, stdError.size() );
+            error = wrapLibxml.getLastError();
             return false;   
         }
         
