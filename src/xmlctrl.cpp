@@ -93,6 +93,11 @@ XmlCtrl::XmlCtrl (
 	}
 
 #if wxCHECK_VERSION(2,9,0)
+	if ( type != FILE_TYPE_BINARY )
+		SetScrollWidthTracking ( true );
+#endif
+
+#if wxCHECK_VERSION(2,9,0)
 	AddTextRaw ( buffer, bufferLen );
 #else
 	SendMsg ( 2001, bufferLen, ( wxIntPtr ) buffer );
