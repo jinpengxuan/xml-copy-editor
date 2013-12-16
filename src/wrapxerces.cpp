@@ -214,11 +214,12 @@ void MySAX2Handler::logError ( const wxString &type, wxLogLevelValues level,
 			type.c_str(), e.getLineNumber(), e.getColumnNumber(),
 			WrapXerces::toString ( e.getMessage() ).c_str(), mEOL.c_str() );
 
-	// Only save the first warning position
+	// Only save the first error position
 	if ( level > mLevel	|| ( level == mLevel && mErrorPosition.first == 1
 			&& mErrorPosition.second == 1 ) )
 	{
 		mErrorPosition.first = e.getLineNumber();
 		mErrorPosition.second = e.getColumnNumber();
+		mLevel = level;
 	}
 }
