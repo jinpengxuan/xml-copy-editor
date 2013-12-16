@@ -82,13 +82,22 @@ class WrapLibxml
 		std::pair<int, int> getErrorPosition();
 		std::string getOutput();
 		int saveEncoding (
-		    const std::string& buffer,
-		    const std::string& fileName,
-		    const std::string& encoding );
-		int saveEncodingFromFile (
-		    const std::string& fileNameSource,
-		    const std::string& fileNameDestination,
-		    const std::string& encoding );
+		    const std::string &utf8Buffer,
+		    const wxString &fileNameSource,
+		    const wxString &fileNameDestination,
+		    wxMemoryBuffer *outputBuffer, /* Override fileNameDestination*/
+		    const wxString &encoding );
+		int saveEncoding (
+		    const wxString &fileNameSource,
+		    const wxString &fileNameDestination,
+		    const wxString &encoding );
+		int saveEncoding (
+		    const char *utf8Buffer,
+		    size_t utf8BufferSize,
+		    const wxString &fileNameSource,
+		    const wxString &fileNameDestination,
+		    wxMemoryBuffer *outputBuffer, /* Override fileNameDestination*/
+		    const wxString &encoding );
 		wxString catalogResolve (
 		    const wxString &publicId,
 		    const wxString &systemId );

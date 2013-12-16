@@ -526,72 +526,68 @@ bool WrapLibxml::bufferWellFormed ( const std::string& buffer )
 }
 
 int WrapLibxml::saveEncoding (
-    const std::string& buffer,
-    const std::string& fileName,
-    const std::string& encoding )
+    const std::string &utf8Buffer,
+    const wxString &fileNameSource,
+    const wxString &fileNameDestination,
+    wxMemoryBuffer *outputBuffer,
+    const wxString &encoding )
 {
-	xmlParserCtxtPtr ctxt = xmlNewParserCtxt();
-	if ( !ctxt )
-		return -1;
-
-	xmlSubstituteEntitiesDefault ( 0 );
-
-	xmlKeepBlanksDefault ( 1 ); // prevents single-line output
-
-	xmlDocPtr docPtr = xmlCtxtReadMemory (
-	                       ctxt,
-	                       buffer.c_str(),
-	                       buffer.size(),
-	                       "",
-	                       NULL,
-	                       XML_PARSE_DTDLOAD | XML_PARSE_DTDVALID | XML_PARSE_PEDANTIC//XML_PARSE_NONET//XML_PARSE_DTDLOAD//0//(netAccess) ? XML_PARSE_DTDLOAD | XML_PARSE_NOENT : XML_PARSE_DTDLOAD | XML_PARSE_NONET | XML_PARSE_NOENT//0
-	                   );
-	if ( !docPtr )
-	{
-		xmlFreeParserCtxt ( ctxt );
-		return -1;
-	}
-
-	int result = xmlSaveFileEnc (
-	                 fileName.c_str(),
-	                 docPtr,
-	                 encoding.c_str() );
-	xmlFreeDoc ( docPtr );
-	xmlFreeParserCtxt ( ctxt );
-	return result;
+	return saveEncoding ( utf8Buffer.c_str(), utf8Buffer.length(),
+			fileNameSource, fileNameDestination, outputBuffer, encoding );
 }
 
-int WrapLibxml::saveEncodingFromFile (
-    const std::string& fileNameSource,
-    const std::string& fileNameDestination,
-    const std::string& encoding )
+int WrapLibxml::saveEncoding (
+    const wxString &fileNameSource,
+    const wxString &fileNameDestination,
+    const wxString &encoding )
+{
+	return saveEncoding ( NULL, 0, fileNameSource, fileNameDestination,
+			NULL, encoding );
+}
+
+int WrapLibxml::saveEncoding (
+    const char *utf8Buffer,
+    size_t utf8BufferSize,
+    const wxString &fileNameSource,
+    const wxString &fileNameDestination,
+    wxMemoryBuffer *outputBuffer,
+    const wxString &encoding )
 {
 	xmlParserCtxtPtr ctxt = xmlNewParserCtxt();
 	if ( !ctxt )
 		return -1;
 
-	xmlSubstituteEntitiesDefault ( 0 );
-	xmlKeepBlanksDefault ( 1 ); // prevents single-line output
-
-	xmlDocPtr docPtr = xmlCtxtReadFile (
-	                       ctxt,
-	                       fileNameSource.c_str(),
-	                       NULL,
-	                       ( netAccess ) ? XML_PARSE_DTDLOAD : XML_PARSE_DTDLOAD | XML_PARSE_NONET );//XML_PARSE_NONET//XML_PARSE_DTDLOAD//0//(netAccess) ? XML_PARSE_DTDLOAD | XML_PARSE_NOENT : XML_PARSE_DTDLOAD | XML_PARSE_NONET | XML_PARSE_NOENT//0
+	xmlDocPtr docPtr;
+	int flags = XML_PARSE_DTDLOAD | XML_PARSE_PEDANTIC /*| XML_PARSE_DTDVALID*/;//XML_PARSE_NONET//XML_PARSE_DTDLOAD//0//(netAccess) ? XML_PARSE_DTDLOAD | XML_PARSE_NOENT : XML_PARSE_DTDLOAD | XML_PARSE_NONET | XML_PARSE_NOENT//0
+	if ( !netAccess )
+		flags |= XML_PARSE_NONET;
+	if ( utf8Buffer != NULL )
+		docPtr = xmlCtxtReadMemory ( ctxt, utf8Buffer, utf8BufferSize,
+				CONV ( fileNameSource ), "UTF-8", flags );
+	else
+		docPtr = xmlCtxtReadFile ( ctxt, fileNameSource.c_str(), NULL, flags );
 	if ( !docPtr )
 	{
 		xmlFreeParserCtxt ( ctxt );
 		return -1;
 	}
 
-	int result = xmlSaveFileEnc (
-	                 fileNameDestination.c_str(),
-	                 docPtr,
-	                 encoding.c_str() );
-
-	// ensure entity warnings are treated as errors!
-	if ( !getLastError().empty() )
-		result = -1;
+	int result;
+	if ( outputBuffer == NULL )
+	{
+		result = xmlSaveFileEnc (
+				CONV ( fileNameDestination ),
+				docPtr,
+				encoding.utf8_str() );
+	}
+	else
+	{
+		xmlChar *buffer;
+		xmlDocDumpMemoryEnc ( docPtr, &buffer, &result,
+				encoding.utf8_str() );
+		outputBuffer->AppendData ( buffer, result );
+		xmlFree ( buffer );
+	}
 
 	xmlFreeDoc ( docPtr );
 	xmlFreeParserCtxt ( ctxt );

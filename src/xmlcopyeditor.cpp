@@ -4280,24 +4280,11 @@ void MyFrame::OnEncoding ( wxCommandEvent& event )
 	if ( scd.ShowModal() == wxID_CANCEL )
 		return;
 
-	wxString selection;
-	std::string selectionUtf8, bufferUtf8;
-
-	selection = scd.GetStringSelection();
-	selectionUtf8 = selection.mb_str ( wxConvUTF8 );
-
-	getRawText ( doc, bufferUtf8 );
-	XmlEncodingHandler::setUtf8 ( bufferUtf8, true );
-
-	WrapTempFileName tempFileName ( _T ( "" ) );
-
-	std::auto_ptr<WrapLibxml> wl ( new WrapLibxml ( libxmlNetAccess ) );
 	int res;
-
-	WrapTempFileName sourceFileName ( doc->getFullFileName() );
-	saveRawUtf8 ( sourceFileName.name(), bufferUtf8 );
-
-	res = wl->saveEncodingFromFile ( sourceFileName.name(), tempFileName.name(), selectionUtf8 );
+	wxMemoryBuffer output;
+	std::auto_ptr<WrapLibxml> wl ( new WrapLibxml ( libxmlNetAccess ) );
+	res = wl->saveEncoding ( doc->myGetTextRaw(), doc->getFullFileName(),
+			wxEmptyString, &output, scd.GetStringSelection() );
 	if ( res == -1 )
 	{
 		wxString wideError = wl->getLastError();
@@ -4306,20 +4293,11 @@ void MyFrame::OnEncoding ( wxCommandEvent& event )
 		return;
 	}
 
-	std::string newBuffer;
-	bool success = ReadFile::run ( tempFileName.name(), newBuffer );
-	if ( !success )
-	{
-		messagePane ( _ ( "Cannot set encoding (cannot open temporary file)" ),
-		              CONST_STOP );
-		return;
-	}
-
 	std::auto_ptr<XmlUtf8Reader> xur ( new XmlUtf8Reader (
 	                                       false,
 	                                       expandInternalEntities,
-	                                       newBuffer.size() ) );
-	if ( !xur->parse ( newBuffer ) )
+	                                       output.GetDataLen() ) );
+	if ( !xur->parse ( ( const char * ) output.GetData(), output.GetDataLen() ) )
 	{
 		messagePane ( _ ( "Cannot set encoding (cannot parse temporary file)" ),
 		              CONST_STOP );
@@ -4783,12 +4761,9 @@ bool MyFrame::saveFile ( XmlDoc *doc, wxString& fileName, bool checkLastModified
 			}
 			else // all other encodings handled by Libxml
 			{
-				XmlEncodingHandler::setUtf8 ( utf8Buffer );
 				auto_ptr<WrapLibxml> wl ( new WrapLibxml ( libxmlNetAccess ) );
-
-				WrapTempFileName sourceFileName ( fileName );
-				saveRawUtf8 ( sourceFileName.name(), utf8Buffer );
-				int result = wl->saveEncodingFromFile ( sourceFileName.name(), fileNameLocal, encoding );
+				int result = wl->saveEncoding ( utf8Buffer,
+						doc->getFullFileName(), fileName, NULL, encoding );
 				if ( result == -1 )
 				{
 					success = saveRawUtf8 ( fileNameLocal, utf8Buffer, false, isXml );
