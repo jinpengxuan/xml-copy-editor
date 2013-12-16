@@ -3903,7 +3903,7 @@ void MyFrame::OnValidateSchema ( wxCommandEvent& event )
 	// branch: if no XML Schema found, use LibXML DTD parser instead
 	// so the catalog is read - switch when Xerces-C implements
 	// XMLCatalogResolver
-#ifdef __WXMSW__
+#if 0
 	{
 		std::string rawBuffer;
 		getRawText ( doc, rawBuffer );
