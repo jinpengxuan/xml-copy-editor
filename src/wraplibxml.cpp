@@ -576,7 +576,7 @@ int WrapLibxml::saveEncodingFromFile (
 	xmlDocPtr docPtr = xmlCtxtReadFile (
 	                       ctxt,
 	                       fileNameSource.c_str(),
-	                       "UTF-8",
+	                       NULL,
 	                       ( netAccess ) ? XML_PARSE_DTDLOAD : XML_PARSE_DTDLOAD | XML_PARSE_NONET );//XML_PARSE_NONET//XML_PARSE_DTDLOAD//0//(netAccess) ? XML_PARSE_DTDLOAD | XML_PARSE_NOENT : XML_PARSE_DTDLOAD | XML_PARSE_NONET | XML_PARSE_NOENT//0
 	if ( !docPtr )
 	{
