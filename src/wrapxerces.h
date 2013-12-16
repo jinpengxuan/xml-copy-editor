@@ -23,6 +23,7 @@
 #include <wx/wx.h>
 #include <wx/strconv.h>
 #include <wx/buffer.h>
+#include <wx/log.h>
 #include <string>
 #include <utility>
 #include <boost/utility.hpp>
@@ -37,6 +38,58 @@
 
 using namespace xercesc;
 
+class MySAX2Handler : public DefaultHandler
+{
+	public:
+		MySAX2Handler()
+		{
+			mEOL = "\n";
+			resetErrors();
+		}
+		void error ( const SAXParseException& e )
+		{
+			logError ( _("Error"), wxLOG_Error, e );
+			throw e;
+		}
+		void warning ( const SAXParseException& e )
+		{
+			logError ( _("Warning"), wxLOG_Warning, e );
+		}
+		void fatalError ( const SAXParseException& e )
+		{
+			logError ( _("FatalError"), wxLOG_FatalError, e );
+			throw e;
+		}
+		void resetErrors()
+		{
+			mErrors.clear();
+			mErrorPosition = std::make_pair ( 1, 1 );
+		}
+		const wxString &getErrors() const
+		{
+			return mErrors;
+		}
+		wxString &getErrors()
+		{
+			return mErrors;
+		}
+		const std::pair<int, int> &getErrorPosition() const
+		{
+			return mErrorPosition;
+		}
+		void logError ( const wxString &type, wxLogLevelValues level,
+				const SAXParseException& e );
+		void setEOL ( const wxChar *eol )
+		{
+			mEOL = eol;
+		}
+	protected:
+		wxString mErrors;
+		std::pair<int, int> mErrorPosition;
+		wxLogLevelValues mLevel;
+		wxString mEOL;
+};
+
 class WrapXerces : private boost::noncopyable
 {
 	public:
@@ -44,10 +97,19 @@ class WrapXerces : private boost::noncopyable
 		WrapXerces();
 		virtual ~WrapXerces();
 		bool validate ( const wxString &fileName );
-		bool validateMemory ( const char *buffer, size_t len,
-		    const wxString &system, wxThread *thread = NULL );
-		const wxString &getLastError();
-		std::pair<int, int> getErrorPosition();
+		bool validateMemory ( const char *utf8Buffer, size_t len,
+		    const wxString &fileName, wxThread *thread = NULL,
+		    bool forceGrammarCheck = true, /* Must specify a grammar */
+		    const wxChar *messageEOL = _T("[br]") );
+		const wxString &getLastError()
+		{
+			return mySAX2Handler.getErrors();
+		}
+		const std::pair<int, int> &getErrorPosition()
+		{
+			return mySAX2Handler.getErrorPosition();
+		}
+
 		static wxString toString ( const XMLCh *str );
 		// Convert Unicode string to const XMLCh *
 //#if wxCHECK_VERSION(2,9,0)
@@ -60,21 +122,7 @@ class WrapXerces : private boost::noncopyable
 		static const wxMBConv &getMBConv();
 
 		XercesCatalogResolver *catalogResolver;
-		wxString lastError;
-		std::pair<int, int> errorPosition;
-};
-
-class MySAX2Handler : public DefaultHandler
-{
-	public:
-		void error ( const SAXParseException& e )
-		{
-			throw e;
-		}
-		void warning ( const SAXParseException& e )
-		{
-			throw e;
-		}
+		MySAX2Handler mySAX2Handler;
 };
 
 #endif

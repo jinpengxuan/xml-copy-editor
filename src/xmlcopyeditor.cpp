@@ -3922,32 +3922,14 @@ void MyFrame::OnValidateSchema ( wxCommandEvent& event )
 	}
 #endif
 
-	wxString fileName;
-	fileName = doc->getFullFileName();
-
-	WrapTempFileName wtfn ( fileName );
-	if ( fileName.empty() || doc->GetModify() )
-	{
-		wxString wideBuffer = doc->GetText();
-
-		std::string buffer = ( const char * ) wideBuffer.mb_str ( wxConvUTF8 );
-		if ( !saveRawUtf8 (
-		            wtfn.name(),
-		            buffer ) )
-		{
-			messagePane (
-			    _ ( "Cannot save temporary copy for validation; please save or discard changes" ),
-			    CONST_STOP );
-			return;
-		}
-		fileName = wtfn.wideName();
-	}
-
 	statusProgress ( _ ( "Validation in progress..." ) );
 	doc->clearErrorIndicators();
 
+	wxString fileName = doc->getFullFileName();
+	wxString utf8Buffer = doc->myGetTextRaw();
 	std::auto_ptr<WrapXerces> validator ( new WrapXerces() );
-	if ( !validator->validate ( fileName ) )
+	if ( !validator->validateMemory ( utf8Buffer.c_str(), utf8Buffer.size(),
+			fileName ) )
 	{
 		statusProgress ( wxEmptyString );
 		messagePane ( validator->getLastError(), CONST_WARNING );

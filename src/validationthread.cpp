@@ -1,4 +1,5 @@
-#include "wx/wx.h"
+#include <wx/wx.h>
+#include <wx/textbuf.h>
 #include "xmlctrl.h"
 #include "validationthread.h"
 #include "wrapxerces.h"
@@ -42,7 +43,11 @@ void *ValidationThread::Entry()
 		myBuffer.c_str(),
 		myBuffer.size(),
 		mySystem,
-		this );
+		this,
+		// Don't be too harsh to new created documents, which may haven't
+		// associated any schema yet
+		/*forceCheckGrammar*/false,
+		wxTextBuffer::GetEOL() );
 
 	myBuffer.clear();
 

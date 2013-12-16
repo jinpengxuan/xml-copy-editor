@@ -19,11 +19,13 @@
 
 #include "wrapxerces.h"
 
+#include <xercesc/parsers/XercesDOMParser.hpp>
 #include <xercesc/sax2/XMLReaderFactory.hpp>
 #include <xercesc/sax2/SAX2XMLReader.hpp>
 #include <xercesc/sax2/DefaultHandler.hpp>
 #include <xercesc/util/XMLUni.hpp>
 #include <xercesc/framework/MemBufInputSource.hpp>
+#include <xercesc/framework/LocalFileInputSource.hpp>
 #include <sstream>
 #include <utility>
 #include <stdexcept>
@@ -51,7 +53,6 @@ WrapXerces::WrapXerces()
 {
 	WrapXerces::Init();
 
-	errorPosition = std::make_pair ( 1, 1 );
 	catalogResolver = new XercesCatalogResolver();
 }
 
@@ -62,135 +63,99 @@ WrapXerces::~WrapXerces()
 
 bool WrapXerces::validate ( const wxString& fileName )
 {
-	SAX2XMLReader *parser = XMLReaderFactory::createXMLReader();
-
-	parser->setFeature ( XMLUni::fgSAX2CoreNameSpaces, true );
-	parser->setFeature ( XMLUni::fgSAX2CoreValidation, true );
-	parser->setFeature ( XMLUni::fgXercesDynamic, false );
-	parser->setFeature ( XMLUni::fgXercesSchema, true );
-	parser->setFeature ( XMLUni::fgXercesSchemaFullChecking, true );
-	parser->setFeature ( XMLUni::fgXercesValidationErrorAsFatal, true );
-	parser->setFeature ( XMLUni::fgXercesLoadExternalDTD, true );
-
-
-	DefaultHandler handler;
-	MySAX2Handler mySAX2Handler;
-	parser->setContentHandler ( &handler );
-	parser->setErrorHandler ( &mySAX2Handler );
-
-	//DefaultHandler handler;
-	//parser->setEntityResolver ( &handler );
-	parser->setEntityResolver ( catalogResolver );
-
-	try
-	{
-		parser->parse ( (const XMLCh *) toString ( fileName ).GetData() );
-	}
-	catch ( XMLException& e )
-	{
-		delete parser;
-		lastError = toString ( e.getMessage() );
-		return false;
-	}
-	catch ( SAXParseException& e )
-	{
-		delete parser;
-		lastError << _T ( "Validation stopped at line " )
-		    << e.getLineNumber() << _T ( ", column " ) << e.getColumnNumber()
-		    << _T ( ": " ) << toString ( e.getMessage() );
-		errorPosition = std::make_pair ( e.getLineNumber(), e.getColumnNumber() );
-		return false;
-	}
-	catch ( ... )
-	{
-		delete parser;
-		lastError = _T ( "Unexpected validation error" );
-		return false;
-	}
-	delete parser;
-	return true;
+	return validateMemory ( NULL, 0, fileName );
 }
 
 // tbd: cache grammar
 bool WrapXerces::validateMemory (
-	const char *buffer,
+	const char *utf8Buffer,
 	size_t len,
-	const wxString &system,
-	wxThread *thread /*= NULL*/ )
+	const wxString &fileName,
+	wxThread *thread /*= NULL*/,
+	bool forceGrammarCheck /*= true*/,
+	const wxChar *messageEOL /*= _T("[br]")*/)
 {
+#if 0 // Test DOM parser
+	std::auto_ptr<XercesDOMParser> parser ( new XercesDOMParser() );
+
+	parser->setDoNamespaces(true);
+	parser->setExitOnFirstFatalError(true);
+	parser->setValidationConstraintFatal(true);
+	//parser->setCreateEntityReferenceNodes(true); // Default is true
+	parser->setValidationScheme(XercesDOMParser::Val_Auto);
+	parser->setDoSchema(true);
+	parser->setValidationSchemaFullChecking(true);
+	parser->setCreateCommentNodes(false);
+#else
 	std::auto_ptr<SAX2XMLReader> parser ( XMLReaderFactory::createXMLReader() );
 
 	parser->setFeature ( XMLUni::fgSAX2CoreNameSpaces, true );
 	parser->setFeature ( XMLUni::fgSAX2CoreValidation, true );
-	parser->setFeature ( XMLUni::fgXercesDynamic, true );
+	parser->setFeature ( XMLUni::fgXercesDynamic, !forceGrammarCheck );
 	parser->setFeature ( XMLUni::fgXercesSchema, true );
-	//parser->setFeature ( XMLUni::fgXercesSchemaFullChecking, true );
+	parser->setFeature ( XMLUni::fgXercesSchemaFullChecking, true);
 	parser->setFeature ( XMLUni::fgXercesValidationErrorAsFatal, true );
 	parser->setFeature ( XMLUni::fgXercesLoadExternalDTD, true );
 
-	DefaultHandler handler;
-	MySAX2Handler mySAX2Handler;
-	parser->setContentHandler ( &handler );
+	parser->setContentHandler ( &mySAX2Handler );
+#endif
+
 	parser->setErrorHandler ( &mySAX2Handler );
 	//parser->setEntityResolver ( &handler );
 	parser->setEntityResolver ( catalogResolver );
 
-	XMLByte* xmlBuffer = (XMLByte*) buffer;
-	MemBufInputSource source
-			( xmlBuffer
-			, len
-			, ( const XMLCh * ) ( const char * ) system.mb_str ( getMBConv() )
-			);
+	mySAX2Handler.setEOL ( messageEOL );
+
+	std::auto_ptr<InputSource> source;
+	if ( utf8Buffer != NULL )
+	{
+		source.reset ( new MemBufInputSource ( (XMLByte*) utf8Buffer, len,
+				(const XMLCh *) toString ( fileName ).GetData() ) );
+		wxString utf8 = _T("UTF-8");
+		source->setEncoding ( (const XMLCh *) toString ( utf8 ).GetData() );
+	}
+	else
+	{
+		source.reset ( new LocalFileInputSource (
+				(const XMLCh *) toString ( fileName ).GetData() ) );
+	}
 	try
 	{
 		if ( thread == NULL )
 		{
-			parser->parse ( source );
+			parser->parse ( *source );
 		}
 		else if ( !thread->TestDestroy() )
 		{
 			XMLPScanToken token;
-			if ( parser->parseFirst ( source, token ) )
+			if ( parser->parseFirst ( *source, token ) )
 				while ( (!thread->TestDestroy()) && parser->parseNext ( token ) )
 					continue;
 		}
 	}
 	catch ( XMLException& e )
 	{
-		lastError = wxEmptyString;
+		wxString error = toString ( e.getMessage() );
+		int i = error.Find( _T("Message:") );
+		if ( i != wxNOT_FOUND )
+			error = error.substr( i );
+		mySAX2Handler.getErrors() << error;
 		return false;
 	}
 	catch ( SAXParseException& e )
 	{
-		lastError << _T ( "Ln " ) << e.getLineNumber() << _T ( " Col " )
-		    << e.getColumnNumber() << _T ( ": " ) << toString ( e.getMessage() );
-		errorPosition = std::make_pair ( e.getLineNumber(), e.getColumnNumber() );
+		// It has already been processed in mySAX2Handler
 		return false;
 	}
 	catch ( ... )
 	{
 		if ( thread != NULL && thread->TestDestroy() )
 			throw;
-		lastError = wxEmptyString;
+		mySAX2Handler.getErrors() << _("Unexpected validation error");
 		return false;
 	}
-	return true;
-}
 
-const wxString &WrapXerces::getLastError()
-{
-	int i = lastError.Find( _T ( "Message:" ) );
-	if ( i != wxNOT_FOUND )
-	{
-		lastError = lastError.substr( i );
-	}
-
-	return lastError;
-}
-
-std::pair<int, int> WrapXerces::getErrorPosition()
-{
-	return errorPosition;
+	return mySAX2Handler.getErrors().empty();
 }
 
 const wxMBConv &WrapXerces::getMBConv()
@@ -239,4 +204,21 @@ wxMemoryBuffer WrapXerces::toString ( const wxString &str )
 	buffer.SetDataLen ( lenMB );
 
 	return buffer;
+}
+
+void MySAX2Handler::logError ( const wxString &type, wxLogLevelValues level,
+		const SAXParseException& e )
+{
+	mErrors << wxString::Format (
+			_("%s at line %llu, column %llu: %s%s"),
+			type.c_str(), e.getLineNumber(), e.getColumnNumber(),
+			WrapXerces::toString ( e.getMessage() ).c_str(), mEOL.c_str() );
+
+	// Only save the first warning position
+	if ( level > mLevel	|| ( level == mLevel && mErrorPosition.first == 1
+			&& mErrorPosition.second == 1 ) )
+	{
+		mErrorPosition.first = e.getLineNumber();
+		mErrorPosition.second = e.getColumnNumber();
+	}
 }
