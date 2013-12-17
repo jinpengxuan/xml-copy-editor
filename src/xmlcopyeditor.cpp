@@ -3926,7 +3926,7 @@ void MyFrame::OnValidateSchema ( wxCommandEvent& event )
 	doc->clearErrorIndicators();
 
 	wxString fileName = doc->getFullFileName();
-	wxString utf8Buffer = doc->myGetTextRaw();
+	std::string utf8Buffer = doc->myGetTextRaw();
 	std::auto_ptr<WrapXerces> validator ( new WrapXerces() );
 	if ( !validator->validateMemory ( utf8Buffer.c_str(), utf8Buffer.size(),
 			fileName ) )
@@ -4763,7 +4763,8 @@ bool MyFrame::saveFile ( XmlDoc *doc, wxString& fileName, bool checkLastModified
 			{
 				auto_ptr<WrapLibxml> wl ( new WrapLibxml ( libxmlNetAccess ) );
 				int result = wl->saveEncoding ( utf8Buffer,
-						doc->getFullFileName(), fileName, NULL, encoding );
+						doc->getFullFileName(), fileName, NULL,
+						wxString ( encoding.c_str(), wxConvUTF8 ) );
 				if ( result == -1 )
 				{
 					success = saveRawUtf8 ( fileNameLocal, utf8Buffer, false, isXml );

@@ -43,7 +43,7 @@ class MySAX2Handler : public DefaultHandler
 	public:
 		MySAX2Handler()
 		{
-			mEOL = "\n";
+			mEOL = _T("\n");
 			resetErrors();
 		}
 		void error ( const SAXParseException& e )
@@ -77,7 +77,7 @@ class MySAX2Handler : public DefaultHandler
 		{
 			return mErrorPosition;
 		}
-		void logError ( const wxString &type, wxLogLevelValues level,
+		void logError ( const wxString &type, wxLogLevel level,
 				const SAXParseException& e );
 		void setEOL ( const wxChar *eol )
 		{
@@ -86,7 +86,7 @@ class MySAX2Handler : public DefaultHandler
 	protected:
 		wxString mErrors;
 		std::pair<int, int> mErrorPosition;
-		wxLogLevelValues mLevel;
+		wxLogLevel mLevel;
 		wxString mEOL;
 };
 

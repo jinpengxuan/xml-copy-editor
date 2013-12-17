@@ -449,7 +449,7 @@ bool WrapLibxml::xslt (
 				CONV ( styleFileName ) );
 		if ( !cur )
 		{
-			nonParserError = "Cannot parse stylesheet";
+			nonParserError = _("Cannot parse stylesheet");
 			return false;
 		}
 
@@ -470,7 +470,7 @@ bool WrapLibxml::xslt (
 			doc = xmlCtxtReadFile ( ctxt,  CONV ( docUrl ), NULL, flags );
 		if ( !doc )
 		{
-			nonParserError = "Cannot parse file";
+			nonParserError = _("Cannot parse file");
 			break;
 		}
 
@@ -481,7 +481,7 @@ bool WrapLibxml::xslt (
 		res = xsltApplyStylesheet ( cur, doc, NULL );
 		if ( !res )
 		{
-			nonParserError = "Cannot apply stylesheet";
+			nonParserError = _("Cannot apply stylesheet");
 			break;
 		}
 
@@ -565,7 +565,7 @@ int WrapLibxml::saveEncoding (
 		docPtr = xmlCtxtReadMemory ( ctxt, utf8Buffer, utf8BufferSize,
 				CONV ( fileNameSource ), "UTF-8", flags );
 	else
-		docPtr = xmlCtxtReadFile ( ctxt, fileNameSource.c_str(), NULL, flags );
+		docPtr = xmlCtxtReadFile ( ctxt, CONV ( fileNameSource ), NULL, flags );
 	if ( !docPtr )
 	{
 		xmlFreeParserCtxt ( ctxt );

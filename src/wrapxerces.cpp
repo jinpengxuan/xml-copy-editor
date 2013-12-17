@@ -206,7 +206,7 @@ wxMemoryBuffer WrapXerces::toString ( const wxString &str )
 	return buffer;
 }
 
-void MySAX2Handler::logError ( const wxString &type, wxLogLevelValues level,
+void MySAX2Handler::logError ( const wxString &type, wxLogLevel level,
 		const SAXParseException& e )
 {
 	mErrors << wxString::Format (
