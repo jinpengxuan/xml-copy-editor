@@ -25,10 +25,29 @@
 #include <wx/wx.h>
 #include <wx/ipc.h>
 
+#if defined ( __WXGTK__ ) && !defined ( __NO_GTK__ )
+#if wxCHECK_VERSION(2,9,0) // GSocket is defined in wxWidgets 2.8
+#include <gdk/gdkx.h>
+#else // wxCHECK_VERSION(2,9,0)
+#define GSocket GlibGSocket
+#include <gdk/gdkx.h>
+#undef GSocket
+#endif // wxCHECK_VERSION(2,9,0)
+#endif // __WXGTK__ && !__NO_GTK__
+
 #define IPC_SERVICE _T("4242")
 #define IPC_TOPIC _T("IPC TEST")
 #define IPC_ADVISE_NAME _T("Item")
+#define IPC_FRAME_WND _T("FrameWnd")
 #define IPC_NO_FILE _T("[nofile]")
+
+#if wxCHECK_VERSION(2,9,0)
+typedef const void IPCData;
+typedef size_t IPCSize_t;
+#else
+typedef wxChar IPCData;
+typedef int IPCSize_t;
+#endif
 
 class MyServerConnection;
 class MyClientConnection;
@@ -42,16 +61,20 @@ class MyServerConnection : public wxConnection
 		~MyServerConnection();
 		bool OnPoke ( const wxString& topic
 					, const wxString& item
-#if wxCHECK_VERSION(2,9,0)
-					, const void *data
-					, size_t size
-#else
-					, wxChar *data
-					, int size
-#endif
+					, IPCData *data
+					, IPCSize_t size
 					, wxIPCFormat format
 					);
 		bool OnStartAdvise ( const wxString& topic, const wxString& item );
+		IPCData *OnRequest(const wxString& topic, const wxString& item,
+				IPCSize_t *size, wxIPCFormat format = wxIPC_PRIVATE );
+
+	protected:
+#if defined ( __WXGTK__ ) && !defined ( __NO_GTK__ )
+		GdkNativeWindow mFrameWnd;
+#else
+		WXWidget mFrameWnd;
+#endif
 };
 
 class MyClientConnection: public wxConnection
@@ -60,13 +83,8 @@ class MyClientConnection: public wxConnection
 		MyClientConnection();
 		bool OnAdvise ( const wxString& topic
 					, const wxString& item
-#if wxCHECK_VERSION(2,9,0)
-					, const void *data
-					, size_t size
-#else
-					, wxChar *data
-					, int size
-#endif
+					, IPCData *data
+					, IPCSize_t size
 					, wxIPCFormat format );
 		bool OnDisconnect();
 };
@@ -76,6 +94,7 @@ class MyClient: public wxClient
 	public:
 		MyClient();
 		wxConnectionBase *OnMakeConnection();
+		bool talkToServer ( int argc, const wxChar * const *argv );
 };
 
 class MyServer: public wxServer
@@ -86,3 +105,4 @@ class MyServer: public wxServer
 };
 
 #endif
+

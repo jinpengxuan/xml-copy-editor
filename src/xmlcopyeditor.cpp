@@ -64,6 +64,7 @@
 #include "threadreaper.h"
 #include <wx/wupdlock.h>
 #include "dtd2schema.h"
+#include "myipc.h"
 
 #define ngettext wxGetTranslation
 
@@ -304,68 +305,37 @@ bool MyApp::OnInit()
 			break;
 	}
 
+#ifdef __WXMSW__
+	singleInstanceCheck = true;
+#else
+	singleInstanceCheck = false;
+#endif
 	if ( config.get() )
 	{
-#ifdef __WXMSW__
-		singleInstanceCheck = config->Read ( _T ( "singleInstanceCheck" ), true );
-#else
-		long longFalse = 0;
-		singleInstanceCheck = config->Read ( _T ( "singleInstanceCheck" ), longFalse );
-#endif
+		singleInstanceCheck = config->Read ( _T ( "singleInstanceCheck" ),
+				singleInstanceCheck );
 		lang = config->Read ( _T ( "lang" ), systemLocale );
 	}
 	else
 	{
 		lang = systemLocale;
-#ifdef __WXMSW__
-		singleInstanceCheck = true;
-#else
-		singleInstanceCheck = false;
-#endif
 	}
-
-	wxString name, service, hostName;
-	name.Printf ( _T ( "xmlcopyeditor-%s" ), wxGetUserId().c_str() );
-	service = IPC_SERVICE;
-	hostName = _T ( "localhost" );
 
 	if ( singleInstanceCheck )
 	{
+		wxString name;
+		name.Printf ( _T ( "xmlcopyeditor-%s" ), wxGetUserId().c_str() );
 		checker = new wxSingleInstanceChecker ( name );
-		while ( checker->IsAnotherRunning() )
+		if ( checker->IsAnotherRunning() )
 		{
-			// attempt calling server
 			MyClient client;
-			MyClientConnection *connection = ( MyClientConnection * )
-			             client.MakeConnection ( hostName, service, IPC_TOPIC );
-			if ( !connection || !connection->StartAdvise ( IPC_ADVISE_NAME ) )
-				break;
-			else
-			{
-				wxString argument;
-				wxChar whatBuffer[] = _T ( "Data" );
-				if ( this->argc > 1 )
-				{
-					for ( int i = 1; i < this->argc; i++ )
-					{
-						argument = ( wxString ) this->argv[i];
-						argument = PathResolver::run ( argument );
-						if ( ! connection->Poke ( argument, whatBuffer ) )
-						   break;
-					}
-				}
-				else
-				{
-					argument = ( wxString ) IPC_NO_FILE;
-					connection->Poke ( argument, whatBuffer );
-				}
+			if ( client.talkToServer ( argc, argv ) )
 				return false;
-			}
 		}
 	}
 
 	server = new MyServer;
-	server->Create ( service );
+	server->Create ( IPC_SERVICE );
 
 	myLocale.Init ( lang, wxLOCALE_LOAD_DEFAULT );
 

@@ -138,6 +138,14 @@ PKG_CHECK_MODULES(ENCHANT, [enchant], [CXXFLAGS="$CXXFLAGS -DUSE_ENCHANT"],
 
 AC_SUBST(ASPELL_LIBS)
 
+# Check gtk
+# This has to match the one wxWidgets linked with
+# It is needed to make single-instance-check work
+PKG_CHECK_MODULES(GTK, [gtk+-2.0], [AC_MSG_RESULT([gtk+-2.0])],
+	[CXXFLAGS="$CXXFLAGS -D__NO_GTK__"]
+	#[PKG_CHECK_MODULES(GTK, [gtk+-3.0], [AC_MSG_RESULT([gtk+-3.0])])]
+)
+
 AC_OUTPUT(Makefile src/Makefile)
 
 dnl Summarized output
@@ -146,8 +154,11 @@ echo "***************************************"
 echo
 
 if [[ "$debugbuild" = "y" ]]; then
-echo "Debug               Enabled"
+echo "Debug         Enabled"
 else
-echo "Debug               Disabled"
+echo "Debug         Disabled"
+fi
+if [[ "$GTK_LIBS" = "" ]]; then
+echo "GTK           No. There will be problems when single instance is enabled."
 fi
 

@@ -52,7 +52,6 @@
 #include "xmldoc.h"
 #include "myhtmlpane.h"
 #include "xmlencodinghandler.h"
-#include "myipc.h"
 #include <wx/aui/framemanager.h>
 
 enum
@@ -166,6 +165,8 @@ enum
 	CONST_INFO,
 	CONST_QUESTION
 };
+
+class MyServer;
 
 class MyApp : public wxApp
 {
