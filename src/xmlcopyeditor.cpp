@@ -4546,6 +4546,7 @@ bool MyFrame::saveFile ( XmlDoc *doc, wxString& fileName, bool checkLastModified
 
 	int bytes = 0;
 	std::string utf8Buffer, encoding, fileNameLocal;
+	wxString wideEncoding;
 	bool isXml = true;
 	try
 	{
@@ -4553,6 +4554,7 @@ bool MyFrame::saveFile ( XmlDoc *doc, wxString& fileName, bool checkLastModified
 		XmlEncodingSpy es;
 		es.parse ( utf8Buffer );
 		encoding = es.getEncoding();
+		wideEncoding = wxString ( encoding.c_str(), wxConvUTF8 );
 
 		fileNameLocal = fileName.mb_str ( wxConvLocal );
 
@@ -4615,8 +4617,6 @@ bool MyFrame::saveFile ( XmlDoc *doc, wxString& fileName, bool checkLastModified
 		}
 		else
 		{
-			wxString wideEncoding = wxString ( encoding.c_str(), wxConvLocal, encoding.size() );
-
 			// IF Unicode, use iconv to convert buffer
 			if ( encoding == "UTF-16" || encoding == "UTF-16LE" ||
 			        encoding == "UTF-16BE" || encoding == "UTF-32" || encoding == "UTF-32LE" ||
@@ -4734,8 +4734,7 @@ bool MyFrame::saveFile ( XmlDoc *doc, wxString& fileName, bool checkLastModified
 			{
 				auto_ptr<WrapLibxml> wl ( new WrapLibxml ( libxmlNetAccess ) );
 				int result = wl->saveEncoding ( utf8Buffer,
-						doc->getFullFileName(), fileName, NULL,
-						wxString ( encoding.c_str(), wxConvUTF8 ) );
+						doc->getFullFileName(), fileName, NULL, wideEncoding );
 				if ( result == -1 )
 				{
 					success = saveRawUtf8 ( fileNameLocal, utf8Buffer, false, isXml );
@@ -4743,9 +4742,7 @@ bool MyFrame::saveFile ( XmlDoc *doc, wxString& fileName, bool checkLastModified
 					{
 						wxString wideError = wl->getLastError();
 						bytes = utf8Buffer.size();
-						wxString msg, wideEncoding;
-						wideEncoding =
-						    wxString ( encoding.c_str(), wxConvUTF8, encoding.size() );
+						wxString msg;
 						if ( wideError.empty() )
 							wideError = _ ( "unknown error" );
 
