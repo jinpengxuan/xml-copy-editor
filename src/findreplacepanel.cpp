@@ -38,7 +38,7 @@ FindReplacePanel::FindReplacePanel (
 {
 	parent = parentParameter;
 	findData = findDataParameter;
-	notFoundSet = false;
+	incrementalFind = notFoundSet = false;
 	isRegex = isRegexParameter;
 
 	matchCaseMemory = ( findData->GetFlags() ) & wxFR_MATCHCASE;
@@ -145,6 +145,7 @@ void FindReplacePanel::OnFindNext ( wxCommandEvent& event )
 	findData->SetFindString ( findEdit->GetValue() );
 	findData->SetReplaceString ( replaceEdit->GetValue() );
 
+	incrementalFind = false;
 	size_t flags = 0;
 	flags |= wxFR_DOWN;
 	if ( matchCaseBox->GetValue() )
@@ -201,6 +202,8 @@ void FindReplacePanel::OnIdle ( wxIdleEvent& event )
 
 	if ( newLength != findEditLength || settingsChanged )
 	{
+		incrementalFind = true;
+
 		size_t flags = 0;
 		flags |= wxFR_DOWN;
 		if ( matchCaseBox->GetValue() )
@@ -231,8 +234,14 @@ void FindReplacePanel::sendFindEvent ( size_t flags )
 	findData->SetReplaceString ( replaceEdit->GetValue() );
 }
 
+bool FindReplacePanel::getIncrementalFind()
+{
+	return incrementalFind;
+}
+
 void FindReplacePanel::refresh()
 {
+	incrementalFind = false;
 	findEdit->SetValue ( findData->GetFindString() );
 	replaceEdit->SetValue ( findData->GetReplaceString() );
 

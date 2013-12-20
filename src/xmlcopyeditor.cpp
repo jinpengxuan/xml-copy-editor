@@ -4444,7 +4444,8 @@ void MyFrame::findAgain ( wxString s, int flags )
 
 	if ( flags & wxFR_DOWN ) // find next
 	{
-		doc->SetTargetStart ( doc->GetSelectionStart() );
+		doc->SetTargetStart ( findReplacePanel->getIncrementalFind()
+				? doc->GetSelectionStart()  : doc->GetSelectionEnd() );
 		doc->SetTargetEnd ( doc->GetLength() );
 		doc->SetSearchFlags ( myFlags );
 		newLocation = doc->SearchInTarget ( s );
