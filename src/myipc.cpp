@@ -88,7 +88,7 @@ bool MyServerConnection::OnPoke (
 	}
 #ifndef __WXMSW__
 #if defined ( __WXGTK__ ) && !defined ( __NO_GTK__ )
-	// Processes mostly cannot raise theire own windows.
+	// Processes mostly cannot raise their own windows.
 	// http://osdir.com/ml/gnome.gaim.devel/2004-12/msg00077.html
 	GtkWidget *widget = frame->GetHandle();
 	GdkWindow *window = gtk_widget_get_window ( widget );
