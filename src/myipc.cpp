@@ -193,20 +193,21 @@ bool MyClient::talkToServer ( int argc, const wxChar * const *argv )
 	wxString argument;
 	// wxConnectionBase::Poke expects something other than NULL in debug
 	// version
-#ifdef __WXDEBUG__
 	static wxChar whatBuffer[] = _T ( "Data" );
+#ifdef __WXDEBUG__
+	const static size_t bufSize = sizeof ( whatBuffer ) - sizeof ( wxChar );
 #else
-	static wxChar whatBuffer[0];
+	const static size_t bufSize = 0;
 #endif
 	if ( argc <= 1 )
 	{
-		connection->Poke ( IPC_NO_FILE, whatBuffer );
+		connection->Poke ( IPC_NO_FILE, whatBuffer, bufSize );
 	}
 	else for ( int i = 1; i < argc; i++ )
 	{
 		argument = argv[i];
 		argument = PathResolver::run ( argument );
-		if ( ! connection->Poke ( argument, whatBuffer ) )
+		if ( ! connection->Poke ( argument, whatBuffer, bufSize ) )
 			break;
 	}
 
