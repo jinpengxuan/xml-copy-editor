@@ -215,7 +215,8 @@ void MySAX2Handler::logError ( const wxString &type, wxLogLevel level,
 			WrapXerces::toString ( e.getMessage() ).c_str(), mEOL.c_str() );
 
 	// Only save the first error position
-	if ( level > mLevel	|| ( level == mLevel && mErrorPosition.first == 1
+	BOOST_STATIC_ASSERT ( wxLOG_Error < wxLOG_Warning );
+	if ( level < mLevel	|| ( level == mLevel && mErrorPosition.first == 1
 			&& mErrorPosition.second == 1 ) )
 	{
 		mErrorPosition.first = e.getLineNumber();

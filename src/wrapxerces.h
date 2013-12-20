@@ -64,6 +64,7 @@ class MySAX2Handler : public DefaultHandler
 		{
 			mErrors.clear();
 			mErrorPosition = std::make_pair ( 1, 1 );
+			mLevel = wxLOG_Max;
 		}
 		const wxString &getErrors() const
 		{
