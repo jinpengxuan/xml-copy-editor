@@ -3973,7 +3973,7 @@ void MyFrame::OnDtd2Schema ( wxCommandEvent& event )
 		messagePane ( error, CONST_STOP );
 	if ( !schema.empty() )
 	{
-		statusProgress ( _ ( "Creating view..." ) );
+		statusProgress ( _ ( "Creating document view..." ) );
 		newDocument ( schema );
 	}
 
