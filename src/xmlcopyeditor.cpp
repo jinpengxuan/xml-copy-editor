@@ -2429,7 +2429,7 @@ void MyFrame::OnBrowser ( wxCommandEvent& WXUNUSED ( event ) )
 		wtfn.setKeepFiles ( true );
 	}
 
-	wxLaunchDefaultBrowser ( sourceFileName );
+	wxLaunchDefaultBrowser ( sourceFileName, wxBROWSER_NEW_WINDOW );
 }
 
 void MyFrame::OnHelp ( wxCommandEvent& event )
