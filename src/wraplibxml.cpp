@@ -122,6 +122,7 @@ bool WrapLibxml::validate ( const std::string& utf8DocBuf,
 	ctxt = xmlNewParserCtxt();
 	if ( ctxt == NULL )
 	{
+		nonParserError = _("Cannot create a parser context");
 		return false;
 	}
 
@@ -156,19 +157,26 @@ bool WrapLibxml::validateRelaxNG (
 	do {
 		rngParserCtxt = xmlRelaxNGNewParserCtxt ( CONV ( schemaFileName ) );
 		if ( rngParserCtxt == NULL )
+		{
+			nonParserError = _("Cannot create an RNG parser context");
 			return false;
-
+		}
 		schemaPtr = xmlRelaxNGParse ( rngParserCtxt );
 		if ( schemaPtr == NULL )
 			break;
 
 		ctxtPtr = xmlRelaxNGNewValidCtxt ( schemaPtr );
 		if ( ctxtPtr == NULL )
+		{
+			nonParserError = _("Cannot create an RNG validation context");
 			break;
-
+		}
 		ctxt = xmlNewParserCtxt();
 		if ( ctxt == NULL )
+		{
+			nonParserError = _("Cannot create a parser context");
 			break;
+		}
 
 		int flags = XML_PARSE_DTDVALID;
 		if ( !netAccess )
@@ -217,11 +225,16 @@ bool WrapLibxml::validateW3CSchema (
 
 		ctxtPtr = xmlSchemaNewValidCtxt ( schemaPtr );
 		if ( ctxtPtr == NULL )
+		{
+			nonParserError = _("Cannot create a schema validation context");
 			break;
-
+		}
 		ctxt = xmlNewParserCtxt();
 		if ( ctxt == NULL )
+		{
+			nonParserError = _("Cannot create a parser context");
 			break;
+		}
 
 		int flags = XML_PARSE_DTDLOAD;
 		if ( !netAccess )
@@ -278,6 +291,7 @@ bool WrapLibxml::parse (
 	ctxt = xmlNewParserCtxt();
 	if ( ctxt == NULL )
 	{
+		nonParserError = _("Cannot create a parser context");
 		return false;
 	}
 
@@ -338,6 +352,7 @@ bool WrapLibxml::xpath ( const wxString &xpath, const std::string &utf8DocBuf,
 	ctxt = xmlNewParserCtxt();
 	if ( ctxt == NULL )
 	{
+		nonParserError = _("Cannot create a parser context");
 		return false;
 	}
 
@@ -456,7 +471,7 @@ bool WrapLibxml::xslt (
 		ctxt = xmlNewParserCtxt();
 		if ( !ctxt )
 		{
-			nonParserError = _("Cannot create parser context");
+			nonParserError = _("Cannot create a parser context");
 			break;
 		}
 
@@ -469,13 +484,6 @@ bool WrapLibxml::xslt (
 		else
 			doc = xmlCtxtReadFile ( ctxt,  CONV ( docUrl ), NULL, flags );
 		if ( !doc )
-		{
-			nonParserError = _("Cannot parse file");
-			break;
-		}
-
-		// ensure entity warnings are treated as errors
-		if ( !getLastError().empty() )
 			break;
 
 		res = xsltApplyStylesheet ( cur, doc, NULL );
@@ -494,7 +502,8 @@ bool WrapLibxml::xslt (
 			xmlFree ( buf );
 		}
 
-		ret = true;
+		// ensure entity warnings are treated as errors
+		ret = !xmlGetLastError();
 
 	} while ( false );
 
@@ -510,7 +519,10 @@ bool WrapLibxml::bufferWellFormed ( const std::string& buffer )
 {
 	xmlParserCtxtPtr ctxt = xmlNewParserCtxt();
 	if ( !ctxt )
+	{
+		nonParserError = _("Cannot create a parser context");
 		return false;
+	}
 
 	int flags = XML_PARSE_DTDLOAD;
 	if ( !netAccess )
@@ -555,7 +567,10 @@ int WrapLibxml::saveEncoding (
 {
 	xmlParserCtxtPtr ctxt = xmlNewParserCtxt();
 	if ( !ctxt )
+	{
+		nonParserError = _("Cannot create a parser context");
 		return -1;
+	}
 
 	xmlDocPtr docPtr;
 	int flags = XML_PARSE_DTDLOAD | XML_PARSE_PEDANTIC /*| XML_PARSE_DTDVALID*/;//XML_PARSE_NONET//XML_PARSE_DTDLOAD//0//(netAccess) ? XML_PARSE_DTDLOAD | XML_PARSE_NOENT : XML_PARSE_DTDLOAD | XML_PARSE_NONET | XML_PARSE_NOENT//0
