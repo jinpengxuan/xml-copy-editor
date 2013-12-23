@@ -94,7 +94,8 @@ class MySAX2Handler : public DefaultHandler
 class WrapXerces : private boost::noncopyable
 {
 	public:
-		static void Init() throw ();
+		static void Init ( bool enableNetAccess ) throw ();
+
 		WrapXerces();
 		virtual ~WrapXerces();
 		bool validate ( const wxString &fileName );
@@ -118,9 +119,12 @@ class WrapXerces : private boost::noncopyable
 //#else
 		static wxMemoryBuffer toString ( const wxString &str );
 //#endif
+		// Returns original value
+		static bool enableNetwork ( bool enable = true );
 
 	private:
 		static const wxMBConv &getMBConv();
+		static XMLNetAccessor *mOriginalNetAccessor;
 
 		XercesCatalogResolver *catalogResolver;
 		MySAX2Handler mySAX2Handler;

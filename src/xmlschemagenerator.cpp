@@ -34,7 +34,6 @@ XmlSchemaGenerator::XmlSchemaGenerator ( bool inlineSimpleType /*= true*/)
 		: mInlineSimpleType ( inlineSimpleType )
 		, mGrammarType ( Grammar::SchemaGrammarType )
 {
-	WrapXerces::Init();
 }
 
 XmlSchemaGenerator::~XmlSchemaGenerator()

@@ -33,26 +33,29 @@
 
 using namespace xercesc;
 
-void WrapXerces::Init() throw()
+XMLNetAccessor *WrapXerces::mOriginalNetAccessor = NULL;
+
+void WrapXerces::Init ( bool enableNetAccess ) throw()
 {
 	static class Initializer
 	{
 	public:
-		Initializer()
+		Initializer ()
 		{
 			XMLPlatformUtils::Initialize();
+			mOriginalNetAccessor = XMLPlatformUtils::fgNetAccessor;
 		}
 		~Initializer()
 		{
 			XMLPlatformUtils::Terminate();
 		}
 	} dummy;
+
+	enableNetwork ( enableNetAccess );
 }
 
 WrapXerces::WrapXerces()
 {
-	WrapXerces::Init();
-
 	catalogResolver = new XercesCatalogResolver();
 }
 
@@ -204,6 +207,21 @@ wxMemoryBuffer WrapXerces::toString ( const wxString &str )
 	buffer.SetDataLen ( lenMB );
 
 	return buffer;
+}
+
+bool WrapXerces::enableNetwork ( bool enable /*= true*/ )
+{
+	bool ret = XMLPlatformUtils::fgNetAccessor != NULL;
+	if ( enable )
+	{
+		wxASSERT ( mOriginalNetAccessor != NULL );
+		XMLPlatformUtils::fgNetAccessor = mOriginalNetAccessor;
+	}
+	else
+	{
+		XMLPlatformUtils::fgNetAccessor = NULL;
+	}
+	return ret;
 }
 
 void MySAX2Handler::logError ( const wxString &type, wxLogLevel level,

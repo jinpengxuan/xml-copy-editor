@@ -190,7 +190,7 @@ MyPropertySheet::MyPropertySheet (
 	}
 
 	libxmlNetAccessBox = new wxCheckBox (
-	    generalPanel, wxID_ANY, _ ( "&Enable network access for DTD validation" ) );
+	    generalPanel, wxID_ANY, _ ( "&Enable network access for XML validation" ) );
 	libxmlNetAccessBox->SetValue ( libxmlNetAccessParameter );
 	expandInternalEntitiesBox = new wxCheckBox (
 	    generalPanel, wxID_ANY, _ ( "E&xpand internal entities on open" ) );

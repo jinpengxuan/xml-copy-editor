@@ -375,9 +375,6 @@ bool MyApp::OnInit()
 		wxImage::AddHandler ( new wxPNGHandler );
 		wxSystemOptions::SetOption ( _T ( "msw.remap" ), 0 );
 
-		// Initialize Xerces-C++
-		WrapXerces::Init();
-
 		frame = new MyFrame (
 		    _ ( "XML Copy Editor" ),
 		    config.get(),
@@ -841,23 +838,6 @@ MyFrame::MyFrame (
 		xercescSSE2Warning = true;
 	}
 
-	if ( XMLPlatformUtils::fgSSE2ok
-		&& xercescSSE2Warning
-		&& wxTheApp->argc == 1 )
-	{
-		xercescSSE2Warning = wxMessageBox (
-			_ ("SSE2 is enabled in Xerces-C++ library. Xerces-C++ didn't "\
-			   "use them in a thread-safe way. It may cause program crashes "\
-			   "(segmentation faults).\n\n"\
-			   "If it happens, please try compiling Xerces-C++ with SSE2 "\
-			   "disabled.\n\n"\
-			   "OK:\tShow this warning next time\n"\
-			   "Cancel:\tDisable the warning\n"),
-			_ ("SSE2 problem in Xerces-C++"),
-			wxOK | wxCANCEL | wxICON_WARNING
-		) == wxOK;
-	}
-
 	largeFileProperties.completion = false;
 	largeFileProperties.fold = false;
 	largeFileProperties.whitespaceVisible = false;
@@ -880,6 +860,26 @@ MyFrame::MyFrame (
 
 	// Initialize libxml
 	WrapLibxml::Init ( catalogPath );
+
+	// Initialize Xerces-C++
+	WrapXerces::Init ( libxmlNetAccess );
+
+	if ( XMLPlatformUtils::fgSSE2ok
+		&& xercescSSE2Warning
+		&& wxTheApp->argc == 1 )
+	{
+		xercescSSE2Warning = wxMessageBox (
+			_ ("SSE2 is enabled in Xerces-C++ library. Xerces-C++ didn't "\
+			   "use them in a thread-safe way. It may cause program crashes "\
+			   "(segmentation faults).\n\n"\
+			   "If it happens, please try compiling Xerces-C++ with SSE2 "\
+			   "disabled.\n\n"\
+			   "OK:\tShow this warning next time\n"\
+			   "Cancel:\tDisable the warning\n"),
+			_ ("SSE2 problem in Xerces-C++"),
+			wxOK | wxCANCEL | wxICON_WARNING
+		) == wxOK;
+	}
 
 	size_t findFlags = 0;
 	findFlags |= wxFR_DOWN;
@@ -2597,6 +2597,7 @@ void MyFrame::OnOptions ( wxCommandEvent& WXUNUSED ( event ) )
 	                                          title ) );
 	if ( mpsd->ShowModal() == wxID_OK )
 	{
+		WrapXerces::enableNetwork ( libxmlNetAccess );
 		applyEditorProperties();
 		updatePaths();
 	}
