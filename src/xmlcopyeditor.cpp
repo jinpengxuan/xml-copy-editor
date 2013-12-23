@@ -1327,7 +1327,9 @@ void MyFrame::OnAbout ( wxCommandEvent& WXUNUSED ( event ) )
 	info.AddTranslator ( _T ( "Marcos Pérez González (Spanish) <marcos_pg at yahoo dot com>" ) );
 	info.AddTranslator ( _T ( "Rob Elemans (Dutch) <relemans at gmail dot com>" ) );
 	info.AddTranslator ( _T ( "Robert Falcó Miramontes <rfalco at acett dot org>" ) );
-    info.SetLicense ( ABOUT_LICENSE );
+	info.AddTranslator ( _T ( "Khoem Sokhem (Khmer) <sokhem at open dot org dot kh>" ) );
+	info.AddTranslator ( _T ( "Roger Sperberg (Khmer) <rsperberg at gmail dot com>" ) );
+	info.SetLicense ( ABOUT_LICENSE );
 	info.SetDescription ( description );
 	wxAboutBox ( info );
 	XmlDoc *doc;
