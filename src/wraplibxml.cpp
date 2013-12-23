@@ -573,7 +573,9 @@ int WrapLibxml::saveEncoding (
 	}
 
 	xmlDocPtr docPtr;
-	int flags = XML_PARSE_DTDLOAD | XML_PARSE_PEDANTIC /*| XML_PARSE_DTDVALID*/;//XML_PARSE_NONET//XML_PARSE_DTDLOAD//0//(netAccess) ? XML_PARSE_DTDLOAD | XML_PARSE_NOENT : XML_PARSE_DTDLOAD | XML_PARSE_NONET | XML_PARSE_NOENT//0
+	// Don't load DTD because additional namespace declarations will be added
+	// to every element when processing a docbook XML
+	int flags = XML_PARSE_PEDANTIC /*| XML_PARSE_DTDLOAD | XML_PARSE_DTDVALID*/;
 	if ( !netAccess )
 		flags |= XML_PARSE_NONET;
 	if ( utf8Buffer != NULL )
@@ -598,8 +600,8 @@ int WrapLibxml::saveEncoding (
 	else
 	{
 		xmlChar *buffer;
-		xmlDocDumpMemoryEnc ( docPtr, &buffer, &result,
-				encoding.utf8_str() );
+		xmlDocDumpFormatMemoryEnc ( docPtr, &buffer, &result,
+				encoding.utf8_str(), 1 );
 		outputBuffer->AppendData ( buffer, result );
 		xmlFree ( buffer );
 	}
