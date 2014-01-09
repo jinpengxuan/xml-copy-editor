@@ -1,21 +1,17 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
-"Project-Id-Version: XML CE 1.2.0.9\n"
+"Project-Id-Version: XML Copy Editor v1.2.0.12\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2013-03-04 19:15-0500\n"
-"PO-Revision-Date: 2013-03-04 23:29-0500\n"
-"Last-Translator: Roger Sperberg <rsperberg@gmail.com>\n"
+"PO-Revision-Date: 2014-01-07 21:48-0500\n"
+"Last-Translator: Khoem Sokhem <sokhem@open.org.kh>\n"
 "Language-Team: Khmer language team <xmlce@spress.ws>\n"
-"Language: Khmer\n"
+"Language: km\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 1.5.5\n"
+"X-Generator: Poedit 1.6.3\n"
 "X-Language: km-KH\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
@@ -23,81 +19,120 @@ msgstr ""
 msgid "OK"
 msgstr "យល់ព្រម"
 
-#: associatedialog.cpp:74 mypropertysheet.cpp:157
+#: associatedialog.cpp:74 mypropertysheet.cpp:166
 msgid "Browse"
 msgstr "រក​មើល"
 
-#: associatedialog.cpp:122
+#: associatedialog.cpp:121
 msgid "Provides a space for you to type the path of the file"
 msgstr "ផ្ដល់​ទំហំ​សម្រាប់​អ្នក​ ដើម្បី​បញ្ចូល​ផ្លូវ​ឯកសារ"
 
-#: associatedialog.cpp:126
+#: associatedialog.cpp:125
 msgid "Opens a standard file dialog"
 msgstr "បើក​ប្រអប់​ឯកសារ​ស្តង់ដារ"
 
-#: associatedialog.cpp:130
+#: associatedialog.cpp:129
 msgid "Provides a space for you to type additional information"
 msgstr "ផ្ដល់​ទំហំ​សម្រាប់​អ្នក​ ដើម្បី​បញ្ចូល​ព័ត៌មាន​បន្ថែម"
 
-#: associatedialog.cpp:134
+#: associatedialog.cpp:133
 msgid "Closes this dialog without making any changes"
 msgstr "បិទ​ប្រអប់​នេះ ដោយ​មិន​ធ្វើ​ការ​ផ្លាស់ប្ដូរ"
 
-#: associatedialog.cpp:138
+#: associatedialog.cpp:137
 msgid "Selects the file specified"
 msgstr "ជ្រើស​ឯកសារ​បាន​បញ្ជាក់"
 
-#: associatedialog.cpp:167
+#: associatedialog.cpp:166
 msgid "|All files (*.*)|*.*"
 msgstr "|ឯកសារ​ទាំងអស់​ (*.*)|*.*"
 
-#: associatedialog.cpp:170
+#: associatedialog.cpp:169
 msgid "Select "
 msgstr "ជ្រើស"
 
-#: commandpanel.cpp:45 commandpanel.cpp:182
+#: commandpanel.cpp:45 commandpanel.cpp:163
 msgid "{path}"
 msgstr "{ផ្លូវ}"
 
-#: commandpanel.cpp:46 commandpanel.cpp:183
+#: commandpanel.cpp:46 commandpanel.cpp:164
 msgid "{name}"
 msgstr "{ឈ្មោះ}"
 
-#: commandpanel.cpp:47 commandpanel.cpp:184
+#: commandpanel.cpp:47 commandpanel.cpp:165
 msgid "{extension}"
 msgstr "{កន្ទុយ}"
 
-#: commandpanel.cpp:48 commandpanel.cpp:181
+#: commandpanel.cpp:48 commandpanel.cpp:162
 msgid "{fullpath}"
 msgstr "{ផ្លូវ​ពេញលេញ}"
 
-#: commandpanel.cpp:74
+#: commandpanel.cpp:63
 msgid "&Run"
-msgstr "រត់"
+msgstr "ដំណើរការ"
 
-#: commandpanel.cpp:82
+#: commandpanel.cpp:71
 msgid "&Wait"
 msgstr "រង់​ចាំ"
 
-#: commandpanel.cpp:88
+#: commandpanel.cpp:77
 msgid "Output options"
 msgstr "ជម្រើស​លទ្ធផល"
 
-#: commandpanel.cpp:93
+#: commandpanel.cpp:82
 msgid "I&gnore"
 msgstr "មិន​អើពើ"
 
-#: commandpanel.cpp:99
+#: commandpanel.cpp:88
 msgid "I&nsert"
 msgstr "បញ្ចូល"
 
-#: commandpanel.cpp:104
+#: commandpanel.cpp:93
 msgid "New &document"
 msgstr "ឯកសារ​ថ្មី"
 
-#: commandpanel.cpp:125
+#: commandpanel.cpp:114
 msgid "Variables"
 msgstr "អថេរ"
+
+#: dtd2schema.cpp:56
+#, c-format
+msgid "Line %lld column %lld: %s[br]"
+msgstr "ជួរ %lld ជួរឈរ %lld: %s[br]"
+
+#: dtd2schema.cpp:83
+#, c-format
+msgid "Target namespace is redefined: %s -> %s[br]"
+msgstr "ចន្លោះ​គោលដៅ​ត្រូវ​បាន​កំណត់​ឡើង​វិញ៖ %s -> %s[br]"
+
+#: dtd2schema.cpp:312
+msgid "Ignored content type: "
+msgstr "មិន​អើពើ​ប្រភេទ​មាតិកា៖"
+
+#: dtd2schema.cpp:337 dtd2schema.cpp:419
+#, c-format
+msgid "Unknown namespace: %s[br]"
+msgstr "មិន​ស្គាល់​ចន្លោះ៖ %s[br]"
+
+#: dtd2schema.cpp:392
+#, c-format
+msgid "Ignored namespace of %s: %s[br]"
+msgstr "មិន​អើពើ​ចន្លោះ​នៃ %s: %s[br]"
+
+#: dtd2schema.cpp:411
+#, c-format
+msgid "Namespace redefined: %s -> %s[br]"
+msgstr "បាន​កំណត់​ចន្លោះ​ឡើងវិញ៖ %s -> %s[br]"
+
+#: dtd2schema.cpp:526
+#, c-format
+msgid "Ignored attribute \"%s\"'s type: %s[br]"
+msgstr "មិន​អើពើ​គុណលក្ខណៈ \"%s\"'s ប្រភេទ៖ %s[br]"
+
+#: dtd2schema.cpp:565
+#, c-format
+msgid "Unknown default type of attribute \"%s\": %s[br]"
+msgstr "មិន​ស្គាល់​ប្រភេទ​គុណលក្ខណៈ​លំនាំដើម \"%s\": %s[br]"
 
 #: exportdialog.cpp:66
 msgid "DAISY export"
@@ -151,23 +186,21 @@ msgstr "អាល់ប៊ុម MP3"
 msgid "Download DAISY extension"
 msgstr "ទាញយក​ផ្នែក​បន្ថែម DAISY"
 
-#: exportdialog.cpp:187
+#: exportdialog.cpp:183
 msgid ""
 "Provides a space for you to enter or select a stylesheet for conversion to "
 "canonical XHTML"
-msgstr ""
-"ផ្ដល់​ទំហំ​សម្រាប់​អ្នក​ ដើម្បី​បញ្ចូល​ "
-"ឬ​ជ្រើស​សន្លឹក​រចនាប័ទ្ម​សម្រាប់​បម្លែងទៅជា canonical XHTML"
+msgstr "ផ្ដល់​ទំហំ​សម្រាប់​អ្នក​ ដើម្បី​បញ្ចូល​ ឬ​ជ្រើស​សន្លឹក​រចនាប័ទ្ម​សម្រាប់​បម្លែងទៅជា canonical XHTML"
 
-#: exportdialog.cpp:191
+#: exportdialog.cpp:187
 msgid "Provides a space for you to enter or select the output folder"
 msgstr "ផ្ដល់​ទំហំ​សម្រាប់​សម្រាប់ ដើម្បី​បញ្ចូល​ ឬ​ជ្រើស​ថត​លទ្ធផល"
 
-#: exportdialog.cpp:195
+#: exportdialog.cpp:191
 msgid "Starts the export"
 msgstr "ចាប់ផ្ដើម​នាំចេញ"
 
-#: exportdialog.cpp:199
+#: exportdialog.cpp:195
 msgid "Closes the dialog box without exporting the file"
 msgstr "បិទ​ប្រអប់​ដោយ​មិន​នាំចេញ​ឯកសារ"
 
@@ -175,7 +208,7 @@ msgstr "បិទ​ប្រអប់​ដោយ​មិន​នាំចេ
 msgid "Find:"
 msgstr "រក៖"
 
-#: findreplacepanel.cpp:48 findreplacepanel.cpp:49 styledialog.cpp:454
+#: findreplacepanel.cpp:48 findreplacepanel.cpp:49 styledialog.cpp:455
 msgid " "
 msgstr " "
 
@@ -227,18 +260,15 @@ msgstr "ជំនួស​ក្នុង​ឯកសារ​បាន​បើ
 msgid "Cannot compile regular expression '"
 msgstr "មិន​អាច​ចងក្រង​កន្សោម​ធម្មតា '"
 
-#: globalreplacedialog.cpp:147
+#: globalreplacedialog.cpp:145
 msgid "Provides a space for you to type the text you want to find"
 msgstr "ផ្ដល់​ទំហំ​សម្រាប់​អ្នក​ ដើម្បី​បញ្ចូល​អត្ថបទ​ដែល​អ្នក​ចង់​ស្វែងរក"
 
-#: globalreplacedialog.cpp:151
+#: globalreplacedialog.cpp:149
 msgid ""
 "Provides a space for you to type the text you want to replace the text you "
 "typed in Find what"
-msgstr ""
-"ផ្ដល់​ទំហំ​សម្រាប់​អ្នក "
-"ដើម្បី​បញ្ចូល​អត្ថបទ​ដែល​អ្នក​ចង់​ជំនួស​អត្ថបទ​ដែល​អ្នកបាន​បញ្ចូល​ក្នុង "
-"​រក​អ្វី"
+msgstr "ផ្ដល់​ទំហំ​សម្រាប់​អ្នក ដើម្បី​បញ្ចូល​អត្ថបទ​ដែល​អ្នក​ចង់​ជំនួស​អត្ថបទ​ដែល​អ្នកបាន​បញ្ចូល​ក្នុង ​រក​អ្វី"
 
 #: globalreplacedialog.cpp:155
 msgid ""
@@ -246,27 +276,33 @@ msgid ""
 "what"
 msgstr "រក​តែ​អត្ថបទ​ដែលមាន​អក្សរ និង​ធំ​ដូច​បាន​បញ្ជាក់​ក្នុង​ រក​អ្វី"
 
-#: globalreplacedialog.cpp:159
+#: globalreplacedialog.cpp:157
 msgid "Extends the scope to all open documents"
 msgstr "ពង្រីក​វិសាលភាព​ទៅ​ឯកសារ​បាន​បើក​ទាំងអស់"
 
-#: globalreplacedialog.cpp:163
+#: globalreplacedialog.cpp:161
 msgid "Interprets the text specified in Find what as a regular expression"
 msgstr "បកប្រែ​អត្ថបទ​ដែល​បាន​បញ្ជាក់​ក្នុង រក​អ្វី​ជា​កន្សោម​ធម្មតា"
 
-#: globalreplacedialog.cpp:167
+#: globalreplacedialog.cpp:165
 msgid ""
 "Finds all instances of the text specified in Find what and replaces them "
 "with the text in Replace with"
-msgstr ""
-"រក​ធាតុ​ទាំងអស់​នៃ​អត្ថបទ​បាន​បញ្ជាក់​ក្នុង​ រក​អ្វី "
-"និងជំនួស​ពួកវា​ដោយ​អត្ថបទ​ក្នុង ជំនួស​ដោយ"
+msgstr "រក​ធាតុ​ទាំងអស់​នៃ​អត្ថបទ​បាន​បញ្ជាក់​ក្នុង​ រក​អ្វី និងជំនួស​ពួកវា​ដោយ​អត្ថបទ​ក្នុង ជំនួស​ដោយ"
 
-#: globalreplacedialog.cpp:171
+#: globalreplacedialog.cpp:169
 msgid "Closes the dialog box without saving any changes you have made"
 msgstr "បិទ​ប្រអប់ ដោយ​មិន​រក្សាទុក​ការ​ផ្លាស់ប្ដូរ​ដែល​អ្នក​បាន​ធ្វើ"
 
-#: mynotebook.cpp:88 wrapdaisy.cpp:538 xmlcopyeditor.cpp:5495
+#: housestyle.cpp:183
+msgid "no rules found"
+msgstr "រក​មិន​ឃើញ​ក្បួន"
+
+#: housestyle.cpp:222
+msgid "Cannot initialise spellcheck"
+msgstr "មិន​អាច​ចាប់ផ្ដើម​ការ​ពិនិត្យ​អក្ខរាវិរុទ្ធ"
+
+#: mynotebook.cpp:88 wrapdaisy.cpp:535 xmlcopyeditor.cpp:5325
 msgid "Close"
 msgstr "បិទ"
 
@@ -274,115 +310,115 @@ msgstr "បិទ"
 msgid "Close all"
 msgstr "បិទ​ទាំង​អស់"
 
-#: mypropertysheet.cpp:66
+#: mypropertysheet.cpp:75
 msgid "Font"
 msgstr "ពុម្ពអក្សរ"
 
-#: mypropertysheet.cpp:81
+#: mypropertysheet.cpp:90
 msgid "I&ntelligent backspace/delete"
 msgstr "លុប/លុបថយក្រោយ​ឆ្លាត"
 
-#: mypropertysheet.cpp:84
+#: mypropertysheet.cpp:93
 msgid "&Tag completion"
 msgstr "ការ​បំពេញ​ស្លាក"
 
-#: mypropertysheet.cpp:87
+#: mypropertysheet.cpp:96
 msgid "&Folding"
 msgstr "បត់"
 
-#: mypropertysheet.cpp:90
+#: mypropertysheet.cpp:99
 msgid "&Highlight current line"
 msgstr "រំលេច​បន្ទាត់​បច្ចុប្បន្ន"
 
-#: mypropertysheet.cpp:93
+#: mypropertysheet.cpp:102
 msgid "&Indentation guides"
 msgstr "មគ្គុទ្ទេសក៍​ចូល​បន្ទាត់"
 
-#: mypropertysheet.cpp:96
+#: mypropertysheet.cpp:105
 msgid "&Always insert closing tag"
 msgstr "បញ្ចូល​ស្លាក​បិទ​ជា​និច្ច"
 
-#: mypropertysheet.cpp:99
+#: mypropertysheet.cpp:108
 msgid "Hi&ghlight syntax"
 msgstr "រំលេច​វាក្យសម្ព័ន្ធ"
 
-#: mypropertysheet.cpp:102
+#: mypropertysheet.cpp:111
 msgid "&Line numbers"
 msgstr "លេខរៀង​បន្ទាត់"
 
-#: mypropertysheet.cpp:105
+#: mypropertysheet.cpp:114
 msgid "L&ock hidden tags"
 msgstr "ចាក់សោ​ស្លាក​ដែល​លាក់"
 
-#: mypropertysheet.cpp:108
+#: mypropertysheet.cpp:117
 msgid "&White space visible"
 msgstr "មើល​​ឃើញចន្លោះ​មិនឃើញ​"
 
-#: mypropertysheet.cpp:111
+#: mypropertysheet.cpp:120
 msgid "&Validate as you type"
 msgstr "ធ្វើឲ្យមាន​សុពលភាព​ពេល​អ្នក​បញ្ចូល"
 
-#: mypropertysheet.cpp:114
+#: mypropertysheet.cpp:123
 msgid "Va&riable highlight in tag free view"
 msgstr "រំលេច​អថេរ​ក្នុង​ស្លាក​ទិដ្ឋភាព​ទំនេរ"
 
-#: mypropertysheet.cpp:147
+#: mypropertysheet.cpp:156
 msgid "Application directory"
 msgstr "ថត​កម្មវិធី"
 
-#: mypropertysheet.cpp:164
+#: mypropertysheet.cpp:173
 msgid "Language (restart required)"
 msgstr "ភាសា (ទាមទារ​ចាប់ផ្ដើម​ឡើង​វិញ)"
 
-#: mypropertysheet.cpp:170 styledialog.cpp:339 xmlcopyeditor.cpp:5150
+#: mypropertysheet.cpp:179 styledialog.cpp:340 xmlcopyeditor.cpp:4978
 msgid "Default"
 msgstr "លំនាំដើម"
 
-#: mypropertysheet.cpp:184
-msgid "&Enable network access for DTD validation"
-msgstr "បើក​ការ​ចូល​បណ្ដាញ​សម្រាប់​សុពលកម្ម DTD"
+#: mypropertysheet.cpp:193
+msgid "&Enable network access for XML validation"
+msgstr "បើក​ការ​ចូល​បណ្ដាញ​សម្រាប់​សុពលកម្ម XML"
 
-#: mypropertysheet.cpp:187
+#: mypropertysheet.cpp:196
 msgid "E&xpand internal entities on open"
 msgstr "ពង្រីក​ធាតុ​ខាង​ក្នុង​ពេល​បើក"
 
-#: mypropertysheet.cpp:190
+#: mypropertysheet.cpp:199
 msgid "&One application instance only"
 msgstr "តែ​ធាតុ​កម្មវិធី​មួយ​ប៉ុណ្ណោះ"
 
-#: mypropertysheet.cpp:193
+#: mypropertysheet.cpp:202
 msgid "Re&member layout on close"
 msgstr "ចងចាំ​ស្លាក​ពេលបិទ"
 
-#: mypropertysheet.cpp:196
+#: mypropertysheet.cpp:205
 msgid "&Remember open tabs on close"
 msgstr "ចងចាំ​ស្លាក​ដែល​បើក​ពេល​បិទ"
 
-#: mypropertysheet.cpp:199
+#: mypropertysheet.cpp:208
 msgid "Re&tain undo history on save"
 msgstr "ចាំ​ប្រវត្តិ​មិនធ្វើ​ពេល​រក្សាទុក"
 
-#: mypropertysheet.cpp:203
+#: mypropertysheet.cpp:212
 msgid "&Save UTF-8 byte order mark"
 msgstr "រក្សាទុកសញ្ញា​សម្គាល់​លំដាប់​​បៃ UTF-8"
 
-#: mypropertysheet.cpp:207
+#: mypropertysheet.cpp:216
 msgid "S&how full path on frame"
 msgstr "បង្ហាញ​ផ្លូវ​ពេញលេញ​លើ​ស៊ុម"
 
-#: mypropertysheet.cpp:233
+#: mypropertysheet.cpp:242
 msgid "General"
 msgstr "ទូទៅ"
 
-#: mypropertysheet.cpp:234
+#: mypropertysheet.cpp:243
 msgid "Editor"
 msgstr "កម្មវិធី​កែសម្រួល"
 
-#: mypropertysheet.cpp:261
+#: mypropertysheet.cpp:256
 msgid "Cannot access application directory"
 msgstr "មិន​អាច​ចូល​ថត​កម្មវិធី​បាន​ទេ"
 
-#: mypropertysheet.cpp:261 xmlcopyeditor.cpp:2611
+#: mypropertysheet.cpp:256 xmlcopyeditor.cpp:2578
 msgid "Options"
 msgstr "ជម្រើស"
 
@@ -390,137 +426,138 @@ msgstr "ជម្រើស"
 msgid "Style"
 msgstr "រចនាប័ទ្ម"
 
-#: styledialog.cpp:102 xmlcopyeditor.cpp:5627 xmlcopyeditor.cpp:5631
+#: styledialog.cpp:102 xmlcopyeditor.cpp:5457 xmlcopyeditor.cpp:5461
 msgid "Spelling"
 msgstr "អក្ខរាវិរុទ្ធ"
 
-#: styledialog.cpp:147
+#: styledialog.cpp:148
 msgid "&Check"
 msgstr "ពិនិត្យ​មើល"
 
-#: styledialog.cpp:165
+#: styledialog.cpp:166
 msgid "No."
 msgstr "លេខ"
 
-#: styledialog.cpp:166 styledialog.cpp:168
+#: styledialog.cpp:167 styledialog.cpp:169
 msgid "Context"
 msgstr "បរិបទ"
 
-#: styledialog.cpp:167 xmlcopyeditor.cpp:424 xmlcopyeditor.cpp:444
-#: xmlcopyeditor.cpp:447 xmlcopyeditor.cpp:464 xmlcopyeditor.cpp:469
-#: xmlcopyeditor.cpp:509 xmlcopyeditor.cpp:529 xmlcopyeditor.cpp:541
-#: xmlcopyeditor.cpp:547 xmlcopyeditor.cpp:576
+#: styledialog.cpp:168 xmlcopyeditor.cpp:393 xmlcopyeditor.cpp:413
+#: xmlcopyeditor.cpp:416 xmlcopyeditor.cpp:433 xmlcopyeditor.cpp:438
+#: xmlcopyeditor.cpp:478 xmlcopyeditor.cpp:498 xmlcopyeditor.cpp:510
+#: xmlcopyeditor.cpp:516 xmlcopyeditor.cpp:545 wrapxerces.h:51
 msgid "Error"
 msgstr "កំហុស"
 
-#: styledialog.cpp:169
+#: styledialog.cpp:170
 msgid "Suggestion"
 msgstr "ការ​ផ្តល់​យោបល់"
 
-#: styledialog.cpp:171
+#: styledialog.cpp:172
 msgid "Rule"
 msgstr "ច្បាប់"
 
-#: styledialog.cpp:172
+#: styledialog.cpp:173
 msgid "Action"
 msgstr "អំពើ"
 
-#: styledialog.cpp:180
+#: styledialog.cpp:181
 msgid "&Apply changes"
 msgstr "អនុវត្ត​ការ​ផ្លាស់ប្ដូរ"
 
-#: styledialog.cpp:188
+#: styledialog.cpp:189
 msgid "&Printable report"
 msgstr "របាយការណ៍​ដែល​អាច​បោះពុម្ព​បាន"
 
-#: styledialog.cpp:196
+#: styledialog.cpp:197
 msgid "Pr&intable summary"
 msgstr "សង្ខេប​ដែល​អាច​បោះពុម្ព​បាន"
 
-#: styledialog.cpp:204
+#: styledialog.cpp:205
 msgid "C&hange all"
 msgstr "ផ្លាស់ប្តូរ​ទាំងអស់"
 
-#: styledialog.cpp:212
+#: styledialog.cpp:213
 msgid "I&gnore all"
 msgstr "មិន​អើពើ​ទាំងអស់"
 
-#: styledialog.cpp:220
+#: styledialog.cpp:221
 msgid "Ca&ncel"
 msgstr "បោះបង់"
 
-#: styledialog.cpp:303 xmlcopyeditor.cpp:786 xmlcopyeditor.cpp:836
+#: styledialog.cpp:304 xmlcopyeditor.cpp:755 xmlcopyeditor.cpp:805
 msgid "en_US"
 msgstr "en_US"
 
-#: styledialog.cpp:308
+#: styledialog.cpp:309
 msgid "(No dictionaries found)"
 msgstr "(រក​មិន​ឃើញ​វចនានុក្រម)"
 
-#: styledialog.cpp:344
+#: styledialog.cpp:345
 msgid "(No rule sets found)"
-msgstr "រក​មិន​សំណុំ​ច្បាប់)"
+msgstr "(រក​មិន​សំណុំ​ច្បាប់)"
 
-#: styledialog.cpp:350 xmlcopyeditor.cpp:789
+#: styledialog.cpp:351 xmlcopyeditor.cpp:758
 msgid "(No filter)"
 msgstr "(គ្មាន​តម្រង)"
 
-#: styledialog.cpp:373
+#: styledialog.cpp:374
 msgid "(No filters found)"
 msgstr "(រក​មិន​ឃើញ​តម្រង)"
 
-#: styledialog.cpp:400 styledialog.cpp:430 styledialog.cpp:755
-#: styledialog.cpp:760
+#: styledialog.cpp:401 styledialog.cpp:431 styledialog.cpp:750
+#: styledialog.cpp:755
 msgid "Ignore"
 msgstr "មិន​អើពើ"
 
-#: styledialog.cpp:414
+#: styledialog.cpp:415
 msgid "Ignore once"
-msgstr "មិន​អើពើ​មួយ"
+msgstr "មិន​អើពើ​ម្ដង"
 
-#: styledialog.cpp:416
+#: styledialog.cpp:417
 msgid "Ignore all"
 msgstr "មិន​អើពើ​ទាំង​អស់"
 
-#: styledialog.cpp:418
+#: styledialog.cpp:419
 msgid "Change once"
 msgstr "មិន​អើពើ​ម្ដង"
 
-#: styledialog.cpp:419
+#: styledialog.cpp:420
 msgid "Change all"
 msgstr "ផ្លាស់ប្តូរ​ទាំងអស់"
 
-#: styledialog.cpp:422
+#: styledialog.cpp:423
 msgid "New suggestion..."
 msgstr "ការ​ផ្តល់​យោបល់​ថ្មី..."
 
-#: styledialog.cpp:445 styledialog.cpp:478
+#: styledialog.cpp:446 styledialog.cpp:474
 msgid "Checking document..."
 msgstr "កំពុង​ពិនិត្យ​ឯកសារ..."
 
-#: styledialog.cpp:483
+#: styledialog.cpp:478
 msgid "Cannot check document: "
 msgstr "មិន​អាច​ពិនិត្យ​ឯកសារ៖"
 
-#: styledialog.cpp:516
+#: styledialog.cpp:511
 #, c-format
 msgid "%i error"
 msgid_plural "%i errors"
 msgstr[0] "កំហុស %i"
+msgstr[1] ""
 
-#: styledialog.cpp:531
+#: styledialog.cpp:526
 msgid "No items selected"
 msgstr "គ្មាន​ធាតុ​បាន​ជ្រើស"
 
-#: styledialog.cpp:760 styledialog.cpp:788
+#: styledialog.cpp:755 styledialog.cpp:783
 msgid "Change"
 msgstr "ផ្លាស់ប្តូរ"
 
-#: styledialog.cpp:919
+#: styledialog.cpp:914
 msgid "Enter new suggestion:"
 msgstr "បញ្ចូលការ​ផ្តល់​យោបល់​ថ្មី ៖"
 
-#: styledialog.cpp:920
+#: styledialog.cpp:915
 msgid "New Suggestion"
 msgstr "ការ​ផ្តល់​យោបល់​ថ្មី"
 
@@ -532,71 +569,71 @@ msgstr "ការ​នាំចេញ​កំពុង​ដំណើរកា
 msgid "Initializing..."
 msgstr "កំពុង​ចាប់ផ្ដើម..."
 
-#: wrapdaisy.cpp:102 wrapdaisy.cpp:265
+#: wrapdaisy.cpp:102 wrapdaisy.cpp:262
 msgid "Cannot create folder [b]"
 msgstr "មិនអាច​បង្កើត​ថត [b]"
 
-#: wrapdaisy.cpp:142
+#: wrapdaisy.cpp:139
 msgid "Empty XHTML file"
 msgstr "សម្អាត XHTML"
 
-#: wrapdaisy.cpp:152
+#: wrapdaisy.cpp:149
 msgid "Cannot read [b]"
 msgstr "មិន​អាច​បង្កើត [b]"
 
-#: wrapdaisy.cpp:152
+#: wrapdaisy.cpp:149
 msgid "[/b]"
 msgstr "[/b]"
 
-#: wrapdaisy.cpp:166
+#: wrapdaisy.cpp:163
 msgid "Suppressing optional production notes..."
 msgstr "កំពុង​បង្ហាប់​ចំណាំការ​ផលិត​ជា​ជម្រើស..."
 
-#: wrapdaisy.cpp:168 wrapdaisy.cpp:194 wrapdaisy.cpp:280 wrapdaisy.cpp:318
+#: wrapdaisy.cpp:165 wrapdaisy.cpp:191 wrapdaisy.cpp:277 wrapdaisy.cpp:315
 msgid "Cancelled"
 msgstr "បាន​បោះបង់"
 
-#: wrapdaisy.cpp:192
+#: wrapdaisy.cpp:189
 msgid "De-emphasizing production notes..."
 msgstr "មិន​​កំពុង​សម្គាល់​ចំណាំ​ការ​ផលិត..."
 
-#: wrapdaisy.cpp:243
+#: wrapdaisy.cpp:240
 msgid "Cannot create HTML folder [b]"
 msgstr "មិន​អាច​បង្កើត​ថត HTML [b]"
 
-#: wrapdaisy.cpp:254
+#: wrapdaisy.cpp:251
 msgid "Cannot create image folder [b]"
 msgstr "មិន​អាច​បង្កើត​ថត​រូបភាព [b]"
 
-#: wrapdaisy.cpp:278
+#: wrapdaisy.cpp:275
 msgid "Copying files..."
 msgstr "កំពុង​ចម្លង​ឯកសារ..."
 
-#: wrapdaisy.cpp:301
+#: wrapdaisy.cpp:298
 msgid "Cannot write canonical XHTML file"
 msgstr "មិន​អាច​សរសេរ​ឯកសារ canonical XHTML"
 
-#: wrapdaisy.cpp:316
+#: wrapdaisy.cpp:313
 msgid "Preparing DTBook..."
 msgstr "កំពុង​រៀបចំ DTBook..."
 
-#: wrapdaisy.cpp:524
+#: wrapdaisy.cpp:521
 msgid "documents.open"
 msgstr "documents.open"
 
-#: wrapdaisy.cpp:525
+#: wrapdaisy.cpp:522
 msgid "ActiveDocument"
 msgstr "ឯកសារ​សកម្ម"
 
-#: wrapdaisy.cpp:527
+#: wrapdaisy.cpp:524
 msgid "Cannot open "
 msgstr "មិន​អាច​បើក"
 
-#: wrapdaisy.cpp:533
+#: wrapdaisy.cpp:530
 msgid "SaveAs"
 msgstr "រក្សាទុក​ជា"
 
-#: wrapdaisy.cpp:661
+#: wrapdaisy.cpp:658
 msgid "Cannot create MP3 album folder [b]"
 msgstr "មិន​អាច​បង្កើត​ថត​អាល់ប៊ុម MP3 [b]"
 
@@ -604,61 +641,105 @@ msgstr "មិន​អាច​បង្កើត​ថត​អាល់ប៊
 msgid "Unable to create parser instance"
 msgstr "មិន​អាច​បង្កើត​ធាតុ​ញែក"
 
-#: xmlcopyeditor.cpp:410 xmlcopyeditor.cpp:1341 xmlcopyeditor.cpp:1443
-#: xmlcopyeditor.cpp:1673 xmlcopyeditor.cpp:1698
+#: wraplibxml.cpp:125 wraplibxml.cpp:177 wraplibxml.cpp:235 wraplibxml.cpp:294
+#: wraplibxml.cpp:355 wraplibxml.cpp:474 wraplibxml.cpp:523 wraplibxml.cpp:571
+msgid "Cannot create a parser context"
+msgstr "មិន​អាច​បង្កើត​បរិបទ​កម្មវិធី​ញែក"
+
+#: wraplibxml.cpp:161
+msgid "Cannot create an RNG parser context"
+msgstr "មិន​អាច​បង្កើត​បរិបទ​កម្មវិធី​ញែក RNG"
+
+#: wraplibxml.cpp:171
+msgid "Cannot create an RNG validation context"
+msgstr "មិន​អាច​បង្កើត​បរិបទ​ផ្ទៀងផ្ទាត់ RNG"
+
+#: wraplibxml.cpp:229
+msgid "Cannot create a schema validation context"
+msgstr "មិន​អាច​បង្កើត​បរិបទ​ផ្ទៀងផ្ទាត់​គ្រោងការណ៍"
+
+#: wraplibxml.cpp:467
+msgid "Cannot parse stylesheet"
+msgstr "មិន​អាច​ញែក​សន្លឹករចនាប័ទ្ម"
+
+#: wraplibxml.cpp:492
+msgid "Cannot apply stylesheet"
+msgstr "មិន​អាច​អនុវត្ត​សន្លឹករចនាប័ទ្ម"
+
+#: wraplibxml.cpp:624
+#, c-format
+msgid "Error at line %d, column %d: %s"
+msgstr "កំហុសនៅ​ជួរ %d, ជួរឈរ %d: %s"
+
+#: wraplibxml.cpp:627
+#, c-format
+msgid "Error at line %d: %s"
+msgstr "កំហុស​នៅ​ជួរ %d: %s"
+
+#: wrapxerces.cpp:157
+msgid "Unexpected validation error"
+msgstr "កំហុស​ផ្ទៀងផ្ទាត់​ដែល​មិន​រំពឹង​ទុក"
+
+#: wrapxerces.cpp:231
+#, c-format
+msgid "%s at line %llu, column %llu: %s%s"
+msgstr "%s នៅ​ជួរ %llu, ជួរឈរ %llu: %s%s"
+
+#: xmlcopyeditor.cpp:379 xmlcopyeditor.cpp:1308 xmlcopyeditor.cpp:1413
+#: xmlcopyeditor.cpp:1643 xmlcopyeditor.cpp:1722
 msgid "XML Copy Editor"
 msgstr "កម្មវិធីកែ​ច្បាប់ចម្លង XML"
 
-#: xmlcopyeditor.cpp:422
+#: xmlcopyeditor.cpp:391
 msgid "Failed to initialize Xerces-C:\n"
 msgstr "បាន​បរាជ័យ​ក្នុងការ​ចាប់ផ្ដើម Xerces-C:\n"
 
-#: xmlcopyeditor.cpp:435 xmlcopyeditor.cpp:500
+#: xmlcopyeditor.cpp:404 xmlcopyeditor.cpp:469
 msgid "(unknown error)"
 msgstr "(មិន​ស្គាល់​កំហុស)"
 
-#: xmlcopyeditor.cpp:437
+#: xmlcopyeditor.cpp:406
 msgid ""
 "XML Copy Editor has encountered the following error and needs to close: "
-msgstr ""
-"កម្មវិធីកែ​ច្បាប់​ចម្លង XML បាន​ជួប​កំហុស​ដូច​ខា​ងក្រោម "
-"ហើយ​ចាំបាច់​ត្រូវ​បិទ៖"
+msgstr "កម្មវិធីកែ​ច្បាប់​ចម្លង XML បាន​ជួប​កំហុស​ដូច​ខា​ងក្រោម ហើយ​ចាំបាច់​ត្រូវ​បិទ៖"
 
-#: xmlcopyeditor.cpp:463 xmlcopyeditor.cpp:468 xmlcopyeditor.cpp:536
+#: xmlcopyeditor.cpp:432 xmlcopyeditor.cpp:437 xmlcopyeditor.cpp:505
 msgid "XML Copy Editor has encountered an error and needs to close."
 msgstr "កម្មវិធី​កែ​ច្បាប់​ចម្លង XML បាន​ជួប​កំហុស​ ហើយ​ចាំបាច់​ត្រូវ​បិទ។"
 
-#: xmlcopyeditor.cpp:486 xmlcopyeditor.cpp:565
+#: xmlcopyeditor.cpp:455 xmlcopyeditor.cpp:534
 msgid "The operating system has turned down a request for additional memory"
 msgstr "ប្រព័ន្ធ​ប្រតិបត្តិការ​បាន​បិទ​សំណើ​​សម្រាប់​អង្គចងចាំ​បន្ថែម"
 
-#: xmlcopyeditor.cpp:487 xmlcopyeditor.cpp:566 xmlcopyeditor.cpp:4947
+#: xmlcopyeditor.cpp:456 xmlcopyeditor.cpp:535 xmlcopyeditor.cpp:4775
 msgid "Out of memory"
 msgstr "អស់​​អង្គចងចាំ"
 
-#: xmlcopyeditor.cpp:502
+#: xmlcopyeditor.cpp:471
 msgid "The following error has occurred: "
 msgstr "កំហុស​ដូច​ខាង​ក្រោម​បាន​កើត​ឡើង៖"
 
-#: xmlcopyeditor.cpp:504
+#: xmlcopyeditor.cpp:473
 msgid ""
 ".\n"
 "\n"
 "Select \"Abort\" to exit, \"Retry\" to close this window and \"Ignore\" to "
 "continue."
 msgstr ""
-".\n\nជ្រើស \"បោះបង់\" ដើម្បី​ចាកចេញ \"ព្យាយាម​ម្ដង​ទៀត\" ដើម្បី​បិទ​បង្អួច​នេះ "
-"និង \"មិន​អើពើ\" ដើម្បីបន្ត។"
+".\n"
+"\n"
+"ជ្រើស \"បោះបង់\" ដើម្បី​ចាកចេញ \"ព្យាយាម​ម្ដង​ទៀត\" ដើម្បី​បិទ​បង្អួច​នេះ និង \"មិន​អើពើ\" "
+"ដើម្បីបន្ត។"
 
-#: xmlcopyeditor.cpp:784 xmlcopyeditor.cpp:835
+#: xmlcopyeditor.cpp:753 xmlcopyeditor.cpp:804
 msgid "Default style"
 msgstr "រចនាប័ទ្ម​លំនាំដើម"
 
-#: xmlcopyeditor.cpp:837
+#: xmlcopyeditor.cpp:806
 msgid "No filter"
 msgstr "គ្មាន​​ចម្រោះ"
 
-#: xmlcopyeditor.cpp:878
+#: xmlcopyeditor.cpp:872
 msgid ""
 "SSE2 is enabled in Xerces-C++ library. Xerces-C++ didn't use them in a "
 "thread-safe way. It may cause program crashes (segmentation faults).\n"
@@ -668,1222 +749,1230 @@ msgid ""
 "OK:\tShow this warning next time\n"
 "Cancel:\tDisable the warning\n"
 msgstr ""
-"SSE2 ត្រូវ​បាន​បើក​ក្នុង​បណ្ណាល័យ Xerces-C++ ។ Xerces-C++ "
-"មិន​បាន​ប្រើ​ពួកវា​ក្នុង​របៀប​សែស្រឡាយ​មាន​សុវត្ថិភាព​ទេ។ "
-"វា​អាច​ធ្វើ​ឲ្យ​កម្មវិធីគាំង "
-"(កំហុស​ការ​ចែក​ជា​ចំណែក)។\n\nប្រសិន​បើ​វា​កើត​ឡើង សូម​ព្យាយាម​ចងក្រង "
-"Xerces-C++ ដោយ​បិទ SSE2 "
-"។\n\nយល់ព្រម៖\tបង្ហាញ​ការ​ព្រមាន​នេះ​ពេល​ក្រោយ\nបោះបង់៖\tបិទ​ការ​ព្រមាន\n"
+"SSE2 ត្រូវ​បាន​បើក​ក្នុង​បណ្ណាល័យ Xerces-C++ ។ Xerces-C++ មិន​បាន​ប្រើ​ពួកវា​ក្នុង​របៀប​សែស្រឡាយ​មាន​"
+"សុវត្ថិភាព​ទេ។ វា​អាច​ធ្វើ​ឲ្យ​កម្មវិធីគាំង (កំហុស​ការ​ចែក​ជា​ចំណែក)។\n"
+"\n"
+"ប្រសិន​បើ​វា​កើត​ឡើង សូម​ព្យាយាម​ចងក្រង Xerces-C++ ដោយ​បិទ SSE2 ។\n"
+"\n"
+"យល់ព្រម៖\tបង្ហាញ​ការ​ព្រមាន​នេះ​ពេល​ក្រោយ\n"
+"បោះបង់៖\tបិទ​ការ​ព្រមាន\n"
 
-#: xmlcopyeditor.cpp:885
+#: xmlcopyeditor.cpp:879
 msgid "SSE2 problem in Xerces-C++"
 msgstr "បញ្ហា SSE2 ក្នុង Xerces-C++"
 
-#: xmlcopyeditor.cpp:985 xmlcopyeditor.cpp:993
+#: xmlcopyeditor.cpp:955 xmlcopyeditor.cpp:963
 msgid "Current Element"
 msgstr "ធាតុ​បច្ចុប្បន្ន"
 
-#: xmlcopyeditor.cpp:986 xmlcopyeditor.cpp:992
+#: xmlcopyeditor.cpp:956 xmlcopyeditor.cpp:962
 msgid "Insert Element"
 msgstr "បញ្ចូល​ធាតុ"
 
-#: xmlcopyeditor.cpp:987 xmlcopyeditor.cpp:991
+#: xmlcopyeditor.cpp:957 xmlcopyeditor.cpp:961
 msgid "Insert Sibling"
 msgstr "បញ្ចូល​ទំនាក់ទំនង"
 
-#: xmlcopyeditor.cpp:988 xmlcopyeditor.cpp:990
+#: xmlcopyeditor.cpp:958 xmlcopyeditor.cpp:960
 msgid "Insert Entity"
-msgstr "បញ្ចូល​អង្គភាព"
+msgstr "បញ្ចូល​​​វត្ថុ"
 
-#: xmlcopyeditor.cpp:1058
-msgid "Cannot open application directory: see Tools, Options..., General"
-msgstr "មិន​អាច​បើក​ថត​កម្មវិធិ​បាន​ទេ៖ មើល​ ឧបករណ៍ ជម្រើស.... ទូទៅ"
-
-#: xmlcopyeditor.cpp:1060
-msgid "Cannot open application directory: see Edit, Preferences..., General"
-msgstr "មិន​អាច​បើក​ថត​កម្មវិធី​បាន​ទេ៖ មើល កែសម្រួល ចំណូល​ចិត្ត... ទូទៅ"
-
-#: xmlcopyeditor.cpp:1239
+#: xmlcopyeditor.cpp:1206
 msgid "Unknown command line switch (expecting 'w', 's', --version or --help)"
-msgstr ""
-"មិន​ស្គាល់ការ​ប្ដូរ​បន្ទាត់​ពាក្យ​បញ្ជា (រំពឹង​ទុក 'w', 's', --version ឬ "
-"--help)"
+msgstr "មិន​ស្គាល់ការ​ប្ដូរ​បន្ទាត់​ពាក្យ​បញ្ជា (រំពឹង​ទុក 'w', 's', --version ឬ --help)"
 
-#: xmlcopyeditor.cpp:1248
+#: xmlcopyeditor.cpp:1215
 msgid "Command line processing incomplete: no file specified"
 msgstr "ដំណើរការ​បន្ទាត់​ពាក្យ​បញ្ជា​មិន​បញ្ចប់៖ គ្មាន​ឯកសារ​បាន​បញ្ជាក់"
 
-#: xmlcopyeditor.cpp:1392
+#: xmlcopyeditor.cpp:1361
 msgid "Parse in progress..."
 msgstr "ការ​ញែក​កំពុង​ដំណើរការ..."
 
-#: xmlcopyeditor.cpp:1411
+#: xmlcopyeditor.cpp:1380
 msgid "well-formed"
 msgstr "បាន​បង្កើត​ត្រឹមត្រូវ"
 
-#: xmlcopyeditor.cpp:1442
+#: xmlcopyeditor.cpp:1412
 msgid "Do you want to save the changes to "
 msgstr "តើ​អ្នក​ចង់​រក្សាទុក​ការ​ផ្លាស់ប្ដូរ​"
 
-#: xmlcopyeditor.cpp:1625 xmlcopyeditor.cpp:1627
+#: xmlcopyeditor.cpp:1595 xmlcopyeditor.cpp:1597
 msgid "Attributes hidden"
 msgstr "គុណលក្ខណៈ​ដែល​លាក់"
 
-#: xmlcopyeditor.cpp:1632 xmlcopyeditor.cpp:1634
+#: xmlcopyeditor.cpp:1602 xmlcopyeditor.cpp:1604
 msgid "Tags hidden"
 msgstr "បានលាក់​ស្លាក​"
 
-#: xmlcopyeditor.cpp:1647 xmlcopyeditor.cpp:1649
+#: xmlcopyeditor.cpp:1617 xmlcopyeditor.cpp:1619
 msgid "Tags locked"
 msgstr "បាន​ចាក់សោ​ស្លាក"
 
-#: xmlcopyeditor.cpp:1712 xmlcopyeditor.cpp:1714
+#: xmlcopyeditor.cpp:1670 xmlcopyeditor.cpp:1672
 msgid "Modified"
 msgstr "បាន​កែប្រែ"
 
-#: xmlcopyeditor.cpp:1747
+#: xmlcopyeditor.cpp:1701
 #, c-format
 msgid "Ln %i Col %i"
 msgstr "បន្ទាត់ %i ជួរឈរ %i"
 
-#: xmlcopyeditor.cpp:1928
+#: xmlcopyeditor.cpp:1892
 msgid "Cannot open clipboard"
 msgstr "មិន​អាចបើក​ក្ដារ​តម្បៀត​ខ្ទាស់"
 
-#: xmlcopyeditor.cpp:1933
+#: xmlcopyeditor.cpp:1897
 msgid "Cannot paste as new document: no text on clipboard"
 msgstr "មិន​អាច​បិទភ្ជាប់​ជា​ឯកសារ​ថ្មី​៖ គ្មាន​អត្ថបទ​លើ​ក្ដារតម្បៀត​ខ្ទាស់"
 
-#: xmlcopyeditor.cpp:2020 xmlcopyeditor.cpp:2832
+#: xmlcopyeditor.cpp:1987 xmlcopyeditor.cpp:2788
 #, c-format
 msgid "%i replacement made"
 msgid_plural "%i replacements made"
 msgstr[0] "ការ​​ជំនួស %i ត្រូវ​បាន​​ធ្វើ"
 
-#: xmlcopyeditor.cpp:2046
+#: xmlcopyeditor.cpp:2013
 msgid "Preparing Print Preview..."
 msgstr "កំពុង​រៀបចំ​កា​រមើល​មុន​បោះពុម្ព..."
 
-#: xmlcopyeditor.cpp:2067
+#: xmlcopyeditor.cpp:2034
 msgid "Preparing to print..."
 msgstr "កំពុង​រៀបចំ​បោះពុម្ព..."
 
-#: xmlcopyeditor.cpp:2126 xmlcopyeditor.cpp:2146
+#: xmlcopyeditor.cpp:2093 xmlcopyeditor.cpp:2113
 msgid "Find"
 msgstr "រក"
 
-#: xmlcopyeditor.cpp:2153 xmlcopyeditor.cpp:2261 xmlcopyeditor.cpp:2355
+#: xmlcopyeditor.cpp:2120 xmlcopyeditor.cpp:2228 xmlcopyeditor.cpp:2322
 msgid "This functionality requires Microsoft Windows"
 msgstr "មុខងារនេះ​ត្រូវការ  Microsoft Windows"
 
-#: xmlcopyeditor.cpp:2159
+#: xmlcopyeditor.cpp:2126
 msgid "Import Microsoft Word Document"
 msgstr "នាំចូល​ឯកសារ Microsoft Word"
 
-#: xmlcopyeditor.cpp:2252
+#: xmlcopyeditor.cpp:2219
 msgid "[b]DAISY export stopped[/b]: "
 msgstr "[b]DAISY បាន​បញ្ឈប់​ការ​នាំចេញ [/b]៖ "
 
-#: xmlcopyeditor.cpp:2255
+#: xmlcopyeditor.cpp:2222
 msgid "DAISY export completed. Output files are stored in: [b]"
 msgstr "នាំចេញ DAISY បាន​បញ្ចប់។ ឯកសា​រលទ្ធផល​​ត្រូវ​បាន​រក្សាទុក​ក្នុង៖ [b]"
 
-#: xmlcopyeditor.cpp:2270
+#: xmlcopyeditor.cpp:2237
 #, c-format
 msgid "Cannot open [b]%s[/b] for import"
 msgstr "មិន​អាច​បើក [b]%s[/b] សម្រាប់​នាំចូល"
 
-#: xmlcopyeditor.cpp:2280
+#: xmlcopyeditor.cpp:2247
 msgid "Import in progress..."
 msgstr "ការ​នាំចូល​កំពុង​ដំណើរការ..."
 
-#: xmlcopyeditor.cpp:2288
+#: xmlcopyeditor.cpp:2255
 msgid "(lossless conversion requires version 2003 or later)"
 msgstr "(ការ​បម្លែង​មិន​បាត់បង់​ត្រូវការ​កំណែ ២០០៣ ឬ​ថ្មីជាង​នេះ)"
 
-#: xmlcopyeditor.cpp:2295 xmlcopyeditor.cpp:2416
+#: xmlcopyeditor.cpp:2262 xmlcopyeditor.cpp:2383
 msgid "Cannot start Microsoft Word"
 msgstr "មិនអាច​ចាប់ផ្ដើម Microsoft Word"
 
-#: xmlcopyeditor.cpp:2299 xmlcopyeditor.cpp:2420
+#: xmlcopyeditor.cpp:2266 xmlcopyeditor.cpp:2387
 msgid "A more recent version of Microsoft Word is required"
 msgstr "កំណែ​ថ្មី​ច្រើន​ទៀតរបស់ Microsoft Word ត្រូវ​បាន​ទាមទារ"
 
-#: xmlcopyeditor.cpp:2306
+#: xmlcopyeditor.cpp:2273
 #, c-format
 msgid "Microsoft Word cannot save [b]%s[/b] as XML"
 msgstr "Microsoft Word មិន​អាច​រក្សាទុក [b]%s[/b] ជា XML"
 
-#: xmlcopyeditor.cpp:2311
+#: xmlcopyeditor.cpp:2278
 msgid "Microsoft Word cannot save this document as WordprocessingML "
 msgstr "Microsoft Word មិន​អាច​រក្សាទុក​ឯកសារ​នេះ​ជា WordprocessingML "
 
-#: xmlcopyeditor.cpp:2319
+#: xmlcopyeditor.cpp:2286
 msgid "Opening imported file..."
 msgstr "កំពុង​បើក​ឯកសារ​បាននាំចូល..."
 
-#: xmlcopyeditor.cpp:2336
+#: xmlcopyeditor.cpp:2303
 msgid "Cannot open imported file"
 msgstr "មិន​អាច​បើក​ឯកសារ​បាននាំចូល"
 
-#: xmlcopyeditor.cpp:2388
+#: xmlcopyeditor.cpp:2355
 msgid "Export Microsoft Word Document"
 msgstr "នាំចេញ​ឯកសារ Microsoft Word"
 
-#: xmlcopyeditor.cpp:2409
+#: xmlcopyeditor.cpp:2376
 msgid "Export in progress..."
 msgstr "ការ​នាំចេញ​កំពុង​ដំណើរការ..."
 
-#: xmlcopyeditor.cpp:2423
+#: xmlcopyeditor.cpp:2390
 #, c-format
 msgid "Microsoft Word cannot save %s"
 msgstr "Microsoft Word មិន​អាច​រក្សាទុក %s"
 
-#: xmlcopyeditor.cpp:2452
+#: xmlcopyeditor.cpp:2419
 msgid "Cannot save temporary file"
 msgstr "មិន​អាច​រក្សាទុក​ឯកសារ​បណ្ដោះអាសន្ន"
 
-#: xmlcopyeditor.cpp:2613
+#: xmlcopyeditor.cpp:2580
 msgid "Preferences"
 msgstr "ចំណូល​ចិត្ត"
 
-#: xmlcopyeditor.cpp:2668
+#: xmlcopyeditor.cpp:2625
 msgid "Enter line number:"
 msgstr "បញ្ចូល​លេខ​បន្ទាត់៖"
 
-#: xmlcopyeditor.cpp:2669
+#: xmlcopyeditor.cpp:2626
 msgid "Go To"
 msgstr "ទៅកាន់"
 
-#: xmlcopyeditor.cpp:2678
+#: xmlcopyeditor.cpp:2635
 #, c-format
 msgid "'%s' is not a valid line number"
 msgstr "'%s' មិនមែនជា​លេខ​បន្ទាត់​ត្រឹមត្រូវ"
 
-#: xmlcopyeditor.cpp:2707
+#: xmlcopyeditor.cpp:2664
 msgid "Replace"
 msgstr "ជំនួស"
 
-#: xmlcopyeditor.cpp:2728
+#: xmlcopyeditor.cpp:2685
 msgid "Find and Replace"
 msgstr "រក​ និង​ជំនួស"
 
-#: xmlcopyeditor.cpp:2822
+#: xmlcopyeditor.cpp:2778
 msgid "Cannot replace: "
 msgstr "មិន​អាច​ជំនួស៖"
 
-#: xmlcopyeditor.cpp:2853
+#: xmlcopyeditor.cpp:2809
 msgid "XML document (*.xml)"
 msgstr "ឯកសារ XML (*.xml)"
 
-#: xmlcopyeditor.cpp:2895
+#: xmlcopyeditor.cpp:2839
 msgid "Choose a document type:"
 msgstr "ជ្រើស​ប្រភេទ​​ឯកសារ៖"
 
-#: xmlcopyeditor.cpp:2895
+#: xmlcopyeditor.cpp:2839
 msgid "New Document"
 msgstr "ឯកសារ​ថ្មី"
 
-#: xmlcopyeditor.cpp:2938
+#: xmlcopyeditor.cpp:2880
 #, c-format
 msgid "Document%i"
 msgstr "ឯកសារ%i"
 
-#: xmlcopyeditor.cpp:3001
+#: xmlcopyeditor.cpp:2945
 msgid "Open Large Document"
 msgstr "បើក​ឯកសារ​ធំ"
 
-#: xmlcopyeditor.cpp:3001 xmlcopyeditor.cpp:5587 xmlcopyeditor.cpp:5589
+#: xmlcopyeditor.cpp:2945 xmlcopyeditor.cpp:5417 xmlcopyeditor.cpp:5419
 msgid "Open"
 msgstr "បើក"
 
-#: xmlcopyeditor.cpp:3041
+#: xmlcopyeditor.cpp:2985
 #, c-format
 msgid "Cannot open %s."
 msgstr "មិន​អាច​បើក %s"
 
-#: xmlcopyeditor.cpp:3049 xmlcopyeditor.cpp:3638
+#: xmlcopyeditor.cpp:2993 xmlcopyeditor.cpp:3587
 #, c-format
 msgid "%s is already open"
 msgstr "%s បាន​បើក​រួច​ហើយ"
 
-#: xmlcopyeditor.cpp:3084
+#: xmlcopyeditor.cpp:3024
 #, c-format
 msgid "Cannot open %s"
 msgstr "មិន​អាច​បើក %s"
 
-#: xmlcopyeditor.cpp:3204
+#: xmlcopyeditor.cpp:3147
 #, c-format
 msgid "Cannot open %s: unknown encoding %s"
 msgstr "មិន​អាច​បើក %s ៖ មិន​ស្គាល់ការ​អ៊ីនកូដ %s"
 
-#: xmlcopyeditor.cpp:3248
+#: xmlcopyeditor.cpp:3178
+#, c-format
+msgid "Cannot open %s: out of memory"
+msgstr "មិន​អាច​បើក %s ៖ "
+
+#: xmlcopyeditor.cpp:3199
 #, c-format
 msgid "Cannot open %s: conversion from encoding %s failed"
 msgstr "មិន​អាច​បើក %s ៖ ការ​បម្លែង​ពី​​ការ​អ៊ីនកូដ %s បាន​បរាជ័យ"
 
-#: xmlcopyeditor.cpp:3258
+#: xmlcopyeditor.cpp:3208 xmlcopyeditor.cpp:3979
 msgid "Creating document view..."
 msgstr "កំពុង​បង្កើត​ទិដ្ខភាព​ឯកសារ..."
 
-#: xmlcopyeditor.cpp:3505
+#: xmlcopyeditor.cpp:3454
 msgid "Edited document empty"
 msgstr "ឯកសារ​បាន​កែសម្រួល​ទទេ"
 
-#: xmlcopyeditor.cpp:3619
+#: xmlcopyeditor.cpp:3568
 msgid "Save As"
 msgstr "រក្សាទុក​ជា"
 
-#: xmlcopyeditor.cpp:3838 xmlcopyeditor.cpp:3934 xmlcopyeditor.cpp:4026
-msgid ""
-"Cannot save temporary copy for validation; please save or discard changes"
-msgstr ""
-"មិន​អាច​រក្សាទុក​ច្បាប់​ចម្លង​បណ្ដោះអាសន្ន​សម្រាប់​​សុពល​កម្ម សូម​រក្សាទុក​ "
-"ឬ​បោះបង់​ការ​ផ្លាស់ប្ដូរ"
-
-#: xmlcopyeditor.cpp:3848
+#: xmlcopyeditor.cpp:3751
 msgid "DTD Validation in progress..."
 msgstr "សុពល​កម្ម DTD កំពុង​ដំណើរការ..."
 
-#: xmlcopyeditor.cpp:3872 xmlcopyeditor.cpp:3967 xmlcopyeditor.cpp:4050
+#: xmlcopyeditor.cpp:3774 xmlcopyeditor.cpp:3849 xmlcopyeditor.cpp:3917
 msgid "valid"
 msgstr "ត្រឹមត្រូវ"
 
-#: xmlcopyeditor.cpp:3894
+#: xmlcopyeditor.cpp:3796
 msgid "Select RELAX NG grammar"
 msgstr "ជ្រើស​វេយ្យាករណ៍ RELAX NG"
 
-#: xmlcopyeditor.cpp:3895 xmlcopyeditor.cpp:4212 xmlcopyeditor.cpp:5951
+#: xmlcopyeditor.cpp:3797 xmlcopyeditor.cpp:4081 xmlcopyeditor.cpp:5774
 msgid "Choose a file:"
 msgstr "ជ្រើស​ឯកសារ៖"
 
-#: xmlcopyeditor.cpp:3896
+#: xmlcopyeditor.cpp:3798
 msgid "RELAX NG grammar"
 msgstr "វេយ្យាករណ៍ RELAX NG"
 
-#: xmlcopyeditor.cpp:3942
+#: xmlcopyeditor.cpp:3827
 msgid "RELAX NG validation in progress..."
 msgstr "សុពល​កម្ម RELAX NG កំពុង​ដំណើរការ..."
 
-#: xmlcopyeditor.cpp:4033
+#: xmlcopyeditor.cpp:3898
 msgid "Validation in progress..."
 msgstr "សុពល​កម្ម​កំពុង​ដំណើរការ..."
 
-#: xmlcopyeditor.cpp:4069
+#: xmlcopyeditor.cpp:3936
 msgid "W3C Schema"
 msgstr "គ្រោងការណ៍ W3C"
 
-#: xmlcopyeditor.cpp:4069
+#: xmlcopyeditor.cpp:3936
 msgid "DTD"
 msgstr "DTD"
 
-#: xmlcopyeditor.cpp:4070
+#: xmlcopyeditor.cpp:3937
 msgid "Please choose a shema type"
 msgstr "សូម​ជ្រើស​ប្រភេទ​គ្រោងការណ៍"
 
-#: xmlcopyeditor.cpp:4071
+#: xmlcopyeditor.cpp:3938
 msgid "Schema type"
 msgstr "ប្រភេទ​គ្រោងការណ៍"
 
-#: xmlcopyeditor.cpp:4099
+#: xmlcopyeditor.cpp:3964
+msgid "Please select a DTD file"
+msgstr "សូម​ជ្រើស​ឯកសារ DTD"
+
+#: xmlcopyeditor.cpp:3970
+msgid "Converting..."
+msgstr "កំពុង​បម្លែង..."
+
+#: xmlcopyeditor.cpp:3997
 msgid "Enter XPath:"
 msgstr "បញ្ចូឡ XPath ៖"
 
-#: xmlcopyeditor.cpp:4100
+#: xmlcopyeditor.cpp:3998
 msgid "Evaluate XPath"
 msgstr "វាយតម្លៃ XPath"
 
-#: xmlcopyeditor.cpp:4136
+#: xmlcopyeditor.cpp:4019
 msgid "Cannot evaluate XPath"
 msgstr "មិន​អាច​វាយតម្លៃ XPath"
 
-#: xmlcopyeditor.cpp:4147
+#: xmlcopyeditor.cpp:4030
 msgid "No matching nodes found"
 msgstr "រក​មិន​ឃើញ​ថ្នាំង​ផ្គូផ្គង"
 
-#: xmlcopyeditor.cpp:4198
+#: xmlcopyeditor.cpp:4067
 #, c-format
 msgid "Cannot open stylesheet %s"
 msgstr "​មិន​អាច​រក្សាទុក​សន្លឹក​រចនាប័ទ្ម %s"
 
-#: xmlcopyeditor.cpp:4211
+#: xmlcopyeditor.cpp:4080
 msgid "Select stylesheet"
 msgstr "ជ្រើស​សន្លឹក​រចនាប័ទ្ម"
 
-#: xmlcopyeditor.cpp:4213 xmlcopyeditor.cpp:5925
+#: xmlcopyeditor.cpp:4082 xmlcopyeditor.cpp:5748
 msgid "XSLT stylesheet"
 msgstr "សន្លឹក​រចនាប័ទ្ម XSLT"
 
-#: xmlcopyeditor.cpp:4267
+#: xmlcopyeditor.cpp:4136
 msgid "XSL transformation in progress..."
 msgstr "ការ​បម្លែង​ XSL កំពុង​ដំណើរការ..."
 
-#: xmlcopyeditor.cpp:4276
+#: xmlcopyeditor.cpp:4145
 msgid "Cannot transform: "
 msgstr "មិន​អាច​បម្លែង៖"
 
-#: xmlcopyeditor.cpp:4284
+#: xmlcopyeditor.cpp:4153
 msgid "Output document empty"
 msgstr "ឯកសារ​លទ្ធផល​ទទេ"
 
-#: xmlcopyeditor.cpp:4314
+#: xmlcopyeditor.cpp:4183
 msgid "Pretty-printing in progress..."
 msgstr "ការ​បោះពុម្ព​ស្អាត​កំពុង​ដំណើរការ..."
 
-#: xmlcopyeditor.cpp:4333
+#: xmlcopyeditor.cpp:4193
 msgid "Cannot pretty-print: "
 msgstr "មិន​អាច​ការ​បោះពុម្ព​ដ៏​ស្អាត ៖ "
 
-#: xmlcopyeditor.cpp:4344
+#: xmlcopyeditor.cpp:4204
 msgid "Pretty-print unsuccessful: output document empty"
 msgstr "ការ​បោះពុម្ព​ស្អាត​មិន​ជោគជ័យ៖ ឯកសារ​លទ្ធផល​ទទេ"
 
-#: xmlcopyeditor.cpp:4391
+#: xmlcopyeditor.cpp:4251
 msgid "Choose an encoding:"
 msgstr "ជ្រើស​ការអ៊ិនកូដ ៖"
 
-#: xmlcopyeditor.cpp:4391
+#: xmlcopyeditor.cpp:4251
 msgid "Encoding"
 msgstr "ការ​អ៊ិនកូដ"
 
-#: xmlcopyeditor.cpp:4418
+#: xmlcopyeditor.cpp:4264
 msgid "Cannot set encoding: "
 msgstr "មិន​អាច​កំណត់​ការ​អ៊ីនកូដ៖"
 
-#: xmlcopyeditor.cpp:4427
-msgid "Cannot set encoding (cannot open temporary file)"
-msgstr "មិន​អាច​កំណត់​ការ​អ៊ីនកូដ (មិន​អាច​បើក​ឯកសារ​ទទេ)"
-
-#: xmlcopyeditor.cpp:4438
+#: xmlcopyeditor.cpp:4275
 msgid "Cannot set encoding (cannot parse temporary file)"
 msgstr "មិន​អាច​កំណត់​ការ​អ៊ីនកូដ (មិន​អាច​ញែក​ឯកសារ​ទទេ)"
 
-#: xmlcopyeditor.cpp:4645
+#: xmlcopyeditor.cpp:4479
 #, c-format
 msgid "Cannot find '%s'"
 msgstr "មិន​អាច​រក​ &#39;%s&#39;"
 
-#: xmlcopyeditor.cpp:4707
+#: xmlcopyeditor.cpp:4541
 msgid ""
 "File has been modified by another application.\n"
 "Do you want to proceed?"
-msgstr "ឯកសារ​ត្រូវ​បាន​កែប្រែ​ដោយ​កម្មវិធី​ផ្សេង។\nតើ​អ្នក​ចង់​បន្ត​ដែរ​ឬទេ?"
+msgstr ""
+"ឯកសារ​ត្រូវ​បាន​កែប្រែ​ដោយ​កម្មវិធី​ផ្សេង។\n"
+"តើ​អ្នក​ចង់​បន្ត​ដែរ​ឬទេ?"
 
-#: xmlcopyeditor.cpp:4708
+#: xmlcopyeditor.cpp:4542
 msgid "Confirmation"
 msgstr "ការអះអាង"
 
-#: xmlcopyeditor.cpp:4745 xmlcopyeditor.cpp:4759 xmlcopyeditor.cpp:4780
-#: xmlcopyeditor.cpp:4811 xmlcopyeditor.cpp:4874 xmlcopyeditor.cpp:4888
-#: xmlcopyeditor.cpp:4931 xmlcopyeditor.cpp:4966
+#: xmlcopyeditor.cpp:4581 xmlcopyeditor.cpp:4595 xmlcopyeditor.cpp:4616
+#: xmlcopyeditor.cpp:4645 xmlcopyeditor.cpp:4708 xmlcopyeditor.cpp:4722
+#: xmlcopyeditor.cpp:4759 xmlcopyeditor.cpp:4794
 #, c-format
 msgid "Cannot save %s"
 msgstr "មិន​អាច​រក្សាទុក %s បាន​ឡើយ"
 
-#: xmlcopyeditor.cpp:4803
+#: xmlcopyeditor.cpp:4637
 #, c-format
 msgid "%s saved in default encoding UTF-8: unknown encoding %s"
-msgstr ""
-"%s បាន​រក្សាទុក​ក្នុង​ការ​អ៊ីនកូដ UTF-8 លំនាំដើម៖ មិន​ស្គាល់​ការ​អ៊ីនកូដ %s"
+msgstr "%s បាន​រក្សាទុក​ក្នុង​ការ​អ៊ីនកូដ UTF-8 លំនាំដើម៖ មិន​ស្គាល់​ការ​អ៊ីនកូដ %s"
 
-#: xmlcopyeditor.cpp:4866
+#: xmlcopyeditor.cpp:4700
 #, c-format
 msgid "%s saved in default encoding UTF-8: conversion to %s failed"
-msgstr ""
-"%s បាន​រក្សាទុក​ក្នុង​ការ​អ៊ីនកូដ UTF-8 លំនាំដើម៖ ការ​បម្លែង​ទៅ %s "
-"បាន​បរាជ័យ"
+msgstr "%s បាន​រក្សាទុក​ក្នុង​ការ​អ៊ីនកូដ UTF-8 លំនាំដើម៖ ការ​បម្លែង​ទៅ %s បាន​បរាជ័យ"
 
-#: xmlcopyeditor.cpp:4922
+#: xmlcopyeditor.cpp:4750
 msgid "unknown error"
 msgstr "មិន​ស្គាល់​កំហុស"
 
-#: xmlcopyeditor.cpp:4924
+#: xmlcopyeditor.cpp:4752
 #, c-format
 msgid "Cannot save document in %s: %s (saved in default encoding UTF-8)"
-msgstr ""
-"មិន​អាច​រក្សាទុក​ឯកសារ​ក្នុង %s: %s (បាន​រក្សាទុក​​​ជា​ការ​អ៊ីនកូដ UTF-8)"
+msgstr "មិន​អាច​រក្សាទុក​ឯកសារ​ក្នុង %s: %s (បាន​រក្សាទុក​​​ជា​ការ​អ៊ីនកូដ UTF-8)"
 
-#: xmlcopyeditor.cpp:4946
+#: xmlcopyeditor.cpp:4774
 msgid "Out of memory: attempt to save in default encoding UTF-8?"
 msgstr "អស់​អង្គ​ចងចាំ៖ ព្យាយាម​រក្សាទុក​ជា​ការ​អ៊ីនកូដ UTF-8?"
 
-#: xmlcopyeditor.cpp:4959
+#: xmlcopyeditor.cpp:4787
 #, c-format
 msgid "%s saved in default encoding UTF-8"
 msgstr "%s បាន​រក្សាទុក​ជា​ការ​អ៊ីនកូដ UTF-8 លំនាំដើម"
 
-#: xmlcopyeditor.cpp:5027
+#: xmlcopyeditor.cpp:4855
 msgid "MB"
 msgstr "មេកាបៃ"
 
-#: xmlcopyeditor.cpp:5032
+#: xmlcopyeditor.cpp:4860
 msgid "kB"
 msgstr "គីឡូបៃ"
 
-#: xmlcopyeditor.cpp:5037
+#: xmlcopyeditor.cpp:4865
 msgid "byte"
 msgid_plural "bytes"
 msgstr[0] "បៃ"
 
-#: xmlcopyeditor.cpp:5045
+#: xmlcopyeditor.cpp:4873
 #, c-format
 msgid "%g %s saved"
 msgstr "បាន​រក្សាទុក %g %s"
 
-#: xmlcopyeditor.cpp:5065
+#: xmlcopyeditor.cpp:4893
 msgid "&Undo\tCtrl+Z"
 msgstr "មិន​ធ្វើ​វិញ\tCtrl+Z"
 
-#: xmlcopyeditor.cpp:5065
+#: xmlcopyeditor.cpp:4893
 msgid "Undo"
 msgstr "មិន​ធ្វើ​វិញ"
 
-#: xmlcopyeditor.cpp:5069
+#: xmlcopyeditor.cpp:4897
 msgid "&Redo\tCtrl+Y"
 msgstr "ធ្វើ​វិញ\tCtrl+Y"
 
-#: xmlcopyeditor.cpp:5069
+#: xmlcopyeditor.cpp:4897
 msgid "Redo"
 msgstr "ធ្វើវិញ"
 
-#: xmlcopyeditor.cpp:5073
+#: xmlcopyeditor.cpp:4901
 msgid "&Cut\tCtrl+X"
 msgstr "កាត់\tCtrl+X"
 
-#: xmlcopyeditor.cpp:5073
+#: xmlcopyeditor.cpp:4901
 msgid "Cut"
 msgstr "កាត់"
 
-#: xmlcopyeditor.cpp:5077
+#: xmlcopyeditor.cpp:4905
 msgid "C&opy\tCtrl+C"
 msgstr "ចម្លង\tCtrl+C"
 
-#: xmlcopyeditor.cpp:5077
+#: xmlcopyeditor.cpp:4905
 msgid "Copy"
 msgstr "ចម្លង"
 
-#: xmlcopyeditor.cpp:5081
+#: xmlcopyeditor.cpp:4909
 msgid "&Paste\tCtrl+V"
 msgstr "បិទ​ភ្ជាប់\tCtrl+V"
 
-#: xmlcopyeditor.cpp:5081
+#: xmlcopyeditor.cpp:4909
 msgid "Paste"
 msgstr "បិទភ្ជាប់"
 
-#: xmlcopyeditor.cpp:5088
+#: xmlcopyeditor.cpp:4916
 msgid "P&aste As New Document"
 msgstr "បិទភ្ជាប់​ជា​ឯកសារ​ថ្មី"
 
-#: xmlcopyeditor.cpp:5089
+#: xmlcopyeditor.cpp:4917
 msgid "Paste As New Document"
 msgstr "បិទភ្ជាប់​ជា​ឯកសារ​ថ្មី"
 
-#: xmlcopyeditor.cpp:5093
+#: xmlcopyeditor.cpp:4921
 msgid "&Find...\tCtrl+F"
 msgstr "រក...\tCtrl+F"
 
-#: xmlcopyeditor.cpp:5093
+#: xmlcopyeditor.cpp:4921
 msgid "Find..."
 msgstr "រក..."
 
-#: xmlcopyeditor.cpp:5097
+#: xmlcopyeditor.cpp:4925
 msgid "F&ind Again\tF3"
 msgstr "រក​បន្ទាប់\tF3"
 
-#: xmlcopyeditor.cpp:5097
+#: xmlcopyeditor.cpp:4925
 msgid "Find Again"
 msgstr "រក​បន្ទាប់"
 
-#: xmlcopyeditor.cpp:5101
+#: xmlcopyeditor.cpp:4929
 msgid "&Replace...\tCtrl+R"
 msgstr "ជំនួស...\tCtrl+R"
 
-#: xmlcopyeditor.cpp:5101
+#: xmlcopyeditor.cpp:4929
 msgid "Replace..."
 msgstr "ជំនួស..."
 
-#: xmlcopyeditor.cpp:5108
+#: xmlcopyeditor.cpp:4936
 msgid "&Global Replace...\tCtrl+Shift+R"
 msgstr "ជំនួស​​ទាំងអស់...\tCtrl+Shift+R"
 
-#: xmlcopyeditor.cpp:5109
+#: xmlcopyeditor.cpp:4937
 msgid "Global Replace..."
 msgstr "ជំនួស​ទាំងអស់..."
 
-#: xmlcopyeditor.cpp:5113
+#: xmlcopyeditor.cpp:4941
 msgid "G&o To...\tCtrl+G"
 msgstr "ទៅកាន់...\tCtrl+G"
 
-#: xmlcopyeditor.cpp:5113
+#: xmlcopyeditor.cpp:4941
 msgid "Go To..."
 msgstr "ទៅកាន់..."
 
-#: xmlcopyeditor.cpp:5133
+#: xmlcopyeditor.cpp:4961
 msgid "Pr&eferences..."
 msgstr "ចំណូល​ចិត្ត"
 
-#: xmlcopyeditor.cpp:5133
+#: xmlcopyeditor.cpp:4961
 msgid "Preferences..."
 msgstr "ចំណូល​ចិត្ត..."
 
-#: xmlcopyeditor.cpp:5141
+#: xmlcopyeditor.cpp:4969
 msgid "Increase\tCtrl+U"
 msgstr "បង្កើន\tCtrl+U"
 
-#: xmlcopyeditor.cpp:5141
+#: xmlcopyeditor.cpp:4969
 msgid "Increase"
 msgstr "បង្កើន"
 
-#: xmlcopyeditor.cpp:5143
+#: xmlcopyeditor.cpp:4971
 msgid "Decrease\tCtrl+D"
 msgstr "បន្ថយ\tCtrl+D"
 
-#: xmlcopyeditor.cpp:5143
+#: xmlcopyeditor.cpp:4971
 msgid "Decrease"
 msgstr "បន្ថយ"
 
-#: xmlcopyeditor.cpp:5145
+#: xmlcopyeditor.cpp:4973
 msgid "Normal\tCtrl+0"
 msgstr "ធម្មតា\tCtrl+0"
 
-#: xmlcopyeditor.cpp:5145
+#: xmlcopyeditor.cpp:4973
 msgid "Normal"
 msgstr "ធម្មតា"
 
-#: xmlcopyeditor.cpp:5150
+#: xmlcopyeditor.cpp:4978
 msgid "&Default"
 msgstr "លំនាំ​​​ដើម"
 
-#: xmlcopyeditor.cpp:5153
+#: xmlcopyeditor.cpp:4981
 msgid "&Blue background, white text"
 msgstr "ផ្ទៃ​ខាង​ក្រោយ​ពណ៌​ខៀវ អត្ថបទ​ពណ៌ស"
 
-#: xmlcopyeditor.cpp:5154
+#: xmlcopyeditor.cpp:4982
 msgid "Blue background, white text"
 msgstr "ផ្ទៃ​ខាង​ក្រោយ​ពណ៌​ខៀវ អត្ថបទ​ពណ៌​ស"
 
-#: xmlcopyeditor.cpp:5157
+#: xmlcopyeditor.cpp:4985
 msgid "&Light"
 msgstr "ស្រាល"
 
-#: xmlcopyeditor.cpp:5158
+#: xmlcopyeditor.cpp:4986
 msgid "Light"
 msgstr "ស្រាល"
 
-#: xmlcopyeditor.cpp:5161
+#: xmlcopyeditor.cpp:4989
 msgid "&None"
 msgstr "គ្មាន"
 
-#: xmlcopyeditor.cpp:5162
+#: xmlcopyeditor.cpp:4990
 msgid "None"
 msgstr "គ្មាន"
 
-#: xmlcopyeditor.cpp:5191
+#: xmlcopyeditor.cpp:5019
 msgid "&Previous Document\tCtrl+PgUp"
 msgstr "ឯកសារ​មុន\tCtrl+PgUp"
 
-#: xmlcopyeditor.cpp:5191
+#: xmlcopyeditor.cpp:5019
 msgid "Previous Document"
 msgstr "ឯកសារ​មុន"
 
-#: xmlcopyeditor.cpp:5192
+#: xmlcopyeditor.cpp:5020
 msgid "&Next Document\tCtrl+PgDn"
 msgstr "ឯកសារ​បន្ទាប់\tCtrl+PgDn"
 
-#: xmlcopyeditor.cpp:5192
+#: xmlcopyeditor.cpp:5020
 msgid "Next Document"
 msgstr "ឯកសារ​ថ្មី"
 
-#: xmlcopyeditor.cpp:5196
+#: xmlcopyeditor.cpp:5024
 msgid "&Browser\tCtrl+B"
 msgstr "កម្មវិធីអ៊ីនធឺណិត\tCtrl+B"
 
-#: xmlcopyeditor.cpp:5196 xmlcopyeditor.cpp:5620 xmlcopyeditor.cpp:5624
+#: xmlcopyeditor.cpp:5024 xmlcopyeditor.cpp:5450 xmlcopyeditor.cpp:5454
 msgid "Browser"
 msgstr "កម្មវិធី​​អ៊ីនធឺណិត"
 
-#: xmlcopyeditor.cpp:5200
+#: xmlcopyeditor.cpp:5028
 msgid "&Show Tags and Attributes\tCtrl+T"
 msgstr "បង្ហាញ​ស្លាក និង​គុណលក្ខណៈ\tCtrl+T"
 
-#: xmlcopyeditor.cpp:5200
+#: xmlcopyeditor.cpp:5028
 msgid "Show Tags and Attributes"
 msgstr "បង្ហាញ​ស្លាក និង​គុណលក្ខណៈ"
 
-#: xmlcopyeditor.cpp:5203
+#: xmlcopyeditor.cpp:5031
 msgid "&Hide Attributes Only\tCtrl+Shift+A"
 msgstr "លាក់​តែ​គុណលក្ខណៈ\tCtrl+Shift+A"
 
-#: xmlcopyeditor.cpp:5203
+#: xmlcopyeditor.cpp:5031
 msgid "Hide Attributes Only"
 msgstr "លាក់​តែ​គុណលក្ខណៈ"
 
-#: xmlcopyeditor.cpp:5206
+#: xmlcopyeditor.cpp:5034
 msgid "H&ide Tags and Attributes\tCtrl+Shift+T"
 msgstr "លាក់​ស្លាក និង​គុណលក្ខណៈ\tCtrl+Shift+T"
 
-#: xmlcopyeditor.cpp:5206
+#: xmlcopyeditor.cpp:5034
 msgid "Hide Tags and Attributes"
 msgstr "លាក់​ស្លាក និង​គុណលក្ខណៈ"
 
-#: xmlcopyeditor.cpp:5225
+#: xmlcopyeditor.cpp:5053
 msgid "&Toggle Fold\tCtrl+Alt+T"
 msgstr "បិទ​/បើក​ការ​បត់\tCtrl+Alt+T"
 
-#: xmlcopyeditor.cpp:5225
+#: xmlcopyeditor.cpp:5053
 msgid "Toggle Fold"
 msgstr "បិទ/បើក​​ការ​បត់"
 
-#: xmlcopyeditor.cpp:5227
+#: xmlcopyeditor.cpp:5055
 msgid "&Fold Tags\tCtrl+Shift+F"
 msgstr "បត់​ស្លាក\tCtrl+Shift+F"
 
-#: xmlcopyeditor.cpp:5227
+#: xmlcopyeditor.cpp:5055
 msgid "Fold Tags"
 msgstr "បត់​ស្លាក"
 
-#: xmlcopyeditor.cpp:5229
+#: xmlcopyeditor.cpp:5057
 msgid "&Unfold Tags\tCtrl+Shift+U"
 msgstr "ពន្លា​ស្លាក\tCtrl+Shift+U"
 
-#: xmlcopyeditor.cpp:5232
+#: xmlcopyeditor.cpp:5060
 msgid "&Wrap Words\tCtrl+W"
 msgstr "រុំ​ពាក្យ​\tCtrl+W"
 
-#: xmlcopyeditor.cpp:5234
+#: xmlcopyeditor.cpp:5062
 msgid "&Color Scheme"
 msgstr "ពណ៌​ចម្រុះ"
 
-#: xmlcopyeditor.cpp:5235
+#: xmlcopyeditor.cpp:5063
 msgid "&Text Size"
 msgstr "ទំហំ​អត្ថបទ"
 
-#: xmlcopyeditor.cpp:5240
+#: xmlcopyeditor.cpp:5068
 msgid "S&how Current Element Pane"
 msgstr "បង្ហាញបន្ទះ​ធាតុ​បច្ចុប្បន្ន"
 
-#: xmlcopyeditor.cpp:5241
+#: xmlcopyeditor.cpp:5069
 msgid "Show Current Element Pane"
 msgstr "បង្ហាញ​បន្ទះ​ធាតុ​បច្ចុប្បន្ន"
 
-#: xmlcopyeditor.cpp:5244
+#: xmlcopyeditor.cpp:5072
 msgid "Sh&ow Toolbar"
 msgstr "បង្ហាញ​របារ​ឧបករណ៍"
 
-#: xmlcopyeditor.cpp:5244
+#: xmlcopyeditor.cpp:5072
 msgid "Show Toolbar"
 msgstr "បង្ហាញ​របារ​ឧបករណ៍"
 
-#: xmlcopyeditor.cpp:5247
+#: xmlcopyeditor.cpp:5075
 msgid "C&lose Message Pane\tAlt+C"
 msgstr "បិទ​បន្ទះ​សារ\tAlt+C"
 
-#: xmlcopyeditor.cpp:5247
+#: xmlcopyeditor.cpp:5075
 msgid "Close Message Pane"
 msgstr "បិទ​បន្ទះ​សារ"
 
-#: xmlcopyeditor.cpp:5251
+#: xmlcopyeditor.cpp:5079
 msgid "&Element...\tCtrl+I"
 msgstr "ធាតុ...\tCtrl+I"
 
-#: xmlcopyeditor.cpp:5251
+#: xmlcopyeditor.cpp:5079
 msgid "Element..."
 msgstr "ធាតុ..."
 
-#: xmlcopyeditor.cpp:5252
+#: xmlcopyeditor.cpp:5080
 msgid "&Sibling...\tCtrl+Shift+I"
 msgstr "ទាក់ទង...\tCtrl+Shift+I"
 
-#: xmlcopyeditor.cpp:5252
+#: xmlcopyeditor.cpp:5080
 msgid "Sibling..."
 msgstr "ទាក់ទង..."
 
-#: xmlcopyeditor.cpp:5253
+#: xmlcopyeditor.cpp:5081
 msgid "&Entity...\tCtrl+E"
-msgstr "អង្គភាព...\tCtrl+E"
+msgstr "វត្ថុ...\tCtrl+E"
 
-#: xmlcopyeditor.cpp:5253
+#: xmlcopyeditor.cpp:5081
 msgid "Entity..."
-msgstr "ធាតុ..."
+msgstr "វត្ថុ..."
 
-#: xmlcopyeditor.cpp:5255
+#: xmlcopyeditor.cpp:5083
 msgid "&Twin\tCtrl+Enter"
 msgstr "ដូច​គ្នាបះ​បិទ\tCtrl+Enter"
 
-#: xmlcopyeditor.cpp:5255
+#: xmlcopyeditor.cpp:5083
 msgid "Twin"
 msgstr "ដូច​គ្នា​បះបិទ"
 
-#: xmlcopyeditor.cpp:5257
+#: xmlcopyeditor.cpp:5085
 msgid "S&ymbol..."
 msgstr "និមិត្ត​សញ្ញា..."
 
-#: xmlcopyeditor.cpp:5257
+#: xmlcopyeditor.cpp:5085
 msgid "Symbol..."
 msgstr "និមិត្ត​សញ្ញា..."
 
-#: xmlcopyeditor.cpp:5265
+#: xmlcopyeditor.cpp:5093
 msgid "&DTD/XML Schema\tF5"
 msgstr "គ្រោងការណ៍ DTD/XML\tF5"
 
-#: xmlcopyeditor.cpp:5265
+#: xmlcopyeditor.cpp:5093
 msgid "DTD/XML Schema"
 msgstr "គ្រោងការណ៍ DTD/XML"
 
-#: xmlcopyeditor.cpp:5268
+#: xmlcopyeditor.cpp:5096
 msgid "&RELAX NG...\tF6"
 msgstr "&RELAX NG...\tF6"
 
-#: xmlcopyeditor.cpp:5268
+#: xmlcopyeditor.cpp:5096
 msgid "RELAX NG..."
 msgstr "RELAX NG..."
 
-#: xmlcopyeditor.cpp:5271
+#: xmlcopyeditor.cpp:5099
 msgid "&Public DTD..."
 msgstr "DTD សាធារណៈ..."
 
-#: xmlcopyeditor.cpp:5271
+#: xmlcopyeditor.cpp:5099
 msgid "Public DTD..."
 msgstr "DTD សាធារណៈ..."
 
-#: xmlcopyeditor.cpp:5272
+#: xmlcopyeditor.cpp:5100
 msgid "&System DTD..."
 msgstr "DTD ប្រព័ន្ធ..."
 
-#: xmlcopyeditor.cpp:5272
+#: xmlcopyeditor.cpp:5100
 msgid "System DTD..."
 msgstr "DTD ប្រព័ន្ធ..."
 
-#: xmlcopyeditor.cpp:5273
+#: xmlcopyeditor.cpp:5101
 msgid "&XML Schema..."
 msgstr "គ្រោងការណ៍ XML..."
 
-#: xmlcopyeditor.cpp:5273
+#: xmlcopyeditor.cpp:5101
 msgid "XML Schema..."
 msgstr "គ្រោងការណ៍ XML..."
 
-#: xmlcopyeditor.cpp:5274
+#: xmlcopyeditor.cpp:5102
 msgid "XS&LT stylesheet..."
 msgstr "សន្លឹក​រចនាប័ទ្ម XS&LT ..."
 
-#: xmlcopyeditor.cpp:5274
+#: xmlcopyeditor.cpp:5102
 msgid "XSLT stylesheet..."
 msgstr "សន្លឹក​រចនាប័ទ្ម XSLT ..."
 
-#: xmlcopyeditor.cpp:5289 xmlcopyeditor.cpp:5300
+#: xmlcopyeditor.cpp:5117 xmlcopyeditor.cpp:5128
 #, c-format
 msgid "\tCtrl+%i"
 msgstr "\tCtrl+%i"
 
-#: xmlcopyeditor.cpp:5340
+#: xmlcopyeditor.cpp:5168
 msgid "&Check Well-formedness\tF2"
 msgstr "ពិនិត្យ​ភាព​បាន​បង្កើត​ត្រឹមត្រូវ\tF2"
 
-#: xmlcopyeditor.cpp:5340 xmlcopyeditor.cpp:5606 xmlcopyeditor.cpp:5610
+#: xmlcopyeditor.cpp:5168 xmlcopyeditor.cpp:5436 xmlcopyeditor.cpp:5440
 msgid "Check Well-formedness"
 msgstr "ពិនិត្យ​ភាព​បាន​បង្កើត​ត្រឹមត្រូវ"
 
-#: xmlcopyeditor.cpp:5343
+#: xmlcopyeditor.cpp:5171
 msgid "&Validate"
 msgstr "ធ្វើ​ឲ្យ​មាន​សុពលភាព"
 
-#: xmlcopyeditor.cpp:5345
+#: xmlcopyeditor.cpp:5173
 msgid "Create &Schema...\tF10"
 msgstr "បង្កើត​គ្រោងការណ៍...\tF10"
 
-#: xmlcopyeditor.cpp:5346
-msgid "Create schema"
+#: xmlcopyeditor.cpp:5174
+msgid "Create schema..."
 msgstr "បង្កើត​គ្រោងការណ៍"
 
-#: xmlcopyeditor.cpp:5350
+#: xmlcopyeditor.cpp:5175 xmlcopyeditor.cpp:5176
+msgid "DTD -> Schema..."
+msgstr "DTD -> គ្រោងការណ៍..."
+
+#: xmlcopyeditor.cpp:5180
 msgid "&Associate"
 msgstr "ភ្ជាប់"
 
-#: xmlcopyeditor.cpp:5353
+#: xmlcopyeditor.cpp:5183
 msgid "&XSL Transform...\tF8"
 msgstr "បម្លេង XSL...\tF8"
 
-#: xmlcopyeditor.cpp:5354
+#: xmlcopyeditor.cpp:5184
 msgid "XSL Transform..."
 msgstr "បម្លែង XSL ..."
 
-#: xmlcopyeditor.cpp:5357
+#: xmlcopyeditor.cpp:5187
 msgid "&Evaluate XPath...\tF9"
 msgstr "វាយតម្លៃ XPath...\tF9"
 
-#: xmlcopyeditor.cpp:5358
+#: xmlcopyeditor.cpp:5188
 msgid "Evaluate XPath..."
 msgstr "វាយតម្លៃ XPath..."
 
-#: xmlcopyeditor.cpp:5363
+#: xmlcopyeditor.cpp:5193
 msgid "&Pretty-print\tF11"
 msgstr "ការ​បោះពុម្ព​ដ៏​ស្អាត\tF11"
 
-#: xmlcopyeditor.cpp:5363
+#: xmlcopyeditor.cpp:5193
 msgid "Pretty-print"
 msgstr "ការ​បោះពុម្ព​ដ៏​ស្អាត"
 
-#: xmlcopyeditor.cpp:5367
+#: xmlcopyeditor.cpp:5197
 msgid "&Lock Tags\tCtrl+L"
 msgstr "ចាក់សោ​ស្លាក\tCtrl+L"
 
-#: xmlcopyeditor.cpp:5368 xmlcopyeditor.cpp:5635 xmlcopyeditor.cpp:5638
+#: xmlcopyeditor.cpp:5198 xmlcopyeditor.cpp:5465 xmlcopyeditor.cpp:5468
 msgid "Lock Tags"
 msgstr "ចាក់​សោ​ស្លាក"
 
-#: xmlcopyeditor.cpp:5373
+#: xmlcopyeditor.cpp:5203
 msgid "E&ncoding..."
 msgstr "ការ​អ៊ិនកូដ..."
 
-#: xmlcopyeditor.cpp:5373
+#: xmlcopyeditor.cpp:5203
 msgid "Encoding..."
 msgstr "ការ​អ៊ិនកូដ..."
 
-#: xmlcopyeditor.cpp:5382
+#: xmlcopyeditor.cpp:5212
 msgid "&Spelling...\tF7"
 msgstr "អក្ខរាវិរុទ្ធ...\tF7"
 
-#: xmlcopyeditor.cpp:5383
+#: xmlcopyeditor.cpp:5213
 msgid "Spelling..."
 msgstr "អក្ខរាវិរុទ្ធ..."
 
-#: xmlcopyeditor.cpp:5390
+#: xmlcopyeditor.cpp:5220
 msgid "&Style...\tShift+F7"
 msgstr "រចនាប័ទ្ម...\tShift+F7"
 
-#: xmlcopyeditor.cpp:5391
+#: xmlcopyeditor.cpp:5221
 msgid "Style..."
 msgstr "រចនាប័ទ្ម..."
 
-#: xmlcopyeditor.cpp:5398
+#: xmlcopyeditor.cpp:5228
 msgid "&Word Count"
 msgstr "ចំនួន​ពាក្យ"
 
-#: xmlcopyeditor.cpp:5399
+#: xmlcopyeditor.cpp:5229
 msgid "Word Count"
 msgstr "ចំនួន​ពាក្យ"
 
-#: xmlcopyeditor.cpp:5407
+#: xmlcopyeditor.cpp:5237
 msgid "&Command\tCtrl+Alt+C"
 msgstr "ពាក្យ​​​បញ្ជា\tCtrl+Alt+C"
 
-#: xmlcopyeditor.cpp:5408
+#: xmlcopyeditor.cpp:5238
 msgid "Command"
 msgstr "ពាក្យបញ្ជា"
 
-#: xmlcopyeditor.cpp:5423
+#: xmlcopyeditor.cpp:5253
 msgid "&Options..."
 msgstr "ជម្រើស..."
 
-#: xmlcopyeditor.cpp:5424
+#: xmlcopyeditor.cpp:5254
 msgid "Options..."
 msgstr "ជម្រើស..."
 
-#: xmlcopyeditor.cpp:5434
+#: xmlcopyeditor.cpp:5264
 msgid "&XML Copy Editor Help\tF1"
 msgstr "ជំនួយ​កម្មវិធី​កែ​ច្បាប់​ចម្លង XML\tF1"
 
-#: xmlcopyeditor.cpp:5434
+#: xmlcopyeditor.cpp:5264
 msgid "Help"
 msgstr "ជំនួយ"
 
-#: xmlcopyeditor.cpp:5440
+#: xmlcopyeditor.cpp:5270
 msgid "&Home Page"
 msgstr "គេហទំព័រ"
 
-#: xmlcopyeditor.cpp:5440
+#: xmlcopyeditor.cpp:5270
 msgid "Home Page"
 msgstr "គេហទំព័រ"
 
-#: xmlcopyeditor.cpp:5443
+#: xmlcopyeditor.cpp:5273
 msgid "&Forum"
 msgstr "វេទិកា"
 
-#: xmlcopyeditor.cpp:5443
+#: xmlcopyeditor.cpp:5273
 msgid "Forum"
 msgstr "វេទិកា"
 
-#: xmlcopyeditor.cpp:5447
+#: xmlcopyeditor.cpp:5277
 msgid "&About XML Copy Editor"
 msgstr "អំពី XML Copy Editor"
 
-#: xmlcopyeditor.cpp:5447
+#: xmlcopyeditor.cpp:5277
 msgid "About"
 msgstr "អំពី"
 
-#: xmlcopyeditor.cpp:5451
+#: xmlcopyeditor.cpp:5281
 msgid "&Browse Source"
 msgstr "រក​មើល​ប្រភព"
 
-#: xmlcopyeditor.cpp:5451
+#: xmlcopyeditor.cpp:5281
 msgid "Browse Source"
 msgstr "រក​មើល​ប្រភព"
 
-#: xmlcopyeditor.cpp:5463
+#: xmlcopyeditor.cpp:5293
 msgid "&File"
 msgstr "ឯកសារ"
 
-#: xmlcopyeditor.cpp:5464
+#: xmlcopyeditor.cpp:5294
 msgid "&Edit"
 msgstr "កែសម្រួល"
 
-#: xmlcopyeditor.cpp:5465
+#: xmlcopyeditor.cpp:5295
 msgid "&View"
 msgstr "មើល"
 
-#: xmlcopyeditor.cpp:5466
+#: xmlcopyeditor.cpp:5296
 msgid "&Insert"
 msgstr "បញ្ចូល"
 
-#: xmlcopyeditor.cpp:5467
+#: xmlcopyeditor.cpp:5297
 msgid "&XML"
 msgstr "XML"
 
-#: xmlcopyeditor.cpp:5468
+#: xmlcopyeditor.cpp:5298
 msgid "&Tools"
 msgstr "ឧបករណ៍"
 
-#: xmlcopyeditor.cpp:5469
+#: xmlcopyeditor.cpp:5299
 msgid "&Help"
 msgstr "ជំនួយ"
 
-#: xmlcopyeditor.cpp:5484
+#: xmlcopyeditor.cpp:5314
 msgid "&New...\tCtrl+N"
 msgstr "ថ្មី...\tCtrl+N"
 
-#: xmlcopyeditor.cpp:5484
+#: xmlcopyeditor.cpp:5314
 msgid "New..."
 msgstr "ថ្មី​..."
 
-#: xmlcopyeditor.cpp:5487
+#: xmlcopyeditor.cpp:5317
 msgid "&Open...\tCtrl+O"
 msgstr "បើក...\tCtrl+O"
 
-#: xmlcopyeditor.cpp:5487
+#: xmlcopyeditor.cpp:5317
 msgid "Open..."
 msgstr "បើក..."
 
-#: xmlcopyeditor.cpp:5491
+#: xmlcopyeditor.cpp:5321
 msgid "O&pen Large Document...\tCtrl+Shift+O"
 msgstr "បើក​ឯកសារ​ធំ...\tCtrl+Shift+O"
 
-#: xmlcopyeditor.cpp:5491
+#: xmlcopyeditor.cpp:5321
 msgid "Open Large Document..."
 msgstr "បើក​ឯកសារ​ធំ..."
 
-#: xmlcopyeditor.cpp:5495
+#: xmlcopyeditor.cpp:5325
 msgid "&Close\tCtrl+F4"
 msgstr "បិទ\tCtrl+F4"
 
-#: xmlcopyeditor.cpp:5498
+#: xmlcopyeditor.cpp:5328
 msgid "C&lose All"
 msgstr "បិទ​ទាំងអស់"
 
-#: xmlcopyeditor.cpp:5498
+#: xmlcopyeditor.cpp:5328
 msgid "Close All"
 msgstr "បិទ​ទាំងអស់"
 
-#: xmlcopyeditor.cpp:5501
+#: xmlcopyeditor.cpp:5331
 msgid "&Save\tCtrl+S"
 msgstr "រក្សាទុក\tCtrl+S"
 
-#: xmlcopyeditor.cpp:5501 xmlcopyeditor.cpp:5592 xmlcopyeditor.cpp:5596
+#: xmlcopyeditor.cpp:5331 xmlcopyeditor.cpp:5422 xmlcopyeditor.cpp:5426
 msgid "Save"
 msgstr "រក្សាទុក"
 
-#: xmlcopyeditor.cpp:5504
+#: xmlcopyeditor.cpp:5334
 msgid "S&ave As...\tF12"
 msgstr "រក្សាទុក​ជា...\tF12"
 
-#: xmlcopyeditor.cpp:5504
+#: xmlcopyeditor.cpp:5334
 msgid "Save As..."
 msgstr "រក្សាទុក​ជា..."
 
-#: xmlcopyeditor.cpp:5508
+#: xmlcopyeditor.cpp:5338
 msgid "&DAISY Export..."
 msgstr "&DAISY នាំចេញ..."
 
-#: xmlcopyeditor.cpp:5508
+#: xmlcopyeditor.cpp:5338
 msgid "DAISY Export..."
 msgstr "DAISY នាំចេញ..."
 
-#: xmlcopyeditor.cpp:5512
+#: xmlcopyeditor.cpp:5342
 msgid "&Reload"
 msgstr "ផ្ទុក​ឡើង​វិញ"
 
-#: xmlcopyeditor.cpp:5512
+#: xmlcopyeditor.cpp:5342
 msgid "Reload"
 msgstr "ផ្ទុក​ឡើងវិញ"
 
-#: xmlcopyeditor.cpp:5515
+#: xmlcopyeditor.cpp:5345
 msgid "&Revert"
 msgstr "ត្រឡប់​ដូច​ដើម"
 
-#: xmlcopyeditor.cpp:5515
+#: xmlcopyeditor.cpp:5345
 msgid "Revert"
 msgstr "ត្រឡប់​ដូច​ដើម"
 
-#: xmlcopyeditor.cpp:5518
+#: xmlcopyeditor.cpp:5348
 msgid "Pa&ge Setup..."
 msgstr "ការ​រៀបចំ​ទំព័រ..."
 
-#: xmlcopyeditor.cpp:5518
+#: xmlcopyeditor.cpp:5348
 msgid "Page Setup..."
 msgstr "ការ​រៀបចំ​ទំព័រ..."
 
-#: xmlcopyeditor.cpp:5521
+#: xmlcopyeditor.cpp:5351
 msgid "Pr&int Preview..."
 msgstr "មើល​មុន​បោះពុម្ព..."
 
-#: xmlcopyeditor.cpp:5521
+#: xmlcopyeditor.cpp:5351
 msgid "Print Preview..."
 msgstr "មើល​មុន​បោះពុម្ព..."
 
-#: xmlcopyeditor.cpp:5524
+#: xmlcopyeditor.cpp:5354
 msgid "Pri&nt...\tCtrl+P"
 msgstr "បោះពុម្ព...\tCtrl+P"
 
-#: xmlcopyeditor.cpp:5524
+#: xmlcopyeditor.cpp:5354
 msgid "Print..."
 msgstr "បោះពុម្ព..."
 
-#: xmlcopyeditor.cpp:5528
+#: xmlcopyeditor.cpp:5358
 msgid "I&mport Microsoft Word Document..."
 msgstr "នាំចូល​ឯកសារ Microsoft Word..."
 
-#: xmlcopyeditor.cpp:5532
+#: xmlcopyeditor.cpp:5362
 msgid "Expor&t Microsoft Word Document..."
 msgstr "នាំចេញ​ឯកសារ Microsoft Word..."
 
-#: xmlcopyeditor.cpp:5536
+#: xmlcopyeditor.cpp:5366
 msgid "E&xit"
 msgstr "ចេញ"
 
-#: xmlcopyeditor.cpp:5536
+#: xmlcopyeditor.cpp:5366
 msgid "Exit"
 msgstr "ចេញ"
 
-#: xmlcopyeditor.cpp:5582 xmlcopyeditor.cpp:5584
+#: xmlcopyeditor.cpp:5412 xmlcopyeditor.cpp:5414
 msgid "New"
 msgstr "ថ្មី"
 
-#: xmlcopyeditor.cpp:5599 xmlcopyeditor.cpp:5603
+#: xmlcopyeditor.cpp:5429 xmlcopyeditor.cpp:5433
 msgid "Print"
 msgstr "បោះពុម្ព"
 
-#: xmlcopyeditor.cpp:5613 xmlcopyeditor.cpp:5617
+#: xmlcopyeditor.cpp:5443 xmlcopyeditor.cpp:5447
 msgid "Validate"
 msgstr "ធ្វើ​ឲ្យ​មាន​សុពលភាព"
 
-#: xmlcopyeditor.cpp:5677
+#: xmlcopyeditor.cpp:5507
 msgid "Information"
 msgstr "ព័ត៌មាន"
 
-#: xmlcopyeditor.cpp:5680
+#: xmlcopyeditor.cpp:5510 wrapxerces.h:56
 msgid "Warning"
 msgstr "ការព្រមាន"
 
-#: xmlcopyeditor.cpp:5683
+#: xmlcopyeditor.cpp:5513
 msgid "Stopped"
 msgstr "បាន​បញ្ឈប់"
 
-#: xmlcopyeditor.cpp:5686
+#: xmlcopyeditor.cpp:5516
 msgid "Question"
 msgstr "សំនួរ"
 
-#: xmlcopyeditor.cpp:5689
+#: xmlcopyeditor.cpp:5519
 msgid "Message"
 msgstr "សារ"
 
-#: xmlcopyeditor.cpp:5752
+#: xmlcopyeditor.cpp:5583
 #, c-format
 msgid "%s is %s"
 msgstr "%s គឺ %s"
 
-#: xmlcopyeditor.cpp:5777
+#: xmlcopyeditor.cpp:5608
 msgid "Document has been modified: save or discard changes"
 msgstr "ឯកសារ​ត្រូ​វបាន​កែប្រែ៖ រក្សាទុក ឬ​បោះបង់​ការ​ផ្លាស់ប្ដូរ"
 
-#: xmlcopyeditor.cpp:5840
+#: xmlcopyeditor.cpp:5671
 msgid "Encoding should be one of "
 msgstr "ការ​អ៊ីនកូដ​គួរ​តែ​មួយ​ក្នុង​ចំណោម"
 
-#: xmlcopyeditor.cpp:5907
+#: xmlcopyeditor.cpp:5730
 msgid "Public DTD"
 msgstr "DTD សាធារណៈ"
 
-#: xmlcopyeditor.cpp:5913
+#: xmlcopyeditor.cpp:5736
 msgid "System DTD"
 msgstr "DTD ប្រ​ព័ន្ធ"
 
-#: xmlcopyeditor.cpp:5919
+#: xmlcopyeditor.cpp:5742
 msgid "XML Schema"
 msgstr "គ្រោងការណ៍ XML"
 
-#: xmlcopyeditor.cpp:5943
+#: xmlcopyeditor.cpp:5766
 #, c-format
 msgid "Cannot associate %s: %s"
 msgstr "មិន​អាច​ភ្ជាប់ %s: %s"
 
-#: xmlcopyeditor.cpp:5950
+#: xmlcopyeditor.cpp:5773
 #, c-format
 msgid "Associate %s"
 msgstr "ភ្ជាប់ %s"
 
-#: xmlcopyeditor.cpp:5958
+#: xmlcopyeditor.cpp:5781
 msgid "Choose a public identifier:"
 msgstr "ជ្រើស​គ្រឿង​សម្គាល់​សាធារណៈ៖"
 
-#: xmlcopyeditor.cpp:6082
+#: xmlcopyeditor.cpp:5905
 #, c-format
 msgid "Cannot count words: %s"
 msgstr "មិន​អាច​រាប់​ពាក្យ៖ %s"
 
-#: xmlcopyeditor.cpp:6090
+#: xmlcopyeditor.cpp:5913
 #, c-format
 msgid "%s contains %i word"
 msgid_plural "%s contains %i words"
 msgstr[0] "%s មាន %i ពាក្យ"
 
-#: xmlctrl.cpp:291 xmlctrl.cpp:395
+#: xmlcopyeditor.cpp:6080
+msgid "Invalid path: "
+msgstr "ផ្លូវ​មិន​ត្រឹមត្រូវ៖"
+
+#: xmlcopyeditor.cpp:6108
+msgid "To change application directory, see Tools, Options..., General"
+msgstr "ដើម្បី​ប្ដូរ​ថត​កម្មវិធី មើល​ឧបករណ៍, ជម្រើស..., ទូទៅ"
+
+#: xmlcopyeditor.cpp:6110
+msgid "To change application directory, see Edit, Preferences..., General"
+msgstr "ដើម្បី​ប្ដូរ​ថត​កម្មវិធី មើល​កែសម្រួល, ចំណូល​ចិត្ត..., ទូទៅ"
+
+#: xmlctrl.cpp:299 xmlctrl.cpp:403
 msgid "Delete tag?"
 msgstr "លុប​ស្លាក?"
 
-#: xmlctrl.cpp:292 xmlctrl.cpp:323 xmlctrl.cpp:396 xmlctrl.cpp:427
+#: xmlctrl.cpp:300 xmlctrl.cpp:331 xmlctrl.cpp:404 xmlctrl.cpp:435
 msgid "Tags Locked"
 msgstr "បាន​ចាក់​សោ​ស្លាក"
 
-#: xmlctrl.cpp:322 xmlctrl.cpp:426
+#: xmlctrl.cpp:330 xmlctrl.cpp:434
 msgid "Delete entity reference?"
-msgstr "លុប​​ឯកសារ​យោង​ស្លាក?"
+msgstr "លុប​​ឯកសារ​យោង​វត្ថុ?"
 
-#: xmlschemagenerator.cpp:73
+#: xmlschemagenerator.cpp:72
 msgid "Failed to load xml file."
 msgstr "បាន​បរាជ័យ​ក្នុងការ​ផ្ទុក​ឯកសារ xml ។"
+
+#: wrapxerces.h:60
+msgid "FatalError"
+msgstr "កំហុស​ធ្ងន់ធ្ងរ"
 
 #: xmlcopyeditorcopy.h:22
 msgid ""
 "All files (*.*)|*.*|XML (*.xml)|*.xml|XHTML (*.html)|*.html|DTD (*.dtd)|*."
 "dtd|XML Schema (*.xsd)|*.xsd|RELAX NG grammar (*.rng)|*.rng|XSL (*.xsl)|*.xsl"
 msgstr ""
-"ឯកសារ​ទាំងអស់ (*.*)|*.*|XML (*.xml)|*.xml|XHTML (*.html)|*.html|DTD "
-"(*.dtd)|*.dtd|XML Schema (*.xsd)|*.xsd|RELAX NG grammar (*.rng)|*.rng|XSL "
-"(*.xsl)|*.xsl"
+"ឯកសារ​ទាំងអស់ (*.*)|*.*|XML (*.xml)|*.xml|XHTML (*.html)|*.html|DTD (*.dtd)|*."
+"dtd|XML Schema (*.xsd)|*.xsd|RELAX NG grammar (*.rng)|*.rng|XSL (*.xsl)|*.xsl"
 
 #: xmlcopyeditorcopy.h:24
 msgid ""
 "All files (*)|*|XML (*.xml)|*.xml|XHTML (*.html)|*.html|DTD (*.dtd)|*.dtd|"
 "XML Schema (*.xsd)|*.xsd|RELAX NG grammar (*.rng)|*.rng|XSL (*.xsl)|*.xsl"
 msgstr ""
-"ឯកសារ​ទាំងអស់ (*)|*|XML (*.xml)|*.xml|XHTML (*.html)|*.html|DTD "
-"(*.dtd)|*.dtd|XML Schema (*.xsd)|*.xsd|RELAX NG grammar (*.rng)|*.rng|XSL "
-"(*.xsl)|*.xsl"
+"ឯកសារ​ទាំងអស់ (*)|*|XML (*.xml)|*.xml|XHTML (*.html)|*.html|DTD (*.dtd)|*.dtd|"
+"XML Schema (*.xsd)|*.xsd|RELAX NG grammar (*.rng)|*.rng|XSL (*.xsl)|*.xsl"
 
 #: xmlcopyeditorcopy.h:29
 msgid "Copyright © 2005-2009 Gerald Schmidt <gnschmidt@users.sourceforge.net>"
 msgstr ""
-"រក្សា​សិទ្ធិ​ឆ្នាំ ២០០៥-២០០៩ ដោយ Gerald Schmidt "
-"<gnschmidt@users.sourceforge.net>"
+"រក្សា​សិទ្ធិ​ឆ្នាំ ២០០៥-២០០៩ ដោយ Gerald Schmidt <gnschmidt@users.sourceforge.net>"
 
 #: xmlcopyeditorcopy.h:31
 msgid ""
@@ -1893,6 +1982,8 @@ msgid ""
 "\n"
 "Many thanks are due to "
 msgstr ""
-"\nកម្មវិធី​កែ​ច្បាប់ចម្លង​ XML "
-"គឺ​ជា​កម្មវិធី​ឥត​គិតថ្លៃ​ដែល​បាន​​ចេញ​ផ្សាយ​ក្រោម GNU\nGeneral Public "
-"License.\n\nអរគុណ​ច្រើន"
+"\n"
+"កម្មវិធី​កែ​ច្បាប់ចម្លង​ XML គឺ​ជា​កម្មវិធី​ឥត​គិតថ្លៃ​ដែល​បាន​​ចេញ​ផ្សាយ​ក្រោម GNU\n"
+"General Public License.\n"
+"\n"
+"អរគុណ​ច្រើន"
