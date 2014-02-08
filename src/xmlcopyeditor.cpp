@@ -5512,7 +5512,7 @@ void MyFrame::messagePane ( const wxString& s, int iconType, bool forcePane )
 			paneTitle = _ ( "Warning" );
 			break;
 		case ( CONST_STOP ) :
-						paneTitle = _ ( "Stopped" );
+			paneTitle = _ ( "Stopped" );
 			break;
 		case ( CONST_QUESTION ) :
 			paneTitle = _ ( "Question" );
@@ -5522,14 +5522,13 @@ void MyFrame::messagePane ( const wxString& s, int iconType, bool forcePane )
 			break;
 	}
 
-	wxAuiPaneInfo info = manager.GetPane ( htmlReport );
+	wxAuiPaneInfo &info = manager.GetPane ( htmlReport );
 	if ( !info.IsShown() )
-    {
-		manager.GetPane ( htmlReport ).Show ( true );
-		manager.Update();
+	{
+		info.Show ( true );
 	}
 
-	manager.GetPane ( htmlReport ).Caption ( paneTitle );
+	info.Caption ( paneTitle );
 
 	wxString htmlString = s;
 	htmlString.Replace ( _T ( "&" ), _T ( "&amp;" ), true );
@@ -5549,7 +5548,7 @@ void MyFrame::messagePane ( const wxString& s, int iconType, bool forcePane )
 	switch ( iconType )
 	{
 		case ( CONST_INFO ) :
-						htmlBuffer += pngDir;
+			htmlBuffer += pngDir;
 			htmlBuffer += _T ( "stock_dialog-info-32.png" );
 			break;
 		case ( CONST_WARNING ) :
