@@ -305,6 +305,7 @@ bool MyApp::OnInit()
 			break;
 	}
 
+	wxString dataDir = wxStandardPaths::Get().GetDataDir();
 #ifdef __WXMSW__
 	singleInstanceCheck = true;
 #else
@@ -315,6 +316,7 @@ bool MyApp::OnInit()
 		singleInstanceCheck = config->Read ( _T ( "singleInstanceCheck" ),
 				singleInstanceCheck );
 		lang = config->Read ( _T ( "lang" ), systemLocale );
+		dataDir = config->Read ( _T ( "applicationDir" ), dataDir );
 	}
 	else
 	{
@@ -345,8 +347,8 @@ bool MyApp::OnInit()
 	prefixes.Add ( _T ( "/usr/share/locale-langpack" ) );
 	prefixes.Add ( _T ( "/usr/local/share/locale" ) );
 #endif
-	wxString poDir = wxStandardPaths::Get().GetDataDir() +
-	        wxFileName::GetPathSeparator() + _T ( "po" ) + wxFileName::GetPathSeparator();
+	wxString poDir = dataDir + wxFileName::GetPathSeparator() + _T ( "po" )
+			+ wxFileName::GetPathSeparator();
 	prefixes.Add ( poDir );
 	for ( size_t i = 0; i < prefixes.Count(); )
 	{
