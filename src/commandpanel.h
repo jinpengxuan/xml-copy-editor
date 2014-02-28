@@ -53,6 +53,7 @@ class CommandPanel : public wxPanel
 		void OnRun ( wxCommandEvent& event );
 		void OnVariableButton ( wxCommandEvent& event );
 		void OnIdle ( wxIdleEvent& event );
+		void OnCharHook ( wxKeyEvent& event );
 		void focusOnCommand();
 		bool getSync();
 		int getOutput();

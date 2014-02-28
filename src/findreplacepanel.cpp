@@ -26,6 +26,7 @@ BEGIN_EVENT_TABLE ( FindReplacePanel, wxPanel )
 	EVT_BUTTON ( ID_FINDREPLACE_FIND_NEXT, FindReplacePanel::OnFindNext )
 	EVT_BUTTON ( ID_FINDREPLACE_REPLACE, FindReplacePanel::OnReplace )
 	EVT_BUTTON ( ID_FINDREPLACE_REPLACE_ALL, FindReplacePanel::OnReplaceAll )
+	EVT_CHAR_HOOK ( FindReplacePanel::OnCharHook )
 	EVT_IDLE ( FindReplacePanel::OnIdle )
 END_EVENT_TABLE()
 
@@ -294,4 +295,12 @@ void FindReplacePanel::enableButtons ( bool b )
 	findNextButton->Enable ( b );
 	replaceButton->Enable ( b );
 	replaceAllButton->Enable ( b );
+}
+
+void FindReplacePanel::OnCharHook ( wxKeyEvent& event )
+{
+	if ( event.GetKeyCode() == WXK_ESCAPE && event.GetModifiers() == 0 )
+		( ( MyFrame* ) GetParent() )->closeFindReplacePane();
+	else
+		event.Skip();
 }

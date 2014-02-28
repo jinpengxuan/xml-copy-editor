@@ -126,7 +126,9 @@ BEGIN_EVENT_TABLE ( MyFrame, wxFrame )
 	EVT_MENU ( ID_IMPORT_MSWORD, MyFrame::OnImportMSWord )
 	EVT_MENU ( ID_EXPORT_MSWORD, MyFrame::OnExportMSWord )
 	EVT_MENU ( ID_EXPORT, MyFrame::OnExport )
-	EVT_MENU ( ID_HIDE_PANE, MyFrame::OnClosePane )
+	EVT_MENU ( ID_CLOSE_MESSAGE_PANE, MyFrame::OnCloseMessagePane )
+	EVT_MENU ( ID_CLOSE_FIND_REPLACE_PANE, MyFrame::OnCloseFindReplacePane )
+	EVT_MENU ( ID_CLOSE_COMMAND_PANE, MyFrame::OnCloseCommandPane )
 	EVT_MENU ( ID_COMMAND, MyFrame::OnCommand )
 	EVT_MENU ( ID_FIND, MyFrame::OnFind )
 	EVT_MENU ( ID_FIND_AGAIN, MyFrame::OnFindAgain )
@@ -195,7 +197,9 @@ BEGIN_EVENT_TABLE ( MyFrame, wxFrame )
 	EVT_UPDATE_UI_RANGE ( ID_FIND, ID_EXPORT_MSWORD, MyFrame::OnUpdateDocRange )
 	EVT_UPDATE_UI ( ID_PREVIOUS_DOCUMENT, MyFrame::OnUpdatePreviousDocument )
 	EVT_UPDATE_UI ( ID_NEXT_DOCUMENT, MyFrame::OnUpdateNextDocument )
-	EVT_UPDATE_UI ( ID_HIDE_PANE, MyFrame::OnUpdateClosePane )
+	EVT_UPDATE_UI ( ID_CLOSE_MESSAGE_PANE, MyFrame::OnUpdateCloseMessagePane )
+	EVT_UPDATE_UI ( ID_CLOSE_FIND_REPLACE_PANE, MyFrame::OnUpdateCloseFindReplacePane )
+	EVT_UPDATE_UI ( ID_CLOSE_COMMAND_PANE, MyFrame::OnUpdateCloseCommandPane )
 	EVT_UPDATE_UI ( ID_RELOAD, MyFrame::OnUpdateReload )
 	EVT_IDLE ( MyFrame::OnIdle )
 	EVT_AUINOTEBOOK_PAGE_CLOSE ( wxID_ANY, MyFrame::OnPageClosing )
@@ -1400,7 +1404,7 @@ void MyFrame::OnPageClosing ( wxAuiNotebookEvent& event ) //wxNotebookEvent& eve
 		return;
 
 	statusProgress ( wxEmptyString );
-	closePane();
+	closeMessagePane();
 
 	if ( doc->GetModify() ) //CanUndo())
 	{
@@ -1470,28 +1474,31 @@ void MyFrame::OnCloseAll ( wxCommandEvent& WXUNUSED ( event ) )
 		;
 }
 
-void MyFrame::OnClosePane ( wxCommandEvent& WXUNUSED ( event ) )
+void MyFrame::OnCloseMessagePane ( wxCommandEvent& WXUNUSED ( event ) )
 {
-	closePane();
-	//closeFindReplacePane();
-	//closeCommandPane();
-
-	XmlDoc *doc = getActiveDocument();
-	if ( doc )
-		doc->SetFocus();
+	closeMessagePane();
 }
 
-void MyFrame::closePane()
+void MyFrame::OnCloseFindReplacePane ( wxCommandEvent& WXUNUSED ( event ) )
+{
+	closeFindReplacePane();
+}
+
+void MyFrame::OnCloseCommandPane ( wxCommandEvent& WXUNUSED ( event ) )
+{
+	closeCommandPane();
+}
+
+void MyFrame::closeMessagePane()
 {
 	if ( !htmlReport )
 		return;
 	manager.GetPane ( htmlReport ).Hide();
 	manager.Update();
 
-	XmlDoc *doc;
-	if ( ( doc = getActiveDocument() ) == NULL )
-		return;
-	doc->SetFocus();
+	XmlDoc *doc = getActiveDocument();
+	if ( doc )
+		doc->SetFocus();
 }
 
 void MyFrame::closeFindReplacePane()
@@ -1499,6 +1506,10 @@ void MyFrame::closeFindReplacePane()
 	if ( manager.GetPane ( findReplacePanel ).IsShown() )
 		manager.GetPane ( findReplacePanel ).Hide();
 	manager.Update();
+
+	XmlDoc *doc = getActiveDocument();
+	if ( doc != NULL )
+		doc->SetFocus();
 }
 
 void MyFrame::closeCommandPane()
@@ -1506,6 +1517,10 @@ void MyFrame::closeCommandPane()
 	if ( manager.GetPane ( commandPanel ).IsShown() )
 		manager.GetPane ( commandPanel ).Hide();
 	manager.Update();
+
+	XmlDoc *doc = getActiveDocument();
+	if ( doc != NULL )
+		doc->SetFocus();
 }
 
 bool MyFrame::panelHasFocus()
@@ -2149,7 +2164,7 @@ void MyFrame::OnImportMSWord ( wxCommandEvent& event )
 void MyFrame::OnExport ( wxCommandEvent& event )
 {
 	statusProgress ( wxEmptyString );
-	closePane();
+	closeMessagePane();
 
 	XmlDoc *doc;
 	if ( ( doc = getActiveDocument() ) == NULL )
@@ -3310,7 +3325,7 @@ bool MyFrame::openFile ( wxString& fileName, bool largeFile )
 	}
 	else
 	{
-		closePane();
+		closeMessagePane();
 	}
 	return true;
 }
@@ -3415,7 +3430,7 @@ void MyFrame::OnSpelling ( wxCommandEvent& event )
 		return;
 
 	statusProgress ( wxEmptyString );
-	closePane();
+	closeMessagePane();
 
 #ifdef __WXMSW__
 	doc->SetUndoCollection ( false );
@@ -3479,7 +3494,7 @@ void MyFrame::OnPreviousDocument ( wxCommandEvent& WXUNUSED ( event ) )
 		return;
 
 	statusProgress ( wxEmptyString );
-	closePane();
+	closeMessagePane();
 
 	int currentSelection = mainBook->GetSelection();
 	if ( currentSelection < 1 )
@@ -3496,7 +3511,7 @@ void MyFrame::OnNextDocument ( wxCommandEvent& WXUNUSED ( event ) )
 		return;
 
 	statusProgress ( wxEmptyString );
-	closePane();
+	closeMessagePane();
 
 	int currentSelection = mainBook->GetSelection();
 	int maxSelection = mainBook->GetPageCount();
@@ -3730,13 +3745,22 @@ void MyFrame::OnUpdateNextDocument ( wxUpdateUIEvent& event )
 	event.Enable ( ( currentDocument >= ( maxDocument - 1 ) ) ? false : true );
 }
 
-void MyFrame::OnUpdateClosePane ( wxUpdateUIEvent& event )
+void MyFrame::OnUpdateCloseMessagePane ( wxUpdateUIEvent& event )
 {
-	wxAuiPaneInfo i1, i2, i3;
-	i1 = manager.GetPane ( htmlReport );
-	i2 = manager.GetPane ( findReplacePanel );
-	i3 = manager.GetPane ( commandPanel );
-	event.Enable ( i1.IsShown() || i2.IsShown() || i3.IsShown() );
+	wxAuiPaneInfo &info = manager.GetPane ( htmlReport );
+	event.Enable ( info.IsShown() );
+}
+
+void MyFrame::OnUpdateCloseFindReplacePane ( wxUpdateUIEvent& event )
+{
+	wxAuiPaneInfo &info = manager.GetPane ( findReplacePanel );
+	event.Enable ( info.IsShown() );
+}
+
+void MyFrame::OnUpdateCloseCommandPane ( wxUpdateUIEvent& event )
+{
+	wxAuiPaneInfo &info = manager.GetPane ( commandPanel );
+	event.Enable ( info.IsShown() );
 }
 
 void MyFrame::OnValidateDTD ( wxCommandEvent& event )
@@ -3956,7 +3980,7 @@ void MyFrame::OnCreateSchema ( wxCommandEvent& event )
 
 void MyFrame::OnDtd2Schema ( wxCommandEvent& event )
 {
-	closePane();
+	closeMessagePane();
 
 #if wxCHECK_VERSION(2,9,0)
 	long style = wxFD_OPEN | wxFD_FILE_MUST_EXIST;
@@ -3988,7 +4012,7 @@ void MyFrame::OnDtd2Schema ( wxCommandEvent& event )
 void MyFrame::OnXPath ( wxCommandEvent& event )
 {
 	statusProgress ( wxEmptyString );
-	closePane();
+	closeMessagePane();
 
 	XmlDoc *doc;
 	if ( ( doc = getActiveDocument() ) == NULL )
@@ -4039,7 +4063,7 @@ void MyFrame::OnXPath ( wxCommandEvent& event )
 void MyFrame::OnXslt ( wxCommandEvent& event )
 {
 	statusProgress ( wxEmptyString );
-	closePane();
+	closeMessagePane();
 
 	// fetch document contents
 	XmlDoc *doc;
@@ -4162,7 +4186,7 @@ void MyFrame::OnXslt ( wxCommandEvent& event )
 void MyFrame::OnPrettyPrint ( wxCommandEvent& event )
 {
 	statusProgress ( wxEmptyString );
-	closePane();
+	closeMessagePane();
 
 	// fetch document contents
 	XmlDoc *doc;
@@ -4231,7 +4255,7 @@ void MyFrame::OnPrettyPrint ( wxCommandEvent& event )
 void MyFrame::OnEncoding ( wxCommandEvent& event )
 {
 	statusProgress ( wxEmptyString );
-	closePane();
+	closeMessagePane();
 
 	// fetch document contents
 	XmlDoc *doc;
@@ -4497,7 +4521,7 @@ void MyFrame::findAgain ( wxString s, int flags )
 bool MyFrame::closeActiveDocument()
 {
 	statusProgress ( wxEmptyString );
-	closePane();
+	closeMessagePane();
 
 	int selection = mainBook->GetSelection();
 	if ( selection == -1 || !mainBook->GetPageCount() ) // GetPageCount needed for wxAuiNotebook
@@ -4563,7 +4587,7 @@ bool MyFrame::saveFile ( XmlDoc *doc, wxString& fileName, bool checkLastModified
 
 		fileNameLocal = fileName.mb_str ( wxConvLocal );
 
-		closePane();
+		closeMessagePane();
 		bool success;
 		success = true;
 		if ( getFileType ( fileName ) != FILE_TYPE_XML )
@@ -5073,8 +5097,12 @@ wxMenuBar *MyFrame::getMenuBar()
 	viewMenu->AppendCheckItem (
 	    ID_TOOLBAR_VISIBLE, _ ( "Sh&ow Toolbar" ), _ ( "Show Toolbar" ) );
 	viewMenu->Check ( ID_TOOLBAR_VISIBLE, toolbarVisible );
-	viewMenu->Append (
-	    ID_HIDE_PANE, _ ( "C&lose Message Pane\tAlt+C" ), _ ( "Close Message Pane" ) );
+	viewMenu->Append ( ID_CLOSE_MESSAGE_PANE,
+	    _ ( "C&lose Message Pane\tAlt+C" ), _ ( "Close Message Pane" ) );
+	viewMenu->Append ( ID_CLOSE_FIND_REPLACE_PANE,
+	    _ ( "Close Find/Replace Pane" ), _ ( "Close Find/Replace Pane" ) );
+	viewMenu->Append ( ID_CLOSE_COMMAND_PANE,
+	    _ ( "Close Command Pane" ), _ ( "Close Command Pane" ) );
 
 	// insert menu
 	wxMenu *insertMenu = new wxMenu;

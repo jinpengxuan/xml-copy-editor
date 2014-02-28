@@ -30,6 +30,7 @@ BEGIN_EVENT_TABLE ( CommandPanel, wxPanel )
 	EVT_BUTTON ( ID_BUTTON_PATH, CommandPanel::OnVariableButton )
 	EVT_BUTTON ( ID_BUTTON_EXTENSION, CommandPanel::OnVariableButton )
 	EVT_BUTTON ( ID_BUTTON_FULLPATH, CommandPanel::OnVariableButton )
+	EVT_CHAR_HOOK ( CommandPanel::OnCharHook )
 END_EVENT_TABLE()
 
 CommandPanel::CommandPanel (
@@ -264,4 +265,12 @@ void CommandPanel::OnIdle ( wxIdleEvent& event )
 	outputIgnore->Enable ( b );
 	outputInsert->Enable ( b );
 	outputNewDocument->Enable ( b );
+}
+
+void CommandPanel::OnCharHook ( wxKeyEvent& event )
+{
+	if ( event.GetKeyCode() == WXK_ESCAPE && event.GetModifiers() == 0 )
+		( ( MyFrame* ) GetParent() )->closeCommandPane();
+	else
+		event.Skip();
 }

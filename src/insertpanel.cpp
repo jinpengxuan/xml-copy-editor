@@ -179,7 +179,7 @@ void InsertPanel::handleChoice ( const wxString& choice )
 		return;
 
 	if ( parentWindow )
-		parentWindow->closePane();
+		parentWindow->closeMessagePane();
 
 	switch ( type )
 	{

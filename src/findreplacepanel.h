@@ -69,6 +69,7 @@ class FindReplacePanel : public wxPanel
 		bool matchCaseMemory, regexMemory;
 		bool incrementalFind, isReplaceDialog, notFoundSet, isRegex;
 
+		void OnCharHook ( wxKeyEvent& event );
 		void OnIdle ( wxIdleEvent& event );
 		void sendFindEvent ( size_t flags );
 

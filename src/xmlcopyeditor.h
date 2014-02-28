@@ -76,7 +76,9 @@ enum
 	ID_NEXT_DOCUMENT,
 	ID_OPTIONS,
 	ID_IMPORT_MSWORD,
-	ID_HIDE_PANE,
+	ID_CLOSE_MESSAGE_PANE,
+	ID_CLOSE_FIND_REPLACE_PANE,
+	ID_CLOSE_COMMAND_PANE,
 	ID_HOME,
 	ID_PASTE_NEW_DOCUMENT,
 	ID_PRINT_SETUP,
@@ -218,7 +220,9 @@ class MyFrame : public wxFrame
 		void OnCheckWellformedness ( wxCommandEvent& event );
 		void OnClose ( wxCommandEvent& event );
 		void OnCloseAll ( wxCommandEvent& event );
-		void OnClosePane ( wxCommandEvent& event );
+		void OnCloseMessagePane ( wxCommandEvent& event );
+		void OnCloseFindReplacePane ( wxCommandEvent& event );
+		void OnCloseCommandPane ( wxCommandEvent& event );
 		void OnCut ( wxCommandEvent& event );
 		void OnCopy ( wxCommandEvent& event );
 		void OnPaste ( wxCommandEvent& event );
@@ -270,7 +274,9 @@ class MyFrame : public wxFrame
 		void OnDialogReplaceAll ( wxFindDialogEvent& event );
 		void OnFrameClose ( wxCloseEvent& event );
 		void OnIdle ( wxIdleEvent& event );
-		void OnUpdateClosePane ( wxUpdateUIEvent& event );
+		void OnUpdateCloseMessagePane ( wxUpdateUIEvent& event );
+		void OnUpdateCloseFindReplacePane ( wxUpdateUIEvent& event );
+		void OnUpdateCloseCommandPane ( wxUpdateUIEvent& event );
 		void OnUpdateCloseAll ( wxUpdateUIEvent& event );
 		void OnUpdateUndo ( wxUpdateUIEvent& event );
 		void OnUpdatePreviousDocument ( wxUpdateUIEvent& event );
@@ -315,7 +321,7 @@ class MyFrame : public wxFrame
 		    XmlDoc *doc,
 		    const wxString& schemaName,
 		    wxString& fileName );
-		void closePane();
+		void closeMessagePane();
 		void closeFindReplacePane();
 		void closeCommandPane();
 		bool closeActiveDocument();
