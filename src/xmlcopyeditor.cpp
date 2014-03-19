@@ -2824,9 +2824,9 @@ void MyFrame::OnNew ( wxCommandEvent& WXUNUSED ( event ) )
 {
 	wxString defaultSelection, typeSelection, templateFile;
 	defaultSelection = _ ( "XML document (*.xml)" );
-	wxArrayString templateArray;
 	if ( wxDirExists ( templateDir ) )
 	{
+		wxArrayString templateArray;
 		wxString templateMask, name, extension, entry;
 		wxFileName fn;
 		templateMask = templateDir + wxFileName::GetPathSeparator() + _T ( "*.*" );
@@ -2846,14 +2846,8 @@ void MyFrame::OnNew ( wxCommandEvent& WXUNUSED ( event ) )
 		templateArray.Sort();
 		templateArray.Insert ( defaultSelection, 0 );
 
-		const int arraySize = templateArray.GetCount();
-
-		wxString choiceArray[arraySize + 1];
-		for ( int i = 0; i < arraySize; ++i )
-			* ( choiceArray + i ) = templateArray.Item ( i );
-
 		wxSingleChoiceDialog scd (
-		    this, _ ( "Choose a document type:" ), _ ( "New Document" ), arraySize, choiceArray );
+		    this, _ ( "Choose a document type:" ), _ ( "New Document" ), templateArray );
 		if ( scd.ShowModal() == wxID_CANCEL )
 		{
 			XmlDoc *doc = getActiveDocument();
@@ -4262,20 +4256,13 @@ void MyFrame::OnEncoding ( wxCommandEvent& event )
 	if ( ( doc = getActiveDocument() ) == NULL )
 		return;
 
-	std::vector<wxString> encodingVector;
-	encodingVector.push_back ( _T ( "UTF-8" ) );
-	encodingVector.push_back ( _T ( "UTF-16" ) );
-	encodingVector.push_back ( _T ( "UTF-16LE" ) );
-	encodingVector.push_back ( _T ( "UTF-16BE" ) );
-	encodingVector.push_back ( _T ( "ISO-8859-1" ) );
-	encodingVector.push_back ( _T ( "US-ASCII" ) );
-	const int vectorSize = encodingVector.size();
-	wxString choiceArray[vectorSize + 1];
-	for ( int i = 0; i < vectorSize; ++i )
-		* ( choiceArray + i ) = encodingVector.at ( i );
+	const static wxString encodings[] = {
+		_T ( "UTF-8" ), _T ( "UTF-16" ), _T ( "UTF-16LE" ),
+		_T ( "UTF-16BE" ), _T ( "ISO-8859-1" ), _T ( "US-ASCII" )
+	};
 	wxSingleChoiceDialog scd (
-	    this, _ ( "Choose an encoding:" ), _ ( "Encoding" ), vectorSize, choiceArray );
-
+	    this, _ ( "Choose an encoding:" ), _ ( "Encoding" ),
+	    sizeof ( encodings ) / sizeof ( encodings[0] ), encodings );
 	if ( scd.ShowModal() == wxID_CANCEL )
 		return;
 
