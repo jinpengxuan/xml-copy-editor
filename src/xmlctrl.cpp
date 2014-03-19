@@ -490,7 +490,7 @@ void XmlCtrl::handleOpenAngleBracket ( wxKeyEvent& event )
 	wxString choice;
 	std::set<wxString> &childSet = elementMap[parent];
 	std::set<wxString>::iterator it;
-	for ( it = childSet.begin(); it != childSet.end(); it++ )
+	for ( it = childSet.begin(); it != childSet.end(); ++it )
 	{
 		if ( !choice.empty() )
 			choice.append ( _T ( "<" ) );
@@ -591,7 +591,7 @@ void XmlCtrl::handleEquals ( wxKeyEvent& event )
 	int cutoff = BUFSIZ;
 	for ( valueSetIterator = valueSet.begin();
 	        valueSetIterator != valueSet.end();
-	        valueSetIterator++ )
+	        ++valueSetIterator )
 	{
 		if ( ! ( cutoff-- ) )
 			break;
@@ -657,7 +657,7 @@ void XmlCtrl::handleSpace ( wxKeyEvent& event )
 	wxString tag = GetTextRange ( tagStartPos, pos );
 	std::map<wxString, std::set<wxString> > &curAttMap = attributeMap[elementName];
 	std::map<wxString, std::set<wxString> >::iterator it;
-	for ( it = curAttMap.begin(); it != curAttMap.end(); it++ )
+	for ( it = curAttMap.begin(); it != curAttMap.end(); ++it )
 	{
 		// avoid duplicate attributes
 		if ( tag.Contains ( it->first + _T ( "=" ) ) )
@@ -700,7 +700,7 @@ void XmlCtrl::handleAmpersand ( wxKeyEvent& event )
 		std::set<wxString>::iterator it = entitySet.begin();
 		choice += *it;
 		choice += _T ( ";" );
-		for ( it++; it != entitySet.end(); it++ )
+		for ( it++; it != entitySet.end(); ++it )
 		{
 			choice += _T ( "<" );
 			choice += *it;
@@ -1786,7 +1786,7 @@ wxString XmlCtrl::getOpenTag ( const wxString& element )
 	requiredAttributeSet = requiredAttributeMap[element];
 	if ( !requiredAttributeSet.empty() )
 	{
-		for ( it = requiredAttributeSet.begin(); it != requiredAttributeSet.end(); it++ )
+		for ( it = requiredAttributeSet.begin(); it != requiredAttributeSet.end(); ++it )
 		{
 			openTag += _T ( " " );
 			openTag += *it;

@@ -181,7 +181,7 @@ MyPropertySheet::MyPropertySheet (
 
 	int index;
 	std::set<const wxLanguageInfo *>::const_iterator t = translations.begin();
-	for ( ; t != translations.end(); t++ )
+	for ( ; t != translations.end(); ++t )
 	{
 		index = languageBox->Append ( wxGetTranslation ( ( **t ).Description ),
 		                              ( void* )( **t ).Language );

@@ -118,7 +118,7 @@ void LocationPanel::indentStructure ( wxString& structure )
 
 	int count = 0;
 	bool justSeenContent = false;
-	for ( ; *s; s++, count++)
+	for ( ; *s; ++s, count++)
 	{
 		if (*s == '(')
 		{

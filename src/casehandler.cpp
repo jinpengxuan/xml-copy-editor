@@ -75,7 +75,7 @@ string CaseHandler::lowerCase ( string &s )
 	for (
 	    it = localString.begin();
 	    it != localString.end();
-	    it++ )
+	    ++it )
 	{
 		if ( *it < 0 )
 			continue;

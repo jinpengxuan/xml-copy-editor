@@ -158,7 +158,7 @@ void HouseStyle::collectRules ( const std::string& fileName,
 	xrr->getExcludeVector ( localExcludeVector );
 	for ( excludeIterator = localExcludeVector.begin();
 	        excludeIterator != localExcludeVector.end();
-	        excludeIterator++ )
+	        ++excludeIterator )
 		excludeSet.insert ( *excludeIterator );
 
 	* ( ruleCount ) += xrr->getRuleCount();
@@ -169,7 +169,7 @@ void HouseStyle::collectRules ( const std::string& fileName,
 	std::vector<std::string>::iterator includeIterator;
 	for ( includeIterator = includeVector.begin();
 	        includeIterator != includeVector.end();
-	        includeIterator++ )
+	        ++includeIterator )
 	{
 		if ( !excludeSet.count ( *includeIterator ) )
 			collectRules ( *includeIterator, ruleVector, excludeSet, ruleCount );
@@ -243,7 +243,7 @@ bool HouseStyle::createReport()
 
 			for ( matchIterator = contextVector.begin();
 				matchIterator != contextVector.end();
-				matchIterator++ )
+				++matchIterator )
 			{
 				matchIterator->report = "Not in dictionary";
 				matchIterator->elementCount = elementCount;	
@@ -269,7 +269,7 @@ bool HouseStyle::createReport()
 	
 					for ( matchIterator = contextVector.begin();
 						matchIterator != contextVector.end();
-						matchIterator++ )
+						++matchIterator )
 					{
 						if ( rule->getAdjustCaseAttribute() )
 							CaseHandler::adjustCase (

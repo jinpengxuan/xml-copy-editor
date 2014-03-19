@@ -102,7 +102,7 @@ void InsertPanel::update (
 		lastDoc = doc;
 		const std::set<wxString> &entitySet = doc->getEntitySet();
 		std::set<wxString>::const_iterator it;
-		for ( it = entitySet.begin(); it != entitySet.end(); it++ )
+		for ( it = entitySet.begin(); it != entitySet.end(); ++it )
 			list->Append ( *it );
 		list->Show ( true );
 #if wxCHECK_VERSION(2,9,0)
@@ -139,7 +139,7 @@ void InsertPanel::update (
 		return;
 	}
 	std::set<wxString>::const_iterator it;
-	for ( it = elementSet.begin(); it != elementSet.end(); it++ )
+	for ( it = elementSet.begin(); it != elementSet.end(); ++it )
 		list->Append ( *it );
 	list->Show ( true );
 #if wxCHECK_VERSION(2,9,0)

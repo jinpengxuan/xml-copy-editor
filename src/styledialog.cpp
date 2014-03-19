@@ -379,7 +379,7 @@ StyleDialog::StyleDialog (
 StyleDialog::~StyleDialog()
 {
 	std::set<wxString>::iterator it;
-	for ( it = tempFiles.begin(); it != tempFiles.end(); it++ )
+	for ( it = tempFiles.begin(); it != tempFiles.end(); ++it )
 		wxRemoveFile ( *it );
 }
 
@@ -484,7 +484,7 @@ void StyleDialog::OnReport ( wxCommandEvent& event )
 	std::string prelogUtf8, matchUtf8, postlogUtf8, replaceUtf8, reportUtf8;
 	wxString matchNo, prelog, match, postlog, replace, report;
 	int i = 0;
-	for ( it = matchVector.begin(); it != matchVector.end(); it++ )
+	for ( it = matchVector.begin(); it != matchVector.end(); ++it )
 	{
 		matchNo.Printf ( _T ( "%i" ), i + 1 ); // display numbers from 1
 		prelogUtf8 = flatWhiteSpace ( ( *it ).prelog );
@@ -643,7 +643,7 @@ void StyleDialog::OnStyleWebReport ( wxCommandEvent& event )
 	ofs << "<td><b>Suggestion</b></td><td><b>Report</b></td></tr>";
 	std::vector<ContextMatch>::iterator it;
 	int matchCount = 0;
-	for ( it = v.begin(); it != v.end(); it++ )
+	for ( it = v.begin(); it != v.end(); ++it )
 	{
 		ofs << "<tr><td align=\"right\">";
 		ofs << ++matchCount;
@@ -681,7 +681,7 @@ void StyleDialog::OnStyleWebSummary ( wxCommandEvent& event )
 	for (
 	    vectorIterator = v.begin();
 	    vectorIterator != v.end();
-	    vectorIterator++ )
+	    ++vectorIterator )
 	{
 		if ( ( matchMap.find ( vectorIterator->match ) ) != matchMap.end() )
 			++ ( matchMap[vectorIterator->match] );
@@ -712,7 +712,7 @@ void StyleDialog::OnStyleWebSummary ( wxCommandEvent& event )
 	for (
 	    mapIterator = matchMap.begin();
 	    mapIterator != matchMap.end();
-	    mapIterator++ )
+	    ++mapIterator )
 	{
 		ofs << "<tr><td>";
 		ofs << we.xmliseTextNode ( mapIterator->first );
@@ -966,7 +966,7 @@ std::string StyleDialog::flatWhiteSpace ( std::string& s )
 	std::string::iterator it;
 	std::string output;
 	output.reserve ( s.size() );
-	for ( it = s.begin(); it != s.end(); it++ )
+	for ( it = s.begin(); it != s.end(); ++it )
 	{
 		if ( *it == '\t' || *it == '\r' || *it == '\n' )
 			output += ' ';

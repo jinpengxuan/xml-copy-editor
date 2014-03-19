@@ -49,7 +49,7 @@ XmlAssociateXsd::XmlAssociateXsd (
 	std::vector<std::pair<std::string, std::string> > attributeVector;
 	attributeVector = parser->getAttributeVector();
 	std::vector<std::pair<std::string, std::string> >::iterator it;
-	for ( it = attributeVector.begin(); it != attributeVector.end(); it++ )
+	for ( it = attributeVector.begin(); it != attributeVector.end(); ++it )
 	{
 		if ( it->first == "targetNamespace" )
 		{
@@ -119,7 +119,7 @@ void XMLCALL XmlAssociateXsd::start ( void *data,
 	{
 		d->buffer += " xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"";
 		std::map<std::string, std::string>::iterator it;
-		for ( it = d->namespaceMap.begin(); it != d->namespaceMap.end(); it++ )
+		for ( it = d->namespaceMap.begin(); it != d->namespaceMap.end(); ++it )
 		{
 			d->buffer += " ";
 			d->buffer += it->first;

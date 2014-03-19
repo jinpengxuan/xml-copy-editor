@@ -142,7 +142,7 @@ void XmlSchemaGenerator::generateData ( const wxString &elementName,
 	std::map<wxString, ChildData>::iterator itr;
 	std::set<wxString> previous;
 	elmtItr = data.nodes.begin();
-	for ( ; elmtItr != data.nodes.end(); elmtItr++ )
+	for ( ; elmtItr != data.nodes.end(); ++elmtItr )
 	{
 		previous.clear();
 
@@ -157,14 +157,14 @@ void XmlSchemaGenerator::generateData ( const wxString &elementName,
 			countMap[name] += 1;
 		}
 		std::map<wxString, size_t>::iterator countItr = countMap.begin();
-		for ( ; countItr != countMap.end(); countItr++ )
+		for ( ; countItr != countMap.end(); ++countItr )
 		{
 			if ( childMap[countItr->first].maxOccurs < countItr->second )
 				childMap[countItr->first].maxOccurs = countItr->second;
 		}
 		if ( childMap.size() == countMap.size() )
 			continue;
-		for ( itr = childMap.begin(); itr != childMap.end(); itr++ )
+		for ( itr = childMap.begin(); itr != childMap.end(); ++itr )
 		{
 			if ( countMap.find ( itr->first ) != countMap.end() )
 				continue;
@@ -176,7 +176,7 @@ void XmlSchemaGenerator::generateData ( const wxString &elementName,
 	std::set<wxString> &optAttrs = data.optAttrs;
 	std::map<wxString, const XMLCh *>::iterator attrItr;
 	elmtItr = data.nodes.begin();
-	for ( ; elmtItr != data.nodes.end(); elmtItr++ )
+	for ( ; elmtItr != data.nodes.end(); ++elmtItr )
 	{
 		if ( ! ( **elmtItr ).hasAttributes() )
 			continue;
@@ -201,7 +201,7 @@ void XmlSchemaGenerator::generateData ( const wxString &elementName,
 		}
 		if ( attrMap.size() == optAttrs.size() )
 			continue;
-		for ( attrItr = attrMap.begin(); attrItr != attrMap.end(); attrItr++ )
+		for ( attrItr = attrMap.begin(); attrItr != attrMap.end(); ++attrItr )
 		{
 			if ( attrs->getNamedItem ( ( const XMLCh * )
 					WrapXerces::toString ( attrItr->first ).GetData() ) == NULL )
@@ -275,7 +275,7 @@ void XmlSchemaGenerator::generateSchema ( ElmtData &data, size_t nIndent )
 
 		size_t minOccurs = 1, maxOccurs = 1, minTotal = 0;
 		std::map<wxString, ChildData>::const_iterator itr;
-		for ( itr = data.children.begin(); itr != data.children.end(); itr++ )
+		for ( itr = data.children.begin(); itr != data.children.end(); ++itr )
 		{
 			if ( itr->second.minOccurs < minOccurs )
 				minOccurs = itr->second.minOccurs;
@@ -298,7 +298,7 @@ void XmlSchemaGenerator::generateSchema ( ElmtData &data, size_t nIndent )
 
 		std::vector<wxString>::const_iterator seqItr;
 		seqItr = data.sequence.begin();
-		for ( ; seqItr != data.sequence.end(); seqItr++ )
+		for ( ; seqItr != data.sequence.end(); ++seqItr )
 		{
 			const ChildData &child = data.children[*seqItr];
 			addIndent ( schema, nIndent );
@@ -345,7 +345,7 @@ void XmlSchemaGenerator::generateSchema ( ElmtData &data, size_t nIndent )
 	}
 	std::map<wxString, const XMLCh *>::const_iterator attrItr;
 	attrItr = data.attrMap.begin();
-	for ( ; attrItr != data.attrMap.end(); attrItr++ )
+	for ( ; attrItr != data.attrMap.end(); ++attrItr )
 	{
 		addIndent ( schema, nIndent );
 		schema << _T("<xs:attribute name=\"") << attrItr->first
@@ -388,7 +388,7 @@ void XmlSchemaGenerator::generateDTD ( ElmtData &data, size_t WXUNUSED ( nIndent
 		seqItr = data.sequence.begin();
 		if (data.useSequence)
 		{
-			for ( ; seqItr != data.sequence.end(); seqItr++ )
+			for ( ; seqItr != data.sequence.end(); ++seqItr )
 			{
 				schema << separator << *seqItr;
 				separator = _T(", ");
@@ -403,7 +403,7 @@ void XmlSchemaGenerator::generateDTD ( ElmtData &data, size_t WXUNUSED ( nIndent
 		else
 		{
 			size_t minTotal = 0;
-			for ( ; seqItr != data.sequence.end(); seqItr++ )
+			for ( ; seqItr != data.sequence.end(); ++seqItr )
 			{
 				schema << separator << *seqItr;
 				separator = _T(" | ");
@@ -422,7 +422,7 @@ void XmlSchemaGenerator::generateDTD ( ElmtData &data, size_t WXUNUSED ( nIndent
 
 		std::map<wxString, const XMLCh *>::const_iterator attrItr;
 		attrItr = data.attrMap.begin();
-		for ( ; attrItr != data.attrMap.end(); attrItr++ )
+		for ( ; attrItr != data.attrMap.end(); ++attrItr )
 		{
 			schema << indent << attrItr->first << _T(" CDATA");
 			if ( attrItr->second != NULL ) // Has default value
@@ -452,7 +452,7 @@ bool XmlSchemaGenerator::getSequence ( std::vector<wxString> &sequence,
 	do
 	{
 		retry = false;
-		for ( itr = elmtMap.begin(); itr != elmtMap.end(); itr++ )
+		for ( itr = elmtMap.begin(); itr != elmtMap.end(); ++itr )
 		{
 			seqFindItr = std::find ( sequence.begin(), sequence.end(),
 					itr->first );
@@ -462,7 +462,7 @@ bool XmlSchemaGenerator::getSequence ( std::vector<wxString> &sequence,
 			seqItr = sequence.begin();
 			prevItr = itr->second.prevSiblings.begin();
 			prevEnd = itr->second.prevSiblings.end();
-			for ( ; prevItr != prevEnd; prevItr++ )
+			for ( ; prevItr != prevEnd; ++prevItr )
 			{ // Find last index of dependent elements
 				seqFindItr = std::find ( sequence.begin(), sequence.end(),
 						*prevItr );
@@ -491,7 +491,7 @@ bool XmlSchemaGenerator::getSequence ( std::vector<wxString> &sequence,
 
 			if ( seqItr != sequence.end() )
 			{
-				seqItr++;
+				++seqItr;
 			}
 			sequence.insert ( seqItr, itr->first );
 			wxLogDebug ( _T(" %s"), itr->first.c_str() );

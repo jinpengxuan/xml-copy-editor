@@ -1068,7 +1068,7 @@ MyFrame::~MyFrame()
 	ThreadReaper::get().clear();
 
 	std::vector<wxString>::iterator it;
-	for ( it = tempFileVector.begin(); it != tempFileVector.end(); it++ )
+	for ( it = tempFileVector.begin(); it != tempFileVector.end(); ++it )
 		wxRemoveFile ( *it );
 
 	layout = manager.SavePerspective();
