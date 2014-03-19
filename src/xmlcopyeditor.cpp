@@ -4155,8 +4155,6 @@ void MyFrame::OnXslt ( wxCommandEvent& event )
 	}
 	statusProgress ( _ ( "XSL transformation in progress..." ) );
 
-	std::string stylefnameLocal = ( const char * ) path.mb_str ( wxConvLocal );
-
 	auto_ptr<WrapLibxml> wl ( new WrapLibxml ( libxmlNetAccess ) );
 	wxString fileName = doc->getFullFileName();
 	if ( !wl->xslt ( path, rawBufferUtf8, fileName ) )
@@ -4846,11 +4844,7 @@ bool MyFrame::saveRawUtf8 (
 
 	if ( saveBom && isXml )
 	{
-		char bom[4];
-		bom[0] = 0xEF;
-		bom[1] = 0xBB;
-		bom[2] = 0xBF;
-		bom[3] = 0;
+		static const char bom[4] = "\xEF\xBB\xBF";
 		ofs.write ( bom, 3 );
 	}
 	ofs.write ( bufferUtf8.c_str(), bufferUtf8.size() );

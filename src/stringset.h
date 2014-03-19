@@ -70,7 +70,6 @@ class StringSet
 		StringSetNode<T> *find ( T *s, size_t len, uint32_t hash = UINT_MAX );
 		void clear();
 	private:
-		bool emptyFlag;
 		uint32_t hashSize, hashMask, nodeCount;
 		StringSetNode<T> **table;
 		uint32_t hash ( const char *s, size_t len );
