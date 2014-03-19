@@ -661,7 +661,7 @@ MyFrame::MyFrame (
 	htmlReport = NULL;
 	lastDoc = NULL;
 
-	wxString defaultFont = wxSystemSettings::GetFont ( wxSYS_SYSTEM_FONT ).GetFaceName();
+	wxString defaultFont = wxSystemSettings::GetFont ( wxSYS_ANSI_VAR_FONT ).GetFaceName();
 
 	bool findMatchCase;
 
