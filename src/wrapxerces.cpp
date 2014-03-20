@@ -169,12 +169,12 @@ const wxMBConv &WrapXerces::getMBConv()
 		return wxConvUTF8;
 	case 2:
 	{
-		const static wxMBConvUTF16 conv;
+		const static wxMBConvUTF16 conv = wxMBConvUTF16();
 		return conv;
 	}
 	case 4:
 	{
-		const static wxMBConvUTF32 conv;
+		const static wxMBConvUTF32 conv = wxMBConvUTF32();
 		return conv;
 	}
 	default:
