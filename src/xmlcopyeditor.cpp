@@ -3617,10 +3617,14 @@ void MyFrame::saveAs()
 	history.AddFileToHistory ( path ); // update history
 	updateFileMenu();
 
-	int selection;
-	if ( ( selection = mainBook->GetSelection() ) == -1 )
-		return;
-	mainBook->SetPageText ( selection, name );
+	int selection = mainBook->GetSelection();
+	if ( selection != -1 )
+		mainBook->SetPageText ( selection, name );
+
+	wxString title = showFullPathOnFrame ? path : name;
+	title += _T ( " - " );
+	title += _ ( "XML Copy Editor" );
+	SetTitle ( title );
 }
 
 void MyFrame::OnUpdateCloseAll ( wxUpdateUIEvent& event )
