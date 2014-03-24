@@ -66,8 +66,6 @@
 #include "dtd2schema.h"
 #include "myipc.h"
 
-#define ngettext wxGetTranslation
-
 #ifdef NEWFINDREPLACE
 #include "findreplacepanel.h"
 #endif
@@ -2001,7 +1999,7 @@ void MyFrame::OnDialogReplaceAll ( wxFindDialogEvent& event )
 
 	wxString msg;
 	msg.Printf (
-	    ngettext ( L"%i replacement made", L"%i replacements made", replacementCount ),
+	    wxPLURAL ( "%i replacement made", "%i replacements made", replacementCount ),
 	    replacementCount );
 	statusProgress ( msg );
 }
@@ -2802,7 +2800,7 @@ void MyFrame::OnGlobalReplace ( wxCommandEvent& event )
 	wxString msg;
 
 	msg.Printf (
-	    ngettext ( L"%i replacement made", L"%i replacements made", globalMatchCount ),
+	    wxPLURAL ( "%i replacement made", "%i replacements made", globalMatchCount ),
 	    globalMatchCount );
 
 	statusProgress ( msg );
@@ -4869,7 +4867,7 @@ void MyFrame::displaySavedStatus ( int bytes )
 	else if ( bytes >= 0 )
 	{
 		result = bytes;
-		unit = ngettext ( L"byte", L"bytes", bytes );
+		unit = wxPLURAL ( "byte", "bytes", bytes );
 	}
 	else
 		return;
@@ -5920,7 +5918,7 @@ void MyFrame::OnWordCount ( wxCommandEvent& event )
 	int count = xwc->getWordCount();
 
 	msg.Printf (
-	    ngettext ( L"%s contains %i word", L"%s contains %i words", count ),
+	    wxPLURAL ( "%s contains %i word", "%s contains %i words", count ),
 	    doc->getShortFileName().c_str(), count );
 
 	messagePane ( msg, CONST_INFO, true );
@@ -6079,15 +6077,15 @@ void MyFrame::addToFileQueue ( wxString& fileName )
 
 void MyFrame::validatePaths()
 {
-	bool valid = true;
+	int invalid = 0;
 	wxString msg;
 
 	// Warning: Don't put a space between 'CHECK' and '('
 #define CHECK( check, path ) \
 	if ( !( check ) ( path ) )\
 	{\
-		valid = false;\
-		msg << _ ( "Invalid path: " ) << path << wxTextFile::GetEOL();\
+		invalid++;\
+		msg << wxTextFile::GetEOL() << path;\
 	}
 	CHECK ( wxDirExists, ruleSetDir );
 	//CHECK ( wxDirExists, filterDir );
@@ -6110,10 +6108,12 @@ void MyFrame::validatePaths()
 #endif // __WXMSW__
 #undef CHECK
 
-	if ( valid )
+	if ( !invalid )
 		return;
 
+	msg = wxPLURAL ( "Invalid path: ", "Invalid paths: ", invalid ) + msg;
 	msg << wxTextFile::GetEOL()
+		<< wxTextFile::GetEOL()
 #ifdef __WXMSW__
 		<< _ ( "To change application directory, see Tools, Options..., General" );
 #else

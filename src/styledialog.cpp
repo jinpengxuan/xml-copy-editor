@@ -25,7 +25,6 @@
 #endif
 #include "styledialog.h"
 #include "nocasecompare.h"
-#define ngettext wxGetTranslation
 
 BEGIN_EVENT_TABLE ( StyleDialog, wxDialog )
 	EVT_BUTTON ( ID_STYLE_REPORT, StyleDialog::OnReport )
@@ -508,7 +507,7 @@ void StyleDialog::OnReport ( wxCommandEvent& event )
 		++i;
 	}
 	wxString message;
-	message.Printf ( ngettext ( L"%i error", L"%i errors", i ), i );
+	message.Printf ( wxPLURAL ( "%i error", "%i errors", i ), i );
 	status->SetStatusText ( message );
 	if ( i )
 		table->SetFocus();

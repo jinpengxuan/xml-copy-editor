@@ -6,7 +6,7 @@ That's quite easy. Download Xml-copy-editor(called XCE below :P),
 unpack it. Go to that source dirctory. Here you can see many ".cpp" 
 files and ".h" files. input command:
 
-$ xgettext -k_ --from-code=utf-8  *.cpp *.h
+$ xgettext -k_ -kwxPLURAL:1,2 --from-code=utf-8  *.cpp *.h
 
 then you get a "messages.po" in the dirctory. That's the ".po" file we 
 need to translate. You need a tool to help you finish the translation 
@@ -44,7 +44,7 @@ version. Uncompress the source and install poedit in "c:\poedit", then
 open a "Command Window" by executing "cmd.exe". Go to the XCE's source 
 directory, run:
 
-c:\poedit\bin\xgettext.exe -k_ --from-code=utf-8  *.cpp *.h
+c:\poedit\bin\xgettext.exe -k_ -kwxPLURAL:1,2 --from-code=utf-8  *.cpp *.h
 
 to a messages.po file. Setup poedit the same as in the Linux part, then 
 open the ".po" file you just created and translate all items. When you 
