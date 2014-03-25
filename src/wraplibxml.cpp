@@ -29,10 +29,11 @@
 #include <wx/filesys.h>
 #include <wx/uri.h>
 
+// Convert wxString to const char *
 #ifdef __WXMSW__ // Libxml supports utf8 file name on windows
-#define CONV(url) ( ( const char * ) ( url ).utf8_str() )
+#define CONV(s) ( ( const char * ) ( s ).utf8_str() )
 #else
-#define CONV(url) ( ( const char * ) ( url ).mb_str ( wxConvLocal ) )
+#define CONV(s) ( ( const char * ) ( s ).mb_str ( wxConvLocal ) )
 #endif
 
 
@@ -49,8 +50,8 @@ public:
 		LIBXML_TEST_VERSION
 
 		xmlInitializeCatalog();
-		xmlLoadCatalog ( catalogPath.mb_str() );
-		::catalog = xmlLoadACatalog ( catalogPath.mb_str() );
+		xmlLoadCatalog ( CONV ( catalogPath ) );
+		::catalog = xmlLoadACatalog ( CONV ( catalogPath ) );
 
 		initGenericErrorDefaultFunc ( NULL );
 	}
@@ -112,7 +113,7 @@ WrapLibxml::~WrapLibxml()
 }
 
 bool WrapLibxml::validate ( const std::string& utf8DocBuf,
-		const wxString &docUrl )
+		const wxString &docFileName )
 {
 	output = "";
 
@@ -130,7 +131,8 @@ bool WrapLibxml::validate ( const std::string& utf8DocBuf,
 	if ( !netAccess )
 		flags |= XML_PARSE_NONET;
 	docPtr = xmlCtxtReadMemory ( ctxt, utf8DocBuf.c_str(), utf8DocBuf.length(),
-			CONV ( docUrl ), "UTF-8", flags);
+			CONV ( wxFileSystem::FileNameToURL ( docFileName ) ),
+			"UTF-8", flags);
 
 	bool returnValue = docPtr != NULL && ctxt->valid != 0;
 
@@ -143,7 +145,7 @@ bool WrapLibxml::validate ( const std::string& utf8DocBuf,
 bool WrapLibxml::validateRelaxNG (
     const wxString &schemaFileName,
     const std::string &utf8DocBuf,
-    const wxString &docUrl )
+    const wxString &docFileName )
 {
 	output = "";
 
@@ -155,7 +157,8 @@ bool WrapLibxml::validateRelaxNG (
 	xmlRelaxNGPtr schemaPtr = NULL;
 
 	do {
-		rngParserCtxt = xmlRelaxNGNewParserCtxt ( CONV ( schemaFileName ) );
+		rngParserCtxt = xmlRelaxNGNewParserCtxt (
+				CONV ( wxFileSystem::FileNameToURL ( schemaFileName ) ) );
 		if ( rngParserCtxt == NULL )
 		{
 			nonParserError = _("Cannot create an RNG parser context");
@@ -181,8 +184,14 @@ bool WrapLibxml::validateRelaxNG (
 		int flags = XML_PARSE_DTDVALID;
 		if ( !netAccess )
 			flags |= XML_PARSE_NONET;
-		docPtr = xmlCtxtReadMemory ( ctxt, utf8DocBuf.c_str(),
-					utf8DocBuf.length(), CONV ( docUrl ), "UTF-8", flags );
+		docPtr = xmlCtxtReadMemory (
+					ctxt,
+					utf8DocBuf.c_str(),
+					utf8DocBuf.length(),
+					CONV ( wxFileSystem::FileNameToURL ( docFileName ) ),
+					"UTF-8",
+					flags
+					);
 		if ( docPtr == NULL )
 			break;
 
@@ -202,7 +211,7 @@ bool WrapLibxml::validateRelaxNG (
 bool WrapLibxml::validateW3CSchema (
     const wxString &schemaFileName,
     const std::string &utf8DocBuf,
-    const wxString &docUrl )
+    const wxString &docFileName )
 {
 	output = "";
 
@@ -215,7 +224,8 @@ bool WrapLibxml::validateW3CSchema (
 	xmlSchemaPtr schemaPtr = NULL;
 
 	do {
-		rngParserCtxt = xmlSchemaNewParserCtxt ( CONV ( schemaFileName ) );
+		rngParserCtxt = xmlSchemaNewParserCtxt (
+				CONV ( wxFileSystem::FileNameToURL ( schemaFileName ) ) );
 		if ( rngParserCtxt == NULL )
 			return false;
 
@@ -239,8 +249,14 @@ bool WrapLibxml::validateW3CSchema (
 		int flags = XML_PARSE_DTDLOAD;
 		if ( !netAccess )
 			flags |= XML_PARSE_NONET;
-		docPtr = xmlCtxtReadMemory ( ctxt, utf8DocBuf.c_str(),
-					utf8DocBuf.length(), CONV ( docUrl ), "UTF-8", flags );
+		docPtr = xmlCtxtReadMemory (
+					ctxt,
+					utf8DocBuf.c_str(),
+					utf8DocBuf.length(),
+					CONV ( wxFileSystem::FileNameToURL ( docFileName ) ),
+					"UTF-8",
+					flags
+					);
 		if ( docPtr == NULL )
 			break;
 
@@ -260,26 +276,26 @@ bool WrapLibxml::validateW3CSchema (
 
 bool WrapLibxml::parse (
     const std::string& utf8DocBuf,
-    const wxString &docUrl,
+    const wxString &docFileName,
     bool indent,
     bool resolveEntities )
 {
-	return parse ( utf8DocBuf.c_str(), utf8DocBuf.length(), docUrl,
+	return parse ( utf8DocBuf.c_str(), utf8DocBuf.length(), docFileName,
 			indent, resolveEntities );
 }
 
 bool WrapLibxml::parse (
-    const wxString &docUrl,
+    const wxString &docFileName,
     bool indent,
     bool resolveEntities )
 {
-	return parse ( NULL, 0, docUrl, indent, resolveEntities );
+	return parse ( NULL, 0, docFileName, indent, resolveEntities );
 }
 
 bool WrapLibxml::parse (
     const char *utf8DocBuf,
     size_t utf8DocBufSize,
-    const wxString &docUrl,
+    const wxString &docFileName,
     bool indent,
     bool resolveEntities )
 {
@@ -303,9 +319,10 @@ bool WrapLibxml::parse (
 
 	if ( utf8DocBuf != NULL)
 		docPtr = xmlCtxtReadMemory ( ctxt, utf8DocBuf, utf8DocBufSize,
-					CONV ( docUrl ), "UTF-8", flags );
+					CONV ( wxFileSystem::FileNameToURL ( docFileName ) ),
+					"UTF-8", flags );
 	else
-		docPtr = xmlCtxtReadFile ( ctxt, CONV ( docUrl ), NULL, flags );
+		docPtr = xmlCtxtReadFile ( ctxt, CONV ( docFileName ), NULL, flags );
 	if ( docPtr == NULL )
 	{
 		xmlFreeParserCtxt ( ctxt );
@@ -340,7 +357,7 @@ bool WrapLibxml::parse (
 }
 
 bool WrapLibxml::xpath ( const wxString &xpath, const std::string &utf8DocBuf,
-	    const wxString &docUrl )
+	    const wxString &docFileName )
 {
 	output = "";
 
@@ -360,7 +377,7 @@ bool WrapLibxml::xpath ( const wxString &xpath, const std::string &utf8DocBuf,
 	             ctxt,
 	             utf8DocBuf.c_str(),
 	             utf8DocBuf.length(),
-	             CONV ( docUrl ),
+	             CONV ( wxFileSystem::FileNameToURL ( docFileName ) ),
 	             "UTF-8",
 	             //(netAccess) ? XML_PARSE_DTDLOAD | XML_PARSE_NOENT : XML_PARSE_DTDLOAD | XML_PARSE_NONET | XML_PARSE_NOENT
 	             XML_PARSE_NOENT | XML_PARSE_NONET | XML_PARSE_NSCLEAN
@@ -429,26 +446,26 @@ bool WrapLibxml::xpath ( const wxString &xpath, const std::string &utf8DocBuf,
 bool WrapLibxml::xslt (
     const wxString &styleFileName,
     const std::string &utf8DocBuf,
-    const wxString &docUrl
+    const wxString &docFileName
 )
 {
 	return xslt ( styleFileName, utf8DocBuf.c_str(), utf8DocBuf.length(),
-			docUrl );
+			docFileName );
 }
 
 bool WrapLibxml::xslt (
     const wxString &styleFileName,
-    const wxString &docUrl
+    const wxString &docFileName
 )
 {
-	return xslt ( styleFileName, NULL, 0, docUrl );
+	return xslt ( styleFileName, NULL, 0, docFileName );
 }
 
 bool WrapLibxml::xslt (
     const wxString &styleFileName,
     const char *utf8DocBuf,
     size_t utf8DocBufSize,
-    const wxString &docUrl
+    const wxString &docFileName
 )
 {
 	output = "";
@@ -480,9 +497,10 @@ bool WrapLibxml::xslt (
 			flags |= XML_PARSE_NONET;
 		if ( utf8DocBuf != NULL )
 			doc = xmlCtxtReadMemory ( ctxt, utf8DocBuf, utf8DocBufSize,
-						CONV ( docUrl ), "UTF-8", flags );
+					CONV ( wxFileSystem::FileNameToURL ( docFileName ) ),
+					"UTF-8", flags );
 		else
-			doc = xmlCtxtReadFile ( ctxt,  CONV ( docUrl ), NULL, flags );
+			doc = xmlCtxtReadFile ( ctxt, CONV ( docFileName ), NULL, flags );
 		if ( !doc )
 			break;
 
@@ -580,7 +598,8 @@ int WrapLibxml::saveEncoding (
 		flags |= XML_PARSE_NONET;
 	if ( utf8Buffer != NULL )
 		docPtr = xmlCtxtReadMemory ( ctxt, utf8Buffer, utf8BufferSize,
-				CONV ( fileNameSource ), "UTF-8", flags );
+				CONV ( wxFileSystem::FileNameToURL ( fileNameSource ) ),
+				"UTF-8", flags );
 	else
 		docPtr = xmlCtxtReadFile ( ctxt, CONV ( fileNameSource ), NULL, flags );
 	if ( !docPtr )
