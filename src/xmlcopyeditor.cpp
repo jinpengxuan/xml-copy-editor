@@ -5083,9 +5083,9 @@ wxMenuBar *MyFrame::getMenuBar()
 	viewMenu->Append ( ID_CLOSE_MESSAGE_PANE,
 	    _ ( "C&lose Message Pane\tAlt+C" ), _ ( "Close Message Pane" ) );
 	viewMenu->Append ( ID_CLOSE_FIND_REPLACE_PANE,
-	    _ ( "Close Find/Replace Pane" ), _ ( "Close Find/Replace Pane" ) );
+	    _ ( "Close Find/&Replace Pane" ), _ ( "Close Find/Replace Pane" ) );
 	viewMenu->Append ( ID_CLOSE_COMMAND_PANE,
-	    _ ( "Close Command Pane" ), _ ( "Close Command Pane" ) );
+	    _ ( "Close Co&mmand Pane" ), _ ( "Close Command Pane" ) );
 
 	// insert menu
 	wxMenu *insertMenu = new wxMenu;

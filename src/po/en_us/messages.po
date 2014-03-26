@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: XML Copy Editor v1.2.0.12\n"
+"Project-Id-Version: XML Copy Editor v1.2.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-19 22:17+0800\n"
+"POT-Creation-Date: 2014-03-26 22:16+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -205,7 +205,7 @@ msgstr ""
 msgid "Find:"
 msgstr ""
 
-#: findreplacepanel.cpp:49 findreplacepanel.cpp:50 styledialog.cpp:455
+#: findreplacepanel.cpp:49 findreplacepanel.cpp:50 styledialog.cpp:454
 msgid " "
 msgstr ""
 
@@ -299,7 +299,7 @@ msgstr ""
 msgid "Cannot initialise spellcheck"
 msgstr ""
 
-#: mynotebook.cpp:88 wrapdaisy.cpp:535 xmlcopyeditor.cpp:5336
+#: mynotebook.cpp:88 wrapdaisy.cpp:535 xmlcopyeditor.cpp:5338
 msgid "Close"
 msgstr ""
 
@@ -367,7 +367,7 @@ msgstr ""
 msgid "Language (restart required)"
 msgstr ""
 
-#: mypropertysheet.cpp:179 styledialog.cpp:340 xmlcopyeditor.cpp:4985
+#: mypropertysheet.cpp:179 styledialog.cpp:339 xmlcopyeditor.cpp:4987
 msgid "Default"
 msgstr ""
 
@@ -415,146 +415,146 @@ msgstr ""
 msgid "Cannot access application directory"
 msgstr ""
 
-#: mypropertysheet.cpp:256 xmlcopyeditor.cpp:2595
+#: mypropertysheet.cpp:256 xmlcopyeditor.cpp:2593
 msgid "Options"
 msgstr ""
 
-#: styledialog.cpp:102
+#: styledialog.cpp:101
 msgid "Style"
 msgstr ""
 
-#: styledialog.cpp:102 xmlcopyeditor.cpp:5468 xmlcopyeditor.cpp:5472
+#: styledialog.cpp:101 xmlcopyeditor.cpp:5470 xmlcopyeditor.cpp:5474
 msgid "Spelling"
 msgstr ""
 
-#: styledialog.cpp:148
+#: styledialog.cpp:147
 msgid "&Check"
 msgstr ""
 
-#: styledialog.cpp:166
+#: styledialog.cpp:165
 msgid "No."
 msgstr ""
 
-#: styledialog.cpp:167 styledialog.cpp:169
+#: styledialog.cpp:166 styledialog.cpp:168
 msgid "Context"
 msgstr ""
 
-#: styledialog.cpp:168 xmlcopyeditor.cpp:399 xmlcopyeditor.cpp:419
-#: xmlcopyeditor.cpp:422 xmlcopyeditor.cpp:439 xmlcopyeditor.cpp:444
-#: xmlcopyeditor.cpp:484 xmlcopyeditor.cpp:504 xmlcopyeditor.cpp:516
-#: xmlcopyeditor.cpp:522 xmlcopyeditor.cpp:551 wrapxerces.h:51
+#: styledialog.cpp:167 xmlcopyeditor.cpp:397 xmlcopyeditor.cpp:417
+#: xmlcopyeditor.cpp:420 xmlcopyeditor.cpp:437 xmlcopyeditor.cpp:442
+#: xmlcopyeditor.cpp:482 xmlcopyeditor.cpp:502 xmlcopyeditor.cpp:514
+#: xmlcopyeditor.cpp:520 xmlcopyeditor.cpp:549 wrapxerces.h:51
 msgid "Error"
 msgstr ""
 
-#: styledialog.cpp:170
+#: styledialog.cpp:169
 msgid "Suggestion"
 msgstr ""
 
-#: styledialog.cpp:172
+#: styledialog.cpp:171
 msgid "Rule"
 msgstr ""
 
-#: styledialog.cpp:173
+#: styledialog.cpp:172
 msgid "Action"
 msgstr ""
 
-#: styledialog.cpp:181
+#: styledialog.cpp:180
 msgid "&Apply changes"
 msgstr ""
 
-#: styledialog.cpp:189
+#: styledialog.cpp:188
 msgid "&Printable report"
 msgstr ""
 
-#: styledialog.cpp:197
+#: styledialog.cpp:196
 msgid "Pr&intable summary"
 msgstr ""
 
-#: styledialog.cpp:205
+#: styledialog.cpp:204
 msgid "C&hange all"
 msgstr ""
 
-#: styledialog.cpp:213
+#: styledialog.cpp:212
 msgid "I&gnore all"
 msgstr ""
 
-#: styledialog.cpp:221
+#: styledialog.cpp:220
 msgid "Ca&ncel"
 msgstr ""
 
-#: styledialog.cpp:304 xmlcopyeditor.cpp:761 xmlcopyeditor.cpp:811
+#: styledialog.cpp:303 xmlcopyeditor.cpp:759 xmlcopyeditor.cpp:809
 msgid "en_US"
 msgstr ""
 
-#: styledialog.cpp:309
+#: styledialog.cpp:308
 msgid "(No dictionaries found)"
 msgstr ""
 
-#: styledialog.cpp:345
+#: styledialog.cpp:344
 msgid "(No rule sets found)"
 msgstr ""
 
-#: styledialog.cpp:351 xmlcopyeditor.cpp:764
+#: styledialog.cpp:350 xmlcopyeditor.cpp:762
 msgid "(No filter)"
 msgstr ""
 
-#: styledialog.cpp:374
+#: styledialog.cpp:373
 msgid "(No filters found)"
 msgstr ""
 
-#: styledialog.cpp:401 styledialog.cpp:431 styledialog.cpp:750
-#: styledialog.cpp:755
+#: styledialog.cpp:400 styledialog.cpp:430 styledialog.cpp:749
+#: styledialog.cpp:754
 msgid "Ignore"
 msgstr ""
 
-#: styledialog.cpp:415
+#: styledialog.cpp:414
 msgid "Ignore once"
 msgstr ""
 
-#: styledialog.cpp:417
+#: styledialog.cpp:416
 msgid "Ignore all"
 msgstr ""
 
-#: styledialog.cpp:419
+#: styledialog.cpp:418
 msgid "Change once"
 msgstr ""
 
-#: styledialog.cpp:420
+#: styledialog.cpp:419
 msgid "Change all"
 msgstr ""
 
-#: styledialog.cpp:423
+#: styledialog.cpp:422
 msgid "New suggestion..."
 msgstr ""
 
-#: styledialog.cpp:446 styledialog.cpp:474
+#: styledialog.cpp:445 styledialog.cpp:473
 msgid "Checking document..."
 msgstr ""
 
-#: styledialog.cpp:478
+#: styledialog.cpp:477
 msgid "Cannot check document: "
 msgstr ""
 
-#: styledialog.cpp:511
+#: styledialog.cpp:510
 #, c-format
 msgid "%i error"
 msgid_plural "%i errors"
 msgstr[0] ""
 msgstr[1] ""
 
-#: styledialog.cpp:526
+#: styledialog.cpp:525
 msgid "No items selected"
 msgstr ""
 
-#: styledialog.cpp:755 styledialog.cpp:783
+#: styledialog.cpp:754 styledialog.cpp:782
 msgid "Change"
 msgstr ""
 
-#: styledialog.cpp:914
+#: styledialog.cpp:913
 msgid "Enter new suggestion:"
 msgstr ""
 
-#: styledialog.cpp:915
+#: styledialog.cpp:914
 msgid "New Suggestion"
 msgstr ""
 
@@ -638,37 +638,37 @@ msgstr ""
 msgid "Unable to create parser instance"
 msgstr ""
 
-#: wraplibxml.cpp:125 wraplibxml.cpp:177 wraplibxml.cpp:235 wraplibxml.cpp:294
-#: wraplibxml.cpp:355 wraplibxml.cpp:474 wraplibxml.cpp:523 wraplibxml.cpp:571
+#: wraplibxml.cpp:126 wraplibxml.cpp:180 wraplibxml.cpp:245 wraplibxml.cpp:310
+#: wraplibxml.cpp:372 wraplibxml.cpp:491 wraplibxml.cpp:541 wraplibxml.cpp:589
 msgid "Cannot create a parser context"
 msgstr ""
 
-#: wraplibxml.cpp:161
+#: wraplibxml.cpp:164
 msgid "Cannot create an RNG parser context"
 msgstr ""
 
-#: wraplibxml.cpp:171
+#: wraplibxml.cpp:174
 msgid "Cannot create an RNG validation context"
 msgstr ""
 
-#: wraplibxml.cpp:229
+#: wraplibxml.cpp:239
 msgid "Cannot create a schema validation context"
 msgstr ""
 
-#: wraplibxml.cpp:467
+#: wraplibxml.cpp:484
 msgid "Cannot parse stylesheet"
 msgstr ""
 
-#: wraplibxml.cpp:492
+#: wraplibxml.cpp:510
 msgid "Cannot apply stylesheet"
 msgstr ""
 
-#: wraplibxml.cpp:624
+#: wraplibxml.cpp:643
 #, c-format
 msgid "Error at line %d, column %d: %s"
 msgstr ""
 
-#: wraplibxml.cpp:627
+#: wraplibxml.cpp:646
 #, c-format
 msgid "Error at line %d: %s"
 msgstr ""
@@ -682,41 +682,41 @@ msgstr ""
 msgid "%s at line %llu, column %llu: %s%s"
 msgstr ""
 
-#: xmlcopyeditor.cpp:385 xmlcopyeditor.cpp:1314 xmlcopyeditor.cpp:1419
-#: xmlcopyeditor.cpp:1660 xmlcopyeditor.cpp:1739
+#: xmlcopyeditor.cpp:383 xmlcopyeditor.cpp:1312 xmlcopyeditor.cpp:1417
+#: xmlcopyeditor.cpp:1658 xmlcopyeditor.cpp:1737 xmlcopyeditor.cpp:3626
 msgid "XML Copy Editor"
 msgstr ""
 
-#: xmlcopyeditor.cpp:397
+#: xmlcopyeditor.cpp:395
 msgid "Failed to initialize Xerces-C:\n"
 msgstr ""
 
-#: xmlcopyeditor.cpp:410 xmlcopyeditor.cpp:475
+#: xmlcopyeditor.cpp:408 xmlcopyeditor.cpp:473
 msgid "(unknown error)"
 msgstr ""
 
-#: xmlcopyeditor.cpp:412
+#: xmlcopyeditor.cpp:410
 msgid ""
 "XML Copy Editor has encountered the following error and needs to close: "
 msgstr ""
 
-#: xmlcopyeditor.cpp:438 xmlcopyeditor.cpp:443 xmlcopyeditor.cpp:511
+#: xmlcopyeditor.cpp:436 xmlcopyeditor.cpp:441 xmlcopyeditor.cpp:509
 msgid "XML Copy Editor has encountered an error and needs to close."
 msgstr ""
 
-#: xmlcopyeditor.cpp:461 xmlcopyeditor.cpp:540
+#: xmlcopyeditor.cpp:459 xmlcopyeditor.cpp:538
 msgid "The operating system has turned down a request for additional memory"
 msgstr ""
 
-#: xmlcopyeditor.cpp:462 xmlcopyeditor.cpp:541 xmlcopyeditor.cpp:4786
+#: xmlcopyeditor.cpp:460 xmlcopyeditor.cpp:539 xmlcopyeditor.cpp:4788
 msgid "Out of memory"
 msgstr ""
 
-#: xmlcopyeditor.cpp:477
+#: xmlcopyeditor.cpp:475
 msgid "The following error has occurred: "
 msgstr ""
 
-#: xmlcopyeditor.cpp:479
+#: xmlcopyeditor.cpp:477
 msgid ""
 ".\n"
 "\n"
@@ -724,15 +724,15 @@ msgid ""
 "continue."
 msgstr ""
 
-#: xmlcopyeditor.cpp:759 xmlcopyeditor.cpp:810
+#: xmlcopyeditor.cpp:757 xmlcopyeditor.cpp:808
 msgid "Default style"
 msgstr ""
 
-#: xmlcopyeditor.cpp:812
+#: xmlcopyeditor.cpp:810
 msgid "No filter"
 msgstr ""
 
-#: xmlcopyeditor.cpp:878
+#: xmlcopyeditor.cpp:876
 msgid ""
 "SSE2 is enabled in Xerces-C++ library. Xerces-C++ didn't use them in a "
 "thread-safe way. It may cause program crashes (segmentation faults).\n"
@@ -743,1190 +743,1198 @@ msgid ""
 "Cancel:\tDisable the warning\n"
 msgstr ""
 
-#: xmlcopyeditor.cpp:885
+#: xmlcopyeditor.cpp:883
 msgid "SSE2 problem in Xerces-C++"
 msgstr ""
 
-#: xmlcopyeditor.cpp:961 xmlcopyeditor.cpp:969
+#: xmlcopyeditor.cpp:959 xmlcopyeditor.cpp:967
 msgid "Current Element"
 msgstr ""
 
-#: xmlcopyeditor.cpp:962 xmlcopyeditor.cpp:968
+#: xmlcopyeditor.cpp:960 xmlcopyeditor.cpp:966
 msgid "Insert Element"
 msgstr ""
 
-#: xmlcopyeditor.cpp:963 xmlcopyeditor.cpp:967
+#: xmlcopyeditor.cpp:961 xmlcopyeditor.cpp:965
 msgid "Insert Sibling"
 msgstr ""
 
-#: xmlcopyeditor.cpp:964 xmlcopyeditor.cpp:966
+#: xmlcopyeditor.cpp:962 xmlcopyeditor.cpp:964
 msgid "Insert Entity"
 msgstr ""
 
-#: xmlcopyeditor.cpp:1212
+#: xmlcopyeditor.cpp:1210
 msgid "Unknown command line switch (expecting 'w', 's', --version or --help)"
 msgstr ""
 
-#: xmlcopyeditor.cpp:1221
+#: xmlcopyeditor.cpp:1219
 msgid "Command line processing incomplete: no file specified"
 msgstr ""
 
-#: xmlcopyeditor.cpp:1367
+#: xmlcopyeditor.cpp:1365
 msgid "Parse in progress..."
 msgstr ""
 
-#: xmlcopyeditor.cpp:1386
+#: xmlcopyeditor.cpp:1384
 msgid "well-formed"
 msgstr ""
 
-#: xmlcopyeditor.cpp:1418
+#: xmlcopyeditor.cpp:1416
 msgid "Do you want to save the changes to "
 msgstr ""
 
-#: xmlcopyeditor.cpp:1612 xmlcopyeditor.cpp:1614
+#: xmlcopyeditor.cpp:1610 xmlcopyeditor.cpp:1612
 msgid "Attributes hidden"
 msgstr ""
 
-#: xmlcopyeditor.cpp:1619 xmlcopyeditor.cpp:1621
+#: xmlcopyeditor.cpp:1617 xmlcopyeditor.cpp:1619
 msgid "Tags hidden"
 msgstr ""
 
-#: xmlcopyeditor.cpp:1634 xmlcopyeditor.cpp:1636
+#: xmlcopyeditor.cpp:1632 xmlcopyeditor.cpp:1634
 msgid "Tags locked"
 msgstr ""
 
-#: xmlcopyeditor.cpp:1687 xmlcopyeditor.cpp:1689
+#: xmlcopyeditor.cpp:1685 xmlcopyeditor.cpp:1687
 msgid "Modified"
 msgstr ""
 
-#: xmlcopyeditor.cpp:1718
+#: xmlcopyeditor.cpp:1716
 #, c-format
 msgid "Ln %i Col %i"
 msgstr ""
 
-#: xmlcopyeditor.cpp:1909
+#: xmlcopyeditor.cpp:1907
 msgid "Cannot open clipboard"
 msgstr ""
 
-#: xmlcopyeditor.cpp:1914
+#: xmlcopyeditor.cpp:1912
 msgid "Cannot paste as new document: no text on clipboard"
 msgstr ""
 
-#: xmlcopyeditor.cpp:2004 xmlcopyeditor.cpp:2805
+#: xmlcopyeditor.cpp:2002 xmlcopyeditor.cpp:2803
 #, c-format
 msgid "%i replacement made"
 msgid_plural "%i replacements made"
 msgstr[0] ""
 msgstr[1] ""
 
-#: xmlcopyeditor.cpp:2030
+#: xmlcopyeditor.cpp:2028
 msgid "Preparing Print Preview..."
 msgstr ""
 
-#: xmlcopyeditor.cpp:2051
+#: xmlcopyeditor.cpp:2049
 msgid "Preparing to print..."
 msgstr ""
 
-#: xmlcopyeditor.cpp:2110 xmlcopyeditor.cpp:2130
+#: xmlcopyeditor.cpp:2108 xmlcopyeditor.cpp:2128
 msgid "Find"
 msgstr ""
 
-#: xmlcopyeditor.cpp:2137 xmlcopyeditor.cpp:2245 xmlcopyeditor.cpp:2339
+#: xmlcopyeditor.cpp:2135 xmlcopyeditor.cpp:2243 xmlcopyeditor.cpp:2337
 msgid "This functionality requires Microsoft Windows"
 msgstr ""
 
-#: xmlcopyeditor.cpp:2143
+#: xmlcopyeditor.cpp:2141
 msgid "Import Microsoft Word Document"
 msgstr ""
 
-#: xmlcopyeditor.cpp:2236
+#: xmlcopyeditor.cpp:2234
 msgid "[b]DAISY export stopped[/b]: "
 msgstr ""
 
-#: xmlcopyeditor.cpp:2239
+#: xmlcopyeditor.cpp:2237
 msgid "DAISY export completed. Output files are stored in: [b]"
 msgstr ""
 
-#: xmlcopyeditor.cpp:2254
+#: xmlcopyeditor.cpp:2252
 #, c-format
 msgid "Cannot open [b]%s[/b] for import"
 msgstr ""
 
-#: xmlcopyeditor.cpp:2264
+#: xmlcopyeditor.cpp:2262
 msgid "Import in progress..."
 msgstr ""
 
-#: xmlcopyeditor.cpp:2272
+#: xmlcopyeditor.cpp:2270
 msgid "(lossless conversion requires version 2003 or later)"
 msgstr ""
 
-#: xmlcopyeditor.cpp:2279 xmlcopyeditor.cpp:2400
+#: xmlcopyeditor.cpp:2277 xmlcopyeditor.cpp:2398
 msgid "Cannot start Microsoft Word"
 msgstr ""
 
-#: xmlcopyeditor.cpp:2283 xmlcopyeditor.cpp:2404
+#: xmlcopyeditor.cpp:2281 xmlcopyeditor.cpp:2402
 msgid "A more recent version of Microsoft Word is required"
 msgstr ""
 
-#: xmlcopyeditor.cpp:2290
+#: xmlcopyeditor.cpp:2288
 #, c-format
 msgid "Microsoft Word cannot save [b]%s[/b] as XML"
 msgstr ""
 
-#: xmlcopyeditor.cpp:2295
+#: xmlcopyeditor.cpp:2293
 msgid "Microsoft Word cannot save this document as WordprocessingML "
 msgstr ""
 
-#: xmlcopyeditor.cpp:2303
+#: xmlcopyeditor.cpp:2301
 msgid "Opening imported file..."
 msgstr ""
 
-#: xmlcopyeditor.cpp:2320
+#: xmlcopyeditor.cpp:2318
 msgid "Cannot open imported file"
 msgstr ""
 
-#: xmlcopyeditor.cpp:2372
+#: xmlcopyeditor.cpp:2370
 msgid "Export Microsoft Word Document"
 msgstr ""
 
-#: xmlcopyeditor.cpp:2393
+#: xmlcopyeditor.cpp:2391
 msgid "Export in progress..."
 msgstr ""
 
-#: xmlcopyeditor.cpp:2407
+#: xmlcopyeditor.cpp:2405
 #, c-format
 msgid "Microsoft Word cannot save %s"
 msgstr ""
 
-#: xmlcopyeditor.cpp:2436
+#: xmlcopyeditor.cpp:2434
 msgid "Cannot save temporary file"
 msgstr ""
 
-#: xmlcopyeditor.cpp:2597
+#: xmlcopyeditor.cpp:2595
 msgid "Preferences"
 msgstr ""
 
-#: xmlcopyeditor.cpp:2642
+#: xmlcopyeditor.cpp:2640
 msgid "Enter line number:"
 msgstr ""
 
-#: xmlcopyeditor.cpp:2643
+#: xmlcopyeditor.cpp:2641
 msgid "Go To"
 msgstr ""
 
-#: xmlcopyeditor.cpp:2652
+#: xmlcopyeditor.cpp:2650
 #, c-format
 msgid "'%s' is not a valid line number"
 msgstr ""
 
-#: xmlcopyeditor.cpp:2681
+#: xmlcopyeditor.cpp:2679
 msgid "Replace"
 msgstr ""
 
-#: xmlcopyeditor.cpp:2702
+#: xmlcopyeditor.cpp:2700
 msgid "Find and Replace"
 msgstr ""
 
-#: xmlcopyeditor.cpp:2795
+#: xmlcopyeditor.cpp:2793
 msgid "Cannot replace: "
 msgstr ""
 
-#: xmlcopyeditor.cpp:2826
+#: xmlcopyeditor.cpp:2824
 msgid "XML document (*.xml)"
 msgstr ""
 
-#: xmlcopyeditor.cpp:2850
+#: xmlcopyeditor.cpp:2848
 msgid "Choose a document type:"
 msgstr ""
 
-#: xmlcopyeditor.cpp:2850
+#: xmlcopyeditor.cpp:2848
 msgid "New Document"
 msgstr ""
 
-#: xmlcopyeditor.cpp:2891
+#: xmlcopyeditor.cpp:2889
 #, c-format
 msgid "Document%i"
 msgstr ""
 
-#: xmlcopyeditor.cpp:2956
+#: xmlcopyeditor.cpp:2954
 msgid "Open Large Document"
 msgstr ""
 
-#: xmlcopyeditor.cpp:2956 xmlcopyeditor.cpp:5428 xmlcopyeditor.cpp:5430
+#: xmlcopyeditor.cpp:2954 xmlcopyeditor.cpp:5430 xmlcopyeditor.cpp:5432
 msgid "Open"
 msgstr ""
 
-#: xmlcopyeditor.cpp:2996
+#: xmlcopyeditor.cpp:2994
 #, c-format
 msgid "Cannot open %s."
 msgstr ""
 
-#: xmlcopyeditor.cpp:3004 xmlcopyeditor.cpp:3598
+#: xmlcopyeditor.cpp:3002 xmlcopyeditor.cpp:3596
 #, c-format
 msgid "%s is already open"
 msgstr ""
 
-#: xmlcopyeditor.cpp:3035
+#: xmlcopyeditor.cpp:3033
 #, c-format
 msgid "Cannot open %s"
 msgstr ""
 
-#: xmlcopyeditor.cpp:3158
+#: xmlcopyeditor.cpp:3156
 #, c-format
 msgid "Cannot open %s: unknown encoding %s"
 msgstr ""
 
-#: xmlcopyeditor.cpp:3189
+#: xmlcopyeditor.cpp:3187
 #, c-format
 msgid "Cannot open %s: out of memory"
 msgstr ""
 
-#: xmlcopyeditor.cpp:3210
+#: xmlcopyeditor.cpp:3208
 #, c-format
 msgid "Cannot open %s: conversion from encoding %s failed"
 msgstr ""
 
-#: xmlcopyeditor.cpp:3219 xmlcopyeditor.cpp:3999
+#: xmlcopyeditor.cpp:3217 xmlcopyeditor.cpp:4001
 msgid "Creating document view..."
 msgstr ""
 
-#: xmlcopyeditor.cpp:3465
+#: xmlcopyeditor.cpp:3463
 msgid "Edited document empty"
 msgstr ""
 
-#: xmlcopyeditor.cpp:3579
+#: xmlcopyeditor.cpp:3577
 msgid "Save As"
 msgstr ""
 
-#: xmlcopyeditor.cpp:3771
+#: xmlcopyeditor.cpp:3773
 msgid "DTD Validation in progress..."
 msgstr ""
 
-#: xmlcopyeditor.cpp:3794 xmlcopyeditor.cpp:3869 xmlcopyeditor.cpp:3937
+#: xmlcopyeditor.cpp:3796 xmlcopyeditor.cpp:3871 xmlcopyeditor.cpp:3939
 msgid "valid"
 msgstr ""
 
-#: xmlcopyeditor.cpp:3816
+#: xmlcopyeditor.cpp:3818
 msgid "Select RELAX NG grammar"
 msgstr ""
 
-#: xmlcopyeditor.cpp:3817 xmlcopyeditor.cpp:4101 xmlcopyeditor.cpp:5784
+#: xmlcopyeditor.cpp:3819 xmlcopyeditor.cpp:4103 xmlcopyeditor.cpp:5786
 msgid "Choose a file:"
 msgstr ""
 
-#: xmlcopyeditor.cpp:3818
+#: xmlcopyeditor.cpp:3820
 msgid "RELAX NG grammar"
 msgstr ""
 
-#: xmlcopyeditor.cpp:3847
+#: xmlcopyeditor.cpp:3849
 msgid "RELAX NG validation in progress..."
 msgstr ""
 
-#: xmlcopyeditor.cpp:3918
+#: xmlcopyeditor.cpp:3920
 msgid "Validation in progress..."
 msgstr ""
 
-#: xmlcopyeditor.cpp:3956
+#: xmlcopyeditor.cpp:3958
 msgid "W3C Schema"
 msgstr ""
 
-#: xmlcopyeditor.cpp:3956
+#: xmlcopyeditor.cpp:3958
 msgid "DTD"
 msgstr ""
 
-#: xmlcopyeditor.cpp:3957
+#: xmlcopyeditor.cpp:3959
 msgid "Please choose a shema type"
 msgstr ""
 
-#: xmlcopyeditor.cpp:3958
+#: xmlcopyeditor.cpp:3960
 msgid "Schema type"
 msgstr ""
 
-#: xmlcopyeditor.cpp:3984
+#: xmlcopyeditor.cpp:3986
 msgid "Please select a DTD file"
 msgstr ""
 
-#: xmlcopyeditor.cpp:3990
+#: xmlcopyeditor.cpp:3992
 msgid "Converting..."
 msgstr ""
 
-#: xmlcopyeditor.cpp:4017
+#: xmlcopyeditor.cpp:4019
 msgid "Enter XPath:"
 msgstr ""
 
-#: xmlcopyeditor.cpp:4018
+#: xmlcopyeditor.cpp:4020
 msgid "Evaluate XPath"
 msgstr ""
 
-#: xmlcopyeditor.cpp:4039
+#: xmlcopyeditor.cpp:4041
 msgid "Cannot evaluate XPath"
 msgstr ""
 
-#: xmlcopyeditor.cpp:4050
+#: xmlcopyeditor.cpp:4052
 msgid "No matching nodes found"
 msgstr ""
 
-#: xmlcopyeditor.cpp:4087
+#: xmlcopyeditor.cpp:4089
 #, c-format
 msgid "Cannot open stylesheet %s"
 msgstr ""
 
-#: xmlcopyeditor.cpp:4100
+#: xmlcopyeditor.cpp:4102
 msgid "Select stylesheet"
 msgstr ""
 
-#: xmlcopyeditor.cpp:4102 xmlcopyeditor.cpp:5758
+#: xmlcopyeditor.cpp:4104 xmlcopyeditor.cpp:5760
 msgid "XSLT stylesheet"
 msgstr ""
 
-#: xmlcopyeditor.cpp:4156
+#: xmlcopyeditor.cpp:4158
 msgid "XSL transformation in progress..."
 msgstr ""
 
-#: xmlcopyeditor.cpp:4163
+#: xmlcopyeditor.cpp:4165
 msgid "Cannot transform: "
 msgstr ""
 
-#: xmlcopyeditor.cpp:4171
+#: xmlcopyeditor.cpp:4173
 msgid "Output document empty"
 msgstr ""
 
-#: xmlcopyeditor.cpp:4201
+#: xmlcopyeditor.cpp:4203
 msgid "Pretty-printing in progress..."
 msgstr ""
 
-#: xmlcopyeditor.cpp:4211
+#: xmlcopyeditor.cpp:4213
 msgid "Cannot pretty-print: "
 msgstr ""
 
-#: xmlcopyeditor.cpp:4222
+#: xmlcopyeditor.cpp:4224
 msgid "Pretty-print unsuccessful: output document empty"
 msgstr ""
 
-#: xmlcopyeditor.cpp:4262
+#: xmlcopyeditor.cpp:4264
 msgid "Choose an encoding:"
 msgstr ""
 
-#: xmlcopyeditor.cpp:4262
+#: xmlcopyeditor.cpp:4264
 msgid "Encoding"
 msgstr ""
 
-#: xmlcopyeditor.cpp:4275
+#: xmlcopyeditor.cpp:4277
 msgid "Cannot set encoding: "
 msgstr ""
 
-#: xmlcopyeditor.cpp:4286
+#: xmlcopyeditor.cpp:4288
 msgid "Cannot set encoding (cannot parse temporary file)"
 msgstr ""
 
-#: xmlcopyeditor.cpp:4490
+#: xmlcopyeditor.cpp:4492
 #, c-format
 msgid "Cannot find '%s'"
 msgstr ""
 
-#: xmlcopyeditor.cpp:4552
+#: xmlcopyeditor.cpp:4554
 msgid ""
 "File has been modified by another application.\n"
 "Do you want to proceed?"
 msgstr ""
 
-#: xmlcopyeditor.cpp:4553
+#: xmlcopyeditor.cpp:4555
 msgid "Confirmation"
 msgstr ""
 
-#: xmlcopyeditor.cpp:4592 xmlcopyeditor.cpp:4606 xmlcopyeditor.cpp:4627
-#: xmlcopyeditor.cpp:4656 xmlcopyeditor.cpp:4719 xmlcopyeditor.cpp:4733
-#: xmlcopyeditor.cpp:4770 xmlcopyeditor.cpp:4805
+#: xmlcopyeditor.cpp:4594 xmlcopyeditor.cpp:4608 xmlcopyeditor.cpp:4629
+#: xmlcopyeditor.cpp:4658 xmlcopyeditor.cpp:4721 xmlcopyeditor.cpp:4735
+#: xmlcopyeditor.cpp:4772 xmlcopyeditor.cpp:4807
 #, c-format
 msgid "Cannot save %s"
 msgstr ""
 
-#: xmlcopyeditor.cpp:4648
+#: xmlcopyeditor.cpp:4650
 #, c-format
 msgid "%s saved in default encoding UTF-8: unknown encoding %s"
 msgstr ""
 
-#: xmlcopyeditor.cpp:4711
+#: xmlcopyeditor.cpp:4713
 #, c-format
 msgid "%s saved in default encoding UTF-8: conversion to %s failed"
 msgstr ""
 
-#: xmlcopyeditor.cpp:4761
+#: xmlcopyeditor.cpp:4763
 msgid "unknown error"
 msgstr ""
 
-#: xmlcopyeditor.cpp:4763
+#: xmlcopyeditor.cpp:4765
 #, c-format
 msgid "Cannot save document in %s: %s (saved in default encoding UTF-8)"
 msgstr ""
 
-#: xmlcopyeditor.cpp:4785
+#: xmlcopyeditor.cpp:4787
 msgid "Out of memory: attempt to save in default encoding UTF-8?"
 msgstr ""
 
-#: xmlcopyeditor.cpp:4798
+#: xmlcopyeditor.cpp:4800
 #, c-format
 msgid "%s saved in default encoding UTF-8"
 msgstr ""
 
-#: xmlcopyeditor.cpp:4862
+#: xmlcopyeditor.cpp:4864
 msgid "MB"
 msgstr ""
 
-#: xmlcopyeditor.cpp:4867
+#: xmlcopyeditor.cpp:4869
 msgid "kB"
 msgstr ""
 
-#: xmlcopyeditor.cpp:4872
+#: xmlcopyeditor.cpp:4874
 msgid "byte"
 msgid_plural "bytes"
 msgstr[0] ""
 msgstr[1] ""
 
-#: xmlcopyeditor.cpp:4880
+#: xmlcopyeditor.cpp:4882
 #, c-format
 msgid "%g %s saved"
 msgstr ""
 
-#: xmlcopyeditor.cpp:4900
+#: xmlcopyeditor.cpp:4902
 msgid "&Undo\tCtrl+Z"
 msgstr ""
 
-#: xmlcopyeditor.cpp:4900
+#: xmlcopyeditor.cpp:4902
 msgid "Undo"
 msgstr ""
 
-#: xmlcopyeditor.cpp:4904
+#: xmlcopyeditor.cpp:4906
 msgid "&Redo\tCtrl+Y"
 msgstr ""
 
-#: xmlcopyeditor.cpp:4904
+#: xmlcopyeditor.cpp:4906
 msgid "Redo"
 msgstr ""
 
-#: xmlcopyeditor.cpp:4908
+#: xmlcopyeditor.cpp:4910
 msgid "&Cut\tCtrl+X"
 msgstr ""
 
-#: xmlcopyeditor.cpp:4908
+#: xmlcopyeditor.cpp:4910
 msgid "Cut"
 msgstr ""
 
-#: xmlcopyeditor.cpp:4912
+#: xmlcopyeditor.cpp:4914
 msgid "C&opy\tCtrl+C"
 msgstr ""
 
-#: xmlcopyeditor.cpp:4912
+#: xmlcopyeditor.cpp:4914
 msgid "Copy"
 msgstr ""
 
-#: xmlcopyeditor.cpp:4916
+#: xmlcopyeditor.cpp:4918
 msgid "&Paste\tCtrl+V"
 msgstr ""
 
-#: xmlcopyeditor.cpp:4916
+#: xmlcopyeditor.cpp:4918
 msgid "Paste"
 msgstr ""
 
-#: xmlcopyeditor.cpp:4923
+#: xmlcopyeditor.cpp:4925
 msgid "P&aste As New Document"
 msgstr ""
 
-#: xmlcopyeditor.cpp:4924
+#: xmlcopyeditor.cpp:4926
 msgid "Paste As New Document"
 msgstr ""
 
-#: xmlcopyeditor.cpp:4928
+#: xmlcopyeditor.cpp:4930
 msgid "&Find...\tCtrl+F"
 msgstr ""
 
-#: xmlcopyeditor.cpp:4928
+#: xmlcopyeditor.cpp:4930
 msgid "Find..."
 msgstr ""
 
-#: xmlcopyeditor.cpp:4932
+#: xmlcopyeditor.cpp:4934
 msgid "F&ind Again\tF3"
 msgstr ""
 
-#: xmlcopyeditor.cpp:4932
+#: xmlcopyeditor.cpp:4934
 msgid "Find Again"
 msgstr ""
 
-#: xmlcopyeditor.cpp:4936
+#: xmlcopyeditor.cpp:4938
 msgid "&Replace...\tCtrl+R"
 msgstr ""
 
-#: xmlcopyeditor.cpp:4936
+#: xmlcopyeditor.cpp:4938
 msgid "Replace..."
 msgstr ""
 
-#: xmlcopyeditor.cpp:4943
+#: xmlcopyeditor.cpp:4945
 msgid "&Global Replace...\tCtrl+Shift+R"
 msgstr ""
 
-#: xmlcopyeditor.cpp:4944
+#: xmlcopyeditor.cpp:4946
 msgid "Global Replace..."
 msgstr ""
 
-#: xmlcopyeditor.cpp:4948
+#: xmlcopyeditor.cpp:4950
 msgid "G&o To...\tCtrl+G"
 msgstr ""
 
-#: xmlcopyeditor.cpp:4948
+#: xmlcopyeditor.cpp:4950
 msgid "Go To..."
 msgstr ""
 
-#: xmlcopyeditor.cpp:4968
+#: xmlcopyeditor.cpp:4970
 msgid "Pr&eferences..."
 msgstr ""
 
-#: xmlcopyeditor.cpp:4968
+#: xmlcopyeditor.cpp:4970
 msgid "Preferences..."
 msgstr ""
 
-#: xmlcopyeditor.cpp:4976
+#: xmlcopyeditor.cpp:4978
 msgid "Increase\tCtrl+U"
 msgstr ""
 
-#: xmlcopyeditor.cpp:4976
+#: xmlcopyeditor.cpp:4978
 msgid "Increase"
 msgstr ""
 
-#: xmlcopyeditor.cpp:4978
+#: xmlcopyeditor.cpp:4980
 msgid "Decrease\tCtrl+D"
 msgstr ""
 
-#: xmlcopyeditor.cpp:4978
+#: xmlcopyeditor.cpp:4980
 msgid "Decrease"
 msgstr ""
 
-#: xmlcopyeditor.cpp:4980
+#: xmlcopyeditor.cpp:4982
 msgid "Normal\tCtrl+0"
 msgstr ""
 
-#: xmlcopyeditor.cpp:4980
+#: xmlcopyeditor.cpp:4982
 msgid "Normal"
 msgstr ""
 
-#: xmlcopyeditor.cpp:4985
+#: xmlcopyeditor.cpp:4987
 msgid "&Default"
 msgstr ""
 
-#: xmlcopyeditor.cpp:4988
+#: xmlcopyeditor.cpp:4990
 msgid "&Blue background, white text"
 msgstr ""
 
-#: xmlcopyeditor.cpp:4989
+#: xmlcopyeditor.cpp:4991
 msgid "Blue background, white text"
 msgstr ""
 
-#: xmlcopyeditor.cpp:4992
+#: xmlcopyeditor.cpp:4994
 msgid "&Light"
 msgstr ""
 
-#: xmlcopyeditor.cpp:4993
+#: xmlcopyeditor.cpp:4995
 msgid "Light"
 msgstr ""
 
-#: xmlcopyeditor.cpp:4996
+#: xmlcopyeditor.cpp:4998
 msgid "&None"
 msgstr ""
 
-#: xmlcopyeditor.cpp:4997
+#: xmlcopyeditor.cpp:4999
 msgid "None"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5026
+#: xmlcopyeditor.cpp:5028
 msgid "&Previous Document\tCtrl+PgUp"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5026
+#: xmlcopyeditor.cpp:5028
 msgid "Previous Document"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5027
+#: xmlcopyeditor.cpp:5029
 msgid "&Next Document\tCtrl+PgDn"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5027
+#: xmlcopyeditor.cpp:5029
 msgid "Next Document"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5031
+#: xmlcopyeditor.cpp:5033
 msgid "&Browser\tCtrl+B"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5031 xmlcopyeditor.cpp:5461 xmlcopyeditor.cpp:5465
+#: xmlcopyeditor.cpp:5033 xmlcopyeditor.cpp:5463 xmlcopyeditor.cpp:5467
 msgid "Browser"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5035
+#: xmlcopyeditor.cpp:5037
 msgid "&Show Tags and Attributes\tCtrl+T"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5035
+#: xmlcopyeditor.cpp:5037
 msgid "Show Tags and Attributes"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5038
+#: xmlcopyeditor.cpp:5040
 msgid "&Hide Attributes Only\tCtrl+Shift+A"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5038
+#: xmlcopyeditor.cpp:5040
 msgid "Hide Attributes Only"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5041
+#: xmlcopyeditor.cpp:5043
 msgid "H&ide Tags and Attributes\tCtrl+Shift+T"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5041
+#: xmlcopyeditor.cpp:5043
 msgid "Hide Tags and Attributes"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5060
+#: xmlcopyeditor.cpp:5062
 msgid "&Toggle Fold\tCtrl+Alt+T"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5060
+#: xmlcopyeditor.cpp:5062
 msgid "Toggle Fold"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5062
+#: xmlcopyeditor.cpp:5064
 msgid "&Fold Tags\tCtrl+Shift+F"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5062
+#: xmlcopyeditor.cpp:5064
 msgid "Fold Tags"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5064
+#: xmlcopyeditor.cpp:5066
 msgid "&Unfold Tags\tCtrl+Shift+U"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5067
+#: xmlcopyeditor.cpp:5069
 msgid "&Wrap Words\tCtrl+W"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5069
+#: xmlcopyeditor.cpp:5071
 msgid "&Color Scheme"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5070
+#: xmlcopyeditor.cpp:5072
 msgid "&Text Size"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5075
+#: xmlcopyeditor.cpp:5077
 msgid "S&how Current Element Pane"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5076
+#: xmlcopyeditor.cpp:5078
 msgid "Show Current Element Pane"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5079
+#: xmlcopyeditor.cpp:5081
 msgid "Sh&ow Toolbar"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5079
+#: xmlcopyeditor.cpp:5081
 msgid "Show Toolbar"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5082
+#: xmlcopyeditor.cpp:5084
 msgid "C&lose Message Pane\tAlt+C"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5082
+#: xmlcopyeditor.cpp:5084
 msgid "Close Message Pane"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5084
-msgid "Close Find/Replace Pane"
+#: xmlcopyeditor.cpp:5086
+msgid "Close Find/&Replace Pane"
 msgstr ""
 
 #: xmlcopyeditor.cpp:5086
+msgid "Close Find/Replace Pane"
+msgstr ""
+
+#: xmlcopyeditor.cpp:5088
+msgid "Close Co&mmand Pane"
+msgstr ""
+
+#: xmlcopyeditor.cpp:5088
 msgid "Close Command Pane"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5090
+#: xmlcopyeditor.cpp:5092
 msgid "&Element...\tCtrl+I"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5090
+#: xmlcopyeditor.cpp:5092
 msgid "Element..."
 msgstr ""
 
-#: xmlcopyeditor.cpp:5091
+#: xmlcopyeditor.cpp:5093
 msgid "&Sibling...\tCtrl+Shift+I"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5091
+#: xmlcopyeditor.cpp:5093
 msgid "Sibling..."
 msgstr ""
 
-#: xmlcopyeditor.cpp:5092
+#: xmlcopyeditor.cpp:5094
 msgid "&Entity...\tCtrl+E"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5092
+#: xmlcopyeditor.cpp:5094
 msgid "Entity..."
 msgstr ""
 
-#: xmlcopyeditor.cpp:5094
+#: xmlcopyeditor.cpp:5096
 msgid "&Twin\tCtrl+Enter"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5094
+#: xmlcopyeditor.cpp:5096
 msgid "Twin"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5096
+#: xmlcopyeditor.cpp:5098
 msgid "S&ymbol..."
 msgstr ""
 
-#: xmlcopyeditor.cpp:5096
+#: xmlcopyeditor.cpp:5098
 msgid "Symbol..."
 msgstr ""
 
-#: xmlcopyeditor.cpp:5104
+#: xmlcopyeditor.cpp:5106
 msgid "&DTD/XML Schema\tF5"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5104
+#: xmlcopyeditor.cpp:5106
 msgid "DTD/XML Schema"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5107
+#: xmlcopyeditor.cpp:5109
 msgid "&RELAX NG...\tF6"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5107
+#: xmlcopyeditor.cpp:5109
 msgid "RELAX NG..."
 msgstr ""
 
-#: xmlcopyeditor.cpp:5110
+#: xmlcopyeditor.cpp:5112
 msgid "&Public DTD..."
 msgstr ""
 
-#: xmlcopyeditor.cpp:5110
+#: xmlcopyeditor.cpp:5112
 msgid "Public DTD..."
 msgstr ""
 
-#: xmlcopyeditor.cpp:5111
+#: xmlcopyeditor.cpp:5113
 msgid "&System DTD..."
 msgstr ""
 
-#: xmlcopyeditor.cpp:5111
+#: xmlcopyeditor.cpp:5113
 msgid "System DTD..."
 msgstr ""
 
-#: xmlcopyeditor.cpp:5112
+#: xmlcopyeditor.cpp:5114
 msgid "&XML Schema..."
 msgstr ""
 
-#: xmlcopyeditor.cpp:5112
+#: xmlcopyeditor.cpp:5114
 msgid "XML Schema..."
 msgstr ""
 
-#: xmlcopyeditor.cpp:5113
+#: xmlcopyeditor.cpp:5115
 msgid "XS&LT stylesheet..."
 msgstr ""
 
-#: xmlcopyeditor.cpp:5113
+#: xmlcopyeditor.cpp:5115
 msgid "XSLT stylesheet..."
 msgstr ""
 
-#: xmlcopyeditor.cpp:5128 xmlcopyeditor.cpp:5139
+#: xmlcopyeditor.cpp:5130 xmlcopyeditor.cpp:5141
 #, c-format
 msgid "\tCtrl+%i"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5179
+#: xmlcopyeditor.cpp:5181
 msgid "&Check Well-formedness\tF2"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5179 xmlcopyeditor.cpp:5447 xmlcopyeditor.cpp:5451
+#: xmlcopyeditor.cpp:5181 xmlcopyeditor.cpp:5449 xmlcopyeditor.cpp:5453
 msgid "Check Well-formedness"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5182
+#: xmlcopyeditor.cpp:5184
 msgid "&Validate"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5184
+#: xmlcopyeditor.cpp:5186
 msgid "Create &Schema...\tF10"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5185
+#: xmlcopyeditor.cpp:5187
 msgid "Create schema..."
 msgstr ""
 
-#: xmlcopyeditor.cpp:5186 xmlcopyeditor.cpp:5187
+#: xmlcopyeditor.cpp:5188 xmlcopyeditor.cpp:5189
 msgid "DTD -> Schema..."
 msgstr ""
 
-#: xmlcopyeditor.cpp:5191
+#: xmlcopyeditor.cpp:5193
 msgid "&Associate"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5194
+#: xmlcopyeditor.cpp:5196
 msgid "&XSL Transform...\tF8"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5195
+#: xmlcopyeditor.cpp:5197
 msgid "XSL Transform..."
 msgstr ""
 
-#: xmlcopyeditor.cpp:5198
+#: xmlcopyeditor.cpp:5200
 msgid "&Evaluate XPath...\tF9"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5199
+#: xmlcopyeditor.cpp:5201
 msgid "Evaluate XPath..."
 msgstr ""
 
-#: xmlcopyeditor.cpp:5204
+#: xmlcopyeditor.cpp:5206
 msgid "&Pretty-print\tF11"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5204
+#: xmlcopyeditor.cpp:5206
 msgid "Pretty-print"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5208
+#: xmlcopyeditor.cpp:5210
 msgid "&Lock Tags\tCtrl+L"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5209 xmlcopyeditor.cpp:5476 xmlcopyeditor.cpp:5479
+#: xmlcopyeditor.cpp:5211 xmlcopyeditor.cpp:5478 xmlcopyeditor.cpp:5481
 msgid "Lock Tags"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5214
+#: xmlcopyeditor.cpp:5216
 msgid "E&ncoding..."
 msgstr ""
 
-#: xmlcopyeditor.cpp:5214
+#: xmlcopyeditor.cpp:5216
 msgid "Encoding..."
 msgstr ""
 
-#: xmlcopyeditor.cpp:5223
+#: xmlcopyeditor.cpp:5225
 msgid "&Spelling...\tF7"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5224
+#: xmlcopyeditor.cpp:5226
 msgid "Spelling..."
 msgstr ""
 
-#: xmlcopyeditor.cpp:5231
+#: xmlcopyeditor.cpp:5233
 msgid "&Style...\tShift+F7"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5232
+#: xmlcopyeditor.cpp:5234
 msgid "Style..."
 msgstr ""
 
-#: xmlcopyeditor.cpp:5239
+#: xmlcopyeditor.cpp:5241
 msgid "&Word Count"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5240
+#: xmlcopyeditor.cpp:5242
 msgid "Word Count"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5248
+#: xmlcopyeditor.cpp:5250
 msgid "&Command\tCtrl+Alt+C"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5249
+#: xmlcopyeditor.cpp:5251
 msgid "Command"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5264
+#: xmlcopyeditor.cpp:5266
 msgid "&Options..."
 msgstr ""
 
-#: xmlcopyeditor.cpp:5265
+#: xmlcopyeditor.cpp:5267
 msgid "Options..."
 msgstr ""
 
-#: xmlcopyeditor.cpp:5275
+#: xmlcopyeditor.cpp:5277
 msgid "&XML Copy Editor Help\tF1"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5275
+#: xmlcopyeditor.cpp:5277
 msgid "Help"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5281
+#: xmlcopyeditor.cpp:5283
 msgid "&Home Page"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5281
+#: xmlcopyeditor.cpp:5283
 msgid "Home Page"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5284
+#: xmlcopyeditor.cpp:5286
 msgid "&Forum"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5284
+#: xmlcopyeditor.cpp:5286
 msgid "Forum"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5288
+#: xmlcopyeditor.cpp:5290
 msgid "&About XML Copy Editor"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5288
+#: xmlcopyeditor.cpp:5290
 msgid "About"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5292
+#: xmlcopyeditor.cpp:5294
 msgid "&Browse Source"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5292
+#: xmlcopyeditor.cpp:5294
 msgid "Browse Source"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5304
+#: xmlcopyeditor.cpp:5306
 msgid "&File"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5305
+#: xmlcopyeditor.cpp:5307
 msgid "&Edit"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5306
+#: xmlcopyeditor.cpp:5308
 msgid "&View"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5307
+#: xmlcopyeditor.cpp:5309
 msgid "&Insert"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5308
+#: xmlcopyeditor.cpp:5310
 msgid "&XML"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5309
+#: xmlcopyeditor.cpp:5311
 msgid "&Tools"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5310
+#: xmlcopyeditor.cpp:5312
 msgid "&Help"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5325
+#: xmlcopyeditor.cpp:5327
 msgid "&New...\tCtrl+N"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5325
+#: xmlcopyeditor.cpp:5327
 msgid "New..."
 msgstr ""
 
-#: xmlcopyeditor.cpp:5328
+#: xmlcopyeditor.cpp:5330
 msgid "&Open...\tCtrl+O"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5328
+#: xmlcopyeditor.cpp:5330
 msgid "Open..."
 msgstr ""
 
-#: xmlcopyeditor.cpp:5332
+#: xmlcopyeditor.cpp:5334
 msgid "O&pen Large Document...\tCtrl+Shift+O"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5332
+#: xmlcopyeditor.cpp:5334
 msgid "Open Large Document..."
 msgstr ""
 
-#: xmlcopyeditor.cpp:5336
+#: xmlcopyeditor.cpp:5338
 msgid "&Close\tCtrl+F4"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5339
+#: xmlcopyeditor.cpp:5341
 msgid "C&lose All"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5339
+#: xmlcopyeditor.cpp:5341
 msgid "Close All"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5342
+#: xmlcopyeditor.cpp:5344
 msgid "&Save\tCtrl+S"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5342 xmlcopyeditor.cpp:5433 xmlcopyeditor.cpp:5437
+#: xmlcopyeditor.cpp:5344 xmlcopyeditor.cpp:5435 xmlcopyeditor.cpp:5439
 msgid "Save"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5345
+#: xmlcopyeditor.cpp:5347
 msgid "S&ave As...\tF12"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5345
+#: xmlcopyeditor.cpp:5347
 msgid "Save As..."
 msgstr ""
 
-#: xmlcopyeditor.cpp:5349
+#: xmlcopyeditor.cpp:5351
 msgid "&DAISY Export..."
 msgstr ""
 
-#: xmlcopyeditor.cpp:5349
+#: xmlcopyeditor.cpp:5351
 msgid "DAISY Export..."
 msgstr ""
 
-#: xmlcopyeditor.cpp:5353
+#: xmlcopyeditor.cpp:5355
 msgid "&Reload"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5353
+#: xmlcopyeditor.cpp:5355
 msgid "Reload"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5356
+#: xmlcopyeditor.cpp:5358
 msgid "&Revert"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5356
+#: xmlcopyeditor.cpp:5358
 msgid "Revert"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5359
+#: xmlcopyeditor.cpp:5361
 msgid "Pa&ge Setup..."
 msgstr ""
 
-#: xmlcopyeditor.cpp:5359
+#: xmlcopyeditor.cpp:5361
 msgid "Page Setup..."
 msgstr ""
 
-#: xmlcopyeditor.cpp:5362
+#: xmlcopyeditor.cpp:5364
 msgid "Pr&int Preview..."
 msgstr ""
 
-#: xmlcopyeditor.cpp:5362
+#: xmlcopyeditor.cpp:5364
 msgid "Print Preview..."
 msgstr ""
 
-#: xmlcopyeditor.cpp:5365
+#: xmlcopyeditor.cpp:5367
 msgid "Pri&nt...\tCtrl+P"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5365
+#: xmlcopyeditor.cpp:5367
 msgid "Print..."
 msgstr ""
 
-#: xmlcopyeditor.cpp:5369
+#: xmlcopyeditor.cpp:5371
 msgid "I&mport Microsoft Word Document..."
 msgstr ""
 
-#: xmlcopyeditor.cpp:5373
+#: xmlcopyeditor.cpp:5375
 msgid "Expor&t Microsoft Word Document..."
 msgstr ""
 
-#: xmlcopyeditor.cpp:5377
+#: xmlcopyeditor.cpp:5379
 msgid "E&xit"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5377
+#: xmlcopyeditor.cpp:5379
 msgid "Exit"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5423 xmlcopyeditor.cpp:5425
+#: xmlcopyeditor.cpp:5425 xmlcopyeditor.cpp:5427
 msgid "New"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5440 xmlcopyeditor.cpp:5444
+#: xmlcopyeditor.cpp:5442 xmlcopyeditor.cpp:5446
 msgid "Print"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5454 xmlcopyeditor.cpp:5458
+#: xmlcopyeditor.cpp:5456 xmlcopyeditor.cpp:5460
 msgid "Validate"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5518
+#: xmlcopyeditor.cpp:5520
 msgid "Information"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5521 wrapxerces.h:56
+#: xmlcopyeditor.cpp:5523 wrapxerces.h:56
 msgid "Warning"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5524
+#: xmlcopyeditor.cpp:5526
 msgid "Stopped"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5527
+#: xmlcopyeditor.cpp:5529
 msgid "Question"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5530
+#: xmlcopyeditor.cpp:5532
 msgid "Message"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5593
+#: xmlcopyeditor.cpp:5595
 #, c-format
 msgid "%s is %s"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5618
+#: xmlcopyeditor.cpp:5620
 msgid "Document has been modified: save or discard changes"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5681
+#: xmlcopyeditor.cpp:5683
 msgid "Encoding should be one of "
 msgstr ""
 
-#: xmlcopyeditor.cpp:5740
+#: xmlcopyeditor.cpp:5742
 msgid "Public DTD"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5746
+#: xmlcopyeditor.cpp:5748
 msgid "System DTD"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5752
+#: xmlcopyeditor.cpp:5754
 msgid "XML Schema"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5776
+#: xmlcopyeditor.cpp:5778
 #, c-format
 msgid "Cannot associate %s: %s"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5783
+#: xmlcopyeditor.cpp:5785
 #, c-format
 msgid "Associate %s"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5791
+#: xmlcopyeditor.cpp:5793
 msgid "Choose a public identifier:"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5915
+#: xmlcopyeditor.cpp:5917
 #, c-format
 msgid "Cannot count words: %s"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5923
+#: xmlcopyeditor.cpp:5925
 #, c-format
 msgid "%s contains %i word"
 msgid_plural "%s contains %i words"
 msgstr[0] ""
 msgstr[1] ""
 
-#: xmlcopyeditor.cpp:6116
+#: xmlcopyeditor.cpp:6118
 msgid "Invalid path: "
 msgid_plural "Invalid paths: "
 msgstr[0] ""
 msgstr[1] ""
 
-#: xmlcopyeditor.cpp:6119
+#: xmlcopyeditor.cpp:6122
 msgid "To change application directory, see Tools, Options..., General"
 msgstr ""
 
-#: xmlcopyeditor.cpp:6121
+#: xmlcopyeditor.cpp:6124
 msgid "To change application directory, see Edit, Preferences..., General"
 msgstr ""
 
