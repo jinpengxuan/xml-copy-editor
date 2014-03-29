@@ -3923,20 +3923,37 @@ void MyFrame::OnValidateSchema ( wxCommandEvent& event )
 	wxString fileName = doc->getFullFileName();
 	std::string utf8Buffer = doc->myGetTextRaw();
 	std::auto_ptr<WrapXerces> validator ( new WrapXerces() );
-	if ( !validator->validateMemory ( utf8Buffer.c_str(), utf8Buffer.size(),
+	int severity;
+	wxString message;
+	if ( validator->validateMemory ( utf8Buffer.c_str(), utf8Buffer.size(),
 			fileName ) )
 	{
-		statusProgress ( wxEmptyString );
-		messagePane ( validator->getLastError(), CONST_WARNING );
-		std::pair<int, int> posPair = validator->getErrorPosition();
+		message.Printf ( _ ( "%s is valid" ),
+		                 doc->getShortFileName().c_str() );
+		if ( validator->getLastError().empty() )
+			severity = CONST_INFO;
+		else
+		{
+			severity = CONST_WARNING;
+			message << _T ( "[br][br]" );
+		}
+	}
+	else
+	{
+		severity = CONST_STOP;
+	}
+	statusProgress ( wxEmptyString );
+	message << validator->getLastError();
+	messagePane ( message, severity );
 
+	if ( severity != CONST_INFO )
+	{
+		std::pair<int, int> posPair = validator->getErrorPosition();
 		int cursorPos =
 		    doc->PositionFromLine ( posPair.first - 1 );
 		doc->SetSelection ( cursorPos, cursorPos );
 		doc->setErrorIndicator ( posPair.first - 1, 0 );
 	}
-	else
-		documentOk ( _ ( "valid" ) );
 }
 
 void MyFrame::OnCreateSchema ( wxCommandEvent& event )

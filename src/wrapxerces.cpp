@@ -64,12 +64,14 @@ WrapXerces::~WrapXerces()
 	delete catalogResolver;
 }
 
+// Returns true if the file is valid. But there can be warnings
 bool WrapXerces::validate ( const wxString& fileName )
 {
 	return validateMemory ( NULL, 0, fileName );
 }
 
 // tbd: cache grammar
+// Returns true if the content is valid. But there can be warnings
 bool WrapXerces::validateMemory (
 	const char *utf8Buffer,
 	size_t len,
@@ -100,6 +102,7 @@ bool WrapXerces::validateMemory (
 	parser->setFeature ( XMLUni::fgXercesValidationErrorAsFatal, true );
 	parser->setFeature ( XMLUni::fgXercesLoadExternalDTD, true );
 
+	mySAX2Handler.reset();
 	parser->setContentHandler ( &mySAX2Handler );
 #endif
 
@@ -158,7 +161,7 @@ bool WrapXerces::validateMemory (
 		return false;
 	}
 
-	return mySAX2Handler.getErrors().empty();
+	return true;//mySAX2Handler.getErrors().empty();
 }
 
 const wxMBConv &WrapXerces::getMBConv()

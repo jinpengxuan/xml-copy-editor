@@ -44,7 +44,7 @@ class MySAX2Handler : public DefaultHandler
 		MySAX2Handler()
 		{
 			mEOL = _T("\n");
-			resetErrors();
+			reset();
 		}
 		void error ( const SAXParseException& e )
 		{
@@ -60,7 +60,7 @@ class MySAX2Handler : public DefaultHandler
 			logError ( _("FatalError"), wxLOG_FatalError, e );
 			throw e;
 		}
-		void resetErrors()
+		void reset()
 		{
 			mErrors.clear();
 			mErrorPosition = std::make_pair ( 1, 1 );
@@ -98,7 +98,9 @@ class WrapXerces : private boost::noncopyable
 
 		WrapXerces();
 		virtual ~WrapXerces();
+		// Returns true if the file is valid. But there can be warnings
 		bool validate ( const wxString &fileName );
+		// Returns true if the content is valid. But there can be warnings
 		bool validateMemory ( const char *utf8Buffer, size_t len,
 		    const wxString &fileName, wxThread *thread = NULL,
 		    bool forceGrammarCheck = true, /* Must specify a grammar */

@@ -58,16 +58,8 @@ void *ValidationThread::Entry()
 
 	wxCriticalSectionLocker locker ( xmlcopyeditorCriticalSection );
 
-	if ( myIsSucceeded )
-	{
-		myPosition = std::make_pair ( 0, 0 );
-		myMessage = wxEmptyString;
-	}
-	else
-	{
-		myPosition = validator->getErrorPosition();
-		myMessage = validator->getLastError();
-	}
+	myPosition = validator->getErrorPosition();
+	myMessage = validator->getLastError();
 
 	if ( !TestDestroy() )
 	{
