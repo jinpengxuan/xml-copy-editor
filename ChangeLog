@@ -1,6 +1,35 @@
-xmlcopyeditor (1.2.0.8) unstable; urgency=low
+1.2.1
+  - Zooming in/out problem with default font
+  + Close panels with menu or, when built with wxWidgets 3.0, Escape key
+  * Updated Khmer translation
 
-  * Supported creating schema
+1.2.0.12 2013/12/24
+  + Converting DTD to schema
+  + Khmer translation
+  * Use less temporary files
+  * Fixed bugs
+
+1.2.0.11 2013/11/03
+  * Fixed bugs
+
+1.2.0.10 2013/11/01
+  * Improved support for large files
+  * Improved Unicode handling
+  * Improved catalogue resolving
+  * Fixed bugs
+
+1.2.0.9 2012/12/07
+  * Fixed a crash
+  * Clear error indicators when there is no error
+
+1.2.0.8 2012/09/17
+  * Creating schemas from XML files
+  * Support element substitutions in schemas
   * Many bug fixes
 
- -- Zane U. Ji <ZaneUJi@gmail.com>  Fri, 15 Sep 2012 00:00:20 +0800
+1.2.0.7
+  + More DAISY features
+
+1.2.0.6 2009/11/15
+  + Catalan translation by Robert Falcó Miramontes
+  + DAISY (http://daisymfc.sourceforge.net/) Pipeline integration
