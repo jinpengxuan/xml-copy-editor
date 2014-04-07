@@ -1,4 +1,4 @@
-1.2.1
+1.2.1 2014/04/06
   - Zooming in/out problem with default font
   + Close panels with menu or, when built with wxWidgets 3.0, Escape key
   * Updated Khmer translation
