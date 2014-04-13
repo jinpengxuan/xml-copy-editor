@@ -18,12 +18,14 @@
 ;
 
 #define MyAppName "XML Copy Editor"
-#define MyAppVersion GetFileVersion(".\ReleaseWx28\XmlCopyEditor.exe")
+#define MyAppVersion GetFileVersion(".\ReleaseWx28-x86\XmlCopyEditor.exe")
 #define MyAppPublisher "Zane U. Ji"
 #define MyAppURL "https://sourceforge.net/projects/xml-copy-editor/"
-#define MyAppDir "ReleaseWx28"
+#define MyAppDir32 "ReleaseWx28-x86"
+#define MyAppDir64 "ReleaseWx28-x64"
 #define MyAppExeName "xmlcopyeditor.exe"
-#define MinGW "D:\MinGW32"
+#define MinGW32 "D:\MinGW32"
+#define MinGW64 "D:\MinGW64"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
@@ -47,6 +49,14 @@ OutputBaseFilename=xmlcopyeditor-{#MyAppVersion}-install
 Compression=lzma
 SolidCompression=yes
 PrivilegesRequired=none
+; "ArchitecturesInstallIn64BitMode=x64" requests that the install be
+; done in "64-bit mode" on x64, meaning it should use the native
+; 64-bit Program Files directory and the 64-bit view of the registry.
+; On all other architectures it will install in "32-bit mode".
+ArchitecturesInstallIn64BitMode=x64
+; Note: We don't set ProcessorsAllowed because we want this
+; installation to run on all architectures (including Itanium,
+; since it's capable of running 32-bit code too).
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
@@ -91,7 +101,28 @@ Root: HKCR; Subkey: ".xlf"; ValueType: string; ValueData: "Software\SourceForge 
 
 [Files]
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
-Source: ".\{#MyAppDir}\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
+Source: ".\{#MyAppDir64}\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion; Check: Is64BitInstallMode
+Source: "{#MinGW64}\bin\libgcc_s_seh-1.dll"; DestDir: "{app}"; Check: Is64BitInstallMode
+Source: "{#MinGW64}\bin\libstdc++-6.dll"; DestDir: "{app}"; Check: Is64BitInstallMode
+Source: "{#MinGW64}\bin\libwinpthread-1.dll"; DestDir: "{app}"; Check: Is64BitInstallMode
+Source: "{#MinGW64}\x86_64-w64-mingw32\bin\libaspell-15.dll"; DestDir: "{app}"; Check: Is64BitInstallMode
+Source: "{#MinGW64}\x86_64-w64-mingw32\bin\libexpat-1.dll"; DestDir: "{app}"; Check: Is64BitInstallMode
+Source: "{#MinGW64}\x86_64-w64-mingw32\bin\libiconv-2.dll"; DestDir: "{app}"; Check: Is64BitInstallMode
+Source: "{#MinGW64}\x86_64-w64-mingw32\bin\libpcre-1.dll"; DestDir: "{app}"; Check: Is64BitInstallMode
+Source: "{#MinGW64}\x86_64-w64-mingw32\bin\libxml2-2.dll"; DestDir: "{app}"; Check: Is64BitInstallMode
+Source: "{#MinGW64}\x86_64-w64-mingw32\bin\libxslt-1.dll"; DestDir: "{app}"; Check: Is64BitInstallMode
+Source: "{#MinGW64}\x86_64-w64-mingw32\bin\zlib1.dll"; DestDir: "{app}"; Check: Is64BitInstallMode
+Source: ".\{#MyAppDir32}\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion; Check: not Is64BitInstallMode
+Source: "{#MinGW32}\bin\libgcc_s_sjlj-1.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode
+Source: "{#MinGW32}\bin\libstdc++-6.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode
+Source: "{#MinGW32}\bin\libwinpthread-1.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode
+Source: "{#MinGW32}\i686-w64-mingw32\bin\libaspell-15.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode
+Source: "{#MinGW32}\i686-w64-mingw32\bin\libexpat-1.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode
+Source: "{#MinGW32}\i686-w64-mingw32\bin\libiconv-2.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode
+Source: "{#MinGW32}\i686-w64-mingw32\bin\libpcre-1.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode
+Source: "{#MinGW32}\i686-w64-mingw32\bin\libxml2-2.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode
+Source: "{#MinGW32}\i686-w64-mingw32\bin\libxslt-1.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode
+Source: "{#MinGW32}\i686-w64-mingw32\bin\zlib1.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode
 Source: ".\aspell\*"; DestDir: "{app}\aspell"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: ".\bin\*"; DestDir: "{app}\bin"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: ".\catalog\*"; DestDir: "{app}\catalog"; Flags: ignoreversion recursesubdirs createallsubdirs
@@ -106,16 +137,6 @@ Source: ".\rng\*"; DestDir: "{app}\rng"; Flags: ignoreversion recursesubdirs cre
 Source: ".\rulesets\*"; DestDir: "{app}\rulesets"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: ".\templates\*"; DestDir: "{app}\templates"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: ".\xsl\*"; DestDir: "{app}\xsl"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "{#MinGW}\bin\libaspell-15.dll"; DestDir: "{app}"
-Source: "{#MinGW}\bin\libexpat-1.dll"; DestDir: "{app}"
-Source: "{#MinGW}\bin\libgcc_s_sjlj-1.dll"; DestDir: "{app}"
-Source: "{#MinGW}\bin\libiconv-2.dll"; DestDir: "{app}"
-Source: "{#MinGW}\bin\libpcre-1.dll"; DestDir: "{app}"
-Source: "{#MinGW}\bin\libstdc++-6.dll"; DestDir: "{app}"
-Source: "{#MinGW}\bin\libwinpthread-1.dll"; DestDir: "{app}"
-Source: "{#MinGW}\bin\libxml2-2.dll"; DestDir: "{app}"
-Source: "{#MinGW}\bin\libxslt-1.dll"; DestDir: "{app}"
-Source: "{#MinGW}\bin\zlib1.dll"; DestDir: "{app}"
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
