@@ -1034,29 +1034,24 @@ void XmlCtrl::adjustNoColumnWidth()
 
 void XmlCtrl::updatePromptMaps()
 {
-	wxString buffer = GetText();
-	std::string bufferUtf8;
-	bufferUtf8 = ( const char * ) buffer.mb_str ( wxConvUTF8 );
-	XmlEncodingHandler::setUtf8 ( bufferUtf8, true );
+	std::string bufferUtf8 = myGetTextRaw();
 
 	updatePromptMaps ( bufferUtf8.c_str(), bufferUtf8.size() );
 }
 
-void XmlCtrl::updatePromptMaps ( const char *buffer, size_t bufferLen )
+void XmlCtrl::updatePromptMaps ( const char *utf8Buffer, size_t bufferLen )
 {
 	attributeMap.clear();
 	elementMap.clear();
 	elementStructureMap.clear();
-	std::auto_ptr<XmlPromptGenerator> xpg ( new XmlPromptGenerator (
-	                                            basePath,
-	                                            auxPath ) );
-	xpg->parse ( buffer, bufferLen );
-	xpg->getAttributeMap ( attributeMap );
-	xpg->getRequiredAttributeMap ( requiredAttributeMap );
-	xpg->getElementMap ( elementMap );
-	xpg->getElementStructureMap ( elementStructureMap );
-	xpg->getEntitySet ( entitySet );
-	grammarFound = xpg->getGrammarFound();
+	XmlPromptGenerator xpg ( basePath, auxPath, "UTF-8" );
+	xpg.parse ( utf8Buffer, bufferLen );
+	xpg.getAttributeMap ( attributeMap );
+	xpg.getRequiredAttributeMap ( requiredAttributeMap );
+	xpg.getElementMap ( elementMap );
+	xpg.getElementStructureMap ( elementStructureMap );
+	xpg.getEntitySet ( entitySet );
+	grammarFound = xpg.getGrammarFound();
 	entitySet.insert ( _T ( "amp" ) );
 	entitySet.insert ( _T ( "apos" ) );
 	entitySet.insert ( _T ( "quot" ) );
@@ -1954,8 +1949,6 @@ bool XmlCtrl::backgroundValidate()
 
 	std::string bufferUtf8 = myGetTextRaw();
 
-	XmlEncodingHandler::setUtf8( bufferUtf8, true );
-	
 	return backgroundValidate (
 		bufferUtf8.c_str(),
 		basePath,

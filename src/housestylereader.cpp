@@ -26,8 +26,11 @@
 using namespace std;
 
 HouseStyleReader::HouseStyleReader (
-    map<string, map<string, set<string> > > &m
-) : WrapExpat ( true ), ud ( new HouseStyleReaderData() )
+	map<string, map<string, set<string> > > &m
+	, const char *encoding /*= NULL*/
+	)
+	: WrapExpat ( encoding, true )
+	, ud ( new HouseStyleReaderData() )
 {
 	ud->setState ( STATE_UNKNOWN );
 	ud->depth = ud->cutoffDepth = 0;

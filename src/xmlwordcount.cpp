@@ -23,7 +23,7 @@
 #include "getword.h"
 
 XmlWordCount::XmlWordCount ( const char *encoding )
-	: WrapExpat ( false, encoding )
+	: WrapExpat ( encoding, false )
 	, wcd ( new WordCountData() )
 {
 	wcd->wordCount = 0;

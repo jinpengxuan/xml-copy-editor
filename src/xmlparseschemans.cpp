@@ -23,7 +23,9 @@
 #include <expat.h>
 #include "xmlparseschemans.h"
 
-XmlParseSchemaNs::XmlParseSchemaNs() : WrapExpat ( false ), d ( new ParseSchemaNsData() )
+XmlParseSchemaNs::XmlParseSchemaNs()
+    : WrapExpat ( NULL, false )
+    , d ( new ParseSchemaNsData() )
 {
 	d->p = p; // set parser for XML_StopParser call
 	XML_SetUserData ( p, d.get() );

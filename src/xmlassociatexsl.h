@@ -38,6 +38,7 @@ class XmlAssociateXsl : public WrapExpat
 	public:
 		XmlAssociateXsl (
 		    const std::string& path = "",
+		    const char *encoding = NULL,
 		    size_t size = BUFSIZ );
 		virtual ~XmlAssociateXsl();
 		std::string getBuffer()

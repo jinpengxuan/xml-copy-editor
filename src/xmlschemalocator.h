@@ -34,7 +34,7 @@ struct SchemaLocatorData
 class XmlSchemaLocator : public WrapExpat
 {
 	public:
-		XmlSchemaLocator();
+		XmlSchemaLocator ( const char *encoding );
 		virtual ~XmlSchemaLocator();
 		std::string getSchemaLocation();
 	private:

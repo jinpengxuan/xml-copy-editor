@@ -27,8 +27,10 @@
 XmlAssociateDtd::XmlAssociateDtd (
     const std::string& path,
     const std::string& publicIdentifier,
-    size_t size ) :
-		d ( new DtdData() )
+    const char *encoding,
+    size_t size )
+    : WrapExpat ( encoding )
+    , d ( new DtdData() )
 {
 	d->buffer.reserve ( size );
 	d->path = path;

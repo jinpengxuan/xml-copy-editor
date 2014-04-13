@@ -24,8 +24,9 @@
 #include <expat.h>
 #include "xmlschemalocator.h"
 
-XmlSchemaLocator::XmlSchemaLocator() :
-		WrapExpat ( true ), d ( new SchemaLocatorData() )
+XmlSchemaLocator::XmlSchemaLocator ( const char *encoding )
+	: WrapExpat ( encoding, true )
+	, d ( new SchemaLocatorData() )
 {
 	d->parser = p;
 	XML_SetUserData ( p, d.get() );

@@ -34,7 +34,7 @@ struct EncodingData : public ParserData
 class XmlEncodingSpy : public WrapExpat
 {
 	public:
-		XmlEncodingSpy();
+		XmlEncodingSpy ( const char *encoding = NULL );
 		virtual ~XmlEncodingSpy();
 		std::string getEncoding()
 		{

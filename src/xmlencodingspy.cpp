@@ -23,8 +23,9 @@
 #include <expat.h>
 #include "xmlencodingspy.h"
 
-XmlEncodingSpy::XmlEncodingSpy() :
-		d ( new EncodingData() )
+XmlEncodingSpy::XmlEncodingSpy ( const char *encoding )
+	: WrapExpat ( encoding )
+	, d ( new EncodingData() )
 {
 	XML_SetUserData ( p, d.get() );
 	XML_SetXmlDeclHandler ( p, xmldeclhandler );

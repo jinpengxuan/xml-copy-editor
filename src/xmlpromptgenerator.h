@@ -53,7 +53,8 @@ class XmlPromptGenerator : public WrapExpat
 	public:
 		XmlPromptGenerator (
 		    const wxString& basePath = wxEmptyString,
-		    const wxString& auxPath = wxEmptyString );
+		    const wxString& auxPath = wxEmptyString,
+		    const char *encoding = NULL );
 		virtual ~XmlPromptGenerator();
 		void getAttributeMap (
 		    std::map<wxString, std::map<wxString, std::set<wxString> > >

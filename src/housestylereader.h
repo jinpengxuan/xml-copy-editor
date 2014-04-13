@@ -43,7 +43,8 @@ class HouseStyleReader : public WrapExpat
 {
 	public:
 		HouseStyleReader (
-		    map<string, map<string, set<string> > > &m
+		    map<string, map<string, set<string> > > &m,
+		    const char *encoding = NULL
 		);
 		virtual ~HouseStyleReader();
 		void getNodeVector ( vector<pair<string, unsigned> > &v );

@@ -115,7 +115,7 @@ class XmlCtrl: public wxStyledTextCtrl
 		    bool zoomOnly = false );
 		void applyVisibilityState ( int state = SHOW_TAGS );
 		void updatePromptMaps();
-		void updatePromptMaps ( const char *buffer, size_t bufferLen );
+		void updatePromptMaps ( const char *utf8Buffer, size_t bufferLen );
 		void adjustCursor();
 		void adjustSelection();
 		void foldAll();

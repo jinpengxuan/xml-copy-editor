@@ -35,7 +35,10 @@ struct SchemaParserData : public ParserData
 class XmlSchemaParser : public WrapExpat
 {
 public:
-    XmlSchemaParser ( PromptGeneratorData *data, bool nameSpaceAware );
+    XmlSchemaParser (
+        PromptGeneratorData *data,
+        const char *encoding,
+        bool nameSpaceAware );
     virtual ~XmlSchemaParser();
     enum {
         STATE_UNKNOWN,

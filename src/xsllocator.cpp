@@ -24,7 +24,9 @@
 #include <expat.h>
 #include "xsllocator.h"
 
-XslLocator::XslLocator() : d ( new XslLocatorData() )
+XslLocator::XslLocator ( const char *encoding )
+    : WrapExpat ( encoding )
+    , d ( new XslLocatorData() )
 {
 	d->parser = p;
 	XML_SetUserData ( p, d.get() );

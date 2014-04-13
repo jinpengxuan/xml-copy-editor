@@ -13,18 +13,18 @@ DEFINE_EVENT_TYPE(wxEVT_COMMAND_VALIDATION_COMPLETED);
 
 ValidationThread::ValidationThread (
 	wxEvtHandler *handler,
-	const char *buffer,
+	const char *utf8Buffer,
 	const wxString &system )
 	: wxThread ( wxTHREAD_JOINABLE )
 	, mStopping ( false )
 {
-	if ( buffer == NULL )
+	if ( utf8Buffer == NULL )
 	{
 		throw;
 	}
 
 	myEventHandler = handler;
-	myBuffer = buffer;
+	myBuffer = utf8Buffer;
 	mySystem = system;
 	myIsSucceeded = false;
 }

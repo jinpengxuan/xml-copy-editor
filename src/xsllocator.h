@@ -34,7 +34,7 @@ struct XslLocatorData : public ParserData
 class XslLocator : public WrapExpat
 {
 	public:
-		XslLocator();
+		XslLocator ( const char * encoding = NULL );
 		virtual ~XslLocator();
 		std::string getXslLocation();
 	private:

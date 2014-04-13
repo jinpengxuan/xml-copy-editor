@@ -40,8 +40,13 @@ XmlSchemaGenerator::~XmlSchemaGenerator()
 {
 }
 
-const wxString &XmlSchemaGenerator::generate ( Grammar::GrammarType grammarType,
-		const wxString &filepath, const char *buffer, size_t len )
+const wxString &XmlSchemaGenerator::generate (
+		Grammar::GrammarType grammarType
+		, const wxString &filepath
+		, const char *buffer
+		, size_t len
+		, const wxString &encoding
+		)
 {
 	mGrammarType = grammarType;
 	mElements.clear();
@@ -56,6 +61,9 @@ const wxString &XmlSchemaGenerator::generate ( Grammar::GrammarType grammarType,
 
 	MemBufInputSource source ( ( const XMLByte * ) buffer, len,
 			filepath.mb_str( wxConvLocal ) );
+	if ( !wxIsEmpty ( encoding ) )
+		source.setEncoding ( (const XMLCh *)
+				WrapXerces::toString ( encoding ).GetData() );
 	try {
 		//XMLPlatformUtils::fgSSE2ok = false;
 		parser->parse ( source );

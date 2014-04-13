@@ -38,7 +38,8 @@ public:
 	virtual ~XmlSchemaGenerator();
 
 	const wxString &generate ( Grammar::GrammarType grammarType,
-			const wxString &filepath, const char *buffer, size_t len );
+			const wxString &filepath, const char *buffer, size_t len,
+			const wxString &encoding );
 	const wxString &getLastError() { return mLastError; }
 
 	static void addIndent ( wxString &str, size_t nIndent )

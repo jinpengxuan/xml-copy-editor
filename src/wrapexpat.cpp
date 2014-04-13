@@ -23,7 +23,7 @@
 #include <iostream>
 #include <sstream>
 
-WrapExpat::WrapExpat ( bool nameSpaceAware, const char *encoding )
+WrapExpat::WrapExpat ( const char *encoding, bool nameSpaceAware )
 {
 	p = ( nameSpaceAware ) ? XML_ParserCreateNS ( encoding, ( XML_Char ) ':' ) : XML_ParserCreate ( encoding );
 	if ( p == 0 )

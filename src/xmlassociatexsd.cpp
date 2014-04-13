@@ -29,8 +29,10 @@
 
 XmlAssociateXsd::XmlAssociateXsd (
     const std::string& path,
-    size_t size ) :
-		d ( new AssociateXsdData() )
+    const char *encoding,
+    size_t size )
+    : WrapExpat ( encoding )
+    , d ( new AssociateXsdData() )
 {
 	d->buffer.reserve ( size );
 	d->path = path;

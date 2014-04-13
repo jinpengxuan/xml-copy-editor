@@ -13,7 +13,7 @@ class ValidationThread : public wxThread
 public:
 	ValidationThread (
 	                 wxEvtHandler *handler,
-	                 const char *buffer,
+	                 const char *utf8Buffer,
 	                 const wxString &system );
 	virtual void *Entry();
 	void setBuffer ( const char *buffer, const char *system );

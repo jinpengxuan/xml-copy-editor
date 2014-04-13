@@ -24,8 +24,13 @@
 #include <expat.h>
 #include "xmlschemaparser.h"
 
-XmlSchemaParser::XmlSchemaParser ( PromptGeneratorData *data, bool nameSpaceAware ) :
-        WrapExpat ( nameSpaceAware ), d ( new SchemaParserData )
+XmlSchemaParser::XmlSchemaParser (
+    PromptGeneratorData *data,
+    const char *encoding,
+    bool nameSpaceAware
+    )
+    : WrapExpat ( encoding, nameSpaceAware )
+    , d ( new SchemaParserData )
 {
     d->promptData = data;
     d->setState ( STATE_UNKNOWN );

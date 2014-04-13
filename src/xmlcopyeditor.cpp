@@ -1354,23 +1354,16 @@ void MyFrame::OnCheckWellformedness ( wxCommandEvent& event )
 	if ( utf8Buffer.empty() )
 		return;
 
-	// handle unusual encodings
-	if ( !XmlEncodingHandler::setUtf8 ( utf8Buffer ) )
-	{
-		encodingMessage();
-		return;
-	}
-
 	doc->clearErrorIndicators();
 	statusProgress ( _ ( "Parse in progress..." ) );
 
 	// check for well-formedness
-	auto_ptr<WrapExpat> we ( new WrapExpat() );
-	if ( !we->parse ( utf8Buffer.c_str() ) )
+	WrapExpat we ( "UTF-8" );
+	if ( !we.parse ( utf8Buffer ) )
 	{
 		statusProgress ( wxEmptyString );
-		messagePane ( we->getLastError(), CONST_WARNING );
-		std::pair<int, int> posPair = we->getErrorPosition();
+		messagePane ( we.getLastError(), CONST_WARNING );
+		std::pair<int, int> posPair = we.getErrorPosition();
 		-- ( posPair.first );
 		int cursorPos =
 		    doc->PositionFromLine ( posPair.first );
@@ -3902,14 +3895,9 @@ void MyFrame::OnValidateSchema ( wxCommandEvent& event )
 	{
 		std::string rawBuffer;
 		getRawText ( doc, rawBuffer );
-		if ( !XmlEncodingHandler::setUtf8 ( rawBuffer ) )
-		{
-			encodingMessage();
-			return;
-		}
-		auto_ptr<XmlSchemaLocator> xsl ( new XmlSchemaLocator() );
-		xsl->parse ( rawBuffer.c_str() );
-		if ( ( xsl->getSchemaLocation() ) . empty() )
+		XmlSchemaLocator xsl ( "UTF-8" );
+		xsl.parse ( rawBuffer.c_str() );
+		if ( ( xsl.getSchemaLocation() ) . empty() )
 		{
 			OnValidateDTD ( event );
 			return;
@@ -3966,11 +3954,6 @@ void MyFrame::OnCreateSchema ( wxCommandEvent& event )
 
 	std::string rawBufferUtf8;
 	getRawText ( doc, rawBufferUtf8 );
-	if ( !XmlEncodingHandler::setUtf8 ( rawBufferUtf8 ) )
-	{
-		encodingMessage();
-		return;
-	}
 
 	const static wxString types[] = { _ ( "W3C Schema" ), _ ( "DTD" ) };
 	const static wxString message = _ ( "Please choose a shema type");
@@ -3981,11 +3964,11 @@ void MyFrame::OnCreateSchema ( wxCommandEvent& event )
 
 	Grammar::GrammarType type = ( dlg.GetSelection() == 0 ) ?
 			Grammar::SchemaGrammarType : Grammar::DTDGrammarType;
-	std::auto_ptr<XmlSchemaGenerator> gen ( new XmlSchemaGenerator() );
-	const wxString &schema = gen->generate(type, doc->getFullFileName(),
-	    rawBufferUtf8.c_str(), rawBufferUtf8.size() );
+	XmlSchemaGenerator gen;
+	const wxString &schema = gen.generate(type, doc->getFullFileName(),
+	    rawBufferUtf8.c_str(), rawBufferUtf8.size(), _T ( "UTF-8" ) );
 	if (schema.IsEmpty()) {
-		messagePane ( gen->getLastError(), CONST_WARNING );
+		messagePane ( gen.getLastError(), CONST_WARNING );
 		return;
 	}
 	newDocument ( schema );
@@ -4089,7 +4072,7 @@ void MyFrame::OnXslt ( wxCommandEvent& event )
 	int id = event.GetId();
 	if ( id == ID_XSLT )
 	{
-		XslLocator xl;
+		XslLocator xl ( "UTF-8" );
 		xl.parse ( rawBufferUtf8 );
 		std::string location = xl.getXslLocation();
 
@@ -4211,12 +4194,6 @@ void MyFrame::OnPrettyPrint ( wxCommandEvent& event )
 
 	std::string encoding = XmlEncodingHandler::get ( rawBufferUtf8 );
 
-	if ( !XmlEncodingHandler::setUtf8 ( rawBufferUtf8, true ) )
-	{
-		encodingMessage();
-		return;
-	}
-
 	statusProgress ( _ ( "Pretty-printing in progress..." ) );
 
 	wxString fileName = doc->getFullFileName();
@@ -4242,14 +4219,6 @@ void MyFrame::OnPrettyPrint ( wxCommandEvent& event )
 		    CONST_STOP );
 	else
 	{
-		/*
-		    if (encoding != "UTF-8")
-		    {
-		      std::string output = getEncodedBuffer(rawBufferUtf8, encoding);
-		      if (!output.empty())
-		        rawBufferUtf8 = output;
-		    }
-		*/
 		if ( encoding != "UTF-8" && !encoding.empty() )
 		{
 			XmlEncodingHandler::set ( rawBufferUtf8, encoding );
@@ -4584,7 +4553,7 @@ bool MyFrame::saveFile ( XmlDoc *doc, wxString& fileName, bool checkLastModified
 	try
 	{
 		getRawText ( doc, utf8Buffer );
-		XmlEncodingSpy es;
+		XmlEncodingSpy es ( "UTF-8" );
 		es.parse ( utf8Buffer );
 		encoding = es.getEncoding();
 		wideEncoding = wxString ( encoding.c_str(), wxConvUTF8 );
@@ -4629,13 +4598,13 @@ bool MyFrame::saveFile ( XmlDoc *doc, wxString& fileName, bool checkLastModified
 		}
 		else if ( encoding == "UTF-8" )
 		{
-			auto_ptr<WrapExpat> we ( new WrapExpat() );
+			WrapExpat we ( "UTF-8" );
 
-			if ( !we->parse ( utf8Buffer ) )
+			if ( !we.parse ( utf8Buffer ) )
 			{
 				//if ( we->isEncodingError() )
 				//	;
-				messagePane ( we->getLastError(), CONST_WARNING );
+				messagePane ( we.getLastError(), CONST_WARNING );
 			}
 			success = saveRawUtf8 ( fileNameLocal, utf8Buffer, true, isXml );
 			if ( success )
@@ -5786,15 +5755,14 @@ void MyFrame::OnAssociate ( wxCommandEvent& event )
 	std::string utf8Buffer;
 	getRawText ( doc, utf8Buffer );
 	std::string origEncoding = XmlEncodingHandler::get ( utf8Buffer );
-	XmlEncodingHandler::setUtf8 ( utf8Buffer, true );
-	std::auto_ptr<WrapExpat> wellformedparser ( new WrapExpat() );
-	if ( !wellformedparser->parse ( utf8Buffer ) )
+	WrapExpat wellformedparser ( "UTF-8" );
+	if ( !wellformedparser.parse ( utf8Buffer ) )
 	{
 		wxString message;
 		message.Printf (
 		    _ ( "Cannot associate %s: %s" ),
 		    type.c_str(),
-		    wellformedparser->getLastError().c_str() );
+		    wellformedparser.getLastError().c_str() );
 		messagePane ( message, CONST_STOP );
 		return;
 	}
@@ -5862,30 +5830,29 @@ void MyFrame::OnAssociate ( wxCommandEvent& event )
 
 	if ( id == ID_ASSOCIATE_W3C_SCHEMA )
 	{
-		std::auto_ptr<XmlAssociateXsd> parser ( new XmlAssociateXsd ( utf8Path ) );
-		if ( !parser->parse ( utf8Buffer ) )
+		XmlAssociateXsd parser ( utf8Path, "UTF-8" );
+		if ( !parser.parse ( utf8Buffer ) )
 			return;
-		modifiedBuffer = parser->getBuffer();
+		modifiedBuffer = parser.getBuffer();
 	}
 	else if ( id == ID_ASSOCIATE_DTD_SYSTEM || id == ID_ASSOCIATE_DTD_PUBLIC )
 	{
-		std::auto_ptr<XmlAssociateDtd> parser ( new XmlAssociateDtd (
-		                                            utf8Path,
-		                                            ( auxiliaryBox ) ? ( const char * ) aux.mb_str ( wxConvUTF8 ) : "" ) );
-		if ( !parser->parse ( utf8Buffer ) )
+		XmlAssociateDtd parser ( utf8Path,
+		        ( auxiliaryBox ) ? ( const char * ) aux.mb_str ( wxConvUTF8 ) : "", "UTF-8" );
+		if ( !parser.parse ( utf8Buffer ) )
 			return;
-		modifiedBuffer = parser->getBuffer();
+		modifiedBuffer = parser.getBuffer();
 	}
 	else if ( id == ID_ASSOCIATE_XSL )
 	{
-		std::auto_ptr<XmlAssociateXsl> parser ( new XmlAssociateXsl (
-		                                            utf8Path ) );
-		if ( !parser->parse ( utf8Buffer ) )
+		XmlAssociateXsl parser( utf8Path, "UTF-8" );
+		if ( !parser.parse ( utf8Buffer ) )
 			return;
-		modifiedBuffer = parser->getBuffer();
+		modifiedBuffer = parser.getBuffer();
 	}
 	else
 		return;
+
 	XmlEncodingHandler::set ( modifiedBuffer, origEncoding );
 	doc->SetTextRaw ( modifiedBuffer.c_str() );
 	doc->SetFocus();

@@ -24,8 +24,12 @@
 #include <cstring>
 #include "xmlassociatexsl.h"
 
-XmlAssociateXsl::XmlAssociateXsl ( const std::string& path, size_t size ) :
-		d ( new XslData() )
+XmlAssociateXsl::XmlAssociateXsl (
+    const std::string& path,
+    const char *encoding,
+    size_t size )
+    : WrapExpat ( encoding )
+    , d ( new XslData() )
 {
 	d->buffer.reserve ( size );
 	d->path = path;

@@ -45,7 +45,11 @@ using namespace xercesc;
 
 XmlPromptGenerator::XmlPromptGenerator (
     const wxString& basePath,
-    const wxString& auxPath ) : d ( new PromptGeneratorData() )
+    const wxString& auxPath,
+    const char *encoding
+    )
+    : WrapExpat ( encoding )
+    , d ( new PromptGeneratorData() )
 {
 	XML_SetUserData ( p, d.get() );
 	d->p = p;
