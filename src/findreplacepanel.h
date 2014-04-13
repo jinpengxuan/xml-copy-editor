@@ -32,7 +32,8 @@ enum
 	ID_FINDREPLACE_REPLACE,
 	ID_FINDREPLACE_REPLACE_ALL,
 	ID_FINDREPLACE_MATCH_CASE,
-	ID_FINDREPLACE_REGEX
+	ID_FINDREPLACE_REGEX,
+	ID_FINDREPLACE_CLOSE
 };
 
 class FindReplacePanel : public wxPanel
@@ -48,6 +49,7 @@ class FindReplacePanel : public wxPanel
 		void OnFindNext ( wxCommandEvent& event );
 		void OnReplace ( wxCommandEvent& event );
 		void OnReplaceAll ( wxCommandEvent& event );
+		void OnClose ( wxCommandEvent& event );
 		void focusOnFind();
 		bool getIncrementalFind();
 		bool getRegex();

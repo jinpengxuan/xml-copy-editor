@@ -26,7 +26,11 @@ BEGIN_EVENT_TABLE ( FindReplacePanel, wxPanel )
 	EVT_BUTTON ( ID_FINDREPLACE_FIND_NEXT, FindReplacePanel::OnFindNext )
 	EVT_BUTTON ( ID_FINDREPLACE_REPLACE, FindReplacePanel::OnReplace )
 	EVT_BUTTON ( ID_FINDREPLACE_REPLACE_ALL, FindReplacePanel::OnReplaceAll )
+#if !wxCHECK_VERSION(2,9,0)
+	EVT_BUTTON ( ID_FINDREPLACE_CLOSE, FindReplacePanel::OnClose )
+#else
 	EVT_CHAR_HOOK ( FindReplacePanel::OnCharHook )
+#endif
 	EVT_IDLE ( FindReplacePanel::OnIdle )
 END_EVENT_TABLE()
 
@@ -119,6 +123,17 @@ FindReplacePanel::FindReplacePanel (
 	sizer->Add ( spacer2, 0, wxLEFT | wxRIGHT | wxALIGN_CENTER_VERTICAL, sizerOffset );
 	sizer->Add ( matchCaseBox, 0, wxLEFT | wxRIGHT | wxALIGN_CENTER_VERTICAL, sizerOffset );
 	sizer->Add ( regexBox, 0, wxLEFT | wxRIGHT | wxALIGN_CENTER_VERTICAL, sizerOffset );
+
+#if !wxCHECK_VERSION(2,9,0)
+	wxButton *closeButton = new wxButton (
+	    this,
+	    ID_FINDREPLACE_CLOSE,
+	    _ ( "&Close" ),
+	    wxDefaultPosition,
+	    wxDefaultSize,
+	    wxBU_EXACTFIT | wxNO_BORDER );
+	sizer->Add ( closeButton, 0, wxLEFT | wxRIGHT | wxALIGN_RIGHT | wxALIGN_CENTER_VERTICAL, sizerOffset );
+#endif
 
 	this->SetSizer ( sizer );
 	sizer->SetSizeHints ( this );
@@ -303,4 +318,9 @@ void FindReplacePanel::OnCharHook ( wxKeyEvent& event )
 		( ( MyFrame* ) GetParent() )->closeFindReplacePane();
 	else
 		event.Skip();
+}
+
+void FindReplacePanel::OnClose ( wxCommandEvent & e )
+{
+	( ( MyFrame* ) GetParent() )->closeFindReplacePane();
 }
