@@ -5830,7 +5830,7 @@ void MyFrame::OnAssociate ( wxCommandEvent& event )
 
 	if ( id == ID_ASSOCIATE_W3C_SCHEMA )
 	{
-		XmlAssociateXsd parser ( utf8Path, "UTF-8" );
+		XmlAssociateXsd parser ( path, "UTF-8" );
 		if ( !parser.parse ( utf8Buffer ) )
 			return;
 		modifiedBuffer = parser.getBuffer();

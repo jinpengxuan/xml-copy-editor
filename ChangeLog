@@ -1,6 +1,7 @@
 1.2.1.1
   + x64 installation package
   * Fixed tab order
+  * Fixed encoding problems
   * Fixed invisible captions in high contrast mode (Windows only, http://trac.wxwidgets.org/ticket/16186)
 
 1.2.1 2014/04/06

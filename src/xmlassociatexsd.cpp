@@ -28,14 +28,14 @@
 #include "replace.h"
 
 XmlAssociateXsd::XmlAssociateXsd (
-    const std::string& path,
+    const wxString &path,
     const char *encoding,
     size_t size )
     : WrapExpat ( encoding )
     , d ( new AssociateXsdData() )
 {
 	d->buffer.reserve ( size );
-	d->path = path;
+	d->path = path.utf8_str(); // TODO: Using the specified "encoding";
 	d->rootElementSeen = false;
 	XML_SetElementHandler ( p, start, end );
 	XML_SetDefaultHandlerExpand ( p, defaulthandler );
@@ -43,7 +43,7 @@ XmlAssociateXsd::XmlAssociateXsd (
 
 	std::auto_ptr<XmlParseSchemaNs> parser ( new XmlParseSchemaNs() );
 	std::string normalisedPath, buffer;
-	normalisedPath = path;
+	normalisedPath = path.mb_str ( wxConvLocal );
 	Replace::run ( normalisedPath, "%20", " ", true );
 	if ( !ReadFile::run ( normalisedPath, buffer ) )
 		return;

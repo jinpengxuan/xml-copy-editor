@@ -39,7 +39,7 @@ class XmlAssociateXsd : public WrapExpat
 {
 	public:
 		XmlAssociateXsd (
-		    const std::string& path = "",
+		    const wxString &path = wxEmptyString,
 		    const char *encoding = NULL,
 		    size_t size = BUFSIZ );
 		virtual ~XmlAssociateXsd();
