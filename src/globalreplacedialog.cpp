@@ -70,13 +70,13 @@ GlobalReplaceDialog::GlobalReplaceDialog (
 	    wxDefaultPosition,
 	    wxSize ( 400, -1 ) );
 
-	regexBox =
-	    new wxCheckBox ( this, ID_REGEX, _ ( "&Regex" ) );
-	regexBox->SetValue ( regex );
-
 	matchCaseBox =
 	    new wxCheckBox ( this, ID_MATCHCASE, _ ( "&Match case" ) );
 	matchCaseBox->SetValue ( matchCase );
+
+	regexBox =
+	    new wxCheckBox ( this, ID_REGEX, _ ( "&Regex" ) );
+	regexBox->SetValue ( regex );
 
 	allDocumentsBox =
 	    new wxCheckBox ( this, ID_ALLDOCUMENTS, _ ( "R&eplace in all open documents" ) );

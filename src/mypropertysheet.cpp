@@ -69,6 +69,44 @@ MyPropertySheet::MyPropertySheet (
 	wxBoxSizer *col1sizer = new wxBoxSizer ( wxVERTICAL );
 	wxBoxSizer *col2sizer = new wxBoxSizer ( wxVERTICAL );
 	wxBoxSizer *tablesizer = new wxBoxSizer ( wxHORIZONTAL );
+
+	insertCloseTagBox =
+	    new wxCheckBox ( editorPanel, wxID_ANY, _ ( "&Always insert closing tag" ) );
+	insertCloseTagBox->SetValue ( properties.insertCloseTag );
+	foldBox =
+	    new wxCheckBox ( editorPanel, wxID_ANY, _ ( "&Folding" ) );
+	foldBox->SetValue ( properties.fold );
+	currentLineBox =
+	    new wxCheckBox ( editorPanel, wxID_ANY, _ ( "&Highlight current line" ) );
+	currentLineBox->SetValue ( properties.currentLine );
+	highlightSyntaxBox =
+	    new wxCheckBox ( editorPanel, wxID_ANY, _ ( "Hi&ghlight syntax" ) );
+	highlightSyntaxBox->SetValue ( properties.highlightSyntax );
+	indentLinesBox =
+	    new wxCheckBox ( editorPanel, wxID_ANY, _ ( "&Indentation guides" ) );
+	indentLinesBox->SetValue ( properties.indentLines );
+	deleteWholeTagBox =
+	    new wxCheckBox ( editorPanel, wxID_ANY, _ ( "I&ntelligent backspace/delete" ) );
+	deleteWholeTagBox->SetValue ( properties.deleteWholeTag );
+	numberBox =
+	    new wxCheckBox ( editorPanel, wxID_ANY, _ ( "&Line numbers" ) );
+	numberBox->SetValue ( properties.number );
+	protectHiddenElementsBox =
+	    new wxCheckBox ( editorPanel, wxID_ANY, _ ( "L&ock hidden tags" ) );
+	protectHiddenElementsBox->SetValue ( properties.protectHiddenElements );
+	completionBox =
+	    new wxCheckBox ( editorPanel, wxID_ANY, _ ( "&Tag completion" ) );
+	completionBox->SetValue ( properties.completion );
+	validateAsYouTypeBox =
+	    new wxCheckBox ( editorPanel, wxID_ANY, _ ( "&Validate as you type" ) );
+	validateAsYouTypeBox->SetValue ( properties.validateAsYouType );
+	toggleLineBackgroundBox =
+	    new wxCheckBox ( editorPanel, wxID_ANY, _ ( "Va&riable highlight in tag free view" ) );
+	toggleLineBackgroundBox->SetValue ( properties.toggleLineBackground );
+	whitespaceVisibleBox =
+	    new wxCheckBox ( editorPanel, wxID_ANY, _ ( "&White space visible" ) );
+	whitespaceVisibleBox->SetValue ( properties.whitespaceVisible );
+
 	wxStaticText *labelFont = new wxStaticText (
 	    editorPanel,
 	    wxID_ANY,
@@ -76,7 +114,6 @@ MyPropertySheet::MyPropertySheet (
 	fontBox = new wxChoice (
 	    editorPanel,
 	    wxID_ANY );
-
 	wxArrayString fontArray;
 	fontArray = wxFontEnumerator::GetFacenames();
 	fontArray.Sort();
@@ -85,43 +122,6 @@ MyPropertySheet::MyPropertySheet (
 		fontBox->Insert ( fontArray.Item ( i ), i );
 	}
 	fontBox->SetStringSelection ( properties.font );
-
-	deleteWholeTagBox =
-	    new wxCheckBox ( editorPanel, wxID_ANY, _ ( "I&ntelligent backspace/delete" ) );
-	deleteWholeTagBox->SetValue ( properties.deleteWholeTag );
-	completionBox =
-	    new wxCheckBox ( editorPanel, wxID_ANY, _ ( "&Tag completion" ) );
-	completionBox->SetValue ( properties.completion );
-	foldBox =
-	    new wxCheckBox ( editorPanel, wxID_ANY, _ ( "&Folding" ) );
-	foldBox->SetValue ( properties.fold );
-	currentLineBox =
-	    new wxCheckBox ( editorPanel, wxID_ANY, _ ( "&Highlight current line" ) );
-	currentLineBox->SetValue ( properties.currentLine );
-	indentLinesBox =
-	    new wxCheckBox ( editorPanel, wxID_ANY, _ ( "&Indentation guides" ) );
-	indentLinesBox->SetValue ( properties.indentLines );
-	insertCloseTagBox =
-	    new wxCheckBox ( editorPanel, wxID_ANY, _ ( "&Always insert closing tag" ) );
-	insertCloseTagBox->SetValue ( properties.insertCloseTag );
-	highlightSyntaxBox =
-	    new wxCheckBox ( editorPanel, wxID_ANY, _ ( "Hi&ghlight syntax" ) );
-	highlightSyntaxBox->SetValue ( properties.highlightSyntax );
-	numberBox =
-	    new wxCheckBox ( editorPanel, wxID_ANY, _ ( "&Line numbers" ) );
-	numberBox->SetValue ( properties.number );
-	protectHiddenElementsBox =
-	    new wxCheckBox ( editorPanel, wxID_ANY, _ ( "L&ock hidden tags" ) );
-	protectHiddenElementsBox->SetValue ( properties.protectHiddenElements );
-	whitespaceVisibleBox =
-	    new wxCheckBox ( editorPanel, wxID_ANY, _ ( "&White space visible" ) );
-	whitespaceVisibleBox->SetValue ( properties.whitespaceVisible );
-	validateAsYouTypeBox =
-	    new wxCheckBox ( editorPanel, wxID_ANY, _ ( "&Validate as you type" ) );
-	validateAsYouTypeBox->SetValue ( properties.validateAsYouType );
-	toggleLineBackgroundBox =
-	    new wxCheckBox ( editorPanel, wxID_ANY, _ ( "Va&riable highlight in tag free view" ) );
-	toggleLineBackgroundBox->SetValue ( properties.toggleLineBackground );
 
 	col1sizer->Add ( insertCloseTagBox, 0, wxALL | wxALIGN_LEFT, 5 );
 	col1sizer->Add ( foldBox, 0, wxALL | wxALIGN_LEFT, 5 );
