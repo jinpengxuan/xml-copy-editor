@@ -35,7 +35,7 @@ XmlAssociateXsd::XmlAssociateXsd (
     , d ( new AssociateXsdData() )
 {
 	d->buffer.reserve ( size );
-	d->path = path.utf8_str(); // TODO: Using the specified "encoding";
+	d->path = path;
 	d->rootElementSeen = false;
 	XML_SetElementHandler ( p, start, end );
 	XML_SetDefaultHandlerExpand ( p, defaulthandler );
@@ -140,7 +140,7 @@ void XMLCALL XmlAssociateXsd::start ( void *data,
 			d->buffer += d->namespaceMap["xmlns"];
 			d->buffer += " ";
 		}
-		d->buffer += d->path;
+		d->buffer += d->path.utf8_str(); // TODO: Apply the encoding of the parser
 		d->buffer += "\"";
 		d->rootElementSeen = true;
 	}

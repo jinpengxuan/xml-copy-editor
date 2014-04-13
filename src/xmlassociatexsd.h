@@ -30,7 +30,8 @@
 
 struct AssociateXsdData : public ParserData
 {
-	std::string buffer, path, namespaceAttribute;
+	std::string buffer;//, namespaceAttribute;
+	wxString path;
 	bool rootElementSeen;
 	std::map<std::string, std::string> namespaceMap;
 };

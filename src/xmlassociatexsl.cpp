@@ -25,7 +25,7 @@
 #include "xmlassociatexsl.h"
 
 XmlAssociateXsl::XmlAssociateXsl (
-    const std::string& path,
+    const wxString &path,
     const char *encoding,
     size_t size )
     : WrapExpat ( encoding )
@@ -63,7 +63,7 @@ void XMLCALL XmlAssociateXsl::start ( void *data,
 	if ( !d->rootElementSeen )
 	{
 		d->buffer += "<?xml-stylesheet type=\"text/xsl\" href=\"";
-		d->buffer += d->path;
+		d->buffer += d->path.utf8_str(); // TODO: Apply the encoding of the parser
 		d->buffer += "\"?>\n";
 		d->rootElementSeen = true;
 	}

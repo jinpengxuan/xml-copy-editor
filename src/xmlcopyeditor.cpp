@@ -5804,8 +5804,6 @@ void MyFrame::OnAssociate ( wxCommandEvent& event )
 		aux = ad.getAux();
 	}
 
-	std::string utf8Path = ( const char * ) path.mb_str ( wxConvUTF8 );
-
 	std::string modifiedBuffer;
 
 	// remember choice
@@ -5837,15 +5835,14 @@ void MyFrame::OnAssociate ( wxCommandEvent& event )
 	}
 	else if ( id == ID_ASSOCIATE_DTD_SYSTEM || id == ID_ASSOCIATE_DTD_PUBLIC )
 	{
-		XmlAssociateDtd parser ( utf8Path,
-		        ( auxiliaryBox ) ? ( const char * ) aux.mb_str ( wxConvUTF8 ) : "", "UTF-8" );
+		XmlAssociateDtd parser ( path, aux, "UTF-8" );
 		if ( !parser.parse ( utf8Buffer ) )
 			return;
 		modifiedBuffer = parser.getBuffer();
 	}
 	else if ( id == ID_ASSOCIATE_XSL )
 	{
-		XmlAssociateXsl parser( utf8Path, "UTF-8" );
+		XmlAssociateXsl parser( path, "UTF-8" );
 		if ( !parser.parse ( utf8Buffer ) )
 			return;
 		modifiedBuffer = parser.getBuffer();

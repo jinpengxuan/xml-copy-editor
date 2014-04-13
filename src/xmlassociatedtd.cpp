@@ -25,8 +25,8 @@
 #include "xmlassociatedtd.h"
 
 XmlAssociateDtd::XmlAssociateDtd (
-    const std::string& path,
-    const std::string& publicIdentifier,
+    const wxString &path,
+    const wxString &publicID,
     const char *encoding,
     size_t size )
     : WrapExpat ( encoding )
@@ -34,7 +34,7 @@ XmlAssociateDtd::XmlAssociateDtd (
 {
 	d->buffer.reserve ( size );
 	d->path = path;
-	d->publicIdentifier = publicIdentifier;
+	d->publicID = publicID;
 	d->rootElementSeen = false;
 	d->insideDtd = false;
 	XML_SetUserData ( p, d.get() );
@@ -66,12 +66,12 @@ void XMLCALL XmlAssociateDtd::start ( void *data,
 
 	if ( !d->rootElementSeen )
 	{
-		if ( d->publicIdentifier.empty() )
+		if ( d->publicID.empty() )
 		{
 			d->buffer += "<!DOCTYPE ";
 			d->buffer += el;
 			d->buffer += " SYSTEM \"";
-			d->buffer += d->path;
+			d->buffer += d->path.utf8_str(); // TODO: Apply the encoding of the parser
 			d->buffer += "\">\n";
 		}
 		else
@@ -79,9 +79,9 @@ void XMLCALL XmlAssociateDtd::start ( void *data,
 			d->buffer += "<!DOCTYPE ";
 			d->buffer += el;
 			d->buffer += " PUBLIC \"";
-			d->buffer += d->publicIdentifier;
+			d->buffer += d->publicID.utf8_str(); // TODO: Apply the encoding of the parser
 			d->buffer += "\" \"";
-			d->buffer += d->path;
+			d->buffer += d->path.utf8_str();
 			d->buffer += "\">\n";
 		}
 		d->rootElementSeen = true;
