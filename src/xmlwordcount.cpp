@@ -22,7 +22,9 @@
 #include "xmlwordcount.h"
 #include "getword.h"
 
-XmlWordCount::XmlWordCount() : wcd ( new WordCountData() )
+XmlWordCount::XmlWordCount ( const char *encoding )
+	: WrapExpat ( false, encoding )
+	, wcd ( new WordCountData() )
 {
 	wcd->wordCount = 0;
 	XML_SetUserData ( p, wcd.get() );

@@ -32,7 +32,7 @@ using namespace std;
 class WrapExpat
 {
 	public:
-		WrapExpat ( bool nameSpaceAware = false );
+		WrapExpat ( bool nameSpaceAware = false, const char *encoding = NULL );
 		virtual ~WrapExpat();
 		bool parse ( const string &buffer, bool isFinal = true );
 		bool parse ( const char *buffer, size_t size, bool isFinal = true );

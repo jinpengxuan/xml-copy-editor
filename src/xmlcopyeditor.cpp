@@ -5921,22 +5921,21 @@ void MyFrame::OnWordCount ( wxCommandEvent& event )
 	XmlDoc *doc;
 	if ( ( doc = getActiveDocument() ) == NULL )
 		return;
-	wxString wideBuffer;
-	std::string buffer;
-	wideBuffer = doc->GetText();
-	buffer = wideBuffer.mb_str ( wxConvUTF8 );
 
-	auto_ptr<XmlWordCount> xwc ( new XmlWordCount() );
+	std::string rawBufferUtf8;
+	getRawText ( doc, rawBufferUtf8 );
+
+	XmlWordCount xwc ( "UTF-8" );
 	wxString msg;
-	if ( !xwc->parse ( buffer.c_str() ) )
+	if ( !xwc.parse ( rawBufferUtf8 ) )
 	{
 		statusProgress ( wxEmptyString );
-		msg.Printf ( _ ( "Cannot count words: %s" ), xwc->getLastError().c_str() );
+		msg.Printf ( _ ( "Cannot count words: %s" ), xwc.getLastError().c_str() );
 		messagePane ( msg, CONST_STOP );
 		return;
 	}
 
-	int count = xwc->getWordCount();
+	int count = xwc.getWordCount();
 
 	msg.Printf (
 	    wxPLURAL ( "%s contains %i word", "%s contains %i words", count ),

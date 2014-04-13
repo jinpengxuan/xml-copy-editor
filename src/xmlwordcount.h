@@ -33,7 +33,7 @@ struct WordCountData : public ParserData
 class XmlWordCount : public WrapExpat
 {
 	public:
-		XmlWordCount();
+		XmlWordCount ( const char *encoding = NULL );
 		virtual ~XmlWordCount();
 
 		int getWordCount();
