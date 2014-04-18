@@ -973,40 +973,102 @@ wxString XmlCtrl::getLastAttributeName ( int pos )
 	return GetTextRange ( startPos + 1, pos );
 }
 
-int XmlCtrl::getParentCloseAngleBracket ( int pos, int range )
+int XmlCtrl::findNextEndTag (
+		int pos,
+		unsigned depth /*= 1*/,
+		int character /*= '>'*/,
+		int range /*= USHRT_MAX * 4*/ )
 {
-	int cutoff, iteratorPos, depth;
-	cutoff = ( ( pos - range ) > 2 ) ? pos - range : 2;
-	depth = 1;
-	for (
-	    iteratorPos = pos;
-	    iteratorPos > cutoff;
-	    --iteratorPos )
-	{
-		int type, style;
-		style = getLexerStyleAt ( iteratorPos );
+	wxASSERT ( character == '<' || character == '>' );
 
-		if ( GetCharAt ( iteratorPos ) == '>' &&
-		        ( style == wxSTC_H_TAG ||
-		          style == wxSTC_H_TAGUNKNOWN ) )
+	unsigned openAngleBrackets = 0;
+	int cutoff = pos + range;
+	if ( cutoff > GetEndStyled() )
+		cutoff = GetEndStyled();
+	for ( ; pos < cutoff; ++pos )
+	{
+		int ch = GetCharAt ( pos );
+		if ( ch == '<' )
+			openAngleBrackets = ( openAngleBrackets << 1 ) | 1;// Just a flag
+		// Check for empty tags, which have start tags but no end tags
+		if ( character != '>' || !openAngleBrackets )
+			if ( ch == '>' && getLexerStyleAt ( pos ) == wxSTC_H_TAGEND )
+				--depth;
+		if ( ch != character )
+			continue;
+
+		int style = getLexerStyleAt ( pos );
+		if ( style == wxSTC_H_TAG || style == wxSTC_H_TAGUNKNOWN )
 		{
-			type = getTagType ( iteratorPos );
+			int type = getTagType ( pos );
 			switch ( type )
 			{
-				case ( TAG_TYPE_CLOSE ) :
-								++depth;
-					break;
-				case ( TAG_TYPE_OPEN ) :
-								--depth;
-					break;
-				case ( TAG_TYPE_EMPTY ) :
-							case ( TAG_TYPE_OTHER ) :
-								case ( TAG_TYPE_ERROR ) :
-										break;
+			case TAG_TYPE_CLOSE:
+				--depth;
+				break;
+			case TAG_TYPE_OPEN:
+				// In case that the cursor is inside a start tag
+				if ( character != '>' || openAngleBrackets > 0 )
+					++depth;
+				break;
+			case TAG_TYPE_EMPTY:
+			case TAG_TYPE_OTHER:
+			case TAG_TYPE_ERROR:
+				break;
 			}
-			if ( !depth )
-				return iteratorPos;
 		}
+
+		if ( !depth )
+			return pos + 1;
+	}
+	return -1;
+}
+
+int XmlCtrl::findPreviousStartTag (
+		int pos,
+		unsigned depth /*= 1*/,
+		int character /*= '<'*/,
+		int range /*= USHRT_MAX * 4*/ )
+{
+	wxASSERT ( character == '<' || character == '>' );
+
+	int cutoff = ( ( pos - range ) > 2 ) ? pos - range : 2;
+	unsigned closeAngleBrackets = 0;
+	while ( pos-- > cutoff )
+	{
+		int ch = GetCharAt ( pos );
+		if ( ch == '>' )
+		{
+			closeAngleBrackets = ( closeAngleBrackets << 1 ) | 1;// Just a flag
+			// Check for empty tags, which have start tags but no end tags
+			if ( character != '>' && getLexerStyleAt ( pos ) == wxSTC_H_TAGEND )
+				++depth;
+		}
+		if ( ch != character )
+			continue;
+
+		int style = getLexerStyleAt ( pos );
+		if ( style == wxSTC_H_TAG || style == wxSTC_H_TAGUNKNOWN )
+		{
+			int type = getTagType ( pos );
+			switch ( type )
+			{
+			case TAG_TYPE_CLOSE:
+				// If the cursor is already in an end tag
+				if ( character != '<' || closeAngleBrackets > 0 )
+					++depth;
+				break;
+			case TAG_TYPE_OPEN:
+				--depth;
+				break;
+			case TAG_TYPE_EMPTY:
+			case TAG_TYPE_OTHER:
+			case TAG_TYPE_ERROR:
+				break;
+			}
+		}
+		if ( !depth )
+			return pos;
 	}
 	return -1;
 }
@@ -2118,4 +2180,112 @@ void XmlCtrl::OnMiddleDown ( wxMouseEvent& event )
 	}
 	SetSelection ( pastePosition, pastePosition );
 	Paste();
+}
+
+void XmlCtrl::toggleComment()
+{
+	int pos = -1;
+	wxString text = GetSelectedText();
+	if ( text.IsEmpty() )
+	{
+		if ( type == FILE_TYPE_BINARY )
+			return;
+
+		pos = GetCurrentPos();
+		Colourise ( 0, -1 );
+
+		int style = getLexerStyleAt ( pos ) ;
+		if ( style == wxSTC_H_COMMENT )
+		{
+			int i = pos;
+			while ( --i >= 0 && getLexerStyleAt ( i ) == wxSTC_H_COMMENT )
+				continue;
+			SetSelectionStart ( i + 1 );
+
+			int styled = GetEndStyled();
+			i = pos;
+			while ( i < styled && getLexerStyleAt ( i ) == wxSTC_H_COMMENT )
+				i++;
+			SetSelectionEnd ( i );
+		}
+		else
+		{
+			// Select current tag
+			int start = findPreviousStartTag ( pos, 1, '<', pos );
+			if ( start < 0 )
+			{
+				wxMessageBox(_T("Cann't find the start tag"));
+				return;
+			}
+			int range = GetTextLength() - pos;
+			int end = findNextEndTag ( pos, 1, '>', range );
+			if ( end < 0 )
+			{
+				wxMessageBox(_T("Cann't find the end tag"));
+				return;
+			}
+			SetSelection ( start, end );
+		}
+		text = GetSelectedText();
+	}
+
+	// Skip leading spaces
+	wxString::iterator itr, start, end;
+	itr = start = text.begin();
+	end = text.end();
+	while ( itr != end && wxIsspace ( *itr ) )
+		++itr;
+
+	const static wxString commentStart = _T ( "<!--" );
+	const static wxString commentEnd = _T ( "-->" );
+
+	size_t offset = itr - start;
+	int ret = text.compare ( offset, commentStart.length(), commentStart );
+	if ( ret == 0 )
+	{
+		start = itr;
+		itr = end;
+		do {
+			--itr;
+		} while ( itr != start && wxIsspace ( *itr ) );
+
+		offset = itr - start;
+		if ( offset > commentEnd.length() )
+		{
+			offset = itr - text.begin() - commentEnd.length() + 1;
+			ret = text.compare ( offset, commentEnd.length(), commentEnd );
+
+			// Is commented?
+			if ( ret == 0 )
+			{
+				text.erase ( offset, commentEnd.length() );
+				text.erase ( start, start + commentStart.length() );
+
+				ReplaceSelection ( text );
+				if ( pos >= 0 )
+				{
+					pos -= commentStart.length();
+					SetEmptySelection ( pos >= 0 ? pos : 0 );
+				}
+				return;
+			}
+		}
+	}
+
+	// Comment selection
+
+	// "--" is not allowed in comments
+	const static wxString doubleHyphen = _T ( "--" );
+	offset = 0;
+	while ( ( offset = text.find ( doubleHyphen, offset ) ) != wxString::npos )
+	{
+		text.replace ( offset, doubleHyphen.length(), _T ( "- -" ) );
+		offset += 2; // WARNING: Not three!
+	}
+
+	text = commentStart + text + commentEnd;
+
+	ReplaceSelection ( text );
+	if ( pos >= 0 )
+		SetEmptySelection ( pos + commentStart.length() );
 }

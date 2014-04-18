@@ -109,6 +109,7 @@ enum
 	ID_FIND,
 	ID_FIND_AGAIN,
 	ID_GOTO,
+	ID_TOGGLE_COMMENT,
 	ID_PRINT,
 	ID_WORD_COUNT,
 	ID_PRINT_PREVIEW,
@@ -235,6 +236,7 @@ class MyFrame : public wxFrame
 		void OnFindReplace ( wxCommandEvent& event );
 		void OnCommand ( wxCommandEvent& event );
 		void OnGlobalReplace ( wxCommandEvent& event );
+		void OnToggleComment ( wxCommandEvent& event );
 		void OnWordCount ( wxCommandEvent& event );
 		void OnFeedback ( wxCommandEvent& event );
 		void OnSplitTab ( wxCommandEvent& event );

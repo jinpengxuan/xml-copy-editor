@@ -131,6 +131,7 @@ BEGIN_EVENT_TABLE ( MyFrame, wxFrame )
 	EVT_MENU ( ID_FIND, MyFrame::OnFind )
 	EVT_MENU ( ID_FIND_AGAIN, MyFrame::OnFindAgain )
 	EVT_MENU ( ID_GOTO, MyFrame::OnGoto )
+	EVT_MENU ( ID_TOGGLE_COMMENT, MyFrame::OnToggleComment )
 	EVT_MENU ( ID_FEEDBACK, MyFrame::OnFeedback )
 	EVT_MENU ( ID_PREVIOUS_DOCUMENT, MyFrame::OnPreviousDocument )
 	EVT_MENU ( ID_NEXT_DOCUMENT, MyFrame::OnNextDocument )
@@ -2799,6 +2800,16 @@ void MyFrame::OnGlobalReplace ( wxCommandEvent& event )
 	statusProgress ( msg );
 }
 
+void MyFrame::OnToggleComment ( wxCommandEvent& event )
+{
+	XmlDoc *doc = getActiveDocument();
+	if ( doc == NULL )
+		return;
+
+	wxBusyCursor cursor;
+	doc->toggleComment();
+}
+
 void MyFrame::OnFrameClose ( wxCloseEvent& event )
 {
 	wxCommandEvent e;
@@ -4936,6 +4947,10 @@ wxMenuBar *MyFrame::getMenuBar()
 	    new wxMenuItem ( NULL, ID_GOTO, _ ( "G&o To...\tCtrl+G" ), _ ( "Go To..." ) );
 	gotoItem->SetBitmap ( wxNullBitmap );
 
+	wxMenuItem *commentItem =
+	    new wxMenuItem ( NULL, ID_TOGGLE_COMMENT, _ ( "&Toggle Comment\tCtrl+/" ), _ ( "Toggle Comment" ) );
+	commentItem->SetBitmap ( wxNullBitmap );
+
 	editMenu->Append ( undoItem );
 	editMenu->Append ( redoItem );
 	editMenu->AppendSeparator();
@@ -4948,8 +4963,9 @@ wxMenuBar *MyFrame::getMenuBar()
 	editMenu->Append ( findAgainItem );
 	editMenu->Append ( replaceItem );
 	editMenu->Append ( globalReplaceItem );
-	editMenu->AppendSeparator();
 	editMenu->Append ( gotoItem );
+	editMenu->AppendSeparator();
+	editMenu->Append ( commentItem );
 
 #ifndef __WXMSW__
 	wxMenuItem *preferencesItem =

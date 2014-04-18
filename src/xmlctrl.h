@@ -109,7 +109,20 @@ class XmlCtrl: public wxStyledTextCtrl
 		    long style = 0 );
 		~XmlCtrl();
 		int getType();
-		int getParentCloseAngleBracket ( int pos, int range = USHRT_MAX * 4 );
+		int getParentCloseAngleBracket ( int pos )
+		{
+			return findPreviousStartTag ( pos, 1, '>' );
+		}
+		int findNextEndTag (
+		    int pos,
+		    unsigned depth = 1,
+		    int character = '>',
+		    int range = USHRT_MAX * 4 );
+		int findPreviousStartTag (
+		    int pos,
+		    unsigned depth = 1,
+		    int character = '<',
+		    int range = USHRT_MAX * 4 );
 		void applyProperties (
 		    const XmlCtrlProperties &propertiesParameter,
 		    bool zoomOnly = false );
@@ -144,6 +157,7 @@ class XmlCtrl: public wxStyledTextCtrl
 		std::string myGetTextRaw(); // alternative to faulty stc implementation
 		bool getValidationRequired();
 		void setValidationRequired ( bool b );
+		void toggleComment();
 	private:
 		ValidationThread *validationThread; // used for background validation
 
