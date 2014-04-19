@@ -158,8 +158,13 @@ var
 begin
   sUnInstPath := ExpandConstant('Software\Microsoft\Windows\CurrentVersion\Uninstall\{#MyAppName}_is1');
   sUnInstallString := '';
-  if not RegQueryStringValue(HKLM, sUnInstPath, 'UninstallString', sUnInstallString) then
-    RegQueryStringValue(HKCU, sUnInstPath, 'UninstallString', sUnInstallString);
+  if RegQueryStringValue(HKLM, sUnInstPath, 'UninstallString', sUnInstallString) then
+  else if RegQueryStringValue(HKCU, sUnInstPath, 'UninstallString', sUnInstallString) then
+  else if Is64BitInstallMode then begin
+    sUnInstPath := ExpandConstant('Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\{#MyAppName}_is1');
+    if not RegQueryStringValue(HKLM, sUnInstPath, 'UninstallString', sUnInstallString) then
+      RegQueryStringValue(HKCU, sUnInstPath, 'UninstallString', sUnInstallString);
+  end;
   Result := sUnInstallString;
 end;
 
