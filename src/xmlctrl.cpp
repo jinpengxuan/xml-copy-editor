@@ -2239,8 +2239,8 @@ void XmlCtrl::toggleComment()
 	const static wxString commentStart = _T ( "<!--" );
 	const static wxString commentEnd = _T ( "-->" );
 
-	size_t offset = itr - start;
-	int ret = text.compare ( offset, commentStart.length(), commentStart );
+	size_t startPos = itr - start;
+	int ret = text.compare ( startPos, commentStart.length(), commentStart );
 	if ( ret == 0 )
 	{
 		start = itr;
@@ -2249,24 +2249,22 @@ void XmlCtrl::toggleComment()
 			--itr;
 		} while ( itr != start && wxIsspace ( *itr ) );
 
-		offset = itr - start;
-		if ( offset > commentEnd.length() )
+		size_t endPos = itr - start;
+		if ( endPos > commentEnd.length() )
 		{
-			offset = itr - text.begin() - commentEnd.length() + 1;
-			ret = text.compare ( offset, commentEnd.length(), commentEnd );
+			endPos = itr - text.begin() - commentEnd.length() + 1;
+			ret = text.compare ( endPos, commentEnd.length(), commentEnd );
 
 			// Is commented?
 			if ( ret == 0 )
 			{
-				text.erase ( offset, commentEnd.length() );
-				text.erase ( start, start + commentStart.length() );
+				text.erase ( endPos, commentEnd.length() );
+				text.erase ( startPos, commentStart.length() );
 
 				ReplaceSelection ( text );
+				pos -= commentStart.length();
 				if ( pos >= 0 )
-				{
-					pos -= commentStart.length();
-					SetEmptySelection ( pos >= 0 ? pos : 0 );
-				}
+					SetSelection ( pos, pos );
 				return;
 			}
 		}
@@ -2276,7 +2274,7 @@ void XmlCtrl::toggleComment()
 
 	// "--" is not allowed in comments
 	const static wxString doubleHyphen = _T ( "--" );
-	offset = 0;
+	size_t offset = 0;
 	while ( ( offset = text.find ( doubleHyphen, offset ) ) != wxString::npos )
 	{
 		text.replace ( offset, doubleHyphen.length(), _T ( "- -" ) );
@@ -2287,5 +2285,8 @@ void XmlCtrl::toggleComment()
 
 	ReplaceSelection ( text );
 	if ( pos >= 0 )
-		SetEmptySelection ( pos + commentStart.length() );
+	{
+		pos += commentStart.length();
+		SetSelection ( pos, pos );
+	}
 }
