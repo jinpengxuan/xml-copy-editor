@@ -36,6 +36,7 @@ AssociateDialog::AssociateDialog (
     const wxString& typeParameter,
     const wxString& extensionParameter,
     const wxString& urlParameter,
+    wxString *lastDir,
     bool auxNeededParameter,
     const wxString& auxLabelTextParameter,
     const wxString& auxParameter ) :
@@ -45,6 +46,7 @@ AssociateDialog::AssociateDialog (
 		type ( typeParameter ),
 		extension ( extensionParameter ),
 		url ( urlParameter ),
+		mLastDir ( lastDir ),
 		auxNeeded ( auxNeededParameter ),
 		auxLabelText ( auxLabelTextParameter ),
 		aux ( auxParameter )
@@ -167,13 +169,13 @@ void AssociateDialog::OnBrowse ( wxCommandEvent& e )
 	std::auto_ptr<wxFileDialog> fd ( new wxFileDialog (
 	                                     this,
 	                                     _ ( "Select " ) + type,
-	                                     _T ( "" ),
+	                                     mLastDir ? *mLastDir : _T ( "" ),
 	                                     _T ( "" ),
 	                                     extensionArgument,
 #if wxCHECK_VERSION(2,9,0)
-	                                     wxFD_OPEN | wxFD_FILE_MUST_EXIST | wxFD_CHANGE_DIR
+	                                     wxFD_OPEN | wxFD_FILE_MUST_EXIST
 #else
-	                                     wxOPEN | wxFILE_MUST_EXIST | wxCHANGE_DIR
+	                                     wxOPEN | wxFILE_MUST_EXIST
 #endif
 	                                     ) );
 
@@ -183,5 +185,8 @@ void AssociateDialog::OnBrowse ( wxCommandEvent& e )
 		newValue.Replace ( _T ( "\\" ), _T ( "/" ), true );
 		newValue.Replace ( _T ( " " ), _T ( "%20" ), true );
 		urlCtrl->SetValue ( newValue );
+
+		if ( mLastDir )
+			*mLastDir = fd->GetDirectory();
 	}
 }

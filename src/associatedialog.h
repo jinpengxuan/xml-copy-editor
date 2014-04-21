@@ -33,6 +33,7 @@ class AssociateDialog : public wxDialog
 		    const wxString& typeParameter = _T ( "All" ),
 		    const wxString& extensionParameter = _T ( "*.*" ),
 		    const wxString& urlParameter = wxEmptyString,
+		    wxString *lastDir = NULL,
 		    bool auxNeededParameter = false,
 		    const wxString& auxLabelTextParameter = wxEmptyString,
 		    const wxString& auxParameter = wxEmptyString );
@@ -54,6 +55,7 @@ class AssociateDialog : public wxDialog
 		wxButton *browseButton;
 		wxStaticText *urlLabel, *auxLabel;
 		wxString title, label, type, extension, url;
+		wxString *mLastDir;
 		bool auxNeeded;
 		wxString auxLabelText, aux;
 		DECLARE_EVENT_TABLE()

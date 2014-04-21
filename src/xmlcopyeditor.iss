@@ -106,23 +106,30 @@ Source: "{#MinGW64}\bin\libgcc_s_seh-1.dll"; DestDir: "{app}"; Check: Is64BitIns
 Source: "{#MinGW64}\bin\libstdc++-6.dll"; DestDir: "{app}"; Check: Is64BitInstallMode
 Source: "{#MinGW64}\bin\libwinpthread-1.dll"; DestDir: "{app}"; Check: Is64BitInstallMode
 Source: "{#MinGW64}\x86_64-w64-mingw32\bin\libaspell-15.dll"; DestDir: "{app}"; Check: Is64BitInstallMode
+Source: "{#MinGW64}\x86_64-w64-mingw32\bin\libcurl-4.dll"; DestDir: "{app}"; Check: Is64BitInstallMode
+Source: "{#MinGW64}\x86_64-w64-mingw32\bin\libeay32.dll"; DestDir: "{app}"; Check: Is64BitInstallMode
 Source: "{#MinGW64}\x86_64-w64-mingw32\bin\libexpat-1.dll"; DestDir: "{app}"; Check: Is64BitInstallMode
 Source: "{#MinGW64}\x86_64-w64-mingw32\bin\libiconv-2.dll"; DestDir: "{app}"; Check: Is64BitInstallMode
 Source: "{#MinGW64}\x86_64-w64-mingw32\bin\libpcre-1.dll"; DestDir: "{app}"; Check: Is64BitInstallMode
 Source: "{#MinGW64}\x86_64-w64-mingw32\bin\libxml2-2.dll"; DestDir: "{app}"; Check: Is64BitInstallMode
 Source: "{#MinGW64}\x86_64-w64-mingw32\bin\libxslt-1.dll"; DestDir: "{app}"; Check: Is64BitInstallMode
+Source: "{#MinGW64}\x86_64-w64-mingw32\bin\ssleay32.dll"; DestDir: "{app}"; Check: Is64BitInstallMode
 Source: "{#MinGW64}\x86_64-w64-mingw32\bin\zlib1.dll"; DestDir: "{app}"; Check: Is64BitInstallMode
 Source: ".\{#MyAppDir32}\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion; Check: not Is64BitInstallMode
 Source: "{#MinGW32}\bin\libgcc_s_sjlj-1.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode
 Source: "{#MinGW32}\bin\libstdc++-6.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode
 Source: "{#MinGW32}\bin\libwinpthread-1.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode
 Source: "{#MinGW32}\i686-w64-mingw32\bin\libaspell-15.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode
+Source: "{#MinGW32}\i686-w64-mingw32\bin\libcurl-4.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode
+Source: "{#MinGW32}\i686-w64-mingw32\bin\libeay32.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode
 Source: "{#MinGW32}\i686-w64-mingw32\bin\libexpat-1.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode
 Source: "{#MinGW32}\i686-w64-mingw32\bin\libiconv-2.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode
 Source: "{#MinGW32}\i686-w64-mingw32\bin\libpcre-1.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode
 Source: "{#MinGW32}\i686-w64-mingw32\bin\libxml2-2.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode
 Source: "{#MinGW32}\i686-w64-mingw32\bin\libxslt-1.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode
+Source: "{#MinGW32}\i686-w64-mingw32\bin\ssleay32.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode
 Source: "{#MinGW32}\i686-w64-mingw32\bin\zlib1.dll"; DestDir: "{app}"; Check: not Is64BitInstallMode
+Source: "{#MinGW64}\bin\curl-ca-bundle.crt"; DestDir: "{app}"; Flags: ignoreversion
 Source: ".\aspell\*"; DestDir: "{app}\aspell"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: ".\bin\*"; DestDir: "{app}\bin"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: ".\catalog\*"; DestDir: "{app}\catalog"; Flags: ignoreversion recursesubdirs createallsubdirs

@@ -444,6 +444,7 @@ class MyFrame : public wxFrame
 		  exportStylesheet,
 		  exportFolder,
 		  lastSymbol;
+		wxString mLastDir;
 		bool globalReplaceAllDocuments,
 		toolbarVisible,
 		protectTags,

@@ -2133,17 +2133,19 @@ void MyFrame::OnImportMSWord ( wxCommandEvent& event )
 	std::auto_ptr<wxFileDialog> fd ( new wxFileDialog (
 	                                     this,
 	                                     _ ( "Import Microsoft Word Document" ),
-	                                     _T ( "" ),
+	                                     mLastDir,
 	                                     _T ( "" ),
 	                                     _T ( "Microsoft Word (*.doc)|*.doc" ),
 #if wxCHECK_VERSION(2,9,0)
-	                                     wxFD_OPEN | wxFD_FILE_MUST_EXIST | wxFD_CHANGE_DIR
+	                                     wxFD_OPEN | wxFD_FILE_MUST_EXIST
 #else
-	                                     wxOPEN | wxFILE_MUST_EXIST | wxCHANGE_DIR
+	                                     wxOPEN | wxFILE_MUST_EXIST
 #endif
 	                                     ) );
 	if ( fd->ShowModal() == wxID_CANCEL )
 		return;
+
+	mLastDir = fd->GetDirectory();
 
 	wxString path = fd->GetPath();
 
@@ -2952,6 +2954,8 @@ void MyFrame::OnOpen ( wxCommandEvent& event )
 			defaultDir = fn.GetPath();
 		}
 	}
+	else
+		defaultDir = mLastDir;
 
 	wxFileDialog fd (
 	    this,
@@ -2960,15 +2964,17 @@ void MyFrame::OnOpen ( wxCommandEvent& event )
 	    wxEmptyString,
 	    FILE_FILTER,
 #if wxCHECK_VERSION(2,9,0)
-	    wxFD_OPEN | wxFD_MULTIPLE | wxFD_FILE_MUST_EXIST | wxFD_CHANGE_DIR
+	    wxFD_OPEN | wxFD_MULTIPLE | wxFD_FILE_MUST_EXIST
 #else
-	    wxOPEN | wxMULTIPLE | wxFILE_MUST_EXIST | wxCHANGE_DIR
+	    wxOPEN | wxMULTIPLE | wxFILE_MUST_EXIST
 #endif
 	    );
 
 
 	if ( fd.ShowModal() == wxID_CANCEL )
 		return;
+
+	mLastDir = fd.GetDirectory();
 
 	wxArrayString paths;
 	fd.GetPaths ( paths );
@@ -3823,7 +3829,8 @@ void MyFrame::OnValidateRelaxNG ( wxCommandEvent& event )
 	    _ ( "Choose a file:" ),
 	    _ ( "RELAX NG grammar" ),
 	    _T ( "*.*" ),
-	    lastRelaxNGSchema );
+	    lastRelaxNGSchema,
+	    &mLastDir );
 	if ( ad.ShowModal() != wxID_OK )
 		return;
 
@@ -4114,7 +4121,8 @@ void MyFrame::OnXslt ( wxCommandEvent& event )
 			    _ ( "Choose a file:" ),
 			    _ ( "XSLT stylesheet" ),
 			    _T ( "*.xsl;*.xslt" ),
-			    lastXslStylesheet );
+			    lastXslStylesheet,
+			    &mLastDir );
 			if ( ad.ShowModal() != wxID_OK )
 				return;
 
@@ -5805,6 +5813,7 @@ void MyFrame::OnAssociate ( wxCommandEvent& event )
 	    type,
 	    extension,
 	    defaulturl,
+	    &mLastDir,
 	    auxiliaryBox,
 	    auxiliaryLabel,
 	    defaultaux );

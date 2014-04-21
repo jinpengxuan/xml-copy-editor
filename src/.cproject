@@ -50,12 +50,6 @@
 							<tool id="cdt.managedbuild.tool.gnu.c.linker.mingw.exe.debug.1587046984" name="MinGW C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.mingw.exe.debug"/>
 							<tool id="cdt.managedbuild.tool.gnu.cpp.linker.mingw.exe.debug.1828428568" name="MinGW C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.mingw.exe.debug">
 								<option id="gnu.cpp.link.option.libs.862743735" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs" valueType="libs">
-									<listOptionValue builtIn="false" value="iconv"/>
-									<listOptionValue builtIn="false" value="xslt"/>
-									<listOptionValue builtIn="false" value="xml2"/>
-									<listOptionValue builtIn="false" value="pcre"/>
-									<listOptionValue builtIn="false" value="xerces-c"/>
-									<listOptionValue builtIn="false" value="aspell"/>
 									<listOptionValue builtIn="false" value="wxmsw${WXVER}ud_richtext"/>
 									<listOptionValue builtIn="false" value="wxmsw${WXVER}ud_html"/>
 									<listOptionValue builtIn="false" value="wxmsw${WXVER}ud_aui"/>
@@ -71,6 +65,13 @@
 									<listOptionValue builtIn="false" value="wxpngd"/>
 									<listOptionValue builtIn="false" value="wxzlibd"/>
 									<listOptionValue builtIn="false" value="wxregexud"/>
+									<listOptionValue builtIn="false" value="xslt"/>
+									<listOptionValue builtIn="false" value="xml2"/>
+									<listOptionValue builtIn="false" value="pcre"/>
+									<listOptionValue builtIn="false" value="xerces-c"/>
+									<listOptionValue builtIn="false" value="curl"/>
+									<listOptionValue builtIn="false" value="aspell"/>
+									<listOptionValue builtIn="false" value="iconv"/>
 									<listOptionValue builtIn="false" value="kernel32"/>
 									<listOptionValue builtIn="false" value="user32"/>
 									<listOptionValue builtIn="false" value="gdi32"/>
@@ -126,7 +127,7 @@
 				</extensions>
 			</storageModule>
 			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
-				<configuration artifactName="${ProjName}" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release,org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe" cleanCommand="rm -rf" description="" id="cdt.managedbuild.config.gnu.mingw.exe.release.710071756" name="ReleaseWx28-x86" parent="cdt.managedbuild.config.gnu.mingw.exe.release" postbuildStep="strip ${ProjName}.exe" prebuildStep="">
+				<configuration artifactName="${ProjName}-" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release,org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe" cleanCommand="rm -rf" description="" id="cdt.managedbuild.config.gnu.mingw.exe.release.710071756" name="ReleaseWx28-x86" parent="cdt.managedbuild.config.gnu.mingw.exe.release" postbuildStep="strip -o ${ProjName}.exe ${ProjName}-.exe" prebuildStep="">
 					<folderInfo id="cdt.managedbuild.config.gnu.mingw.exe.release.710071756." name="/" resourcePath="">
 						<toolChain id="cdt.managedbuild.toolchain.gnu.mingw.exe.release.1386364382" name="MinGW GCC" superClass="cdt.managedbuild.toolchain.gnu.mingw.exe.release">
 							<targetPlatform id="cdt.managedbuild.target.gnu.platform.mingw.exe.release.1941985969" name="Debug Platform" superClass="cdt.managedbuild.target.gnu.platform.mingw.exe.release"/>
@@ -159,12 +160,6 @@
 							<tool id="cdt.managedbuild.tool.gnu.c.linker.mingw.exe.release.580131824" name="MinGW C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.mingw.exe.release"/>
 							<tool id="cdt.managedbuild.tool.gnu.cpp.linker.mingw.exe.release.1322526705" name="MinGW C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.mingw.exe.release">
 								<option id="gnu.cpp.link.option.libs.1763201887" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs" valueType="libs">
-									<listOptionValue builtIn="false" value="iconv"/>
-									<listOptionValue builtIn="false" value="xslt"/>
-									<listOptionValue builtIn="false" value="xml2"/>
-									<listOptionValue builtIn="false" value="pcre"/>
-									<listOptionValue builtIn="false" value="xerces-c"/>
-									<listOptionValue builtIn="false" value="aspell"/>
 									<listOptionValue builtIn="false" value="wxmsw28u_richtext"/>
 									<listOptionValue builtIn="false" value="wxmsw28u_html"/>
 									<listOptionValue builtIn="false" value="wxmsw28u_aui"/>
@@ -179,6 +174,13 @@
 									<listOptionValue builtIn="false" value="wxpng"/>
 									<listOptionValue builtIn="false" value="wxzlib"/>
 									<listOptionValue builtIn="false" value="wxregexu"/>
+									<listOptionValue builtIn="false" value="xslt"/>
+									<listOptionValue builtIn="false" value="xml2"/>
+									<listOptionValue builtIn="false" value="pcre"/>
+									<listOptionValue builtIn="false" value="xerces-c"/>
+									<listOptionValue builtIn="false" value="curl"/>
+									<listOptionValue builtIn="false" value="aspell"/>
+									<listOptionValue builtIn="false" value="iconv"/>
 									<listOptionValue builtIn="false" value="kernel32"/>
 									<listOptionValue builtIn="false" value="user32"/>
 									<listOptionValue builtIn="false" value="gdi32"/>
@@ -270,12 +272,6 @@
 							<tool id="cdt.managedbuild.tool.gnu.c.linker.mingw.exe.debug.1903385815" name="MinGW C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.mingw.exe.debug"/>
 							<tool command="g++" id="cdt.managedbuild.tool.gnu.cpp.linker.mingw.exe.debug.700174924" name="MinGW C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.mingw.exe.debug">
 								<option id="gnu.cpp.link.option.libs.1167884640" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs" valueType="libs">
-									<listOptionValue builtIn="false" value="iconv"/>
-									<listOptionValue builtIn="false" value="xslt"/>
-									<listOptionValue builtIn="false" value="xml2"/>
-									<listOptionValue builtIn="false" value="pcre"/>
-									<listOptionValue builtIn="false" value="xerces-c"/>
-									<listOptionValue builtIn="false" value="aspell"/>
 									<listOptionValue builtIn="false" value="wxmsw${WXVER}ud_richtext"/>
 									<listOptionValue builtIn="false" value="wxmsw${WXVER}ud_html"/>
 									<listOptionValue builtIn="false" value="wxmsw${WXVER}ud_aui"/>
@@ -291,6 +287,13 @@
 									<listOptionValue builtIn="false" value="wxpngd"/>
 									<listOptionValue builtIn="false" value="wxzlibd"/>
 									<listOptionValue builtIn="false" value="wxregexud"/>
+									<listOptionValue builtIn="false" value="xslt"/>
+									<listOptionValue builtIn="false" value="xml2"/>
+									<listOptionValue builtIn="false" value="pcre"/>
+									<listOptionValue builtIn="false" value="xerces-c"/>
+									<listOptionValue builtIn="false" value="curl"/>
+									<listOptionValue builtIn="false" value="aspell"/>
+									<listOptionValue builtIn="false" value="iconv"/>
 									<listOptionValue builtIn="false" value="kernel32"/>
 									<listOptionValue builtIn="false" value="user32"/>
 									<listOptionValue builtIn="false" value="gdi32"/>
@@ -380,12 +383,6 @@
 							<tool id="cdt.managedbuild.tool.gnu.c.linker.mingw.exe.debug.264046671" name="MinGW C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.mingw.exe.debug"/>
 							<tool id="cdt.managedbuild.tool.gnu.cpp.linker.mingw.exe.debug.306395199" name="MinGW C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.mingw.exe.debug">
 								<option id="gnu.cpp.link.option.libs.387120188" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs" valueType="libs">
-									<listOptionValue builtIn="false" value="iconv"/>
-									<listOptionValue builtIn="false" value="xslt"/>
-									<listOptionValue builtIn="false" value="xml2"/>
-									<listOptionValue builtIn="false" value="pcre"/>
-									<listOptionValue builtIn="false" value="xerces-c"/>
-									<listOptionValue builtIn="false" value="aspell"/>
 									<listOptionValue builtIn="false" value="wxmsw28ud_richtext"/>
 									<listOptionValue builtIn="false" value="wxmsw28ud_html"/>
 									<listOptionValue builtIn="false" value="wxmsw28ud_aui"/>
@@ -400,6 +397,13 @@
 									<listOptionValue builtIn="false" value="wxpngd"/>
 									<listOptionValue builtIn="false" value="wxzlibd"/>
 									<listOptionValue builtIn="false" value="wxregexud"/>
+									<listOptionValue builtIn="false" value="xslt"/>
+									<listOptionValue builtIn="false" value="xml2"/>
+									<listOptionValue builtIn="false" value="pcre"/>
+									<listOptionValue builtIn="false" value="xerces-c"/>
+									<listOptionValue builtIn="false" value="curl"/>
+									<listOptionValue builtIn="false" value="aspell"/>
+									<listOptionValue builtIn="false" value="iconv"/>
 									<listOptionValue builtIn="false" value="kernel32"/>
 									<listOptionValue builtIn="false" value="user32"/>
 									<listOptionValue builtIn="false" value="gdi32"/>
@@ -456,7 +460,7 @@
 				</extensions>
 			</storageModule>
 			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
-				<configuration artifactName="${ProjName}" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release,org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe" cleanCommand="rm -rf" description="" id="cdt.managedbuild.config.gnu.mingw.exe.release.710071756.384493523" name="ReleaseWx-x86" parent="cdt.managedbuild.config.gnu.mingw.exe.release" postbuildStep="strip ${ProjName}.exe" prebuildStep="">
+				<configuration artifactName="${ProjName}-" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release,org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe" cleanCommand="rm -rf" description="" id="cdt.managedbuild.config.gnu.mingw.exe.release.710071756.384493523" name="ReleaseWx-x86" parent="cdt.managedbuild.config.gnu.mingw.exe.release" postbuildStep="strip -o ${ProjName}.exe ${ProjName}-.exe" prebuildStep="">
 					<folderInfo id="cdt.managedbuild.config.gnu.mingw.exe.release.710071756.384493523." name="/" resourcePath="">
 						<toolChain id="cdt.managedbuild.toolchain.gnu.mingw.exe.release.1523176033" name="MinGW GCC" superClass="cdt.managedbuild.toolchain.gnu.mingw.exe.release">
 							<targetPlatform id="cdt.managedbuild.target.gnu.platform.mingw.exe.release.1727143624" name="Debug Platform" superClass="cdt.managedbuild.target.gnu.platform.mingw.exe.release"/>
@@ -489,12 +493,6 @@
 							<tool id="cdt.managedbuild.tool.gnu.c.linker.mingw.exe.release.51183391" name="MinGW C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.mingw.exe.release"/>
 							<tool id="cdt.managedbuild.tool.gnu.cpp.linker.mingw.exe.release.196561642" name="MinGW C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.mingw.exe.release">
 								<option id="gnu.cpp.link.option.libs.600357943" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs" valueType="libs">
-									<listOptionValue builtIn="false" value="iconv"/>
-									<listOptionValue builtIn="false" value="xslt"/>
-									<listOptionValue builtIn="false" value="xml2"/>
-									<listOptionValue builtIn="false" value="pcre"/>
-									<listOptionValue builtIn="false" value="xerces-c"/>
-									<listOptionValue builtIn="false" value="aspell"/>
 									<listOptionValue builtIn="false" value="wxmsw${WXVER}u_richtext"/>
 									<listOptionValue builtIn="false" value="wxmsw${WXVER}u_html"/>
 									<listOptionValue builtIn="false" value="wxmsw${WXVER}u_aui"/>
@@ -510,6 +508,13 @@
 									<listOptionValue builtIn="false" value="wxpng"/>
 									<listOptionValue builtIn="false" value="wxzlib"/>
 									<listOptionValue builtIn="false" value="wxregexu"/>
+									<listOptionValue builtIn="false" value="xslt"/>
+									<listOptionValue builtIn="false" value="xml2"/>
+									<listOptionValue builtIn="false" value="pcre"/>
+									<listOptionValue builtIn="false" value="xerces-c"/>
+									<listOptionValue builtIn="false" value="curl"/>
+									<listOptionValue builtIn="false" value="aspell"/>
+									<listOptionValue builtIn="false" value="iconv"/>
 									<listOptionValue builtIn="false" value="kernel32"/>
 									<listOptionValue builtIn="false" value="user32"/>
 									<listOptionValue builtIn="false" value="gdi32"/>
@@ -600,12 +605,6 @@
 							<tool id="cdt.managedbuild.tool.gnu.c.linker.mingw.exe.debug.1902541260" name="MinGW C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.mingw.exe.debug"/>
 							<tool id="cdt.managedbuild.tool.gnu.cpp.linker.mingw.exe.debug.798445962" name="MinGW C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.mingw.exe.debug">
 								<option id="gnu.cpp.link.option.libs.1588804990" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs" valueType="libs">
-									<listOptionValue builtIn="false" value="iconv"/>
-									<listOptionValue builtIn="false" value="xslt"/>
-									<listOptionValue builtIn="false" value="xml2"/>
-									<listOptionValue builtIn="false" value="pcre"/>
-									<listOptionValue builtIn="false" value="xerces-c"/>
-									<listOptionValue builtIn="false" value="aspell"/>
 									<listOptionValue builtIn="false" value="wxmsw${WXVER}ud_richtext"/>
 									<listOptionValue builtIn="false" value="wxmsw${WXVER}ud_html"/>
 									<listOptionValue builtIn="false" value="wxmsw${WXVER}ud_aui"/>
@@ -621,6 +620,13 @@
 									<listOptionValue builtIn="false" value="wxpngd"/>
 									<listOptionValue builtIn="false" value="wxzlibd"/>
 									<listOptionValue builtIn="false" value="wxregexud"/>
+									<listOptionValue builtIn="false" value="xslt"/>
+									<listOptionValue builtIn="false" value="xml2"/>
+									<listOptionValue builtIn="false" value="pcre"/>
+									<listOptionValue builtIn="false" value="xerces-c"/>
+									<listOptionValue builtIn="false" value="curl"/>
+									<listOptionValue builtIn="false" value="aspell"/>
+									<listOptionValue builtIn="false" value="iconv"/>
 									<listOptionValue builtIn="false" value="kernel32"/>
 									<listOptionValue builtIn="false" value="user32"/>
 									<listOptionValue builtIn="false" value="gdi32"/>
@@ -676,7 +682,7 @@
 				</extensions>
 			</storageModule>
 			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
-				<configuration artifactName="${ProjName}" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release,org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe" cleanCommand="rm -rf" description="" id="cdt.managedbuild.config.gnu.mingw.exe.release.710071756.1627034107" name="ReleaseWx28-x64" parent="cdt.managedbuild.config.gnu.mingw.exe.release" postbuildStep="strip ${ProjName}.exe" prebuildStep="">
+				<configuration artifactName="${ProjName}-" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release,org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe" cleanCommand="rm -rf" description="" id="cdt.managedbuild.config.gnu.mingw.exe.release.710071756.1627034107" name="ReleaseWx28-x64" parent="cdt.managedbuild.config.gnu.mingw.exe.release" postbuildStep="strip -o ${ProjName}.exe ${ProjName}-.exe" prebuildStep="">
 					<folderInfo id="cdt.managedbuild.config.gnu.mingw.exe.release.710071756.1627034107." name="/" resourcePath="">
 						<toolChain id="cdt.managedbuild.toolchain.gnu.mingw.exe.release.1134942942" name="MinGW GCC" superClass="cdt.managedbuild.toolchain.gnu.mingw.exe.release">
 							<targetPlatform id="cdt.managedbuild.target.gnu.platform.mingw.exe.release.774622965" name="Debug Platform" superClass="cdt.managedbuild.target.gnu.platform.mingw.exe.release"/>
@@ -710,12 +716,6 @@
 							<tool id="cdt.managedbuild.tool.gnu.c.linker.mingw.exe.release.1491860293" name="MinGW C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.mingw.exe.release"/>
 							<tool id="cdt.managedbuild.tool.gnu.cpp.linker.mingw.exe.release.75261412" name="MinGW C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.mingw.exe.release">
 								<option id="gnu.cpp.link.option.libs.716102194" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs" valueType="libs">
-									<listOptionValue builtIn="false" value="iconv"/>
-									<listOptionValue builtIn="false" value="xslt"/>
-									<listOptionValue builtIn="false" value="xml2"/>
-									<listOptionValue builtIn="false" value="pcre"/>
-									<listOptionValue builtIn="false" value="xerces-c"/>
-									<listOptionValue builtIn="false" value="aspell"/>
 									<listOptionValue builtIn="false" value="wxmsw28u_richtext"/>
 									<listOptionValue builtIn="false" value="wxmsw28u_html"/>
 									<listOptionValue builtIn="false" value="wxmsw28u_aui"/>
@@ -730,6 +730,13 @@
 									<listOptionValue builtIn="false" value="wxpng"/>
 									<listOptionValue builtIn="false" value="wxzlib"/>
 									<listOptionValue builtIn="false" value="wxregexu"/>
+									<listOptionValue builtIn="false" value="xslt"/>
+									<listOptionValue builtIn="false" value="xml2"/>
+									<listOptionValue builtIn="false" value="pcre"/>
+									<listOptionValue builtIn="false" value="xerces-c"/>
+									<listOptionValue builtIn="false" value="curl"/>
+									<listOptionValue builtIn="false" value="aspell"/>
+									<listOptionValue builtIn="false" value="iconv"/>
 									<listOptionValue builtIn="false" value="kernel32"/>
 									<listOptionValue builtIn="false" value="user32"/>
 									<listOptionValue builtIn="false" value="gdi32"/>
@@ -819,12 +826,6 @@
 							<tool id="cdt.managedbuild.tool.gnu.c.linker.mingw.exe.debug.1966193798" name="MinGW C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.mingw.exe.debug"/>
 							<tool id="cdt.managedbuild.tool.gnu.cpp.linker.mingw.exe.debug.1872853143" name="MinGW C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.mingw.exe.debug">
 								<option id="gnu.cpp.link.option.libs.958677503" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs" valueType="libs">
-									<listOptionValue builtIn="false" value="iconv"/>
-									<listOptionValue builtIn="false" value="xslt"/>
-									<listOptionValue builtIn="false" value="xml2"/>
-									<listOptionValue builtIn="false" value="pcre"/>
-									<listOptionValue builtIn="false" value="xerces-c"/>
-									<listOptionValue builtIn="false" value="aspell"/>
 									<listOptionValue builtIn="false" value="wxmsw28ud_richtext"/>
 									<listOptionValue builtIn="false" value="wxmsw28ud_html"/>
 									<listOptionValue builtIn="false" value="wxmsw28ud_aui"/>
@@ -839,6 +840,13 @@
 									<listOptionValue builtIn="false" value="wxpngd"/>
 									<listOptionValue builtIn="false" value="wxzlibd"/>
 									<listOptionValue builtIn="false" value="wxregexud"/>
+									<listOptionValue builtIn="false" value="xslt"/>
+									<listOptionValue builtIn="false" value="xml2"/>
+									<listOptionValue builtIn="false" value="pcre"/>
+									<listOptionValue builtIn="false" value="xerces-c"/>
+									<listOptionValue builtIn="false" value="curl"/>
+									<listOptionValue builtIn="false" value="aspell"/>
+									<listOptionValue builtIn="false" value="iconv"/>
 									<listOptionValue builtIn="false" value="kernel32"/>
 									<listOptionValue builtIn="false" value="user32"/>
 									<listOptionValue builtIn="false" value="gdi32"/>
@@ -883,8 +891,8 @@
 		<cconfiguration id="cdt.managedbuild.config.gnu.mingw.exe.release.710071756.384493523.2075568512">
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="cdt.managedbuild.config.gnu.mingw.exe.release.710071756.384493523.2075568512" moduleId="org.eclipse.cdt.core.settings" name="ReleaseWx-x64">
 				<macros>
-					<stringMacro name="WXWIDGETS" type="VALUE_TEXT" value="E:/wxWidgets"/>
 					<stringMacro name="WXVER" type="VALUE_TEXT" value="31"/>
+					<stringMacro name="WXWIDGETS" type="VALUE_TEXT" value="E:/wxWidgets"/>
 				</macros>
 				<externalSettings/>
 				<extensions>
@@ -895,7 +903,7 @@
 				</extensions>
 			</storageModule>
 			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
-				<configuration artifactName="${ProjName}" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release,org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe" cleanCommand="rm -rf" description="" id="cdt.managedbuild.config.gnu.mingw.exe.release.710071756.384493523.2075568512" name="ReleaseWx-x64" parent="cdt.managedbuild.config.gnu.mingw.exe.release" postbuildStep="strip ${ProjName}.exe" prebuildStep="">
+				<configuration artifactName="${ProjName}-" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release,org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe" cleanCommand="rm -rf" description="" id="cdt.managedbuild.config.gnu.mingw.exe.release.710071756.384493523.2075568512" name="ReleaseWx-x64" parent="cdt.managedbuild.config.gnu.mingw.exe.release" postbuildStep="strip -o ${ProjName}.exe ${ProjName}-.exe" prebuildStep="">
 					<folderInfo id="cdt.managedbuild.config.gnu.mingw.exe.release.710071756.384493523.2075568512." name="/" resourcePath="">
 						<toolChain id="cdt.managedbuild.toolchain.gnu.mingw.exe.release.1887368198" name="MinGW GCC" superClass="cdt.managedbuild.toolchain.gnu.mingw.exe.release">
 							<targetPlatform id="cdt.managedbuild.target.gnu.platform.mingw.exe.release.1472743801" name="Debug Platform" superClass="cdt.managedbuild.target.gnu.platform.mingw.exe.release"/>
@@ -928,12 +936,6 @@
 							<tool id="cdt.managedbuild.tool.gnu.c.linker.mingw.exe.release.367480360" name="MinGW C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.mingw.exe.release"/>
 							<tool id="cdt.managedbuild.tool.gnu.cpp.linker.mingw.exe.release.647122531" name="MinGW C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.mingw.exe.release">
 								<option id="gnu.cpp.link.option.libs.1817279920" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs" valueType="libs">
-									<listOptionValue builtIn="false" value="iconv"/>
-									<listOptionValue builtIn="false" value="xslt"/>
-									<listOptionValue builtIn="false" value="xml2"/>
-									<listOptionValue builtIn="false" value="pcre"/>
-									<listOptionValue builtIn="false" value="xerces-c"/>
-									<listOptionValue builtIn="false" value="aspell"/>
 									<listOptionValue builtIn="false" value="wxmsw${WXVER}u_richtext"/>
 									<listOptionValue builtIn="false" value="wxmsw${WXVER}u_html"/>
 									<listOptionValue builtIn="false" value="wxmsw${WXVER}u_aui"/>
@@ -949,6 +951,13 @@
 									<listOptionValue builtIn="false" value="wxpng"/>
 									<listOptionValue builtIn="false" value="wxzlib"/>
 									<listOptionValue builtIn="false" value="wxregexu"/>
+									<listOptionValue builtIn="false" value="xslt"/>
+									<listOptionValue builtIn="false" value="xml2"/>
+									<listOptionValue builtIn="false" value="pcre"/>
+									<listOptionValue builtIn="false" value="xerces-c"/>
+									<listOptionValue builtIn="false" value="curl"/>
+									<listOptionValue builtIn="false" value="aspell"/>
+									<listOptionValue builtIn="false" value="iconv"/>
 									<listOptionValue builtIn="false" value="kernel32"/>
 									<listOptionValue builtIn="false" value="user32"/>
 									<listOptionValue builtIn="false" value="gdi32"/>
