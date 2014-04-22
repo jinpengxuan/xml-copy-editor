@@ -122,6 +122,10 @@ class XmlPromptGenerator : public WrapExpat
 		static void buildSubstitutionMap (
 		    SubstitutionMap &substitutions,
 		    const xercesc::SchemaGrammar &grammar );
+		static void buildElementPrompt (
+		    PromptGeneratorData *d,
+		    const xercesc::XMLElementDecl *element,
+		    SubstitutionMap &substitutions );
 		static void getContent (
 		    std::set<wxString> &list,
 		    const xercesc::ContentSpecNode *spec,

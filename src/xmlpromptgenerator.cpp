@@ -40,6 +40,8 @@
 #include <xercesc/validators/schema/SchemaValidator.hpp>
 #include <xercesc/validators/common/ContentSpecNode.hpp>
 #include <xercesc/validators/schema/SchemaSymbols.hpp>
+#include <xercesc/framework/URLInputSource.hpp>
+#include <xercesc/validators/DTD/DTDGrammar.hpp>
 
 using namespace xercesc;
 
@@ -88,10 +90,8 @@ void XMLCALL XmlPromptGenerator::starthandler (
 		d->rootElement = el;
 		handleSchema ( d, el, attr ); // experimental: schema has been pre-parsed
 		d->isRootElement = false;
-		if ( ! (d->elementMap.empty() )  )//if ( d->elementMap.size() == 1) // must be 1 for success
+		if ( d->grammarFound )//if ( d->elementMap.size() == 1) // must be 1 for success
 		{
-			d->grammarFound = true;
-			XML_StopParser ( d->p, false );
 			return;
 		}
 	}
@@ -301,6 +301,43 @@ int XMLCALL XmlPromptGenerator::externalentityrefhandler (
 	PromptGeneratorData *d;
 	d = ( PromptGeneratorData * ) p; // arg is set to user data in c'tor
 
+	// Either EXPAT or Xerces-C++ is capable of parsing DTDs. The advantage
+	// of Xerces-C++ is that it can access DTDs that are on the internet.
+#if !PREFER_EXPAT_TO_XERCES_C
+
+	XercesDOMParser parser;
+	parser.setDoNamespaces ( true );
+	parser.setDoSchema ( true );
+	parser.setValidationSchemaFullChecking ( true );
+
+	XercesCatalogResolver catalogResolver;
+	parser.setEntityResolver ( &catalogResolver );
+
+	wxString wideSystemId ( systemId, wxConvUTF8 ); // TODO: Apply encoding
+	wxString widePublicId ( publicId, wxConvUTF8 );
+	URLInputSource source
+			( ( const XMLCh * ) WrapXerces::toString ( d->basePath ).GetData()
+			, ( const XMLCh * ) WrapXerces::toString ( wideSystemId ).GetData()
+			, ( const XMLCh * ) WrapXerces::toString ( widePublicId ).GetData()
+			);
+	Grammar *rootGrammar = parser.loadGrammar ( source, Grammar::DTDGrammarType );
+	if ( !rootGrammar )
+		return XML_STATUS_ERROR;
+
+	DTDGrammar* grammar = ( DTDGrammar* ) rootGrammar;
+	NameIdPoolEnumerator<DTDElementDecl> elemEnum = grammar->getElemEnumerator();
+
+	SubstitutionMap substitutions;
+	while ( elemEnum.hasMoreElements() )
+	{
+		const DTDElementDecl& curElem = elemEnum.nextElement();
+		buildElementPrompt ( d, &curElem, substitutions );
+	}
+
+	return XML_STATUS_OK;
+
+#else // !PREFER_EXPAT_TO_XERCES_C
+
 	int ret;
 	std::string buffer;
 
@@ -360,6 +397,8 @@ int XMLCALL XmlPromptGenerator::externalentityrefhandler (
 	ret = XML_Parse ( dtdParser, buffer.c_str(), buffer.size(), true );
 	XML_ParserFree ( dtdParser );
 	return ret;
+
+#endif // PREFER_EXPAT_TO_XERCES_C
 }
 
 void XMLCALL XmlPromptGenerator::entitydeclhandler (
@@ -455,57 +494,63 @@ void XmlPromptGenerator::handleSchema (
 	while ( elemEnum.hasMoreElements() )
 	{
 		const SchemaElementDecl& curElem = elemEnum.nextElement();
+		buildElementPrompt ( d, &curElem, substitutions );
+	}
 
-		wxString element;
+	d->grammarFound = true;
+	XML_StopParser ( d->p, false );
+}
 
-		const QName *qnm = curElem.getElementName();
-		if ( qnm == NULL )
+void XmlPromptGenerator::buildElementPrompt (
+    PromptGeneratorData *d,
+    const XMLElementDecl *element,
+    SubstitutionMap &substitutions )
+{
+
+	wxString name;
+
+	const QName *qnm = element->getElementName();
+	if ( qnm == NULL )
+		return;
+	name = WrapXerces::toString ( qnm->getRawName() ); // this includes any prefix:localname combinations
+	if ( name.empty() )
+		return;
+
+	const XMLCh* fmtCntModel = element->getFormattedContentModel();
+	if ( fmtCntModel != NULL ) // tbd: this does not yet pick up prefix:localname combinations
+	{
+		wxString structure = WrapXerces::toString ( fmtCntModel );
+		d->elementStructureMap[name] = structure;
+	}
+	const ContentSpecNode *spec = element->getContentSpec();
+	if ( spec != NULL )
+	{
+		getContent ( d->elementMap[name], spec, substitutions );
+	}
+
+	// fetch attributes
+	if ( !element->hasAttDefs() )
+		return;
+
+	XMLAttDefList& attIter = element->getAttDefList();
+	for ( unsigned int i = 0; i < attIter.getAttDefCount(); i++ )
+	{
+		wxString attribute, attributeValue;
+
+		XMLAttDef& attr = attIter.getAttDef ( i );
+		XMLAttDef::DefAttTypes ty = attr.getDefaultType();
+		if ( ty == XMLAttDef::Prohibited )
 			continue;
-		element = WrapXerces::toString ( qnm->getRawName() ); // this includes any prefix:localname combinations
-		if ( element.empty() )
+		attribute = WrapXerces::toString ( attr.getFullName() );
+		if ( attribute.empty() )
 			continue;
 
-		const XMLCh* fmtCntModel = curElem.getFormattedContentModel();
-		if ( fmtCntModel != NULL ) // tbd: this does not yet pick up prefix:localname combinations
-		{
-			wxString structure = WrapXerces::toString ( fmtCntModel );
-			d->elementStructureMap[element] = structure;
-		}
-		const ContentSpecNode *spec = curElem.getContentSpec();
-		if ( spec != NULL )
-		{
-			getContent ( d->elementMap[element], spec, substitutions );
-		}
+		// Value
+		attributeValue = WrapXerces::toString ( attr.getValue() );
+		d->attributeMap[name][attribute].insert( attributeValue );
 
-		// fetch attributes
-		if ( !curElem.hasAttDefs() )
-			continue;
-
-		XMLAttDefList& attIter = curElem.getAttDefList();
-		for ( unsigned int i = 0; i < attIter.getAttDefCount(); i++ )
-		{
-			wxString attribute, attributeValue;
-
-			XMLAttDef& attr = attIter.getAttDef ( i );
-			XMLAttDef::DefAttTypes ty = attr.getDefaultType();
-			if ( ty == XMLAttDef::Prohibited )
-				continue;
-			SchemaAttDef *pAttr = ( SchemaAttDef * ) &attr;
-
-			const QName *qnm = pAttr->getAttName();
-			if ( qnm == NULL )
-				continue;
-			attribute = WrapXerces::toString ( qnm->getRawName() );
-			if ( attribute.empty() )
-				continue;
-
-			// Value
-			attributeValue = WrapXerces::toString ( pAttr->getValue() );
-			d->attributeMap[element][attribute].insert( attributeValue );
-
-			if ( ty == XMLAttDef::Required || ty == XMLAttDef::Required_And_Fixed)
-				d->requiredAttributeMap[element].insert ( attribute );
-		}
+		if ( ty == XMLAttDef::Required || ty == XMLAttDef::Required_And_Fixed)
+			d->requiredAttributeMap[name].insert ( attribute );
 	}
 }
 
