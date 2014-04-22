@@ -353,6 +353,7 @@ class MyFrame : public wxFrame
 		bool activateTab ( const wxString& fileName );
 		void reloadTab();
 		void addToFileQueue ( wxString& fileName );
+		void openRememberedTabs();
 	private:
 		wxAuiManager manager;
 		wxFileConfig *config; // owned by MyApp
@@ -536,7 +537,6 @@ class MyFrame : public wxFrame
 		void showTopBars ( bool b );
 		void modifiedMessage();
 		void loadBitmaps();
-		void openRememberedTabs();
 		void getRawText ( XmlDoc *doc, std::string& buffer );
 		void updateToolbar();
 		std::string getApproximateEncoding ( char *docBuffer, size_t docBufferLen );

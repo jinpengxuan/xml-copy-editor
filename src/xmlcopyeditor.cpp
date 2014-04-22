@@ -387,6 +387,13 @@ bool MyApp::OnInit()
 		    singleInstanceCheck,
 		    lang );
 		frame->Show ( true );
+
+		bool rememberOpenTabs = config->Read ( _T ( "rememberOpenTabs" ), true );
+		if ( rememberOpenTabs )
+			frame->openRememberedTabs();
+		else if ( !frame->getHandleCommandLineFlag() )
+			frame->newDocument ( wxEmptyString );
+
 		if ( frame->getHandleCommandLineFlag() )
 			frame->handleCommandLine();
 	}
@@ -1033,20 +1040,9 @@ MyFrame::MyFrame (
 	// handle command line and, on Windows, MS Word integration
 	handleCommandLineFlag = ( wxTheApp->argc > 1 ) ? true : false;
 
-	if ( rememberOpenTabs && !openTabsOnClose.empty() )
-		openRememberedTabs();
-	else
-	{
-		if ( !handleCommandLineFlag )
-			newDocument ( wxEmptyString );
-	}
-
 #ifdef __WXMSW__
 	DragAcceptFiles ( true ); // currently Windows only
 #endif
-
-	XmlDoc *doc = getActiveDocument();
-	insertEntityPanel->update ( doc ); // NULL is ok
 
 	manager.Update();
 
