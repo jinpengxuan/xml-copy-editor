@@ -55,12 +55,12 @@ protected:
 	public:
 		ChildData() : minOccurs ( 1 ), maxOccurs ( 1 ) {}
 		size_t minOccurs, maxOccurs;
-		std::set<wxString> prevSiblings;
+		std::set<wxString> precedence;
 	};
 	class ElmtData
 	{
 	public:
-		ElmtData() : useSequence ( true ) { }
+		ElmtData() : useSequence ( true ), mixed ( false ) { }
 
 		// All occurs
 		std::set<const DOMElement*> nodes;
@@ -73,6 +73,9 @@ protected:
 		// Sequence of children
 		std::vector<wxString> sequence;
 		bool useSequence; // Use xs:sequence or xs:choice
+		// Specifies whether character data is allowed to appear between the
+		// child elements of this complexType element
+		bool mixed;
 		// Attribute name and default value
 		std::map<wxString, const XMLCh *> attrMap;
 		// Optional attributes

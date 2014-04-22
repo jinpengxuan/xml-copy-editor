@@ -148,22 +148,33 @@ void XmlSchemaGenerator::generateData ( const wxString &elementName,
 	//Content
 	std::map<wxString, ChildData> &childMap = data.children;
 	std::map<wxString, ChildData>::iterator itr;
-	std::set<wxString> previous;
+	std::set<wxString> precedence;
 	elmtItr = data.nodes.begin();
 	for ( ; elmtItr != data.nodes.end(); ++elmtItr )
 	{
-		previous.clear();
-
 		std::map<wxString, size_t> countMap;
-		DOMElement *child = ( **elmtItr ).getFirstElementChild();
-		for ( ; child != NULL; child = child->getNextElementSibling() )
+		DOMNode *child = ( **elmtItr ).getFirstChild();
+		for ( ; child != NULL; child = child->getNextSibling() )
 		{
-			wxString name = WrapXerces::toString ( child->getTagName() );
-			childMap[name].prevSiblings.insert ( previous.begin(), previous.end() );
-			childMap[name].prevSiblings.erase ( name ); // Don't depend on oneself
-			previous.insert ( name );
+			DOMNode::NodeType type = child->getNodeType();
+			if ( type != DOMNode::ELEMENT_NODE )
+			{
+				if ( type == DOMNode::TEXT_NODE )
+				{ // Check for mixed content
+					wxString value = WrapXerces::toString ( child->getNodeValue() );
+					if ( !value.Trim().Trim ( false ).empty() )
+						data.mixed = true;
+				}
+				continue;
+			}
+			wxString name = WrapXerces::toString ( child->getNodeName() );
+			childMap[name].precedence.insert ( precedence.begin(), precedence.end() );
+			childMap[name].precedence.erase ( name ); // Don't depend on oneself
+			precedence.insert ( name );
 			countMap[name] += 1;
 		}
+		precedence.clear();
+
 		std::map<wxString, size_t>::iterator countItr = countMap.begin();
 		for ( ; countItr != countMap.end(); ++countItr )
 		{
@@ -186,12 +197,16 @@ void XmlSchemaGenerator::generateData ( const wxString &elementName,
 	elmtItr = data.nodes.begin();
 	for ( ; elmtItr != data.nodes.end(); ++elmtItr )
 	{
-		if ( ! ( **elmtItr ).hasAttributes() )
+		DOMNamedNodeMap *attrs = ( **elmtItr ).getAttributes();
+		if ( attrs == NULL )
+		{
+			for ( attrItr = attrMap.begin(); attrItr != attrMap.end(); ++attrItr )
+				optAttrs.insert ( attrItr->first );
 			continue;
+		}
 
 		wxString name;
 		DOMAttr *attr;
-		DOMNamedNodeMap *attrs = ( **elmtItr ).getAttributes();
 		size_t i = attrs->getLength();
 		while ( i-- > 0 )
 		{
@@ -202,6 +217,9 @@ void XmlSchemaGenerator::generateData ( const wxString &elementName,
 				wxLogDebug ( _T("Ignore: %s"), name.c_str() );
 				continue;
 			}
+			if ( elmtItr != data.nodes.begin() ) // Not the first node
+				if ( attrMap.find ( name ) == attrMap.end() ) // Not in the map
+					optAttrs.insert ( name );
 			if ( attr->getSpecified() )
 				attrMap[name]; // Initialize attribute map
 			else
@@ -275,12 +293,13 @@ void XmlSchemaGenerator::generateSchema ( ElmtData &data, size_t nIndent )
 
 	addIndent ( schema, nIndent++ );
 	schema << _T("<xs:element name=\"") << data.name << _T("\">") << getEOL();
+	addIndent ( schema, nIndent++ );
+	if ( data.mixed )
+		schema << _T("<xs:complexType mixed=\"true\">") << getEOL();
+	else
+		schema << _T("<xs:complexType>") << getEOL();
 	if ( !data.children.empty() )
 	{
-		addIndent ( schema, nIndent++ );
-		schema << _T("<xs:complexType>") << getEOL();
-		addIndent ( schema, nIndent++ );
-
 		size_t minOccurs = 1, maxOccurs = 1, minTotal = 0;
 		std::map<wxString, ChildData>::const_iterator itr;
 		for ( itr = data.children.begin(); itr != data.children.end(); ++itr )
@@ -291,6 +310,7 @@ void XmlSchemaGenerator::generateSchema ( ElmtData &data, size_t nIndent )
 				maxOccurs = itr->second.maxOccurs;
 			minTotal += itr->second.minOccurs;
 		}
+		addIndent ( schema, nIndent++ );
 		if ( data.useSequence )
 		{
 			schema << _T("<xs:sequence");
@@ -345,12 +365,8 @@ void XmlSchemaGenerator::generateSchema ( ElmtData &data, size_t nIndent )
 		{
 			schema << _T("</xs:choice>") << getEOL();
 		}
-	}
-	else if ( !data.attrMap.empty() )
-	{
-		addIndent ( schema, nIndent++ );
-		schema << _T("<xs:complexType>") << getEOL();
-	}
+	} // Child elements
+
 	std::map<wxString, const XMLCh *>::const_iterator attrItr;
 	attrItr = data.attrMap.begin();
 	for ( ; attrItr != data.attrMap.end(); ++attrItr )
@@ -468,8 +484,8 @@ bool XmlSchemaGenerator::getSequence ( std::vector<wxString> &sequence,
 				continue;
 
 			seqItr = sequence.begin();
-			prevItr = itr->second.prevSiblings.begin();
-			prevEnd = itr->second.prevSiblings.end();
+			prevItr = itr->second.precedence.begin();
+			prevEnd = itr->second.precedence.end();
 			for ( ; prevItr != prevEnd; ++prevItr )
 			{ // Find last index of dependent elements
 				seqFindItr = std::find ( sequence.begin(), sequence.end(),
@@ -483,7 +499,7 @@ bool XmlSchemaGenerator::getSequence ( std::vector<wxString> &sequence,
 					continue;
 				}
 				const std::set<wxString> &previous =
-						elmtMap.find ( *prevItr )->second.prevSiblings;
+						elmtMap.find ( *prevItr )->second.precedence;
 				if ( previous.find ( itr->first ) == previous.end() )
 				{ // Not a deadlock
 					retry = true;
