@@ -105,11 +105,7 @@ void InsertPanel::update (
 		for ( it = entitySet.begin(); it != entitySet.end(); ++it )
 			list->Append ( *it );
 		list->Show ( true );
-#if wxCHECK_VERSION(2,9,0)
-		list->Update();
-#else
 		sizer->Layout();
-#endif
 		return;
 	}
 
@@ -142,11 +138,7 @@ void InsertPanel::update (
 	for ( it = elementSet.begin(); it != elementSet.end(); ++it )
 		list->Append ( *it );
 	list->Show ( true );
-#if wxCHECK_VERSION(2,9,0)
-	list->Update();
-#else
 	sizer->Layout();
-#endif
 }
 
 void InsertPanel::OnEnter ( wxCommandEvent& event )

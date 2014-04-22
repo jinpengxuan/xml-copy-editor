@@ -90,11 +90,7 @@ void LocationPanel::update (
 			structureEdit->SetReadOnly ( false );
 			structureEdit->SetText ( structure );
 			structureEdit->SetReadOnly ( true );
-#if wxCHECK_VERSION(2,9,0)
-			structureEdit->Update();
-#else
 			sizer->Layout();
-#endif
 		}
 		else
 		{
