@@ -194,11 +194,7 @@ bool MyClient::talkToServer ( int argc, const wxChar * const *argv )
 	// wxConnectionBase::Poke expects something other than NULL in debug
 	// version
 	static wxChar whatBuffer[] = _T ( "Data" );
-#ifdef __WXDEBUG__
 	const static size_t bufSize = sizeof ( whatBuffer ) - sizeof ( wxChar );
-#else
-	const static size_t bufSize = 0;
-#endif
 	if ( argc <= 1 )
 	{
 		connection->Poke ( IPC_NO_FILE, whatBuffer, bufSize );
