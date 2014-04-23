@@ -3079,11 +3079,7 @@ bool MyFrame::openFile ( wxString& fileName, bool largeFile )
 	size_t finalBufferLen;
 
 	std::string encoding;
-	if ( largeFile )
-	{
-		encoding = "UTF-8";
-	}
-	else if ( docBufferLen >= 4 && // UTF-32 BE
+	if ( docBufferLen >= 4 && // UTF-32 BE
 			( unsigned char ) docBuffer[0] == 0x00 &&
 			( unsigned char ) docBuffer[1] == 0x00 &&
 			( unsigned char ) docBuffer[2] == 0xFE &&
