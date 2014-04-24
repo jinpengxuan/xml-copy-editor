@@ -19,6 +19,7 @@
 
 #include <wx/wx.h>
 #include <wx/filename.h>
+#include <wx/filesys.h>
 #include <stdexcept>
 #include "xmlpromptgenerator.h"
 #include "xmlencodinghandler.h"
@@ -306,19 +307,41 @@ int XMLCALL XmlPromptGenerator::externalentityrefhandler (
 	parser.setDoSchema ( true );
 	parser.setValidationSchemaFullChecking ( true );
 
+	MySAX2Handler handler;
 	XercesCatalogResolver catalogResolver;
+	parser.setErrorHandler ( &handler );
 	parser.setEntityResolver ( &catalogResolver );
 
 	wxString wideSystemId ( systemId, wxConvUTF8 ); // TODO: Apply encoding
 	wxString widePublicId ( publicId, wxConvUTF8 );
-	URLInputSource source
-			( ( const XMLCh * ) WrapXerces::toString ( d->basePath ).GetData()
+	std::auto_ptr<InputSource> source ( catalogResolver.resolveEntity
+			( ( const XMLCh * ) WrapXerces::toString ( widePublicId ).GetData()
+			, ( const XMLCh * ) WrapXerces::toString ( wideSystemId ).GetData()
+			) );
+	if ( !source.get() )
+	{
+		wxString fileURL = wxFileSystem::FileNameToURL ( d->basePath );
+		source.reset ( new 	URLInputSource
+			( ( const XMLCh * ) WrapXerces::toString ( fileURL ).GetData()
 			, ( const XMLCh * ) WrapXerces::toString ( wideSystemId ).GetData()
 			, ( const XMLCh * ) WrapXerces::toString ( widePublicId ).GetData()
-			);
-	Grammar *rootGrammar = parser.loadGrammar ( source, Grammar::DTDGrammarType );
-	if ( !rootGrammar )
+			) );
+	}
+
+	if ( pThis->TestDestroy() )
 		return XML_STATUS_ERROR;
+
+	Grammar *rootGrammar;
+	try {
+		rootGrammar = parser.loadGrammar ( *source, Grammar::DTDGrammarType );
+		if ( !rootGrammar )
+			return XML_STATUS_ERROR;
+	}
+	catch ( SAXParseException& e )
+	{
+		wxLogError ( _T ( "%s" ), handler.getErrors().c_str() );
+		return XML_STATUS_ERROR;
+	}
 
 	DTDGrammar* grammar = ( DTDGrammar* ) rootGrammar;
 	NameIdPoolEnumerator<DTDElementDecl> elemEnum = grammar->getElemEnumerator();
