@@ -4,6 +4,7 @@
   + Supported HTTPS on validation
   * Auto complete list for DTDs that are on the internet
   * Show UI before opening any file
+  * Made UI more responsive
   * Fixed tab order
   * Fixed encoding problems
   * Fixed invisible captions in high contrast mode (Windows only, http://trac.wxwidgets.org/ticket/16186)

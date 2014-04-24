@@ -318,6 +318,7 @@ class MyFrame : public wxFrame
 #ifdef __WXMSW__
 		void OnDropFiles ( wxDropFilesEvent& event );
 #endif
+		void OnPromptGenerated ( wxNotifyEvent &event );
 		void setStrictScrolling ( bool b );
 		void validateRelaxNG (
 		    XmlDoc *doc,

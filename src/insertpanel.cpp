@@ -109,7 +109,7 @@ void InsertPanel::update (
 		return;
 	}
 
-	if ( parent == lastParent )
+	if ( parent == lastParent && !list->IsEmpty() )
 		return;
 	lastParent = parent;
 

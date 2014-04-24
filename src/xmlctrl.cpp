@@ -41,6 +41,7 @@ BEGIN_EVENT_TABLE ( XmlCtrl, wxStyledTextCtrl )
 	EVT_RIGHT_UP ( XmlCtrl::OnMouseRightUp )
 	EVT_MIDDLE_DOWN ( XmlCtrl::OnMiddleDown )
 	EVT_COMMAND(wxID_ANY, wxEVT_COMMAND_VALIDATION_COMPLETED, XmlCtrl::OnValidationCompleted)
+	EVT_NOTIFY ( myEVT_NOTIFY_PROMPT_GENERATED, wxID_ANY, XmlCtrl::OnPromptGenerated )
 END_EVENT_TABLE()
 
 // global protection for validation threads
@@ -69,6 +70,7 @@ XmlCtrl::XmlCtrl (
 	, auxPath ( auxPathParameter )
 {
 	validationThread = NULL;
+	mPromptGeneratorThread = NULL;
 
 	grammarFound = false;
 	validationRequired = (buffer) ? true : false; // NULL for plain XML template
@@ -148,6 +150,8 @@ XmlCtrl::~XmlCtrl()
 		//validationThread->Delete();
 		//delete validationThread;
 	}
+	if ( mPromptGeneratorThread != NULL )
+		mPromptGeneratorThread->PendingDelete();
 }
 
 
@@ -1106,19 +1110,48 @@ void XmlCtrl::updatePromptMaps ( const char *utf8Buffer, size_t bufferLen )
 	attributeMap.clear();
 	elementMap.clear();
 	elementStructureMap.clear();
-	XmlPromptGenerator xpg ( basePath, auxPath, "UTF-8" );
-	xpg.parse ( utf8Buffer, bufferLen );
-	xpg.getAttributeMap ( attributeMap );
-	xpg.getRequiredAttributeMap ( requiredAttributeMap );
-	xpg.getElementMap ( elementMap );
-	xpg.getElementStructureMap ( elementStructureMap );
-	xpg.getEntitySet ( entitySet );
-	grammarFound = xpg.getGrammarFound();
+
+	wxCriticalSectionLocker locker ( xmlcopyeditorCriticalSection );
+
+	if ( mPromptGeneratorThread )
+		return;
+
+	mPromptGeneratorThread = new XmlPromptGenerator (
+		GetEventHandler(), utf8Buffer, bufferLen, basePath, auxPath, "UTF-8"
+	);
+
+	if ( mPromptGeneratorThread->Create() != wxTHREAD_NO_ERROR
+	    || mPromptGeneratorThread->Run() != wxTHREAD_NO_ERROR )
+	{
+		delete mPromptGeneratorThread;
+		mPromptGeneratorThread = NULL;
+	}
+}
+
+void XmlCtrl::OnPromptGenerated ( wxNotifyEvent &event )
+{
+	wxCriticalSectionLocker locker ( xmlcopyeditorCriticalSection );
+
+	if ( mPromptGeneratorThread == NULL )
+		return;
+
+	attributeMap = mPromptGeneratorThread->getAttributeMap();
+	requiredAttributeMap = mPromptGeneratorThread->getRequiredAttributeMap();
+	elementMap = mPromptGeneratorThread->getElementMap();
+	elementStructureMap = mPromptGeneratorThread->getElementStructureMap();
+	entitySet = mPromptGeneratorThread->getEntitySet();
+	grammarFound = mPromptGeneratorThread->getGrammarFound();
 	entitySet.insert ( _T ( "amp" ) );
 	entitySet.insert ( _T ( "apos" ) );
 	entitySet.insert ( _T ( "quot" ) );
 	entitySet.insert ( _T ( "lt" ) );
 	entitySet.insert ( _T ( "gt" ) );
+
+	mPromptGeneratorThread->Wait();
+	delete mPromptGeneratorThread;
+	mPromptGeneratorThread = NULL;
+
+	wxPostEvent ( GetParent()->GetEventHandler(), event );
 }
 
 void XmlCtrl::applyProperties (

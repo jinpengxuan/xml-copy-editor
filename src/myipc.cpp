@@ -83,7 +83,13 @@ bool MyServerConnection::OnPoke (
 	}
 	else
 	{
-		frame->openFile ( ( wxString& ) item );
+#if wxCHECK_VERSION(2,9,0)
+		wxCommandEvent event ( wxEVT_MENU, wxID_OPEN );
+#else
+		wxCommandEvent event ( wxEVT_COMMAND_MENU_SELECTED, wxID_OPEN );
+#endif
+		event.SetString ( item );
+		wxPostEvent ( frame->GetEventHandler(), event );
 		//frame->addToFileQueue ( ( wxString& ) item ); // prevent event loop problems
 	}
 #ifndef __WXMSW__
@@ -190,6 +196,10 @@ bool MyClient::talkToServer ( int argc, const wxChar * const *argv )
 	if ( !connection || !connection->StartAdvise ( IPC_ADVISE_NAME ) )
 		return false;
 
+	// Grab what we need before the server is too busy to response
+	IPCSize_t size;
+	const void *data = connection->Request ( IPC_FRAME_WND, &size );
+
 	wxString argument;
 	// wxConnectionBase::Poke expects something other than NULL in debug
 	// version
@@ -207,11 +217,10 @@ bool MyClient::talkToServer ( int argc, const wxChar * const *argv )
 			break;
 	}
 
-	// Bring the window to front
-	IPCSize_t size;
-	const void *data = connection->Request ( IPC_FRAME_WND, &size );
 	if ( !data )
 		return false;
+
+	// Bring the window to front
 #ifdef __WXMSW__
  	if ( size == sizeof ( HWND ) )
 	{

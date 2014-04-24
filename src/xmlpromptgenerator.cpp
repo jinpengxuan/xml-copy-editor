@@ -25,6 +25,7 @@
 #include "readfile.h"
 #include "replace.h"
 #include "pathresolver.h"
+#include "threadreaper.h"
 
 #undef XMLCALL
 #include "catalogresolver.h"
@@ -45,15 +46,29 @@
 
 using namespace xercesc;
 
+extern wxCriticalSection xmlcopyeditorCriticalSection;
+
+DEFINE_EVENT_TYPE ( myEVT_NOTIFY_PROMPT_GENERATED );
+
 XmlPromptGenerator::XmlPromptGenerator (
+	wxEvtHandler *handler,
+	const char *buffer,
+	size_t bufferSize,
     const wxString& basePath,
     const wxString& auxPath,
     const char *encoding
     )
     : WrapExpat ( encoding )
+    , wxThread ( wxTHREAD_JOINABLE )
     , d ( new PromptGeneratorData() )
+    , mEventHandler ( handler )
+    , mBuffer ( buffer, bufferSize )
+    , mStopping ( false )
 {
-	XML_SetUserData ( p, d.get() );
+	if ( mBuffer.length() != bufferSize )
+		throw std::bad_alloc();
+
+	XML_SetUserData ( p, this );
 	d->p = p;
 	d->basePath = basePath;
 	d->auxPath = auxPath;
@@ -66,7 +81,7 @@ XmlPromptGenerator::XmlPromptGenerator (
 	XML_SetElementDeclHandler ( p, elementdeclhandler );
 	XML_SetAttlistDeclHandler ( p, attlistdeclhandler );
 	XML_SetEntityDeclHandler ( p, entitydeclhandler );
-	XML_SetExternalEntityRefHandlerArg ( p, d.get() );
+	XML_SetExternalEntityRefHandlerArg ( p, this );
 	XML_SetExternalEntityRefHandler ( p, externalentityrefhandler );
 	XML_SetBase ( p, d->basePath.utf8_str() );
 
@@ -82,15 +97,15 @@ void XMLCALL XmlPromptGenerator::starthandler (
     const XML_Char *el,
     const XML_Char **attr )
 {
-	PromptGeneratorData *d;
-	d = ( PromptGeneratorData * ) data;
+	XmlPromptGenerator *pThis = ( XmlPromptGenerator * ) data;
+	PromptGeneratorData *d = pThis->d.get();
 
 	if (d->isRootElement)
 	{
 		d->rootElement = el;
-		handleSchema ( d, el, attr ); // experimental: schema has been pre-parsed
+		pThis->handleSchema ( d, el, attr ); // experimental: schema has been pre-parsed
 		d->isRootElement = false;
-		if ( d->grammarFound )//if ( d->elementMap.size() == 1) // must be 1 for success
+		if ( d->grammarFound || pThis->TestDestroy() )//if ( d->elementMap.size() == 1) // must be 1 for success
 		{
 			return;
 		}
@@ -119,45 +134,12 @@ void XMLCALL XmlPromptGenerator::starthandler (
 
 void XMLCALL XmlPromptGenerator::endhandler ( void *data, const XML_Char *el )
 {
-	PromptGeneratorData *d;
-	d = ( PromptGeneratorData * ) data;
-	d->pop();
-}
+	XmlPromptGenerator *pThis = ( XmlPromptGenerator * ) data;
 
-bool XmlPromptGenerator::getGrammarFound()
-{
-	return d->grammarFound;
-}
-
-void XmlPromptGenerator::getAttributeMap (
-    std::map<wxString, std::map<wxString, std::set<wxString> > >
-    &attributeMap )
-{
-	attributeMap = d->attributeMap;
-}
-
-void XmlPromptGenerator::getRequiredAttributeMap (
-    std::map<wxString, std::set<wxString> >& requiredAttributeMap )
-{
-	requiredAttributeMap = d->requiredAttributeMap;
-}
-
-void XmlPromptGenerator::getElementMap (
-    std::map<wxString, std::set<wxString> > &elementMap )
-{
-	elementMap = d->elementMap;
-}
-
-void XmlPromptGenerator::getEntitySet (
-    std::set<wxString> &entitySet )
-{
-	entitySet = d->entitySet;
-}
-
-void XmlPromptGenerator::getElementStructureMap (
-    std::map<wxString, wxString> &elementStructureMap )
-{
-	elementStructureMap = d->elementStructureMap;
+	if ( pThis->TestDestroy() )
+		XML_StopParser ( pThis->d->p, false );
+	else
+		pThis->d->pop();
 }
 
 // handlers for DOCTYPE handling
@@ -175,13 +157,16 @@ void XMLCALL XmlPromptGenerator::doctypedeclstarthandler (
 
 void XMLCALL XmlPromptGenerator::doctypedeclendhandler ( void *data )
 {
-	PromptGeneratorData *d;
-	d = ( PromptGeneratorData * ) data;
+	XmlPromptGenerator *pThis = ( XmlPromptGenerator * ) data;
+	PromptGeneratorData *d = pThis->d.get();
 	if ( !d->elementMap.empty() )
 	{
 		d->grammarFound = true;
 		XML_StopParser ( d->p, false ); // experimental
 	}
+
+	if ( pThis->TestDestroy() )
+		XML_StopParser ( d->p, false );
 }
 
 void XMLCALL XmlPromptGenerator::elementdeclhandler (
@@ -189,14 +174,18 @@ void XMLCALL XmlPromptGenerator::elementdeclhandler (
     const XML_Char *name,
     XML_Content *model )
 {
-	PromptGeneratorData *d;
-	d = ( PromptGeneratorData * ) data;
+	XmlPromptGenerator *pThis = ( XmlPromptGenerator * ) data;
+	PromptGeneratorData *d = pThis->d.get();
 
 	wxString myElement ( name, wxConvUTF8 );
 
-	getContent ( *model, d->elementStructureMap[myElement], d->elementMap[myElement] );
+	pThis->getContent ( *model, d->elementStructureMap[myElement],
+			d->elementMap[myElement] );
 
 	XML_FreeContentModel ( d->p, model );
+
+	if ( pThis->TestDestroy() )
+		XML_StopParser ( d->p, false );
 }
 
 void XmlPromptGenerator::getContent (
@@ -204,6 +193,9 @@ void XmlPromptGenerator::getContent (
     wxString &contentModel,
     std::set<wxString> &list )
 {
+	if ( TestDestroy() )
+		return;
+
 	wxString name;
 	switch ( content.type )
 	{
@@ -260,8 +252,8 @@ void XMLCALL XmlPromptGenerator::attlistdeclhandler (
     const XML_Char *dflt,
     int isrequired )
 {
-	PromptGeneratorData *d;
-	d = ( PromptGeneratorData * ) data;
+	XmlPromptGenerator *pThis = ( XmlPromptGenerator * ) data;
+	PromptGeneratorData *d = pThis->d.get();
 
 	wxString element ( elname, wxConvUTF8 );
 	wxString attribute ( attname, wxConvUTF8 );
@@ -289,6 +281,9 @@ void XMLCALL XmlPromptGenerator::attlistdeclhandler (
 	{
 		d->requiredAttributeMap[element].insert ( attribute );
 	}
+
+	if ( pThis->TestDestroy() )
+		XML_StopParser ( d->p, false );
 }
 
 int XMLCALL XmlPromptGenerator::externalentityrefhandler (
@@ -298,8 +293,9 @@ int XMLCALL XmlPromptGenerator::externalentityrefhandler (
     const XML_Char *systemId,
     const XML_Char *publicId )
 {
-	PromptGeneratorData *d;
-	d = ( PromptGeneratorData * ) p; // arg is set to user data in c'tor
+	// arg is set to user data in c'tor
+	XmlPromptGenerator *pThis = ( XmlPromptGenerator * ) p;
+	PromptGeneratorData *d = pThis->d.get();
 
 	// Either EXPAT or Xerces-C++ is capable of parsing DTDs. The advantage
 	// of Xerces-C++ is that it can access DTDs that are on the internet.
@@ -328,13 +324,13 @@ int XMLCALL XmlPromptGenerator::externalentityrefhandler (
 	NameIdPoolEnumerator<DTDElementDecl> elemEnum = grammar->getElemEnumerator();
 
 	SubstitutionMap substitutions;
-	while ( elemEnum.hasMoreElements() )
+	while ( elemEnum.hasMoreElements() && !pThis->TestDestroy() )
 	{
 		const DTDElementDecl& curElem = elemEnum.nextElement();
-		buildElementPrompt ( d, &curElem, substitutions );
+		pThis->buildElementPrompt ( d, &curElem, substitutions );
 	}
 
-	return XML_STATUS_OK;
+	return pThis->TestDestroy() ? XML_STATUS_ERROR : XML_STATUS_OK;
 
 #else // !PREFER_EXPAT_TO_XERCES_C
 
@@ -352,7 +348,7 @@ int XMLCALL XmlPromptGenerator::externalentityrefhandler (
 
 		d->encoding = XmlEncodingHandler::get ( buffer );
 		XML_Parser dtdParser = XML_ExternalEntityParserCreate ( d->p, context, d->encoding.c_str() );
-		if ( !dtdParser )
+		if ( pThis->TestDestroy() || !dtdParser )
 			return XML_STATUS_ERROR;
 		XML_SetBase ( dtdParser, d->auxPath.utf8_str() );
 		ret = XML_Parse ( dtdParser, buffer.c_str(), buffer.size(), true );
@@ -389,14 +385,15 @@ int XMLCALL XmlPromptGenerator::externalentityrefhandler (
 
 	std::string encoding = XmlEncodingHandler::get ( buffer );
 	XML_Parser dtdParser = XML_ExternalEntityParserCreate ( d->p, context, encoding.c_str() );
-	if ( !dtdParser )
+	if ( pThis->TestDestroy() || !dtdParser )
 		return XML_STATUS_ERROR;
 
 	XML_SetBase ( dtdParser, wideSystemId.utf8_str() );
 
 	ret = XML_Parse ( dtdParser, buffer.c_str(), buffer.size(), true );
 	XML_ParserFree ( dtdParser );
-	return ret;
+
+	return pThis->TestDestroy() ? XML_STATUS_ERROR : ret;
 
 #endif // PREFER_EXPAT_TO_XERCES_C
 }
@@ -412,8 +409,9 @@ void XMLCALL XmlPromptGenerator::entitydeclhandler (
     const XML_Char *publicId,
     const XML_Char *notationName )
 {
-	PromptGeneratorData *d;
-	d = ( PromptGeneratorData * ) data; // arg is set to user data in c'tor
+	// arg is set to user data in c'tor
+	XmlPromptGenerator *pThis = ( XmlPromptGenerator * ) data;
+	PromptGeneratorData *d = pThis->d.get();
 
 	if (
 	    entityName &&
@@ -424,6 +422,9 @@ void XMLCALL XmlPromptGenerator::entitydeclhandler (
 	{
 		d->entitySet.insert ( wxString ( entityName, wxConvUTF8 ) );
 	}
+
+	if ( pThis->TestDestroy() )
+		XML_StopParser ( d->p, false );
 }
 
 void XmlPromptGenerator::handleSchema (
@@ -471,6 +472,12 @@ void XmlPromptGenerator::handleSchema (
 	parser->setDoSchema ( true );
 	parser->setValidationSchemaFullChecking ( true );
 
+	if ( TestDestroy() )
+	{
+		XML_StopParser ( d->p, false );
+		return;
+	}
+
 	Grammar *rootGrammar = parser->loadGrammar
 			( ( const XMLCh * ) WrapXerces::toString ( schemaPath ).GetData()
 			, Grammar::SchemaGrammarType
@@ -491,7 +498,7 @@ void XmlPromptGenerator::handleSchema (
 	SubstitutionMap substitutions;
 	buildSubstitutionMap ( substitutions, *grammar );
 
-	while ( elemEnum.hasMoreElements() )
+	while ( elemEnum.hasMoreElements() && !TestDestroy() )
 	{
 		const SchemaElementDecl& curElem = elemEnum.nextElement();
 		buildElementPrompt ( d, &curElem, substitutions );
@@ -533,7 +540,8 @@ void XmlPromptGenerator::buildElementPrompt (
 		return;
 
 	XMLAttDefList& attIter = element->getAttDefList();
-	for ( unsigned int i = 0; i < attIter.getAttDefCount(); i++ )
+	unsigned int i = 0;
+	for ( ; i < attIter.getAttDefCount() && !TestDestroy(); i++ )
 	{
 		wxString attribute, attributeValue;
 
@@ -564,7 +572,7 @@ void XmlPromptGenerator::buildSubstitutionMap (
 	if ( !list.hasMoreElements() )
 		return;
 
-	while ( list.hasMoreElements() )
+	while ( list.hasMoreElements() && !TestDestroy() )
 	{
 		const ElemVector &elmts = list.nextElement();
 
@@ -589,6 +597,8 @@ void XmlPromptGenerator::getContent (
     const ContentSpecNode *spec,
     SubstitutionMap &substitutions )
 {
+	if ( TestDestroy() )
+		return;
 	//if ( spec == NULL) return;
 
 	const QName *qnm = spec->getElement();
@@ -614,4 +624,29 @@ void XmlPromptGenerator::getContent (
 		getContent( list, spec->getFirst(), substitutions );
 	if ( spec->getSecond() != NULL)
 		getContent( list, spec->getSecond(), substitutions );
+}
+
+void *XmlPromptGenerator::Entry()
+{
+	if ( TestDestroy() )
+		return NULL;
+
+	parse ( mBuffer );
+
+	wxCriticalSectionLocker locker ( xmlcopyeditorCriticalSection );
+
+	if ( !TestDestroy() )
+	{
+		wxNotifyEvent event ( myEVT_NOTIFY_PROMPT_GENERATED );
+		wxPostEvent ( mEventHandler, event );
+	}
+
+	return NULL;
+}
+
+void XmlPromptGenerator::PendingDelete ()
+{
+	Cancel();
+
+	ThreadReaper::get().add ( this );
 }

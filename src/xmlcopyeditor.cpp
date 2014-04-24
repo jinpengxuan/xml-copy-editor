@@ -205,6 +205,7 @@ BEGIN_EVENT_TABLE ( MyFrame, wxFrame )
 #ifdef __WXMSW__
 	EVT_DROP_FILES ( MyFrame::OnDropFiles )
 #endif
+	EVT_NOTIFY ( myEVT_NOTIFY_PROMPT_GENERATED, wxID_ANY, MyFrame::OnPromptGenerated )
 END_EVENT_TABLE()
 
 IMPLEMENT_APP ( MyApp)
@@ -2926,10 +2927,6 @@ void MyFrame::newDocument ( const std::string& s, const wxString& path, bool can
 	doc->setShortFileName ( documentLabel );
 	doc->SetFocus();
 	manager.Update();
-	locationPanel->update ( doc, wxEmptyString );
-	insertChildPanel->update ( doc, wxEmptyString );
-	insertSiblingPanel->update ( doc, wxEmptyString );
-	insertEntityPanel->update ( doc );
 	if ( properties.validateAsYouType )
 		doc->backgroundValidate();
 }
@@ -2938,6 +2935,13 @@ void MyFrame::OnOpen ( wxCommandEvent& event )
 {
 	bool largeFile;
 	largeFile = ( event.GetId() == ID_OPEN_LARGE_FILE );
+
+	wxString file = event.GetString();
+	if ( !file.empty() )
+	{
+		openFile ( file );
+		return;
+	}
 
 	wxString defaultFile, defaultDir;
 	XmlDoc *doc;
@@ -6013,6 +6017,15 @@ void MyFrame::OnDropFiles ( wxDropFilesEvent& event )
 	}
 }
 #endif
+
+void MyFrame::OnPromptGenerated ( wxNotifyEvent &event )
+{
+	XmlDoc *doc = this->getActiveDocument();
+	locationPanel->update ( doc, lastParent );
+	insertChildPanel->update ( doc, lastParent );
+	insertSiblingPanel->update ( doc, lastParent );
+	insertEntityPanel->update ( doc );
+}
 
 wxString MyFrame::getAuxPath ( const wxString& fileName )
 {

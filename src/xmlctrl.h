@@ -29,6 +29,7 @@
 #include <map>
 
 class ValidationThread;
+class XmlPromptGenerator;
 
 struct XmlCtrlProperties
 {
@@ -160,6 +161,7 @@ class XmlCtrl: public wxStyledTextCtrl
 		void toggleComment();
 	private:
 		ValidationThread *validationThread; // used for background validation
+		XmlPromptGenerator *mPromptGeneratorThread;
 
 		int type;
 		bool *protectTags;
@@ -203,6 +205,7 @@ class XmlCtrl: public wxStyledTextCtrl
 		void OnMouseLeftUp ( wxMouseEvent& event );
 		void OnMouseRightUp ( wxMouseEvent& event );
 		void OnMiddleDown ( wxMouseEvent& event );
+		void OnPromptGenerated ( wxNotifyEvent &event );
 		void insertNewLine();
 		void adjustNoColumnWidth();
 		void adjustPosRight();

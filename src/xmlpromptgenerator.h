@@ -21,14 +21,18 @@
 #define XML_PROMPT_GENERATOR_H
 
 #include <wx/wx.h>
-//#include <expat.h>
+#include <wx/thread.h>
+#include <wx/event.h>
 #include <map>
 #include <set>
 #include <memory>
+#include <string>
 #include "wrapexpat.h"
 #include "parserdata.h"
 #include <xercesc/validators/common/ContentSpecNode.hpp>
 #include <xercesc/validators/schema/SchemaGrammar.hpp>
+
+DECLARE_EVENT_TYPE ( myEVT_NOTIFY_PROMPT_GENERATED, wxID_ANY );
 
 struct PromptGeneratorData : public ParserData
 {
@@ -48,26 +52,54 @@ struct PromptGeneratorData : public ParserData
 typedef std::map<const xercesc::SchemaElementDecl *, std::set<wxString> >
         SubstitutionMap;
 
-class XmlPromptGenerator : public WrapExpat
+class XmlPromptGenerator : public WrapExpat, public wxThread
 {
 	public:
 		XmlPromptGenerator (
+		    wxEvtHandler *handler,
+		    const char *buffer,
+		    size_t bufferSize,
 		    const wxString& basePath = wxEmptyString,
 		    const wxString& auxPath = wxEmptyString,
 		    const char *encoding = NULL );
 		virtual ~XmlPromptGenerator();
-		void getAttributeMap (
-		    std::map<wxString, std::map<wxString, std::set<wxString> > >
-		    &attributeMap );
-		void getRequiredAttributeMap (
-		    std::map<wxString, std::set<wxString> > &requiredAttributeMap );
-		void getElementMap (
-		    std::map<wxString, std::set<wxString> > &elementMap );
-		void getEntitySet (
-		    std::set<wxString> &entitySet );
-		bool getGrammarFound();
-		void getElementStructureMap (
-		    std::map<wxString, wxString> &elementStructureMap );
+
+		virtual void *Entry();
+		void PendingDelete();
+		// Since we can't call wxThread::m_internal->Cancel(), the original
+		// TestDestroy() is useless. Here is the work around.
+		virtual void Cancel() { mStopping = true; }
+		virtual bool TestDestroy() { return mStopping || wxThread::TestDestroy(); }
+
+		const std::map<wxString, std::map<wxString, std::set<wxString> > >
+		    &getAttributeMap()
+		{
+			return d->attributeMap;
+		}
+		const std::map<wxString, std::set<wxString> >
+		    &getRequiredAttributeMap ()
+		{
+			return d->requiredAttributeMap;
+		}
+		const std::map<wxString, std::set<wxString> >
+		    &getElementMap()
+		{
+			return d->elementMap;
+		}
+		const std::set<wxString>
+		    &getEntitySet()
+		{
+			return d->entitySet;
+		}
+		bool getGrammarFound()
+		{
+			return d->grammarFound;
+		}
+		const std::map<wxString, wxString>
+		    &getElementStructureMap()
+		{
+			return d->elementStructureMap;
+		}
 	private:
 		std::auto_ptr<PromptGeneratorData> d;
 		static void XMLCALL starthandler (
@@ -88,7 +120,7 @@ class XmlPromptGenerator : public WrapExpat
 		    void *userData,
 		    const XML_Char *name,
 		    XML_Content *model );
-		static void getContent (
+		void getContent (
 		    const XML_Content &content,
 		    wxString &contentModel,
 		    std::set<wxString> &list );
@@ -115,21 +147,25 @@ class XmlPromptGenerator : public WrapExpat
 		    const XML_Char *systemId,
 		    const XML_Char *publicId,
 		    const XML_Char *notationName );
-		static void handleSchema (
+		void handleSchema (
 		    PromptGeneratorData *d,
 		    const XML_Char *el,
 		    const XML_Char **attr );
-		static void buildSubstitutionMap (
+		void buildSubstitutionMap (
 		    SubstitutionMap &substitutions,
 		    const xercesc::SchemaGrammar &grammar );
-		static void buildElementPrompt (
+		void buildElementPrompt (
 		    PromptGeneratorData *d,
 		    const xercesc::XMLElementDecl *element,
 		    SubstitutionMap &substitutions );
-		static void getContent (
+		void getContent (
 		    std::set<wxString> &list,
 		    const xercesc::ContentSpecNode *spec,
 		    SubstitutionMap &substitutions );
+protected:
+		wxEvtHandler *mEventHandler;
+		std::string mBuffer;
+		bool mStopping;
 };
 
 #endif
