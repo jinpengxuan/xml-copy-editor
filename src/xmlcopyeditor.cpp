@@ -4900,59 +4900,59 @@ wxMenuBar *MyFrame::getMenuBar()
 	wxMenu *editMenu = new wxMenu;
 
 	wxMenuItem *undoItem =
-	    new wxMenuItem ( NULL, wxID_UNDO, _ ( "&Undo\tCtrl+Z" ), _ ( "Undo" ) );
+	    new wxMenuItem ( editMenu, wxID_UNDO, _ ( "&Undo\tCtrl+Z" ), _ ( "Undo" ) );
 	undoItem->SetBitmap ( undo16Bitmap );
 
 	wxMenuItem *redoItem =
-	    new wxMenuItem ( NULL, wxID_REDO, _ ( "&Redo\tCtrl+Y" ), _ ( "Redo" ) );
+	    new wxMenuItem ( editMenu, wxID_REDO, _ ( "&Redo\tCtrl+Y" ), _ ( "Redo" ) );
 	redoItem->SetBitmap ( redo16Bitmap );
 
 	wxMenuItem *cutItem =
-	    new wxMenuItem ( NULL, wxID_CUT, _ ( "&Cut\tCtrl+X" ), _ ( "Cut" ) );
+	    new wxMenuItem ( editMenu, wxID_CUT, _ ( "&Cut\tCtrl+X" ), _ ( "Cut" ) );
 	cutItem->SetBitmap ( cutBitmap );
 
 	wxMenuItem *copyItem =
-	    new wxMenuItem ( NULL, wxID_COPY, _ ( "C&opy\tCtrl+C" ), _ ( "Copy" ) );
+	    new wxMenuItem ( editMenu, wxID_COPY, _ ( "C&opy\tCtrl+C" ), _ ( "Copy" ) );
 	copyItem->SetBitmap ( copyBitmap );
 
 	wxMenuItem *pasteItem =
-	    new wxMenuItem ( NULL, wxID_PASTE, _ ( "&Paste\tCtrl+V" ), _ ( "Paste" ) );
+	    new wxMenuItem ( editMenu, wxID_PASTE, _ ( "&Paste\tCtrl+V" ), _ ( "Paste" ) );
 	pasteItem->SetBitmap ( pasteBitmap );
 
 	wxMenuItem *pasteNewDocumentItem =
 	    new wxMenuItem (
-	    NULL,
+	    editMenu,
 	    ID_PASTE_NEW_DOCUMENT,
 	    _ ( "P&aste As New Document" ),
 	    _ ( "Paste As New Document" ) );
 	pasteNewDocumentItem->SetBitmap ( wxNullBitmap );
 
 	wxMenuItem *findItem =
-	    new wxMenuItem ( NULL, ID_FIND, _ ( "&Find...\tCtrl+F" ), _ ( "Find..." ) );
+	    new wxMenuItem ( editMenu, ID_FIND, _ ( "&Find...\tCtrl+F" ), _ ( "Find..." ) );
 	findItem->SetBitmap ( searchBitmap );
 
 	wxMenuItem *findAgainItem =
-	    new wxMenuItem ( NULL, ID_FIND_AGAIN, _ ( "F&ind Again\tF3" ), _ ( "Find Again" ) );
+	    new wxMenuItem ( editMenu, ID_FIND_AGAIN, _ ( "F&ind Again\tF3" ), _ ( "Find Again" ) );
 	findAgainItem->SetBitmap ( wxNullBitmap );
 
 	wxMenuItem *replaceItem =
-	    new wxMenuItem ( NULL, ID_REPLACE, _ ( "&Replace...\tCtrl+R" ), _ ( "Replace..." ) );
+	    new wxMenuItem ( editMenu, ID_REPLACE, _ ( "&Replace...\tCtrl+R" ), _ ( "Replace..." ) );
 	replaceItem->SetBitmap ( wxNullBitmap );
 
 	wxMenuItem *globalReplaceItem =
 	    new wxMenuItem (
-	    NULL,
+	    editMenu,
 	    ID_GLOBAL_REPLACE,
 	    _ ( "&Global Replace...\tCtrl+Shift+R" ),
 	    _ ( "Global Replace..." ) );
 	globalReplaceItem->SetBitmap ( wxNullBitmap );
 
 	wxMenuItem *gotoItem =
-	    new wxMenuItem ( NULL, ID_GOTO, _ ( "G&o To...\tCtrl+G" ), _ ( "Go To..." ) );
+	    new wxMenuItem ( editMenu, ID_GOTO, _ ( "G&o To...\tCtrl+G" ), _ ( "Go To..." ) );
 	gotoItem->SetBitmap ( wxNullBitmap );
 
 	wxMenuItem *commentItem =
-	    new wxMenuItem ( NULL, ID_TOGGLE_COMMENT, _ ( "&Toggle Comment\tCtrl+/" ), _ ( "Toggle Comment" ) );
+	    new wxMenuItem ( editMenu, ID_TOGGLE_COMMENT, _ ( "&Toggle Comment\tCtrl+/" ), _ ( "Toggle Comment" ) );
 	commentItem->SetBitmap ( wxNullBitmap );
 
 	editMenu->Append ( undoItem );
@@ -4973,7 +4973,7 @@ wxMenuBar *MyFrame::getMenuBar()
 
 #ifndef __WXMSW__
 	wxMenuItem *preferencesItem =
-	    new wxMenuItem ( NULL, ID_OPTIONS, _ ( "Pr&eferences..." ), _ ( "Preferences..." ) );
+	    new wxMenuItem ( editMenu, ID_OPTIONS, _ ( "Pr&eferences..." ), _ ( "Preferences..." ) );
 	editMenu->AppendSeparator();
 	editMenu->Append ( preferencesItem );
 #endif
@@ -5226,7 +5226,7 @@ wxMenuBar *MyFrame::getMenuBar()
 
 	wxMenuItem *spellingItem =
 	    new wxMenuItem (
-	    NULL,
+	    toolsMenu,
 	    ID_SPELL,
 	    _ ( "&Spelling...\tF7" ),
 	    _ ( "Spelling..." ) );
@@ -5234,7 +5234,7 @@ wxMenuBar *MyFrame::getMenuBar()
 
 	wxMenuItem *styleItem = 
 	    new wxMenuItem (
-	    NULL,
+	    toolsMenu,
 	    ID_STYLE,
 	    _ ( "&Style...\tShift+F7" ),
 	    _ ( "Style..." ) );
@@ -5242,7 +5242,7 @@ wxMenuBar *MyFrame::getMenuBar()
 
 	wxMenuItem *wordCountItem =
 	    new wxMenuItem (
-	    NULL,
+	    toolsMenu,
 	    ID_WORD_COUNT,
 	    _ ( "&Word Count" ),
 	    _ ( "Word Count" ) );
@@ -5251,7 +5251,7 @@ wxMenuBar *MyFrame::getMenuBar()
 
 	wxMenuItem *commandItem =
 	    new wxMenuItem (
-	    NULL,
+	    toolsMenu,
 	    ID_COMMAND,
 	    _ ( "&Command\tCtrl+Alt+C" ),
 	    _ ( "Command" ) );
@@ -5267,7 +5267,7 @@ wxMenuBar *MyFrame::getMenuBar()
 	toolsMenu->AppendSeparator();
 	wxMenuItem *optionsItem =
 	    new wxMenuItem (
-	    NULL,
+	    toolsMenu,
 	    ID_OPTIONS,
 	    _ ( "&Options..." ),
 	    _ ( "Options..." ) );
@@ -5279,24 +5279,24 @@ wxMenuBar *MyFrame::getMenuBar()
 	wxMenu *helpMenu = new wxMenu;
 
 	wxMenuItem *helpItem =
-	    new wxMenuItem ( NULL, wxID_HELP,
+	    new wxMenuItem ( helpMenu, wxID_HELP,
 	                     _ ( "&XML Copy Editor Help\tF1" ), _ ( "Help" ) );
 	helpItem->SetBitmap ( helpBitmap );
 
 
 	wxMenuItem *homeItem =
-	    new wxMenuItem ( NULL, ID_HOME,
+	    new wxMenuItem ( helpMenu, ID_HOME,
 	                     _ ( "&Home Page" ), _ ( "Home Page" ) );
 	homeItem->SetBitmap ( wxNullBitmap );
 	wxMenuItem *feedbackItem =
-	    new wxMenuItem ( NULL, ID_FEEDBACK, _ ( "&Forum" ), _ ( "Forum" ) );
+	    new wxMenuItem ( helpMenu, ID_FEEDBACK, _ ( "&Forum" ), _ ( "Forum" ) );
 	feedbackItem->SetBitmap ( wxNullBitmap );
 	wxMenuItem *aboutItem =
-	    new wxMenuItem ( NULL, wxID_ABOUT,
+	    new wxMenuItem ( helpMenu, wxID_ABOUT,
 	                     _ ( "&About XML Copy Editor" ), _ ( "About" ) );
 	aboutItem->SetBitmap ( wxNullBitmap );
 	wxMenuItem *downloadSourceItem =
-	    new wxMenuItem ( NULL, ID_DOWNLOAD_SOURCE,
+	    new wxMenuItem ( helpMenu, ID_DOWNLOAD_SOURCE,
 	                     _ ( "&Browse Source" ), _ ( "Browse Source" ) );
 	downloadSourceItem->SetBitmap ( wxNullBitmap );
 	helpMenu->Append ( helpItem );
@@ -5330,59 +5330,59 @@ void MyFrame::updateFileMenu ( bool deleteExisting )
 	}
 
 	wxMenuItem *newItem =
-	    new wxMenuItem ( NULL, wxID_NEW, _ ( "&New...\tCtrl+N" ), _ ( "New..." ) );
+	    new wxMenuItem ( fileMenu, wxID_NEW, _ ( "&New...\tCtrl+N" ), _ ( "New..." ) );
 	newItem->SetBitmap ( new16Bitmap );
 	wxMenuItem *openItem =
-	    new wxMenuItem ( NULL, wxID_OPEN, _ ( "&Open...\tCtrl+O" ), _ ( "Open..." ) );
+	    new wxMenuItem ( fileMenu, wxID_OPEN, _ ( "&Open...\tCtrl+O" ), _ ( "Open..." ) );
 	openItem->SetBitmap ( open16Bitmap );
 	wxMenuItem *openLargeFileItem =
-	    new wxMenuItem ( NULL, ID_OPEN_LARGE_FILE,
+	    new wxMenuItem ( fileMenu, ID_OPEN_LARGE_FILE,
 	                     _ ( "O&pen Large Document...\tCtrl+Shift+O" ), _ ( "Open Large Document..." ) );
 	openLargeFileItem->SetBitmap ( wxNullBitmap );
 
 	wxMenuItem *closeItem =
-	    new wxMenuItem ( NULL, wxID_CLOSE, _ ( "&Close\tCtrl+F4" ), _ ( "Close" ) );
+	    new wxMenuItem ( fileMenu, wxID_CLOSE, _ ( "&Close\tCtrl+F4" ), _ ( "Close" ) );
 	closeItem->SetBitmap ( wxNullBitmap );
 	wxMenuItem *closeAllItem =
-	    new wxMenuItem ( NULL, wxID_CLOSE_ALL, _ ( "C&lose All" ), _ ( "Close All" ) );
+	    new wxMenuItem ( fileMenu, wxID_CLOSE_ALL, _ ( "C&lose All" ), _ ( "Close All" ) );
 	closeAllItem->SetBitmap ( wxNullBitmap );
 	wxMenuItem *saveItem =
-	    new wxMenuItem ( NULL, wxID_SAVE, _ ( "&Save\tCtrl+S" ), _ ( "Save" ) );
+	    new wxMenuItem ( fileMenu, wxID_SAVE, _ ( "&Save\tCtrl+S" ), _ ( "Save" ) );
 	saveItem->SetBitmap ( save16Bitmap );
 	wxMenuItem *saveAsItem =
-	    new wxMenuItem ( NULL, wxID_SAVEAS, _ ( "S&ave As...\tF12" ), _ ( "Save As..." ) );
+	    new wxMenuItem ( fileMenu, wxID_SAVEAS, _ ( "S&ave As...\tF12" ), _ ( "Save As..." ) );
 	saveAsItem->SetBitmap ( wxNullBitmap );
 #ifdef __WXMSW__
 	wxMenuItem *exportItem =
-        new wxMenuItem ( NULL, ID_EXPORT, _ ( "&DAISY Export..." ), _ ( "DAISY Export..." ) );
+        new wxMenuItem ( fileMenu, ID_EXPORT, _ ( "&DAISY Export..." ), _ ( "DAISY Export..." ) );
     exportItem->SetBitmap ( wxNullBitmap );
 #endif
 	wxMenuItem *reloadItem =
-	    new wxMenuItem ( NULL, ID_RELOAD, _ ( "&Reload" ), _ ( "Reload" ) );
+	    new wxMenuItem ( fileMenu, ID_RELOAD, _ ( "&Reload" ), _ ( "Reload" ) );
 	reloadItem->SetBitmap ( wxNullBitmap );
 	wxMenuItem *revertItem =
-	    new wxMenuItem ( NULL, wxID_REVERT, _ ( "&Revert" ), _ ( "Revert" ) );
+	    new wxMenuItem ( fileMenu, wxID_REVERT, _ ( "&Revert" ), _ ( "Revert" ) );
 	revertItem->SetBitmap ( wxNullBitmap );
 	wxMenuItem *printSetupItem =
-	    new wxMenuItem ( NULL, ID_PRINT_SETUP, _ ( "Pa&ge Setup..." ), _ ( "Page Setup..." ) );
+	    new wxMenuItem ( fileMenu, ID_PRINT_SETUP, _ ( "Pa&ge Setup..." ), _ ( "Page Setup..." ) );
 	printSetupItem->SetBitmap ( wxNullBitmap );
 	wxMenuItem *printPreviewItem =
-	    new wxMenuItem ( NULL, ID_PRINT_PREVIEW, _ ( "Pr&int Preview..." ), _ ( "Print Preview..." ) );
+	    new wxMenuItem ( fileMenu, ID_PRINT_PREVIEW, _ ( "Pr&int Preview..." ), _ ( "Print Preview..." ) );
 	printPreviewItem->SetBitmap ( printPreviewBitmap );
 	wxMenuItem *printItem =
-	    new wxMenuItem ( NULL, ID_PRINT, _ ( "Pri&nt...\tCtrl+P" ), _ ( "Print..." ) );
+	    new wxMenuItem ( fileMenu, ID_PRINT, _ ( "Pri&nt...\tCtrl+P" ), _ ( "Print..." ) );
 	printItem->SetBitmap ( print16Bitmap );
 	wxMenuItem *importMSWordItem =
 	    new wxMenuItem (
-	    NULL, ID_IMPORT_MSWORD, _ ( "I&mport Microsoft Word Document..." ) );
+	    fileMenu, ID_IMPORT_MSWORD, _ ( "I&mport Microsoft Word Document..." ) );
 	importMSWordItem->SetBitmap ( wxNullBitmap );
 	wxMenuItem *exportMSWordItem =
 	    new wxMenuItem (
-	    NULL, ID_EXPORT_MSWORD, _ ( "Expor&t Microsoft Word Document..." ) );
+	    fileMenu, ID_EXPORT_MSWORD, _ ( "Expor&t Microsoft Word Document..." ) );
 	exportMSWordItem->SetBitmap ( wxNullBitmap );
 
 	wxMenuItem *exitItem =
-	    new wxMenuItem ( NULL, wxID_EXIT, _ ( "E&xit" ), _ ( "Exit" ) );
+	    new wxMenuItem ( fileMenu, wxID_EXIT, _ ( "E&xit" ), _ ( "Exit" ) );
 	exitItem->SetBitmap ( wxNullBitmap );
 
 	fileMenu->Append ( newItem );
