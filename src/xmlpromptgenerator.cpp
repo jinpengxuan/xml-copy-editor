@@ -346,6 +346,14 @@ int XMLCALL XmlPromptGenerator::externalentityrefhandler (
 		pThis->buildElementPrompt ( d, &curElem, substitutions );
 	}
 
+	NameIdPoolEnumerator<DTDEntityDecl>
+			entityEnum = grammar->getEntityEnumerator();
+	while ( entityEnum.hasMoreElements() && !pThis->TestDestroy() )
+	{
+		const DTDEntityDecl &entity = entityEnum.nextElement();
+		d->entitySet.insert ( WrapXerces::toString ( entity.getName() ) );
+	}
+
 	return pThis->TestDestroy() ? XML_STATUS_ERROR : XML_STATUS_OK;
 
 #else // !PREFER_EXPAT_TO_XERCES_C
