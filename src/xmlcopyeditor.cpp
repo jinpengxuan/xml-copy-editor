@@ -6018,9 +6018,9 @@ void MyFrame::OnPromptGenerated ( wxNotifyEvent &event )
 {
 	XmlDoc *doc = this->getActiveDocument();
 	locationPanel->update ( doc, lastParent );
-	insertChildPanel->update ( doc, lastParent );
-	insertSiblingPanel->update ( doc, lastParent );
-	insertEntityPanel->update ( doc );
+	insertChildPanel->update ( doc, lastParent, wxEmptyString, true );
+	insertSiblingPanel->update ( doc, lastParent, wxEmptyString, true );
+	insertEntityPanel->update ( doc, wxEmptyString, wxEmptyString, true );
 }
 
 wxString MyFrame::getAuxPath ( const wxString& fileName )

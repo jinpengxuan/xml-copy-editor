@@ -71,7 +71,8 @@ InsertPanel::InsertPanel (
 void InsertPanel::update (
     XmlDoc *docParameter,
     const wxString& parentParameter,
-    const wxString& grandparentParameter )
+    const wxString& grandparentParameter,
+    bool forced )
 {
 	doc = docParameter;
 	parent = parentParameter;
@@ -89,7 +90,7 @@ void InsertPanel::update (
 		return;
 	}
 
-	bool refreshEntities = false;
+	bool refreshEntities = forced;
 	if ( doc != lastDoc )
 	{
 		refreshEntities = true;
@@ -109,7 +110,7 @@ void InsertPanel::update (
 		return;
 	}
 
-	if ( parent == lastParent && !list->IsEmpty() )
+	if ( parent == lastParent && !refreshEntities )
 		return;
 	lastParent = parent;
 

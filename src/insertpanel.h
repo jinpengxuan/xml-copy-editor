@@ -41,7 +41,8 @@ class InsertPanel : public wxPanel
 		void update (
 		    XmlDoc *doc,
 		    const wxString& parent = wxEmptyString,
-		    const wxString& grandparent = wxEmptyString );
+		    const wxString& grandparent = wxEmptyString,
+		    bool forced = false );
 		void OnEnter ( wxCommandEvent& event );
 		void OnDoubleClick ( wxCommandEvent& event );
 		void OnListSelection ( wxCommandEvent& event );
