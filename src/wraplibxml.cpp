@@ -130,9 +130,10 @@ bool WrapLibxml::validate ( const std::string& utf8DocBuf,
 	int flags = XML_PARSE_DTDVALID;
 	if ( !netAccess )
 		flags |= XML_PARSE_NONET;
+	xmlChar *url = xmlFileNameToURL ( docFileName );
 	docPtr = xmlCtxtReadMemory ( ctxt, utf8DocBuf.c_str(), utf8DocBuf.length(),
-			CONV ( wxFileSystem::FileNameToURL ( docFileName ) ),
-			"UTF-8", flags);
+			( const char * ) url, "UTF-8", flags);
+	xmlFree ( url );
 
 	bool returnValue = docPtr != NULL && ctxt->valid != 0;
 
@@ -157,8 +158,9 @@ bool WrapLibxml::validateRelaxNG (
 	xmlRelaxNGPtr schemaPtr = NULL;
 
 	do {
-		rngParserCtxt = xmlRelaxNGNewParserCtxt (
-				CONV ( wxFileSystem::FileNameToURL ( schemaFileName ) ) );
+		xmlChar *url = xmlFileNameToURL ( schemaFileName );
+		rngParserCtxt = xmlRelaxNGNewParserCtxt ( ( const char * ) url );
+		xmlFree ( url );
 		if ( rngParserCtxt == NULL )
 		{
 			nonParserError = _("Cannot create an RNG parser context");
@@ -184,14 +186,10 @@ bool WrapLibxml::validateRelaxNG (
 		int flags = XML_PARSE_DTDVALID;
 		if ( !netAccess )
 			flags |= XML_PARSE_NONET;
-		docPtr = xmlCtxtReadMemory (
-					ctxt,
-					utf8DocBuf.c_str(),
-					utf8DocBuf.length(),
-					CONV ( wxFileSystem::FileNameToURL ( docFileName ) ),
-					"UTF-8",
-					flags
-					);
+		url = xmlFileNameToURL ( docFileName );
+		docPtr = xmlCtxtReadMemory ( ctxt, utf8DocBuf.c_str(),
+					utf8DocBuf.length(), ( const char * ) url, "UTF-8", flags );
+		xmlFree ( url );
 		if ( docPtr == NULL )
 			break;
 
@@ -224,8 +222,9 @@ bool WrapLibxml::validateW3CSchema (
 	xmlSchemaPtr schemaPtr = NULL;
 
 	do {
-		rngParserCtxt = xmlSchemaNewParserCtxt (
-				CONV ( wxFileSystem::FileNameToURL ( schemaFileName ) ) );
+		xmlChar *url = xmlFileNameToURL ( schemaFileName );
+		rngParserCtxt = xmlSchemaNewParserCtxt ( ( const char * ) url );
+		xmlFree ( url );
 		if ( rngParserCtxt == NULL )
 			return false;
 
@@ -249,14 +248,10 @@ bool WrapLibxml::validateW3CSchema (
 		int flags = XML_PARSE_DTDLOAD;
 		if ( !netAccess )
 			flags |= XML_PARSE_NONET;
-		docPtr = xmlCtxtReadMemory (
-					ctxt,
-					utf8DocBuf.c_str(),
-					utf8DocBuf.length(),
-					CONV ( wxFileSystem::FileNameToURL ( docFileName ) ),
-					"UTF-8",
-					flags
-					);
+		url = xmlFileNameToURL ( docFileName );
+		docPtr = xmlCtxtReadMemory ( ctxt, utf8DocBuf.c_str(),
+					utf8DocBuf.length(), ( const char * ) url, "UTF-8", flags );
+		xmlFree ( url );
 		if ( docPtr == NULL )
 			break;
 
@@ -318,9 +313,12 @@ bool WrapLibxml::parse (
 		flags |= XML_PARSE_NONET;
 
 	if ( utf8DocBuf != NULL)
+	{
+		xmlChar *url = xmlFileNameToURL ( docFileName );
 		docPtr = xmlCtxtReadMemory ( ctxt, utf8DocBuf, utf8DocBufSize,
-					CONV ( wxFileSystem::FileNameToURL ( docFileName ) ),
-					"UTF-8", flags );
+					( const char * ) url, "UTF-8", flags );
+		xmlFree ( url );
+	}
 	else
 		docPtr = xmlCtxtReadFile ( ctxt, CONV ( docFileName ), NULL, flags );
 	if ( docPtr == NULL )
@@ -373,16 +371,12 @@ bool WrapLibxml::xpath ( const wxString &xpath, const std::string &utf8DocBuf,
 		return false;
 	}
 
-	docPtr = xmlCtxtReadMemory (
-	             ctxt,
-	             utf8DocBuf.c_str(),
-	             utf8DocBuf.length(),
-	             CONV ( wxFileSystem::FileNameToURL ( docFileName ) ),
-	             "UTF-8",
-	             //(netAccess) ? XML_PARSE_DTDLOAD | XML_PARSE_NOENT : XML_PARSE_DTDLOAD | XML_PARSE_NONET | XML_PARSE_NOENT
-	             XML_PARSE_NOENT | XML_PARSE_NONET | XML_PARSE_NSCLEAN
-	         );
-
+	//(netAccess) ? XML_PARSE_DTDLOAD | XML_PARSE_NOENT : XML_PARSE_DTDLOAD | XML_PARSE_NONET | XML_PARSE_NOENT
+	const static int flags = XML_PARSE_NOENT | XML_PARSE_NONET | XML_PARSE_NSCLEAN;
+	xmlChar *url = xmlFileNameToURL ( docFileName );
+	docPtr = xmlCtxtReadMemory ( ctxt, utf8DocBuf.c_str(), utf8DocBuf.length(),
+				( const char * ) url, "UTF-8", flags );
+	xmlFree ( url );
 	if ( docPtr == NULL )
 	{
 		xmlFreeParserCtxt ( ctxt );
@@ -496,9 +490,12 @@ bool WrapLibxml::xslt (
 		if ( !netAccess )
 			flags |= XML_PARSE_NONET;
 		if ( utf8DocBuf != NULL )
+		{
+			xmlChar *url = xmlFileNameToURL ( docFileName );
 			doc = xmlCtxtReadMemory ( ctxt, utf8DocBuf, utf8DocBufSize,
-					CONV ( wxFileSystem::FileNameToURL ( docFileName ) ),
-					"UTF-8", flags );
+					( const char * ) url, "UTF-8", flags );
+			xmlFree ( url );
+		}
 		else
 			doc = xmlCtxtReadFile ( ctxt, CONV ( docFileName ), NULL, flags );
 		if ( !doc )
@@ -597,9 +594,12 @@ int WrapLibxml::saveEncoding (
 	if ( !netAccess )
 		flags |= XML_PARSE_NONET;
 	if ( utf8Buffer != NULL )
+	{
+		xmlChar *url = xmlFileNameToURL ( fileNameSource );
 		docPtr = xmlCtxtReadMemory ( ctxt, utf8Buffer, utf8BufferSize,
-				CONV ( wxFileSystem::FileNameToURL ( fileNameSource ) ),
-				"UTF-8", flags );
+				( const char * ) url, "UTF-8", flags );
+		xmlFree ( url );
+	}
 	else
 		docPtr = xmlCtxtReadFile ( ctxt, CONV ( fileNameSource ), NULL, flags );
 	if ( !docPtr )
@@ -690,9 +690,69 @@ wxString WrapLibxml::catalogResolve
 	wxString url ( s, wxConvUTF8 );
 	xmlFree ( s );
 
-	wxFileName file = wxFileSystem::URLToFileName ( url );
+	wxFileName file = URLToFileName ( url );
 	if ( file.IsFileReadable() )
 		return file.GetFullPath();
 
 	return url;
+}
+
+wxString WrapLibxml::FileNameToURL ( const wxString &fileName )
+{
+	xmlChar *s = xmlFileNameToURL ( fileName );
+	if ( !s )
+		return wxEmptyString;
+
+	wxString url = wxString::FromUTF8 ( ( char * ) s );
+	xmlFree ( s );
+
+	return url;
+}
+
+xmlChar *WrapLibxml::xmlFileNameToURL ( const wxString &fileName )
+{
+	if ( fileName.empty() )
+		return NULL;
+
+	wxFileName fn ( fileName );
+	fn.Normalize(wxPATH_NORM_DOTS | wxPATH_NORM_TILDE | wxPATH_NORM_ABSOLUTE);
+	wxString url = fn.GetFullPath(wxPATH_NATIVE);
+
+	return xmlPathToURI ( ( xmlChar * ) ( const char * ) url.utf8_str() );
+}
+
+wxFileName WrapLibxml::URLToFileName ( const wxString &url )
+{
+#if wxCHECK_VERSION(2,9,0)
+	return wxFileSystem::URLToFileName ( url );
+#else
+	xmlURIPtr uri = xmlParseURI ( url.utf8_str() );
+	if ( !uri )
+		return wxFileName ( url );
+
+	do {
+		if ( uri->scheme == NULL || strcmp (uri->scheme, "file" ) )
+			break;
+		if ( uri->server && stricmp ( uri->server, "localhost") )
+			break;
+		if ( uri->path == NULL || !*uri->path )
+			break;
+
+		char *path = uri->path;
+		// Does it begin with "/C:" ?
+		if ( *path == '/' && wxIsalpha ( path[1] ) && path[2] == ':')
+			path++;
+
+		wxFileName file ( wxString ( path, wxConvUTF8 ) );
+
+		xmlFreeURI ( uri );
+
+		return file;
+
+	} while ( false );
+
+	xmlFreeURI ( uri );
+
+	return wxFileName();
+#endif // wxCHECK_VERSION(2,9,0)
 }

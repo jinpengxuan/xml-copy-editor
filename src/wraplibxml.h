@@ -30,11 +30,13 @@
 #include <libxml/catalog.h>
 #include <libxml/xmlreader.h>
 #include <libxml/xmlmemory.h>
+#include <libxml/uri.h>
 #include <libxslt/xslt.h>
 #include <libxslt/xsltInternals.h>
 #include <libxslt/transform.h>
 #include <libxslt/xsltutils.h>
 #include <wx/wx.h>
+#include <wx/filename.h>
 
 class WrapLibxml
 {
@@ -109,6 +111,10 @@ class WrapLibxml
 		wxString catalogResolve (
 		    const wxString &publicId,
 		    const wxString &systemId );
+
+		static wxString FileNameToURL ( const wxString &fileName );
+		static xmlChar *xmlFileNameToURL ( const wxString &fileName );
+		static wxFileName URLToFileName ( const wxString &url );
 	private:
 		bool netAccess;
 		std::string output;

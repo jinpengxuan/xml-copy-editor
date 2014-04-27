@@ -18,6 +18,7 @@
  */
 
 #include "wrapxerces.h"
+#include "pathresolver.h"
 
 #include <xercesc/parsers/XercesDOMParser.hpp>
 #include <xercesc/sax2/XMLReaderFactory.hpp>
@@ -26,6 +27,7 @@
 #include <xercesc/util/XMLUni.hpp>
 #include <xercesc/framework/MemBufInputSource.hpp>
 #include <xercesc/framework/LocalFileInputSource.hpp>
+#include <xercesc/framework/URLInputSource.hpp>
 #include <sstream>
 #include <utility>
 #include <stdexcept>
@@ -244,4 +246,35 @@ void MySAX2Handler::logError ( const wxString &type, wxLogLevel level,
 		mErrorPosition.second = e.getColumnNumber();
 		mLevel = level;
 	}
+}
+
+InputSource *WrapXerces::resolveEntity (
+	const wxString &publicId,
+	const wxString &systemId,
+	const wxString &fileName
+)
+{
+	XercesCatalogResolver cr;
+	InputSource *source = cr.resolveEntity
+			( ( const XMLCh * ) WrapXerces::toString ( publicId ).GetData()
+			, ( const XMLCh * ) WrapXerces::toString ( systemId ).GetData()
+			);
+	if ( source )
+		return source;
+
+	BOOST_STATIC_ASSERT ( sizeof( xmlChar ) == sizeof ( char ) );
+
+	// Xerces-C++ can't open a file URL when there are multi-byte characters.
+	// Let's use the file name instead.
+	wxString file = PathResolver::run ( systemId, fileName );
+	if ( wxFileExists ( file ) )
+		return new LocalFileInputSource (
+				( const XMLCh * ) WrapXerces::toString ( file ).GetData() );
+
+	wxString fileURL = WrapLibxml::FileNameToURL ( fileName );
+	return new URLInputSource
+		( ( const XMLCh * ) WrapXerces::toString ( fileURL ).GetData()
+		, ( const XMLCh * ) WrapXerces::toString ( systemId ).GetData()
+		, ( const XMLCh * ) WrapXerces::toString ( publicId ).GetData()
+		);
 }

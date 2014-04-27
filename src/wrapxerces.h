@@ -124,6 +124,10 @@ class WrapXerces : private boost::noncopyable
 		// Returns original value
 		static bool enableNetwork ( bool enable = true );
 
+		static xercesc::InputSource *resolveEntity (
+			const wxString &publicId,
+			const wxString &systemId,
+			const wxString &fileName );
 	private:
 		static const wxMBConv &getMBConv();
 		static XMLNetAccessor *mOriginalNetAccessor;

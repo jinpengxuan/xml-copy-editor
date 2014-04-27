@@ -18,8 +18,6 @@
  */
 
 #include <wx/wx.h>
-#include <wx/filename.h>
-#include <wx/filesys.h>
 #include <stdexcept>
 #include "xmlpromptgenerator.h"
 #include "xmlencodinghandler.h"
@@ -42,7 +40,6 @@
 #include <xercesc/validators/schema/SchemaValidator.hpp>
 #include <xercesc/validators/common/ContentSpecNode.hpp>
 #include <xercesc/validators/schema/SchemaSymbols.hpp>
-#include <xercesc/framework/URLInputSource.hpp>
 #include <xercesc/validators/DTD/DTDGrammar.hpp>
 
 using namespace xercesc;
@@ -312,27 +309,23 @@ int XMLCALL XmlPromptGenerator::externalentityrefhandler (
 	parser.setErrorHandler ( &handler );
 	parser.setEntityResolver ( &catalogResolver );
 
-	wxString wideSystemId ( systemId, wxConvUTF8 ); // TODO: Apply encoding
-	wxString widePublicId ( publicId, wxConvUTF8 );
-	std::auto_ptr<InputSource> source ( catalogResolver.resolveEntity
-			( ( const XMLCh * ) WrapXerces::toString ( widePublicId ).GetData()
-			, ( const XMLCh * ) WrapXerces::toString ( wideSystemId ).GetData()
-			) );
-	if ( !source.get() )
-	{
-		wxString fileURL = wxFileSystem::FileNameToURL ( d->basePath );
-		source.reset ( new 	URLInputSource
-			( ( const XMLCh * ) WrapXerces::toString ( fileURL ).GetData()
-			, ( const XMLCh * ) WrapXerces::toString ( wideSystemId ).GetData()
-			, ( const XMLCh * ) WrapXerces::toString ( widePublicId ).GetData()
-			) );
-	}
-
-	if ( pThis->TestDestroy() )
-		return XML_STATUS_ERROR;
-
 	Grammar *rootGrammar;
 	try {
+		wxString wideSystemId = wxString::FromUTF8 ( systemId );
+		std::auto_ptr<InputSource> source ( WrapXerces::resolveEntity
+				( wxString::FromUTF8 ( publicId )
+				, wideSystemId
+				, d->basePath
+				) );
+		if ( !source.get() )
+		{
+			wxLogError ( _T("Cann't open '%s'"), wideSystemId.c_str() );
+			return XML_STATUS_ERROR;
+		}
+
+		if ( pThis->TestDestroy() )
+			return XML_STATUS_ERROR;
+
 		rootGrammar = parser.loadGrammar ( *source, Grammar::DTDGrammarType );
 		if ( !rootGrammar )
 			return XML_STATUS_ERROR;
