@@ -44,7 +44,6 @@ XmlAssociateXsd::XmlAssociateXsd (
 	std::auto_ptr<XmlParseSchemaNs> parser ( new XmlParseSchemaNs() );
 	std::string normalisedPath, buffer;
 	normalisedPath = path.mb_str ( wxConvLocal );
-	Replace::run ( normalisedPath, "%20", " ", true );
 	if ( !ReadFile::run ( normalisedPath, buffer ) )
 		return;
 	parser->parse ( buffer );

@@ -182,8 +182,6 @@ void AssociateDialog::OnBrowse ( wxCommandEvent& e )
 	if ( fd->ShowModal() == wxID_OK )
 	{
 		wxString newValue = fd->GetPath();
-		newValue.Replace ( _T ( "\\" ), _T ( "/" ), true );
-		newValue.Replace ( _T ( " " ), _T ( "%20" ), true );
 		urlCtrl->SetValue ( newValue );
 
 		if ( mLastDir )

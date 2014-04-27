@@ -711,9 +711,6 @@ MyFrame::MyFrame (
 		lastRelaxNGSchema =
 		    config->Read ( _T ( "lastRelaxNGSchema" ), wxEmptyString );
 
-		lastXslStylesheet.Replace ( _T ( " " ), _T ( "%20" ), true );
-		lastRelaxNGSchema.Replace ( _T ( " " ), _T ( "%20" ), true );
-	
 		exportQuiet =
 		  config->Read ( _T ( "exportQuiet" ), (long)true );
 		exportMp3Album =
@@ -4091,7 +4088,6 @@ void MyFrame::OnXslt ( wxCommandEvent& event )
 		std::string location = xl.getXslLocation();
 
 		path = wxString ( location.c_str(), wxConvUTF8, location.size() );
-		path.Replace ( _T ( "%20" ), _T ( " " ), true );
 
 		path = PathResolver::run ( path, doc->getFullFileName() );
 
