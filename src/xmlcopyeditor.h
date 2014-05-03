@@ -349,7 +349,7 @@ class MyFrame : public wxFrame
 		                   bool forcePane = false );
 
 		// public to allow IPC access
-		bool openFile ( wxString& fileName, bool largeFile = false );
+		bool openFile ( const wxString &fileName, bool largeFile = false );
 		bool isOpen ( const wxString& fileName );
 		bool activateTab ( const wxString& fileName );
 		void reloadTab();

@@ -51,37 +51,38 @@ XmlDoc::XmlDoc (
 		    style )
 { }
 
-wxString& XmlDoc::getDirectory()
+wxString XmlDoc::getDirectory()
 {
-	return directory;
+	return mFileName.GetPath();
 }
-wxString& XmlDoc::getFullFileName()
+
+wxString XmlDoc::getFullFileName()
 {
-	return fullFileName;
+	return mFileName.GetFullPath();
 }
-wxString& XmlDoc::getShortFileName()
+
+wxString XmlDoc::getShortFileName()
 {
-	return shortFileName;
+	return mFileName.GetFullName();
 }
-wxDateTime XmlDoc::getLastModified()
+
+const wxDateTime& XmlDoc::getLastModified()
 {
 	return lastModified;
 }
 
-void XmlDoc::setDirectory ( const wxString& s )
+void XmlDoc::setFullFileName ( const wxString &s )
 {
-	directory = s;
+	mFileName.Assign ( s );
+	mFileName.Normalize();
 }
 
-void XmlDoc::setFullFileName ( const wxString& s )
+void XmlDoc::setShortFileName ( const wxString &s )
 {
-	fullFileName = s;
+	mFileName.SetFullName ( s );
 }
-void XmlDoc::setShortFileName ( const wxString& s )
-{
-	shortFileName = s;
-}
-void XmlDoc::setLastModified ( wxDateTime dt )
+
+void XmlDoc::setLastModified ( const wxDateTime& dt )
 {
 	lastModified = dt;
 }

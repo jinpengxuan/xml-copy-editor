@@ -715,8 +715,8 @@ xmlChar *WrapLibxml::xmlFileNameToURL ( const wxString &fileName )
 		return NULL;
 
 	wxFileName fn ( fileName );
-	fn.Normalize(wxPATH_NORM_DOTS | wxPATH_NORM_TILDE | wxPATH_NORM_ABSOLUTE);
-	wxString url = fn.GetFullPath(wxPATH_NATIVE);
+	fn.Normalize();
+	wxString url = fn.GetFullPath();
 
 	return xmlPathToURI ( ( xmlChar * ) ( const char * ) url.utf8_str() );
 }

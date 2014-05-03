@@ -23,6 +23,7 @@
 #include <wx/wx.h>
 #include <wx/datetime.h>
 #include <wx/print.h>
+#include <wx/filename.h>
 #include "xmlctrl.h"
 
 class XmlDoc : public XmlCtrl
@@ -43,16 +44,15 @@ class XmlDoc : public XmlCtrl
 		    const wxPoint& position = wxDefaultPosition,
 		    const wxSize& size = wxDefaultSize,
 		    long style = 0 );
-		wxString& getDirectory();
-		wxString& getFullFileName();
-		wxString& getShortFileName();
-		wxDateTime getLastModified();
-		void setDirectory ( const wxString& s );
-		void setFullFileName ( const wxString& s );
-		void setShortFileName ( const wxString& s );
-		void setLastModified ( wxDateTime dt );
+		wxString getDirectory();
+		wxString getFullFileName();
+		wxString getShortFileName();
+		const wxDateTime& getLastModified();
+		void setFullFileName ( const wxString &s );
+		void setShortFileName ( const wxString &s );
+		void setLastModified ( const wxDateTime &dt );
 	private:
-		wxString directory, fullFileName, shortFileName;
+		wxFileName mFileName;
 		wxDateTime lastModified;
 };
 

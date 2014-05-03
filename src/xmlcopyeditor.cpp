@@ -2983,19 +2983,13 @@ void MyFrame::OnOpen ( wxCommandEvent& event )
 			break;
 }
 
-bool MyFrame::openFile ( wxString& fileName, bool largeFile )
+bool MyFrame::openFile ( const wxString &file, bool largeFile )
 {
-#ifndef __WXMSW__
-	// truncate string up to file:/ portion added by GNOME
-	wxString filePrefix = _T ( "file:" );
-	int index = fileName.Find ( filePrefix.c_str() );
-	if ( index != -1 )
-	{
-		fileName = fileName.Mid ( ( size_t ) index + filePrefix.Length() );
-	}
-#endif
+	wxFileName fn = WrapLibxml::URLToFileName ( file );
+	fn.Normalize();
 
-	if ( !wxFileExists ( fileName ) )
+	wxString fileName = fn.GetFullPath();
+	if ( !fn.IsFileReadable() )
 	{
 		wxString message;
 		message.Printf ( _ ( "Cannot open %s." ), fileName.c_str() );
@@ -3010,15 +3004,6 @@ bool MyFrame::openFile ( wxString& fileName, bool largeFile )
 		statusProgress ( message );
 		activateTab ( fileName );
 		return false;
-	}
-
-	wxString directory, name, extension;
-	wxFileName::SplitPath ( fileName, NULL, &directory, &name, &extension );
-
-	if ( !extension.empty() )
-	{
-		name += _T ( "." );
-		name += extension;
 	}
 
 	wxString wideError;
@@ -3238,21 +3223,16 @@ bool MyFrame::openFile ( wxString& fileName, bool largeFile )
 #endif
 
 		doc->setFullFileName ( fileName );
-		doc->setShortFileName ( name );
-		doc->setDirectory ( directory );
 		openFileSet.insert ( fileName );
 		history.AddFileToHistory ( fileName );
 		updateFileMenu();
-		wxFileName ofn ( fileName );
-		doc->setLastModified ( ofn.GetModificationTime() );
 
-		mainBook->AddPage ( ( wxWindow * ) doc, name, _T ( "" ) );
+		mainBook->AddPage ( ( wxWindow * ) doc, fn.GetFullName(), _T ( "" ) );
 	}
 	statusProgress ( wxEmptyString );
 
 	mainBook->Layout();
 
-	wxFileName fn ( fileName );
 	doc->setLastModified ( fn.GetModificationTime() );
 	doc->SetFocus();
 
@@ -3614,8 +3594,6 @@ void MyFrame::saveAs()
 	openFileSet.erase ( doc->getFullFileName() );
 
 	doc->setFullFileName ( path );
-	doc->setShortFileName ( name );
-	doc->setDirectory ( directory );
 
 	history.AddFileToHistory ( path ); // update history
 	updateFileMenu();
