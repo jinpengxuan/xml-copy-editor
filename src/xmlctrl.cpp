@@ -2215,52 +2215,95 @@ void XmlCtrl::OnMiddleDown ( wxMouseEvent& event )
 	Paste();
 }
 
+bool XmlCtrl::selectCurrentElement()
+{
+	if ( type != FILE_TYPE_XML )
+		return false;
+
+	Colourise ( 0, -1 );
+
+	int pos = GetCurrentPos();
+	int style = getLexerStyleAt ( pos ) ;
+	if ( style == wxSTC_H_COMMENT )
+	{
+		int i = pos;
+		while ( --i >= 0 && getLexerStyleAt ( i ) == wxSTC_H_COMMENT )
+			continue;
+		SetSelectionStart ( i + 1 );
+
+		int styled = GetEndStyled();
+		i = pos;
+		while ( i < styled && getLexerStyleAt ( i ) == wxSTC_H_COMMENT )
+			i++;
+		SetSelectionEnd ( i );
+	}
+	else
+	{
+		// Select current tag
+		int start = findPreviousStartTag ( pos, 1, '<', pos );
+		if ( start < 0 )
+		{
+			MyFrame *frame = ( MyFrame * ) wxTheApp->GetTopWindow();
+			frame->statusProgress ( _("Cannot find the start tag") );
+			return false;
+		}
+		int range = GetTextLength() - pos;
+		int end = findNextEndTag ( pos, 1, '>', range );
+		if ( end < 0 )
+		{
+			MyFrame *frame = ( MyFrame * ) wxTheApp->GetTopWindow();
+			frame->statusProgress ( _("Cannot find the end tag") );
+			return false;
+		}
+		SetSelection ( start, end );
+	}
+
+	return true;
+}
+
 void XmlCtrl::toggleComment()
 {
+	MyFrame *frame = ( MyFrame * ) wxTheApp->GetTopWindow();
+	frame->statusProgress ( wxEmptyString );
+
 	int pos = -1;
-	wxString text = GetSelectedText();
-	if ( text.IsEmpty() )
+	wxString commentStart = _T ( "<!--" );
+	wxString commentEnd = _T ( "-->" );
+
+	// Is there a selection?
+	int from = GetSelectionStart();
+	int to = GetSelectionEnd();
+	switch ( type )
 	{
-		if ( type == FILE_TYPE_BINARY )
+	case FILE_TYPE_BINARY:
+		return;
+
+	case FILE_TYPE_CSS:
+		if ( from == to )
 			return;
 
+		commentStart = _T ( "/*" );
+		commentEnd = _T ( "*/" );
+		break;
+
+	case FILE_TYPE_XML:
+		if ( from != to )
+			break;
+
+		// Select current element
 		pos = GetCurrentPos();
-		Colourise ( 0, -1 );
+		if ( !selectCurrentElement() )
+			return;
+		break;
 
-		int style = getLexerStyleAt ( pos ) ;
-		if ( style == wxSTC_H_COMMENT )
-		{
-			int i = pos;
-			while ( --i >= 0 && getLexerStyleAt ( i ) == wxSTC_H_COMMENT )
-				continue;
-			SetSelectionStart ( i + 1 );
-
-			int styled = GetEndStyled();
-			i = pos;
-			while ( i < styled && getLexerStyleAt ( i ) == wxSTC_H_COMMENT )
-				i++;
-			SetSelectionEnd ( i );
-		}
-		else
-		{
-			// Select current tag
-			int start = findPreviousStartTag ( pos, 1, '<', pos );
-			if ( start < 0 )
-			{
-				wxMessageBox(_T("Cann't find the start tag"));
-				return;
-			}
-			int range = GetTextLength() - pos;
-			int end = findNextEndTag ( pos, 1, '>', range );
-			if ( end < 0 )
-			{
-				wxMessageBox(_T("Cann't find the end tag"));
-				return;
-			}
-			SetSelection ( start, end );
-		}
-		text = GetSelectedText();
+	default:
+		if ( from == to )
+			return;
+		break;
 	}
+
+	wxString text = GetSelectedText();
+	wxASSERT ( !text.IsEmpty() );
 
 	// Skip leading spaces
 	wxString::iterator itr, start, end;
@@ -2268,9 +2311,6 @@ void XmlCtrl::toggleComment()
 	end = text.end();
 	while ( itr != end && wxIsspace ( *itr ) )
 		++itr;
-
-	const static wxString commentStart = _T ( "<!--" );
-	const static wxString commentEnd = _T ( "-->" );
 
 	size_t startPos = itr - start;
 	int ret = text.compare ( startPos, commentStart.length(), commentStart );
@@ -2306,12 +2346,15 @@ void XmlCtrl::toggleComment()
 	// Comment selection
 
 	// "--" is not allowed in comments
-	const static wxString doubleHyphen = _T ( "--" );
-	size_t offset = 0;
-	while ( ( offset = text.find ( doubleHyphen, offset ) ) != wxString::npos )
+	if ( commentStart == _T ( "<!--" ) )
 	{
-		text.replace ( offset, doubleHyphen.length(), _T ( "- -" ) );
-		offset += 2; // WARNING: Not three!
+		const static wxString doubleHyphen = _T ( "--" );
+		size_t offset = 0;
+		while ( ( offset = text.find ( doubleHyphen, offset ) ) != wxString::npos )
+		{
+			text.replace ( offset, doubleHyphen.length(), _T ( "- -" ) );
+			offset += 2; // WARNING: Not three!
+		}
 	}
 
 	text = commentStart + text + commentEnd;

@@ -193,6 +193,7 @@ BEGIN_EVENT_TABLE ( MyFrame, wxFrame )
 	EVT_UPDATE_UI ( wxID_CUT, MyFrame::OnUpdateCutCopy )
 	EVT_UPDATE_UI ( wxID_COPY, MyFrame::OnUpdateCutCopy )
 	EVT_UPDATE_UI ( ID_FIND_AGAIN, MyFrame::OnUpdateFindAgain )
+	EVT_UPDATE_UI ( ID_TOGGLE_COMMENT, MyFrame::OnUpdateToggleComment )
 	EVT_UPDATE_UI_RANGE ( ID_FIND, ID_EXPORT_MSWORD, MyFrame::OnUpdateDocRange )
 	EVT_UPDATE_UI ( ID_PREVIOUS_DOCUMENT, MyFrame::OnUpdatePreviousDocument )
 	EVT_UPDATE_UI ( ID_NEXT_DOCUMENT, MyFrame::OnUpdateNextDocument )
@@ -3697,6 +3698,20 @@ void MyFrame::OnUpdateRedo ( wxUpdateUIEvent& event )
 void MyFrame::OnUpdatePaste ( wxUpdateUIEvent& event )
 {
 	event.Enable ( getActiveDocument() != NULL );
+}
+
+void MyFrame::OnUpdateToggleComment ( wxUpdateUIEvent& event )
+{
+	XmlDoc *doc = getActiveDocument();
+	if ( !doc )
+	{
+		event.Enable ( false );
+		return;
+	}
+
+	int from = doc->GetSelectionStart();
+	int to = doc->GetSelectionEnd();
+	event.Enable ( from != to || doc->getType() == FILE_TYPE_XML );
 }
 
 void MyFrame::OnUpdatePreviousDocument ( wxUpdateUIEvent& event )

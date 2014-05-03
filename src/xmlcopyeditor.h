@@ -288,6 +288,7 @@ class MyFrame : public wxFrame
 		void OnUpdateCutCopy ( wxUpdateUIEvent& event );
 		void OnUpdateFindAgain ( wxUpdateUIEvent& event );
 		void OnUpdatePaste ( wxUpdateUIEvent& event );
+		void OnUpdateToggleComment ( wxUpdateUIEvent& event );
 		void OnUpdateDocRange ( wxUpdateUIEvent& event );
 		void OnUpdateReplaceRange ( wxUpdateUIEvent& event );
 		void OnUpdateReload ( wxUpdateUIEvent& event );

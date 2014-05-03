@@ -158,6 +158,7 @@ class XmlCtrl: public wxStyledTextCtrl
 		std::string myGetTextRaw(); // alternative to faulty stc implementation
 		bool getValidationRequired();
 		void setValidationRequired ( bool b );
+		bool selectCurrentElement();
 		void toggleComment();
 	private:
 		ValidationThread *validationThread; // used for background validation
