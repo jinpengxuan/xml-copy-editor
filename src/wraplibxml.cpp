@@ -733,8 +733,13 @@ wxFileName WrapLibxml::URLToFileName ( const wxString &url )
 	do {
 		if ( uri->scheme == NULL || strcmp (uri->scheme, "file" ) )
 			break;
+#ifdef _MSC_VER
 		if ( uri->server && stricmp ( uri->server, "localhost") )
 			break;
+#else
+		if ( uri->server && strcasecmp ( uri->server, "localhost") )
+			break;
+#endif
 		if ( uri->path == NULL || !*uri->path )
 			break;
 

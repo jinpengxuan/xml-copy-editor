@@ -24,7 +24,7 @@ InputSource *XercesCatalogResolver::resolveEntity (
 
 	// Xerces-C++ can't open a file URL when there are multi-byte characters.
 	// Parse the file URL here instead.
-	wxFileName file = WrapLibxml::URLToFileName ( systemId );
+	wxFileName file = WrapLibxml::URLToFileName ( sysId );
 	if ( file.IsFileReadable() )
 		return new LocalFileInputSource (
 			( const XMLCh * ) WrapXerces::toString ( file.GetFullPath() ).GetData() );
