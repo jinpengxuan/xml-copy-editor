@@ -32,7 +32,7 @@ xmlcopyeditor_SOURCES = xmlcopyeditor.cpp associatedialog.cpp casehandler.cpp \
 	xmlcopyeditor.spec xmlcopyeditor.png custom.xpm \
 	xmlcopyeditor.desktop
 
-xmlcopyeditor_LDFLAGS = $(WX_LIBS) \
+xmlcopyeditor_LDADD = $(WX_LIBS) \
 	-lexpat -lxslt -lxml2 -lpcre -lxerces-c $(ASPELL_LIBS) $(ENCHANT_LIBS) $(GTK_LIBS)
 
 nobase_dist_xmlcopyeditor_DATA = $(srcdir)/catalog/catalog \

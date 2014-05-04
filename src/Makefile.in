@@ -80,10 +80,10 @@ am_xmlcopyeditor_OBJECTS = xmlcopyeditor.$(OBJEXT) \
 	xmlprodnote.$(OBJEXT) xmlsuppressprodnote.$(OBJEXT) \
 	xmlcopyimg.$(OBJEXT) xmlschemagenerator.$(OBJEXT)
 xmlcopyeditor_OBJECTS = $(am_xmlcopyeditor_OBJECTS)
-xmlcopyeditor_LDADD = $(LDADD)
-xmlcopyeditor_LINK = $(LIBTOOL) --tag=CXX $(AM_LIBTOOLFLAGS) \
-	$(LIBTOOLFLAGS) --mode=link $(CXXLD) $(AM_CXXFLAGS) \
-	$(CXXFLAGS) $(xmlcopyeditor_LDFLAGS) $(LDFLAGS) -o $@
+am__DEPENDENCIES_1 =
+xmlcopyeditor_DEPENDENCIES = $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1)
 DEFAULT_INCLUDES = -I.@am__isrc@
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
@@ -286,7 +286,7 @@ xmlcopyeditor_SOURCES = xmlcopyeditor.cpp associatedialog.cpp casehandler.cpp \
 	xmlcopyeditor.spec xmlcopyeditor.png custom.xpm \
 	xmlcopyeditor.desktop
 
-xmlcopyeditor_LDFLAGS = $(WX_LIBS) \
+xmlcopyeditor_LDADD = $(WX_LIBS) \
 	-lexpat -lxslt -lxml2 -lpcre -lxerces-c $(ASPELL_LIBS) $(ENCHANT_LIBS) $(GTK_LIBS)
 
 nobase_dist_xmlcopyeditor_DATA = $(srcdir)/catalog/catalog \
@@ -414,7 +414,7 @@ clean-binPROGRAMS:
 	rm -f $$list
 xmlcopyeditor$(EXEEXT): $(xmlcopyeditor_OBJECTS) $(xmlcopyeditor_DEPENDENCIES) $(EXTRA_xmlcopyeditor_DEPENDENCIES) 
 	@rm -f xmlcopyeditor$(EXEEXT)
-	$(xmlcopyeditor_LINK) $(xmlcopyeditor_OBJECTS) $(xmlcopyeditor_LDADD) $(LIBS)
+	$(CXXLINK) $(xmlcopyeditor_OBJECTS) $(xmlcopyeditor_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
