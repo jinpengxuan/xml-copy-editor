@@ -1,3 +1,23 @@
+/*
+ * Copyright 2005-2009 Gerald Schmidt.
+ * Copyright 2012-2014 Zane U. Ji.
+ *
+ * This file is part of Xml Copy Editor.
+ *
+ * Xml Copy Editor is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; version 2 of the License.
+ *
+ * Xml Copy Editor is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Xml Copy Editor; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+ */
+
 //////////////////////////////////////////////////////////////////////////////
 //
 // Generated from the TEXTINCLUDE 1 resource.
@@ -42,30 +62,57 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 // BITMAP : Bitmap
 //
 
-stock_calc-accept BITMAP "png/stock_calc-accept.bmp"
-stock_calc-accept-green BITMAP "png/stock_calc-accept-green.bmp"
-stock_copy_16 BITMAP "png/stock_copy-16.bmp"
-stock_cut_16 BITMAP "png/stock_cut-16.bmp"
-stock_filters BITMAP "png/stock_filters.bmp"
-stock_help_16 BITMAP "png/stock_help-16.bmp"
-stock_hyperlink BITMAP "png/stock_hyperlink.bmp"
-stock_internet BITMAP "png/stock_internet.bmp"
-stock_internet_16 BITMAP "png/stock_internet-16.bmp"
-stock_new BITMAP "png/stock_new.bmp"
-stock_new_16 BITMAP "png/stock_new-16.bmp"
-stock_open BITMAP "png/stock_open.bmp"
-stock_open_16 BITMAP "png/stock_open-16.bmp"
-stock_paste_16 BITMAP "png/stock_paste-16.bmp"
-stock_print BITMAP "png/stock_print.bmp"
-stock_print_16 BITMAP "png/stock_print-16.bmp"
-stock_print_preview_16 BITMAP "png/stock_print-preview-16.bmp"
-stock_redo_16 BITMAP "png/stock_redo-16.bmp"
-stock_save BITMAP "png/stock_save.bmp"
-stock_save_16 BITMAP "png/stock_save-16.bmp"
-stock_search_16 BITMAP "png/stock_search-16.bmp"
-stock_spellcheck BITMAP "png/stock_spellcheck.bmp"
-stock_spellcheck_16 BITMAP "png/stock_spellcheck-16.bmp"
-stock_undo_16 BITMAP "png/stock_undo-16.bmp"
+#if USE_PNG
+stock_calc-accept PNG "png/stock_calc-accept.png"
+stock_calc-accept-green PNG "png/stock_calc-accept-green.png"
+stock_copy_16 PNG "png/stock_copy_16.png"
+stock_cut_16 PNG "png/stock_cut_16.png"
+stock_filters PNG "png/stock_filters.png"
+stock_help_16 PNG "png/stock_help_16.png"
+stock_hyperlink PNG "png/stock_hyperlink.png"
+stock_internet PNG "png/stock_internet.png"
+stock_internet_16 PNG "png/stock_internet_16.png"
+stock_new PNG "png/stock_new.png"
+stock_new_16 PNG "png/stock_new_16.png"
+stock_open PNG "png/stock_open.png"
+stock_open_16 PNG "png/stock_open_16.png"
+stock_paste_16 PNG "png/stock_paste_16.png"
+stock_print PNG "png/stock_print.png"
+stock_print_16 PNG "png/stock_print_16.png"
+stock_print_preview_16 PNG "png/stock_print_preview_16.png"
+stock_redo_16 PNG "png/stock_redo_16.png"
+stock_save PNG "png/stock_save.png"
+stock_save_16 PNG "png/stock_save_16.png"
+stock_search_16 PNG "png/stock_search_16.png"
+stock_spellcheck PNG "png/stock_spellcheck.png"
+stock_spellcheck_16 PNG "png/stock_spellcheck_16.png"
+stock_undo_16 PNG "png/stock_undo_16.png"
+#else // USE_PNG
+stock_calc-accept BITMAP "bmp/stock_calc-accept.bmp"
+stock_calc-accept-green BITMAP "bmp/stock_calc-accept-green.bmp"
+stock_copy_16 BITMAP "bmp/stock_copy_16.bmp"
+stock_cut_16 BITMAP "bmp/stock_cut_16.bmp"
+stock_filters BITMAP "bmp/stock_filters.bmp"
+stock_help_16 BITMAP "bmp/stock_help_16.bmp"
+stock_hyperlink BITMAP "bmp/stock_hyperlink.bmp"
+stock_internet BITMAP "bmp/stock_internet.bmp"
+stock_internet_16 BITMAP "bmp/stock_internet_16.bmp"
+stock_new BITMAP "bmp/stock_new.bmp"
+stock_new_16 BITMAP "bmp/stock_new_16.bmp"
+stock_open BITMAP "bmp/stock_open.bmp"
+stock_open_16 BITMAP "bmp/stock_open_16.bmp"
+stock_paste_16 BITMAP "bmp/stock_paste_16.bmp"
+stock_print BITMAP "bmp/stock_print.bmp"
+stock_print_16 BITMAP "bmp/stock_print_16.bmp"
+stock_print_preview_16 BITMAP "bmp/stock_print_preview_16.bmp"
+stock_redo_16 BITMAP "bmp/stock_redo_16.bmp"
+stock_save BITMAP "bmp/stock_save.bmp"
+stock_save_16 BITMAP "bmp/stock_save_16.bmp"
+stock_search_16 BITMAP "bmp/stock_search_16.bmp"
+stock_spellcheck BITMAP "bmp/stock_spellcheck.bmp"
+stock_spellcheck_16 BITMAP "bmp/stock_spellcheck_16.bmp"
+stock_undo_16 BITMAP "bmp/stock_undo_16.bmp"
+#endif // USE_PNG
 
 //////////////////////////////////////////////////////////////////////////////
 //
@@ -84,8 +131,8 @@ stock_undo_16 BITMAP "png/stock_undo-16.bmp"
 // ICON : Icon
 //
 
-appicon ICON "res/appicon.ico"
-appicondoc ICON "res/appicondoc.ico"
+appicon ICON "ico/appicon.ico"
+appicondoc ICON "ico/appicondoc.ico"
 
 #endif    // English (United States) resources
 //////////////////////////////////////////////////////////////////////////////
