@@ -271,6 +271,9 @@ InputSource *WrapXerces::resolveEntity (
 		return new LocalFileInputSource (
 				( const XMLCh * ) WrapXerces::toString ( file ).GetData() );
 
+	if (systemId.empty() && publicId.empty())
+		return NULL;
+
 	wxString fileURL = WrapLibxml::FileNameToURL ( fileName );
 	return new URLInputSource
 		( ( const XMLCh * ) WrapXerces::toString ( fileURL ).GetData()
