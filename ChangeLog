@@ -1,4 +1,5 @@
 1.2.1.2
+  + Click on the error message to jump to the error location
   * Bug #99 fix desktop file (Marco Rodrigues)
 
 1.2.1.1 2014/05/04

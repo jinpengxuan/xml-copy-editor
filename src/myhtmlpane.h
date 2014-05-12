@@ -31,16 +31,16 @@ class MyHtmlPane : public wxHtmlWindow
 		    wxWindowID id = wxID_ANY,
 		    const wxPoint& position = wxDefaultPosition,
 		    const wxSize& size = wxDefaultSize );
+		void setLastFile ( const wxString &file );
 	private:
-		/*
-		void OnCellClicked(
-		  wxHtmlCell *cell,
-		  wxCoord x,
-		  wxCoord y,
-		  const wxMouseEvent& event);
-		*/
-		void OnLeftDoubleClick ( wxMouseEvent& event );
+		bool OnCellClicked(
+		    wxHtmlCell *cell,
+		    wxCoord x,
+		    wxCoord y,
+		    const wxMouseEvent& event);
 		DECLARE_EVENT_TABLE()
+
+		wxString mLastFile;
 };
 
 #endif
