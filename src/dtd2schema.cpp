@@ -53,7 +53,7 @@ const wxString &Dtd2Schema::convert ( const wxString &dtdFile )
 	}
 	catch ( const SAXParseException &e )
 	{
-		mErrors << wxString::Format ( _("Line %lld column %lld: %s[br]"),
+		mErrors << wxString::Format ( _("Error at ine %lld, column %lld: %s[br]"),
 				e.getLineNumber(), e.getColumnNumber(),
 				WrapXerces::toString ( e.getMessage() ).c_str() );
 		return mSchema;
