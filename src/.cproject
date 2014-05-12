@@ -4,8 +4,9 @@
 		<cconfiguration id="cdt.managedbuild.config.gnu.mingw.exe.debug.747771716">
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="cdt.managedbuild.config.gnu.mingw.exe.debug.747771716" moduleId="org.eclipse.cdt.core.settings" name="DebugWx-x86">
 				<macros>
-					<stringMacro name="WXVER" type="VALUE_TEXT" value="31"/>
+					<stringMacro name="BOOSTINC" type="VALUE_TEXT" value="D:/boost_1_55_0"/>
 					<stringMacro name="WXWIDGETS" type="VALUE_TEXT" value="E:/wxWidgets"/>
+					<stringMacro name="WXVER" type="VALUE_TEXT" value="31"/>
 				</macros>
 				<externalSettings/>
 				<extensions>
@@ -117,6 +118,7 @@
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="cdt.managedbuild.config.gnu.mingw.exe.release.710071756" moduleId="org.eclipse.cdt.core.settings" name="ReleaseWx28-x86">
 				<macros>
 					<stringMacro name="WXWIDGETS" type="VALUE_TEXT" value="E:/wxWidgets-2.8.12"/>
+					<stringMacro name="BOOSTINC" type="VALUE_TEXT" value="D:/boost_1_55_0"/>
 				</macros>
 				<externalSettings/>
 				<extensions>
@@ -226,6 +228,7 @@
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="cdt.managedbuild.config.gnu.mingw.exe.debug.747771716.2136330833" moduleId="org.eclipse.cdt.core.settings" name="DebugStatic">
 				<macros>
 					<stringMacro name="WXWIDGETS" type="VALUE_TEXT" value="E:/wxWidgets"/>
+					<stringMacro name="BOOSTINC" type="VALUE_TEXT" value="D:/boost_1_55_0"/>
 				</macros>
 				<externalSettings/>
 				<extensions>
@@ -339,6 +342,7 @@
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="cdt.managedbuild.config.gnu.mingw.exe.debug.747771716.73095692" moduleId="org.eclipse.cdt.core.settings" name="DebugWx28-x86">
 				<macros>
 					<stringMacro name="WXWIDGETS" type="VALUE_TEXT" value="E:/wxWidgets-2.8.12"/>
+					<stringMacro name="BOOSTINC" type="VALUE_TEXT" value="D:/boost_1_55_0"/>
 				</macros>
 				<externalSettings/>
 				<extensions>
@@ -448,8 +452,9 @@
 		<cconfiguration id="cdt.managedbuild.config.gnu.mingw.exe.release.710071756.384493523">
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="cdt.managedbuild.config.gnu.mingw.exe.release.710071756.384493523" moduleId="org.eclipse.cdt.core.settings" name="ReleaseWx-x86">
 				<macros>
-					<stringMacro name="WXVER" type="VALUE_TEXT" value="31"/>
+					<stringMacro name="BOOSTINC" type="VALUE_TEXT" value="D:/boost_1_55_0"/>
 					<stringMacro name="WXWIDGETS" type="VALUE_TEXT" value="E:/wxWidgets"/>
+					<stringMacro name="WXVER" type="VALUE_TEXT" value="31"/>
 				</macros>
 				<externalSettings/>
 				<extensions>
@@ -559,8 +564,9 @@
 		<cconfiguration id="cdt.managedbuild.config.gnu.mingw.exe.debug.747771716.1860829555">
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="cdt.managedbuild.config.gnu.mingw.exe.debug.747771716.1860829555" moduleId="org.eclipse.cdt.core.settings" name="DebugWx-x64">
 				<macros>
-					<stringMacro name="WXVER" type="VALUE_TEXT" value="31"/>
+					<stringMacro name="BOOSTINC" type="VALUE_TEXT" value="D:/boost_1_55_0"/>
 					<stringMacro name="WXWIDGETS" type="VALUE_TEXT" value="E:/wxWidgets"/>
+					<stringMacro name="WXVER" type="VALUE_TEXT" value="31"/>
 				</macros>
 				<externalSettings/>
 				<extensions>
@@ -672,6 +678,7 @@
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="cdt.managedbuild.config.gnu.mingw.exe.release.710071756.1627034107" moduleId="org.eclipse.cdt.core.settings" name="ReleaseWx28-x64">
 				<macros>
 					<stringMacro name="WXWIDGETS" type="VALUE_TEXT" value="E:/wxWidgets-2.8.12"/>
+					<stringMacro name="BOOSTINC" type="VALUE_TEXT" value="D:/boost_1_55_0"/>
 				</macros>
 				<externalSettings/>
 				<extensions>
@@ -782,6 +789,7 @@
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="cdt.managedbuild.config.gnu.mingw.exe.debug.747771716.73095692.895241768" moduleId="org.eclipse.cdt.core.settings" name="DebugWx28-x64">
 				<macros>
 					<stringMacro name="WXWIDGETS" type="VALUE_TEXT" value="E:/wxWidgets-2.8.12"/>
+					<stringMacro name="BOOSTINC" type="VALUE_TEXT" value="D:/boost_1_55_0"/>
 				</macros>
 				<externalSettings/>
 				<extensions>
@@ -891,8 +899,9 @@
 		<cconfiguration id="cdt.managedbuild.config.gnu.mingw.exe.release.710071756.384493523.2075568512">
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="cdt.managedbuild.config.gnu.mingw.exe.release.710071756.384493523.2075568512" moduleId="org.eclipse.cdt.core.settings" name="ReleaseWx-x64">
 				<macros>
-					<stringMacro name="WXVER" type="VALUE_TEXT" value="31"/>
+					<stringMacro name="BOOSTINC" type="VALUE_TEXT" value="D:/boost_1_55_0"/>
 					<stringMacro name="WXWIDGETS" type="VALUE_TEXT" value="E:/wxWidgets"/>
+					<stringMacro name="WXVER" type="VALUE_TEXT" value="31"/>
 				</macros>
 				<externalSettings/>
 				<extensions>
