@@ -17,12 +17,11 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
+#include "wx/wx.h"
 #include "xercescatalogresolver.h"
 #include <xercesc/sax2/SAX2XMLReader.hpp>
 #include <xercesc/framework/LocalFileInputSource.hpp>
-
 #ifdef __WXMSW__
-#include "wx/wx.h"
 #include "replace.h"
 #endif
 
