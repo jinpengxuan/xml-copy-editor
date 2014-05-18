@@ -6121,9 +6121,11 @@ void MyFrame::validatePaths()
 	msg << wxTextFile::GetEOL()
 		<< wxTextFile::GetEOL()
 #ifdef __WXMSW__
-		<< _ ( "To change application directory, see Tools, Options..., General" );
+		<< _ ( "To change the application directory setting, click "
+			"Tools menu -> Options... after XML Copy Editor starts up." );
 #else
-		<< _ ( "To change application directory, see Edit, Preferences..., General" );
+		<< _ ( "To change the application directory setting, click "
+			"Edit menu -> Preferences... after XML Copy Editor starts up." );
 #endif
-	wxMessageBox ( msg, GetTitle(), wxOK | wxICON_ERROR, this );
+	messagePane ( msg, CONST_STOP );
 }

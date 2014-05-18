@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: XML Copy Editor v1.2.1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-03 23:08+0800\n"
+"POT-Creation-Date: 2014-05-18 20:20+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -94,7 +94,7 @@ msgstr ""
 
 #: dtd2schema.cpp:56
 #, c-format
-msgid "Line %lld column %lld: %s[br]"
+msgid "Error at ine %lld, column %lld: %s[br]"
 msgstr ""
 
 #: dtd2schema.cpp:83
@@ -303,7 +303,7 @@ msgstr ""
 msgid "Cannot initialise spellcheck"
 msgstr ""
 
-#: mynotebook.cpp:88 wrapdaisy.cpp:535 xmlcopyeditor.cpp:5333
+#: mynotebook.cpp:88 wrapdaisy.cpp:554 xmlcopyeditor.cpp:5333
 msgid "Close"
 msgstr ""
 
@@ -562,79 +562,79 @@ msgstr ""
 msgid "New Suggestion"
 msgstr ""
 
-#: wrapdaisy.cpp:77
+#: wrapdaisy.cpp:96
 msgid "Export in progress"
 msgstr ""
 
-#: wrapdaisy.cpp:78
+#: wrapdaisy.cpp:97
 msgid "Initializing..."
 msgstr ""
 
-#: wrapdaisy.cpp:102 wrapdaisy.cpp:262
+#: wrapdaisy.cpp:121 wrapdaisy.cpp:281
 msgid "Cannot create folder [b]"
 msgstr ""
 
-#: wrapdaisy.cpp:139
+#: wrapdaisy.cpp:158
 msgid "Empty XHTML file"
 msgstr ""
 
-#: wrapdaisy.cpp:149
+#: wrapdaisy.cpp:168
 msgid "Cannot read [b]"
 msgstr ""
 
-#: wrapdaisy.cpp:149
+#: wrapdaisy.cpp:168
 msgid "[/b]"
 msgstr ""
 
-#: wrapdaisy.cpp:163
+#: wrapdaisy.cpp:182
 msgid "Suppressing optional production notes..."
 msgstr ""
 
-#: wrapdaisy.cpp:165 wrapdaisy.cpp:191 wrapdaisy.cpp:277 wrapdaisy.cpp:315
+#: wrapdaisy.cpp:184 wrapdaisy.cpp:210 wrapdaisy.cpp:296 wrapdaisy.cpp:334
 msgid "Cancelled"
 msgstr ""
 
-#: wrapdaisy.cpp:189
+#: wrapdaisy.cpp:208
 msgid "De-emphasizing production notes..."
 msgstr ""
 
-#: wrapdaisy.cpp:240
+#: wrapdaisy.cpp:259
 msgid "Cannot create HTML folder [b]"
 msgstr ""
 
-#: wrapdaisy.cpp:251
+#: wrapdaisy.cpp:270
 msgid "Cannot create image folder [b]"
 msgstr ""
 
-#: wrapdaisy.cpp:275
+#: wrapdaisy.cpp:294
 msgid "Copying files..."
 msgstr ""
 
-#: wrapdaisy.cpp:298
+#: wrapdaisy.cpp:317
 msgid "Cannot write canonical XHTML file"
 msgstr ""
 
-#: wrapdaisy.cpp:313
+#: wrapdaisy.cpp:332
 msgid "Preparing DTBook..."
 msgstr ""
 
-#: wrapdaisy.cpp:521
+#: wrapdaisy.cpp:540
 msgid "documents.open"
 msgstr ""
 
-#: wrapdaisy.cpp:522
+#: wrapdaisy.cpp:541
 msgid "ActiveDocument"
 msgstr ""
 
-#: wrapdaisy.cpp:524
+#: wrapdaisy.cpp:543
 msgid "Cannot open "
 msgstr ""
 
-#: wrapdaisy.cpp:530
+#: wrapdaisy.cpp:549
 msgid "SaveAs"
 msgstr ""
 
-#: wrapdaisy.cpp:658
+#: wrapdaisy.cpp:677
 msgid "Cannot create MP3 album folder [b]"
 msgstr ""
 
@@ -1014,7 +1014,7 @@ msgstr ""
 msgid "Select RELAX NG grammar"
 msgstr ""
 
-#: xmlcopyeditor.cpp:3815 xmlcopyeditor.cpp:4106 xmlcopyeditor.cpp:5780
+#: xmlcopyeditor.cpp:3815 xmlcopyeditor.cpp:4106 xmlcopyeditor.cpp:5783
 msgid "Choose a file:"
 msgstr ""
 
@@ -1084,7 +1084,7 @@ msgstr ""
 msgid "Select stylesheet"
 msgstr ""
 
-#: xmlcopyeditor.cpp:4107 xmlcopyeditor.cpp:5755
+#: xmlcopyeditor.cpp:4107 xmlcopyeditor.cpp:5758
 msgid "XSLT stylesheet"
 msgstr ""
 
@@ -1890,88 +1890,92 @@ msgstr ""
 msgid "Message"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5590
+#: xmlcopyeditor.cpp:5593
 #, c-format
 msgid "%s is %s"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5615
+#: xmlcopyeditor.cpp:5618
 msgid "Document has been modified: save or discard changes"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5678
+#: xmlcopyeditor.cpp:5681
 msgid "Encoding should be one of "
 msgstr ""
 
-#: xmlcopyeditor.cpp:5737
+#: xmlcopyeditor.cpp:5740
 msgid "Public DTD"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5743
+#: xmlcopyeditor.cpp:5746
 msgid "System DTD"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5749
+#: xmlcopyeditor.cpp:5752
 msgid "XML Schema"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5772
+#: xmlcopyeditor.cpp:5775
 #, c-format
 msgid "Cannot associate %s: %s"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5779
+#: xmlcopyeditor.cpp:5782
 #, c-format
 msgid "Associate %s"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5787
+#: xmlcopyeditor.cpp:5790
 msgid "Choose a public identifier:"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5907
+#: xmlcopyeditor.cpp:5910
 #, c-format
 msgid "Cannot count words: %s"
 msgstr ""
 
-#: xmlcopyeditor.cpp:5915
+#: xmlcopyeditor.cpp:5918
 #, c-format
 msgid "%s contains %i word"
 msgid_plural "%s contains %i words"
 msgstr[0] ""
 msgstr[1] ""
 
-#: xmlcopyeditor.cpp:6117
+#: xmlcopyeditor.cpp:6120
 msgid "Invalid path: "
 msgid_plural "Invalid paths: "
 msgstr[0] ""
 msgstr[1] ""
 
-#: xmlcopyeditor.cpp:6121
-msgid "To change application directory, see Tools, Options..., General"
+#: xmlcopyeditor.cpp:6124
+msgid ""
+"To change the application directory setting, click Tools menu -> Options... "
+"after XML Copy Editor starts up."
 msgstr ""
 
-#: xmlcopyeditor.cpp:6123
-msgid "To change application directory, see Edit, Preferences..., General"
+#: xmlcopyeditor.cpp:6127
+msgid ""
+"To change the application directory setting, click Edit menu -> "
+"Preferences... after XML Copy Editor starts up."
 msgstr ""
 
-#: xmlctrl.cpp:303 xmlctrl.cpp:407
+#: xmlctrl.cpp:304 xmlctrl.cpp:408
 msgid "Delete tag?"
 msgstr ""
 
-#: xmlctrl.cpp:304 xmlctrl.cpp:335 xmlctrl.cpp:408 xmlctrl.cpp:439
+#: xmlctrl.cpp:305 xmlctrl.cpp:336 xmlctrl.cpp:409 xmlctrl.cpp:440
 msgid "Tags Locked"
 msgstr ""
 
-#: xmlctrl.cpp:334 xmlctrl.cpp:438
+#: xmlctrl.cpp:335 xmlctrl.cpp:439
 msgid "Delete entity reference?"
 msgstr ""
 
-#: xmlctrl.cpp:2247
+#: xmlctrl.cpp:2248
 msgid "Cannot find the start tag"
 msgstr ""
 
-#: xmlctrl.cpp:2255
+#: xmlctrl.cpp:2256
 msgid "Cannot find the end tag"
 msgstr ""
 
