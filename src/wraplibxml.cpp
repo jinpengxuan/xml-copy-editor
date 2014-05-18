@@ -731,7 +731,7 @@ wxFileName WrapLibxml::URLToFileName ( const wxString &url )
 		return wxFileName ( url );
 
 	do {
-		if ( uri->scheme == NULL || strcmp (uri->scheme, "file" ) )
+		if ( uri->scheme != NULL && strcmp (uri->scheme, "file" ) )
 			break;
 #ifdef _MSC_VER
 		if ( uri->server && stricmp ( uri->server, "localhost") )
@@ -758,6 +758,6 @@ wxFileName WrapLibxml::URLToFileName ( const wxString &url )
 
 	xmlFreeURI ( uri );
 
-	return wxFileName();
+	return wxFileName(url);
 #endif // wxCHECK_VERSION(2,9,0)
 }
