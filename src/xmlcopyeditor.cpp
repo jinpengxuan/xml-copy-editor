@@ -6127,5 +6127,5 @@ void MyFrame::validatePaths()
 		<< _ ( "To change the application directory setting, click "
 			"Edit menu -> Preferences... after XML Copy Editor starts up." );
 #endif
-	messagePane ( msg, CONST_STOP );
+	wxMessageBox ( msg, GetTitle(), wxOK | wxICON_ERROR, this );
 }
