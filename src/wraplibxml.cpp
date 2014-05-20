@@ -385,7 +385,6 @@ bool WrapLibxml::xpath ( const wxString &xpath, const std::string &utf8DocBuf,
 
 	xmlXPathContextPtr context = NULL;
 	xmlXPathObjectPtr result = NULL;
-	xmlNodeSetPtr nodeset = NULL;
 
 	context = xmlXPathNewContext ( docPtr );
 	if ( !context )
@@ -406,28 +405,7 @@ bool WrapLibxml::xpath ( const wxString &xpath, const std::string &utf8DocBuf,
 
 	bool xpathIsValid = ( result ) ? true : false;
 
-	while ( result != NULL )
-	{
-		if ( xmlXPathNodeSetIsEmpty ( result->nodesetval ) )
-			break;
-		xmlBufferPtr bufferPtr = xmlBufferCreate();
-		if ( bufferPtr == NULL )
-			break;
-		nodeset = result->nodesetval;
-		for ( int i = 0; i < nodeset->nodeNr; i++ )
-		{
-			xmlNodePtr node = nodeset->nodeTab[i];
-			if ( !node )
-				break;
-			xmlNodeDump ( bufferPtr, NULL, node, 0, 1 );
-
-			output += ( const char * ) xmlBufferContent ( bufferPtr );
-			output += '\n';
-			xmlBufferEmpty ( bufferPtr );
-		}
-		xmlBufferFree ( bufferPtr );
-		break;
-	}
+	output = dumpXPathObject ( result );
 
 	xmlXPathFreeObject ( result );
 	xmlXPathFreeContext ( context );
@@ -435,6 +413,96 @@ bool WrapLibxml::xpath ( const wxString &xpath, const std::string &utf8DocBuf,
 	xmlFreeParserCtxt ( ctxt );
 
 	return xpathIsValid;
+}
+
+std::string WrapLibxml::dumpXPathObject ( xmlXPathObjectPtr obj )
+{
+	std::stringstream sstream;
+	if ( !obj )
+		return sstream.str();
+
+	switch ( obj->type )
+	{
+	case XPATH_NODESET:
+	{
+		if ( xmlXPathNodeSetIsEmpty ( obj->nodesetval ) )
+			break;
+
+		xmlBufferPtr bufferPtr = xmlBufferCreate();
+		if ( bufferPtr == NULL )
+			break;
+
+		xmlNodeSetPtr nodeset = obj->nodesetval;
+		for ( int i = 0; i < nodeset->nodeNr; i++ )
+		{
+			xmlNodePtr node = nodeset->nodeTab[i];
+			if ( !node )
+				break;
+			xmlNodeDump ( bufferPtr, NULL, node, 0/*level*/, TRUE/*format*/ );
+
+			sstream << ( const char * ) xmlBufferContent ( bufferPtr )
+					<< '\n';
+			xmlBufferEmpty ( bufferPtr );
+		}
+		xmlBufferFree ( bufferPtr );
+		break;
+	}
+
+	case XPATH_BOOLEAN:
+		sstream << !!obj->boolval;
+		break;
+
+	case XPATH_NUMBER:
+		switch ( xmlXPathIsInf ( obj->floatval ) )
+		{
+		case 1:
+			sstream << wxString ( _("Infinity") ).utf8_str();
+			break;
+		case -1:
+			sstream << wxString ( _("-Infinity") ).utf8_str();
+			break;
+		default:
+			if ( xmlXPathIsNaN ( obj->floatval ) )
+				sstream << wxString ( _("NaN") ).utf8_str();
+			else
+				sstream << obj->floatval;
+			break;
+		}
+		break;
+
+	case XPATH_STRING:
+		sstream << obj->stringval;
+		break;
+
+	case XPATH_POINT:
+		xmlBufferPtr bufferPtr;
+		bufferPtr = xmlBufferCreate();
+		if ( bufferPtr == NULL )
+			break;
+		xmlNodeDump ( bufferPtr, NULL, ( xmlNodePtr ) obj->user,
+				1/*level*/, TRUE/*format*/ );
+		sstream << xmlBufferContent ( bufferPtr );
+		xmlBufferFree ( bufferPtr );
+		break;
+
+	case XPATH_RANGE:
+	case XPATH_LOCATIONSET:
+	case XPATH_XSLT_TREE:
+	default:
+		FILE *fp = tmpfile();
+		xmlXPathDebugDumpObject ( fp, obj, 0/*depth*/ );
+
+		fpos_t size = ftell ( fp );
+		std::string str;
+		str.resize ( size );
+		fseek ( fp, 0, SEEK_SET );
+		fread ( ( char * ) str.c_str(), 1, str.capacity(), fp );
+		fclose ( fp );
+
+		return str;
+	}
+
+	return sstream.str();
 }
 
 bool WrapLibxml::xslt (

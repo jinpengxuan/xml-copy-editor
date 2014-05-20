@@ -1,5 +1,6 @@
 1.2.1.2
   + Feature #69 Add "current XPath" shortcut
+  + Feature #155 XPath - functions
   + Click on the error message to jump to the error location
   * Bug #99 fix desktop file (Marco Rodrigues)
 

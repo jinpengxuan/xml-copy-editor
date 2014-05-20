@@ -76,6 +76,7 @@ class WrapLibxml
 		    const wxString &xpath,
 		    const std::string &utf8DocBuf,
 		    const wxString &docFileName );
+		std::string dumpXPathObject ( xmlXPathObjectPtr obj );
 		bool xslt (
 		    const wxString &styleFileName,
 		    const std::string &utf8DocBuf,
