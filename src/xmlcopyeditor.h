@@ -125,6 +125,7 @@ enum
 	ID_CREATE_SCHEMA,
 	ID_DTD_TO_SCHEMA,
 	ID_XPATH,
+	ID_COPY_XPATH,
 	ID_XSLT,
 	ID_XSLT_TEI_FO,
 	ID_XSLT_TEI_HTML,
@@ -320,6 +321,8 @@ class MyFrame : public wxFrame
 		void OnDropFiles ( wxDropFilesEvent& event );
 #endif
 		void OnPromptGenerated ( wxNotifyEvent &event );
+		void OnCopyXPath ( wxCommandEvent &event );
+		void OnUpdateCopyXPath ( wxUpdateUIEvent& event );
 		void setStrictScrolling ( bool b );
 		void validateRelaxNG (
 		    XmlDoc *doc,

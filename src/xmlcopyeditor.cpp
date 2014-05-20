@@ -159,6 +159,7 @@ BEGIN_EVENT_TABLE ( MyFrame, wxFrame )
 	EVT_MENU ( ID_LOCATION_PANE_VISIBLE, MyFrame::OnLocationPaneVisible )
 	EVT_MENU ( ID_PROTECT_TAGS, MyFrame::OnProtectTags )
 	EVT_MENU ( ID_WRAP_WORDS, MyFrame::OnWrapWords )
+	EVT_MENU ( ID_COPY_XPATH, MyFrame::OnCopyXPath )
 	EVT_MENU_RANGE ( ID_SHOW_TAGS, ID_HIDE_TAGS, MyFrame::OnVisibilityState )
 	EVT_MENU_RANGE ( ID_ASSOCIATE_DTD_PUBLIC, ID_ASSOCIATE_XSL, MyFrame::OnAssociate )
 	EVT_MENU_RANGE ( wxID_FILE1, wxID_FILE9, MyFrame::OnHistoryFile )
@@ -201,6 +202,7 @@ BEGIN_EVENT_TABLE ( MyFrame, wxFrame )
 	EVT_UPDATE_UI ( ID_CLOSE_FIND_REPLACE_PANE, MyFrame::OnUpdateCloseFindReplacePane )
 	EVT_UPDATE_UI ( ID_CLOSE_COMMAND_PANE, MyFrame::OnUpdateCloseCommandPane )
 	EVT_UPDATE_UI ( ID_RELOAD, MyFrame::OnUpdateReload )
+	EVT_UPDATE_UI ( ID_COPY_XPATH, MyFrame::OnUpdateCopyXPath )
 	EVT_IDLE ( MyFrame::OnIdle )
 	EVT_AUINOTEBOOK_PAGE_CLOSE ( wxID_ANY, MyFrame::OnPageClosing )
 #ifdef __WXMSW__
@@ -5194,6 +5196,10 @@ wxMenuBar *MyFrame::getMenuBar()
 	    ID_XPATH,
 	    _ ( "&Evaluate XPath...\tF9" ),
 	    _ ( "Evaluate XPath..." ) );
+	xmlMenu->Append (
+	    ID_COPY_XPATH,
+	    _ ( "Copy &The Current XPath" ),
+	    _ ( "Copy The Current XPath" ) );
 
 	xmlMenu->AppendSeparator();
 	xmlMenu->Append (
@@ -6017,6 +6023,49 @@ void MyFrame::OnPromptGenerated ( wxNotifyEvent &event )
 	insertChildPanel->update ( doc, lastParent, wxEmptyString, true );
 	insertSiblingPanel->update ( doc, lastParent, wxEmptyString, true );
 	insertEntityPanel->update ( doc, wxEmptyString, wxEmptyString, true );
+}
+
+void MyFrame::OnCopyXPath ( wxCommandEvent &event )
+{
+	XmlDoc *doc = getActiveDocument();
+	if ( !doc )
+		return;
+
+	wxBusyCursor cursor;
+
+	wxString xpath = doc->getCurrentXPath();
+	// Write the XPath to the clipboard
+	if ( xpath.IsEmpty() )
+	{
+		messagePane ( _("The current XPath is empty."), CONST_WARNING );
+	}
+	else if ( wxTheClipboard->Open() )
+	{
+		// This data objects are held by the clipboard,
+		// so do not delete them in the app.
+		wxTheClipboard->SetData ( new wxTextDataObject ( xpath ) );
+		wxTheClipboard->Close();
+
+		wxString message = wxString::Format
+					( _("The current XPath has been copied to the clipboard:[br][b]%s[/b]")
+					, xpath.c_str()
+					);
+		messagePane ( message, CONST_INFO );
+	}
+	else
+	{
+		wxString message = wxString::Format
+				( _("Failed to copy the current XPath to the clipboard:[br][b]%s[/b]")
+				, xpath.c_str()
+				);
+		messagePane ( message, CONST_STOP );
+		htmlReport->SetFocus(); // This is needed to make Ctrl + C work
+	}
+}
+
+void MyFrame::OnUpdateCopyXPath ( wxUpdateUIEvent& event )
+{
+	event.Enable ( getActiveDocument() );
 }
 
 wxString MyFrame::getAuxPath ( const wxString& fileName )

@@ -160,6 +160,7 @@ class XmlCtrl: public wxStyledTextCtrl
 		void setValidationRequired ( bool b );
 		bool selectCurrentElement();
 		void toggleComment();
+		wxString getCurrentXPath();
 	private:
 		ValidationThread *validationThread; // used for background validation
 		XmlPromptGenerator *mPromptGeneratorThread;

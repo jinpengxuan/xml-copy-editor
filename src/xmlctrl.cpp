@@ -2366,3 +2366,27 @@ void XmlCtrl::toggleComment()
 		SetSelection ( pos, pos );
 	}
 }
+
+wxString XmlCtrl::getCurrentXPath()
+{
+	wxString xpath;
+	int pos = GetCurrentPos();
+	for ( ; ; )
+	{
+		pos = findPreviousStartTag ( pos, 1, '>' );
+		if ( pos <= 0 )
+			break;
+
+		wxString name = getLastElementName ( pos );
+		size_t pos = name.Index ( ':' );
+		if ( pos != wxString::npos && pos < name.length() )
+		{
+			++pos;
+			name = _T("*[local-name()='")
+					+ name.substr ( pos, name.length() - pos ) + _T("']");
+		}
+		xpath = _T("/") + name + xpath;
+	}
+
+	return xpath;
+}
