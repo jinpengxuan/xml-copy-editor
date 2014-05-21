@@ -1209,13 +1209,15 @@ void XmlCtrl::applyProperties (
 		SetMarginWidth ( 2, 16 );
 
 		// define folding markers
-		MarkerDefine ( wxSTC_MARKNUM_FOLDEREND, wxSTC_MARK_BOXPLUSCONNECTED,  *wxWHITE, *wxBLACK );
-		MarkerDefine ( wxSTC_MARKNUM_FOLDEROPENMID, wxSTC_MARK_BOXMINUSCONNECTED, *wxWHITE, *wxBLACK );
-		MarkerDefine ( wxSTC_MARKNUM_FOLDERMIDTAIL, wxSTC_MARK_TCORNER, *wxWHITE, *wxBLACK );
-		MarkerDefine ( wxSTC_MARKNUM_FOLDERTAIL, wxSTC_MARK_LCORNER, *wxWHITE, *wxBLACK );
-		MarkerDefine ( wxSTC_MARKNUM_FOLDERSUB, wxSTC_MARK_VLINE, *wxWHITE, *wxBLACK );
-		MarkerDefine ( wxSTC_MARKNUM_FOLDER, wxSTC_MARK_BOXPLUS, *wxWHITE, *wxBLACK );
-		MarkerDefine ( wxSTC_MARKNUM_FOLDEROPEN, wxSTC_MARK_BOXMINUS, *wxWHITE, *wxBLACK );
+		wxColor clrWnd = wxSystemSettings::GetColour ( wxSYS_COLOUR_WINDOW );
+		wxColor clrText = wxSystemSettings::GetColour ( wxSYS_COLOUR_WINDOWTEXT );
+		MarkerDefine ( wxSTC_MARKNUM_FOLDEREND, wxSTC_MARK_BOXPLUSCONNECTED, clrWnd, clrText );
+		MarkerDefine ( wxSTC_MARKNUM_FOLDEROPENMID, wxSTC_MARK_BOXMINUSCONNECTED, clrWnd, clrText );
+		MarkerDefine ( wxSTC_MARKNUM_FOLDERMIDTAIL, wxSTC_MARK_TCORNER, clrWnd, clrText );
+		MarkerDefine ( wxSTC_MARKNUM_FOLDERTAIL, wxSTC_MARK_LCORNER, clrWnd, clrText );
+		MarkerDefine ( wxSTC_MARKNUM_FOLDERSUB, wxSTC_MARK_VLINE, clrWnd, clrText );
+		MarkerDefine ( wxSTC_MARKNUM_FOLDER, wxSTC_MARK_BOXPLUS, clrWnd, clrText );
+		MarkerDefine ( wxSTC_MARKNUM_FOLDEROPEN, wxSTC_MARK_BOXMINUS, clrWnd, clrText );
 	}
 	else
 	{
@@ -1740,6 +1742,9 @@ void XmlCtrl::setColorScheme ( int scheme )
 		StyleSetBold ( wxSTC_H_SGML_ENTITY, true );
 		StyleSetBold ( wxSTC_H_SGML_DEFAULT, true );
 	}
+
+	wxColour color = wxSystemSettings::GetColour ( wxSYS_COLOUR_WINDOWTEXT );
+	StyleSetForeground ( wxSTC_STYLE_LINENUMBER, color );
 
 	applyVisibilityState ( visibilityState );
 }

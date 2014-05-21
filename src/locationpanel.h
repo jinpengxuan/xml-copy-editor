@@ -33,6 +33,7 @@ class LocationPanel : public wxPanel
 		void update (
 		    XmlDoc *docParameter = NULL,
 		    const wxString& parent = wxEmptyString );
+		void OnSysColourChanged ( wxSysColourChangedEvent &event );
 	private:
 		void indentStructure ( wxString& structure );
 		MyFrame *parentWindow;

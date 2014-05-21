@@ -21,6 +21,7 @@
 #include "xmldoc.h"
 
 BEGIN_EVENT_TABLE ( LocationPanel, wxPanel )
+	EVT_SYS_COLOUR_CHANGED ( LocationPanel::OnSysColourChanged )
 END_EVENT_TABLE()
 
 LocationPanel::LocationPanel ( wxWindow *parentWindowParameter, int id ) :
@@ -59,6 +60,10 @@ LocationPanel::LocationPanel ( wxWindow *parentWindowParameter, int id ) :
 	//structureEdit->SetWrapVisualFlags ( wxSTC_WRAPVISUALFLAG_START );
 	structureEdit->SetTabWidth ( 2 );
 	structureEdit->SetIndentationGuides ( true );
+	structureEdit->SetLexer ( wxSTC_LEX_NULL );
+
+	wxSysColourChangedEvent event;
+	OnSysColourChanged ( event );
 
 	sizer->Add ( edit, 0, wxGROW | wxTOP, 0 );
 	sizer->Add ( structureEdit, 1, wxGROW | wxTOP, 0 );
@@ -168,4 +173,13 @@ void LocationPanel::indentStructure ( wxString& structure )
 		}
 	}
 	structure = indented;
+}
+
+void LocationPanel::OnSysColourChanged ( wxSysColourChangedEvent &WXUNUSED ( event ) )
+{
+	wxColor clrWnd = wxSystemSettings::GetColour ( wxSYS_COLOUR_WINDOW );
+	wxColor clrText = wxSystemSettings::GetColour ( wxSYS_COLOUR_WINDOWTEXT );
+	structureEdit->StyleSetForeground ( wxSTC_STYLE_DEFAULT, clrText );
+	structureEdit->StyleSetBackground ( wxSTC_STYLE_DEFAULT, clrWnd );
+	structureEdit->StyleClearAll();
 }
