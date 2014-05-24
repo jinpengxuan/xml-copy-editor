@@ -5582,9 +5582,11 @@ void MyFrame::messagePane ( const wxString& s, int iconType, bool forcePane )
 	htmlBuffer += htmlString;
 	htmlBuffer += _T ( "</td></tr></table></body></html>" );
 
+	wxString file;
 	XmlDoc *doc = getActiveDocument();
 	if ( doc )
-		htmlReport->setLastFile ( doc->getFullFileName() );
+		file = doc->getFullFileName();
+	htmlReport->setLastFile ( file );
 	htmlReport->SetPage ( htmlBuffer );
 
 	manager.Update();
