@@ -23,11 +23,7 @@
 #else
 #define FILE_FILTER _("All files (*)|*|XML (*.xml)|*.xml|XHTML (*.html)|*.html|DTD (*.dtd)|*.dtd|XML Schema (*.xsd)|*.xsd|RELAX NG grammar (*.rng)|*.rng|XSL (*.xsl)|*.xsl")
 #endif
-#if wxCHECK_VERSION(2,9,0)
-#define ABOUT_COPYRIGHT _(_T("Copyright © 2005-2009 Gerald Schmidt <gnschmidt@users.sourceforge.net>"))
-#else
 #define ABOUT_COPYRIGHT _("Copyright © 2005-2009 Gerald Schmidt <gnschmidt@users.sourceforge.net>")
-#endif
 #define ABOUT_DESCRIPTION _("\nXML Copy Editor is free software released under the GNU\nGeneral Public License.\n\nMany thanks are due to ")
 #define ABOUT_CONTRIBUTORS _T(\
 "Tim van Niekerk, Matt Smigielski,\n"\
