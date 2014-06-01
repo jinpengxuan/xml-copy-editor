@@ -492,14 +492,20 @@ std::string WrapLibxml::dumpXPathObject ( xmlXPathObjectPtr obj )
 		FILE *fp = tmpfile();
 		xmlXPathDebugDumpObject ( fp, obj, 0/*depth*/ );
 
-		fpos_t size = ftell ( fp );
 		std::string str;
-		str.resize ( size );
-		fseek ( fp, 0, SEEK_SET );
-		fread ( ( char * ) str.c_str(), 1, str.capacity(), fp );
+		long size = ftell ( fp );
+		if ( size == -1 )
+			return str;
+
+		str.resize ( size + 1 );
+		if ( str.capacity() != ( size_t ) size + 1 )
+			return str;
+		rewind ( fp );
+		size_t read = fread ( ( char * ) str.c_str(), 1, str.capacity(), fp );
+		str[size] = '\0';
 		fclose ( fp );
 
-		return str;
+		return read == str.capacity() ? str : sstream.str();
 	}
 
 	return sstream.str();
