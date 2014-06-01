@@ -7,4 +7,4 @@ Exec=xmlcopyeditor %U
 Icon=xmlcopyeditor
 Terminal=false
 MimeType=text/xml;
-Categories=Development;TextEditor;
+Categories=Development;Utility;TextEditor;
