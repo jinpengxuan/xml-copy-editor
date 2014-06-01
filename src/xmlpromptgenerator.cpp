@@ -41,6 +41,7 @@
 #include <xercesc/validators/common/ContentSpecNode.hpp>
 #include <xercesc/validators/schema/SchemaSymbols.hpp>
 #include <xercesc/validators/DTD/DTDGrammar.hpp>
+#include <xercesc/dom/DOMException.hpp>
 
 using namespace xercesc;
 
@@ -309,14 +310,13 @@ int XMLCALL XmlPromptGenerator::externalentityrefhandler (
 	parser.setErrorHandler ( &handler );
 	parser.setEntityResolver ( &catalogResolver );
 
+	wxString widePublicId = wxString::FromUTF8 ( publicId );
+	wxString wideSystemId = wxString::FromUTF8 ( systemId );
+
 	Grammar *rootGrammar;
 	try {
-		wxString wideSystemId = wxString::FromUTF8 ( systemId );
 		std::auto_ptr<InputSource> source ( WrapXerces::resolveEntity
-				( wxString::FromUTF8 ( publicId )
-				, wideSystemId
-				, d->basePath
-				) );
+				( widePublicId , wideSystemId , d->basePath ) );
 		if ( !source.get() )
 		{
 			wxLogError ( _T("Cann't open '%s'"), wideSystemId.c_str() );
@@ -330,9 +330,27 @@ int XMLCALL XmlPromptGenerator::externalentityrefhandler (
 		if ( !rootGrammar )
 			return XML_STATUS_ERROR;
 	}
-	catch ( SAXParseException& e )
+	catch ( SAXParseException &e )
 	{
 		wxLogError ( _T ( "%s" ), handler.getErrors().c_str() );
+		return XML_STATUS_ERROR;
+	}
+	catch ( XMLException &e )
+	{
+		wxString error = WrapXerces::toString ( e.getMessage() );
+		wxLogError ( _T ( "%s" ), error.c_str() );
+		return XML_STATUS_ERROR;
+	}
+	catch ( DOMException &e )
+	{
+		wxString error = WrapXerces::toString ( e.getMessage() );
+		wxLogError ( _T ( "%s" ), error.c_str() );
+		return XML_STATUS_ERROR;
+	}
+	catch (...)
+	{
+		wxLogError ( _T ( "Failed to load: %s %s"), widePublicId.c_str()
+				, wideSystemId.c_str() );
 		return XML_STATUS_ERROR;
 	}
 
