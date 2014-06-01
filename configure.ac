@@ -1,6 +1,13 @@
 AC_INIT([xmlcopyeditor], [1.2.1.2])
 AC_CONFIG_SRCDIR([src/xmlcopyeditor.cpp])
-AM_INIT_AUTOMAKE
+AC_CONFIG_MACRO_DIR([m4])
+
+AM_INIT_AUTOMAKE([1.11 foreign])
+
+GETTEXT_PACKAGE=AC_PACKAGE_NAME
+AC_SUBST(GETTEXT_PACKAGE)
+AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE",[The name of the gettext domain])
+IT_PROG_INTLTOOL(0.40.0)
 
 AC_PROG_CXX
 AC_PROG_INSTALL
@@ -146,7 +153,7 @@ PKG_CHECK_MODULES(GTK, [gtk+-2.0], [AC_MSG_RESULT([gtk+-2.0])],
 	#[PKG_CHECK_MODULES(GTK, [gtk+-3.0], [AC_MSG_RESULT([gtk+-3.0])])]
 )
 
-AC_OUTPUT(Makefile src/Makefile)
+AC_OUTPUT(Makefile m4/Makefile po/Makefile.in src/Makefile)
 
 dnl Summarized output
 echo

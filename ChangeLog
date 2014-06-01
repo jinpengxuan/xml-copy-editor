@@ -2,6 +2,7 @@
   + Feature #69 Add "current XPath" shortcut
   + Feature #155 XPath - functions
   + Click on the error message to jump to the error location
+  * Bug #103 Locale files have the wrong pathname under Linux
   * Bug #99 fix desktop file (Marco Rodrigues)
   * Bug #57 black on black = hard to use
 
@@ -51,3 +52,4 @@
 1.2.0.6 2009/11/15
   + Catalan translation by Robert Falcó Miramontes
   + DAISY (http://daisymfc.sourceforge.net/) Pipeline integration
+

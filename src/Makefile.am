@@ -59,7 +59,6 @@ nobase_dist_xmlcopyeditor_DATA = $(srcdir)/catalog/catalog \
 	$(srcdir)/help/*.* \
 	$(srcdir)/help/html/*.* \
 	$(srcdir)/png/*.png \
-	$(srcdir)/po/*/messages.mo \
 	$(srcdir)/rng/*.rnc \
 	$(srcdir)/rng/*.rng \
 	$(srcdir)/rng/exclude/*.rng \

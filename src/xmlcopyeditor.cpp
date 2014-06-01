@@ -365,7 +365,7 @@ bool MyApp::OnInit()
 			prefixes.RemoveAt ( i );
 	}
 	
-	wxString catalog = _T ( "messages" );
+	wxString catalog = _T ( "xmlcopyeditor" );
 	getAvailableTranslations ( &prefixes, &catalog );
 
 	if ( !myLocale.AddCatalog ( catalog ) )

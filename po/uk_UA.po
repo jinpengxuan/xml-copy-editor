@@ -1,0 +1,2265 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: XMLCopyEditor 1.0.9.5\n"
+"Report-Msgid-Bugs-To: https://sourceforge.net/p/xml-copy-editor/bugs/\n"
+"POT-Creation-Date: 2014-06-01 20:12+0800\n"
+"PO-Revision-Date: 2007-08-24 02:28+0200\n"
+"Last-Translator: Serhij Dubyk <dubyk@library.lviv.ua>\n"
+"Language-Team: \n"
+"Language: uk_UA\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Poedit-Language: Ukrainian\n"
+"X-Poedit-Country: UKRAINE\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#. wxID_CANCEL req'd for 'Esc closes dialog' functionality
+#: ../src/aboutdialog.cpp:51
+msgid "OK"
+msgstr "Гаразд"
+
+#: ../src/associatedialog.cpp:76 ../src/mypropertysheet.cpp:166
+msgid "Browse"
+msgstr "Перегляд"
+
+#: ../src/associatedialog.cpp:123
+msgid "Provides a space for you to type the path of the file"
+msgstr ""
+
+#: ../src/associatedialog.cpp:127
+msgid "Opens a standard file dialog"
+msgstr ""
+
+#: ../src/associatedialog.cpp:131
+msgid "Provides a space for you to type additional information"
+msgstr ""
+
+#: ../src/associatedialog.cpp:135
+msgid "Closes this dialog without making any changes"
+msgstr ""
+
+#: ../src/associatedialog.cpp:139
+msgid "Selects the file specified"
+msgstr ""
+
+#: ../src/associatedialog.cpp:168
+msgid "|All files (*.*)|*.*"
+msgstr "|Усі файли (*.*)|*.*"
+
+#: ../src/associatedialog.cpp:171
+msgid "Select "
+msgstr ""
+
+#: ../src/commandpanel.cpp:46 ../src/commandpanel.cpp:164
+msgid "{path}"
+msgstr ""
+
+#: ../src/commandpanel.cpp:47 ../src/commandpanel.cpp:165
+msgid "{name}"
+msgstr ""
+
+#: ../src/commandpanel.cpp:48 ../src/commandpanel.cpp:166
+msgid "{extension}"
+msgstr ""
+
+#: ../src/commandpanel.cpp:49 ../src/commandpanel.cpp:163
+msgid "{fullpath}"
+msgstr ""
+
+#: ../src/commandpanel.cpp:64
+msgid "&Run"
+msgstr "&Виконати"
+
+#: ../src/commandpanel.cpp:72
+msgid "&Wait"
+msgstr "&Чекати"
+
+#: ../src/commandpanel.cpp:78
+msgid "Output options"
+msgstr "Опції виводу"
+
+#: ../src/commandpanel.cpp:83
+#, fuzzy
+msgid "I&gnore"
+msgstr "Ігнорувати"
+
+#: ../src/commandpanel.cpp:89
+msgid "I&nsert"
+msgstr "&Вставити"
+
+#: ../src/commandpanel.cpp:94
+msgid "New &document"
+msgstr "Новий &документ"
+
+#: ../src/commandpanel.cpp:115
+msgid "Variables"
+msgstr "Змінні"
+
+#: ../src/dtd2schema.cpp:56
+#, c-format
+msgid "Error at ine %lld, column %lld: %s[br]"
+msgstr ""
+
+#: ../src/dtd2schema.cpp:83
+#, c-format
+msgid "Target namespace is redefined: %s -> %s[br]"
+msgstr ""
+
+#: ../src/dtd2schema.cpp:312
+#, fuzzy
+msgid "Ignored content type: "
+msgstr "Ігнорувати цього разу"
+
+#: ../src/dtd2schema.cpp:337 ../src/dtd2schema.cpp:419
+#, c-format
+msgid "Unknown namespace: %s[br]"
+msgstr ""
+
+#: ../src/dtd2schema.cpp:392
+#, c-format
+msgid "Ignored namespace of %s: %s[br]"
+msgstr ""
+
+#: ../src/dtd2schema.cpp:411
+#, c-format
+msgid "Namespace redefined: %s -> %s[br]"
+msgstr ""
+
+#: ../src/dtd2schema.cpp:526
+#, c-format
+msgid "Ignored attribute \"%s\"'s type: %s[br]"
+msgstr ""
+
+#: ../src/dtd2schema.cpp:565
+#, c-format
+msgid "Unknown default type of attribute \"%s\": %s[br]"
+msgstr ""
+
+#: ../src/exportdialog.cpp:66
+msgid "DAISY export"
+msgstr ""
+
+#: ../src/exportdialog.cpp:73
+msgid "&Stylesheet for conversion to canonical XHTML (optional):"
+msgstr ""
+
+#: ../src/exportdialog.cpp:85
+msgid "&Output folder:"
+msgstr ""
+
+#: ../src/exportdialog.cpp:96
+msgid "&De-emphasize production notes"
+msgstr ""
+
+#: ../src/exportdialog.cpp:98
+msgid "&Suppress optional production notes"
+msgstr ""
+
+#: ../src/exportdialog.cpp:101
+#, fuzzy
+msgid "Outputs"
+msgstr "Опції виводу"
+
+#: ../src/exportdialog.cpp:102
+msgid "&Full DAISY 2.02 and 3.0 Talking Books"
+msgstr ""
+
+#: ../src/exportdialog.cpp:104
+msgid "&HTML"
+msgstr ""
+
+#: ../src/exportdialog.cpp:106
+msgid "&ePub ebook"
+msgstr ""
+
+#: ../src/exportdialog.cpp:108
+#, fuzzy
+msgid "&RTF document"
+msgstr "Новий &документ"
+
+#: ../src/exportdialog.cpp:110
+#, fuzzy
+msgid "&Word document"
+msgstr "&Підрахунок кількості слів"
+
+#: ../src/exportdialog.cpp:112
+msgid "&MP3 album"
+msgstr ""
+
+#: ../src/exportdialog.cpp:135
+msgid "Download DAISY extension"
+msgstr ""
+
+#: ../src/exportdialog.cpp:183
+msgid ""
+"Provides a space for you to enter or select a stylesheet for conversion to "
+"canonical XHTML"
+msgstr ""
+
+#: ../src/exportdialog.cpp:187
+msgid "Provides a space for you to enter or select the output folder"
+msgstr ""
+
+#: ../src/exportdialog.cpp:191
+msgid "Starts the export"
+msgstr ""
+
+#: ../src/exportdialog.cpp:195
+msgid "Closes the dialog box without exporting the file"
+msgstr ""
+
+#: ../src/findreplacepanel.cpp:52
+msgid "Find:"
+msgstr "Шукати: "
+
+#: ../src/findreplacepanel.cpp:53 ../src/findreplacepanel.cpp:54
+#: ../src/styledialog.cpp:454
+msgid " "
+msgstr " "
+
+#: ../src/findreplacepanel.cpp:66
+msgid "Replace with:"
+msgstr "Замінити на: "
+
+#: ../src/findreplacepanel.cpp:78
+msgid "Find &Next"
+msgstr "Шукати &далі"
+
+#: ../src/findreplacepanel.cpp:85
+msgid "&Replace"
+msgstr "&Замінити"
+
+#: ../src/findreplacepanel.cpp:92
+msgid "Replace &All"
+msgstr "Замінити &усе"
+
+#: ../src/findreplacepanel.cpp:100 ../src/globalreplacedialog.cpp:74
+msgid "&Match case"
+msgstr "&Враховувати реґістр"
+
+#: ../src/findreplacepanel.cpp:107
+msgid "Re&gex"
+msgstr "&Регулярні вирази"
+
+#: ../src/findreplacepanel.cpp:131
+#, fuzzy
+msgid "&Close"
+msgstr "Закрити"
+
+#: ../src/globalreplacedialog.cpp:50 ../src/globalreplacedialog.cpp:132
+msgid "Global Find and Replace"
+msgstr "Глобальний пошук та заміна"
+
+#: ../src/globalreplacedialog.cpp:56
+msgid "&Find what: "
+msgstr ""
+
+#: ../src/globalreplacedialog.cpp:58
+msgid "Replace with: "
+msgstr "Замінити на: "
+
+#: ../src/globalreplacedialog.cpp:78
+msgid "&Regex"
+msgstr "&Регулярні вирази"
+
+#: ../src/globalreplacedialog.cpp:82
+msgid "R&eplace in all open documents"
+msgstr "&Замінити у всіх відкритих документах"
+
+#: ../src/globalreplacedialog.cpp:128
+msgid "Cannot compile regular expression '"
+msgstr ""
+
+#: ../src/globalreplacedialog.cpp:145
+msgid "Provides a space for you to type the text you want to find"
+msgstr ""
+
+#: ../src/globalreplacedialog.cpp:149
+msgid ""
+"Provides a space for you to type the text you want to replace the text you "
+"typed in Find what"
+msgstr ""
+
+#: ../src/globalreplacedialog.cpp:153
+msgid ""
+"Finds only text with lowercase and uppercase letters as specified in Find "
+"what"
+msgstr ""
+
+#: ../src/globalreplacedialog.cpp:157
+#, fuzzy
+msgid "Extends the scope to all open documents"
+msgstr "&Замінити у всіх відкритих документах"
+
+#: ../src/globalreplacedialog.cpp:161
+msgid "Interprets the text specified in Find what as a regular expression"
+msgstr ""
+
+#: ../src/globalreplacedialog.cpp:165
+msgid ""
+"Finds all instances of the text specified in Find what and replaces them "
+"with the text in Replace with"
+msgstr ""
+
+#: ../src/globalreplacedialog.cpp:169
+msgid "Closes the dialog box without saving any changes you have made"
+msgstr ""
+
+#: ../src/housestyle.cpp:183
+msgid "no rules found"
+msgstr ""
+
+#: ../src/housestyle.cpp:222
+msgid "Cannot initialise spellcheck"
+msgstr ""
+
+#: ../src/mynotebook.cpp:88 ../src/wrapdaisy.cpp:554
+#: ../src/xmlcopyeditor.cpp:5339
+msgid "Close"
+msgstr "Закрити"
+
+#: ../src/mynotebook.cpp:89
+msgid "Close all"
+msgstr "Позакривати усі"
+
+#: ../src/mypropertysheet.cpp:74
+msgid "&Always insert closing tag"
+msgstr "&Завжди вставляти закриваючий теґ"
+
+#: ../src/mypropertysheet.cpp:77
+#, fuzzy
+msgid "&Folding"
+msgstr "Кодування"
+
+#: ../src/mypropertysheet.cpp:80
+msgid "&Highlight current line"
+msgstr "&Підсвічувати поточний рядок"
+
+#: ../src/mypropertysheet.cpp:83
+#, fuzzy
+msgid "Hi&ghlight syntax"
+msgstr "&Підсвічувати поточний рядок"
+
+#: ../src/mypropertysheet.cpp:86
+msgid "&Indentation guides"
+msgstr ""
+
+#: ../src/mypropertysheet.cpp:89
+msgid "I&ntelligent backspace/delete"
+msgstr ""
+
+#: ../src/mypropertysheet.cpp:92
+msgid "&Line numbers"
+msgstr "&Номери рядків"
+
+#: ../src/mypropertysheet.cpp:95
+msgid "L&ock hidden tags"
+msgstr "&Замкнути приховані теґи"
+
+#: ../src/mypropertysheet.cpp:98
+msgid "&Tag completion"
+msgstr ""
+
+#: ../src/mypropertysheet.cpp:101
+msgid "&Validate as you type"
+msgstr "&Перевірка чинності при вводі"
+
+#: ../src/mypropertysheet.cpp:104
+msgid "Va&riable highlight in tag free view"
+msgstr ""
+
+#: ../src/mypropertysheet.cpp:107
+msgid "&White space visible"
+msgstr ""
+
+#: ../src/mypropertysheet.cpp:113
+msgid "Font"
+msgstr "Шрифт"
+
+#: ../src/mypropertysheet.cpp:156
+msgid "Application directory"
+msgstr "Тека програми"
+
+#: ../src/mypropertysheet.cpp:173
+msgid "Language (restart required)"
+msgstr "Мова (потрібний перезапуск)"
+
+#: ../src/mypropertysheet.cpp:179 ../src/styledialog.cpp:339
+#: ../src/xmlcopyeditor.cpp:4984
+msgid "Default"
+msgstr "По умовчанню"
+
+#: ../src/mypropertysheet.cpp:193
+#, fuzzy
+msgid "&Enable network access for XML validation"
+msgstr "&Задіяти доступ по мережі для перевірки чинності по DTD"
+
+#: ../src/mypropertysheet.cpp:196
+msgid "E&xpand internal entities on open"
+msgstr ""
+
+#: ../src/mypropertysheet.cpp:199
+msgid "&One application instance only"
+msgstr "&Лише одна копія програми"
+
+#: ../src/mypropertysheet.cpp:202
+msgid "Re&member layout on close"
+msgstr ""
+
+#: ../src/mypropertysheet.cpp:205
+msgid "&Remember open tabs on close"
+msgstr ""
+
+#: ../src/mypropertysheet.cpp:208
+msgid "Re&tain undo history on save"
+msgstr ""
+
+#: ../src/mypropertysheet.cpp:212
+msgid "&Save UTF-8 byte order mark"
+msgstr ""
+
+#: ../src/mypropertysheet.cpp:216
+msgid "S&how full path on frame"
+msgstr ""
+
+#: ../src/mypropertysheet.cpp:242
+msgid "General"
+msgstr "Загальне"
+
+#: ../src/mypropertysheet.cpp:243
+msgid "Editor"
+msgstr "Редактор"
+
+#: ../src/mypropertysheet.cpp:256
+#, fuzzy
+msgid "Cannot access application directory"
+msgstr "Тека програми"
+
+#: ../src/mypropertysheet.cpp:256 ../src/xmlcopyeditor.cpp:2586
+msgid "Options"
+msgstr "Налаштування"
+
+#: ../src/styledialog.cpp:101
+msgid "Style"
+msgstr ""
+
+#: ../src/styledialog.cpp:101 ../src/xmlcopyeditor.cpp:5471
+#: ../src/xmlcopyeditor.cpp:5475
+msgid "Spelling"
+msgstr ""
+
+#: ../src/styledialog.cpp:147
+msgid "&Check"
+msgstr ""
+
+#: ../src/styledialog.cpp:165
+msgid "No."
+msgstr "№"
+
+#: ../src/styledialog.cpp:166 ../src/styledialog.cpp:168
+msgid "Context"
+msgstr "Контекст"
+
+#: ../src/styledialog.cpp:167 ../src/wrapxerces.h:51
+#: ../src/xmlcopyeditor.cpp:409 ../src/xmlcopyeditor.cpp:429
+#: ../src/xmlcopyeditor.cpp:432 ../src/xmlcopyeditor.cpp:449
+#: ../src/xmlcopyeditor.cpp:454 ../src/xmlcopyeditor.cpp:494
+#: ../src/xmlcopyeditor.cpp:514 ../src/xmlcopyeditor.cpp:526
+#: ../src/xmlcopyeditor.cpp:532 ../src/xmlcopyeditor.cpp:561
+msgid "Error"
+msgstr "Помилка"
+
+#: ../src/styledialog.cpp:169
+msgid "Suggestion"
+msgstr "Пропозиція"
+
+#: ../src/styledialog.cpp:171
+msgid "Rule"
+msgstr "Правило"
+
+#: ../src/styledialog.cpp:172
+msgid "Action"
+msgstr "Дія"
+
+#: ../src/styledialog.cpp:180
+msgid "&Apply changes"
+msgstr ""
+
+#: ../src/styledialog.cpp:188
+msgid "&Printable report"
+msgstr "&Звіт для друку"
+
+#: ../src/styledialog.cpp:196
+msgid "Pr&intable summary"
+msgstr "&Зведення для друку"
+
+#: ../src/styledialog.cpp:204
+#, fuzzy
+msgid "C&hange all"
+msgstr "Замінити усе"
+
+#: ../src/styledialog.cpp:212
+msgid "I&gnore all"
+msgstr "Про&ігнорувати усе"
+
+#: ../src/styledialog.cpp:220
+#, fuzzy
+msgid "Ca&ncel"
+msgstr "&Відміна"
+
+#: ../src/styledialog.cpp:303 ../src/xmlcopyeditor.cpp:768
+#: ../src/xmlcopyeditor.cpp:818
+msgid "en_US"
+msgstr ""
+
+#: ../src/styledialog.cpp:308
+msgid "(No dictionaries found)"
+msgstr ""
+
+#: ../src/styledialog.cpp:344
+msgid "(No rule sets found)"
+msgstr ""
+
+#: ../src/styledialog.cpp:350 ../src/xmlcopyeditor.cpp:771
+msgid "(No filter)"
+msgstr ""
+
+#: ../src/styledialog.cpp:373
+msgid "(No filters found)"
+msgstr ""
+
+#: ../src/styledialog.cpp:400 ../src/styledialog.cpp:430
+#: ../src/styledialog.cpp:749 ../src/styledialog.cpp:754
+msgid "Ignore"
+msgstr "Ігнорувати"
+
+#: ../src/styledialog.cpp:414
+msgid "Ignore once"
+msgstr "Ігнорувати цього разу"
+
+#: ../src/styledialog.cpp:416
+msgid "Ignore all"
+msgstr "Проігнорувати усе"
+
+#: ../src/styledialog.cpp:418
+msgid "Change once"
+msgstr "Замінити цього разу"
+
+#: ../src/styledialog.cpp:419
+msgid "Change all"
+msgstr "Замінити усе"
+
+#: ../src/styledialog.cpp:422
+msgid "New suggestion..."
+msgstr "Нова пропозиція..."
+
+#: ../src/styledialog.cpp:445 ../src/styledialog.cpp:473
+#, fuzzy
+msgid "Checking document..."
+msgstr "Відкрити великий документ..."
+
+#: ../src/styledialog.cpp:477
+#, fuzzy
+msgid "Cannot check document: "
+msgstr "Не вдається замінити: "
+
+#: ../src/styledialog.cpp:510
+#, fuzzy, c-format
+msgid "%i error"
+msgid_plural "%i errors"
+msgstr[0] "Помилка"
+msgstr[1] "Помилка"
+msgstr[2] "Помилка"
+
+#: ../src/styledialog.cpp:525
+msgid "No items selected"
+msgstr "Немає вибраних елементів"
+
+#: ../src/styledialog.cpp:754 ../src/styledialog.cpp:782
+msgid "Change"
+msgstr "Замінити"
+
+#: ../src/styledialog.cpp:913
+msgid "Enter new suggestion:"
+msgstr "Введіть нову пропозицію: "
+
+#: ../src/styledialog.cpp:914
+msgid "New Suggestion"
+msgstr "Нова пропозиція"
+
+#: ../src/wrapdaisy.cpp:96
+#, fuzzy
+msgid "Export in progress"
+msgstr "Експорт триває..."
+
+#: ../src/wrapdaisy.cpp:97
+#, fuzzy
+msgid "Initializing..."
+msgstr "Сусід..."
+
+#: ../src/wrapdaisy.cpp:121 ../src/wrapdaisy.cpp:281
+#, fuzzy
+msgid "Cannot create folder [b]"
+msgstr "Не вдалося перетворити: "
+
+#: ../src/wrapdaisy.cpp:158
+msgid "Empty XHTML file"
+msgstr ""
+
+#: ../src/wrapdaisy.cpp:168
+#, fuzzy
+msgid "Cannot read [b]"
+msgstr "Не вдається замінити: "
+
+#: ../src/wrapdaisy.cpp:168
+msgid "[/b]"
+msgstr ""
+
+#: ../src/wrapdaisy.cpp:182
+msgid "Suppressing optional production notes..."
+msgstr ""
+
+#: ../src/wrapdaisy.cpp:184 ../src/wrapdaisy.cpp:210 ../src/wrapdaisy.cpp:296
+#: ../src/wrapdaisy.cpp:334
+#, fuzzy
+msgid "Cancelled"
+msgstr "&Відміна"
+
+#: ../src/wrapdaisy.cpp:208
+msgid "De-emphasizing production notes..."
+msgstr ""
+
+#: ../src/wrapdaisy.cpp:259
+msgid "Cannot create HTML folder [b]"
+msgstr ""
+
+#: ../src/wrapdaisy.cpp:270
+msgid "Cannot create image folder [b]"
+msgstr ""
+
+#: ../src/wrapdaisy.cpp:294
+#, fuzzy
+msgid "Copying files..."
+msgstr "Відкриття імпортованого файлу..."
+
+#: ../src/wrapdaisy.cpp:317
+msgid "Cannot write canonical XHTML file"
+msgstr ""
+
+#: ../src/wrapdaisy.cpp:332
+#, fuzzy
+msgid "Preparing DTBook..."
+msgstr "Підготовка до друку..."
+
+#: ../src/wrapdaisy.cpp:540
+msgid "documents.open"
+msgstr ""
+
+#: ../src/wrapdaisy.cpp:541
+#, fuzzy
+msgid "ActiveDocument"
+msgstr "Новий документ"
+
+#: ../src/wrapdaisy.cpp:543
+#, fuzzy
+msgid "Cannot open "
+msgstr "Не вдається відкрити %s"
+
+#. tempDocFile;//
+#. wdFormatDocument
+#: ../src/wrapdaisy.cpp:549
+#, fuzzy
+msgid "SaveAs"
+msgstr "Зберегти як"
+
+#: ../src/wrapdaisy.cpp:677
+msgid "Cannot create MP3 album folder [b]"
+msgstr ""
+
+#: ../src/wrapexpat.cpp:74
+msgid "Unable to create parser instance"
+msgstr ""
+
+#: ../src/wraplibxml.cpp:126 ../src/wraplibxml.cpp:182
+#: ../src/wraplibxml.cpp:244 ../src/wraplibxml.cpp:305
+#: ../src/wraplibxml.cpp:370 ../src/wraplibxml.cpp:559
+#: ../src/wraplibxml.cpp:612 ../src/wraplibxml.cpp:660
+msgid "Cannot create a parser context"
+msgstr ""
+
+#: ../src/wraplibxml.cpp:166
+msgid "Cannot create an RNG parser context"
+msgstr ""
+
+#: ../src/wraplibxml.cpp:176
+msgid "Cannot create an RNG validation context"
+msgstr ""
+
+#: ../src/wraplibxml.cpp:238
+msgid "Cannot create a schema validation context"
+msgstr ""
+
+#: ../src/wraplibxml.cpp:459
+msgid "Infinity"
+msgstr ""
+
+#: ../src/wraplibxml.cpp:462
+msgid "-Infinity"
+msgstr ""
+
+#: ../src/wraplibxml.cpp:466
+msgid "NaN"
+msgstr ""
+
+#: ../src/wraplibxml.cpp:552
+msgid "Cannot parse stylesheet"
+msgstr ""
+
+#: ../src/wraplibxml.cpp:581
+msgid "Cannot apply stylesheet"
+msgstr ""
+
+#: ../src/wraplibxml.cpp:717
+#, c-format
+msgid "Error at line %d, column %d: %s"
+msgstr ""
+
+#: ../src/wraplibxml.cpp:720
+#, c-format
+msgid "Error at line %d: %s"
+msgstr ""
+
+#: ../src/wrapxerces.cpp:162
+#, fuzzy
+msgid "Unexpected validation error"
+msgstr "Помилка перевірки чинності"
+
+#: ../src/wrapxerces.cpp:236
+#, c-format
+msgid "%s at line %llu, column %llu: %s%s"
+msgstr ""
+
+#: ../src/wrapxerces.h:56 ../src/xmlcopyeditor.cpp:5524
+msgid "Warning"
+msgstr "Попередження"
+
+#: ../src/wrapxerces.h:60
+#, fuzzy
+msgid "FatalError"
+msgstr "Помилка"
+
+#: ../src/xmlcopyeditorcopy.h:22
+msgid ""
+"All files (*.*)|*.*|XML (*.xml)|*.xml|XHTML (*.html)|*.html|DTD (*.dtd)|*."
+"dtd|XML Schema (*.xsd)|*.xsd|RELAX NG grammar (*.rng)|*.rng|XSL (*.xsl)|*.xsl"
+msgstr ""
+"Усі файли (*.*)|*.*|XML (*.xml)|*.xml|XHTML (*.html)|*.html|DTD (*.dtd)|*."
+"dtd|XML Schema (*.xsd)|*.xsd|RELAX NG grammar (*.rng)|*.rng|XSL (*.xsl)|*.xsl"
+
+#: ../src/xmlcopyeditorcopy.h:24
+#, fuzzy
+msgid ""
+"All files (*)|*|XML (*.xml)|*.xml|XHTML (*.html)|*.html|DTD (*.dtd)|*.dtd|"
+"XML Schema (*.xsd)|*.xsd|RELAX NG grammar (*.rng)|*.rng|XSL (*.xsl)|*.xsl"
+msgstr ""
+"Усі файли (*.*)|*.*|XML (*.xml)|*.xml|XHTML (*.html)|*.html|DTD (*.dtd)|*."
+"dtd|XML Schema (*.xsd)|*.xsd|RELAX NG grammar (*.rng)|*.rng|XSL (*.xsl)|*.xsl"
+
+#: ../src/xmlcopyeditorcopy.h:26
+#, fuzzy
+msgid "Copyright © 2005-2009 Gerald Schmidt <gnschmidt@users.sourceforge.net>"
+msgstr ""
+"Авторське право © 2005-2007 Ґералд Шмідт (Gerald Schmidt) <gnschmidt@users."
+"sourceforge.net>"
+
+#: ../src/xmlcopyeditorcopy.h:27
+msgid ""
+"\n"
+"XML Copy Editor is free software released under the GNU\n"
+"General Public License.\n"
+"\n"
+"Many thanks are due to "
+msgstr ""
+"\n"
+"XML Copy Editor - вільне прогамне забезпечення, що поширюється \n"
+"під Загальною Вілною Ліцензією GNU.\n"
+"\n"
+"Велика подяка "
+
+#: ../src/xmlcopyeditor.cpp:388 ../src/xmlcopyeditor.cpp:1310
+#: ../src/xmlcopyeditor.cpp:1408 ../src/xmlcopyeditor.cpp:1649
+#: ../src/xmlcopyeditor.cpp:1728 ../src/xmlcopyeditor.cpp:3610
+msgid "XML Copy Editor"
+msgstr "XML Copy Editor"
+
+#: ../src/xmlcopyeditor.cpp:407
+msgid "Failed to initialize Xerces-C:\n"
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:420 ../src/xmlcopyeditor.cpp:485
+msgid "(unknown error)"
+msgstr "(невідома помилка)"
+
+#: ../src/xmlcopyeditor.cpp:422
+msgid ""
+"XML Copy Editor has encountered the following error and needs to close: "
+msgstr "XML Copy Editor зіткнувся з наступною помилкою і потрібує закритття: "
+
+#: ../src/xmlcopyeditor.cpp:448 ../src/xmlcopyeditor.cpp:453
+#: ../src/xmlcopyeditor.cpp:521
+msgid "XML Copy Editor has encountered an error and needs to close."
+msgstr "XML Copy Editor зіткнувся з помилкою і потрібує закриття."
+
+#: ../src/xmlcopyeditor.cpp:471 ../src/xmlcopyeditor.cpp:550
+msgid "The operating system has turned down a request for additional memory"
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:472 ../src/xmlcopyeditor.cpp:551
+#: ../src/xmlcopyeditor.cpp:4780
+msgid "Out of memory"
+msgstr "Вихід за межі доступної пам'яті"
+
+#: ../src/xmlcopyeditor.cpp:487
+msgid "The following error has occurred: "
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:489
+msgid ""
+".\n"
+"\n"
+"Select \"Abort\" to exit, \"Retry\" to close this window and \"Ignore\" to "
+"continue."
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:766 ../src/xmlcopyeditor.cpp:817
+#, fuzzy
+msgid "Default style"
+msgstr "По умовчанню"
+
+#: ../src/xmlcopyeditor.cpp:819
+msgid "No filter"
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:885
+msgid ""
+"SSE2 is enabled in Xerces-C++ library. Xerces-C++ didn't use them in a "
+"thread-safe way. It may cause program crashes (segmentation faults).\n"
+"\n"
+"If it happens, please try compiling Xerces-C++ with SSE2 disabled.\n"
+"\n"
+"OK:\tShow this warning next time\n"
+"Cancel:\tDisable the warning\n"
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:892
+msgid "SSE2 problem in Xerces-C++"
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:968 ../src/xmlcopyeditor.cpp:976
+msgid "Current Element"
+msgstr "Поточний елемент"
+
+#: ../src/xmlcopyeditor.cpp:969 ../src/xmlcopyeditor.cpp:975
+msgid "Insert Element"
+msgstr "Вставити елемент"
+
+#: ../src/xmlcopyeditor.cpp:970 ../src/xmlcopyeditor.cpp:974
+msgid "Insert Sibling"
+msgstr "Вставити сусіда"
+
+#: ../src/xmlcopyeditor.cpp:971 ../src/xmlcopyeditor.cpp:973
+msgid "Insert Entity"
+msgstr "Вставити Entity"
+
+#: ../src/xmlcopyeditor.cpp:1208
+msgid "Unknown command line switch (expecting 'w', 's', --version or --help)"
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:1217
+msgid "Command line processing incomplete: no file specified"
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:1356
+msgid "Parse in progress..."
+msgstr "Аналіз триває..."
+
+#: ../src/xmlcopyeditor.cpp:1375
+msgid "well-formed"
+msgstr "добре сформований"
+
+#: ../src/xmlcopyeditor.cpp:1407
+msgid "Do you want to save the changes to "
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:1601 ../src/xmlcopyeditor.cpp:1603
+msgid "Attributes hidden"
+msgstr "Атрибути приховано"
+
+#: ../src/xmlcopyeditor.cpp:1608 ../src/xmlcopyeditor.cpp:1610
+msgid "Tags hidden"
+msgstr "Теґи приховано"
+
+#: ../src/xmlcopyeditor.cpp:1623 ../src/xmlcopyeditor.cpp:1625
+msgid "Tags locked"
+msgstr "Теґи замкнуті"
+
+#: ../src/xmlcopyeditor.cpp:1676 ../src/xmlcopyeditor.cpp:1678
+msgid "Modified"
+msgstr "Змінено"
+
+#: ../src/xmlcopyeditor.cpp:1707
+#, c-format
+msgid "Ln %i Col %i"
+msgstr "рядок %i позиція %i"
+
+#: ../src/xmlcopyeditor.cpp:1898
+msgid "Cannot open clipboard"
+msgstr "Не вдається відкрити буфер обміну"
+
+#: ../src/xmlcopyeditor.cpp:1903
+msgid "Cannot paste as new document: no text on clipboard"
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:1993 ../src/xmlcopyeditor.cpp:2796
+#, c-format
+msgid "%i replacement made"
+msgid_plural "%i replacements made"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: ../src/xmlcopyeditor.cpp:2019
+msgid "Preparing Print Preview..."
+msgstr "Підготовка попереднього перегляду перед друком..."
+
+#: ../src/xmlcopyeditor.cpp:2040
+msgid "Preparing to print..."
+msgstr "Підготовка до друку..."
+
+#: ../src/xmlcopyeditor.cpp:2099 ../src/xmlcopyeditor.cpp:2119
+msgid "Find"
+msgstr "Шукати"
+
+#: ../src/xmlcopyeditor.cpp:2126 ../src/xmlcopyeditor.cpp:2236
+#: ../src/xmlcopyeditor.cpp:2330
+msgid "This functionality requires Microsoft Windows"
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:2132
+msgid "Import Microsoft Word Document"
+msgstr "Імпорт документа Microsoft Word"
+
+#: ../src/xmlcopyeditor.cpp:2227
+msgid "[b]DAISY export stopped[/b]: "
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:2230
+msgid "DAISY export completed. Output files are stored in: [b]"
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:2245
+#, fuzzy, c-format
+msgid "Cannot open [b]%s[/b] for import"
+msgstr "Не вдається відкрити імпортований файл"
+
+#: ../src/xmlcopyeditor.cpp:2255
+msgid "Import in progress..."
+msgstr "Імпорт триває..."
+
+#: ../src/xmlcopyeditor.cpp:2263
+msgid "(lossless conversion requires version 2003 or later)"
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:2270 ../src/xmlcopyeditor.cpp:2391
+msgid "Cannot start Microsoft Word"
+msgstr "Не вдається запустити Microsoft Word"
+
+#: ../src/xmlcopyeditor.cpp:2274 ../src/xmlcopyeditor.cpp:2395
+msgid "A more recent version of Microsoft Word is required"
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:2281
+#, c-format
+msgid "Microsoft Word cannot save [b]%s[/b] as XML"
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:2286
+msgid "Microsoft Word cannot save this document as WordprocessingML "
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:2294
+msgid "Opening imported file..."
+msgstr "Відкриття імпортованого файлу..."
+
+#: ../src/xmlcopyeditor.cpp:2311
+msgid "Cannot open imported file"
+msgstr "Не вдається відкрити імпортований файл"
+
+#: ../src/xmlcopyeditor.cpp:2363
+msgid "Export Microsoft Word Document"
+msgstr "Експорт документа Microsoft Word"
+
+#: ../src/xmlcopyeditor.cpp:2384
+msgid "Export in progress..."
+msgstr "Експорт триває..."
+
+#: ../src/xmlcopyeditor.cpp:2398
+#, fuzzy, c-format
+msgid "Microsoft Word cannot save %s"
+msgstr "Експорт документа Microsoft Word"
+
+#: ../src/xmlcopyeditor.cpp:2427
+msgid "Cannot save temporary file"
+msgstr "Не вдається зберегти тимчасовий файл"
+
+#: ../src/xmlcopyeditor.cpp:2588
+msgid "Preferences"
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:2633
+msgid "Enter line number:"
+msgstr "Введіть номер рядка:"
+
+#: ../src/xmlcopyeditor.cpp:2634
+msgid "Go To"
+msgstr "Перейти на рядок"
+
+#: ../src/xmlcopyeditor.cpp:2643
+#, c-format
+msgid "'%s' is not a valid line number"
+msgstr "'%s' не є чинним номером рядка"
+
+#: ../src/xmlcopyeditor.cpp:2672
+msgid "Replace"
+msgstr "Заміна"
+
+#: ../src/xmlcopyeditor.cpp:2693
+msgid "Find and Replace"
+msgstr "Пошук та заміна"
+
+#: ../src/xmlcopyeditor.cpp:2786
+msgid "Cannot replace: "
+msgstr "Не вдається замінити: "
+
+#: ../src/xmlcopyeditor.cpp:2827
+msgid "XML document (*.xml)"
+msgstr "XML-документ (*.xml)"
+
+#: ../src/xmlcopyeditor.cpp:2851
+msgid "Choose a document type:"
+msgstr "Виберіть тип документу: "
+
+#: ../src/xmlcopyeditor.cpp:2851
+msgid "New Document"
+msgstr "Новий документ"
+
+#: ../src/xmlcopyeditor.cpp:2892
+#, c-format
+msgid "Document%i"
+msgstr "Документ%i"
+
+#: ../src/xmlcopyeditor.cpp:2962
+msgid "Open Large Document"
+msgstr "Відкрити великий документ"
+
+#: ../src/xmlcopyeditor.cpp:2962 ../src/xmlcopyeditor.cpp:5431
+#: ../src/xmlcopyeditor.cpp:5433
+msgid "Open"
+msgstr "Відкрити"
+
+#: ../src/xmlcopyeditor.cpp:2998
+#, fuzzy, c-format
+msgid "Cannot open %s."
+msgstr "Не вдається відкрити %s"
+
+#: ../src/xmlcopyeditor.cpp:3006 ../src/xmlcopyeditor.cpp:3582
+#, c-format
+msgid "%s is already open"
+msgstr "%s вже відкрито"
+
+#: ../src/xmlcopyeditor.cpp:3028
+#, c-format
+msgid "Cannot open %s"
+msgstr "Не вдається відкрити %s"
+
+#: ../src/xmlcopyeditor.cpp:3147
+#, fuzzy, c-format
+msgid "Cannot open %s: unknown encoding %s"
+msgstr "Не вдається встановити кодування: "
+
+#: ../src/xmlcopyeditor.cpp:3178
+#, fuzzy, c-format
+msgid "Cannot open %s: out of memory"
+msgstr "Не вдається відкрити %s"
+
+#: ../src/xmlcopyeditor.cpp:3199
+#, c-format
+msgid "Cannot open %s: conversion from encoding %s failed"
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:3208 ../src/xmlcopyeditor.cpp:4007
+#, fuzzy
+msgid "Creating document view..."
+msgstr "Підготовка попереднього перегляду перед друком..."
+
+#: ../src/xmlcopyeditor.cpp:3449
+msgid "Edited document empty"
+msgstr "Редагований документ пустий"
+
+#: ../src/xmlcopyeditor.cpp:3563
+msgid "Save As"
+msgstr "Зберегти як"
+
+#: ../src/xmlcopyeditor.cpp:3771
+#, fuzzy
+msgid "DTD Validation in progress..."
+msgstr "Перевірка чинності по DTD триває..."
+
+#: ../src/xmlcopyeditor.cpp:3794 ../src/xmlcopyeditor.cpp:3870
+msgid "valid"
+msgstr "чинний"
+
+#: ../src/xmlcopyeditor.cpp:3816
+msgid "Select RELAX NG grammar"
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:3817 ../src/xmlcopyeditor.cpp:4108
+#: ../src/xmlcopyeditor.cpp:5791
+msgid "Choose a file:"
+msgstr "Виберіть файл: "
+
+#: ../src/xmlcopyeditor.cpp:3818
+msgid "RELAX NG grammar"
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:3848
+msgid "RELAX NG validation in progress..."
+msgstr "RELAX NG validation in progress..."
+
+#: ../src/xmlcopyeditor.cpp:3914
+msgid "Validation in progress..."
+msgstr "Перевірка чинності триває..."
+
+#: ../src/xmlcopyeditor.cpp:3925
+#, fuzzy, c-format
+msgid "%s is valid"
+msgstr "чинний"
+
+#: ../src/xmlcopyeditor.cpp:3964
+#, fuzzy
+msgid "W3C Schema"
+msgstr "&Кольорова схема"
+
+#: ../src/xmlcopyeditor.cpp:3964
+msgid "DTD"
+msgstr "DTD"
+
+#: ../src/xmlcopyeditor.cpp:3965
+msgid "Please choose a shema type"
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:3966
+msgid "Schema type"
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:3992
+msgid "Please select a DTD file"
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:3998
+msgid "Converting..."
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:4025
+msgid "Enter XPath:"
+msgstr "Введіть XPath:"
+
+#: ../src/xmlcopyeditor.cpp:4026
+msgid "Evaluate XPath"
+msgstr "Вичислити XPath"
+
+#: ../src/xmlcopyeditor.cpp:4047
+msgid "Cannot evaluate XPath"
+msgstr "Не вдається вичислити XPath"
+
+#: ../src/xmlcopyeditor.cpp:4058
+msgid "No matching nodes found"
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:4094
+#, fuzzy, c-format
+msgid "Cannot open stylesheet %s"
+msgstr "Не вдається відкрити %s"
+
+#: ../src/xmlcopyeditor.cpp:4107
+msgid "Select stylesheet"
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:4109 ../src/xmlcopyeditor.cpp:5766
+msgid "XSLT stylesheet"
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:4164
+msgid "XSL transformation in progress..."
+msgstr "XSL-перетворення триває..."
+
+#: ../src/xmlcopyeditor.cpp:4171
+msgid "Cannot transform: "
+msgstr "Не вдалося перетворити: "
+
+#: ../src/xmlcopyeditor.cpp:4179
+#, fuzzy
+msgid "Output document empty"
+msgstr "Редагований документ пустий"
+
+#: ../src/xmlcopyeditor.cpp:4203
+msgid "Pretty-printing in progress..."
+msgstr "Форматування для гарного видруку триває..."
+
+#: ../src/xmlcopyeditor.cpp:4213
+msgid "Cannot pretty-print: "
+msgstr "Сформатувати для гарного видруку невдалося: "
+
+#: ../src/xmlcopyeditor.cpp:4224
+msgid "Pretty-print unsuccessful: output document empty"
+msgstr "Сформатувати для гарного видруку невдалося: вихідний документ пустий"
+
+#: ../src/xmlcopyeditor.cpp:4256
+msgid "Choose an encoding:"
+msgstr "Виберіть кодування: "
+
+#: ../src/xmlcopyeditor.cpp:4256
+msgid "Encoding"
+msgstr "Кодування"
+
+#: ../src/xmlcopyeditor.cpp:4269
+msgid "Cannot set encoding: "
+msgstr "Не вдається встановити кодування: "
+
+#: ../src/xmlcopyeditor.cpp:4280
+msgid "Cannot set encoding (cannot parse temporary file)"
+msgstr ""
+"Не можливо встановити кодування (не вдається проаналізувати тимчасовий файл)"
+
+#: ../src/xmlcopyeditor.cpp:4484
+#, fuzzy, c-format
+msgid "Cannot find '%s'"
+msgstr "Не вдається відкрити %s"
+
+#: ../src/xmlcopyeditor.cpp:4546
+msgid ""
+"File has been modified by another application.\n"
+"Do you want to proceed?"
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:4547
+msgid "Confirmation"
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:4586 ../src/xmlcopyeditor.cpp:4600
+#: ../src/xmlcopyeditor.cpp:4621 ../src/xmlcopyeditor.cpp:4650
+#: ../src/xmlcopyeditor.cpp:4713 ../src/xmlcopyeditor.cpp:4727
+#: ../src/xmlcopyeditor.cpp:4764 ../src/xmlcopyeditor.cpp:4799
+#, fuzzy, c-format
+msgid "Cannot save %s"
+msgstr "Не вдається відкрити %s"
+
+#: ../src/xmlcopyeditor.cpp:4642
+#, c-format
+msgid "%s saved in default encoding UTF-8: unknown encoding %s"
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:4705
+#, c-format
+msgid "%s saved in default encoding UTF-8: conversion to %s failed"
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:4755
+#, fuzzy
+msgid "unknown error"
+msgstr "(невідома помилка)"
+
+#: ../src/xmlcopyeditor.cpp:4757
+#, c-format
+msgid "Cannot save document in %s: %s (saved in default encoding UTF-8)"
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:4779
+msgid "Out of memory: attempt to save in default encoding UTF-8?"
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:4792
+#, c-format
+msgid "%s saved in default encoding UTF-8"
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:4856
+msgid "MB"
+msgstr "МБ"
+
+#: ../src/xmlcopyeditor.cpp:4861
+msgid "kB"
+msgstr "кБ"
+
+#: ../src/xmlcopyeditor.cpp:4866
+msgid "byte"
+msgid_plural "bytes"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: ../src/xmlcopyeditor.cpp:4874
+#, c-format
+msgid "%g %s saved"
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:4894
+msgid "&Undo\tCtrl+Z"
+msgstr "&Відкат\tCtrl+Z"
+
+#: ../src/xmlcopyeditor.cpp:4894
+msgid "Undo"
+msgstr "Відкат"
+
+#: ../src/xmlcopyeditor.cpp:4898
+msgid "&Redo\tCtrl+Y"
+msgstr "&Відміна відкату\tCtrl+Y"
+
+#: ../src/xmlcopyeditor.cpp:4898
+msgid "Redo"
+msgstr "Відміна відкату"
+
+#: ../src/xmlcopyeditor.cpp:4902
+msgid "&Cut\tCtrl+X"
+msgstr "&Вирізати\tCtrl+X"
+
+#: ../src/xmlcopyeditor.cpp:4902
+msgid "Cut"
+msgstr "Вирізати"
+
+#: ../src/xmlcopyeditor.cpp:4906
+msgid "C&opy\tCtrl+C"
+msgstr "&Копіювати\tCtrl+C"
+
+#: ../src/xmlcopyeditor.cpp:4906
+msgid "Copy"
+msgstr "Копіювати"
+
+#: ../src/xmlcopyeditor.cpp:4910
+msgid "&Paste\tCtrl+V"
+msgstr "&Вставити\tCtrl+V"
+
+#: ../src/xmlcopyeditor.cpp:4910
+msgid "Paste"
+msgstr "Вставити"
+
+#: ../src/xmlcopyeditor.cpp:4917
+msgid "P&aste As New Document"
+msgstr "Вставити як новий документ"
+
+#: ../src/xmlcopyeditor.cpp:4918
+msgid "Paste As New Document"
+msgstr "Вставити як новий документ"
+
+#: ../src/xmlcopyeditor.cpp:4922
+msgid "&Find...\tCtrl+F"
+msgstr "&Пошук...\tCtrl+F"
+
+#: ../src/xmlcopyeditor.cpp:4922
+msgid "Find..."
+msgstr "Пошук..."
+
+#: ../src/xmlcopyeditor.cpp:4926
+msgid "F&ind Again\tF3"
+msgstr "&Шукати знов\tF3"
+
+#: ../src/xmlcopyeditor.cpp:4926
+msgid "Find Again"
+msgstr "Шукати знов"
+
+#: ../src/xmlcopyeditor.cpp:4930
+msgid "&Replace...\tCtrl+R"
+msgstr "&Замінити...\tCtrl+R"
+
+#: ../src/xmlcopyeditor.cpp:4930
+msgid "Replace..."
+msgstr "Замінити..."
+
+#: ../src/xmlcopyeditor.cpp:4937
+msgid "&Global Replace...\tCtrl+Shift+R"
+msgstr "&Глобальна заміна...\tCtrl+Shift+R"
+
+#: ../src/xmlcopyeditor.cpp:4938
+msgid "Global Replace..."
+msgstr "Глобальна заміна..."
+
+#: ../src/xmlcopyeditor.cpp:4942
+msgid "G&o To...\tCtrl+G"
+msgstr "&Перейти на рядок...\tCtrl+G"
+
+#: ../src/xmlcopyeditor.cpp:4942
+msgid "Go To..."
+msgstr "Перейти на рядок..."
+
+#: ../src/xmlcopyeditor.cpp:4946
+#, fuzzy
+msgid "&Toggle Comment\tCtrl+/"
+msgstr "&Елемент...\tCtrl+I"
+
+#: ../src/xmlcopyeditor.cpp:4946
+#, fuzzy
+msgid "Toggle Comment"
+msgstr "Перемкнути згортку/розгортку"
+
+#: ../src/xmlcopyeditor.cpp:4967
+msgid "Pr&eferences..."
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:4967
+msgid "Preferences..."
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:4975
+msgid "Increase\tCtrl+U"
+msgstr "Збільшити\tCtrl+U"
+
+#: ../src/xmlcopyeditor.cpp:4975
+msgid "Increase"
+msgstr "Збільшити"
+
+#: ../src/xmlcopyeditor.cpp:4977
+msgid "Decrease\tCtrl+D"
+msgstr "Зменшити\tCtrl+D"
+
+#: ../src/xmlcopyeditor.cpp:4977
+msgid "Decrease"
+msgstr "Зменшити"
+
+#: ../src/xmlcopyeditor.cpp:4979
+msgid "Normal\tCtrl+0"
+msgstr "Нормальний\tCtrl+0"
+
+#: ../src/xmlcopyeditor.cpp:4979
+msgid "Normal"
+msgstr "Нормальний"
+
+#: ../src/xmlcopyeditor.cpp:4984
+msgid "&Default"
+msgstr "&По умовчанню"
+
+#: ../src/xmlcopyeditor.cpp:4987
+msgid "&Blue background, white text"
+msgstr "&Блакитний фон, білий текст"
+
+#: ../src/xmlcopyeditor.cpp:4988
+msgid "Blue background, white text"
+msgstr "Блакитний фон, білий текст"
+
+#: ../src/xmlcopyeditor.cpp:4991
+msgid "&Light"
+msgstr "&Світла"
+
+#: ../src/xmlcopyeditor.cpp:4992
+msgid "Light"
+msgstr "Світла"
+
+#: ../src/xmlcopyeditor.cpp:4995
+msgid "&None"
+msgstr "&Немає"
+
+#: ../src/xmlcopyeditor.cpp:4996
+msgid "None"
+msgstr "Немає"
+
+#. WAIT FOR AUI LIBRARY TO SUPPORT THIS - currently always splits left
+#. wxMenu *splitTabMenu = new wxMenu;
+#. splitTabMenu->Append ( ID_SPLIT_TAB_TOP, _ ( "&Top" ), _ ( "Top" ));
+#. splitTabMenu->Append ( ID_SPLIT_TAB_RIGHT, _ ( "&Right" ), _ ( "Right" ));
+#. splitTabMenu->Append ( ID_SPLIT_TAB_BOTTOM, _ ( "&Bottom" ), _ ( "Bottom" ));
+#. splitTabMenu->Append ( ID_SPLIT_TAB_LEFT, _ ( "&Left" ), _ ( "Left" ));
+#.
+#. use class-wide data member
+#: ../src/xmlcopyeditor.cpp:5025
+msgid "&Previous Document\tCtrl+PgUp"
+msgstr "&Попередній документ\tCtrl+PgUp"
+
+#: ../src/xmlcopyeditor.cpp:5025
+msgid "Previous Document"
+msgstr "Попередній документ"
+
+#: ../src/xmlcopyeditor.cpp:5026
+msgid "&Next Document\tCtrl+PgDn"
+msgstr "&Наступний документ\tCtrl+PgDn"
+
+#: ../src/xmlcopyeditor.cpp:5026
+msgid "Next Document"
+msgstr "Наступний документ"
+
+#. viewMenu->Append ( wxID_ANY, _ ( "&Split Tab" ), splitTabMenu );
+#: ../src/xmlcopyeditor.cpp:5030
+msgid "&Browser\tCtrl+B"
+msgstr "У &броузері\tCtrl+B"
+
+#: ../src/xmlcopyeditor.cpp:5030 ../src/xmlcopyeditor.cpp:5464
+#: ../src/xmlcopyeditor.cpp:5468
+msgid "Browser"
+msgstr "У броузері"
+
+#: ../src/xmlcopyeditor.cpp:5034
+msgid "&Show Tags and Attributes\tCtrl+T"
+msgstr "&Показувати теґи та атрибути\tCtrl+T"
+
+#: ../src/xmlcopyeditor.cpp:5034
+msgid "Show Tags and Attributes"
+msgstr "Показувати теґи та атрибути"
+
+#: ../src/xmlcopyeditor.cpp:5037
+msgid "&Hide Attributes Only\tCtrl+Shift+A"
+msgstr "&Приховати лиш атрибути\tCtrl+Shift+A"
+
+#: ../src/xmlcopyeditor.cpp:5037
+msgid "Hide Attributes Only"
+msgstr "Приховати лиш атрибути"
+
+#: ../src/xmlcopyeditor.cpp:5040
+msgid "H&ide Tags and Attributes\tCtrl+Shift+T"
+msgstr "&Приховати теґи і атрибути\tCtrl+Shift+T"
+
+#: ../src/xmlcopyeditor.cpp:5040
+msgid "Hide Tags and Attributes"
+msgstr "Приховати теґи і атрибути "
+
+#: ../src/xmlcopyeditor.cpp:5059
+#, fuzzy
+msgid "&Toggle Fold\tCtrl+Alt+T"
+msgstr "&Перемкнути згортку/розгортку"
+
+#: ../src/xmlcopyeditor.cpp:5059
+msgid "Toggle Fold"
+msgstr "Перемкнути згортку/розгортку"
+
+#: ../src/xmlcopyeditor.cpp:5061
+msgid "&Fold Tags\tCtrl+Shift+F"
+msgstr "&Згорути теґи\tCtrl+Shift+F"
+
+#: ../src/xmlcopyeditor.cpp:5061
+msgid "Fold Tags"
+msgstr "Згорути теґи"
+
+#: ../src/xmlcopyeditor.cpp:5063
+msgid "&Unfold Tags\tCtrl+Shift+U"
+msgstr "&Розгорнути теґи\tCtrl+Shift+U"
+
+#: ../src/xmlcopyeditor.cpp:5066
+msgid "&Wrap Words\tCtrl+W"
+msgstr "&Завертати рядки\tCtrl+W"
+
+#: ../src/xmlcopyeditor.cpp:5068
+msgid "&Color Scheme"
+msgstr "&Кольорова схема"
+
+#: ../src/xmlcopyeditor.cpp:5069
+msgid "&Text Size"
+msgstr "&Розмір тексту"
+
+#: ../src/xmlcopyeditor.cpp:5074
+msgid "S&how Current Element Pane"
+msgstr "&Показувати шибку з поточним елементом"
+
+#: ../src/xmlcopyeditor.cpp:5075
+#, fuzzy
+msgid "Show Current Element Pane"
+msgstr "&Показувати шибку з поточним елементом"
+
+#: ../src/xmlcopyeditor.cpp:5078
+msgid "Sh&ow Toolbar"
+msgstr "&Показувати панель інструментів"
+
+#: ../src/xmlcopyeditor.cpp:5078
+msgid "Show Toolbar"
+msgstr "Показувати панель інструментів"
+
+#: ../src/xmlcopyeditor.cpp:5081
+#, fuzzy
+msgid "C&lose Message Pane\tAlt+C"
+msgstr "&Закрити шибки повідомлення/пошуку/команди\tAlt+C"
+
+#: ../src/xmlcopyeditor.cpp:5081
+#, fuzzy
+msgid "Close Message Pane"
+msgstr "Закрити шибки повідомлення/пошуку/команди"
+
+#: ../src/xmlcopyeditor.cpp:5083
+#, fuzzy
+msgid "Close Find/&Replace Pane"
+msgstr "Закрити шибки повідомлення/пошуку/команди"
+
+#: ../src/xmlcopyeditor.cpp:5083
+#, fuzzy
+msgid "Close Find/Replace Pane"
+msgstr "Закрити шибки повідомлення/пошуку/команди"
+
+#: ../src/xmlcopyeditor.cpp:5085
+#, fuzzy
+msgid "Close Co&mmand Pane"
+msgstr "Закрити шибки повідомлення/пошуку/команди"
+
+#: ../src/xmlcopyeditor.cpp:5085
+#, fuzzy
+msgid "Close Command Pane"
+msgstr "Закрити шибки повідомлення/пошуку/команди"
+
+#: ../src/xmlcopyeditor.cpp:5089
+msgid "&Element...\tCtrl+I"
+msgstr "&Елемент...\tCtrl+I"
+
+#: ../src/xmlcopyeditor.cpp:5089
+msgid "Element..."
+msgstr "Елемент..."
+
+#: ../src/xmlcopyeditor.cpp:5090
+msgid "&Sibling...\tCtrl+Shift+I"
+msgstr "&Сусід...\tCtrl+Shift+I"
+
+#: ../src/xmlcopyeditor.cpp:5090
+msgid "Sibling..."
+msgstr "Сусід..."
+
+#: ../src/xmlcopyeditor.cpp:5091
+msgid "&Entity...\tCtrl+E"
+msgstr "&Entity...\tCtrl+E"
+
+#: ../src/xmlcopyeditor.cpp:5091
+msgid "Entity..."
+msgstr "Entity..."
+
+#: ../src/xmlcopyeditor.cpp:5093
+msgid "&Twin\tCtrl+Enter"
+msgstr "&Близнюк\tCtrl+Enter"
+
+#: ../src/xmlcopyeditor.cpp:5093
+msgid "Twin"
+msgstr "Близнюк"
+
+#: ../src/xmlcopyeditor.cpp:5095
+msgid "S&ymbol..."
+msgstr "&Символ..."
+
+#: ../src/xmlcopyeditor.cpp:5095
+msgid "Symbol..."
+msgstr "Символ..."
+
+#: ../src/xmlcopyeditor.cpp:5103
+msgid "&DTD/XML Schema\tF5"
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:5103
+msgid "DTD/XML Schema"
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:5106
+msgid "&RELAX NG...\tF6"
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:5106
+msgid "RELAX NG..."
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:5109
+msgid "&Public DTD..."
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:5109
+msgid "Public DTD..."
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:5110
+msgid "&System DTD..."
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:5110
+msgid "System DTD..."
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:5111
+msgid "&XML Schema..."
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:5111
+msgid "XML Schema..."
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:5112
+msgid "XS&LT stylesheet..."
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:5112
+msgid "XSLT stylesheet..."
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:5127 ../src/xmlcopyeditor.cpp:5138
+#, c-format
+msgid "\tCtrl+%i"
+msgstr "\tCtrl+%i"
+
+#: ../src/xmlcopyeditor.cpp:5178
+msgid "&Check Well-formedness\tF2"
+msgstr "&Перевірити чи добре сформовано\tF2"
+
+#: ../src/xmlcopyeditor.cpp:5178 ../src/xmlcopyeditor.cpp:5450
+#: ../src/xmlcopyeditor.cpp:5454
+msgid "Check Well-formedness"
+msgstr "Перевірити чи добре сформовано"
+
+#: ../src/xmlcopyeditor.cpp:5181
+msgid "&Validate"
+msgstr "&Перевірка чинності"
+
+#: ../src/xmlcopyeditor.cpp:5183
+msgid "Create &Schema...\tF10"
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:5184
+msgid "Create schema..."
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:5185 ../src/xmlcopyeditor.cpp:5186
+msgid "DTD -> Schema..."
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:5190
+msgid "&Associate"
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:5193
+msgid "&XSL Transform...\tF8"
+msgstr "&XSL-перетворення...\tF8"
+
+#: ../src/xmlcopyeditor.cpp:5194
+msgid "XSL Transform..."
+msgstr "XSL-перетворення..."
+
+#: ../src/xmlcopyeditor.cpp:5197
+msgid "&Evaluate XPath...\tF9"
+msgstr "&Вичислити XPath...\tF9"
+
+#: ../src/xmlcopyeditor.cpp:5198
+msgid "Evaluate XPath..."
+msgstr "Вичислити XPath..."
+
+#: ../src/xmlcopyeditor.cpp:5201
+msgid "Copy &The Current XPath"
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:5202
+msgid "Copy The Current XPath"
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:5207
+msgid "&Pretty-print\tF11"
+msgstr "&Сформатувати для гарного видруку\tF11"
+
+#: ../src/xmlcopyeditor.cpp:5207
+msgid "Pretty-print"
+msgstr "Сформатувати для гарного видруку"
+
+#: ../src/xmlcopyeditor.cpp:5211
+msgid "&Lock Tags\tCtrl+L"
+msgstr "&Замкнути теґи\tCtrl+L"
+
+#: ../src/xmlcopyeditor.cpp:5212 ../src/xmlcopyeditor.cpp:5479
+#: ../src/xmlcopyeditor.cpp:5482
+msgid "Lock Tags"
+msgstr "Замкнути теґи"
+
+#: ../src/xmlcopyeditor.cpp:5217
+msgid "E&ncoding..."
+msgstr "&Кодування..."
+
+#: ../src/xmlcopyeditor.cpp:5217
+msgid "Encoding..."
+msgstr "Кодування..."
+
+#: ../src/xmlcopyeditor.cpp:5226
+#, fuzzy
+msgid "&Spelling...\tF7"
+msgstr "Сусід..."
+
+#: ../src/xmlcopyeditor.cpp:5227
+#, fuzzy
+msgid "Spelling..."
+msgstr "Сусід..."
+
+#: ../src/xmlcopyeditor.cpp:5234
+#, fuzzy
+msgid "&Style...\tShift+F7"
+msgstr "&Сусід...\tCtrl+Shift+I"
+
+#: ../src/xmlcopyeditor.cpp:5235
+msgid "Style..."
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:5242
+msgid "&Word Count"
+msgstr "&Підрахунок кількості слів"
+
+#: ../src/xmlcopyeditor.cpp:5243
+msgid "Word Count"
+msgstr "Підрахунок кількості слів"
+
+#: ../src/xmlcopyeditor.cpp:5251
+msgid "&Command\tCtrl+Alt+C"
+msgstr "&Команда\tCtrl+Alt+C"
+
+#: ../src/xmlcopyeditor.cpp:5252
+msgid "Command"
+msgstr "Команда"
+
+#: ../src/xmlcopyeditor.cpp:5267
+msgid "&Options..."
+msgstr "&Налаштування..."
+
+#: ../src/xmlcopyeditor.cpp:5268
+msgid "Options..."
+msgstr "Налаштування..."
+
+#: ../src/xmlcopyeditor.cpp:5278
+msgid "&XML Copy Editor Help\tF1"
+msgstr "Довідка  - &XML Copy Editor\tF1"
+
+#: ../src/xmlcopyeditor.cpp:5278
+msgid "Help"
+msgstr "Допомога"
+
+#: ../src/xmlcopyeditor.cpp:5284
+msgid "&Home Page"
+msgstr "&Домашня cторінка"
+
+#: ../src/xmlcopyeditor.cpp:5284
+msgid "Home Page"
+msgstr "Домашня cторінка"
+
+#: ../src/xmlcopyeditor.cpp:5287
+msgid "&Forum"
+msgstr "&Форум"
+
+#: ../src/xmlcopyeditor.cpp:5287
+msgid "Forum"
+msgstr "Форум"
+
+#: ../src/xmlcopyeditor.cpp:5291
+msgid "&About XML Copy Editor"
+msgstr "&Про XML Copy Editor"
+
+#: ../src/xmlcopyeditor.cpp:5291
+msgid "About"
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:5295
+#, fuzzy
+msgid "&Browse Source"
+msgstr "&Завантажити джерельний код"
+
+#: ../src/xmlcopyeditor.cpp:5295
+#, fuzzy
+msgid "Browse Source"
+msgstr "У броузері"
+
+#: ../src/xmlcopyeditor.cpp:5307
+msgid "&File"
+msgstr "&Файл"
+
+#: ../src/xmlcopyeditor.cpp:5308
+msgid "&Edit"
+msgstr "&Редагування"
+
+#: ../src/xmlcopyeditor.cpp:5309
+msgid "&View"
+msgstr "&Вигляд"
+
+#: ../src/xmlcopyeditor.cpp:5310
+msgid "&Insert"
+msgstr "&Вставка"
+
+#: ../src/xmlcopyeditor.cpp:5311
+msgid "&XML"
+msgstr "&XML"
+
+#: ../src/xmlcopyeditor.cpp:5312
+msgid "&Tools"
+msgstr "&Інструменти"
+
+#: ../src/xmlcopyeditor.cpp:5313
+msgid "&Help"
+msgstr "&Допомога"
+
+#: ../src/xmlcopyeditor.cpp:5328
+msgid "&New...\tCtrl+N"
+msgstr "&Новий...\tCtrl+N"
+
+#: ../src/xmlcopyeditor.cpp:5328
+msgid "New..."
+msgstr "Новий..."
+
+#: ../src/xmlcopyeditor.cpp:5331
+msgid "&Open...\tCtrl+O"
+msgstr "&Відкрити...\tCtrl+O"
+
+#: ../src/xmlcopyeditor.cpp:5331
+msgid "Open..."
+msgstr "Відкрити..."
+
+#: ../src/xmlcopyeditor.cpp:5335
+msgid "O&pen Large Document...\tCtrl+Shift+O"
+msgstr "&Відкрити великий документ...\tCtrl+Shift+O"
+
+#: ../src/xmlcopyeditor.cpp:5335
+msgid "Open Large Document..."
+msgstr "Відкрити великий документ..."
+
+#: ../src/xmlcopyeditor.cpp:5339
+msgid "&Close\tCtrl+F4"
+msgstr "&Закрити\tCtrl+F4"
+
+#: ../src/xmlcopyeditor.cpp:5342
+msgid "C&lose All"
+msgstr "&Позакривати усі"
+
+#: ../src/xmlcopyeditor.cpp:5342
+msgid "Close All"
+msgstr "Позакривати усі"
+
+#: ../src/xmlcopyeditor.cpp:5345
+msgid "&Save\tCtrl+S"
+msgstr "&Зберегти\tCtrl+S"
+
+#: ../src/xmlcopyeditor.cpp:5345 ../src/xmlcopyeditor.cpp:5436
+#: ../src/xmlcopyeditor.cpp:5440
+msgid "Save"
+msgstr "Зберегти"
+
+#: ../src/xmlcopyeditor.cpp:5348
+msgid "S&ave As...\tF12"
+msgstr "&Зберегти як...\tF12"
+
+#: ../src/xmlcopyeditor.cpp:5348
+msgid "Save As..."
+msgstr "Зберегти як..."
+
+#: ../src/xmlcopyeditor.cpp:5352
+msgid "&DAISY Export..."
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:5352
+msgid "DAISY Export..."
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:5356
+msgid "&Reload"
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:5356
+msgid "Reload"
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:5359
+msgid "&Revert"
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:5359
+msgid "Revert"
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:5362
+msgid "Pa&ge Setup..."
+msgstr "&Лаштунки сторінки..."
+
+#: ../src/xmlcopyeditor.cpp:5362
+msgid "Page Setup..."
+msgstr "Лаштунки сторінки..."
+
+#: ../src/xmlcopyeditor.cpp:5365
+#, fuzzy
+msgid "Pr&int Preview..."
+msgstr "Перегляд перед друком..."
+
+#: ../src/xmlcopyeditor.cpp:5365
+msgid "Print Preview..."
+msgstr "Перегляд перед друком..."
+
+#: ../src/xmlcopyeditor.cpp:5368
+#, fuzzy
+msgid "Pri&nt...\tCtrl+P"
+msgstr "&Друк...\tCtrl+P"
+
+#: ../src/xmlcopyeditor.cpp:5368
+msgid "Print..."
+msgstr "Друк..."
+
+#: ../src/xmlcopyeditor.cpp:5372
+msgid "I&mport Microsoft Word Document..."
+msgstr "&Імпорт документаMicrosoft Word..."
+
+#: ../src/xmlcopyeditor.cpp:5376
+#, fuzzy
+msgid "Expor&t Microsoft Word Document..."
+msgstr "&Експорт документа Microsoft Word..."
+
+#: ../src/xmlcopyeditor.cpp:5380
+msgid "E&xit"
+msgstr "&Вихід"
+
+#: ../src/xmlcopyeditor.cpp:5380
+msgid "Exit"
+msgstr "Вихід"
+
+#: ../src/xmlcopyeditor.cpp:5426 ../src/xmlcopyeditor.cpp:5428
+msgid "New"
+msgstr "Новий"
+
+#: ../src/xmlcopyeditor.cpp:5443 ../src/xmlcopyeditor.cpp:5447
+msgid "Print"
+msgstr "Друк"
+
+#: ../src/xmlcopyeditor.cpp:5457 ../src/xmlcopyeditor.cpp:5461
+#, fuzzy
+msgid "Validate"
+msgstr "&Перевірка чинності"
+
+#: ../src/xmlcopyeditor.cpp:5521
+msgid "Information"
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:5527
+msgid "Stopped"
+msgstr "Зупинено"
+
+#: ../src/xmlcopyeditor.cpp:5530
+msgid "Question"
+msgstr "Запитання"
+
+#: ../src/xmlcopyeditor.cpp:5533
+msgid "Message"
+msgstr "Повідомлення"
+
+#: ../src/xmlcopyeditor.cpp:5601
+#, fuzzy, c-format
+msgid "%s is %s"
+msgstr "%s %s %s %s"
+
+#: ../src/xmlcopyeditor.cpp:5626
+msgid "Document has been modified: save or discard changes"
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:5689
+msgid "Encoding should be one of "
+msgstr "Кодування повинно бути одне з "
+
+#: ../src/xmlcopyeditor.cpp:5748
+msgid "Public DTD"
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:5754
+msgid "System DTD"
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:5760
+msgid "XML Schema"
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:5783
+#, fuzzy, c-format
+msgid "Cannot associate %s: %s"
+msgstr "Не вдається відкрити %s"
+
+#: ../src/xmlcopyeditor.cpp:5790
+#, c-format
+msgid "Associate %s"
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:5798
+#, fuzzy
+msgid "Choose a public identifier:"
+msgstr "Виберіть файл: "
+
+#: ../src/xmlcopyeditor.cpp:5918
+#, fuzzy, c-format
+msgid "Cannot count words: %s"
+msgstr "Не вдається відкрити %s"
+
+#: ../src/xmlcopyeditor.cpp:5926
+#, c-format
+msgid "%s contains %i word"
+msgid_plural "%s contains %i words"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: ../src/xmlcopyeditor.cpp:6042
+msgid "The current XPath is empty."
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:6052
+#, c-format
+msgid "The current XPath has been copied to the clipboard:[br][b]%s[/b]"
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:6060
+#, c-format
+msgid "Failed to copy the current XPath to the clipboard:[br][b]%s[/b]"
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:6171
+msgid "Invalid path: "
+msgid_plural "Invalid paths: "
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: ../src/xmlcopyeditor.cpp:6175
+msgid ""
+"To change the application directory setting, click Tools menu -> Options... "
+"after XML Copy Editor starts up."
+msgstr ""
+
+#: ../src/xmlcopyeditor.cpp:6178
+msgid ""
+"To change the application directory setting, click Edit menu -> "
+"Preferences... after XML Copy Editor starts up."
+msgstr ""
+
+#: ../src/xmlctrl.cpp:303 ../src/xmlctrl.cpp:407
+msgid "Delete tag?"
+msgstr ""
+
+#: ../src/xmlctrl.cpp:304 ../src/xmlctrl.cpp:335 ../src/xmlctrl.cpp:408
+#: ../src/xmlctrl.cpp:439
+#, fuzzy
+msgid "Tags Locked"
+msgstr "Теґи замкнуті"
+
+#: ../src/xmlctrl.cpp:334 ../src/xmlctrl.cpp:438
+msgid "Delete entity reference?"
+msgstr ""
+
+#: ../src/xmlctrl.cpp:2252
+msgid "Cannot find the start tag"
+msgstr ""
+
+#: ../src/xmlctrl.cpp:2260
+msgid "Cannot find the end tag"
+msgstr ""
+
+#: ../src/xmlschemagenerator.cpp:80
+msgid "Failed to load xml file."
+msgstr ""
+
+#, fuzzy
+#~ msgid "XML Editor"
+#~ msgstr "XML Copy Editor"
+
+#, fuzzy
+#~ msgid "Edit XML documents"
+#~ msgstr "Редагований документ пустий"
+
+#~ msgid "%i match"
+#~ msgid_plural "%i matches"
+#~ msgstr[0] "%i знаходження"
+#~ msgstr[1] "%i знаходження"
+#~ msgstr[2] "%i знаходжень"
+
+#~ msgid "&Change all"
+#~ msgstr "&Замінити усе"
+
+#~ msgid "&DTD\tF4"
+#~ msgstr "&DTD\tF4"
+
+#~ msgid "&DocBook to HTML\tAlt+1"
+#~ msgstr "&DocBook у HTML\tAlt+1"
+
+#~ msgid "&DocBook to XHTML\tAlt+2"
+#~ msgstr "&DocBook у XHTML\tAlt+2"
+
+#~ msgid "&Report"
+#~ msgstr "&Звітувати"
+
+#~ msgid "&TEI to HTML\tAlt+4"
+#~ msgstr "&TEI у HTML\tAlt+4"
+
+#~ msgid "&XSLT"
+#~ msgstr "&XSLT"
+
+#~ msgid "Cannot set encoding (cannot open temporary file)"
+#~ msgstr ""
+#~ "Не можливо встановити кодування (не вдається відкрити тимчасовий файл)"
+
+#~ msgid "D&ocBook to XSL-FO\tAlt+3"
+#~ msgstr "D&ocBook у XSL-FO\tAlt+3"
+
+#~ msgid "David Håsäther (Swedish) <hasather@gmail.com>"
+#~ msgstr "David Håsäther (швецька мова) <hasather@gmail.com>"
+
+#~ msgid "DocBook to HTML"
+#~ msgstr "DocBook у HTML"
+
+#~ msgid "DocBook to XHTML"
+#~ msgstr "DocBook у XHTML"
+
+#~ msgid "DocBook to XSL-FO"
+#~ msgstr "DocBook у XSL-FO"
+
+#~ msgid "Download Source"
+#~ msgstr "Завантажити джерельний код"
+
+#~ msgid "François Badier (French) <frabad@gmail.com>"
+#~ msgstr "François Badier (французька мова) <frabad@gmail.com>"
+
+#~ msgid "MSXML validation failed (version 4.0 or later required)"
+#~ msgstr ""
+#~ "Перевірка чинності MSXML зазнала невдачі (потребує 4.0 чи вищої версії)"
+
+#~ msgid "P&rint Preview..."
+#~ msgstr "Перегляд перед друком..."
+
+#~ msgid "Show Current ElementPane"
+#~ msgstr "Показувати шибку з поточним елементом"
+
+#~ msgid "T&EI to LaTeX\tAlt+5"
+#~ msgstr "T&EI у LaTeX\tAlt+5"
+
+#~ msgid "TE&I to XHTML\tAlt+6"
+#~ msgstr "TE&I у XHTML\tAlt+6"
+
+#~ msgid "TEI to &XSL-FO\tAlt+7"
+#~ msgstr "TEI у &XSL-FO\tAlt+7"
+
+#~ msgid "TEI to HTML"
+#~ msgstr "TEI у HTML"
+
+#~ msgid "TEI to LaTeX"
+#~ msgstr "TEI у LaTeX"
+
+#~ msgid "TEI to XHTML"
+#~ msgstr "TEI у XHTML"
+
+#~ msgid "TEI to XSL-FO"
+#~ msgstr "TEI у XSL-FO"
+
+#~ msgid "Thomas Wenzel (German) <thowen@users.sourceforge.net>"
+#~ msgstr "Thomas Wenzel (німецька мова) <thowen@users.sourceforge.net>"
+
+#~ msgid ""
+#~ "Using local encoding because %s is neither valid UTF-8 nor well-formed "
+#~ "XML: %s"
+#~ msgstr ""
+#~ "Використовується локальне кодування бо %s не є чинним UTF-8 або ж погано "
+#~ "сформований XML: %s"
+
+#~ msgid "Viliam Búr (Slovak) <viliam@bur.sk>"
+#~ msgstr "Viliam Búr (словацька мова) <viliam@bur.sk>"
+
+#~ msgid "XML Copy Editor has encountered an error and needs to close"
+#~ msgstr "XML Copy Editor зіткнувся з помилкою і потрібує закриття"

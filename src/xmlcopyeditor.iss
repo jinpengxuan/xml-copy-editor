@@ -113,9 +113,22 @@ Source: ".\copying\*"; DestDir: "{app}\copying"; Flags: ignoreversion recursesub
 Source: ".\dtd\*"; DestDir: "{app}\dtd"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: ".\help\xmlcopyeditor.chm"; DestDir: "{app}\help"; Flags: recursesubdirs createallsubdirs
 Source: ".\png\*png"; DestDir: "{app}\png"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: ".\po\*.mo"; DestDir: "{app}\po"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: ".\po\*.png"; DestDir: "{app}"
-Source: ".\po\translate.txt"; DestDir: "{app}"
+Source: "..\po\ca.gmo"; DestDir: "{app}\po\ca"; DestName: "xmlcopyeditor.mo"; Flags: ignoreversion
+Source: "..\po\de.gmo"; DestDir: "{app}\po\de"; DestName: "xmlcopyeditor.mo"; Flags: ignoreversion
+Source: "..\po\en_US.gmo"; DestDir: "{app}\po\en_US"; DestName: "xmlcopyeditor.mo"; Flags: ignoreversion
+Source: "..\po\es.gmo"; DestDir: "{app}\po\es"; DestName: "xmlcopyeditor.mo"; Flags: ignoreversion
+Source: "..\po\fr.gmo"; DestDir: "{app}\po\fr"; DestName: "xmlcopyeditor.mo"; Flags: ignoreversion
+Source: "..\po\it.gmo"; DestDir: "{app}\po\it"; DestName: "xmlcopyeditor.mo"; Flags: ignoreversion
+Source: "..\po\km.gmo"; DestDir: "{app}\po\km"; DestName: "xmlcopyeditor.mo"; Flags: ignoreversion
+Source: "..\po\nl.gmo"; DestDir: "{app}\po\nl"; DestName: "xmlcopyeditor.mo"; Flags: ignoreversion
+Source: "..\po\ru.gmo"; DestDir: "{app}\po\ru"; DestName: "xmlcopyeditor.mo"; Flags: ignoreversion
+Source: "..\po\sk.gmo"; DestDir: "{app}\po\sk"; DestName: "xmlcopyeditor.mo"; Flags: ignoreversion
+Source: "..\po\sv.gmo"; DestDir: "{app}\po\sv"; DestName: "xmlcopyeditor.mo"; Flags: ignoreversion
+Source: "..\po\uk_UA.gmo"; DestDir: "{app}\po\uk_UA"; DestName: "xmlcopyeditor.mo"; Flags: ignoreversion
+Source: "..\po\zh_CN.gmo"; DestDir: "{app}\po\zh_CN"; DestName: "xmlcopyeditor.mo"; Flags: ignoreversion
+Source: "..\po\zh_TW.gmo"; DestDir: "{app}\po\zh_TW"; DestName: "xmlcopyeditor.mo"; Flags: ignoreversion
+Source: "..\po\*.png"; DestDir: "{app}"
+Source: "..\po\translate.txt"; DestDir: "{app}"
 Source: ".\rng\*"; DestDir: "{app}\rng"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: ".\rulesets\*"; DestDir: "{app}\rulesets"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: ".\templates\*"; DestDir: "{app}\templates"; Flags: ignoreversion recursesubdirs createallsubdirs
