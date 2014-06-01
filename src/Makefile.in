@@ -47,7 +47,7 @@ am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 mkinstalldirs = $(install_sh) -d
 CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
-am__installdirs = "$(DESTDIR)$(bindir)" "$(DESTDIR)$(applicationsdir)" \
+am__installdirs = "$(DESTDIR)$(bindir)" \
 	"$(DESTDIR)$(xmlcopyeditordir)" "$(DESTDIR)$(pixmapdir)"
 PROGRAMS = $(bin_PROGRAMS)
 am_xmlcopyeditor_OBJECTS = xmlcopyeditor.$(OBJEXT) \
@@ -126,8 +126,7 @@ am__uninstall_files_from_dir = { \
     || { echo " ( cd '$$dir' && rm -f" $$files ")"; \
          $(am__cd) "$$dir" && rm -f $$files; }; \
   }
-DATA = $(applications_DATA) $(nobase_dist_xmlcopyeditor_DATA) \
-	$(pixmap_DATA)
+DATA = $(nobase_dist_xmlcopyeditor_DATA) $(pixmap_DATA)
 HEADERS = $(noinst_HEADERS)
 ETAGS = etags
 CTAGS = ctags
@@ -302,8 +301,7 @@ xmlcopyeditor_SOURCES = xmlcopyeditor.cpp associatedialog.cpp casehandler.cpp \
 	binaryfile.cpp xmlencodingspy.cpp wrapaspell.cpp validationthread.cpp \
 	wrapdaisy.cpp exportdialog.cpp mp3album.cpp xmlprodnote.cpp \
 	xmlsuppressprodnote.cpp xmlcopyimg.cpp xmlschemagenerator.cpp \
-	xmlcopyeditor.spec xmlcopyeditor.png custom.xpm \
-	xmlcopyeditor.desktop
+	xmlcopyeditor.spec xmlcopyeditor.png custom.xpm
 
 xmlcopyeditor_LDADD = $(WX_LIBS) \
 	-lexpat -lxslt -lxml2 -lpcre -lxerces-c $(ASPELL_LIBS) $(ENCHANT_LIBS) $(GTK_LIBS)
@@ -351,7 +349,6 @@ nobase_dist_xmlcopyeditor_DATA = $(srcdir)/catalog/catalog \
 	$(srcdir)/xsl/openlearn2daisyhtml/*.*
 
 pixmap_DATA = xmlcopyeditor.png
-applications_DATA = xmlcopyeditor.desktop
 AM_CPPFLAGS = -I/usr/include/libxml2 $(ENCHANT_CFLAGS) $(GTK_CFLAGS)
 all: all-am
 
@@ -526,24 +523,6 @@ mostlyclean-libtool:
 
 clean-libtool:
 	-rm -rf .libs _libs
-install-applicationsDATA: $(applications_DATA)
-	@$(NORMAL_INSTALL)
-	test -z "$(applicationsdir)" || $(MKDIR_P) "$(DESTDIR)$(applicationsdir)"
-	@list='$(applications_DATA)'; test -n "$(applicationsdir)" || list=; \
-	for p in $$list; do \
-	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
-	  echo "$$d$$p"; \
-	done | $(am__base_list) | \
-	while read files; do \
-	  echo " $(INSTALL_DATA) $$files '$(DESTDIR)$(applicationsdir)'"; \
-	  $(INSTALL_DATA) $$files "$(DESTDIR)$(applicationsdir)" || exit $$?; \
-	done
-
-uninstall-applicationsDATA:
-	@$(NORMAL_UNINSTALL)
-	@list='$(applications_DATA)'; test -n "$(applicationsdir)" || list=; \
-	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
-	dir='$(DESTDIR)$(applicationsdir)'; $(am__uninstall_files_from_dir)
 install-nobase_dist_xmlcopyeditorDATA: $(nobase_dist_xmlcopyeditor_DATA)
 	@$(NORMAL_INSTALL)
 	test -z "$(xmlcopyeditordir)" || $(MKDIR_P) "$(DESTDIR)$(xmlcopyeditordir)"
@@ -670,7 +649,7 @@ check-am: all-am
 check: check-am
 all-am: Makefile $(PROGRAMS) $(DATA) $(HEADERS)
 installdirs:
-	for dir in "$(DESTDIR)$(bindir)" "$(DESTDIR)$(applicationsdir)" "$(DESTDIR)$(xmlcopyeditordir)" "$(DESTDIR)$(pixmapdir)"; do \
+	for dir in "$(DESTDIR)$(bindir)" "$(DESTDIR)$(xmlcopyeditordir)" "$(DESTDIR)$(pixmapdir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
 install: install-am
@@ -725,8 +704,8 @@ info: info-am
 
 info-am:
 
-install-data-am: install-applicationsDATA \
-	install-nobase_dist_xmlcopyeditorDATA install-pixmapDATA
+install-data-am: install-nobase_dist_xmlcopyeditorDATA \
+	install-pixmapDATA
 
 install-dvi: install-dvi-am
 
@@ -772,7 +751,7 @@ ps: ps-am
 
 ps-am:
 
-uninstall-am: uninstall-applicationsDATA uninstall-binPROGRAMS \
+uninstall-am: uninstall-binPROGRAMS \
 	uninstall-nobase_dist_xmlcopyeditorDATA uninstall-pixmapDATA
 
 .MAKE: install-am install-strip
@@ -781,18 +760,17 @@ uninstall-am: uninstall-applicationsDATA uninstall-binPROGRAMS \
 	clean-generic clean-libtool ctags distclean distclean-compile \
 	distclean-generic distclean-libtool distclean-tags distdir dvi \
 	dvi-am html html-am info info-am install install-am \
-	install-applicationsDATA install-binPROGRAMS install-data \
-	install-data-am install-dvi install-dvi-am install-exec \
-	install-exec-am install-html install-html-am install-info \
-	install-info-am install-man \
+	install-binPROGRAMS install-data install-data-am install-dvi \
+	install-dvi-am install-exec install-exec-am install-html \
+	install-html-am install-info install-info-am install-man \
 	install-nobase_dist_xmlcopyeditorDATA install-pdf \
 	install-pdf-am install-pixmapDATA install-ps install-ps-am \
 	install-strip installcheck installcheck-am installdirs \
 	maintainer-clean maintainer-clean-generic mostlyclean \
 	mostlyclean-compile mostlyclean-generic mostlyclean-libtool \
 	pdf pdf-am ps ps-am tags uninstall uninstall-am \
-	uninstall-applicationsDATA uninstall-binPROGRAMS \
-	uninstall-nobase_dist_xmlcopyeditorDATA uninstall-pixmapDATA
+	uninstall-binPROGRAMS uninstall-nobase_dist_xmlcopyeditorDATA \
+	uninstall-pixmapDATA
 
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.

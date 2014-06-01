@@ -29,8 +29,7 @@ xmlcopyeditor_SOURCES = xmlcopyeditor.cpp associatedialog.cpp casehandler.cpp \
 	binaryfile.cpp xmlencodingspy.cpp wrapaspell.cpp validationthread.cpp \
 	wrapdaisy.cpp exportdialog.cpp mp3album.cpp xmlprodnote.cpp \
 	xmlsuppressprodnote.cpp xmlcopyimg.cpp xmlschemagenerator.cpp \
-	xmlcopyeditor.spec xmlcopyeditor.png custom.xpm \
-	xmlcopyeditor.desktop
+	xmlcopyeditor.spec xmlcopyeditor.png custom.xpm
 
 xmlcopyeditor_LDADD = $(WX_LIBS) \
 	-lexpat -lxslt -lxml2 -lpcre -lxerces-c $(ASPELL_LIBS) $(ENCHANT_LIBS) $(GTK_LIBS)
@@ -78,8 +77,6 @@ nobase_dist_xmlcopyeditor_DATA = $(srcdir)/catalog/catalog \
 	$(srcdir)/xsl/openlearn2daisyhtml/*.*
 
 pixmap_DATA = xmlcopyeditor.png
-
-applications_DATA = xmlcopyeditor.desktop
 
 AM_CPPFLAGS = -I/usr/include/libxml2 $(ENCHANT_CFLAGS) $(GTK_CFLAGS)
 

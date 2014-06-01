@@ -1,0 +1,10 @@
+[Desktop Entry]
+_Name=XML Copy Editor
+_GenericName=XML Editor
+_Comment=Edit XML documents
+Type=Application
+Exec=xmlcopyeditor %U
+Icon=xmlcopyeditor
+Terminal=false
+MimeType=text/xml;
+Categories=Development;TextEditor;

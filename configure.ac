@@ -153,7 +153,7 @@ PKG_CHECK_MODULES(GTK, [gtk+-2.0], [AC_MSG_RESULT([gtk+-2.0])],
 	#[PKG_CHECK_MODULES(GTK, [gtk+-3.0], [AC_MSG_RESULT([gtk+-3.0])])]
 )
 
-AC_OUTPUT(Makefile m4/Makefile po/Makefile.in src/Makefile)
+AC_OUTPUT(Makefile data/Makefile m4/Makefile po/Makefile.in src/Makefile)
 
 dnl Summarized output
 echo

@@ -16212,7 +16212,7 @@ $as_echo "yes" >&6; }
 $as_echo "gtk+-2.0" >&6; }
 fi
 
-ac_config_files="$ac_config_files Makefile m4/Makefile po/Makefile.in src/Makefile"
+ac_config_files="$ac_config_files Makefile data/Makefile m4/Makefile po/Makefile.in src/Makefile"
 
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
@@ -17345,6 +17345,7 @@ do
     "depfiles") CONFIG_COMMANDS="$CONFIG_COMMANDS depfiles" ;;
     "libtool") CONFIG_COMMANDS="$CONFIG_COMMANDS libtool" ;;
     "Makefile") CONFIG_FILES="$CONFIG_FILES Makefile" ;;
+    "data/Makefile") CONFIG_FILES="$CONFIG_FILES data/Makefile" ;;
     "m4/Makefile") CONFIG_FILES="$CONFIG_FILES m4/Makefile" ;;
     "po/Makefile.in") CONFIG_FILES="$CONFIG_FILES po/Makefile.in" ;;
     "src/Makefile") CONFIG_FILES="$CONFIG_FILES src/Makefile" ;;

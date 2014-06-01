@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: XML Copy Editor\n"
 "Report-Msgid-Bugs-To: https://sourceforge.net/p/xml-copy-editor/bugs/\n"
-"POT-Creation-Date: 2014-06-01 20:12+0800\n"
+"POT-Creation-Date: 2014-06-01 20:46+0800\n"
 "PO-Revision-Date: 2007-01-23 19:52+CET\n"
 "Last-Translator: David Håsäther <hzr@users.sourceforge.net>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -11,6 +11,41 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../data/xmlcopyeditor.appdata.xml.in.h:1
+msgid "fast, free, validating XML editor"
+msgstr ""
+
+#: ../data/xmlcopyeditor.appdata.xml.in.h:2
+msgid ""
+"XML Copy Editor is an XML editor focusing on editing document markup "
+"languages like DITA, DocBook, WordprocessingML. Features: DTD/XML Schema/"
+"RELAX NG validation, XSLT, XPath, Pretty-printing, Syntax highlighting, "
+"Folding, Tag completion, Tag locking, Tag-free editing, Built-in support for "
+"XHTML, XSL, DocBook and TEI, Generating XML Schema, Spelling and style check "
+"with built-in spell/style checker."
+msgstr ""
+
+#: ../data/xmlcopyeditor.appdata.xml.in.h:3
+msgid "https://a.fsdn.com/con/app/proj/xml-copy-editor/screenshots/151221.jpg"
+msgstr ""
+
+#: ../data/xmlcopyeditor.desktop.in.h:1 ../src/xmlcopyeditor.cpp:388
+#: ../src/xmlcopyeditor.cpp:1310 ../src/xmlcopyeditor.cpp:1408
+#: ../src/xmlcopyeditor.cpp:1649 ../src/xmlcopyeditor.cpp:1728
+#: ../src/xmlcopyeditor.cpp:3610
+msgid "XML Copy Editor"
+msgstr "XML Copy Editor"
+
+#: ../data/xmlcopyeditor.desktop.in.h:2
+#, fuzzy
+msgid "XML Editor"
+msgstr "XML Copy Editor"
+
+#: ../data/xmlcopyeditor.desktop.in.h:3
+#, fuzzy
+msgid "Edit XML documents"
+msgstr "Redigerat dokument är tomt"
 
 #. wxID_CANCEL req'd for 'Esc closes dialog' functionality
 #: ../src/aboutdialog.cpp:51
@@ -795,12 +830,6 @@ msgid ""
 "\n"
 "Many thanks are due to "
 msgstr ""
-
-#: ../src/xmlcopyeditor.cpp:388 ../src/xmlcopyeditor.cpp:1310
-#: ../src/xmlcopyeditor.cpp:1408 ../src/xmlcopyeditor.cpp:1649
-#: ../src/xmlcopyeditor.cpp:1728 ../src/xmlcopyeditor.cpp:3610
-msgid "XML Copy Editor"
-msgstr "XML Copy Editor"
 
 #: ../src/xmlcopyeditor.cpp:407
 msgid "Failed to initialize Xerces-C:\n"
@@ -2171,14 +2200,6 @@ msgstr "Kan inte hitta '%s'"
 #: ../src/xmlschemagenerator.cpp:80
 msgid "Failed to load xml file."
 msgstr ""
-
-#, fuzzy
-#~ msgid "XML Editor"
-#~ msgstr "XML Copy Editor"
-
-#, fuzzy
-#~ msgid "Edit XML documents"
-#~ msgstr "Redigerat dokument är tomt"
 
 #~ msgid " in large document mode?"
 #~ msgstr " i stort-dokumentläge?"

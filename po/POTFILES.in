@@ -1,4 +1,6 @@
 # List of source files which contain translatable strings.
+data/xmlcopyeditor.appdata.xml.in
+data/xmlcopyeditor.desktop.in
 src/aboutdialog.cpp
 src/aboutdialog.h
 src/associatedialog.cpp
