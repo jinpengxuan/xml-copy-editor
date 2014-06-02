@@ -2,6 +2,7 @@ SUBDIRS = data m4 po src
 AM_CPPFLAGS = -I$(top_srcdir)/. -I$(top_srcdir)/src
 
 EXTRA_DIST = \
+	debian \
 	config.rpath \
 	autogen.sh \
 	checkinstall.sh \

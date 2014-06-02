@@ -65,7 +65,22 @@ nobase_dist_xmlcopyeditor_DATA = $(srcdir)/catalog/catalog \
 
 pixmap_DATA = xmlcopyeditor.png
 
-EXTRA_DIST = $(srcdir)/copying
+EXTRA_DIST = \
+	$(srcdir)/aspell \
+	$(srcdir)/bin \
+	$(srcdir)/bmp \
+	$(srcdir)/copying \
+	$(srcdir)/dtd/docbook/4.4/ent/README \
+	$(srcdir)/dtd/docbook/4.4/ChangeLog \
+	$(srcdir)/dtd/docbook/4.4/README \
+	$(srcdir)/ico \
+	$(srcdir)/.cproject \
+	$(srcdir)/.project \
+	$(srcdir)/myprintout.cpp \
+	$(srcdir)/xmlcopyeditor.iss \
+	$(srcdir)/xmlcopyeditor64.iss \
+	$(srcdir)/xmlcopyeditor.rc \
+	$(srcdir)/xmlschemaparser.cpp
 
 AM_CPPFLAGS = -I/usr/include/libxml2 $(ENCHANT_CFLAGS) $(GTK_CFLAGS)
 
