@@ -1,0 +1,31 @@
+xmlcopyeditor (1.2.1.2-1) unstable; urgency=low
+
+  + Feature #69 Add "current XPath" shortcut
+  + Feature #155 XPath - functions
+  + Click on the error message to jump to the error location
+  * Bug #103 Locale files have the wrong pathname under Linux
+  * Bug #99 fix desktop file (Marco Rodrigues)
+  * Bug #57 black on black = hard to use
+
+ -- Zane U. Ji <zaneuji@users.sf.net>  Mon, 02 Jun 2014 20:29:20 +0800
+
+xmlcopyeditor (1.2.1.1-1) unstable; urgency=low
+
+  + Feature #25 Fast commenting
+  + x64 installation package
+  + Supported HTTPS on validation ( when libxerces-c linked with libcurl )
+  * Auto complete list for DTDs that are on the internet
+  * Show UI before opening any file
+  * Made UI more responsive
+  * Fixed tab order
+  * Fixed encoding problems
+
+ -- Zane U. Ji <zaneuji@users.sf.net>  Sun, 04 May 2014 22:39:01 +0800
+
+xmlcopyeditor (1.2.1-1) unstable; urgency=low
+
+  - Zooming in/out problem with default font
+  + Close panels with menu or, when built with wxWidgets 3.0, Escape key
+  * Updated Khmer translation
+
+ -- Zane U. Ji <zaneuji@users.sf.net>  Sat, 05 Apr 2014 22:03:46 +0800

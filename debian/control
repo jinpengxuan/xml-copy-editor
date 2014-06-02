@@ -1,0 +1,33 @@
+Source: xmlcopyeditor
+Section: editors
+Priority: extra
+Maintainer: Zane U. Ji <zaneuji@users.sf.net>
+Build-Depends: debhelper (>= 8.0.0), autotools-dev, x11proto-composite-dev,
+  x11proto-randr-dev, libxfixes-dev, libxerces-c-dev, libglib2.0-0,
+  libxdmcp-dev, mime-support, gettext, file, libxinerama-dev, intltool,
+  libcairo2-dev, libxcb1-dev, libxcb-render0-dev, libxi-dev, libgtk2.0-dev,
+  mawk, libgdk-pixbuf2.0-dev, libglib2.0-dev, libatk1.0-dev,
+  libxml-parser-perl, libcroco3, libx11-dev, perl-modules, libpopt0, libxml2,
+  pkg-config, libpcre3-dev, libwxgtk2.8-dev, libfreetype6-dev, x11proto-kb-dev,
+  x11proto-damage-dev, libfontconfig1-dev, x11proto-xinerama-dev,
+  libexpat1-dev, libxml2-dev, libpthread-stubs0-dev, libxext-dev,
+  libxrandr-dev, libxau-dev, libenchant-dev, libpixman-1-dev,
+  libxcomposite-dev, libxrender-dev, libboost1.48-dev, libpng12-dev,
+  libunistring0, libegl1-mesa-lts-saucy, libmagic1, x11proto-render-dev,
+  libexpat1, libxcb-shm0-dev, libpcre3, libpango1.0-dev,
+  libgl1-mesa-glx-lts-saucy, libxcursor-dev, libxdamage-dev, libxslt1-dev, cpio
+Standards-Version: 3.9.2
+Homepage: http://xml-copy-editor.sourceforge.net/
+Vcs-Git: git://git.code.sf.net/p/xml-copy-editor/code
+Vcs-Browser: http://sourceforge.net/p/xml-copy-editor/code/
+
+Package: xmlcopyeditor
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: fast, free, validating XML editor
+ XML Copy Editor is an XML editor focusing on editing document markup
+ languages like DITA, DocBook, WordprocessingML. Features: DTD/XML
+ Schema/RELAX NG validation, XSLT, XPath, Pretty-printing, Syntax
+ highlighting, Folding, Tag completion, Tag locking, Tag-free editing,
+ Built-in support for XHTML, XSL, DocBook and TEI, Generating XML Schema,
+ Spelling and style check with built-in spell/style checker.
