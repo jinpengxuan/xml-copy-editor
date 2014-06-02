@@ -18,6 +18,7 @@
  */
 
 #include <wx/wx.h>
+#include <wx/tokenzr.h>
 #include <stdexcept>
 #include "xmlpromptgenerator.h"
 #include "xmlencodinghandler.h"
@@ -285,21 +286,14 @@ void XMLCALL XmlPromptGenerator::attlistdeclhandler (
 		XML_StopParser ( d->p, false );
 }
 
-int XMLCALL XmlPromptGenerator::externalentityrefhandler (
-    XML_Parser p,
-    const XML_Char *context,
-    const XML_Char *base,
-    const XML_Char *systemId,
-    const XML_Char *publicId )
+int XmlPromptGenerator::parseGrammar
+	( PromptGeneratorData *d
+	, const wxString &publicId
+	, const wxString &systemId
+	, const wxString &baseFileName
+	, Grammar::GrammarType type
+	)
 {
-	// arg is set to user data in c'tor
-	XmlPromptGenerator *pThis = ( XmlPromptGenerator * ) p;
-	PromptGeneratorData *d = pThis->d.get();
-
-	// Either EXPAT or Xerces-C++ is capable of parsing DTDs. The advantage
-	// of Xerces-C++ is that it can access DTDs that are on the internet.
-#if !PREFER_EXPAT_TO_XERCES_C
-
 	XercesDOMParser parser;
 	parser.setDoNamespaces ( true );
 	parser.setDoSchema ( true );
@@ -310,23 +304,20 @@ int XMLCALL XmlPromptGenerator::externalentityrefhandler (
 	parser.setErrorHandler ( &handler );
 	parser.setEntityResolver ( &catalogResolver );
 
-	wxString widePublicId = wxString::FromUTF8 ( publicId );
-	wxString wideSystemId = wxString::FromUTF8 ( systemId );
-
 	Grammar *rootGrammar;
 	try {
 		std::auto_ptr<InputSource> source ( WrapXerces::resolveEntity
-				( widePublicId , wideSystemId , d->basePath ) );
+				( publicId , systemId , baseFileName ) );
 		if ( !source.get() )
 		{
-			wxLogError ( _T("Cann't open '%s'"), wideSystemId.c_str() );
+			wxLogError ( _T("Cann't open '%s'"), systemId.c_str() );
 			return XML_STATUS_ERROR;
 		}
 
-		if ( pThis->TestDestroy() )
+		if ( TestDestroy() )
 			return XML_STATUS_ERROR;
 
-		rootGrammar = parser.loadGrammar ( *source, Grammar::DTDGrammarType );
+		rootGrammar = parser.loadGrammar ( *source, type );
 		if ( !rootGrammar )
 			return XML_STATUS_ERROR;
 	}
@@ -349,30 +340,81 @@ int XMLCALL XmlPromptGenerator::externalentityrefhandler (
 	}
 	catch (...)
 	{
-		wxLogError ( _T ( "Failed to load: %s %s"), widePublicId.c_str()
-				, wideSystemId.c_str() );
+		wxLogError ( _T ( "Failed to load: %s %s"), publicId.c_str()
+				, systemId.c_str() );
 		return XML_STATUS_ERROR;
 	}
 
-	DTDGrammar* grammar = ( DTDGrammar* ) rootGrammar;
-	NameIdPoolEnumerator<DTDElementDecl> elemEnum = grammar->getElemEnumerator();
+	wxASSERT ( rootGrammar->getGrammarType() == type );
 
-	SubstitutionMap substitutions;
-	while ( elemEnum.hasMoreElements() && !pThis->TestDestroy() )
+	if ( type == Grammar::DTDGrammarType )
 	{
-		const DTDElementDecl& curElem = elemEnum.nextElement();
-		pThis->buildElementPrompt ( d, &curElem, substitutions );
+		DTDGrammar* grammar = ( DTDGrammar* ) rootGrammar;
+		NameIdPoolEnumerator<DTDElementDecl> elemEnum
+				= grammar->getElemEnumerator();
+
+		SubstitutionMap substitutions;
+		while ( elemEnum.hasMoreElements() && !TestDestroy() )
+		{
+			const DTDElementDecl& curElem = elemEnum.nextElement();
+			buildElementPrompt ( d, &curElem, substitutions );
+		}
+
+		NameIdPoolEnumerator<DTDEntityDecl>
+				entityEnum = grammar->getEntityEnumerator();
+		while ( entityEnum.hasMoreElements() && !TestDestroy() )
+		{
+			const DTDEntityDecl &entity = entityEnum.nextElement();
+			d->entitySet.insert ( WrapXerces::toString ( entity.getName() ) );
+		}
+	}
+	else
+	{
+		wxASSERT ( type == Grammar::SchemaGrammarType );
+
+		SchemaGrammar* grammar = ( SchemaGrammar* ) rootGrammar;
+		RefHash3KeysIdPoolEnumerator<SchemaElementDecl> elemEnum = grammar->getElemEnumerator();
+
+		if ( !elemEnum.hasMoreElements() )
+		{
+			return XML_STATUS_ERROR;
+		}
+
+		SubstitutionMap substitutions;
+		buildSubstitutionMap ( substitutions, *grammar );
+
+		while ( elemEnum.hasMoreElements() && !TestDestroy() )
+		{
+			const SchemaElementDecl& curElem = elemEnum.nextElement();
+			buildElementPrompt ( d, &curElem, substitutions );
+		}
 	}
 
-	NameIdPoolEnumerator<DTDEntityDecl>
-			entityEnum = grammar->getEntityEnumerator();
-	while ( entityEnum.hasMoreElements() && !pThis->TestDestroy() )
-	{
-		const DTDEntityDecl &entity = entityEnum.nextElement();
-		d->entitySet.insert ( WrapXerces::toString ( entity.getName() ) );
-	}
+	return TestDestroy() ? XML_STATUS_ERROR : XML_STATUS_OK;
+}
 
-	return pThis->TestDestroy() ? XML_STATUS_ERROR : XML_STATUS_OK;
+int XMLCALL XmlPromptGenerator::externalentityrefhandler (
+    XML_Parser p,
+    const XML_Char *context,
+    const XML_Char *base,
+    const XML_Char *systemId,
+    const XML_Char *publicId )
+{
+	// arg is set to user data in c'tor
+	XmlPromptGenerator *pThis = ( XmlPromptGenerator * ) p;
+	PromptGeneratorData *d = pThis->d.get();
+
+	// Either EXPAT or Xerces-C++ is capable of parsing DTDs. The advantage
+	// of Xerces-C++ is that it can access DTDs that are on the internet.
+#if !PREFER_EXPAT_TO_XERCES_C
+
+	return pThis->parseGrammar
+			( d
+			, wxString::FromUTF8 ( publicId )
+			, wxString::FromUTF8 ( systemId )
+			, d->basePath
+			, Grammar::DTDGrammarType
+			);
 
 #else // !PREFER_EXPAT_TO_XERCES_C
 
@@ -476,75 +518,36 @@ void XmlPromptGenerator::handleSchema (
 {
 	if ( !d->isRootElement )
 		return;
+
+	wxString publicId, systemId;
+
 	// first check for XML Schema association
 	const char **schemaAttr = ( const char ** ) attr; // now redundant; could use attr
-	wxString path;
 	for ( ; *schemaAttr; schemaAttr += 2 )
 	{
 		// no namespace
 		if ( !strcmp ( *schemaAttr, "xsi:noNamespaceSchemaLocation" ) )
 		{
-			path = wxString ( schemaAttr[1], wxConvUTF8 );
+			systemId = wxString ( schemaAttr[1], wxConvUTF8 );
 			break;
 		}
 		// with namespace -- check if this works
 		else if ( !strcmp ( *schemaAttr, "xsi:schemaLocation" ) )
 		{
-			const char *searchIterator = * ( schemaAttr + 1 );
-			while ( *searchIterator && *searchIterator != ' ' && *searchIterator != '\t' && *searchIterator != '\n' )
-				searchIterator++;
-			if ( *searchIterator )
-			{
-				path = wxString ( searchIterator + 1, wxConvUTF8 );
-				break;
-			}
+			wxStringTokenizer tokens ( wxString ( schemaAttr[1], wxConvUTF8 ) );
+			size_t count = tokens.CountTokens();
+			if ( count < 2 )
+				return;
+			// TODO: Support multiple schemas
+			publicId = tokens.GetNextToken();
+			systemId = tokens.GetNextToken();
 		}
 	}
 
-	if ( path.empty() )
-	{
+	int ret = parseGrammar ( d, publicId, systemId, d->basePath
+			, Grammar::SchemaGrammarType );
+	if ( ret != XML_STATUS_OK )
 		return;
-	}
-
-
-	wxString schemaPath = PathResolver::run ( path, ( d->auxPath.empty() ) ? d->basePath : d->auxPath);
-
-	std::auto_ptr<XercesDOMParser> parser ( new XercesDOMParser() );
-	parser->setDoNamespaces ( true );
-	parser->setDoSchema ( true );
-	parser->setValidationSchemaFullChecking ( true );
-
-	if ( TestDestroy() )
-	{
-		XML_StopParser ( d->p, false );
-		return;
-	}
-
-	Grammar *rootGrammar = parser->loadGrammar
-			( ( const XMLCh * ) WrapXerces::toString ( schemaPath ).GetData()
-			, Grammar::SchemaGrammarType
-			);
-	if ( !rootGrammar )
-	{
-		return;
-	}
-
-	SchemaGrammar* grammar = ( SchemaGrammar* ) rootGrammar;
-	RefHash3KeysIdPoolEnumerator<SchemaElementDecl> elemEnum = grammar->getElemEnumerator();
-
-	if ( !elemEnum.hasMoreElements() )
-	{
-		return;
-	}
-
-	SubstitutionMap substitutions;
-	buildSubstitutionMap ( substitutions, *grammar );
-
-	while ( elemEnum.hasMoreElements() && !TestDestroy() )
-	{
-		const SchemaElementDecl& curElem = elemEnum.nextElement();
-		buildElementPrompt ( d, &curElem, substitutions );
-	}
 
 	d->grammarFound = true;
 	XML_StopParser ( d->p, false );

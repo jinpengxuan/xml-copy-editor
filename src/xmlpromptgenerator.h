@@ -131,6 +131,12 @@ class XmlPromptGenerator : public WrapExpat, public wxThread
 		    const XML_Char *att_type,
 		    const XML_Char *dflt,
 		    int isrequired );
+		int parseGrammar (
+		    PromptGeneratorData *d,
+		    const wxString &publicId,
+		    const wxString &systemId,
+		    const wxString &baseFileName,
+		    xercesc::Grammar::GrammarType type );
 		static int XMLCALL externalentityrefhandler (
 		    XML_Parser p,
 		    const XML_Char *context,
