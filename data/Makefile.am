@@ -10,9 +10,12 @@ appdata_in_files = xmlcopyeditor.appdata.xml.in
 appdata_DATA = $(appdata_in_files:.xml.in=.xml)
 @INTLTOOL_XML_RULE@
 
+man_MANS = xmlcopyeditor.1
+
 EXTRA_DIST = \
 	$(appdata_in_files) \
-	$(desktop_in_files)
+	$(desktop_in_files) \
+	$(man_MANS)
 
 CLEANFILES = \
 	$(appdata_DATA) \
