@@ -19,6 +19,7 @@
 
 #include <memory>
 #include "associatedialog.h"
+#include "wraplibxml.h"
 
 BEGIN_EVENT_TABLE ( AssociateDialog, wxDialog )
 	EVT_BUTTON ( wxID_OK, AssociateDialog::OnOk )
@@ -160,16 +161,16 @@ void AssociateDialog::OnBrowse ( wxCommandEvent& e )
 {
 	wxString extensionArgument;
 	extensionArgument =
-	    type +
-	    _T ( " (" ) +
-	    extension +
-	    _T ( ")|" ) +
-	    extension +
-	    _ ( "|All files (*.*)|*.*" );
+	    type + _T ( " (" ) + extension + _T ( ")|" ) + extension
+	    + _ ( "|All files (*.*)|*.*" );
+	wxFileName fileName = WrapLibxml::URLToFileName ( urlCtrl->GetValue() );
+	wxString dir = fileName.GetPath();
+	if ( dir.empty() && mLastDir )
+		dir = *mLastDir;
 	std::auto_ptr<wxFileDialog> fd ( new wxFileDialog (
 	                                     this,
 	                                     _ ( "Select " ) + type,
-	                                     mLastDir ? *mLastDir : _T ( "" ),
+	                                     dir,
 	                                     _T ( "" ),
 	                                     extensionArgument,
 #if wxCHECK_VERSION(2,9,0)
@@ -181,7 +182,7 @@ void AssociateDialog::OnBrowse ( wxCommandEvent& e )
 
 	if ( fd->ShowModal() == wxID_OK )
 	{
-		wxString newValue = fd->GetPath();
+		wxString newValue = WrapLibxml::FileNameToURL ( fd->GetPath() );
 		urlCtrl->SetValue ( newValue );
 
 		if ( mLastDir )
