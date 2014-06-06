@@ -31,7 +31,7 @@ struct XslData : public ParserData
 {
 	std::string buffer;
 	wxString path;
-	bool rootElementSeen;
+	bool associated;
 };
 
 class XmlAssociateXsl : public WrapExpat

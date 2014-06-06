@@ -30,7 +30,7 @@ struct DtdData : public ParserData
 {
 	std::string buffer;
 	wxString path, publicID;
-	bool rootElementSeen, insideDtd;
+	bool associated, insideDtd;
 };
 
 class XmlAssociateDtd : public WrapExpat
@@ -67,6 +67,7 @@ class XmlAssociateDtd : public WrapExpat
 		    const XML_Char *pubid,
 		    int has_internal_subset );
 		static void XMLCALL enddoctypehandler ( void *userData );
+		static void associate ( DtdData *d, const char *doctypeName );
 };
 
 #endif

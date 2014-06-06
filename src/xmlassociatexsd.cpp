@@ -36,10 +36,10 @@ XmlAssociateXsd::XmlAssociateXsd (
 {
 	d->buffer.reserve ( size );
 	d->path = path;
-	d->rootElementSeen = false;
+	d->depth = 0;
 	XML_SetElementHandler ( p, start, end );
 	XML_SetDefaultHandlerExpand ( p, defaulthandler );
-	XML_SetUserData ( p, d.get() );
+	XML_SetUserData ( p, this );
 
 	std::auto_ptr<XmlParseSchemaNs> parser ( new XmlParseSchemaNs() );
 	std::string normalisedPath, buffer;
@@ -80,8 +80,8 @@ void XMLCALL XmlAssociateXsd::defaulthandler (
 {
 	if ( !data || !s )
 		return;
-	AssociateXsdData *d;
-	d = ( AssociateXsdData * ) data;
+	XmlAssociateXsd *pThis = (XmlAssociateXsd *)data;
+	AssociateXsdData *d = pThis->d.get();
 	if ( d )
 		d->buffer.append ( s, len );
 }
@@ -92,10 +92,17 @@ void XMLCALL XmlAssociateXsd::start ( void *data,
 {
 	if ( !data )
 		return;
-	
-	AssociateXsdData *d;
-	d = ( AssociateXsdData * ) data;
-	
+
+	XmlAssociateXsd *pThis = (XmlAssociateXsd *)data;
+	AssociateXsdData *d = pThis->d.get();
+
+	d->depth++;
+	if ( d->depth > 1 )
+	{
+		XML_DefaultCurrent ( pThis->p );
+		return;
+	}
+
 	d->buffer += "<";
 	d->buffer += el;
 
@@ -116,33 +123,31 @@ void XMLCALL XmlAssociateXsd::start ( void *data,
 		}
 		attr += 2;
 	}
-	if ( !d->rootElementSeen )
-	{
-		d->buffer += " xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"";
-		std::map<std::string, std::string>::iterator it;
-		for ( it = d->namespaceMap.begin(); it != d->namespaceMap.end(); ++it )
-		{
-			d->buffer += " ";
-			d->buffer += it->first;
-			d->buffer += "=\"";
-			d->buffer += it->second;
-			d->buffer += "\"";
-		}
 
-		d->buffer += " xsi:";
-		bool withNamespace =
-		    ( d->namespaceMap.find ( "xmlns" ) != d->namespaceMap.end() );
-		d->buffer += ( withNamespace ) ? "schemaLocation" : "noNamespaceSchemaLocation";
+	d->buffer += " xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"";
+	std::map<std::string, std::string>::iterator it;
+	for ( it = d->namespaceMap.begin(); it != d->namespaceMap.end(); ++it )
+	{
+		d->buffer += " ";
+		d->buffer += it->first;
 		d->buffer += "=\"";
-		if ( withNamespace )
-		{
-			d->buffer += d->namespaceMap["xmlns"];
-			d->buffer += " ";
-		}
-		d->buffer += d->path.utf8_str(); // TODO: Apply the encoding of the parser
+		d->buffer += it->second;
 		d->buffer += "\"";
-		d->rootElementSeen = true;
 	}
+
+	d->buffer += " xsi:";
+	bool withNamespace =
+		( d->namespaceMap.find ( "xmlns" ) != d->namespaceMap.end() );
+	d->buffer += ( withNamespace ) ? "schemaLocation" : "noNamespaceSchemaLocation";
+	d->buffer += "=\"";
+	if ( withNamespace )
+	{
+		d->buffer += d->namespaceMap["xmlns"];
+		d->buffer += " ";
+	}
+	d->buffer += d->path.utf8_str(); // TODO: Apply the encoding of the parser
+	d->buffer += "\"";
+
 	d->buffer += ">";
 }
 
@@ -150,9 +155,15 @@ void XMLCALL XmlAssociateXsd::end ( void *data, const XML_Char *el )
 {
 	if ( !data )
 		return;
-	AssociateXsdData *d;
-	d = ( AssociateXsdData * ) data;
-	d->buffer += "</";
-	d->buffer += el;
-	d->buffer += ">";
+	XmlAssociateXsd *pThis = (XmlAssociateXsd *)data;
+	AssociateXsdData *d = pThis->d.get();
+	d->depth--;
+	if ( d->depth )
+		XML_DefaultCurrent ( pThis->p );
+	else
+	{
+		d->buffer += "</";
+		d->buffer += el;
+		d->buffer += ">";
+	}
 }

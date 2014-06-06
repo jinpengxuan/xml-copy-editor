@@ -33,9 +33,9 @@ XmlAssociateXsl::XmlAssociateXsl (
 {
 	d->buffer.reserve ( size );
 	d->path = path;
-	d->rootElementSeen = false;
-	XML_SetUserData ( p, d.get() );
-	XML_SetElementHandler ( p, start, end );
+	d->associated = false;
+	XML_SetUserData ( p, this );
+	XML_SetElementHandler ( p, start, NULL );
 	XML_SetProcessingInstructionHandler ( p, processinghandler );
 	XML_SetDefaultHandlerExpand ( p, defaulthandler );
 }
@@ -48,8 +48,8 @@ void XMLCALL XmlAssociateXsl::defaulthandler (
     const XML_Char *s,
     int len )
 {
-	XslData *d;
-	d = ( XslData * ) data;
+	XmlAssociateXsl *pThis = (XmlAssociateXsl *)data;
+	XslData *d = pThis->d.get();
 	d->buffer.append ( s, len );
 }
 
@@ -57,36 +57,25 @@ void XMLCALL XmlAssociateXsl::start ( void *data,
                                       const XML_Char *el,
                                       const XML_Char **attr )
 {
-	XslData *d;
-	d = ( XslData * ) data;
+	XmlAssociateXsl *pThis = (XmlAssociateXsl *)data;
+	XslData *d = pThis->d.get();
 
-	if ( !d->rootElementSeen )
+	if ( !d->associated )
 	{
 		d->buffer += "<?xml-stylesheet type=\"text/xsl\" href=\"";
 		d->buffer += d->path.utf8_str(); // TODO: Apply the encoding of the parser
 		d->buffer += "\"?>\n";
-		d->rootElementSeen = true;
+		d->associated = true;
 	}
 
-	d->buffer += "<";
-	d->buffer += el;
-
-	while ( *attr )
-	{
-		d->buffer += " ";
-		d->buffer += *attr;
-		d->buffer += "=\"";
-		d->buffer += xmliseAttribute ( * ( attr + 1 ) );
-		d->buffer += "\"";
-		attr += 2;
-	}
-	d->buffer += ">";
+	XML_DefaultCurrent ( pThis->p );
+	XML_SetElementHandler ( pThis->p, NULL, NULL );
 }
 
 void XMLCALL XmlAssociateXsl::end ( void *data, const XML_Char *el )
 {
-	XslData *d;
-	d = ( XslData * ) data;
+	XmlAssociateXsl *pThis = (XmlAssociateXsl *)data;
+	XslData *d = pThis->d.get();
 	d->buffer += "</";
 	d->buffer += el;
 	d->buffer += ">";
@@ -97,15 +86,24 @@ void XMLCALL XmlAssociateXsl::processinghandler (
     const XML_Char *target,
     const XML_Char *datastring )
 {
-	XslData *d;
-	d = ( XslData * ) data;
+	XmlAssociateXsl *pThis = (XmlAssociateXsl *)data;
+	XslData *d = pThis->d.get();
 
 	if ( !strcmp ( target, "xml-stylesheet" ) )
-		return;
+	{
+		d->buffer += "<?xml-stylesheet type=\"text/xsl\" href=\"";
+		d->buffer += d->path.utf8_str(); // TODO: Apply the encoding of the parser
+		d->buffer += "\"?>";
+		d->associated = true;
 
-	d->buffer += "<?";
-	d->buffer += target;
-	d->buffer += " ";
-	d->buffer += datastring;
-	d->buffer += "?>";
+		XML_SetElementHandler ( pThis->p, NULL, NULL );
+	}
+	else
+	{
+		d->buffer += "<?";
+		d->buffer += target;
+		d->buffer += " ";
+		d->buffer += datastring;
+		d->buffer += "?>";
+	}
 }
