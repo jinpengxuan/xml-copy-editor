@@ -25,12 +25,14 @@
 #include "xmlassociatedtd.h"
 
 XmlAssociateDtd::XmlAssociateDtd (
-    const wxString &path,
-    const wxString &publicID,
-    const char *encoding,
-    size_t size )
-    : WrapExpat ( encoding )
-    , d ( new DtdData() )
+	const XmlTextInfo &info,
+	const wxString &path,
+	const wxString &publicID,
+	const char *encoding,
+	size_t size )
+	: WrapExpat ( encoding )
+	, d ( new DtdData() )
+	, mInfo ( info )
 {
 	d->buffer.reserve ( size );
 	d->path = path;
@@ -67,7 +69,7 @@ void XMLCALL XmlAssociateDtd::start ( void *data,
 	if ( !d->associated )
 	{
 		associate ( d, el );
-		d->buffer += "\n";
+		d->buffer += pThis->mInfo.mEOL.utf8_str();
 		d->associated = true;
 	}
 

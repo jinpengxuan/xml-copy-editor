@@ -25,7 +25,7 @@
 #include <expat.h>
 #include <string>
 #include <memory>
-#include "wrapexpat.h"
+#include "xmltextinfo.h"
 
 struct XslData : public ParserData
 {
@@ -38,6 +38,7 @@ class XmlAssociateXsl : public WrapExpat
 {
 	public:
 		XmlAssociateXsl (
+		    const XmlTextInfo &info,
 		    const wxString &path = wxEmptyString,
 		    const char *encoding = NULL,
 		    size_t size = BUFSIZ );
@@ -48,7 +49,7 @@ class XmlAssociateXsl : public WrapExpat
 		}
 	private:
 		std::auto_ptr<XslData> d;
-		std::string encoding;
+		const XmlTextInfo &mInfo;
 		static void XMLCALL start (
 		    void *data,
 		    const XML_Char *el,

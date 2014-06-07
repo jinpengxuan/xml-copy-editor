@@ -13,22 +13,24 @@ pixmapdir = /usr/share/pixmaps
 applicationsdir = /usr/share/applications
 
 # the application source, library search path, and link libraries
-xmlcopyeditor_SOURCES = xmlcopyeditor.cpp associatedialog.cpp casehandler.cpp \
-	contexthandler.cpp dtd2schema.cpp globalreplacedialog.cpp housestyle.cpp \
-	housestylereader.cpp myhtmlpane.cpp nocasecompare.cpp readfile.cpp \
-	replace.cpp styledialog.cpp threadreaper.cpp wraplibxml.cpp \
-	wrapregex.cpp wraptempfilename.cpp xmlassociatedtd.cpp xmlassociatexsd.cpp \
-	xmlassociatexsl.cpp xmlctrl.cpp xmldoc.cpp xmlencodinghandler.cpp \
-	xmlfilterreader.cpp xmlpromptgenerator.cpp xmlrulereader.cpp \
-	xmlschemalocator.cpp xmlutf8reader.cpp xsllocator.cpp \
-	wrapexpat.cpp mypropertysheet.cpp rule.cpp housestylewriter.cpp myipc.cpp \
-	aboutdialog.cpp pathresolver.cpp mynotebook.cpp insertpanel.cpp \
-	xmlwordcount.cpp getword.cpp locationpanel.cpp catalogresolver.cpp \
-	xmlparseschemans.cpp xmlshallowvalidator.cpp wrapxerces.cpp \
-	findreplacepanel.cpp commandpanel.cpp xercescatalogresolver.cpp \
-	binaryfile.cpp xmlencodingspy.cpp wrapaspell.cpp validationthread.cpp \
-	wrapdaisy.cpp exportdialog.cpp mp3album.cpp xmlprodnote.cpp \
-	xmlsuppressprodnote.cpp xmlcopyimg.cpp xmlschemagenerator.cpp \
+xmlcopyeditor_SOURCES = aboutdialog.cpp associatedialog.cpp binaryfile.cpp \
+	casehandler.cpp catalogresolver.cpp commandpanel.cpp \
+	contexthandler.cpp dtd2schema.cpp exportdialog.cpp \
+	findreplacepanel.cpp getword.cpp globalreplacedialog.cpp \
+	housestyle.cpp housestylereader.cpp housestylewriter.cpp \
+	insertpanel.cpp locationpanel.cpp mp3album.cpp myhtmlpane.cpp \
+	myipc.cpp mynotebook.cpp mypropertysheet.cpp nocasecompare.cpp \
+	pathresolver.cpp readfile.cpp replace.cpp rule.cpp styledialog.cpp \
+	threadreaper.cpp validationthread.cpp wrapaspell.cpp wrapdaisy.cpp \
+	wrapexpat.cpp wraplibxml.cpp wrapregex.cpp wraptempfilename.cpp \
+	wrapxerces.cpp xercescatalogresolver.cpp xmlassociatedtd.cpp \
+	xmlassociatexsd.cpp xmlassociatexsl.cpp xmlcopyeditor.cpp \
+	xmlcopyimg.cpp xmlctrl.cpp xmldoc.cpp xmlencodinghandler.cpp \
+	xmlencodingspy.cpp xmlfilterreader.cpp xmlparseschemans.cpp \
+	xmlprodnote.cpp xmlpromptgenerator.cpp xmlrulereader.cpp \
+	xmlschemagenerator.cpp xmlschemalocator.cpp xmlshallowvalidator.cpp \
+	xmlsuppressprodnote.cpp xmltextinfo.cpp xmlutf8reader.cpp \
+	xmlwordcount.cpp xsllocator.cpp \
 	xmlcopyeditor.spec xmlcopyeditor.png custom.xpm
 
 xmlcopyeditor_LDADD = $(WX_LIBS) \

@@ -5739,6 +5739,9 @@ void MyFrame::OnAssociate ( wxCommandEvent& event )
 	if ( ( doc = getActiveDocument() ) == NULL )
 		return;
 
+	XmlTextInfo info ( doc->getFullFileName() );
+	info.parse ( doc->myGetTextRaw() );
+
 	wxString title, label, type, extension, path, defaulturl, defaultaux;
 	wxString auxiliaryLabel;
 	int id = event.GetId();
@@ -5748,24 +5751,26 @@ void MyFrame::OnAssociate ( wxCommandEvent& event )
 			type = _ ( "Public DTD" );
 			extension = _T ( "*.dtd" );
 			defaulturl = lastDtdPublic;
-			defaultaux = lastDtdPublicAux;
+			defaultaux = info.mDtdFile.empty()
+					? lastDtdPublicAux : info.mDtdFile;
 			break;
 		case ID_ASSOCIATE_DTD_SYSTEM:
 			type = _ ( "System DTD" );
 			extension = _T ( "*.dtd" );
-			defaulturl = lastDtdSystem;
+			defaulturl = info.mDtdFile.empty() ? lastDtdSystem : info.mDtdFile;
 			defaultaux = _T ( "" );
 			break;
 		case ID_ASSOCIATE_W3C_SCHEMA:
 			type = _ ( "XML Schema" );
 			extension = _T ( "*.xsd" );
-			defaulturl = lastSchema;
+			defaulturl = info.mXsdFile.empty() ? lastSchema : info.mXsdFile;
 			defaultaux = _T ( "" );
 			break;
 		case ID_ASSOCIATE_XSL:
 			type = _ ( "XSLT stylesheet" );
 			extension = _T ( "*.xsl;*.xslt" );
-			defaulturl = lastXslStylesheet;
+			defaulturl = info.mXslFile.empty()
+					? lastXslStylesheet : info.mXslFile;
 			defaultaux = _T ( "" );
 			break;
 		default:
@@ -5856,14 +5861,14 @@ void MyFrame::OnAssociate ( wxCommandEvent& event )
 	}
 	else if ( id == ID_ASSOCIATE_DTD_SYSTEM || id == ID_ASSOCIATE_DTD_PUBLIC )
 	{
-		XmlAssociateDtd parser ( path, aux, "UTF-8" );
+		XmlAssociateDtd parser ( info, path, aux, "UTF-8" );
 		if ( !parser.parse ( utf8Buffer ) )
 			return;
 		modifiedBuffer = parser.getBuffer();
 	}
 	else if ( id == ID_ASSOCIATE_XSL )
 	{
-		XmlAssociateXsl parser( path, "UTF-8" );
+		XmlAssociateXsl parser( info, path, "UTF-8" );
 		if ( !parser.parse ( utf8Buffer ) )
 			return;
 		modifiedBuffer = parser.getBuffer();

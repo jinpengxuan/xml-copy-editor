@@ -24,7 +24,7 @@
 #include <expat.h>
 #include <string>
 #include <memory>
-#include "wrapexpat.h"
+#include "xmltextinfo.h"
 
 struct DtdData : public ParserData
 {
@@ -37,6 +37,7 @@ class XmlAssociateDtd : public WrapExpat
 {
 	public:
 		XmlAssociateDtd (
+		    const XmlTextInfo &info,
 		    const wxString &path = wxEmptyString,
 		    const wxString &publicID = wxEmptyString,
 		    const char *encoding = NULL,
@@ -48,7 +49,7 @@ class XmlAssociateDtd : public WrapExpat
 		}
 	private:
 		std::auto_ptr<DtdData> d;
-		std::string encoding;
+		const XmlTextInfo &mInfo;
 		static void XMLCALL start (
 		    void *data,
 		    const XML_Char *el,

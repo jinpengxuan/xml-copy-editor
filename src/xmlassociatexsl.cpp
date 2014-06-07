@@ -25,11 +25,13 @@
 #include "xmlassociatexsl.h"
 
 XmlAssociateXsl::XmlAssociateXsl (
+    const XmlTextInfo &info,
     const wxString &path,
     const char *encoding,
     size_t size )
     : WrapExpat ( encoding )
     , d ( new XslData() )
+    , mInfo ( info )
 {
 	d->buffer.reserve ( size );
 	d->path = path;
@@ -64,7 +66,8 @@ void XMLCALL XmlAssociateXsl::start ( void *data,
 	{
 		d->buffer += "<?xml-stylesheet type=\"text/xsl\" href=\"";
 		d->buffer += d->path.utf8_str(); // TODO: Apply the encoding of the parser
-		d->buffer += "\"?>\n";
+		d->buffer += "\"?>";
+		d->buffer += pThis->mInfo.mEOL.utf8_str();
 		d->associated = true;
 	}
 
