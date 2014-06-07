@@ -1047,6 +1047,10 @@ MyFrame::MyFrame (
 
 	manager.Update();
 
+	wxAcceleratorEntry entry ( wxACCEL_CTRL, WXK_F4, wxID_CLOSE );
+	wxAcceleratorTable accel ( 1, &entry );
+	SetAcceleratorTable ( accel );
+
 	/*
 	  defaultLayout = manager.SavePerspective();
 
@@ -5063,7 +5067,7 @@ wxMenuBar *MyFrame::getMenuBar()
 	    ID_UNFOLD_ALL, _ ( "&Unfold Tags\tCtrl+Shift+U" ), _T ( "Unfold Tags" ) );
 	viewMenu->AppendSeparator();
 	viewMenu->AppendCheckItem (
-	    ID_WRAP_WORDS, _ ( "&Wrap Words\tCtrl+W" ), _T ( "Wrap Words" ) );
+	    ID_WRAP_WORDS, _ ( "&Wrap Words" ), _T ( "Wrap Words" ) );
 	viewMenu->Check ( ID_WRAP_WORDS, properties.wrap );
 	viewMenu->Append ( wxID_ANY, _ ( "&Color Scheme" ), colorSchemeMenu );
 	viewMenu->Append ( wxID_ANY, _ ( "&Text Size" ), fontSizeMenu );
@@ -5336,7 +5340,7 @@ void MyFrame::updateFileMenu ( bool deleteExisting )
 	openLargeFileItem->SetBitmap ( wxNullBitmap );
 
 	wxMenuItem *closeItem =
-	    new wxMenuItem ( fileMenu, wxID_CLOSE, _ ( "&Close\tCtrl+F4" ), _ ( "Close" ) );
+	    new wxMenuItem ( fileMenu, wxID_CLOSE, _ ( "&Close\tCtrl+W" ), _ ( "Close" ) );
 	closeItem->SetBitmap ( wxNullBitmap );
 	wxMenuItem *closeAllItem =
 	    new wxMenuItem ( fileMenu, wxID_CLOSE_ALL, _ ( "C&lose All" ), _ ( "Close All" ) );
