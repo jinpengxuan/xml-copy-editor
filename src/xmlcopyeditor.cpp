@@ -878,6 +878,7 @@ MyFrame::MyFrame (
 	// Initialize Xerces-C++
 	WrapXerces::Init ( libxmlNetAccess );
 
+#if _XERCES_VERSION >= 30101
 	if ( XMLPlatformUtils::fgSSE2ok
 		&& xercescSSE2Warning
 		&& wxTheApp->argc == 1 )
@@ -894,6 +895,7 @@ MyFrame::MyFrame (
 			wxOK | wxCANCEL | wxICON_WARNING
 		) == wxOK;
 	}
+#endif // _XERCES_VERSION >= 30101
 
 	size_t findFlags = 0;
 	findFlags |= wxFR_DOWN;
