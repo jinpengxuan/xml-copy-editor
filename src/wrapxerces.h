@@ -35,6 +35,7 @@
 
 #include <xercesc/sax2/SAX2XMLReader.hpp>
 #include <xercesc/sax2/DefaultHandler.hpp>
+#include <xercesc/dom/DOMElement.hpp>
 #include "xercescatalogresolver.h"
 
 using namespace xercesc;
@@ -129,6 +130,12 @@ class WrapXerces : private boost::noncopyable
 			const wxString &publicId,
 			const wxString &systemId,
 			const wxString &fileName );
+
+		static DOMElement *getFirstElementChild ( const DOMElement &element );
+		static DOMElement *getFirstElementChild ( const DOMNode *n );
+		static DOMElement *getNextElementSibling ( const DOMElement &element );
+		static DOMNode *getNextLogicalSibling ( const DOMNode* n );
+
 	private:
 		static const wxMBConv &getMBConv();
 		static XMLNetAccessor *mOriginalNetAccessor;

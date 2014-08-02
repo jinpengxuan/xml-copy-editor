@@ -115,10 +115,11 @@ void XmlSchemaGenerator::findAllElements ( const DOMElement &element,
 	wxString tagName = WrapXerces::toString ( element.getTagName() );
 	mElements[tagName].nodes.insert ( &element );
 
-	DOMElement *child = element.getFirstElementChild();
-	for ( ; child != NULL; child = child->getNextElementSibling() )
+	DOMElement *child = WrapXerces::getFirstElementChild ( element );
+	while ( child )
 	{
 		findAllElements ( *child, nIndent );
+		child = WrapXerces::getNextElementSibling ( *child );
 	}
 }
 
@@ -131,10 +132,11 @@ void XmlSchemaGenerator::generateData ( const DOMElement &element,
 		generateData ( name, nIndent );
 	}
 
-	DOMElement *child = element.getFirstElementChild();
-	for ( ; child != NULL; child = child->getNextElementSibling() )
+	DOMElement *child = WrapXerces::getFirstElementChild ( element );
+	while ( child )
 	{
 		generateData ( *child, nIndent );
+		child = WrapXerces::getNextElementSibling ( *child );
 	}
 }
 
@@ -268,10 +270,11 @@ void XmlSchemaGenerator::outputSchema ( const DOMElement &element )
 		mSchema << data.schema;
 	}
 
-	DOMElement *child = element.getFirstElementChild();
-	for ( ; child != NULL; child = child->getNextElementSibling() )
+	DOMElement *child = WrapXerces::getFirstElementChild ( element );
+	while ( child )
 	{
 		outputSchema ( *child );
+		child = WrapXerces::getNextElementSibling ( *child );
 	}
 }
 

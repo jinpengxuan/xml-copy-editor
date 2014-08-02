@@ -878,7 +878,7 @@ MyFrame::MyFrame (
 	// Initialize Xerces-C++
 	WrapXerces::Init ( libxmlNetAccess );
 
-#if _XERCES_VERSION >= 30101
+#if _XERCES_VERSION >= 30100
 	if ( XMLPlatformUtils::fgSSE2ok
 		&& xercescSSE2Warning
 		&& wxTheApp->argc == 1 )

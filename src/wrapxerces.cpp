@@ -184,8 +184,12 @@ const wxMBConv &WrapXerces::getMBConv()
 		return conv;
 	}
 	default:
+#ifdef BOOST_STATIC_ASSERT_MSG
 		BOOST_STATIC_ASSERT_MSG ( sizeof ( XMLCh ) == 2
 			, "Xerces-C doesn't use UTF-16 strings any more");
+#else
+		BOOST_STATIC_ASSERT ( sizeof ( XMLCh ) == 2 );
+#endif
 		break;
 	}
 	return wxConvUTF8;
@@ -281,4 +285,116 @@ InputSource *WrapXerces::resolveEntity (
 		, ( const XMLCh * ) WrapXerces::toString ( systemId ).GetData()
 		, ( const XMLCh * ) WrapXerces::toString ( publicId ).GetData()
 		);
+}
+
+DOMElement *WrapXerces::getFirstElementChild ( const DOMElement &element )
+{
+#if _XERCES_VERSION >= 30100
+	return element.getFirstElementChild();
+#else
+	// Copied from Xerces-C
+	DOMNode* n = element.getFirstChild();
+	while ( n )
+	{
+		switch ( n->getNodeType() )
+		{
+		case DOMNode::ELEMENT_NODE:
+			return ( DOMElement * ) n;
+
+		case DOMNode::ENTITY_REFERENCE_NODE:
+		{
+			DOMElement* e = getFirstElementChild ( n );
+			if ( e )
+				return e;
+			break;
+		}
+
+		default:
+			break;
+		}
+		n = n->getNextSibling();
+	}
+	return NULL;
+#endif
+}
+
+DOMElement *WrapXerces::getFirstElementChild ( const DOMNode *n )
+{
+	// Copied from Xerces-C
+	const DOMNode *top = n;
+	while ( n )
+	{
+		if ( n->getNodeType() == DOMNode::ELEMENT_NODE )
+			return ( DOMElement * ) n;
+
+		DOMNode *next = n->getFirstChild();
+		while ( !next )
+		{
+			if (top == n)
+				break;
+
+			next = n->getNextSibling();
+			if ( !next )
+			{
+				n = n->getParentNode();
+				if ( top == n || !n )
+					return NULL;
+			}
+		}
+		n = next;
+	}
+	return NULL;
+}
+
+DOMElement *WrapXerces::getNextElementSibling (
+	const DOMElement &element )
+{
+#if _XERCES_VERSION >= 30100
+	return element.getNextElementSibling();
+#else
+	// Copied from Xerces-C
+	DOMNode *n = getNextLogicalSibling ( &element );
+	while ( n ) {
+		switch ( n->getNodeType() )
+		{
+		case DOMNode::ELEMENT_NODE:
+			return ( DOMElement * ) n;
+
+		case DOMNode::ENTITY_REFERENCE_NODE:
+		{
+			DOMElement* e = getFirstElementChild ( n );
+			if ( e )
+				return e;
+			break;
+		}
+		default:
+			break;
+		}
+		n = getNextLogicalSibling ( n );
+	}
+	return NULL;
+#endif
+}
+
+DOMNode *WrapXerces::getNextLogicalSibling (
+	const DOMNode* n )
+{
+	// Copied from Xerces-C
+	DOMNode* next = n->getNextSibling();
+	// If "n" has no following sibling and its parent is an entity reference node we
+	// need to continue the search through the following siblings of the entity
+	// reference as these are logically siblings of the given node.
+	if ( !next ) {
+		DOMNode* parent = n->getParentNode();
+		while ( parent
+				&& parent->getNodeType() == DOMNode::ENTITY_REFERENCE_NODE )
+		{
+			next = parent->getNextSibling();
+			if ( next )
+				break;
+
+			parent = parent->getParentNode();
+		}
+	}
+	return next;
 }
