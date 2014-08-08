@@ -209,6 +209,7 @@ class XmlCtrl: public wxStyledTextCtrl
 		void OnMouseRightUp ( wxMouseEvent& event );
 		void OnMiddleDown ( wxMouseEvent& event );
 		void OnPromptGenerated ( wxNotifyEvent &event );
+		void OnKillFocus ( wxFocusEvent &event );
 		void insertNewLine();
 		void adjustNoColumnWidth();
 		void adjustPosRight();

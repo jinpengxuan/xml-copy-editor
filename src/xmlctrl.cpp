@@ -43,6 +43,7 @@ BEGIN_EVENT_TABLE ( XmlCtrl, wxStyledTextCtrl )
 	EVT_MIDDLE_DOWN ( XmlCtrl::OnMiddleDown )
 	EVT_COMMAND(wxID_ANY, wxEVT_COMMAND_VALIDATION_COMPLETED, XmlCtrl::OnValidationCompleted)
 	EVT_NOTIFY ( myEVT_NOTIFY_PROMPT_GENERATED, wxID_ANY, XmlCtrl::OnPromptGenerated )
+	EVT_KILL_FOCUS ( XmlCtrl::OnKillFocus )
 END_EVENT_TABLE()
 
 // global protection for validation threads
@@ -2395,4 +2396,10 @@ wxString XmlCtrl::getCurrentXPath()
 	}
 
 	return xpath;
+}
+
+void XmlCtrl::OnKillFocus ( wxFocusEvent &event )
+{
+	AutoCompCancel();
+	event.Skip();
 }
