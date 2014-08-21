@@ -405,20 +405,6 @@ int XMLCALL XmlPromptGenerator::externalentityrefhandler (
 	XmlPromptGenerator *pThis = ( XmlPromptGenerator * ) p;
 	PromptGeneratorData *d = pThis->d.get();
 
-	// Either EXPAT or Xerces-C++ is capable of parsing DTDs. The advantage
-	// of Xerces-C++ is that it can access DTDs that are on the internet.
-#if !PREFER_EXPAT_TO_XERCES_C
-
-	return pThis->parseGrammar
-			( d
-			, wxString::FromUTF8 ( publicId )
-			, wxString::FromUTF8 ( systemId )
-			, d->basePath
-			, Grammar::DTDGrammarType
-			);
-
-#else // !PREFER_EXPAT_TO_XERCES_C
-
 	int ret;
 	std::string buffer;
 
@@ -440,6 +426,20 @@ int XMLCALL XmlPromptGenerator::externalentityrefhandler (
 		XML_ParserFree ( dtdParser );
 		return ret;
 	}
+
+	// Either EXPAT or Xerces-C++ is capable of parsing DTDs. The advantage
+	// of Xerces-C++ is that it can access DTDs that are on the internet.
+#if !PREFER_EXPAT_TO_XERCES_C
+
+	return pThis->parseGrammar
+			( d
+			, wxString::FromUTF8 ( publicId )
+			, wxString::FromUTF8 ( systemId )
+			, d->basePath
+			, Grammar::DTDGrammarType
+			);
+
+#else // !PREFER_EXPAT_TO_XERCES_C
 
 	wxString widePublicId ( publicId, wxConvUTF8 );
 	wxString wideSystemId ( systemId, wxConvUTF8 );
