@@ -1454,14 +1454,11 @@ void MyFrame::OnCloseAll ( wxCommandEvent& WXUNUSED ( event ) )
 		for ( size_t i = 0; i < maxTabs; ++i )
 		{
 			doc = ( XmlDoc * ) mainBook->GetPage ( i );
-			if ( doc )
+			if ( doc && !doc->getDirectory().empty() )
 			{
 				fullPath = doc->getFullFileName();
-				if ( !fullPath.empty() )
-				{
-					openTabsOnClose.Append ( fullPath );
-					openTabsOnClose.Append ( _T ( "|" ) );
-				}
+				openTabsOnClose.Append ( fullPath );
+				openTabsOnClose.Append ( _T ( "|" ) );
 			}
 		}
 	}
@@ -2347,7 +2344,7 @@ void MyFrame::OnExportMSWord ( wxCommandEvent& event )
 	WrapTempFileName wtfn ( _T ( "" ) );
 	wxString sourceFileName = doc->getFullFileName();
 
-	if ( sourceFileName.empty() )
+	if ( doc->getDirectory().empty() )
 	{
 		sourceFileName = wtfn.wideName();
 		std::fstream ofs ( wtfn.name().c_str() );
@@ -2424,7 +2421,7 @@ void MyFrame::OnBrowser ( wxCommandEvent& WXUNUSED ( event ) )
 	wxString sourceFileName = doc->getFullFileName();
 	WrapTempFileName wtfn ( sourceFileName, _T ( ".html" ) );
 
-	if ( sourceFileName.empty() || doc->GetModify() )
+	if ( doc->getDirectory().empty() || doc->GetModify() )
 	{
 		sourceFileName = wtfn.wideName();
 
@@ -2954,12 +2951,9 @@ void MyFrame::OnOpen ( wxCommandEvent& event )
 	XmlDoc *doc;
 	if ( ( doc = getActiveDocument() ) != NULL )
 	{
-		defaultFile = doc->getFullFileName();
-		if ( !defaultFile.empty() )
-		{
-			wxFileName fn ( defaultFile );
-			defaultDir = fn.GetPath();
-		}
+		defaultDir = doc->getDirectory();
+		if ( defaultDir.empty() )
+			defaultDir = mLastDir;
 	}
 	else
 		defaultDir = mLastDir;
@@ -3519,14 +3513,14 @@ void MyFrame::save()
 	if ( ( doc = getActiveDocument() ) == NULL )
 		return;
 
-	wxString fileName;
-	if ( ( fileName = doc->getFullFileName() ) == _T ( "" ) )
+	if ( doc->getDirectory().empty() )
 	{
 		wxCommandEvent event;
 		OnSaveAs ( event );
 		return;
 	}
 
+	wxString fileName = doc->getFullFileName();
 	if ( !saveFile ( doc, fileName, true ) )
 	{} // handle messages in saveFile
 }
@@ -3560,11 +3554,10 @@ void MyFrame::saveAs()
 
 	wxString defaultFile, defaultDir;
 	defaultFile = doc->getFullFileName();
-	if ( !defaultFile.empty() )
-	{
-		wxFileName fn ( defaultFile );
-		defaultDir = fn.GetPath();
-	}
+	defaultDir = doc->getDirectory();
+	if ( defaultDir.empty() )
+		defaultDir = mLastDir;
+
 	auto_ptr<wxFileDialog> fd ( new wxFileDialog (
 	                                this,
 	                                _ ( "Save As" ),
@@ -3631,7 +3624,7 @@ void MyFrame::OnUpdateReload ( wxUpdateUIEvent& event )
 		event.Enable ( false );
 		return;
 	}
-	event.Enable ( !doc->getFullFileName().empty() );
+	event.Enable ( !doc->getDirectory().empty() );
 }
 
 void MyFrame::OnUpdateCutCopy ( wxUpdateUIEvent& event )
@@ -3655,7 +3648,7 @@ void MyFrame::OnUpdateSavedOnly ( wxUpdateUIEvent& event )
 		event.Enable ( false );
 		return;
 	}
-	event.Enable ( !doc->getFullFileName().empty() );
+	event.Enable ( !doc->getDirectory().empty() );
 }
 
 void MyFrame::OnUpdateDocRange ( wxUpdateUIEvent& event )
@@ -3813,11 +3806,10 @@ void MyFrame::OnValidateRelaxNG ( wxCommandEvent& event )
 
 	wxString defaultFile, defaultDir;
 	defaultFile = doc->getFullFileName();
-	if ( !defaultFile.empty() )
-	{
-		wxFileName fn ( defaultFile );
-		defaultDir = fn.GetPath();
-	}
+	defaultDir = doc->getDirectory();
+	if ( defaultDir.empty() )
+		defaultDir = mLastDir;
+
 	AssociateDialog ad (
 	    this,
 	    _ ( "Select RELAX NG grammar" ),
@@ -4104,11 +4096,10 @@ void MyFrame::OnXslt ( wxCommandEvent& event )
 
 			wxString defaultFile, defaultDir;
 			defaultFile = doc->getFullFileName();
-			if ( !defaultFile.empty() )
-			{
-				wxFileName fn ( defaultFile );
-				defaultDir = fn.GetPath();
-			}
+			defaultDir = doc->getDirectory();
+			if ( defaultDir.empty() )
+				defaultDir = mLastDir;
+
 			AssociateDialog ad (
 			    this,
 			    _ ( "Select stylesheet" ),
