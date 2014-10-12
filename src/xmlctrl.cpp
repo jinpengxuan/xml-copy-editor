@@ -622,9 +622,9 @@ void XmlCtrl::handleSpace ( wxKeyEvent& event )
 		return;
 	}
 
-	int style = getLexerStyleAt ( pos - 1 );
-
-	char c = GetCharAt ( pos - 1 );
+	int prevPos;
+	char c = getPrevNonSpaceChar ( pos, &prevPos );
+	int style = getLexerStyleAt ( prevPos );
 
 	bool proceed = false;
 	// space pressed after element name
@@ -641,7 +641,7 @@ void XmlCtrl::handleSpace ( wxKeyEvent& event )
 	    ( style == wxSTC_H_DOUBLESTRING ||
 	      style == wxSTC_H_SINGLESTRING ) &&
 	    ( c == '\'' || c == '"' ) &&
-	    GetCharAt ( pos - 2 ) != '=' )
+	    getPrevNonSpaceChar ( prevPos - 1, NULL ) != '=' )
 	{
 		proceed = true;
 	}
@@ -2402,4 +2402,21 @@ void XmlCtrl::OnKillFocus ( wxFocusEvent &event )
 {
 	AutoCompCancel();
 	event.Skip();
+}
+
+int XmlCtrl::getPrevNonSpaceChar ( int curPos, int *charPos )
+{
+	int c = 0;
+	int pos = curPos;
+	while ( pos-- > 0 )
+	{
+		c = GetCharAt ( pos );
+		if ( !wxIsspace ( c ) )
+			break;
+	}
+
+	if ( charPos )
+		*charPos = pos;
+
+	return c;
 }

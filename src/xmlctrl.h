@@ -162,6 +162,7 @@ class XmlCtrl: public wxStyledTextCtrl
 		bool selectCurrentElement();
 		void toggleComment();
 		wxString getCurrentXPath();
+		int getPrevNonSpaceChar ( int curPos, int *charPos );
 	private:
 		ValidationThread *validationThread; // used for background validation
 		XmlPromptGenerator *mPromptGeneratorThread;
