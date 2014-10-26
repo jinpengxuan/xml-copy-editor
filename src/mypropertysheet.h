@@ -62,6 +62,7 @@ class MyPropertySheet : public wxPropertySheetDialog
 		wxCheckBox *completionBox,
 		*currentLineBox,
 		*foldBox,
+		*foldCompactBox,
 		*numberBox,
 		*whitespaceVisibleBox,
 		*indentLinesBox,

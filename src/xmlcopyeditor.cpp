@@ -688,6 +688,8 @@ MyFrame::MyFrame (
 		    config->Read ( _T ( "number" ), true );
 		properties.fold =
 		    config->Read ( _T ( "fold" ), true );
+		properties.foldCompact =
+		    config->Read ( _T ( "foldCompact" ), true );
 		properties.currentLine =
 		    config->Read ( _T ( "currentLine" ), true );
 		properties.highlightSyntax =
@@ -854,6 +856,7 @@ MyFrame::MyFrame (
 
 	largeFileProperties.completion = false;
 	largeFileProperties.fold = false;
+	largeFileProperties.foldCompact = false;
 	largeFileProperties.whitespaceVisible = false;
 	largeFileProperties.wrap = false;
 	largeFileProperties.indentLines = false;
@@ -1082,6 +1085,7 @@ MyFrame::~MyFrame()
 	config->Write ( _T ( "completion" ), properties.completion );
 	config->Write ( _T ( "number" ), properties.number );
 	config->Write ( _T ( "fold" ), properties.fold );
+	config->Write ( _T ( "foldCompact" ), properties.foldCompact );
 	config->Write ( _T ( "currentLine" ), properties.currentLine );
 	config->Write ( _T ( "whitespaceVisible" ), properties.whitespaceVisible );
 	config->Write ( _T ( "wrap" ), properties.wrap );

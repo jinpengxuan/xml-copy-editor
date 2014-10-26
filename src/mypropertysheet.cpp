@@ -77,6 +77,9 @@ MyPropertySheet::MyPropertySheet (
 	foldBox =
 	    new wxCheckBox ( editorPanel, wxID_ANY, _ ( "&Folding" ) );
 	foldBox->SetValue ( properties.fold );
+	foldCompactBox =
+	    new wxCheckBox ( editorPanel, wxID_ANY, _ ( "Fol&d blank lines" ) );
+	foldCompactBox->SetValue ( properties.foldCompact );
 	currentLineBox =
 	    new wxCheckBox ( editorPanel, wxID_ANY, _ ( "&Highlight current line" ) );
 	currentLineBox->SetValue ( properties.currentLine );
@@ -126,6 +129,7 @@ MyPropertySheet::MyPropertySheet (
 
 	col1sizer->Add ( insertCloseTagBox, 0, wxALL | wxALIGN_LEFT, 5 );
 	col1sizer->Add ( foldBox, 0, wxALL | wxALIGN_LEFT, 5 );
+	col1sizer->Add ( foldCompactBox, 0, wxALL | wxALIGN_LEFT, 5 );
 	col1sizer->Add ( currentLineBox, 0, wxALL | wxALIGN_LEFT, 5 );
 	col1sizer->Add ( highlightSyntaxBox, 0, wxALL | wxALIGN_LEFT, 5 );
 	col1sizer->Add ( indentLinesBox, 0, wxALL | wxALIGN_LEFT, 5 );
@@ -262,6 +266,7 @@ void MyPropertySheet::OnOk ( wxCommandEvent& e )
 
 	properties.completion = completionBox->GetValue();
 	properties.fold = foldBox->GetValue();
+	properties.foldCompact = foldCompactBox->GetValue();
 	properties.number = numberBox->GetValue();
 	properties.currentLine = currentLineBox->GetValue();
 	properties.whitespaceVisible = whitespaceVisibleBox->GetValue();

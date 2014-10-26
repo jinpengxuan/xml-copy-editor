@@ -1233,8 +1233,9 @@ void XmlCtrl::applyProperties (
 
 	wxString value = ( properties.fold && type != FILE_TYPE_BINARY ) ? _T ( "1" ) : _T ( "0" );
 	SetProperty ( _T ( "fold" ), value );
-	SetProperty ( _T ( "fold.compact" ), value );
 	SetProperty ( _T ( "fold.html" ), value );
+	value = properties.foldCompact ? value : _T("0");
+	SetProperty ( _T ( "fold.compact" ), value );
 }
 
 void XmlCtrl::OnMarginClick ( wxStyledTextEvent& event )

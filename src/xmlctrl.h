@@ -36,6 +36,7 @@ struct XmlCtrlProperties
 {
 	bool completion;
 	bool fold;
+	bool foldCompact;
 	bool number;
 	bool currentLine;
 	bool whitespaceVisible;
