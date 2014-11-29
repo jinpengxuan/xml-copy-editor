@@ -21,7 +21,7 @@
 #include "myipc.h"
 #include "xmlcopyeditor.h"
 #include "pathresolver.h"
-#if defined ( __WXGTK__ ) && !defined ( __NO_GTK__ )
+#ifdef HAVE_GTK2
 #include <gtk/gtk.h>
 
 guint32 XTimeNow()
@@ -30,7 +30,7 @@ guint32 XTimeNow()
 	clock_gettime ( CLOCK_MONOTONIC, &ts );
 	return ts.tv_sec * 1000 + ts.tv_nsec / 1000000;
 }
-#endif // __WXGTK__
+#endif // HAVE_GTK2
 
 MyServerConnection *server_connection = 0;
 MyClientConnection *client_connection = 0;
@@ -94,7 +94,7 @@ bool MyServerConnection::OnPoke (
 		//frame->addToFileQueue ( ( wxString& ) item ); // prevent event loop problems
 	}
 #ifndef __WXMSW__
-#if defined ( __WXGTK__ ) && !defined ( __NO_GTK__ )
+#ifdef HAVE_GTK2
 	// Processes mostly cannot raise their own windows.
 	// http://osdir.com/ml/gnome.gaim.devel/2004-12/msg00077.html
 	GtkWidget *widget = frame->GetHandle();
@@ -105,7 +105,7 @@ bool MyServerConnection::OnPoke (
 	//gdk_window_show ( window );
 	//gdk_window_raise ( window );
 	//gtk_window_present ( GTK_WINDOW ( widget ) );
-#endif // __WXGTK__ && !__NO_GTK__
+#endif // HAVE_GTK2
 	frame->Show();
 	frame->Raise();
 #endif // __WXMSW__

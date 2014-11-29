@@ -26,7 +26,7 @@
 #include <wx/wx.h>
 #include <wx/ipc.h>
 
-#if defined ( __WXGTK__ ) && !defined ( __NO_GTK__ )
+#ifdef HAVE_GTK2
 #if wxCHECK_VERSION(2,9,0) // GSocket is defined in wxWidgets 2.8
 #include <gdk/gdkx.h>
 #else // wxCHECK_VERSION(2,9,0)
@@ -34,7 +34,7 @@
 #include <gdk/gdkx.h>
 #undef GSocket
 #endif // wxCHECK_VERSION(2,9,0)
-#endif // __WXGTK__ && !__NO_GTK__
+#endif // HAVE_GTK2
 
 #define IPC_SERVICE _T("4242")
 #define IPC_TOPIC _T("IPC TEST")
@@ -71,7 +71,7 @@ class MyServerConnection : public wxConnection
 				IPCSize_t *size, wxIPCFormat format = wxIPC_PRIVATE );
 
 	protected:
-#if defined ( __WXGTK__ ) && !defined ( __NO_GTK__ )
+#ifdef HAVE_GTK2
 		GdkNativeWindow mFrameWnd;
 #else
 		WXWidget mFrameWnd;

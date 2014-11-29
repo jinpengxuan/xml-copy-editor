@@ -613,15 +613,15 @@ ac_subst_vars='am__EXEEXT_FALSE
 am__EXEEXT_TRUE
 LTLIBOBJS
 LIBOBJS
-GTK_LIBS
-GTK_CFLAGS
+WX_LIBS
+GTK2_LIBS
+GTK2_CFLAGS
 ASPELL_LIBS
 ENCHANT_LIBS
 ENCHANT_CFLAGS
 PKG_CONFIG_LIBDIR
 PKG_CONFIG_PATH
 PKG_CONFIG
-WX_LIBS
 CXXCPP
 CPP
 OTOOL64
@@ -810,8 +810,8 @@ PKG_CONFIG_PATH
 PKG_CONFIG_LIBDIR
 ENCHANT_CFLAGS
 ENCHANT_LIBS
-GTK_CFLAGS
-GTK_LIBS'
+GTK2_CFLAGS
+GTK2_LIBS'
 
 
 # Initialize some variables set by options.
@@ -1474,8 +1474,8 @@ Some influential environment variables:
               C compiler flags for ENCHANT, overriding pkg-config
   ENCHANT_LIBS
               linker flags for ENCHANT, overriding pkg-config
-  GTK_CFLAGS  C compiler flags for GTK, overriding pkg-config
-  GTK_LIBS    linker flags for GTK, overriding pkg-config
+  GTK2_CFLAGS C compiler flags for GTK2, overriding pkg-config
+  GTK2_LIBS   linker flags for GTK2, overriding pkg-config
 
 Use these variables to override the choices made by `configure' or to help
 it to find libraries and programs with nonstandard names/locations.
@@ -15824,7 +15824,7 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
 
 
 CPPFLAGS="$CPPFLAGS -Wall -g -fexceptions"
-CXXFLAGS="$CXXFLAGS -Wall -g -fexceptions"
+CXXFLAGS?=
 
 WXCONFIG=wx-config
 LIBXMLCONFIG=xml2-config
@@ -15906,11 +15906,6 @@ $as_echo "$libxsltversion" >&6; }
 $as_echo "not found" >&6; }
 		as_fn_error $? "libxslt" "$LINENO" 5
 	fi
-
-CPPFLAGS="$CPPFLAGS $WX_CPPFLAGS"
-CXXFLAGS="$CXXFLAGS $WX_CXXFLAGS"
-
-
 
 # Check whether --enable-debug was given.
 if test "${enable_debug+set}" = set; then :
@@ -16222,11 +16217,11 @@ fi
 # It is needed to make single-instance-check work
 
 pkg_failed=no
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for GTK" >&5
-$as_echo_n "checking for GTK... " >&6; }
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for GTK2" >&5
+$as_echo_n "checking for GTK2... " >&6; }
 
-if test -n "$GTK_CFLAGS"; then
-    pkg_cv_GTK_CFLAGS="$GTK_CFLAGS"
+if test -n "$GTK2_CFLAGS"; then
+    pkg_cv_GTK2_CFLAGS="$GTK2_CFLAGS"
  elif test -n "$PKG_CONFIG"; then
     if test -n "$PKG_CONFIG" && \
     { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"gtk+-2.0\""; } >&5
@@ -16234,7 +16229,7 @@ if test -n "$GTK_CFLAGS"; then
   ac_status=$?
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
-  pkg_cv_GTK_CFLAGS=`$PKG_CONFIG --cflags "gtk+-2.0" 2>/dev/null`
+  pkg_cv_GTK2_CFLAGS=`$PKG_CONFIG --cflags "gtk+-2.0" 2>/dev/null`
 		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
@@ -16242,8 +16237,8 @@ fi
  else
     pkg_failed=untried
 fi
-if test -n "$GTK_LIBS"; then
-    pkg_cv_GTK_LIBS="$GTK_LIBS"
+if test -n "$GTK2_LIBS"; then
+    pkg_cv_GTK2_LIBS="$GTK2_LIBS"
  elif test -n "$PKG_CONFIG"; then
     if test -n "$PKG_CONFIG" && \
     { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"gtk+-2.0\""; } >&5
@@ -16251,7 +16246,7 @@ if test -n "$GTK_LIBS"; then
   ac_status=$?
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
-  pkg_cv_GTK_LIBS=`$PKG_CONFIG --libs "gtk+-2.0" 2>/dev/null`
+  pkg_cv_GTK2_LIBS=`$PKG_CONFIG --libs "gtk+-2.0" 2>/dev/null`
 		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
@@ -16272,30 +16267,56 @@ else
         _pkg_short_errors_supported=no
 fi
         if test $_pkg_short_errors_supported = yes; then
-	        GTK_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "gtk+-2.0" 2>&1`
+	        GTK2_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "gtk+-2.0" 2>&1`
         else
-	        GTK_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "gtk+-2.0" 2>&1`
+	        GTK2_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "gtk+-2.0" 2>&1`
         fi
 	# Put the nasty error message in config.log where it belongs
-	echo "$GTK_PKG_ERRORS" >&5
+	echo "$GTK2_PKG_ERRORS" >&5
 
-	CXXFLAGS="$CXXFLAGS -D__NO_GTK__"
-	#[PKG_CHECK_MODULES(GTK, [gtk+-3.0], [AC_MSG_RESULT([gtk+-3.0])])]
+	as_fn_error $? "Package requirements (gtk+-2.0) were not met:
 
+$GTK2_PKG_ERRORS
+
+Consider adjusting the PKG_CONFIG_PATH environment variable if you
+installed software in a non-standard prefix.
+
+Alternatively, you may set the environment variables GTK2_CFLAGS
+and GTK2_LIBS to avoid the need to call pkg-config.
+See the pkg-config man page for more details." "$LINENO" 5
 elif test $pkg_failed = untried; then
      	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
-	CXXFLAGS="$CXXFLAGS -D__NO_GTK__"
-	#[PKG_CHECK_MODULES(GTK, [gtk+-3.0], [AC_MSG_RESULT([gtk+-3.0])])]
+	{ { $as_echo "$as_me:${as_lineno-$LINENO}: error: in \`$ac_pwd':" >&5
+$as_echo "$as_me: error: in \`$ac_pwd':" >&2;}
+as_fn_error $? "The pkg-config script could not be found or is too old.  Make sure it
+is in your PATH or set the PKG_CONFIG environment variable to the full
+path to pkg-config.
 
+Alternatively, you may set the environment variables GTK2_CFLAGS
+and GTK2_LIBS to avoid the need to call pkg-config.
+See the pkg-config man page for more details.
+
+To get pkg-config, see <http://pkg-config.freedesktop.org/>.
+See \`config.log' for more details" "$LINENO" 5; }
 else
-	GTK_CFLAGS=$pkg_cv_GTK_CFLAGS
-	GTK_LIBS=$pkg_cv_GTK_LIBS
+	GTK2_CFLAGS=$pkg_cv_GTK2_CFLAGS
+	GTK2_LIBS=$pkg_cv_GTK2_LIBS
         { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
 $as_echo "yes" >&6; }
-	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: gtk+-2.0" >&5
-$as_echo "gtk+-2.0" >&6; }
+
+$as_echo "#define HAVE_GTK2 1" >>confdefs.h
+
+	#, [PKG_CHECK_MODULES(GTK, [gtk+-3.0], [AC_MSG_RESULT([gtk+-3.0])])]
+
 fi
+#AC_SUBST(GTK2_CFLAGS)
+#AC_SUBST(GTK2_LIBS)
+
+CPPFLAGS="$CPPFLAGS $WX_CPPFLAGS"
+CXXFLAGS="$CXXFLAGS $WX_CXXFLAGS"
+
+
 
 ac_config_files="$ac_config_files Makefile data/Makefile m4/Makefile po/Makefile.in src/Makefile"
 
@@ -18824,7 +18845,7 @@ echo "Debug         Enabled"
 else
 echo "Debug         Disabled"
 fi
-if [ "$GTK_LIBS" = "" ]; then
+if [ "$GTK2_LIBS" = "" ]; then
 echo "GTK           No. There will be problems when single instance is enabled."
 fi
 

@@ -18,7 +18,7 @@ AC_LIBTOOL_DLOPEN
 AC_PROG_LIBTOOL
 
 CPPFLAGS="$CPPFLAGS -Wall -g -fexceptions"
-CXXFLAGS="$CXXFLAGS -Wall -g -fexceptions"
+CXXFLAGS?=
 
 WXCONFIG=wx-config
 LIBXMLCONFIG=xml2-config
@@ -93,11 +93,6 @@ AC_DEFUN([LIBXSLTTEST],
 # Call XSLT TEST func
 LIBXSLTTEST
 
-CPPFLAGS="$CPPFLAGS $WX_CPPFLAGS"
-CXXFLAGS="$CXXFLAGS $WX_CXXFLAGS"
-
-AC_SUBST(WX_LIBS)
-
 AC_ARG_ENABLE(debug,
 [  --enable-debug,  Enable debug build],
 [
@@ -151,10 +146,16 @@ AC_SUBST(ASPELL_LIBS)
 # Check gtk
 # This has to match the one wxWidgets linked with
 # It is needed to make single-instance-check work
-PKG_CHECK_MODULES(GTK, [gtk+-2.0], [AC_MSG_RESULT([gtk+-2.0])],
-	[CXXFLAGS="$CXXFLAGS -D__NO_GTK__"]
-	#[PKG_CHECK_MODULES(GTK, [gtk+-3.0], [AC_MSG_RESULT([gtk+-3.0])])]
+PKG_CHECK_MODULES([GTK2], [gtk+-2.0], [AC_DEFINE([HAVE_GTK2], [1], [Define if gtk+-2.0 exist.])]
+	#, [PKG_CHECK_MODULES(GTK, [gtk+-3.0], [AC_MSG_RESULT([gtk+-3.0])])]
 )
+#AC_SUBST(GTK2_CFLAGS)
+#AC_SUBST(GTK2_LIBS)
+
+CPPFLAGS="$CPPFLAGS $WX_CPPFLAGS"
+CXXFLAGS="$CXXFLAGS $WX_CXXFLAGS"
+
+AC_SUBST(WX_LIBS)
 
 AC_OUTPUT(Makefile data/Makefile m4/Makefile po/Makefile.in src/Makefile)
 
@@ -168,7 +169,7 @@ echo "Debug         Enabled"
 else
 echo "Debug         Disabled"
 fi
-if [[ "$GTK_LIBS" = "" ]]; then
+if [[ "$GTK2_LIBS" = "" ]]; then
 echo "GTK           No. There will be problems when single instance is enabled."
 fi
 
