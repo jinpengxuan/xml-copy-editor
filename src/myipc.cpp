@@ -129,7 +129,7 @@ IPCData *MyServerConnection::OnRequest
 			wxWindow *window = wxTheApp->GetTopWindow();
 			if ( window )
 			{
-#if defined ( __WXGTK__ ) && !defined ( __NO_GTK__ )
+#ifdef HAVE_GTK2
 				GtkWidget *wnd = window->GetHandle();
 				if ( wnd )
 				{
