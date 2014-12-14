@@ -50,7 +50,7 @@ class WrapLibxml
 		    const std::string &utf8DocBuf,
 		    const wxString &docFileName );
 		bool validateRelaxNG (
-		    const wxString &schemaFileName,
+		    const wxString &schemaUrl,
 		    const std::string &utf8DocBuf,
 		    const wxString &docFileName );
 		bool validateW3CSchema (

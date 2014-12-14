@@ -145,7 +145,7 @@ bool WrapLibxml::validate ( const std::string& utf8DocBuf,
 }
 
 bool WrapLibxml::validateRelaxNG (
-    const wxString &schemaFileName,
+    const wxString &schemaUrl,
     const std::string &utf8DocBuf,
     const wxString &docFileName )
 {
@@ -159,9 +159,7 @@ bool WrapLibxml::validateRelaxNG (
 	xmlRelaxNGPtr schemaPtr = NULL;
 
 	do {
-		xmlChar *url = xmlFileNameToURL ( schemaFileName );
-		rngParserCtxt = xmlRelaxNGNewParserCtxt ( ( const char * ) url );
-		xmlFree ( url );
+		rngParserCtxt = xmlRelaxNGNewParserCtxt ( schemaUrl.utf8_str() );
 		if ( rngParserCtxt == NULL )
 		{
 			nonParserError = _("Cannot create an RNG parser context");
@@ -187,7 +185,7 @@ bool WrapLibxml::validateRelaxNG (
 		int flags = XML_PARSE_DTDVALID;
 		if ( !netAccess )
 			flags |= XML_PARSE_NONET;
-		url = xmlFileNameToURL ( docFileName );
+		xmlChar *url = xmlFileNameToURL ( docFileName );
 		docPtr = xmlCtxtReadMemory ( ctxt, utf8DocBuf.c_str(),
 					utf8DocBuf.length(), ( const char * ) url, "UTF-8", flags );
 		xmlFree ( url );

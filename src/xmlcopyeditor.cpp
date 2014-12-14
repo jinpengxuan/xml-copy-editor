@@ -3825,20 +3825,19 @@ void MyFrame::OnValidateRelaxNG ( wxCommandEvent& event )
 	if ( ad.ShowModal() != wxID_OK )
 		return;
 
-	wxString path = lastRelaxNGSchema = ad.getUrl();
-
-	if ( path.empty() )
+	const wxString &url = lastRelaxNGSchema = ad.getUrl();
+	if ( url.empty() )
 	{
 		statusProgress ( wxEmptyString );
 		return;
 	}
 
-	validateRelaxNG ( doc, path, fileName );
+	validateRelaxNG ( doc, url, fileName );
 }
 
 void MyFrame::validateRelaxNG (
     XmlDoc *doc,
-    const wxString& schemaName,
+    const wxString& schemaUrl,
     wxString& fileName ) // not const: may change if empty/document modified
 {
 	statusProgress ( wxEmptyString );
@@ -3846,13 +3845,11 @@ void MyFrame::validateRelaxNG (
 	if ( !doc )
 		return;
 
-
 	doc->clearErrorIndicators();
 	statusProgress ( _ ( "RELAX NG validation in progress..." ) );
 
 	auto_ptr<WrapLibxml> wl ( new WrapLibxml ( libxmlNetAccess ) );
-
-	if ( !wl->validateRelaxNG ( schemaName, doc->myGetTextRaw(), fileName ) )
+	if ( !wl->validateRelaxNG ( schemaUrl, doc->myGetTextRaw(), fileName ) )
 	{
 		wxString wideError = wl->getLastError();
 		statusProgress ( wxEmptyString );
@@ -3883,10 +3880,10 @@ void MyFrame::OnValidatePreset ( wxCommandEvent& event )
 	wxString fileName = doc->getFullFileName();
 
 	int id = event.GetId();
-	wxString schemaFileName = validationPresetMap[id];
-	if ( schemaFileName.empty() )
+	const wxString &schemaUrl = validationPresetMap[id];
+	if ( schemaUrl.empty() )
 		return;
-	validateRelaxNG ( doc, schemaFileName, fileName );
+	validateRelaxNG ( doc, schemaUrl, fileName );
 }
 
 void MyFrame::OnValidateSchema ( wxCommandEvent& event )
@@ -5115,32 +5112,24 @@ wxMenuBar *MyFrame::getMenuBar()
 
 	if ( wxDirExists ( rngDir ) )
 	{
-		wxString rngMask, rngFile, displayName, shortcutString;
+		wxString rngMask, rngFile, rngUrl, displayName, shortcutString;
 		rngMask = rngDir + wxFileName::GetPathSeparator() + _T ( "*.rng" );
 		rngFile = wxFindFirstFile ( rngMask, wxFILE );
 
 		int id = ID_VALIDATE_PRESET1;
 
-		if ( !rngFile.empty() )
+		while ( id <= ID_VALIDATE_PRESET9 && !rngFile.empty() )
 		{
-			validationPresetMap.insert ( make_pair ( id, rngFile ) );
+			rngUrl = WrapLibxml::FileNameToURL ( rngFile );
+			validationPresetMap.insert ( make_pair ( id, rngUrl ) );
 			wxFileName::SplitPath ( rngFile, NULL, NULL, &displayName, NULL );
 			displayName.Replace ( _T ( ".rng" ), _T ( "" ) );
 			shortcutString.Printf ( _ ( "\tCtrl+%i" ), ( id - ID_VALIDATE_PRESET1 ) + 1 );
 
 			validationMenu->Append ( id, displayName + shortcutString, displayName );
 
-			for ( id = ID_VALIDATE_PRESET2; id <= ID_VALIDATE_PRESET9; ++id )
-			{
-				rngFile = wxFindNextFile();
-				if ( rngFile.empty() )
-					break;
-				validationPresetMap.insert ( make_pair ( id, rngFile ) );
-				wxFileName::SplitPath ( rngFile, NULL, NULL, &displayName, NULL );
-				shortcutString.Printf ( _ ( "\tCtrl+%i" ), ( id - ID_VALIDATE_PRESET1 ) + 1 );
-				displayName.Replace ( _T ( ".rng" ), _T ( "" ) );
-				validationMenu->Append ( id, displayName + shortcutString, displayName );
-			}
+			id++;
+			rngFile = wxFindNextFile();
 		}
 	}
 
