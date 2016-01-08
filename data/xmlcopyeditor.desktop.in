@@ -8,3 +8,4 @@ Icon=xmlcopyeditor
 Terminal=false
 MimeType=text/xml;
 Categories=Development;Utility;TextEditor;
+_Keywords=XML;Editor;
