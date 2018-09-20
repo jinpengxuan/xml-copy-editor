@@ -1,0 +1,35 @@
+build:
+	`wx-config --cxx --cxxflags --libs all` -I /usr/include -I /usr/local/include -I /usr/include/libxml2 -I ../src -lxml2 -lxslt -laspell.15 -lxerces-c -lpcre -o xmlcopyeditor ../src/*.cpp
+bundle: Info.plist xmlcopyeditor version.plist InfoPlist.strings xmlcopyeditor.icns
+	SetFile -t APPL xmlcopyeditor
+	-mkdir xmlcopyeditor.app
+	-mkdir xmlcopyeditor.app/Contents
+	-mkdir xmlcopyeditor.app/Contents/MacOS
+	-mkdir xmlcopyeditor.app/Contents/Resources
+	-mkdir xmlcopyeditor.app/Contents/Resources/English.lproj
+	-mkdir xmlcopyeditor.app/Contents/SharedSupport
+	-mkdir xmlcopyeditor.app/Contents/Frameworks
+	cp Info.plist xmlcopyeditor.app/Contents/
+	cp version.plist xmlcopyeditor.app/Contents/
+	cp InfoPlist.strings xmlcopyeditor.app/Contents/Resources/English.lproj/
+	echo -n 'APPLxmlc' > xmlcopyeditor.app/Contents/PkgInfo
+	cp xmlcopyeditor xmlcopyeditor.app/Contents/MacOS/xmlcopyeditor
+	cp -R ../src/png xmlcopyeditor.app/Contents/SharedSupport/
+	cp -R ../src/catalog xmlcopyeditor.app/Contents/SharedSupport/
+	cp -R ../src/dtd xmlcopyeditor.app/Contents/SharedSupport/
+	cp -R ../src/help xmlcopyeditor.app/Contents/SharedSupport/
+	cp -R ../src/ico xmlcopyeditor.app/Contents/SharedSupport/
+	cp -R ../src/rng xmlcopyeditor.app/Contents/SharedSupport/
+	cp -R ../src/rulesets xmlcopyeditor.app/Contents/SharedSupport/
+	cp -R ../src/templates xmlcopyeditor.app/Contents/SharedSupport/
+	cp -R ../src/xpm xmlcopyeditor.app/Contents/SharedSupport/
+	cp -R ../src/xsl xmlcopyeditor.app/Contents/SharedSupport/
+	cp xmlcopyeditor.icns xmlcopyeditor.app/Contents/Resources/
+	for DYLIB in lib/libxml2.2 lib/libxslt.1 lib/libpcre.0 local/lib/libaspell.15 local/lib/libxerces-c-3.1; do BASENAME=`basename /usr/$${DYLIB}.dylib`; echo "relinking $${BASENAME}"; cp /usr/$${DYLIB}.dylib xmlcopyeditor.app/Contents/Frameworks/; install_name_tool -change /usr/$${DYLIB}.dylib @executable_path/../Frameworks/$${BASENAME} xmlcopyeditor.app/Contents/MacOS/xmlcopyeditor; done
+dmg:
+	make -f Makefile.diskimage
+clean:
+	rm -f xmlcopyeditor
+	rm -rf xmlcopyeditor.app/
+	make -f Makefile.diskimage clean
+all: clean build bundle dmg

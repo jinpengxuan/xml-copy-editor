@@ -66,6 +66,7 @@
 #include <wx/wupdlock.h>
 #include "dtd2schema.h"
 #include "myipc.h"
+#include <wx/debug.h>
 
 #ifdef NEWFINDREPLACE
 #include "findreplacepanel.h"
@@ -225,6 +226,8 @@ MyApp::MyApp()
 	, config ( new wxFileConfig ( _T ( "xmlcopyeditor" ) ) )
 #endif
 {
+	wxDisableAsserts();
+
 #if defined ( __WXGTK__ ) && !defined ( __WXDEBUG__ )
 	int fdnull = open ( "/dev/null", O_WRONLY, 0 );
 	dup2 ( fdnull, STDERR_FILENO );
@@ -657,9 +660,11 @@ MyFrame::MyFrame (
 		                   wxEmptyString,
 		                   this ) ),
 		findDialog ( 0 ),
-#ifndef __WXMSW__
-		helpController ( new wxHtmlHelpController() ),
+		helpController ( new wxHtmlHelpController (
+#ifdef __WXOSX__					
+					wxHF_CONTENTS | wxHF_INDEX | wxHF_SEARCH | wxHF_BOOKMARKS | wxHF_PRINT
 #endif
+		) ),
 		menuBar ( 0 ),
 		toolBar ( 0 ),
 		xmlMenu ( 0 ),
@@ -881,7 +886,7 @@ MyFrame::MyFrame (
 	// Initialize Xerces-C++
 	WrapXerces::Init ( libxmlNetAccess );
 
-#if _XERCES_VERSION >= 30100
+#if _XERCES_VERSION >= 30100 && wxDEBUG_LEVEL > 0
 	if ( XMLPlatformUtils::fgSSE2ok
 		&& xercescSSE2Warning
 		&& wxTheApp->argc == 1 )
@@ -940,7 +945,13 @@ MyFrame::MyFrame (
 	stylePosition = aboutPosition = wxDefaultPosition;
 	styleSize = wxSize ( 720, 540 );
 
-	showTopBars ( toolbarVisible );
+	showTopBars (
+#ifndef __WXOSX__
+		toolbarVisible
+#else
+		false
+#endif
+	);
 
 	long style = wxAUI_NB_TOP |
 	             wxAUI_NB_TAB_SPLIT |
@@ -5073,9 +5084,11 @@ wxMenuBar *MyFrame::getMenuBar()
 	    _ ( "S&how Current Element Pane" ),
 	    _ ( "Show Current Element Pane" ) );
 	viewMenu->Check ( ID_LOCATION_PANE_VISIBLE, false );
+#ifndef __WXOSX__
 	viewMenu->AppendCheckItem (
 	    ID_TOOLBAR_VISIBLE, _ ( "Sh&ow Toolbar" ), _ ( "Show Toolbar" ) );
 	viewMenu->Check ( ID_TOOLBAR_VISIBLE, toolbarVisible );
+#endif
 	viewMenu->Append ( ID_CLOSE_MESSAGE_PANE,
 	    _ ( "C&lose Message Pane\tAlt+C" ), _ ( "Close Message Pane" ) );
 	viewMenu->Append ( ID_CLOSE_FIND_REPLACE_PANE,
@@ -5429,6 +5442,7 @@ wxToolBar *MyFrame::getToolBar()
 	    wxNullBitmap,
 	    wxITEM_NORMAL,
 	    _ ( "Save" ) );
+#ifndef __WXOSX__
 	toolBar->AddTool (
 	    ID_PRINT,
 	    _ ( "Print" ),
@@ -5464,7 +5478,6 @@ wxToolBar *MyFrame::getToolBar()
 	    wxNullBitmap,
 	    wxITEM_NORMAL,
 	    _ ( "Spelling" ) );
-
 	toolBar->AddCheckTool (
 	    ID_PROTECT_TAGS,
 	    _ ( "Lock Tags" ),
@@ -5473,6 +5486,7 @@ wxToolBar *MyFrame::getToolBar()
 	    _ ( "Lock Tags" ) );
 	toolBar->ToggleTool (
 	    ID_PROTECT_TAGS, protectTags );
+#endif
 
 	toolBar->Realize();
 	return toolBar;
@@ -5684,44 +5698,33 @@ void MyFrame::encodingMessage()
 
 void MyFrame::updatePaths()
 {
-	ruleSetDir = applicationDir + wxFileName::GetPathSeparator() + _T ( "rulesets" );
-	filterDir = applicationDir + wxFileName::GetPathSeparator() + _T ( "filters" );
-	templateDir = applicationDir + wxFileName::GetPathSeparator() + _T ( "templates" ) +
-	              wxFileName::GetPathSeparator();
-	binDir = applicationDir + wxFileName::GetPathSeparator() + _T ( "bin" ) +
-	         wxFileName::GetPathSeparator();
-	helpDir = applicationDir + wxFileName::GetPathSeparator() + _T ( "help" ) +
-	          wxFileName::GetPathSeparator();
-	rngDir = applicationDir + wxFileName::GetPathSeparator() + _T ( "rng" ) +
-	         wxFileName::GetPathSeparator();
-	htmlDir = applicationDir + wxFileName::GetPathSeparator() + _T ( "html" ) +
-	          wxFileName::GetPathSeparator();
-	pngDir = applicationDir + wxFileName::GetPathSeparator() + _T ( "png" ) +
-	         wxFileName::GetPathSeparator();
-    daisyDir = applicationDir + wxFileName::GetPathSeparator() + _T ( "daisy" ) +
-        wxFileName::GetPathSeparator();
+	wxString sep = wxFileName::GetPathSeparator();
+	ruleSetDir = applicationDir + sep + _T ( "rulesets" );
+	filterDir = applicationDir + sep + _T ( "filters" );
+	templateDir = applicationDir + sep + _T ( "templates" ) + sep;
+	binDir = applicationDir + sep + _T ( "bin" ) + sep;
+	helpDir = applicationDir + sep + _T ( "help" ) + sep;
+	rngDir = applicationDir + sep + _T ( "rng" ) + sep;
+	htmlDir = applicationDir + sep + _T ( "html" ) + sep;
+	pngDir = applicationDir + sep + _T ( "png" ) + sep;
+	xpmDir = applicationDir + sep + _T ( "xpm" ) + sep;
+	daisyDir = applicationDir + sep + _T ( "daisy" ) + sep;
 	catalogPath =
-	    applicationDir + wxFileName::GetPathSeparator() + _T ( "catalog" ) +
-	    wxFileName::GetPathSeparator() + _T ( "catalog" );
+	    applicationDir + sep + _T ( "catalog" ) + sep + _T ( "catalog" );
 	xslDtdPath =
-	    applicationDir + wxFileName::GetPathSeparator() + _T ( "dtd" ) +
-	    wxFileName::GetPathSeparator() + _T ( "xslt10.dtd" );
+	    applicationDir + sep + _T ( "dtd" ) + sep + _T ( "xslt10.dtd" );
 	rssDtdPath =
-	    applicationDir + wxFileName::GetPathSeparator() + _T ( "dtd" ) +
-	    wxFileName::GetPathSeparator() + _T ( "rss2.dtd" );
+	    applicationDir + sep + _T ( "dtd" ) + sep + _T ( "rss2.dtd" );
 	xtmDtdPath =
-	    applicationDir + wxFileName::GetPathSeparator() + _T ( "dtd" ) +
-	    wxFileName::GetPathSeparator() + _T ( "xtm1.dtd" );
+	    applicationDir + sep + _T ( "dtd" ) + sep + _T ( "xtm1.dtd" );
 	lzxDtdPath =
-	    applicationDir + wxFileName::GetPathSeparator() + _T ( "dtd" ) +
-	    wxFileName::GetPathSeparator() + _T ( "lzx.dtd" );
+	    applicationDir + sep + _T ( "dtd" ) + sep + _T ( "lzx.dtd" );
 	xliffDtdPath =
-	    applicationDir + wxFileName::GetPathSeparator() + _T ( "dtd" ) +
-	    wxFileName::GetPathSeparator() + _T ( "xliff.dtd" );
-	aspellDataPath = applicationDir + wxFileName::GetPathSeparator() +
-        _T ( "aspell" ) + wxFileName::GetPathSeparator() + _T ( "data" );
-    aspellDictPath = applicationDir + wxFileName::GetPathSeparator() +
-        _T ( "aspell" ) + wxFileName::GetPathSeparator() + _T ( "dict" );
+	    applicationDir + sep + _T ( "dtd" ) + sep + _T ( "xliff.dtd" );
+	aspellDataPath = applicationDir + sep +
+        _T ( "aspell" ) + sep + _T ( "data" );
+	aspellDictPath = applicationDir + sep +
+        _T ( "aspell" ) + sep + _T ( "dict" );
 }
 
 void MyFrame::OnAssociate ( wxCommandEvent& event )
@@ -5966,11 +5969,34 @@ void MyFrame::loadBitmaps()
 	findBitmap = wxBITMAP ( stock_search_16 );
 	spelling16Bitmap = wxBITMAP ( stock_spellcheck_16 );
 	helpBitmap = wxBITMAP ( stock_help_16 );
+/*
+#elif __WXOSX__
+	// toolbar icons
+	newBitmap.LoadFile ( xpmDir + _T ( "stock_new.xpm" ), wxBITMAP_TYPE_XPM );
+	openBitmap.LoadFile ( xpmDir + _T ( "stock_open.xpm" ), wxBITMAP_TYPE_XPM );
+	saveBitmap.LoadFile ( xpmDir + _T ( "stock_save.xpm" ), wxBITMAP_TYPE_XPM );
+
+        // menu icons
+        new16Bitmap = wxNullBitmap;
+        open16Bitmap = wxNullBitmap;
+        save16Bitmap = wxNullBitmap;
+        printPreviewBitmap = wxNullBitmap;
+        print16Bitmap = wxNullBitmap;
+        undo16Bitmap = wxNullBitmap;
+        redo16Bitmap = wxNullBitmap;
+        cutBitmap = wxNullBitmap;
+        copyBitmap = wxNullBitmap;
+        pasteBitmap = wxNullBitmap;
+        findBitmap = wxNullBitmap;
+        spelling16Bitmap = wxNullBitmap;
+        helpBitmap = wxNullBitmap;
+*/
 #else
 	// toolbar icons
 	newBitmap = wxArtProvider::GetBitmap ( wxART_NEW, wxART_TOOLBAR );
 	openBitmap = wxArtProvider::GetBitmap ( wxART_FILE_OPEN, wxART_TOOLBAR );
 	saveBitmap = wxArtProvider::GetBitmap ( wxART_FILE_SAVE, wxART_TOOLBAR );
+#ifndef __WXOSX__
 	printBitmap = wxArtProvider::GetBitmap ( wxART_PRINT, wxART_TOOLBAR );
 	spellingBitmap = wxArtProvider::GetBitmap ( _T ( "gtk-spell-check" ), wxART_TOOLBAR );
 
@@ -5979,6 +6005,7 @@ void MyFrame::loadBitmaps()
 	hyperlinkBitmap.LoadFile ( pngDir + _T ( "stock_hyperlink.png" ), wxBITMAP_TYPE_PNG );
 	checkWellformedBitmap.LoadFile ( pngDir + _T ( "stock_calc-accept.png" ), wxBITMAP_TYPE_PNG );
 	checkValidBitmap.LoadFile ( pngDir + _T ( "stock_calc-accept-green.png" ), wxBITMAP_TYPE_PNG );
+#endif
 
 	// menu icons
 	new16Bitmap = wxNullBitmap;

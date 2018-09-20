@@ -46,7 +46,7 @@ wxConnectionBase *MyServer::OnAcceptConnection ( const wxString& topic )
 
 MyServerConnection::MyServerConnection()
 	: wxConnection()
-	, mFrameWnd ( ( wxIntPtr ) NULL )
+	, mFrameWnd ( 0 )
 {
 	server_connection = this;
 }

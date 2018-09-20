@@ -24,7 +24,7 @@
 #else
 #define FILE_FILTER _("All files (*)|*|XML (*.xml)|*.xml|XHTML (*.html)|*.html|DTD (*.dtd)|*.dtd|XML Schema (*.xsd)|*.xsd|RELAX NG grammar (*.rng)|*.rng|XSL (*.xsl)|*.xsl")
 #endif
-#define ABOUT_COPYRIGHT _("Copyright © 2005-2009 Gerald Schmidt <gnschmidt@users.sourceforge.net>")
+#define ABOUT_COPYRIGHT _("Copyright © 2005-2018 Gerald Schmidt <gnschmidt@users.sourceforge.net>")
 #define ABOUT_DESCRIPTION _("\nXML Copy Editor is free software released under the GNU\nGeneral Public License.\n\nMany thanks are due to ")
 #define ABOUT_CONTRIBUTORS _T(\
 "Tim van Niekerk, Matt Smigielski,\n"\
@@ -52,7 +52,7 @@
 "License along with this program; if not, write to the Free\n"\
 "Software Foundation, Inc., 59 Temple Place, Suite 330,\n"\
 "Boston, MA 02111-1307 USA.")
-#define ABOUT_VERSION _T("1.2.1.4")
+#define ABOUT_VERSION _T("1.2.1.5")
 #define XMLCE_VAR _T("XMLCE_VAR")
 
 #ifdef __WXMSW__
