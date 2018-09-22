@@ -25,7 +25,7 @@ SOURCE_DIR ?= .
 SOURCE_FILES ?= xmlcopyeditor.app Applications.lnk
 
 TEMPLATE_DMG ?= xmlcopyeditor.dmg
-TEMPLATE_SIZE ?= 40m
+TEMPLATE_SIZE ?= 60m
 
 ################################################################################
 # DMG building. No editing should be needed beyond this point.
