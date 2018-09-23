@@ -14,6 +14,7 @@ bundle: Info.plist xmlcopyeditor version.plist InfoPlist.strings xmlcopyeditor.i
 	cp InfoPlist.strings xmlcopyeditor.app/Contents/Resources/English.lproj/
 	echo -n 'APPLxmlc' > xmlcopyeditor.app/Contents/PkgInfo
 	cp xmlcopyeditor xmlcopyeditor.app/Contents/MacOS/xmlcopyeditor
+	cp -R ../src/aspell xmlcopyeditor.app/Contents/SharedSupport/
 	cp -R ../src/png xmlcopyeditor.app/Contents/SharedSupport/
 	cp -R ../src/catalog xmlcopyeditor.app/Contents/SharedSupport/
 	cp -R ../src/dtd xmlcopyeditor.app/Contents/SharedSupport/
