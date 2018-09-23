@@ -1,3 +1,7 @@
+1.2.1.5 2018/09/23
+  + Fixed #221 Patch for building with C++11 (Roger Leigh)
+  + Added Mac port
+
 1.2.1.4
   + Feature #171 Fold element does not fold following whitespace
   + Feature #170 I did a small patch that allows SPACE to trigger autocompletion on any space (Thanassis Tsiodras)
