@@ -1,4 +1,4 @@
-AC_INIT([xmlcopyeditor], [1.2.1.4])
+AC_INIT([xmlcopyeditor], [1.2.1.5])
 AC_CONFIG_SRCDIR([src/xmlcopyeditor.cpp])
 AC_CONFIG_MACRO_DIR([m4])
 
