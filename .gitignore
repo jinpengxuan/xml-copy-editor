@@ -1,8 +1,10 @@
 .DS_Store
-*.dmg
-*.app
-*.bz2
+**.dmg
+**.app
+**.swp
+**.bz2
 xmlcopyeditor
 xmlcopyeditor.exe
-*.o
+**.o
 tests-main
+thumbs.db
