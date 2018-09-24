@@ -4,3 +4,5 @@
 *.bz2
 xmlcopyeditor
 xmlcopyeditor.exe
+*.o
+tests-main
