@@ -21,18 +21,12 @@
 #include <memory>
 #include "catalogresolver.h"
 
-CatalogResolver::CatalogResolver()
-{
-}
+CatalogResolver::CatalogResolver() {}
 
-CatalogResolver::~CatalogResolver()
-{
-}
+CatalogResolver::~CatalogResolver() {}
 
-wxString CatalogResolver::catalogResolve (
-    const wxString &publicId,
-    const wxString &systemId )
-{
-	//std::auto_ptr<WrapLibxml> libxml ( new WrapLibxml ( false, catalogPath ) );
-	return WrapLibxml::catalogResolve ( publicId, systemId );
+wxString CatalogResolver::catalogResolve(const wxString &publicId,
+                                         const wxString &systemId) {
+  // std::auto_ptr<WrapLibxml> libxml ( new WrapLibxml ( false, catalogPath ) );
+  return WrapLibxml::catalogResolve(publicId, systemId);
 }

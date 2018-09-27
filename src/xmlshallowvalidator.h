@@ -30,56 +30,53 @@
 #include <expat.h>
 #include "wrapexpat.h"
 
-struct XmlShallowValidatorData : public ParserData
-{
-	XmlShallowValidatorData()
-	{
-		isValid = segmentOnly = false;
-		depth = maxLine = 0;
-		p = 0;
-		overrideFailure = false;
-	}
-	std::map<wxString, std::set<wxString> > elementMap;
-	std::map<wxString, std::map<wxString, std::set<wxString> > >
-	attributeMap;
-	std::map<wxString, std::set<wxString> > requiredAttributeMap;
-	std::set<wxString> entitySet;
-	std::vector<std::pair<int, int> > positionVector;
-	bool isValid, segmentOnly;
-	int depth, maxLine;
-	XML_Parser p;
-	bool overrideFailure;
+struct XmlShallowValidatorData : public ParserData {
+  XmlShallowValidatorData() {
+    isValid = segmentOnly = false;
+    depth = maxLine = 0;
+    p = 0;
+    overrideFailure = false;
+  }
+  std::map< wxString, std::set< wxString > > elementMap;
+  std::map< wxString, std::map< wxString, std::set< wxString > > > attributeMap;
+  std::map< wxString, std::set< wxString > > requiredAttributeMap;
+  std::set< wxString > entitySet;
+  std::vector< std::pair< int, int > > positionVector;
+  bool isValid, segmentOnly;
+  int depth, maxLine;
+  XML_Parser p;
+  bool overrideFailure;
 };
 
-class XmlShallowValidator : public WrapExpat
-{
-	public:
-		XmlShallowValidator (
-		    std::map<wxString, std::set<wxString> > &elementMap,
-		    std::map<wxString, std::map<wxString, std::set<wxString> > >
-		    &attributeMap,
-		    std::map<wxString, std::set<wxString> > &requiredAttributeMap,
-		    std::set<wxString> &entitySet,
-		    int maxLine = 0,
-		    bool segmentOnly = false );
-		virtual ~XmlShallowValidator();
-		bool isValid();
-		std::vector<std::pair<int, int> > getPositionVector();
-		bool getOverrideFailure();
-	private:
-		std::auto_ptr<XmlShallowValidatorData> vd;
-		static void XMLCALL start ( void *data, const XML_Char *el, const XML_Char **attr );
-		static void XMLCALL end ( void *data, const XML_Char *el );
-		static void XMLCALL skippedentity ( void *data, const XML_Char *entityName,
-		        int is_parameter_entity );
-		
-/*
-	static int XMLCALL externalentity ( XML_Parser p,
-			const XML_Char *context,
-                        const XML_Char *base,
-                        const XML_Char *systemId,
-                        const XML_Char *publicId);
-*/
+class XmlShallowValidator : public WrapExpat {
+public:
+  XmlShallowValidator(
+      std::map< wxString, std::set< wxString > > &elementMap,
+      std::map< wxString, std::map< wxString, std::set< wxString > > >
+          &attributeMap,
+      std::map< wxString, std::set< wxString > > &requiredAttributeMap,
+      std::set< wxString > &entitySet, int maxLine = 0,
+      bool segmentOnly = false);
+  virtual ~XmlShallowValidator();
+  bool isValid();
+  std::vector< std::pair< int, int > > getPositionVector();
+  bool getOverrideFailure();
+
+private:
+  std::auto_ptr< XmlShallowValidatorData > vd;
+  static void XMLCALL start(void *data, const XML_Char *el,
+                            const XML_Char **attr);
+  static void XMLCALL end(void *data, const XML_Char *el);
+  static void XMLCALL skippedentity(void *data, const XML_Char *entityName,
+                                    int is_parameter_entity);
+
+  /*
+          static int XMLCALL externalentity ( XML_Parser p,
+                          const XML_Char *context,
+                          const XML_Char *base,
+                          const XML_Char *systemId,
+                          const XML_Char *publicId);
+  */
 };
 
 #endif

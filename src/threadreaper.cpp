@@ -22,60 +22,50 @@
 
 extern wxCriticalSection xmlcopyeditorCriticalSection;
 
-ThreadReaper::ThreadReaper ()
-{
+ThreadReaper::ThreadReaper() {}
+
+ThreadReaper::~ThreadReaper() { clear(); }
+
+ThreadReaper &ThreadReaper::get() {
+  static ThreadReaper reaper;
+  return reaper;
 }
 
-ThreadReaper::~ThreadReaper ()
-{
-	clear();
+void ThreadReaper::add(wxThread *thread) {
+  // Make sure everything is valid when wxPostMessage is called
+  // and protect mList
+  wxCriticalSectionLocker lock(xmlcopyeditorCriticalSection);
+
+  mList.push_back(boost::shared_ptr< wxThread >(thread));
+
+  std::vector< boost::shared_ptr< wxThread > >::iterator itr;
+  for (itr = mList.begin(); itr != mList.end();) {
+    if ((**itr).IsAlive())
+      ++itr;
+    else
+      itr = mList.erase(itr);
+  }
 }
 
-ThreadReaper &ThreadReaper::get()
-{
-	static ThreadReaper reaper;
-	return reaper;
-}
+void ThreadReaper::clear() {
+  xmlcopyeditorCriticalSection.Enter();
 
-void ThreadReaper::add ( wxThread *thread )
-{
-	// Make sure everything is valid when wxPostMessage is called
-	// and protect mList
-	wxCriticalSectionLocker lock ( xmlcopyeditorCriticalSection );
+  std::vector< boost::shared_ptr< wxThread > > threads = mList;
+  mList.clear();
 
-	mList.push_back ( boost::shared_ptr<wxThread> ( thread ) );
+  xmlcopyeditorCriticalSection.Leave();
 
-	std::vector<boost::shared_ptr<wxThread> >::iterator itr;
-	for ( itr = mList.begin(); itr != mList.end(); )
-	{
-		if ( (**itr).IsAlive() )
-			++itr;
-		else
-			itr = mList.erase ( itr );
-	}
-}
-
-void ThreadReaper::clear()
-{
-	xmlcopyeditorCriticalSection.Enter();
-
-	std::vector<boost::shared_ptr<wxThread> > threads = mList;
-	mList.clear();
-
-	xmlcopyeditorCriticalSection.Leave();
-
-	// It's safe to call wxThread::Wait() now
-	std::vector<boost::shared_ptr<wxThread> >::iterator itr;
-	for ( itr = threads.begin(); itr != threads.end(); ++itr)
-	{
-		// This will cause the whole program to abort in linux with early
-		// versions of wxWidgets. A easy way to fix this is to rethrow
-		// abi::__forced_unwind& exceptions and avoid calling pthread_exit
-		// in such a condition.
-#if defined(__WXGTK__) && !wxCHECK_VERSION(2,9,5)
-		wxPrintf ( _T ( "Expecting crash..." ) );
+  // It's safe to call wxThread::Wait() now
+  std::vector< boost::shared_ptr< wxThread > >::iterator itr;
+  for (itr = threads.begin(); itr != threads.end(); ++itr) {
+    // This will cause the whole program to abort in linux with early
+    // versions of wxWidgets. A easy way to fix this is to rethrow
+    // abi::__forced_unwind& exceptions and avoid calling pthread_exit
+    // in such a condition.
+#if defined(__WXGTK__) && !wxCHECK_VERSION(2, 9, 5)
+    wxPrintf(_T ( "Expecting crash..." ));
 #endif
-		(**itr).Kill();
-		(**itr).Wait();
-	}
+    (**itr).Kill();
+    (**itr).Wait();
+  }
 }

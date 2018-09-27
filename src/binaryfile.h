@@ -25,16 +25,16 @@
 #include <cstdlib>
 #include <wx/wx.h>
 
-class BinaryFile
-{
-	public:
-		BinaryFile ( const wxString &fname );
-		~BinaryFile();
-		const char *getData();
-		size_t getDataLen();
-	private:
-		char *m_data;
-		size_t m_dataLen;
+class BinaryFile {
+public:
+  BinaryFile(const wxString &fname);
+  ~BinaryFile();
+  const char *getData();
+  size_t getDataLen();
+
+private:
+  char *m_data;
+  size_t m_dataLen;
 };
 
 #endif

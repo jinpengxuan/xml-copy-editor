@@ -24,15 +24,11 @@
 #include <string>
 #include "wraplibxml.h"
 
-class CatalogResolver : protected WrapLibxml
-{
-	public:
-		CatalogResolver();
-		~CatalogResolver();
-		wxString catalogResolve
-		    ( const wxString &pubIdUtf8
-		    , const wxString &sysIdUtf8
-		    );
+class CatalogResolver : protected WrapLibxml {
+public:
+  CatalogResolver();
+  ~CatalogResolver();
+  wxString catalogResolve(const wxString &pubIdUtf8, const wxString &sysIdUtf8);
 };
 
 #endif

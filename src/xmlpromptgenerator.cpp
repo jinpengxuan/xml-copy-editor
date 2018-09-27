@@ -49,650 +49,564 @@ using namespace xercesc;
 
 extern wxCriticalSection xmlcopyeditorCriticalSection;
 
-DEFINE_EVENT_TYPE ( myEVT_NOTIFY_PROMPT_GENERATED );
+DEFINE_EVENT_TYPE(myEVT_NOTIFY_PROMPT_GENERATED);
 
-XmlPromptGenerator::XmlPromptGenerator (
-	wxEvtHandler *handler,
-	const char *buffer,
-	size_t bufferSize,
-    const wxString& basePath,
-    const wxString& auxPath,
-    const char *encoding
-    )
-    : WrapExpat ( encoding )
-    , wxThread ( wxTHREAD_JOINABLE )
-    , d ( new PromptGeneratorData() )
-    , mEventHandler ( handler )
-    , mBuffer ( buffer, bufferSize )
-    , mStopping ( false )
-{
-	if ( mBuffer.length() != bufferSize )
-		throw std::bad_alloc();
+XmlPromptGenerator::XmlPromptGenerator(wxEvtHandler *handler,
+                                       const char *buffer, size_t bufferSize,
+                                       const wxString &basePath,
+                                       const wxString &auxPath,
+                                       const char *encoding)
+    : WrapExpat(encoding), wxThread(wxTHREAD_JOINABLE),
+      d(new PromptGeneratorData()), mEventHandler(handler),
+      mBuffer(buffer, bufferSize), mStopping(false) {
+  if (mBuffer.length() != bufferSize)
+    throw std::bad_alloc();
 
-	XML_SetUserData ( p, this );
-	d->p = p;
-	d->basePath = basePath;
-	d->auxPath = auxPath;
-	d->isRootElement = true;
-	d->grammarFound = false;
-	d->attributeValueCutoff = 12; // this prevents enums being stored in their thousands
-	XML_SetParamEntityParsing ( p, XML_PARAM_ENTITY_PARSING_UNLESS_STANDALONE );
-	XML_SetElementHandler ( p, starthandler, endhandler );
-	XML_SetDoctypeDeclHandler ( p, doctypedeclstarthandler, doctypedeclendhandler );
-	XML_SetElementDeclHandler ( p, elementdeclhandler );
-	XML_SetAttlistDeclHandler ( p, attlistdeclhandler );
-	XML_SetEntityDeclHandler ( p, entitydeclhandler );
-	XML_SetExternalEntityRefHandlerArg ( p, this );
-	XML_SetExternalEntityRefHandler ( p, externalentityrefhandler );
-	XML_SetBase ( p, d->basePath.utf8_str() );
+  XML_SetUserData(p, this);
+  d->p = p;
+  d->basePath = basePath;
+  d->auxPath = auxPath;
+  d->isRootElement = true;
+  d->grammarFound = false;
+  d->attributeValueCutoff =
+      12; // this prevents enums being stored in their thousands
+  XML_SetParamEntityParsing(p, XML_PARAM_ENTITY_PARSING_UNLESS_STANDALONE);
+  XML_SetElementHandler(p, starthandler, endhandler);
+  XML_SetDoctypeDeclHandler(p, doctypedeclstarthandler, doctypedeclendhandler);
+  XML_SetElementDeclHandler(p, elementdeclhandler);
+  XML_SetAttlistDeclHandler(p, attlistdeclhandler);
+  XML_SetEntityDeclHandler(p, entitydeclhandler);
+  XML_SetExternalEntityRefHandlerArg(p, this);
+  XML_SetExternalEntityRefHandler(p, externalentityrefhandler);
+  XML_SetBase(p, d->basePath.utf8_str());
 
-	if ( !auxPath.empty() )
-		XML_UseForeignDTD ( p, true );
+  if (!auxPath.empty())
+    XML_UseForeignDTD(p, true);
 }
 
-XmlPromptGenerator::~XmlPromptGenerator()
-{}
+XmlPromptGenerator::~XmlPromptGenerator() {}
 
-void XMLCALL XmlPromptGenerator::starthandler (
-    void *data,
-    const XML_Char *el,
-    const XML_Char **attr )
-{
-	XmlPromptGenerator *pThis = ( XmlPromptGenerator * ) data;
-	PromptGeneratorData *d = pThis->d.get();
+void XMLCALL XmlPromptGenerator::starthandler(void *data, const XML_Char *el,
+                                              const XML_Char **attr) {
+  XmlPromptGenerator *pThis = (XmlPromptGenerator *)data;
+  PromptGeneratorData *d = pThis->d.get();
 
-	if (d->isRootElement)
-	{
-		d->rootElement = el;
-		pThis->handleSchema ( d, el, attr ); // experimental: schema has been pre-parsed
-		d->isRootElement = false;
-		if ( d->grammarFound || pThis->TestDestroy() )//if ( d->elementMap.size() == 1) // must be 1 for success
-		{
-			return;
-		}
-	}
+  if (d->isRootElement) {
+    d->rootElement = el;
+    pThis->handleSchema(d, el,
+                        attr); // experimental: schema has been pre-parsed
+    d->isRootElement = false;
+    if (d->grammarFound || pThis->TestDestroy()) // if ( d->elementMap.size() ==
+                                                 // 1) // must be 1 for success
+    {
+      return;
+    }
+  }
 
-	d->push ( el );
+  d->push(el);
 
-	wxString parent ( d->getParent().c_str(), wxConvUTF8 );
-	wxString element ( el, wxConvUTF8 );
+  wxString parent(d->getParent().c_str(), wxConvUTF8);
+  wxString element(el, wxConvUTF8);
 
-	// update elementMap
-	d->elementMap[parent].insert ( element );
+  // update elementMap
+  d->elementMap[parent].insert(element);
 
-	wxString attributeName, attributeValue;
+  wxString attributeName, attributeValue;
 
-	// update attributeMap
-	for ( ; *attr; attr += 2 )
-	{
-		attributeName = wxString ( *attr, wxConvUTF8 );
-		attributeValue = wxString ( * ( attr + 1 ), wxConvUTF8 );
+  // update attributeMap
+  for (; *attr; attr += 2) {
+    attributeName = wxString(*attr, wxConvUTF8);
+    attributeValue = wxString(*(attr + 1), wxConvUTF8);
 
-		if (d->attributeMap[element][attributeName].size() < d->attributeValueCutoff)
-			d->attributeMap[element][attributeName].insert ( attributeValue );
-	}
+    if (d->attributeMap[element][attributeName].size() <
+        d->attributeValueCutoff)
+      d->attributeMap[element][attributeName].insert(attributeValue);
+  }
 }
 
-void XMLCALL XmlPromptGenerator::endhandler ( void *data, const XML_Char *el )
-{
-	XmlPromptGenerator *pThis = ( XmlPromptGenerator * ) data;
+void XMLCALL XmlPromptGenerator::endhandler(void *data, const XML_Char *el) {
+  XmlPromptGenerator *pThis = (XmlPromptGenerator *)data;
 
-	if ( pThis->TestDestroy() )
-		XML_StopParser ( pThis->d->p, false );
-	else
-		pThis->d->pop();
+  if (pThis->TestDestroy())
+    XML_StopParser(pThis->d->p, false);
+  else
+    pThis->d->pop();
 }
 
 // handlers for DOCTYPE handling
 
-void XMLCALL XmlPromptGenerator::doctypedeclstarthandler (
-    void *data,
-    const XML_Char *doctypeName,
-    const XML_Char *sysid,
-    const XML_Char *pubid,
-    int has_internal_subset )
-{
-	//PromptGeneratorData *d;
-	//d = ( PromptGeneratorData * ) data;
+void XMLCALL XmlPromptGenerator::doctypedeclstarthandler(
+    void *data, const XML_Char *doctypeName, const XML_Char *sysid,
+    const XML_Char *pubid, int has_internal_subset) {
+  // PromptGeneratorData *d;
+  // d = ( PromptGeneratorData * ) data;
 }
 
-void XMLCALL XmlPromptGenerator::doctypedeclendhandler ( void *data )
-{
-	XmlPromptGenerator *pThis = ( XmlPromptGenerator * ) data;
-	PromptGeneratorData *d = pThis->d.get();
-	if ( !d->elementMap.empty() )
-	{
-		d->grammarFound = true;
-		XML_StopParser ( d->p, false ); // experimental
-	}
+void XMLCALL XmlPromptGenerator::doctypedeclendhandler(void *data) {
+  XmlPromptGenerator *pThis = (XmlPromptGenerator *)data;
+  PromptGeneratorData *d = pThis->d.get();
+  if (!d->elementMap.empty()) {
+    d->grammarFound = true;
+    XML_StopParser(d->p, false); // experimental
+  }
 
-	if ( pThis->TestDestroy() )
-		XML_StopParser ( d->p, false );
+  if (pThis->TestDestroy())
+    XML_StopParser(d->p, false);
 }
 
-void XMLCALL XmlPromptGenerator::elementdeclhandler (
-    void *data,
-    const XML_Char *name,
-    XML_Content *model )
-{
-	XmlPromptGenerator *pThis = ( XmlPromptGenerator * ) data;
-	PromptGeneratorData *d = pThis->d.get();
+void XMLCALL XmlPromptGenerator::elementdeclhandler(void *data,
+                                                    const XML_Char *name,
+                                                    XML_Content *model) {
+  XmlPromptGenerator *pThis = (XmlPromptGenerator *)data;
+  PromptGeneratorData *d = pThis->d.get();
 
-	wxString myElement ( name, wxConvUTF8 );
+  wxString myElement(name, wxConvUTF8);
 
-	pThis->getContent ( *model, d->elementStructureMap[myElement],
-			d->elementMap[myElement] );
+  pThis->getContent(*model, d->elementStructureMap[myElement],
+                    d->elementMap[myElement]);
 
-	XML_FreeContentModel ( d->p, model );
+  XML_FreeContentModel(d->p, model);
 
-	if ( pThis->TestDestroy() )
-		XML_StopParser ( d->p, false );
+  if (pThis->TestDestroy())
+    XML_StopParser(d->p, false);
 }
 
-void XmlPromptGenerator::getContent (
-    const XML_Content &content,
-    wxString &contentModel,
-    std::set<wxString> &list )
-{
-	if ( TestDestroy() )
-		return;
+void XmlPromptGenerator::getContent(const XML_Content &content,
+                                    wxString &contentModel,
+                                    std::set< wxString > &list) {
+  if (TestDestroy())
+    return;
 
-	wxString name;
-	switch ( content.type )
-	{
-	case XML_CTYPE_EMPTY:
-		contentModel += _T("EMPTY");
-		return;
-	case XML_CTYPE_ANY:
-		contentModel += _T("ANY");
-		return;
-	case XML_CTYPE_NAME:
-		name = wxString ( content.name, wxConvUTF8 );
-		list.insert ( name );
-		contentModel += name;
-		break;
-	case XML_CTYPE_CHOICE:
-	case XML_CTYPE_SEQ:
-	case XML_CTYPE_MIXED:
-	default:
-		wxString sep;
-		sep = ( content.type == XML_CTYPE_CHOICE ) ? _T("|") : _T(",");
-		contentModel += ( content.type == XML_CTYPE_MIXED ) ? _T("(#PCDATA|") : _T("(");
-		for ( unsigned i = 0; i < content.numchildren; i++ )
-		{
-			if ( i > 0 )
-				contentModel += sep;
-			getContent ( content.children[i], contentModel, list);
-		}
-		contentModel += _T(")");
-		break;
-	}
+  wxString name;
+  switch (content.type) {
+  case XML_CTYPE_EMPTY:
+    contentModel += _T("EMPTY");
+    return;
+  case XML_CTYPE_ANY:
+    contentModel += _T("ANY");
+    return;
+  case XML_CTYPE_NAME:
+    name = wxString(content.name, wxConvUTF8);
+    list.insert(name);
+    contentModel += name;
+    break;
+  case XML_CTYPE_CHOICE:
+  case XML_CTYPE_SEQ:
+  case XML_CTYPE_MIXED:
+  default:
+    wxString sep;
+    sep = (content.type == XML_CTYPE_CHOICE) ? _T("|") : _T(",");
+    contentModel +=
+        (content.type == XML_CTYPE_MIXED) ? _T("(#PCDATA|") : _T("(");
+    for (unsigned i = 0; i < content.numchildren; i++) {
+      if (i > 0)
+        contentModel += sep;
+      getContent(content.children[i], contentModel, list);
+    }
+    contentModel += _T(")");
+    break;
+  }
 
-	switch ( content.quant )
-	{
-	case XML_CQUANT_OPT:
-		contentModel += _T("?");
-		break;
-	case XML_CQUANT_REP:
-		contentModel += _T("*");
-		break;
-	case XML_CQUANT_PLUS:
-		contentModel += _T("+");
-		break;
-	case XML_CQUANT_NONE:
-	default:
-		break;
-	}
+  switch (content.quant) {
+  case XML_CQUANT_OPT:
+    contentModel += _T("?");
+    break;
+  case XML_CQUANT_REP:
+    contentModel += _T("*");
+    break;
+  case XML_CQUANT_PLUS:
+    contentModel += _T("+");
+    break;
+  case XML_CQUANT_NONE:
+  default:
+    break;
+  }
 }
 
-void XMLCALL XmlPromptGenerator::attlistdeclhandler (
-    void *data,
-    const XML_Char *elname,
-    const XML_Char *attname,
-    const XML_Char *att_type,
-    const XML_Char *dflt,
-    int isrequired )
-{
-	XmlPromptGenerator *pThis = ( XmlPromptGenerator * ) data;
-	PromptGeneratorData *d = pThis->d.get();
+void XMLCALL XmlPromptGenerator::attlistdeclhandler(
+    void *data, const XML_Char *elname, const XML_Char *attname,
+    const XML_Char *att_type, const XML_Char *dflt, int isrequired) {
+  XmlPromptGenerator *pThis = (XmlPromptGenerator *)data;
+  PromptGeneratorData *d = pThis->d.get();
 
-	wxString element ( elname, wxConvUTF8 );
-	wxString attribute ( attname, wxConvUTF8 );
-	std::set<wxString> &attributeValues = d->attributeMap[element][attribute];
-	if ( *att_type == '(' ) // change to exclude _known_ identifiers?
-	{
-		const char *s, *word;
-		s = att_type;
+  wxString element(elname, wxConvUTF8);
+  wxString attribute(attname, wxConvUTF8);
+  std::set< wxString > &attributeValues = d->attributeMap[element][attribute];
+  if (*att_type == '(') // change to exclude _known_ identifiers?
+  {
+    const char *s, *word;
+    s = att_type;
 
-		do {
-			s++;
-			word = s;
-			while ( *s != '|' && *s != ')' )
-				s++;
+    do {
+      s++;
+      word = s;
+      while (*s != '|' && *s != ')')
+        s++;
 
-			wxString currentValue ( word, wxConvUTF8, s - word );
-			attributeValues.insert ( currentValue );
+      wxString currentValue(word, wxConvUTF8, s - word);
+      attributeValues.insert(currentValue);
 
-			while ( *s != '|' && *s != ')')
-				s++;
-		} while ( *s != ')' );
-	}
+      while (*s != '|' && *s != ')')
+        s++;
+    } while (*s != ')');
+  }
 
-	if ( isrequired )
-	{
-		d->requiredAttributeMap[element].insert ( attribute );
-	}
+  if (isrequired) {
+    d->requiredAttributeMap[element].insert(attribute);
+  }
 
-	if ( pThis->TestDestroy() )
-		XML_StopParser ( d->p, false );
+  if (pThis->TestDestroy())
+    XML_StopParser(d->p, false);
 }
 
-int XmlPromptGenerator::parseGrammar
-	( PromptGeneratorData *d
-	, const wxString &publicId
-	, const wxString &systemId
-	, const wxString &baseFileName
-	, Grammar::GrammarType type
-	)
-{
-	XercesDOMParser parser;
-	parser.setDoNamespaces ( true );
-	parser.setDoSchema ( true );
-	parser.setValidationSchemaFullChecking ( true );
+int XmlPromptGenerator::parseGrammar(PromptGeneratorData *d,
+                                     const wxString &publicId,
+                                     const wxString &systemId,
+                                     const wxString &baseFileName,
+                                     Grammar::GrammarType type) {
+  XercesDOMParser parser;
+  parser.setDoNamespaces(true);
+  parser.setDoSchema(true);
+  parser.setValidationSchemaFullChecking(true);
 
-	MySAX2Handler handler;
-	XercesCatalogResolver catalogResolver;
-	parser.setErrorHandler ( &handler );
-	parser.setEntityResolver ( &catalogResolver );
+  MySAX2Handler handler;
+  XercesCatalogResolver catalogResolver;
+  parser.setErrorHandler(&handler);
+  parser.setEntityResolver(&catalogResolver);
 
-	Grammar *rootGrammar;
-	try {
-		std::auto_ptr<InputSource> source ( WrapXerces::resolveEntity
-				( publicId , systemId , baseFileName ) );
-		if ( !source.get() )
-		{
-			wxLogError ( _T("Cann't open '%s'"), systemId.c_str() );
-			return XML_STATUS_ERROR;
-		}
+  Grammar *rootGrammar;
+  try {
+    std::auto_ptr< InputSource > source(
+        WrapXerces::resolveEntity(publicId, systemId, baseFileName));
+    if (!source.get()) {
+      wxLogError(_T("Cann't open '%s'"), systemId.c_str());
+      return XML_STATUS_ERROR;
+    }
 
-		if ( TestDestroy() )
-			return XML_STATUS_ERROR;
+    if (TestDestroy())
+      return XML_STATUS_ERROR;
 
-		rootGrammar = parser.loadGrammar ( *source, type );
-		if ( !rootGrammar )
-			return XML_STATUS_ERROR;
-	}
-	catch ( SAXParseException &e )
-	{
-		wxLogError ( _T ( "%s" ), handler.getErrors().c_str() );
-		return XML_STATUS_ERROR;
-	}
-	catch ( XMLException &e )
-	{
-		wxString error = WrapXerces::toString ( e.getMessage() );
-		wxLogError ( _T ( "%s" ), error.c_str() );
-		return XML_STATUS_ERROR;
-	}
-	catch ( DOMException &e )
-	{
-		wxString error = WrapXerces::toString ( e.getMessage() );
-		wxLogError ( _T ( "%s" ), error.c_str() );
-		return XML_STATUS_ERROR;
-	}
-	catch (...)
-	{
-		wxLogError ( _T ( "Failed to load: %s %s"), publicId.c_str()
-				, systemId.c_str() );
-		return XML_STATUS_ERROR;
-	}
+    rootGrammar = parser.loadGrammar(*source, type);
+    if (!rootGrammar)
+      return XML_STATUS_ERROR;
+  } catch (SAXParseException &e) {
+    wxLogError(_T ( "%s" ), handler.getErrors().c_str());
+    return XML_STATUS_ERROR;
+  } catch (XMLException &e) {
+    wxString error = WrapXerces::toString(e.getMessage());
+    wxLogError(_T ( "%s" ), error.c_str());
+    return XML_STATUS_ERROR;
+  } catch (DOMException &e) {
+    wxString error = WrapXerces::toString(e.getMessage());
+    wxLogError(_T ( "%s" ), error.c_str());
+    return XML_STATUS_ERROR;
+  } catch (...) {
+    wxLogError(_T ( "Failed to load: %s %s"), publicId.c_str(),
+               systemId.c_str());
+    return XML_STATUS_ERROR;
+  }
 
-	wxASSERT ( rootGrammar->getGrammarType() == type );
+  wxASSERT(rootGrammar->getGrammarType() == type);
 
-	if ( type == Grammar::DTDGrammarType )
-	{
-		DTDGrammar* grammar = ( DTDGrammar* ) rootGrammar;
-		NameIdPoolEnumerator<DTDElementDecl> elemEnum
-				= grammar->getElemEnumerator();
+  if (type == Grammar::DTDGrammarType) {
+    DTDGrammar *grammar = (DTDGrammar *)rootGrammar;
+    NameIdPoolEnumerator< DTDElementDecl > elemEnum =
+        grammar->getElemEnumerator();
 
-		SubstitutionMap substitutions;
-		while ( elemEnum.hasMoreElements() && !TestDestroy() )
-		{
-			const DTDElementDecl& curElem = elemEnum.nextElement();
-			buildElementPrompt ( d, &curElem, substitutions );
-		}
+    SubstitutionMap substitutions;
+    while (elemEnum.hasMoreElements() && !TestDestroy()) {
+      const DTDElementDecl &curElem = elemEnum.nextElement();
+      buildElementPrompt(d, &curElem, substitutions);
+    }
 
-		NameIdPoolEnumerator<DTDEntityDecl>
-				entityEnum = grammar->getEntityEnumerator();
-		while ( entityEnum.hasMoreElements() && !TestDestroy() )
-		{
-			const DTDEntityDecl &entity = entityEnum.nextElement();
-			d->entitySet.insert ( WrapXerces::toString ( entity.getName() ) );
-		}
-	}
-	else
-	{
-		wxASSERT ( type == Grammar::SchemaGrammarType );
+    NameIdPoolEnumerator< DTDEntityDecl > entityEnum =
+        grammar->getEntityEnumerator();
+    while (entityEnum.hasMoreElements() && !TestDestroy()) {
+      const DTDEntityDecl &entity = entityEnum.nextElement();
+      d->entitySet.insert(WrapXerces::toString(entity.getName()));
+    }
+  } else {
+    wxASSERT(type == Grammar::SchemaGrammarType);
 
-		SchemaGrammar* grammar = ( SchemaGrammar* ) rootGrammar;
-		RefHash3KeysIdPoolEnumerator<SchemaElementDecl> elemEnum = grammar->getElemEnumerator();
+    SchemaGrammar *grammar = (SchemaGrammar *)rootGrammar;
+    RefHash3KeysIdPoolEnumerator< SchemaElementDecl > elemEnum =
+        grammar->getElemEnumerator();
 
-		if ( !elemEnum.hasMoreElements() )
-		{
-			return XML_STATUS_ERROR;
-		}
+    if (!elemEnum.hasMoreElements()) {
+      return XML_STATUS_ERROR;
+    }
 
-		SubstitutionMap substitutions;
-		buildSubstitutionMap ( substitutions, *grammar );
+    SubstitutionMap substitutions;
+    buildSubstitutionMap(substitutions, *grammar);
 
-		while ( elemEnum.hasMoreElements() && !TestDestroy() )
-		{
-			const SchemaElementDecl& curElem = elemEnum.nextElement();
-			buildElementPrompt ( d, &curElem, substitutions );
-		}
-	}
+    while (elemEnum.hasMoreElements() && !TestDestroy()) {
+      const SchemaElementDecl &curElem = elemEnum.nextElement();
+      buildElementPrompt(d, &curElem, substitutions);
+    }
+  }
 
-	return TestDestroy() ? XML_STATUS_ERROR : XML_STATUS_OK;
+  return TestDestroy() ? XML_STATUS_ERROR : XML_STATUS_OK;
 }
 
-int XMLCALL XmlPromptGenerator::externalentityrefhandler (
-    XML_Parser p,
-    const XML_Char *context,
-    const XML_Char *base,
-    const XML_Char *systemId,
-    const XML_Char *publicId )
-{
-	// arg is set to user data in c'tor
-	XmlPromptGenerator *pThis = ( XmlPromptGenerator * ) p;
-	PromptGeneratorData *d = pThis->d.get();
+int XMLCALL XmlPromptGenerator::externalentityrefhandler(
+    XML_Parser p, const XML_Char *context, const XML_Char *base,
+    const XML_Char *systemId, const XML_Char *publicId) {
+  // arg is set to user data in c'tor
+  XmlPromptGenerator *pThis = (XmlPromptGenerator *)p;
+  PromptGeneratorData *d = pThis->d.get();
 
-	int ret;
-	std::string buffer;
+  int ret;
+  std::string buffer;
 
-	// auxPath req'd?
-	if ( !systemId && !publicId )
-	{
-		ReadFile::run ( ( const char * ) d->auxPath.mb_str(), buffer );
-		if ( buffer.empty() )
-		{
-			return XML_STATUS_ERROR;
-		}
+  // auxPath req'd?
+  if (!systemId && !publicId) {
+    ReadFile::run((const char *)d->auxPath.mb_str(), buffer);
+    if (buffer.empty()) {
+      return XML_STATUS_ERROR;
+    }
 
-		d->encoding = XmlEncodingHandler::get ( buffer );
-		XML_Parser dtdParser = XML_ExternalEntityParserCreate ( d->p, context, d->encoding.c_str() );
-		if ( pThis->TestDestroy() || !dtdParser )
-			return XML_STATUS_ERROR;
-		XML_SetBase ( dtdParser, d->auxPath.utf8_str() );
-		ret = XML_Parse ( dtdParser, buffer.c_str(), buffer.size(), true );
-		XML_ParserFree ( dtdParser );
-		return ret;
-	}
+    d->encoding = XmlEncodingHandler::get(buffer);
+    XML_Parser dtdParser =
+        XML_ExternalEntityParserCreate(d->p, context, d->encoding.c_str());
+    if (pThis->TestDestroy() || !dtdParser)
+      return XML_STATUS_ERROR;
+    XML_SetBase(dtdParser, d->auxPath.utf8_str());
+    ret = XML_Parse(dtdParser, buffer.c_str(), buffer.size(), true);
+    XML_ParserFree(dtdParser);
+    return ret;
+  }
 
-	// Either EXPAT or Xerces-C++ is capable of parsing DTDs. The advantage
-	// of Xerces-C++ is that it can access DTDs that are on the internet.
+  // Either EXPAT or Xerces-C++ is capable of parsing DTDs. The advantage
+  // of Xerces-C++ is that it can access DTDs that are on the internet.
 #if !PREFER_EXPAT_TO_XERCES_C
 
-	return pThis->parseGrammar
-			( d
-			, wxString::FromUTF8 ( publicId )
-			, wxString::FromUTF8 ( systemId )
-			, d->basePath
-			, Grammar::DTDGrammarType
-			);
+  return pThis->parseGrammar(d, wxString::FromUTF8(publicId),
+                             wxString::FromUTF8(systemId), d->basePath,
+                             Grammar::DTDGrammarType);
 
 #else // !PREFER_EXPAT_TO_XERCES_C
 
-	wxString widePublicId ( publicId, wxConvUTF8 );
-	wxString wideSystemId ( systemId, wxConvUTF8 );
-	CatalogResolver cr;
-	wideSystemId = cr.catalogResolve ( widePublicId, wideSystemId );
+  wxString widePublicId(publicId, wxConvUTF8);
+  wxString wideSystemId(systemId, wxConvUTF8);
+  CatalogResolver cr;
+  wideSystemId = cr.catalogResolve(widePublicId, wideSystemId);
 
-	if ( wideSystemId.empty() )
-	{
-		if ( systemId )
-			wideSystemId = wxString ( systemId, wxConvUTF8 );
-		if ( base )
-		{
-			wxString test = PathResolver::run ( wideSystemId,
-					wxString ( base, wxConvUTF8 ) );
-			if ( !test.empty() )
-			{
-				wideSystemId = test;
-			}
-		}
-	}
+  if (wideSystemId.empty()) {
+    if (systemId)
+      wideSystemId = wxString(systemId, wxConvUTF8);
+    if (base) {
+      wxString test =
+          PathResolver::run(wideSystemId, wxString(base, wxConvUTF8));
+      if (!test.empty()) {
+        wideSystemId = test;
+      }
+    }
+  }
 
-	std::string localName;
-	localName = wideSystemId.mb_str ( wxConvLocal );
-	if ( !localName.empty() )
-	{
-		ReadFile::run ( localName, buffer );
-	}
+  std::string localName;
+  localName = wideSystemId.mb_str(wxConvLocal);
+  if (!localName.empty()) {
+    ReadFile::run(localName, buffer);
+  }
 
-	std::string encoding = XmlEncodingHandler::get ( buffer );
-	XML_Parser dtdParser = XML_ExternalEntityParserCreate ( d->p, context, encoding.c_str() );
-	if ( pThis->TestDestroy() || !dtdParser )
-		return XML_STATUS_ERROR;
+  std::string encoding = XmlEncodingHandler::get(buffer);
+  XML_Parser dtdParser =
+      XML_ExternalEntityParserCreate(d->p, context, encoding.c_str());
+  if (pThis->TestDestroy() || !dtdParser)
+    return XML_STATUS_ERROR;
 
-	XML_SetBase ( dtdParser, wideSystemId.utf8_str() );
+  XML_SetBase(dtdParser, wideSystemId.utf8_str());
 
-	ret = XML_Parse ( dtdParser, buffer.c_str(), buffer.size(), true );
-	XML_ParserFree ( dtdParser );
+  ret = XML_Parse(dtdParser, buffer.c_str(), buffer.size(), true);
+  XML_ParserFree(dtdParser);
 
-	return pThis->TestDestroy() ? XML_STATUS_ERROR : ret;
+  return pThis->TestDestroy() ? XML_STATUS_ERROR : ret;
 
 #endif // PREFER_EXPAT_TO_XERCES_C
 }
 
-void XMLCALL XmlPromptGenerator::entitydeclhandler (
-    void *data,
-    const XML_Char *entityName,
-    int is_parameter_entity,
-    const XML_Char *value,
-    int value_length,
-    const XML_Char *base,
-    const XML_Char *systemId,
-    const XML_Char *publicId,
-    const XML_Char *notationName )
-{
-	// arg is set to user data in c'tor
-	XmlPromptGenerator *pThis = ( XmlPromptGenerator * ) data;
-	PromptGeneratorData *d = pThis->d.get();
+void XMLCALL XmlPromptGenerator::entitydeclhandler(
+    void *data, const XML_Char *entityName, int is_parameter_entity,
+    const XML_Char *value, int value_length, const XML_Char *base,
+    const XML_Char *systemId, const XML_Char *publicId,
+    const XML_Char *notationName) {
+  // arg is set to user data in c'tor
+  XmlPromptGenerator *pThis = (XmlPromptGenerator *)data;
+  PromptGeneratorData *d = pThis->d.get();
 
-	if (
-	    entityName &&
-	    !is_parameter_entity &&
-	    !systemId &&
-	    !publicId &&
-	    !notationName )
-	{
-		d->entitySet.insert ( wxString ( entityName, wxConvUTF8 ) );
-	}
+  if (entityName && !is_parameter_entity && !systemId && !publicId &&
+      !notationName) {
+    d->entitySet.insert(wxString(entityName, wxConvUTF8));
+  }
 
-	if ( pThis->TestDestroy() )
-		XML_StopParser ( d->p, false );
+  if (pThis->TestDestroy())
+    XML_StopParser(d->p, false);
 }
 
-void XmlPromptGenerator::handleSchema (
-    PromptGeneratorData *d,
-    const XML_Char *el,
-    const XML_Char **attr )
-{
-	if ( !d->isRootElement )
-		return;
+void XmlPromptGenerator::handleSchema(PromptGeneratorData *d,
+                                      const XML_Char *el,
+                                      const XML_Char **attr) {
+  if (!d->isRootElement)
+    return;
 
-	wxString publicId, systemId;
+  wxString publicId, systemId;
 
-	// first check for XML Schema association
-	const char **schemaAttr = ( const char ** ) attr; // now redundant; could use attr
-	for ( ; *schemaAttr; schemaAttr += 2 )
-	{
-		// no namespace
-		if ( !strcmp ( *schemaAttr, "xsi:noNamespaceSchemaLocation" ) )
-		{
-			systemId = wxString ( schemaAttr[1], wxConvUTF8 );
-			break;
-		}
-		// with namespace -- check if this works
-		else if ( !strcmp ( *schemaAttr, "xsi:schemaLocation" ) )
-		{
-			wxStringTokenizer tokens ( wxString ( schemaAttr[1], wxConvUTF8 ) );
-			size_t count = tokens.CountTokens();
-			if ( count < 2 )
-				return;
-			// TODO: Support multiple schemas
-			publicId = tokens.GetNextToken();
-			systemId = tokens.GetNextToken();
-		}
-	}
+  // first check for XML Schema association
+  const char **schemaAttr =
+      (const char **)attr; // now redundant; could use attr
+  for (; *schemaAttr; schemaAttr += 2) {
+    // no namespace
+    if (!strcmp(*schemaAttr, "xsi:noNamespaceSchemaLocation")) {
+      systemId = wxString(schemaAttr[1], wxConvUTF8);
+      break;
+    }
+    // with namespace -- check if this works
+    else if (!strcmp(*schemaAttr, "xsi:schemaLocation")) {
+      wxStringTokenizer tokens(wxString(schemaAttr[1], wxConvUTF8));
+      size_t count = tokens.CountTokens();
+      if (count < 2)
+        return;
+      // TODO: Support multiple schemas
+      publicId = tokens.GetNextToken();
+      systemId = tokens.GetNextToken();
+    }
+  }
 
-	int ret = parseGrammar ( d, publicId, systemId, d->basePath
-			, Grammar::SchemaGrammarType );
-	if ( ret != XML_STATUS_OK )
-		return;
+  int ret = parseGrammar(d, publicId, systemId, d->basePath,
+                         Grammar::SchemaGrammarType);
+  if (ret != XML_STATUS_OK)
+    return;
 
-	d->grammarFound = true;
-	XML_StopParser ( d->p, false );
+  d->grammarFound = true;
+  XML_StopParser(d->p, false);
 }
 
-void XmlPromptGenerator::buildElementPrompt (
-    PromptGeneratorData *d,
-    const XMLElementDecl *element,
-    SubstitutionMap &substitutions )
-{
+void XmlPromptGenerator::buildElementPrompt(PromptGeneratorData *d,
+                                            const XMLElementDecl *element,
+                                            SubstitutionMap &substitutions) {
 
-	wxString name;
+  wxString name;
 
-	const QName *qnm = element->getElementName();
-	if ( qnm == NULL )
-		return;
-	name = WrapXerces::toString ( qnm->getRawName() ); // this includes any prefix:localname combinations
-	if ( name.empty() )
-		return;
+  const QName *qnm = element->getElementName();
+  if (qnm == NULL)
+    return;
+  name = WrapXerces::toString(
+      qnm->getRawName()); // this includes any prefix:localname combinations
+  if (name.empty())
+    return;
 
-	const XMLCh* fmtCntModel = element->getFormattedContentModel();
-	if ( fmtCntModel != NULL ) // tbd: this does not yet pick up prefix:localname combinations
-	{
-		wxString structure = WrapXerces::toString ( fmtCntModel );
-		d->elementStructureMap[name] = structure;
-	}
-	const ContentSpecNode *spec = element->getContentSpec();
-	if ( spec != NULL )
-	{
-		getContent ( d->elementMap[name], spec, substitutions );
-	}
+  const XMLCh *fmtCntModel = element->getFormattedContentModel();
+  if (fmtCntModel !=
+      NULL) // tbd: this does not yet pick up prefix:localname combinations
+  {
+    wxString structure = WrapXerces::toString(fmtCntModel);
+    d->elementStructureMap[name] = structure;
+  }
+  const ContentSpecNode *spec = element->getContentSpec();
+  if (spec != NULL) {
+    getContent(d->elementMap[name], spec, substitutions);
+  }
 
-	// fetch attributes
-	if ( !element->hasAttDefs() )
-		return;
+  // fetch attributes
+  if (!element->hasAttDefs())
+    return;
 
-	XMLAttDefList& attIter = element->getAttDefList();
-	unsigned int i = 0;
-	for ( ; i < attIter.getAttDefCount() && !TestDestroy(); i++ )
-	{
-		wxString attribute, attributeValue;
+  XMLAttDefList &attIter = element->getAttDefList();
+  unsigned int i = 0;
+  for (; i < attIter.getAttDefCount() && !TestDestroy(); i++) {
+    wxString attribute, attributeValue;
 
-		XMLAttDef& attr = attIter.getAttDef ( i );
-		XMLAttDef::DefAttTypes ty = attr.getDefaultType();
-		if ( ty == XMLAttDef::Prohibited )
-			continue;
-		attribute = WrapXerces::toString ( attr.getFullName() );
-		if ( attribute.empty() )
-			continue;
+    XMLAttDef &attr = attIter.getAttDef(i);
+    XMLAttDef::DefAttTypes ty = attr.getDefaultType();
+    if (ty == XMLAttDef::Prohibited)
+      continue;
+    attribute = WrapXerces::toString(attr.getFullName());
+    if (attribute.empty())
+      continue;
 
-		// Value
-		attributeValue = WrapXerces::toString ( attr.getValue() );
-		d->attributeMap[name][attribute].insert( attributeValue );
+    // Value
+    attributeValue = WrapXerces::toString(attr.getValue());
+    d->attributeMap[name][attribute].insert(attributeValue);
 
-		if ( ty == XMLAttDef::Required || ty == XMLAttDef::Required_And_Fixed)
-			d->requiredAttributeMap[name].insert ( attribute );
-	}
+    if (ty == XMLAttDef::Required || ty == XMLAttDef::Required_And_Fixed)
+      d->requiredAttributeMap[name].insert(attribute);
+  }
 }
 
-void XmlPromptGenerator::buildSubstitutionMap (
-    SubstitutionMap &substitutions,
-    const SchemaGrammar &grammar )
-{
-	substitutions.clear();
+void XmlPromptGenerator::buildSubstitutionMap(SubstitutionMap &substitutions,
+                                              const SchemaGrammar &grammar) {
+  substitutions.clear();
 
-	RefHash2KeysTableOfEnumerator<ElemVector> list ( grammar.getValidSubstitutionGroups() );
-	if ( !list.hasMoreElements() )
-		return;
+  RefHash2KeysTableOfEnumerator< ElemVector > list(
+      grammar.getValidSubstitutionGroups());
+  if (!list.hasMoreElements())
+    return;
 
-	while ( list.hasMoreElements() && !TestDestroy() )
-	{
-		const ElemVector &elmts = list.nextElement();
+  while (list.hasMoreElements() && !TestDestroy()) {
+    const ElemVector &elmts = list.nextElement();
 
-		const QName *qnm;
-		const SchemaElementDecl *cur, *substitution;
-		substitution = elmts.elementAt ( 0 )->getSubstitutionGroupElem();
+    const QName *qnm;
+    const SchemaElementDecl *cur, *substitution;
+    substitution = elmts.elementAt(0)->getSubstitutionGroupElem();
 
-		size_t index = elmts.size();
-		while ( index-- > 0 )
-		{
-			cur = elmts.elementAt ( index );
-			qnm = cur->getElementName();
-			wxString element = WrapXerces::toString ( qnm->getRawName() );
+    size_t index = elmts.size();
+    while (index-- > 0) {
+      cur = elmts.elementAt(index);
+      qnm = cur->getElementName();
+      wxString element = WrapXerces::toString(qnm->getRawName());
 
-			substitutions[substitution].insert ( element );
-		}
-	}
+      substitutions[substitution].insert(element);
+    }
+  }
 }
 
-void XmlPromptGenerator::getContent (
-    std::set<wxString> &list,
-    const ContentSpecNode *spec,
-    SubstitutionMap &substitutions )
-{
-	if ( TestDestroy() )
-		return;
-	//if ( spec == NULL) return;
+void XmlPromptGenerator::getContent(std::set< wxString > &list,
+                                    const ContentSpecNode *spec,
+                                    SubstitutionMap &substitutions) {
+  if (TestDestroy())
+    return;
+  // if ( spec == NULL) return;
 
-	const QName *qnm = spec->getElement();
-	if ( qnm )
-	{
-		const SchemaElementDecl *elem = (const SchemaElementDecl *)spec->getElementDecl();
-		SubstitutionMap::const_iterator itr = substitutions.find ( elem );
-		if ( itr == substitutions.end() && elem != NULL )
-			itr = substitutions.find ( elem->getSubstitutionGroupElem() );
-		if ( itr != substitutions.end() )
-		{
-			list.insert ( itr->second.begin(), itr->second.end() );
-		}
-		else
-		{
-			wxString element = WrapXerces::toString ( qnm->getRawName() );
-			if ( !element.IsEmpty() )
-				list.insert( element );
-		}
-	}
+  const QName *qnm = spec->getElement();
+  if (qnm) {
+    const SchemaElementDecl *elem =
+        (const SchemaElementDecl *)spec->getElementDecl();
+    SubstitutionMap::const_iterator itr = substitutions.find(elem);
+    if (itr == substitutions.end() && elem != NULL)
+      itr = substitutions.find(elem->getSubstitutionGroupElem());
+    if (itr != substitutions.end()) {
+      list.insert(itr->second.begin(), itr->second.end());
+    } else {
+      wxString element = WrapXerces::toString(qnm->getRawName());
+      if (!element.IsEmpty())
+        list.insert(element);
+    }
+  }
 
-	if ( spec->getFirst() != NULL)
-		getContent( list, spec->getFirst(), substitutions );
-	if ( spec->getSecond() != NULL)
-		getContent( list, spec->getSecond(), substitutions );
+  if (spec->getFirst() != NULL)
+    getContent(list, spec->getFirst(), substitutions);
+  if (spec->getSecond() != NULL)
+    getContent(list, spec->getSecond(), substitutions);
 }
 
-void *XmlPromptGenerator::Entry()
-{
-	if ( TestDestroy() )
-		return NULL;
+void *XmlPromptGenerator::Entry() {
+  if (TestDestroy())
+    return NULL;
 
-	parse ( mBuffer );
+  parse(mBuffer);
 
-	wxCriticalSectionLocker locker ( xmlcopyeditorCriticalSection );
+  wxCriticalSectionLocker locker(xmlcopyeditorCriticalSection);
 
-	if ( !TestDestroy() )
-	{
-		wxNotifyEvent event ( myEVT_NOTIFY_PROMPT_GENERATED );
-		wxPostEvent ( mEventHandler, event );
-	}
+  if (!TestDestroy()) {
+    wxNotifyEvent event(myEVT_NOTIFY_PROMPT_GENERATED);
+    wxPostEvent(mEventHandler, event);
+  }
 
-	return NULL;
+  return NULL;
 }
 
-void XmlPromptGenerator::PendingDelete ()
-{
-	Cancel();
+void XmlPromptGenerator::PendingDelete() {
+  Cancel();
 
-	ThreadReaper::get().add ( this );
+  ThreadReaper::get().add(this);
 }

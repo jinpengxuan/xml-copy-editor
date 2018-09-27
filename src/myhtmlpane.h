@@ -24,24 +24,19 @@
 #include <wx/wx.h>
 #include <wx/wxhtml.h>
 
-class MyHtmlPane : public wxHtmlWindow
-{
-	public:
-		MyHtmlPane (
-		    wxWindow *parent,
-		    wxWindowID id = wxID_ANY,
-		    const wxPoint& position = wxDefaultPosition,
-		    const wxSize& size = wxDefaultSize );
-		void setLastFile ( const wxString &file );
-	private:
-		bool OnCellClicked(
-		    wxHtmlCell *cell,
-		    wxCoord x,
-		    wxCoord y,
-		    const wxMouseEvent& event);
-		DECLARE_EVENT_TABLE()
+class MyHtmlPane : public wxHtmlWindow {
+public:
+  MyHtmlPane(wxWindow *parent, wxWindowID id = wxID_ANY,
+             const wxPoint &position = wxDefaultPosition,
+             const wxSize &size = wxDefaultSize);
+  void setLastFile(const wxString &file);
 
-		wxString mLastFile;
+private:
+  bool OnCellClicked(wxHtmlCell *cell, wxCoord x, wxCoord y,
+                     const wxMouseEvent &event);
+  DECLARE_EVENT_TABLE()
+
+  wxString mLastFile;
 };
 
 #endif

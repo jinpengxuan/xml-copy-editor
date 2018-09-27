@@ -27,7 +27,7 @@
 #include <wx/ipc.h>
 
 #ifdef HAVE_GTK2
-#if wxCHECK_VERSION(2,9,0) // GSocket is defined in wxWidgets 2.8
+#if wxCHECK_VERSION(2, 9, 0) // GSocket is defined in wxWidgets 2.8
 #include <gdk/gdkx.h>
 #else // wxCHECK_VERSION(2,9,0)
 #define GSocket GlibGSocket
@@ -42,7 +42,7 @@
 #define IPC_FRAME_WND _T("FrameWnd")
 #define IPC_NO_FILE _T("[nofile]")
 
-#if wxCHECK_VERSION(2,9,0)
+#if wxCHECK_VERSION(2, 9, 0)
 typedef const void IPCData;
 typedef size_t IPCSize_t;
 #else
@@ -55,55 +55,43 @@ class MyClientConnection;
 extern MyServerConnection *server_connection;
 extern MyClientConnection *client_connection;
 
-class MyServerConnection : public wxConnection
-{
-	public:
-		MyServerConnection();
-		~MyServerConnection();
-		bool OnPoke ( const wxString& topic
-					, const wxString& item
-					, IPCData *data
-					, IPCSize_t size
-					, wxIPCFormat format
-					);
-		bool OnStartAdvise ( const wxString& topic, const wxString& item );
-		IPCData *OnRequest(const wxString& topic, const wxString& item,
-				IPCSize_t *size, wxIPCFormat format = wxIPC_PRIVATE );
+class MyServerConnection : public wxConnection {
+public:
+  MyServerConnection();
+  ~MyServerConnection();
+  bool OnPoke(const wxString &topic, const wxString &item, IPCData *data,
+              IPCSize_t size, wxIPCFormat format);
+  bool OnStartAdvise(const wxString &topic, const wxString &item);
+  IPCData *OnRequest(const wxString &topic, const wxString &item,
+                     IPCSize_t *size, wxIPCFormat format = wxIPC_PRIVATE);
 
-	protected:
+protected:
 #ifdef HAVE_GTK2
-		GdkNativeWindow mFrameWnd;
+  GdkNativeWindow mFrameWnd;
 #else
-		WXWidget mFrameWnd;
+  WXWidget mFrameWnd;
 #endif
 };
 
-class MyClientConnection: public wxConnection
-{
-	public:
-		MyClientConnection();
-		bool OnAdvise ( const wxString& topic
-					, const wxString& item
-					, IPCData *data
-					, IPCSize_t size
-					, wxIPCFormat format );
-		bool OnDisconnect();
+class MyClientConnection : public wxConnection {
+public:
+  MyClientConnection();
+  bool OnAdvise(const wxString &topic, const wxString &item, IPCData *data,
+                IPCSize_t size, wxIPCFormat format);
+  bool OnDisconnect();
 };
 
-class MyClient: public wxClient
-{
-	public:
-		MyClient();
-		wxConnectionBase *OnMakeConnection();
-		bool talkToServer ( int argc, const wxChar * const *argv );
+class MyClient : public wxClient {
+public:
+  MyClient();
+  wxConnectionBase *OnMakeConnection();
+  bool talkToServer(int argc, const wxChar *const *argv);
 };
 
-class MyServer: public wxServer
-{
-	public:
-		MyServer();
-		wxConnectionBase *OnAcceptConnection ( const wxString& topic );
+class MyServer : public wxServer {
+public:
+  MyServer();
+  wxConnectionBase *OnAcceptConnection(const wxString &topic);
 };
 
 #endif
-

@@ -25,66 +25,52 @@
 #include <wx/tipwin.h>
 #include <wx/filepicker.h>
 
-class ExportDialog : public wxDialog
-{
-	public:
-		ExportDialog (
-		    wxWindow *parent,
-		    const wxString& urlParameter,
-            const wxString& folderParameter,
-            bool quiet = true,
-            bool suppressOptional = true,
-            bool html = true,
-            bool epub = true,
-            bool rtf = true,
-            bool doc = true,
-            bool fullDaisy = true,
-            bool mp3Album = true,
-            bool downloadLink = false );
-		~ExportDialog();
-		void OnOk ( wxCommandEvent& e );
-		void OnContextHelp ( wxHelpEvent& e );
-		void OnUpdateOk ( wxUpdateUIEvent& e );
-		void OnFolderBrowse ( wxCommandEvent& e );
-		wxString getUrlString();
-		wxString getFolderString();
-		bool getQuiet();
-		bool getMp3Album();
-		bool getSuppressOptional();
-		bool getHtml();
-        bool getEpub();
-        bool getRtf();
-        bool getDoc();
-        bool getFullDaisy();
+class ExportDialog : public wxDialog {
+public:
+  ExportDialog(wxWindow *parent, const wxString &urlParameter,
+               const wxString &folderParameter, bool quiet = true,
+               bool suppressOptional = true, bool html = true, bool epub = true,
+               bool rtf = true, bool doc = true, bool fullDaisy = true,
+               bool mp3Album = true, bool downloadLink = false);
+  ~ExportDialog();
+  void OnOk(wxCommandEvent &e);
+  void OnContextHelp(wxHelpEvent &e);
+  void OnUpdateOk(wxUpdateUIEvent &e);
+  void OnFolderBrowse(wxCommandEvent &e);
+  wxString getUrlString();
+  wxString getFolderString();
+  bool getQuiet();
+  bool getMp3Album();
+  bool getSuppressOptional();
+  bool getHtml();
+  bool getEpub();
+  bool getRtf();
+  bool getDoc();
+  bool getFullDaisy();
 
-		enum constants
-		{
-			ID_URL,
-			ID_FOLDER,
-			ID_QUIET,
-			ID_SUPPRESS_OPTIONAL,
-			ID_FULL_DAISY,
-			ID_MP3,
-			ID_EPUB,
-			ID_RTF,
-			ID_DOC,
-			ID_HTML
-		};
+  enum constants {
+    ID_URL,
+    ID_FOLDER,
+    ID_QUIET,
+    ID_SUPPRESS_OPTIONAL,
+    ID_FULL_DAISY,
+    ID_MP3,
+    ID_EPUB,
+    ID_RTF,
+    ID_DOC,
+    ID_HTML
+  };
 
-	private:
-		wxString url, folder;
-		wxCheckBox *quietCheckbox,
-		*suppressOptionalCheckbox,
-        *htmlCheckbox,
-        *epubCheckbox,
-        *rtfCheckbox,
-	    *docCheckbox,
-        *fullDaisyCheckbox,
-        *mp3AlbumCheckbox;
-		wxFilePickerCtrl *urlCtrl;
-        wxDirPickerCtrl *dirPicker;
-		bool quiet, suppressOptional, html, epub, rtf, doc, fullDaisy, mp3Album, downloadLink;
-		DECLARE_EVENT_TABLE()
+private:
+  wxString url, folder;
+  wxCheckBox *quietCheckbox, *suppressOptionalCheckbox, *htmlCheckbox,
+      *epubCheckbox, *rtfCheckbox, *docCheckbox, *fullDaisyCheckbox,
+      *mp3AlbumCheckbox;
+  wxFilePickerCtrl *urlCtrl;
+  wxDirPickerCtrl *dirPicker;
+  bool quiet, suppressOptional, html, epub, rtf, doc, fullDaisy, mp3Album,
+      downloadLink;
+  DECLARE_EVENT_TABLE()
 };
 
 #endif

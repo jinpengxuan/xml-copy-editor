@@ -26,34 +26,33 @@
 
 using namespace xercesc;
 
-class Dtd2Schema
-{
+class Dtd2Schema {
 public:
-	Dtd2Schema();
-	virtual ~Dtd2Schema();
+  Dtd2Schema();
+  virtual ~Dtd2Schema();
 
-	const wxString &convert ( const wxString &dtdFile );
-	const wxString &getErrors() { return mErrors; }
+  const wxString &convert(const wxString &dtdFile);
+  const wxString &getErrors() { return mErrors; }
 
-	void reset ();
-
-protected:
-	wxString convertElement ( const DTDElementDecl &element, size_t nIndent );
-	wxString convertContent ( const ContentSpecNode *content, size_t nIndent,
-			const ContentSpecNode *parent = NULL );
-	wxString convertOccurrence (const ContentSpecNode *content );
-	wxString convertAttribute ( const XMLAttDef &att, size_t nIndent,
-			const wxString &element );
-	wxString convertAttType ( const XMLAttDef &att, size_t nIndent );
-	wxString convertAttValue ( const XMLAttDef &att );
-	wxString convertEntity ( const DTDEntityDecl &entity, size_t nIndent );
-	wxString convertNotation ( const XMLNotationDecl &notation, size_t nIndent );
+  void reset();
 
 protected:
-	wxString mSchema;
-	wxString mErrors;
-	wxString mTargetNameSpace;
-	std::map<wxString, wxString> mNameSpaceMap;
+  wxString convertElement(const DTDElementDecl &element, size_t nIndent);
+  wxString convertContent(const ContentSpecNode *content, size_t nIndent,
+                          const ContentSpecNode *parent = NULL);
+  wxString convertOccurrence(const ContentSpecNode *content);
+  wxString convertAttribute(const XMLAttDef &att, size_t nIndent,
+                            const wxString &element);
+  wxString convertAttType(const XMLAttDef &att, size_t nIndent);
+  wxString convertAttValue(const XMLAttDef &att);
+  wxString convertEntity(const DTDEntityDecl &entity, size_t nIndent);
+  wxString convertNotation(const XMLNotationDecl &notation, size_t nIndent);
+
+protected:
+  wxString mSchema;
+  wxString mErrors;
+  wxString mTargetNameSpace;
+  std::map< wxString, wxString > mNameSpaceMap;
 };
 
 #endif /* DTD2SCHEMA_H_ */

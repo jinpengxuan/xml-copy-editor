@@ -28,39 +28,36 @@
 #if !defined(USE_ENCHANT)
 #include "aspell.h"
 #else
-namespace enchant
-{
-	class Broker;
-	class Dict;
-}
+namespace enchant {
+class Broker;
+class Dict;
+} // namespace enchant
 #endif
 
-class WrapAspell
-{
-	public:
-		WrapAspell (
-                   const wxString& lang// = "en_US",
+class WrapAspell {
+public:
+  WrapAspell(const wxString &lang // = "en_US",
 #if !defined(USE_ENCHANT) && defined(__WXMSW__)
-                   , const wxString& aspellDataPathParameter,
-                   const wxString& aspellDictPath
+             ,
+             const wxString &aspellDataPathParameter,
+             const wxString &aspellDictPath
 #endif
-                   );
-		~WrapAspell();
-		inline bool checkWord ( const std::string &s );
-		void checkString (
-		    std::string &s,
-		    std::vector<ContextMatch> &v,
-		    int contextRange );
-		std::string getSuggestion ( std::string &s );
-		std::string getVersion();
-	private:
+  );
+  ~WrapAspell();
+  inline bool checkWord(const std::string &s);
+  void checkString(std::string &s, std::vector< ContextMatch > &v,
+                   int contextRange);
+  std::string getSuggestion(std::string &s);
+  std::string getVersion();
+
+private:
 #ifdef USE_ENCHANT
-		enchant::Broker *spell_broker;
-		enchant::Dict *spell_checker;
+  enchant::Broker *spell_broker;
+  enchant::Dict *spell_checker;
 #else
-		AspellConfig *spell_config;
-		AspellSpeller *spell_checker;
+  AspellConfig *spell_config;
+  AspellSpeller *spell_checker;
 #endif
-		bool checkWord ( const char *s, size_t len );
+  bool checkWord(const char *s, size_t len);
 };
 #endif

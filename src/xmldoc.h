@@ -27,35 +27,28 @@
 #include <wx/filename.h>
 #include "xmlctrl.h"
 
-class XmlDoc : public XmlCtrl
-{
-	public:
-		XmlDoc (
-		    wxWindow *parent,
-		    XmlCtrlProperties properties,
-		    bool *protectTags,
-		    int visibilityState = SHOW_TAGS,//bool hideAttributes,
-		    int type = FILE_TYPE_XML,
-		    wxWindowID id = wxID_ANY,
-		    //const std::string& buffer = DEFAULT_XML_DECLARATION_UTF8,
-		    const char *buffer = NULL,
-		    size_t bufferLen = 0,
-		    const wxString& basePath = wxEmptyString,
-		    const wxString& auxPath = wxEmptyString,
-		    const wxPoint& position = wxDefaultPosition,
-		    const wxSize& size = wxDefaultSize,
-		    long style = 0 );
-		wxString getDirectory();
-		wxString getFullFileName();
-		wxString getShortFileName();
-		const wxDateTime& getLastModified();
-		void setFullFileName ( const wxString &s );
-		void setShortFileName ( const wxString &s );
-		void setLastModified ( const wxDateTime &dt );
-	private:
-		wxFileName mFileName;
-		wxDateTime lastModified;
+class XmlDoc : public XmlCtrl {
+public:
+  XmlDoc(wxWindow *parent, XmlCtrlProperties properties, bool *protectTags,
+         int visibilityState = SHOW_TAGS, // bool hideAttributes,
+         int type = FILE_TYPE_XML, wxWindowID id = wxID_ANY,
+         // const std::string& buffer = DEFAULT_XML_DECLARATION_UTF8,
+         const char *buffer = NULL, size_t bufferLen = 0,
+         const wxString &basePath = wxEmptyString,
+         const wxString &auxPath = wxEmptyString,
+         const wxPoint &position = wxDefaultPosition,
+         const wxSize &size = wxDefaultSize, long style = 0);
+  wxString getDirectory();
+  wxString getFullFileName();
+  wxString getShortFileName();
+  const wxDateTime &getLastModified();
+  void setFullFileName(const wxString &s);
+  void setShortFileName(const wxString &s);
+  void setLastModified(const wxDateTime &dt);
+
+private:
+  wxFileName mFileName;
+  wxDateTime lastModified;
 };
 
 #endif
-

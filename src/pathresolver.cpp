@@ -22,40 +22,34 @@
 #include "pathresolver.h"
 #include <wx/stdpaths.h>
 
-wxString PathResolver::run ( const wxString& path, const wxString& anchor )
-{
-	if ( path.empty() ) // no hope for empty paths
-		return wxEmptyString;
-	
-	wxFileName pathObject ( path );
-	if ( pathObject.IsAbsolute() || path.Contains ( _T ( "http://" ) ) )
-		return path;
+wxString PathResolver::run(const wxString &path, const wxString &anchor) {
+  if (path.empty()) // no hope for empty paths
+    return wxEmptyString;
 
-	// check anchor
-	wxString myAnchor;
-	myAnchor = anchor;
-	wxFileName anchorObject ( myAnchor );
-	if ( myAnchor.empty() )
-	{
-		myAnchor = wxFileName::GetCwd();
-	}
-	else if ( !anchorObject.IsDir() )
-	{
-		myAnchor = anchorObject.GetPath();
-	}
+  wxFileName pathObject(path);
+  if (pathObject.IsAbsolute() || path.Contains(_T ( "http://" )))
+    return path;
 
-	pathObject.MakeAbsolute ( myAnchor );
+  // check anchor
+  wxString myAnchor;
+  myAnchor = anchor;
+  wxFileName anchorObject(myAnchor);
+  if (myAnchor.empty()) {
+    myAnchor = wxFileName::GetCwd();
+  } else if (!anchorObject.IsDir()) {
+    myAnchor = anchorObject.GetPath();
+  }
 
-	return pathObject.GetFullPath();
+  pathObject.MakeAbsolute(myAnchor);
+
+  return pathObject.GetFullPath();
 }
 
-std::string PathResolver::run (
-    const std::string& path,
-    const std::string& anchor )
-{
-	wxString widePath, wideAnchor;
-	widePath = wxString ( path.c_str(), wxConvUTF8, path.size() );
-	wideAnchor = wxString ( anchor.c_str(), wxConvUTF8, anchor.size() );
-	wxString wideReturn = PathResolver::run ( widePath, wideAnchor );
-	return ( const char * ) wideReturn.mb_str ( wxConvUTF8 );
+std::string PathResolver::run(const std::string &path,
+                              const std::string &anchor) {
+  wxString widePath, wideAnchor;
+  widePath = wxString(path.c_str(), wxConvUTF8, path.size());
+  wideAnchor = wxString(anchor.c_str(), wxConvUTF8, anchor.size());
+  wxString wideReturn = PathResolver::run(widePath, wideAnchor);
+  return (const char *)wideReturn.mb_str(wxConvUTF8);
 }

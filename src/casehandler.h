@@ -25,13 +25,12 @@
 
 using namespace std;
 
-class CaseHandler
-{
-	public:
-		CaseHandler();
-		~CaseHandler();
-		static string lowerCase ( string &s );
-		static void adjustCase ( string &buffer, string &comparison );
+class CaseHandler {
+public:
+  CaseHandler();
+  ~CaseHandler();
+  static string lowerCase(string &s);
+  static void adjustCase(string &buffer, string &comparison);
 };
 
 #endif

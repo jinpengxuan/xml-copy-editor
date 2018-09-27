@@ -29,7 +29,7 @@
 #include <utility>
 #include <boost/utility.hpp>
 
-#if !wxCHECK_GCC_VERSION(4,7)
+#if !wxCHECK_GCC_VERSION(4, 7)
 #define XERCES_TMPLSINC
 #endif
 
@@ -40,108 +40,88 @@
 
 using namespace xercesc;
 
-class MySAX2Handler : public DefaultHandler
-{
-	public:
-		MySAX2Handler()
-		{
-			mEOL = _T("\n");
-			reset();
-		}
-		void error ( const SAXParseException& e )
-		{
-			logError ( _("Error"), wxLOG_Error, e );
-			throw e;
-		}
-		void warning ( const SAXParseException& e )
-		{
-			logError ( _("Warning"), wxLOG_Warning, e );
-		}
-		void fatalError ( const SAXParseException& e )
-		{
-			logError ( _("FatalError"), wxLOG_FatalError, e );
-			throw e;
-		}
-		void reset()
-		{
-			mErrors.clear();
-			mErrorPosition = std::make_pair ( 1, 1 );
-			mLevel = wxLOG_Max;
-		}
-		const wxString &getErrors() const
-		{
-			return mErrors;
-		}
-		wxString &getErrors()
-		{
-			return mErrors;
-		}
-		const std::pair<int, int> &getErrorPosition() const
-		{
-			return mErrorPosition;
-		}
-		void logError ( const wxString &type, wxLogLevel level,
-				const SAXParseException& e );
-		void setEOL ( const wxChar *eol )
-		{
-			mEOL = eol;
-		}
-	protected:
-		wxString mErrors;
-		std::pair<int, int> mErrorPosition;
-		wxLogLevel mLevel;
-		wxString mEOL;
+class MySAX2Handler : public DefaultHandler {
+public:
+  MySAX2Handler() {
+    mEOL = _T("\n");
+    reset();
+  }
+  void error(const SAXParseException &e) {
+    logError(_("Error"), wxLOG_Error, e);
+    throw e;
+  }
+  void warning(const SAXParseException &e) {
+    logError(_("Warning"), wxLOG_Warning, e);
+  }
+  void fatalError(const SAXParseException &e) {
+    logError(_("FatalError"), wxLOG_FatalError, e);
+    throw e;
+  }
+  void reset() {
+    mErrors.clear();
+    mErrorPosition = std::make_pair(1, 1);
+    mLevel = wxLOG_Max;
+  }
+  const wxString &getErrors() const { return mErrors; }
+  wxString &getErrors() { return mErrors; }
+  const std::pair< int, int > &getErrorPosition() const {
+    return mErrorPosition;
+  }
+  void logError(const wxString &type, wxLogLevel level,
+                const SAXParseException &e);
+  void setEOL(const wxChar *eol) { mEOL = eol; }
+
+protected:
+  wxString mErrors;
+  std::pair< int, int > mErrorPosition;
+  wxLogLevel mLevel;
+  wxString mEOL;
 };
 
-class WrapXerces : private boost::noncopyable
-{
-	public:
-		static void Init ( bool enableNetAccess ) throw ();
+class WrapXerces : private boost::noncopyable {
+public:
+  static void Init(bool enableNetAccess) throw();
 
-		WrapXerces();
-		virtual ~WrapXerces();
-		// Returns true if the file is valid. But there can be warnings
-		bool validate ( const wxString &fileName );
-		// Returns true if the content is valid. But there can be warnings
-		bool validateMemory ( const char *utf8Buffer, size_t len,
-		    const wxString &fileName, wxThread *thread = NULL,
-		    bool forceGrammarCheck = true, /* Must specify a grammar */
-		    const wxChar *messageEOL = _T("[br]") );
-		const wxString &getLastError()
-		{
-			return mySAX2Handler.getErrors();
-		}
-		const std::pair<int, int> &getErrorPosition()
-		{
-			return mySAX2Handler.getErrorPosition();
-		}
+  WrapXerces();
+  virtual ~WrapXerces();
+  // Returns true if the file is valid. But there can be warnings
+  bool validate(const wxString &fileName);
+  // Returns true if the content is valid. But there can be warnings
+  bool
+  validateMemory(const char *utf8Buffer, size_t len, const wxString &fileName,
+                 wxThread *thread = NULL,
+                 bool forceGrammarCheck = true, /* Must specify a grammar */
+                 const wxChar *messageEOL = _T("[br]"));
+  const wxString &getLastError() { return mySAX2Handler.getErrors(); }
+  const std::pair< int, int > &getErrorPosition() {
+    return mySAX2Handler.getErrorPosition();
+  }
 
-		static wxString toString ( const XMLCh *str );
-		// Convert Unicode string to const XMLCh *
-//#if wxCHECK_VERSION(2,9,0)
-//		static wxCharTypeBuffer<XMLCh> toString ( const wxString &str );
-//#else
-		static wxMemoryBuffer toString ( const wxString &str );
-//#endif
-		// Returns original value
-		static bool enableNetwork ( bool enable = true );
+  static wxString toString(const XMLCh *str);
+  // Convert Unicode string to const XMLCh *
+  //#if wxCHECK_VERSION(2,9,0)
+  //		static wxCharTypeBuffer<XMLCh> toString ( const wxString &str );
+  //#else
+  static wxMemoryBuffer toString(const wxString &str);
+  //#endif
+  // Returns original value
+  static bool enableNetwork(bool enable = true);
 
-		static xercesc::InputSource *resolveEntity (
-			const wxString &publicId,
-			const wxString &systemId,
-			const wxString &fileName );
+  static xercesc::InputSource *resolveEntity(const wxString &publicId,
+                                             const wxString &systemId,
+                                             const wxString &fileName);
 
-		static DOMElement *getFirstElementChild ( const DOMElement &element );
-		static DOMElement *getFirstElementChild ( const DOMNode *n );
-		static DOMElement *getNextElementSibling ( const DOMElement &element );
-		static DOMNode *getNextLogicalSibling ( const DOMNode* n );
+  static DOMElement *getFirstElementChild(const DOMElement &element);
+  static DOMElement *getFirstElementChild(const DOMNode *n);
+  static DOMElement *getNextElementSibling(const DOMElement &element);
+  static DOMNode *getNextLogicalSibling(const DOMNode *n);
 
-	private:
-		static const wxMBConv &getMBConv();
-		static XMLNetAccessor *mOriginalNetAccessor;
+private:
+  static const wxMBConv &getMBConv();
+  static XMLNetAccessor *mOriginalNetAccessor;
 
-		XercesCatalogResolver *catalogResolver;
-		MySAX2Handler mySAX2Handler;
+  XercesCatalogResolver *catalogResolver;
+  MySAX2Handler mySAX2Handler;
 };
 
 #endif

@@ -30,42 +30,31 @@
 
 using namespace std;
 
-class WrapRegex : private boost::noncopyable
-{
-	public:
-		WrapRegex (
-		    const string& pattern,
-		    bool matchCase,
-		    const string& replaceParameter = "",
-		    const int arrayLengthParameter = 60 );
-		virtual ~WrapRegex();
-		string replaceGlobal (
-		    const string& buffer,
-		    int *matchCount );
-		int matchPatternGlobal (
-		    string &buffer,
-		    vector<ContextMatch> &match_vector,
-		    unsigned elementCount,
-		    int context = 0 );
-	private:
-		string replace;
-		const int arrayLength;
-		int returnValue;
-		bool disabled;
+class WrapRegex : private boost::noncopyable {
+public:
+  WrapRegex(const string &pattern, bool matchCase,
+            const string &replaceParameter = "",
+            const int arrayLengthParameter = 60);
+  virtual ~WrapRegex();
+  string replaceGlobal(const string &buffer, int *matchCount);
+  int matchPatternGlobal(string &buffer, vector< ContextMatch > &match_vector,
+                         unsigned elementCount, int context = 0);
 
-		pcre *patternStructure;
-		pcre_extra *patternExtraStructure;
-		int *matchArray;
+private:
+  string replace;
+  const int arrayLength;
+  int returnValue;
+  bool disabled;
 
-		string getInterpolatedString_ ( const char *buffer,
-		    const char *source );
-		string getSubpattern_ ( const char *buffer, unsigned subpattern );
-		int matchPatternGlobal_ (
-		    const char *buffer,
-		    size_t buflen,
-		    vector<ContextMatch> &matchVector,
-		    unsigned elementCount,
-		    int context );
+  pcre *patternStructure;
+  pcre_extra *patternExtraStructure;
+  int *matchArray;
+
+  string getInterpolatedString_(const char *buffer, const char *source);
+  string getSubpattern_(const char *buffer, unsigned subpattern);
+  int matchPatternGlobal_(const char *buffer, size_t buflen,
+                          vector< ContextMatch > &matchVector,
+                          unsigned elementCount, int context);
 };
 
 #endif

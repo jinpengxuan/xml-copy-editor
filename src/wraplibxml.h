@@ -39,88 +39,60 @@
 #include <wx/wx.h>
 #include <wx/filename.h>
 
-class WrapLibxml
-{
-	public:
-		static void Init ( const wxString &catalogPath = _T ( "catalog" ) ) throw();
+class WrapLibxml {
+public:
+  static void Init(const wxString &catalogPath = _T ( "catalog" )) throw();
 
-		WrapLibxml ( bool netAccessParameter = false );
-		virtual ~WrapLibxml();
-		bool validate (
-		    const std::string &utf8DocBuf,
-		    const wxString &docFileName );
-		bool validateRelaxNG (
-		    const wxString &schemaUrl,
-		    const std::string &utf8DocBuf,
-		    const wxString &docFileName );
-		bool validateW3CSchema (
-		    const wxString &schemaFileName,
-		    const std::string &utf8DocBuf,
-		    const wxString &docFileName );
-		bool parse (
-		    const std::string &utf8DocBuf,
-		    const wxString &docFileName,
-		    bool indent = false,
-		    bool resolveEntities = false );
-		bool parse (
-		    const wxString &fileName,
-		    bool indent = false,
-		    bool resolveEntities = false );
-		bool parse (
-		    const char *utf8DocBuf,
-		    size_t utf8DocBufSize,
-		    const wxString &fileName,
-		    bool indent = false,
-		    bool resolveEntities = false );
-		bool bufferWellFormed ( const std::string& utf8Buffer );
-		bool xpath (
-		    const wxString &xpath,
-		    const std::string &utf8DocBuf,
-		    const wxString &docFileName );
-		std::string dumpXPathObject ( xmlXPathObjectPtr obj );
-		bool xslt (
-		    const wxString &styleFileName,
-		    const std::string &utf8DocBuf,
-		    const wxString &docFileName );
-		bool xslt (
-		    const wxString &styleFileName,
-		    const wxString &docFileName );
-		bool xslt (
-		    const wxString &styleFileName,
-		    const char *utf8DocBuf,
-		    size_t utf8DocBufSize,
-		    const wxString &docFileName );
-		wxString getLastError();
-		std::pair<int, int> getErrorPosition();
-		std::string getOutput();
-		int saveEncoding (
-		    const std::string &utf8Buffer,
-		    const wxString &fileNameSource,
-		    const wxString &fileNameDestination,
-		    wxMemoryBuffer *outputBuffer, /* Override fileNameDestination*/
-		    const wxString &encoding );
-		int saveEncoding (
-		    const wxString &fileNameSource,
-		    const wxString &fileNameDestination,
-		    const wxString &encoding );
-		int saveEncoding (
-		    const char *utf8Buffer,
-		    size_t utf8BufferSize,
-		    const wxString &fileNameSource,
-		    const wxString &fileNameDestination,
-		    wxMemoryBuffer *outputBuffer, /* Override fileNameDestination*/
-		    const wxString &encoding );
-		wxString catalogResolve (
-		    const wxString &publicId,
-		    const wxString &systemId );
+  WrapLibxml(bool netAccessParameter = false);
+  virtual ~WrapLibxml();
+  bool validate(const std::string &utf8DocBuf, const wxString &docFileName);
+  bool validateRelaxNG(const wxString &schemaUrl, const std::string &utf8DocBuf,
+                       const wxString &docFileName);
+  bool validateW3CSchema(const wxString &schemaFileName,
+                         const std::string &utf8DocBuf,
+                         const wxString &docFileName);
+  bool parse(const std::string &utf8DocBuf, const wxString &docFileName,
+             bool indent = false, bool resolveEntities = false);
+  bool parse(const wxString &fileName, bool indent = false,
+             bool resolveEntities = false);
+  bool parse(const char *utf8DocBuf, size_t utf8DocBufSize,
+             const wxString &fileName, bool indent = false,
+             bool resolveEntities = false);
+  bool bufferWellFormed(const std::string &utf8Buffer);
+  bool xpath(const wxString &xpath, const std::string &utf8DocBuf,
+             const wxString &docFileName);
+  std::string dumpXPathObject(xmlXPathObjectPtr obj);
+  bool xslt(const wxString &styleFileName, const std::string &utf8DocBuf,
+            const wxString &docFileName);
+  bool xslt(const wxString &styleFileName, const wxString &docFileName);
+  bool xslt(const wxString &styleFileName, const char *utf8DocBuf,
+            size_t utf8DocBufSize, const wxString &docFileName);
+  wxString getLastError();
+  std::pair< int, int > getErrorPosition();
+  std::string getOutput();
+  int saveEncoding(
+      const std::string &utf8Buffer, const wxString &fileNameSource,
+      const wxString &fileNameDestination,
+      wxMemoryBuffer *outputBuffer, /* Override fileNameDestination*/
+      const wxString &encoding);
+  int saveEncoding(const wxString &fileNameSource,
+                   const wxString &fileNameDestination,
+                   const wxString &encoding);
+  int saveEncoding(
+      const char *utf8Buffer, size_t utf8BufferSize,
+      const wxString &fileNameSource, const wxString &fileNameDestination,
+      wxMemoryBuffer *outputBuffer, /* Override fileNameDestination*/
+      const wxString &encoding);
+  wxString catalogResolve(const wxString &publicId, const wxString &systemId);
 
-		static wxString FileNameToURL ( const wxString &fileName );
-		static xmlChar *xmlFileNameToURL ( const wxString &fileName );
-		static wxFileName URLToFileName ( const wxString &url );
-	private:
-		bool netAccess;
-		std::string output;
-		wxString nonParserError;
+  static wxString FileNameToURL(const wxString &fileName);
+  static xmlChar *xmlFileNameToURL(const wxString &fileName);
+  static wxFileName URLToFileName(const wxString &url);
+
+private:
+  bool netAccess;
+  std::string output;
+  wxString nonParserError;
 };
 
 #endif

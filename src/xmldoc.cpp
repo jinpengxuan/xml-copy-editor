@@ -21,70 +21,30 @@
 #include <wx/filename.h>
 #include "xmldoc.h"
 
-XmlDoc::XmlDoc (
-    wxWindow *parent,
-    XmlCtrlProperties properties,
-    bool *protectTags,
-    int visibilityState,
-    int type,
-    wxWindowID id,
-    //const std::string& buffer,
-    const char *buffer,
-    size_t bufferLen,
-    const wxString& basePath,
-    const wxString& auxPath,
-    const wxPoint &position,
-    const wxSize& size,
-    long style )
-		: XmlCtrl (
-		    parent,
-		    properties,
-		    protectTags,
-		    visibilityState,
-		    type,
-		    id,
-		    buffer,
-		    bufferLen, // new
-		    basePath,
-		    auxPath,
-		    position,
-		    size,
-		    style )
-{ }
+XmlDoc::XmlDoc(wxWindow *parent, XmlCtrlProperties properties,
+               bool *protectTags, int visibilityState, int type, wxWindowID id,
+               // const std::string& buffer,
+               const char *buffer, size_t bufferLen, const wxString &basePath,
+               const wxString &auxPath, const wxPoint &position,
+               const wxSize &size, long style)
+    : XmlCtrl(parent, properties, protectTags, visibilityState, type, id,
+              buffer,
+              bufferLen, // new
+              basePath, auxPath, position, size, style) {}
 
-wxString XmlDoc::getDirectory()
-{
-	return mFileName.GetPath();
+wxString XmlDoc::getDirectory() { return mFileName.GetPath(); }
+
+wxString XmlDoc::getFullFileName() { return mFileName.GetFullPath(); }
+
+wxString XmlDoc::getShortFileName() { return mFileName.GetFullName(); }
+
+const wxDateTime &XmlDoc::getLastModified() { return lastModified; }
+
+void XmlDoc::setFullFileName(const wxString &s) {
+  mFileName.Assign(s);
+  mFileName.Normalize();
 }
 
-wxString XmlDoc::getFullFileName()
-{
-	return mFileName.GetFullPath();
-}
+void XmlDoc::setShortFileName(const wxString &s) { mFileName.SetFullName(s); }
 
-wxString XmlDoc::getShortFileName()
-{
-	return mFileName.GetFullName();
-}
-
-const wxDateTime& XmlDoc::getLastModified()
-{
-	return lastModified;
-}
-
-void XmlDoc::setFullFileName ( const wxString &s )
-{
-	mFileName.Assign ( s );
-	mFileName.Normalize();
-}
-
-void XmlDoc::setShortFileName ( const wxString &s )
-{
-	mFileName.SetFullName ( s );
-}
-
-void XmlDoc::setLastModified ( const wxDateTime& dt )
-{
-	lastModified = dt;
-}
-
+void XmlDoc::setLastModified(const wxDateTime &dt) { lastModified = dt; }

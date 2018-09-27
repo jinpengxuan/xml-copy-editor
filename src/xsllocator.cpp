@@ -25,49 +25,38 @@
 #include <expat.h>
 #include "xsllocator.h"
 
-XslLocator::XslLocator ( const char *encoding )
-    : WrapExpat ( encoding )
-    , d ( new XslLocatorData() )
-{
-	d->parser = p;
-	XML_SetUserData ( p, d.get() );
-	XML_SetProcessingInstructionHandler ( p, processingInstructionHandler );
+XslLocator::XslLocator(const char *encoding)
+    : WrapExpat(encoding), d(new XslLocatorData()) {
+  d->parser = p;
+  XML_SetUserData(p, d.get());
+  XML_SetProcessingInstructionHandler(p, processingInstructionHandler);
 }
 
-XslLocator::~XslLocator()
-{}
+XslLocator::~XslLocator() {}
 
-void XMLCALL XslLocator::processingInstructionHandler (
-    void *userData,
-    const XML_Char *target,
-    const XML_Char *data )
-{
-	XslLocatorData *d;
-	d = ( XslLocatorData * ) userData;
+void XMLCALL XslLocator::processingInstructionHandler(void *userData,
+                                                      const XML_Char *target,
+                                                      const XML_Char *data) {
+  XslLocatorData *d;
+  d = (XslLocatorData *)userData;
 
-	if ( strcmp ( target, "xml-stylesheet" ) )
-		return;
+  if (strcmp(target, "xml-stylesheet"))
+    return;
 
-	const char *value, *iterator;
-	value = strstr ( ( const char * ) data, "href=" );
-	if ( !value || strlen ( value ) < 7 )
-		return;
-	value += 6;
-	iterator = value;
-	for ( iterator = value; *iterator; ++iterator )
-	{
-		if ( *iterator == '"' || *iterator == '\'' )
-		{
-			break;
-		}
-	}
+  const char *value, *iterator;
+  value = strstr((const char *)data, "href=");
+  if (!value || strlen(value) < 7)
+    return;
+  value += 6;
+  iterator = value;
+  for (iterator = value; *iterator; ++iterator) {
+    if (*iterator == '"' || *iterator == '\'') {
+      break;
+    }
+  }
 
-	d->xslLocation.assign( value, iterator - value );
-	XML_StopParser ( d->parser, false );
+  d->xslLocation.assign(value, iterator - value);
+  XML_StopParser(d->parser, false);
 }
 
-
-std::string XslLocator::getXslLocation()
-{
-	return d->xslLocation;
-}
+std::string XslLocator::getXslLocation() { return d->xslLocation; }

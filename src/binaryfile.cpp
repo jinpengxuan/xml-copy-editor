@@ -21,54 +21,44 @@
 #include "binaryfile.h"
 #include <wx/wfstream.h>
 
-BinaryFile::BinaryFile ( const wxString &fname ) : m_data ( 0 ), m_dataLen ( 0 )
-{
-	wxFileInputStream stream ( fname );
-	size_t lSize;
-	char *buffer;
+BinaryFile::BinaryFile(const wxString &fname) : m_data(0), m_dataLen(0) {
+  wxFileInputStream stream(fname);
+  size_t lSize;
+  char *buffer;
 
-	if ( !stream.IsOk() )
-	{
-		return;
-	}
+  if (!stream.IsOk()) {
+    return;
+  }
 
-	lSize = stream.GetSize();
+  lSize = stream.GetSize();
 
-	// allocate memory to contain the whole file:
+  // allocate memory to contain the whole file:
 
-	//buffer = new char[lSize]; // for some reason this is much slower than malloc
-	buffer = ( char* ) malloc ( sizeof ( char ) *lSize );
-	if ( buffer == NULL )
-	{
-		return;
-	}
+  // buffer = new char[lSize]; // for some reason this is much slower than
+  // malloc
+  buffer = (char *)malloc(sizeof(char) * lSize);
+  if (buffer == NULL) {
+    return;
+  }
 
-	// copy the file into the buffer:
-	stream.Read ( buffer, lSize );
-	if ( stream.LastRead() != lSize )
-	{
-		if ( !stream.Eof() )
-			return;
-	}
+  // copy the file into the buffer:
+  stream.Read(buffer, lSize);
+  if (stream.LastRead() != lSize) {
+    if (!stream.Eof())
+      return;
+  }
 
-	/* the whole file is now loaded in the memory buffer. */
+  /* the whole file is now loaded in the memory buffer. */
 
-	m_data = buffer;
-	m_dataLen = lSize;
+  m_data = buffer;
+  m_dataLen = lSize;
 }
 
-BinaryFile::~BinaryFile()
-{
-	//delete[] m_data;
-	free ( m_data );
+BinaryFile::~BinaryFile() {
+  // delete[] m_data;
+  free(m_data);
 }
 
-const char *BinaryFile::getData()
-{
-	return ( const char * ) m_data;
-}
+const char *BinaryFile::getData() { return (const char *)m_data; }
 
-size_t BinaryFile::getDataLen()
-{
-	return m_dataLen;
-}
+size_t BinaryFile::getDataLen() { return m_dataLen; }

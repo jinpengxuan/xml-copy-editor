@@ -35,62 +35,50 @@
 #include "wrapaspell.h"
 #include "casehandler.h"
 
-enum {
-		HS_TYPE_SPELL = 0,
-		HS_TYPE_STYLE
-};
+enum { HS_TYPE_SPELL = 0, HS_TYPE_STYLE };
 
-class HouseStyle
-{
-	public:
-		HouseStyle (
-		    int type,
-		    const std::string& bufferParameter,
-		    const wxString& ruleDirectoryParameter,
-		    const wxString& ruleFileParameter,
-		    const wxString& filterDirectoryParameter,
-		    const wxString& filterFileParameter,
-		    const wxString& pathSeparatorParameter,
+class HouseStyle {
+public:
+  HouseStyle(int type, const std::string &bufferParameter,
+             const wxString &ruleDirectoryParameter,
+             const wxString &ruleFileParameter,
+             const wxString &filterDirectoryParameter,
+             const wxString &filterFileParameter,
+             const wxString &pathSeparatorParameter,
 #ifdef __WXMSW__
-		    const wxString& aspellDataPathParameter,
-		    const wxString& aspellDictPathParameter,
+             const wxString &aspellDataPathParameter,
+             const wxString &aspellDictPathParameter,
 #endif
-		    int contextRangeParameter );
-		~HouseStyle();
-		bool createReport();
-		const wxString &getLastError();
-		const std::vector<ContextMatch> &getMatchVector();
-	private:
-		int type;
-		std::string buffer;
-		wxString ruleDirectory
-		       , ruleFile
-		       , filterDirectory
-		       , filterFile
-		       , pathSeparator
-		       , error
+             int contextRangeParameter);
+  ~HouseStyle();
+  bool createReport();
+  const wxString &getLastError();
+  const std::vector< ContextMatch > &getMatchVector();
+
+private:
+  int type;
+  std::string buffer;
+  wxString ruleDirectory, ruleFile, filterDirectory, filterFile, pathSeparator,
+      error
 #ifdef __WXMSW__
-               , aspellDataPath
-               , aspellDictPath
+      ,
+      aspellDataPath, aspellDictPath
 #endif
-               ;
-		int contextRange;
-		boost::shared_ptr<std::vector<boost::shared_ptr<Rule> > > ruleVector;
-		std::map<std::string, std::map<std::string, std::set<std::string> > >
-		    filterMap;
-		std::vector<ContextMatch> matchVector;
-		boost::shared_ptr<StringSet<char> > dictionary, passiveDictionary;
-		void collectFilter (
-		    const std::string& fileName,
-		    std::set<std::string>& excludeSet,
-		    int *filterCount );
-		void collectRules (
-		    const std::string& fileName,
-		    boost::shared_ptr<std::vector<boost::shared_ptr<Rule> > > ruleVector,
-		    std::set<string>& excludeSet,
-		    int *ruleCount );
-		int updateFilter();
-		int updateRules();
+      ;
+  int contextRange;
+  boost::shared_ptr< std::vector< boost::shared_ptr< Rule > > > ruleVector;
+  std::map< std::string, std::map< std::string, std::set< std::string > > >
+      filterMap;
+  std::vector< ContextMatch > matchVector;
+  boost::shared_ptr< StringSet< char > > dictionary, passiveDictionary;
+  void collectFilter(const std::string &fileName,
+                     std::set< std::string > &excludeSet, int *filterCount);
+  void collectRules(
+      const std::string &fileName,
+      boost::shared_ptr< std::vector< boost::shared_ptr< Rule > > > ruleVector,
+      std::set< string > &excludeSet, int *ruleCount);
+  int updateFilter();
+  int updateRules();
 };
 
 #endif

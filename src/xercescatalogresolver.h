@@ -30,18 +30,12 @@
 
 using namespace xercesc;
 
-class XercesCatalogResolver : public EntityResolver, public CatalogResolver
-{
-	public:
-		XercesCatalogResolver()
-		{
-		}
-		~XercesCatalogResolver()
-		{
-		}
-		virtual InputSource *resolveEntity (
-			const XMLCh * const publicID,
-			const XMLCh* const systemId );
+class XercesCatalogResolver : public EntityResolver, public CatalogResolver {
+public:
+  XercesCatalogResolver() {}
+  ~XercesCatalogResolver() {}
+  virtual InputSource *resolveEntity(const XMLCh *const publicID,
+                                     const XMLCh *const systemId);
 };
 
 #endif

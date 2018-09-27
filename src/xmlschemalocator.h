@@ -26,24 +26,21 @@
 #include <memory>
 #include "wrapexpat.h"
 
-struct SchemaLocatorData
-{
-	std::string schemaLocation;
-	XML_Parser parser;
+struct SchemaLocatorData {
+  std::string schemaLocation;
+  XML_Parser parser;
 };
 
-class XmlSchemaLocator : public WrapExpat
-{
-	public:
-		XmlSchemaLocator ( const char *encoding );
-		virtual ~XmlSchemaLocator();
-		std::string getSchemaLocation();
-	private:
-		std::auto_ptr<SchemaLocatorData> d;
-		static void XMLCALL starthandler (
-		    void *data,
-		    const XML_Char *el,
-		    const XML_Char **attr );
+class XmlSchemaLocator : public WrapExpat {
+public:
+  XmlSchemaLocator(const char *encoding);
+  virtual ~XmlSchemaLocator();
+  std::string getSchemaLocation();
+
+private:
+  std::auto_ptr< SchemaLocatorData > d;
+  static void XMLCALL starthandler(void *data, const XML_Char *el,
+                                   const XML_Char **attr);
 };
 
 #endif

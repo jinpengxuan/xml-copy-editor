@@ -25,21 +25,20 @@
 #include <vector>
 #include <boost/shared_ptr.hpp>
 
-class ThreadReaper
-{
+class ThreadReaper {
 protected:
-	ThreadReaper();
-	virtual ~ThreadReaper();
+  ThreadReaper();
+  virtual ~ThreadReaper();
 
 public:
-	static ThreadReaper &get();
+  static ThreadReaper &get();
 
-	void add ( wxThread *thread );
-	// Kills all threads in the list.
-	void clear();
+  void add(wxThread *thread);
+  // Kills all threads in the list.
+  void clear();
 
 protected:
-	std::vector<boost::shared_ptr<wxThread> > mList;
+  std::vector< boost::shared_ptr< wxThread > > mList;
 };
 
 #endif /* THREADREAPER_H_ */

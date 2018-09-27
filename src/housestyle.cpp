@@ -23,326 +23,285 @@
 #include "housestyle.h"
 #include "readfile.h"
 
-HouseStyle::HouseStyle (
-    int typeParameter,
-    const std::string& bufferParameter,
-    const wxString& ruleDirectoryParameter,
-    const wxString& ruleFileParameter,
-    const wxString& filterDirectoryParameter,
-    const wxString& filterFileParameter,
-    const wxString& pathSeparatorParameter,
+HouseStyle::HouseStyle(int typeParameter, const std::string &bufferParameter,
+                       const wxString &ruleDirectoryParameter,
+                       const wxString &ruleFileParameter,
+                       const wxString &filterDirectoryParameter,
+                       const wxString &filterFileParameter,
+                       const wxString &pathSeparatorParameter,
 #ifdef __WXMSW__
-    const wxString& aspellDataPathParameter,
-    const wxString& aspellDictPathParameter,
+                       const wxString &aspellDataPathParameter,
+                       const wxString &aspellDictPathParameter,
 #endif
-    int contextRangeParameter ) :
-		type ( typeParameter ),
-		buffer ( bufferParameter ),
-		ruleDirectory ( ruleDirectoryParameter ),
-		ruleFile ( ruleFileParameter ),
-		filterDirectory ( filterDirectoryParameter ),
-		filterFile ( filterFileParameter ),
-		pathSeparator ( pathSeparatorParameter ),
+                       int contextRangeParameter)
+    : type(typeParameter), buffer(bufferParameter),
+      ruleDirectory(ruleDirectoryParameter), ruleFile(ruleFileParameter),
+      filterDirectory(filterDirectoryParameter),
+      filterFile(filterFileParameter), pathSeparator(pathSeparatorParameter),
 #ifdef __WXMSW__
-		aspellDataPath ( aspellDataPathParameter ),
-		aspellDictPath ( aspellDictPathParameter ),
+      aspellDataPath(aspellDataPathParameter),
+      aspellDictPath(aspellDictPathParameter),
 #endif
-		contextRange ( contextRangeParameter ),
-		ruleVector ( new std::vector<boost::shared_ptr<Rule> > ),
-		dictionary ( new StringSet<char> ),
-		passiveDictionary ( new StringSet<char> )
-{
+      contextRange(contextRangeParameter),
+      ruleVector(new std::vector< boost::shared_ptr< Rule > >),
+      dictionary(new StringSet< char >),
+      passiveDictionary(new StringSet< char >) {
 }
 
-HouseStyle::~HouseStyle()
-{}
+HouseStyle::~HouseStyle() {}
 
-void HouseStyle::collectFilter (
-    const std::string& fileName,
-    std::set<std::string>& excludeSet,
-    int *filterCount )
-{
-	// from v. 1.1.0.7: always ignore
-	//if ( type == HS_TYPE_SPELL || fileName == "(No filter)" )
-		return;
+void HouseStyle::collectFilter(const std::string &fileName,
+                               std::set< std::string > &excludeSet,
+                               int *filterCount) {
+  // from v. 1.1.0.7: always ignore
+  // if ( type == HS_TYPE_SPELL || fileName == "(No filter)" )
+  return;
 
-/*
-	string filePath, buffer;
-	filePath = filterDirectory + pathSeparator + fileName;
+  /*
+          string filePath, buffer;
+          filePath = filterDirectory + pathSeparator + fileName;
 
-	if ( !ReadFile::run ( filePath, buffer ) )
-		return;
+          if ( !ReadFile::run ( filePath, buffer ) )
+                  return;
 
-	XmlFilterReader xfr;
-	if ( !xfr.parse ( buffer ) )
-	{
-		std::string report = xfr.getLastError();
-		throw runtime_error ( report.c_str() );
-	}
+          XmlFilterReader xfr;
+          if ( !xfr.parse ( buffer ) )
+          {
+                  std::string report = xfr.getLastError();
+                  throw runtime_error ( report.c_str() );
+          }
 
-	std::map<std::string, std::map<std::string, std::set<std::string> > >
-	temporaryMap;
-	std::map<std::string, std::map<std::string, std::set<std::string> > >::iterator
-	temporaryMapIterator;
-	xfr.getFilterMap ( temporaryMap );
+          std::map<std::string, std::map<std::string, std::set<std::string> > >
+          temporaryMap;
+          std::map<std::string, std::map<std::string, std::set<std::string> >
+     >::iterator temporaryMapIterator; xfr.getFilterMap ( temporaryMap );
 
-	for ( temporaryMapIterator = temporaryMap.begin();
-	        temporaryMapIterator != temporaryMap.end();
-	        ++temporaryMapIterator )
-	{
-		filterMap.insert ( *temporaryMapIterator );
-		( *filterCount ) ++;
-	}
+          for ( temporaryMapIterator = temporaryMap.begin();
+                  temporaryMapIterator != temporaryMap.end();
+                  ++temporaryMapIterator )
+          {
+                  filterMap.insert ( *temporaryMapIterator );
+                  ( *filterCount ) ++;
+          }
 
-	// add current file to exclude set
-	excludeSet.insert ( fileName );
+          // add current file to exclude set
+          excludeSet.insert ( fileName );
 
-	// fetch exclude vector
-	std::vector<std::string> localExcludeVector;
-	std::vector<std::string>::iterator excludeIterator;
-	xfr.getExcludeVector ( localExcludeVector );
-	for ( excludeIterator = localExcludeVector.begin();
-	        excludeIterator != localExcludeVector.end();
-	        excludeIterator++ )
-		excludeSet.insert ( *excludeIterator );
+          // fetch exclude vector
+          std::vector<std::string> localExcludeVector;
+          std::vector<std::string>::iterator excludeIterator;
+          xfr.getExcludeVector ( localExcludeVector );
+          for ( excludeIterator = localExcludeVector.begin();
+                  excludeIterator != localExcludeVector.end();
+                  excludeIterator++ )
+                  excludeSet.insert ( *excludeIterator );
 
-	// fetch include vector
-	std::vector<std::string> includeVector;
-	std::vector<std::string>::iterator includeIterator;
-	xfr.getIncludeVector ( includeVector );
+          // fetch include vector
+          std::vector<std::string> includeVector;
+          std::vector<std::string>::iterator includeIterator;
+          xfr.getIncludeVector ( includeVector );
 
-	if ( includeVector.empty() )
-		return;
+          if ( includeVector.empty() )
+                  return;
 
-	for ( includeIterator = includeVector.begin();
-	        includeIterator != includeVector.end();
-	        includeIterator++ )
-	{
-		if ( !excludeSet.count ( *includeIterator ) )
-			collectFilter ( *includeIterator, excludeSet, filterCount );
-	}
-*/
+          for ( includeIterator = includeVector.begin();
+                  includeIterator != includeVector.end();
+                  includeIterator++ )
+          {
+                  if ( !excludeSet.count ( *includeIterator ) )
+                          collectFilter ( *includeIterator, excludeSet,
+     filterCount );
+          }
+  */
 }
 
-void HouseStyle::collectRules ( const std::string& fileName,
-                                boost::shared_ptr<std::vector<boost::shared_ptr<Rule> > > ruleVector,
-                                std::set<string>& excludeSet,
-                                int *ruleCount )
-{
-	if (type == HS_TYPE_SPELL)
-		return;
-	
-	std::string filePath, buffer;
-	filePath = (const char *) ( ruleDirectory + pathSeparator ).mb_str() + fileName;
-	if ( !ReadFile::run ( filePath, buffer ) )
-		return;
+void HouseStyle::collectRules(
+    const std::string &fileName,
+    boost::shared_ptr< std::vector< boost::shared_ptr< Rule > > > ruleVector,
+    std::set< string > &excludeSet, int *ruleCount) {
+  if (type == HS_TYPE_SPELL)
+    return;
 
-	std::auto_ptr<XmlRuleReader> xrr ( new XmlRuleReader (
-	                                       dictionary,
-	                                       passiveDictionary,
-	                                       ruleVector ) );
-	if ( !xrr->parse ( buffer ) )
-	{
-		std::string report = xrr->getIncorrectPatternReport();
-		if ( report != "" )
-			throw runtime_error ( report.c_str() );
-		else
-			throw runtime_error ( ( const char * ) xrr->getLastError().utf8_str() );
-	}
+  std::string filePath, buffer;
+  filePath = (const char *)(ruleDirectory + pathSeparator).mb_str() + fileName;
+  if (!ReadFile::run(filePath, buffer))
+    return;
 
-	// add current file to exclude set
-	excludeSet.insert ( fileName );
+  std::auto_ptr< XmlRuleReader > xrr(
+      new XmlRuleReader(dictionary, passiveDictionary, ruleVector));
+  if (!xrr->parse(buffer)) {
+    std::string report = xrr->getIncorrectPatternReport();
+    if (report != "")
+      throw runtime_error(report.c_str());
+    else
+      throw runtime_error((const char *)xrr->getLastError().utf8_str());
+  }
 
-	// fetch exclude vector
-	std::vector<std::string> localExcludeVector;
-	std::vector<std::string>::iterator excludeIterator;
-	xrr->getExcludeVector ( localExcludeVector );
-	for ( excludeIterator = localExcludeVector.begin();
-	        excludeIterator != localExcludeVector.end();
-	        ++excludeIterator )
-		excludeSet.insert ( *excludeIterator );
+  // add current file to exclude set
+  excludeSet.insert(fileName);
 
-	* ( ruleCount ) += xrr->getRuleCount();
+  // fetch exclude vector
+  std::vector< std::string > localExcludeVector;
+  std::vector< std::string >::iterator excludeIterator;
+  xrr->getExcludeVector(localExcludeVector);
+  for (excludeIterator = localExcludeVector.begin();
+       excludeIterator != localExcludeVector.end(); ++excludeIterator)
+    excludeSet.insert(*excludeIterator);
 
-	// fetch include vector
-	std::vector<std::string> includeVector;
-	xrr->getIncludeVector ( includeVector );
-	std::vector<std::string>::iterator includeIterator;
-	for ( includeIterator = includeVector.begin();
-	        includeIterator != includeVector.end();
-	        ++includeIterator )
-	{
-		if ( !excludeSet.count ( *includeIterator ) )
-			collectRules ( *includeIterator, ruleVector, excludeSet, ruleCount );
-	}
+  *(ruleCount) += xrr->getRuleCount();
+
+  // fetch include vector
+  std::vector< std::string > includeVector;
+  xrr->getIncludeVector(includeVector);
+  std::vector< std::string >::iterator includeIterator;
+  for (includeIterator = includeVector.begin();
+       includeIterator != includeVector.end(); ++includeIterator) {
+    if (!excludeSet.count(*includeIterator))
+      collectRules(*includeIterator, ruleVector, excludeSet, ruleCount);
+  }
 }
 
-bool HouseStyle::createReport()
-{
-	if ( type == HS_TYPE_STYLE && !updateRules() )
-	{
-		error = _ ( "no rules found" );
-		return false;
-	}
+bool HouseStyle::createReport() {
+  if (type == HS_TYPE_STYLE && !updateRules()) {
+    error = _("no rules found");
+    return false;
+  }
 
-/*
-	updateFilter();
+  /*
+          updateFilter();
 
-	auto_ptr<HouseStyleReader> xtr ( new HouseStyleReader ( filterMap ) );
-	if ( !xtr->parse ( buffer ) )
-	{
-		error = _ ( "file is not well-formed" );
-		return false;
-	}
-*/
-	std::vector<std::pair<std::string, unsigned> > nodeVector;
-	//xtr->getNodeVector ( nodeVector );
-	nodeVector.push_back( make_pair ( buffer, 0 ) ); // new from 1.1.0.7
-	
-	int ruleVectorsize, nodeVectorSize;
+          auto_ptr<HouseStyleReader> xtr ( new HouseStyleReader ( filterMap ) );
+          if ( !xtr->parse ( buffer ) )
+          {
+                  error = _ ( "file is not well-formed" );
+                  return false;
+          }
+  */
+  std::vector< std::pair< std::string, unsigned > > nodeVector;
+  // xtr->getNodeVector ( nodeVector );
+  nodeVector.push_back(make_pair(buffer, 0)); // new from 1.1.0.7
 
-	std::vector<ContextMatch> contextVector;
-	std::vector<ContextMatch>::iterator matchIterator;
-	ruleVectorsize = ruleVector->size();
+  int ruleVectorsize, nodeVectorSize;
 
-	nodeVectorSize = nodeVector.size();
+  std::vector< ContextMatch > contextVector;
+  std::vector< ContextMatch >::iterator matchIterator;
+  ruleVectorsize = ruleVector->size();
 
-	WrapAspell *spellcheck = NULL;
-	try {
-		if (type == HS_TYPE_SPELL)
-			spellcheck = new WrapAspell(
-            ruleFile // carries lang information
+  nodeVectorSize = nodeVector.size();
+
+  WrapAspell *spellcheck = NULL;
+  try {
+    if (type == HS_TYPE_SPELL)
+      spellcheck = new WrapAspell(ruleFile // carries lang information
 #ifdef __WXMSW__
-                , aspellDataPath,
-                aspellDictPath
-#endif            
-             );
-	}
-	catch (...)
-	{
-		error = _ ( "Cannot initialise spellcheck" );
-		return false;
-	}
+                                  ,
+                                  aspellDataPath, aspellDictPath
+#endif
+      );
+  } catch (...) {
+    error = _("Cannot initialise spellcheck");
+    return false;
+  }
 
-	std::string nodeBuffer;
-	unsigned elementCount;
-	for ( int j = 0; j < nodeVectorSize; ++j )
-	{
-		nodeBuffer = nodeVector.at ( j ).first;
-		elementCount = nodeVector.at ( j ).second;
+  std::string nodeBuffer;
+  unsigned elementCount;
+  for (int j = 0; j < nodeVectorSize; ++j) {
+    nodeBuffer = nodeVector.at(j).first;
+    elementCount = nodeVector.at(j).second;
 
-		if ( !nodeBuffer.size() )
-			continue;
+    if (!nodeBuffer.size())
+      continue;
 
-		// try spelling first
-		if ( type == HS_TYPE_SPELL && spellcheck )
-		{
-			spellcheck->checkString (
-						nodeBuffer,
-						contextVector,
-						contextRange );
+    // try spelling first
+    if (type == HS_TYPE_SPELL && spellcheck) {
+      spellcheck->checkString(nodeBuffer, contextVector, contextRange);
 
-			for ( matchIterator = contextVector.begin();
-				matchIterator != contextVector.end();
-				++matchIterator )
-			{
-				matchIterator->report = "Not in dictionary";
-				matchIterator->elementCount = elementCount;	
-				matchVector.push_back ( *matchIterator );
-			}
-			contextVector.clear();
-			continue; // bail out before we reach style loop
-		}
+      for (matchIterator = contextVector.begin();
+           matchIterator != contextVector.end(); ++matchIterator) {
+        matchIterator->report = "Not in dictionary";
+        matchIterator->elementCount = elementCount;
+        matchVector.push_back(*matchIterator);
+      }
+      contextVector.clear();
+      continue; // bail out before we reach style loop
+    }
 
-		// otherwise, proceed with style check
-		for ( int i = 0; i < ruleVectorsize; i++ )
-		{
-			if ( type == HS_TYPE_STYLE )
-			{
-				boost::shared_ptr<Rule> rule ( ruleVector->at ( i ) );
-				if ( rule->matchPatternGlobal (
-					nodeBuffer,
-					contextVector,
-					elementCount,
-					contextRange ) )
-				{
-					std::string report = rule->getReport();
-	
-					for ( matchIterator = contextVector.begin();
-						matchIterator != contextVector.end();
-						++matchIterator )
-					{
-						if ( rule->getAdjustCaseAttribute() )
-							CaseHandler::adjustCase (
-							matchIterator->replace,
-							matchIterator->match );
+    // otherwise, proceed with style check
+    for (int i = 0; i < ruleVectorsize; i++) {
+      if (type == HS_TYPE_STYLE) {
+        boost::shared_ptr< Rule > rule(ruleVector->at(i));
+        if (rule->matchPatternGlobal(nodeBuffer, contextVector, elementCount,
+                                     contextRange)) {
+          std::string report = rule->getReport();
 
-						// tentative?
-						matchIterator->tentative =
-						( rule->getTentativeAttribute() ) ? true : false;
-	
-						matchIterator->report = report;
+          for (matchIterator = contextVector.begin();
+               matchIterator != contextVector.end(); ++matchIterator) {
+            if (rule->getAdjustCaseAttribute())
+              CaseHandler::adjustCase(matchIterator->replace,
+                                      matchIterator->match);
 
-						matchVector.push_back ( *matchIterator );
-					}
-					contextVector.clear();
-				}
-			}
-/*
-			// check spelling
-			else // if ( !dictionary->empty() )
-			{
-				spellcheck->checkString (
-					nodeBuffer,
-					contextVector,
-					contextRange );
+            // tentative?
+            matchIterator->tentative =
+                (rule->getTentativeAttribute()) ? true : false;
 
-				for ( matchIterator = contextVector.begin();
-					matchIterator != contextVector.end();
-					matchIterator++ )
-				{
-					matchIterator->report = "Not in dictionary";
-					matchIterator->elementCount = elementCount;	
+            matchIterator->report = report;
 
-					matchVector.push_back ( *matchIterator );
-				}
-				contextVector.clear();
-			}
-*/
-		}
-	}
-	delete spellcheck;
-	return true;
+            matchVector.push_back(*matchIterator);
+          }
+          contextVector.clear();
+        }
+      }
+      /*
+                              // check spelling
+                              else // if ( !dictionary->empty() )
+                              {
+                                      spellcheck->checkString (
+                                              nodeBuffer,
+                                              contextVector,
+                                              contextRange );
+
+                                      for ( matchIterator =
+         contextVector.begin(); matchIterator != contextVector.end();
+                                              matchIterator++ )
+                                      {
+                                              matchIterator->report = "Not in
+         dictionary"; matchIterator->elementCount = elementCount;
+
+                                              matchVector.push_back (
+         *matchIterator );
+                                      }
+                                      contextVector.clear();
+                              }
+      */
+    }
+  }
+  delete spellcheck;
+  return true;
 }
 
-const wxString &HouseStyle::getLastError()
-{
-	return error;
+const wxString &HouseStyle::getLastError() { return error; }
+
+const std::vector< ContextMatch > &HouseStyle::getMatchVector() {
+  return matchVector;
 }
 
-const std::vector<ContextMatch> &HouseStyle::getMatchVector()
-{
-	return matchVector;
+int HouseStyle::updateRules() {
+  ruleVector->clear();
+  dictionary->clear();
+  passiveDictionary->clear();
+
+  int ruleCount = 0;
+  set< string > excludeSet;
+  collectRules((const char *)ruleFile.mb_str(), ruleVector, excludeSet,
+               &ruleCount);
+  return ruleCount;
 }
 
-int HouseStyle::updateRules()
-{
-	ruleVector->clear();
-	dictionary->clear();
-	passiveDictionary->clear();
+int HouseStyle::updateFilter() {
+  filterMap.clear();
+  int filterCount = 0;
+  set< string > excludeSet;
+  collectFilter((const char *)filterFile.mb_str(), excludeSet, &filterCount);
 
-	int ruleCount = 0;
-	set<string> excludeSet;
-	collectRules ( ( const char * ) ruleFile.mb_str(), ruleVector, excludeSet, &ruleCount );
-	return ruleCount;
-}
-
-int HouseStyle::updateFilter()
-{
-	filterMap.clear();
-	int filterCount = 0;
-	set<string> excludeSet;
-	collectFilter ( ( const char * ) filterFile.mb_str(), excludeSet, &filterCount );
-
-	return filterCount;
+  return filterCount;
 }

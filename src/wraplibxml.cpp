@@ -32,805 +32,703 @@
 
 // Convert wxString to const char *
 #ifdef __WXMSW__ // Libxml supports utf8 file name on windows
-#define CONV(s) ( ( const char * ) ( s ).utf8_str() )
+#define CONV(s) ((const char *)(s).utf8_str())
 #else
-#define CONV(s) ( ( const char * ) ( s ).mb_str ( wxConvLocal ) )
+#define CONV(s) ((const char *)(s).mb_str(wxConvLocal))
 #endif
-
 
 static xmlCatalogPtr catalog = NULL;
 
-class Initializer
-{
+class Initializer {
 public:
-	Initializer ( const wxString &catalogPath ) throw ()
-	{
-		xmlSetGenericErrorFunc ( xmlGenericErrorContext,
-				&Initializer::OnXmlGenericError );
+  Initializer(const wxString &catalogPath) throw() {
+    xmlSetGenericErrorFunc(xmlGenericErrorContext,
+                           &Initializer::OnXmlGenericError);
 
-		LIBXML_TEST_VERSION
+    LIBXML_TEST_VERSION
 
-		xmlInitializeCatalog();
-		xmlLoadCatalog ( CONV ( catalogPath ) );
-		::catalog = xmlLoadACatalog ( CONV ( catalogPath ) );
+    xmlInitializeCatalog();
+    xmlLoadCatalog(CONV(catalogPath));
+    ::catalog = xmlLoadACatalog(CONV(catalogPath));
 
-		initGenericErrorDefaultFunc ( NULL );
-	}
+    initGenericErrorDefaultFunc(NULL);
+  }
 
-	~Initializer ()
-	{
-		xmlFreeCatalog ( ::catalog );
-		::catalog = NULL;
+  ~Initializer() {
+    xmlFreeCatalog(::catalog);
+    ::catalog = NULL;
 
-		xsltCleanupGlobals();
-		xmlCatalogCleanup();
-		xmlCleanupParser();
-	}
+    xsltCleanupGlobals();
+    xmlCatalogCleanup();
+    xmlCleanupParser();
+  }
 
-	static void XMLCDECL OnXmlGenericError (void *ctx, const char *msg, ...) throw()
-	{
-		va_list args;
+  static void XMLCDECL OnXmlGenericError(void *ctx, const char *msg,
+                                         ...) throw() {
+    va_list args;
 
-		size_t size = 128;
-		std::string buffer;
-		int chars;
-		for (;;)
-		{
-			buffer.resize ( size );
-			if ( buffer.size() < size )
-				throw std::runtime_error ( "Out of memory" );
+    size_t size = 128;
+    std::string buffer;
+    int chars;
+    for (;;) {
+      buffer.resize(size);
+      if (buffer.size() < size)
+        throw std::runtime_error("Out of memory");
 
-			va_start(args, msg);
-			chars = vsnprintf( (char *) buffer.c_str(), size, msg, args);
-			va_end(args);
+      va_start(args, msg);
+      chars = vsnprintf((char *)buffer.c_str(), size, msg, args);
+      va_end(args);
 
-			if ( chars >= 0 && ( size_t ) chars < size )
-			{
-				buffer.resize ( chars );
-				throw std::runtime_error ( buffer );
-			}
-			if ( chars >= 0 )
-				size = chars + 1;
-			else
-				throw std::runtime_error (
-					std::string ( "Can't format message: " ) + msg );
-		}
-	}
+      if (chars >= 0 && (size_t)chars < size) {
+        buffer.resize(chars);
+        throw std::runtime_error(buffer);
+      }
+      if (chars >= 0)
+        size = chars + 1;
+      else
+        throw std::runtime_error(std::string("Can't format message: ") + msg);
+    }
+  }
 };
 
-void WrapLibxml::Init ( const wxString &catalogPath ) throw()
-{
-	static Initializer dummy ( catalogPath );
+void WrapLibxml::Init(const wxString &catalogPath) throw() {
+  static Initializer dummy(catalogPath);
 }
 
-WrapLibxml::WrapLibxml ( bool netAccessParameter )
-		: netAccess ( netAccessParameter )
-{
-	WrapLibxml::Init();
+WrapLibxml::WrapLibxml(bool netAccessParameter)
+    : netAccess(netAccessParameter) {
+  WrapLibxml::Init();
 }
 
-WrapLibxml::~WrapLibxml()
-{
+WrapLibxml::~WrapLibxml() {}
+
+bool WrapLibxml::validate(const std::string &utf8DocBuf,
+                          const wxString &docFileName) {
+  output = "";
+
+  xmlParserCtxtPtr ctxt = NULL;
+  xmlDocPtr docPtr = NULL;
+
+  ctxt = xmlNewParserCtxt();
+  if (ctxt == NULL) {
+    nonParserError = _("Cannot create a parser context");
+    return false;
+  }
+
+  int flags = XML_PARSE_DTDVALID;
+  if (!netAccess)
+    flags |= XML_PARSE_NONET;
+  xmlChar *url = xmlFileNameToURL(docFileName);
+  docPtr = xmlCtxtReadMemory(ctxt, utf8DocBuf.c_str(), utf8DocBuf.length(),
+                             (const char *)url, "UTF-8", flags);
+  xmlFree(url);
+
+  bool returnValue = docPtr != NULL && ctxt->valid != 0;
+
+  xmlFreeDoc(docPtr);
+  xmlFreeParserCtxt(ctxt);
+
+  return returnValue;
 }
 
-bool WrapLibxml::validate ( const std::string& utf8DocBuf,
-		const wxString &docFileName )
-{
-	output = "";
+bool WrapLibxml::validateRelaxNG(const wxString &schemaUrl,
+                                 const std::string &utf8DocBuf,
+                                 const wxString &docFileName) {
+  output = "";
 
-	xmlParserCtxtPtr ctxt = NULL;
-	xmlDocPtr docPtr = NULL;
+  bool returnValue = false;
+  xmlParserCtxtPtr ctxt = NULL;
+  xmlDocPtr docPtr = NULL;
+  xmlRelaxNGValidCtxtPtr ctxtPtr = NULL;
+  xmlRelaxNGParserCtxtPtr rngParserCtxt = NULL;
+  xmlRelaxNGPtr schemaPtr = NULL;
 
-	ctxt = xmlNewParserCtxt();
-	if ( ctxt == NULL )
-	{
-		nonParserError = _("Cannot create a parser context");
-		return false;
-	}
+  do {
+    rngParserCtxt = xmlRelaxNGNewParserCtxt(schemaUrl.utf8_str());
+    if (rngParserCtxt == NULL) {
+      nonParserError = _("Cannot create an RNG parser context");
+      return false;
+    }
+    schemaPtr = xmlRelaxNGParse(rngParserCtxt);
+    if (schemaPtr == NULL)
+      break;
 
-	int flags = XML_PARSE_DTDVALID;
-	if ( !netAccess )
-		flags |= XML_PARSE_NONET;
-	xmlChar *url = xmlFileNameToURL ( docFileName );
-	docPtr = xmlCtxtReadMemory ( ctxt, utf8DocBuf.c_str(), utf8DocBuf.length(),
-			( const char * ) url, "UTF-8", flags);
-	xmlFree ( url );
+    ctxtPtr = xmlRelaxNGNewValidCtxt(schemaPtr);
+    if (ctxtPtr == NULL) {
+      nonParserError = _("Cannot create an RNG validation context");
+      break;
+    }
+    ctxt = xmlNewParserCtxt();
+    if (ctxt == NULL) {
+      nonParserError = _("Cannot create a parser context");
+      break;
+    }
 
-	bool returnValue = docPtr != NULL && ctxt->valid != 0;
+    int flags = XML_PARSE_DTDVALID;
+    if (!netAccess)
+      flags |= XML_PARSE_NONET;
+    xmlChar *url = xmlFileNameToURL(docFileName);
+    docPtr = xmlCtxtReadMemory(ctxt, utf8DocBuf.c_str(), utf8DocBuf.length(),
+                               (const char *)url, "UTF-8", flags);
+    xmlFree(url);
+    if (docPtr == NULL)
+      break;
 
-	xmlFreeDoc ( docPtr );
-	xmlFreeParserCtxt ( ctxt );
+    int err = xmlRelaxNGValidateDoc(ctxtPtr, docPtr);
+    returnValue = (err) ? false : true;
 
-	return returnValue;
+  } while (false);
+
+  xmlFreeDoc(docPtr);
+  xmlFreeParserCtxt(ctxt);
+  xmlRelaxNGFreeValidCtxt(ctxtPtr);
+  xmlRelaxNGFree(schemaPtr);
+
+  return returnValue;
 }
 
-bool WrapLibxml::validateRelaxNG (
-    const wxString &schemaUrl,
-    const std::string &utf8DocBuf,
-    const wxString &docFileName )
-{
-	output = "";
+bool WrapLibxml::validateW3CSchema(const wxString &schemaFileName,
+                                   const std::string &utf8DocBuf,
+                                   const wxString &docFileName) {
+  output = "";
 
-	bool returnValue = false;
-	xmlParserCtxtPtr ctxt = NULL;
-	xmlDocPtr docPtr = NULL;
-	xmlRelaxNGValidCtxtPtr ctxtPtr = NULL;
-	xmlRelaxNGParserCtxtPtr rngParserCtxt = NULL;
-	xmlRelaxNGPtr schemaPtr = NULL;
+  bool returnValue = false;
 
-	do {
-		rngParserCtxt = xmlRelaxNGNewParserCtxt ( schemaUrl.utf8_str() );
-		if ( rngParserCtxt == NULL )
-		{
-			nonParserError = _("Cannot create an RNG parser context");
-			return false;
-		}
-		schemaPtr = xmlRelaxNGParse ( rngParserCtxt );
-		if ( schemaPtr == NULL )
-			break;
+  xmlParserCtxtPtr ctxt = NULL;
+  xmlDocPtr docPtr = NULL;
+  xmlSchemaValidCtxtPtr ctxtPtr = NULL;
+  xmlSchemaParserCtxtPtr rngParserCtxt = NULL;
+  xmlSchemaPtr schemaPtr = NULL;
 
-		ctxtPtr = xmlRelaxNGNewValidCtxt ( schemaPtr );
-		if ( ctxtPtr == NULL )
-		{
-			nonParserError = _("Cannot create an RNG validation context");
-			break;
-		}
-		ctxt = xmlNewParserCtxt();
-		if ( ctxt == NULL )
-		{
-			nonParserError = _("Cannot create a parser context");
-			break;
-		}
+  do {
+    xmlChar *url = xmlFileNameToURL(schemaFileName);
+    rngParserCtxt = xmlSchemaNewParserCtxt((const char *)url);
+    xmlFree(url);
+    if (rngParserCtxt == NULL)
+      return false;
 
-		int flags = XML_PARSE_DTDVALID;
-		if ( !netAccess )
-			flags |= XML_PARSE_NONET;
-		xmlChar *url = xmlFileNameToURL ( docFileName );
-		docPtr = xmlCtxtReadMemory ( ctxt, utf8DocBuf.c_str(),
-					utf8DocBuf.length(), ( const char * ) url, "UTF-8", flags );
-		xmlFree ( url );
-		if ( docPtr == NULL )
-			break;
+    schemaPtr = xmlSchemaParse(rngParserCtxt);
+    if (schemaPtr == NULL)
+      break;
 
-		int err = xmlRelaxNGValidateDoc ( ctxtPtr, docPtr );
-		returnValue = ( err ) ? false : true;
+    ctxtPtr = xmlSchemaNewValidCtxt(schemaPtr);
+    if (ctxtPtr == NULL) {
+      nonParserError = _("Cannot create a schema validation context");
+      break;
+    }
+    ctxt = xmlNewParserCtxt();
+    if (ctxt == NULL) {
+      nonParserError = _("Cannot create a parser context");
+      break;
+    }
 
-	} while ( false );
+    int flags = XML_PARSE_DTDLOAD;
+    if (!netAccess)
+      flags |= XML_PARSE_NONET;
+    url = xmlFileNameToURL(docFileName);
+    docPtr = xmlCtxtReadMemory(ctxt, utf8DocBuf.c_str(), utf8DocBuf.length(),
+                               (const char *)url, "UTF-8", flags);
+    xmlFree(url);
+    if (docPtr == NULL)
+      break;
 
-	xmlFreeDoc ( docPtr );
-	xmlFreeParserCtxt ( ctxt );
-	xmlRelaxNGFreeValidCtxt ( ctxtPtr );
-	xmlRelaxNGFree ( schemaPtr );
+    int res = xmlSchemaValidateDoc(ctxtPtr, docPtr);
 
-	return returnValue;
+    returnValue = (res) ? false : true;
+
+  } while (false);
+
+  xmlFreeDoc(docPtr);
+  xmlFreeParserCtxt(ctxt);
+  xmlSchemaFree(schemaPtr);
+  xmlSchemaFreeValidCtxt(ctxtPtr);
+
+  return returnValue;
 }
 
-bool WrapLibxml::validateW3CSchema (
-    const wxString &schemaFileName,
-    const std::string &utf8DocBuf,
-    const wxString &docFileName )
-{
-	output = "";
-
-	bool returnValue = false;
-
-	xmlParserCtxtPtr ctxt = NULL;
-	xmlDocPtr docPtr = NULL;
-	xmlSchemaValidCtxtPtr ctxtPtr = NULL;
-	xmlSchemaParserCtxtPtr rngParserCtxt = NULL;
-	xmlSchemaPtr schemaPtr = NULL;
-
-	do {
-		xmlChar *url = xmlFileNameToURL ( schemaFileName );
-		rngParserCtxt = xmlSchemaNewParserCtxt ( ( const char * ) url );
-		xmlFree ( url );
-		if ( rngParserCtxt == NULL )
-			return false;
-
-		schemaPtr = xmlSchemaParse ( rngParserCtxt );
-		if ( schemaPtr == NULL )
-			break;
-
-		ctxtPtr = xmlSchemaNewValidCtxt ( schemaPtr );
-		if ( ctxtPtr == NULL )
-		{
-			nonParserError = _("Cannot create a schema validation context");
-			break;
-		}
-		ctxt = xmlNewParserCtxt();
-		if ( ctxt == NULL )
-		{
-			nonParserError = _("Cannot create a parser context");
-			break;
-		}
-
-		int flags = XML_PARSE_DTDLOAD;
-		if ( !netAccess )
-			flags |= XML_PARSE_NONET;
-		url = xmlFileNameToURL ( docFileName );
-		docPtr = xmlCtxtReadMemory ( ctxt, utf8DocBuf.c_str(),
-					utf8DocBuf.length(), ( const char * ) url, "UTF-8", flags );
-		xmlFree ( url );
-		if ( docPtr == NULL )
-			break;
-
-		int res = xmlSchemaValidateDoc ( ctxtPtr, docPtr );
-
-		returnValue = ( res ) ? false : true;
-
-	} while ( false );
-
-	xmlFreeDoc ( docPtr );
-	xmlFreeParserCtxt ( ctxt );
-	xmlSchemaFree ( schemaPtr );
-	xmlSchemaFreeValidCtxt ( ctxtPtr );
-
-	return returnValue;
+bool WrapLibxml::parse(const std::string &utf8DocBuf,
+                       const wxString &docFileName, bool indent,
+                       bool resolveEntities) {
+  return parse(utf8DocBuf.c_str(), utf8DocBuf.length(), docFileName, indent,
+               resolveEntities);
 }
 
-bool WrapLibxml::parse (
-    const std::string& utf8DocBuf,
-    const wxString &docFileName,
-    bool indent,
-    bool resolveEntities )
-{
-	return parse ( utf8DocBuf.c_str(), utf8DocBuf.length(), docFileName,
-			indent, resolveEntities );
+bool WrapLibxml::parse(const wxString &docFileName, bool indent,
+                       bool resolveEntities) {
+  return parse(NULL, 0, docFileName, indent, resolveEntities);
 }
 
-bool WrapLibxml::parse (
-    const wxString &docFileName,
-    bool indent,
-    bool resolveEntities )
-{
-	return parse ( NULL, 0, docFileName, indent, resolveEntities );
+bool WrapLibxml::parse(const char *utf8DocBuf, size_t utf8DocBufSize,
+                       const wxString &docFileName, bool indent,
+                       bool resolveEntities) {
+  output = "";
+
+  xmlParserCtxtPtr ctxt = NULL;
+  xmlDocPtr docPtr = NULL;
+
+  ctxt = xmlNewParserCtxt();
+  if (ctxt == NULL) {
+    nonParserError = _("Cannot create a parser context");
+    return false;
+  }
+
+  int flags = XML_PARSE_DTDLOAD;
+  if (resolveEntities)
+    flags |= XML_PARSE_NOENT;
+  if (!netAccess)
+    flags |= XML_PARSE_NONET;
+
+  if (utf8DocBuf != NULL) {
+    xmlChar *url = xmlFileNameToURL(docFileName);
+    docPtr = xmlCtxtReadMemory(ctxt, utf8DocBuf, utf8DocBufSize,
+                               (const char *)url, "UTF-8", flags);
+    xmlFree(url);
+  } else
+    docPtr = xmlCtxtReadFile(ctxt, CONV(docFileName), NULL, flags);
+  if (docPtr == NULL) {
+    xmlFreeParserCtxt(ctxt);
+    return false;
+  }
+
+  xmlKeepBlanksDefault(indent ? 0 : 1);
+
+  xmlChar *buf = NULL;
+  int size;
+
+  // tbd: link output encoding to input encoding?
+  xmlDocDumpFormatMemoryEnc(docPtr, &buf, &size, "UTF-8", indent);
+
+  if (buf) {
+    output.append((const char *)buf);
+    free(buf);
+  }
+
+  bool returnValue = (!ctxt->errNo) ? true : false;
+
+  xmlFreeDoc(docPtr);
+  xmlFreeParserCtxt(ctxt);
+
+  return returnValue;
 }
 
-bool WrapLibxml::parse (
-    const char *utf8DocBuf,
-    size_t utf8DocBufSize,
-    const wxString &docFileName,
-    bool indent,
-    bool resolveEntities )
-{
-	output = "";
+bool WrapLibxml::xpath(const wxString &xpath, const std::string &utf8DocBuf,
+                       const wxString &docFileName) {
+  output = "";
 
-	xmlParserCtxtPtr ctxt = NULL;
-	xmlDocPtr docPtr = NULL;
+  xmlParserCtxtPtr ctxt = NULL;
+  xmlDocPtr docPtr = NULL;
 
-	ctxt = xmlNewParserCtxt();
-	if ( ctxt == NULL )
-	{
-		nonParserError = _("Cannot create a parser context");
-		return false;
-	}
+  xmlKeepBlanksDefault(0);
 
-	int flags = XML_PARSE_DTDLOAD;
-	if ( resolveEntities )
-		flags |= XML_PARSE_NOENT;
-	if ( !netAccess )
-		flags |= XML_PARSE_NONET;
+  ctxt = xmlNewParserCtxt();
+  if (ctxt == NULL) {
+    nonParserError = _("Cannot create a parser context");
+    return false;
+  }
 
-	if ( utf8DocBuf != NULL)
-	{
-		xmlChar *url = xmlFileNameToURL ( docFileName );
-		docPtr = xmlCtxtReadMemory ( ctxt, utf8DocBuf, utf8DocBufSize,
-					( const char * ) url, "UTF-8", flags );
-		xmlFree ( url );
-	}
-	else
-		docPtr = xmlCtxtReadFile ( ctxt, CONV ( docFileName ), NULL, flags );
-	if ( docPtr == NULL )
-	{
-		xmlFreeParserCtxt ( ctxt );
-		return false;
-	}
+  //(netAccess) ? XML_PARSE_DTDLOAD | XML_PARSE_NOENT : XML_PARSE_DTDLOAD |
+  //XML_PARSE_NONET | XML_PARSE_NOENT
+  const static int flags =
+      XML_PARSE_NOENT | XML_PARSE_NONET | XML_PARSE_NSCLEAN;
+  xmlChar *url = xmlFileNameToURL(docFileName);
+  docPtr = xmlCtxtReadMemory(ctxt, utf8DocBuf.c_str(), utf8DocBuf.length(),
+                             (const char *)url, "UTF-8", flags);
+  xmlFree(url);
+  if (docPtr == NULL) {
+    xmlFreeParserCtxt(ctxt);
+    return false;
+  }
 
-	xmlKeepBlanksDefault ( indent ? 0 : 1 );
+  xmlXPathContextPtr context = NULL;
+  xmlXPathObjectPtr result = NULL;
 
-	xmlChar *buf = NULL;
-	int size;
+  context = xmlXPathNewContext(docPtr);
+  if (!context) {
+    xmlFreeDoc(docPtr);
+    xmlFreeParserCtxt(ctxt);
+    return false;
+  }
 
-	// tbd: link output encoding to input encoding?
-	xmlDocDumpFormatMemoryEnc (
-	    docPtr,
-	    &buf,
-	    &size,
-	    "UTF-8",
-	    indent );
+  // enable namespace prefixes
+  xmlXPathRegisterNs(context, (xmlChar *)"xhtml",
+                     (xmlChar *)"http://www.w3.org/1999/xhtml");
+  // add others as necessary!
 
-	if ( buf )
-	{
-		output.append ( ( const char * ) buf );
-		free ( buf );
-	}
+  result = xmlXPathEvalExpression(
+      // Since the encoding of the buffer is UTF-8
+      (const xmlChar *)(const char *)xpath.utf8_str(), context);
 
-	bool returnValue = ( !ctxt->errNo ) ? true : false;
+  bool xpathIsValid = (result) ? true : false;
 
-	xmlFreeDoc ( docPtr );
-	xmlFreeParserCtxt ( ctxt );
+  output = dumpXPathObject(result);
 
-	return returnValue;
+  xmlXPathFreeObject(result);
+  xmlXPathFreeContext(context);
+  xmlFreeDoc(docPtr);
+  xmlFreeParserCtxt(ctxt);
+
+  return xpathIsValid;
 }
 
-bool WrapLibxml::xpath ( const wxString &xpath, const std::string &utf8DocBuf,
-	    const wxString &docFileName )
-{
-	output = "";
+std::string WrapLibxml::dumpXPathObject(xmlXPathObjectPtr obj) {
+  std::stringstream sstream;
+  if (!obj)
+    return sstream.str();
 
-	xmlParserCtxtPtr ctxt = NULL;
-	xmlDocPtr docPtr = NULL;
+  switch (obj->type) {
+  case XPATH_NODESET: {
+    if (xmlXPathNodeSetIsEmpty(obj->nodesetval))
+      break;
 
-	xmlKeepBlanksDefault ( 0 );
+    xmlBufferPtr bufferPtr = xmlBufferCreate();
+    if (bufferPtr == NULL)
+      break;
 
-	ctxt = xmlNewParserCtxt();
-	if ( ctxt == NULL )
-	{
-		nonParserError = _("Cannot create a parser context");
-		return false;
-	}
+    xmlNodeSetPtr nodeset = obj->nodesetval;
+    for (int i = 0; i < nodeset->nodeNr; i++) {
+      xmlNodePtr node = nodeset->nodeTab[i];
+      if (!node)
+        break;
+      xmlNodeDump(bufferPtr, NULL, node, 0 /*level*/, TRUE /*format*/);
 
-	//(netAccess) ? XML_PARSE_DTDLOAD | XML_PARSE_NOENT : XML_PARSE_DTDLOAD | XML_PARSE_NONET | XML_PARSE_NOENT
-	const static int flags = XML_PARSE_NOENT | XML_PARSE_NONET | XML_PARSE_NSCLEAN;
-	xmlChar *url = xmlFileNameToURL ( docFileName );
-	docPtr = xmlCtxtReadMemory ( ctxt, utf8DocBuf.c_str(), utf8DocBuf.length(),
-				( const char * ) url, "UTF-8", flags );
-	xmlFree ( url );
-	if ( docPtr == NULL )
-	{
-		xmlFreeParserCtxt ( ctxt );
-		return false;
-	}
+      sstream << (const char *)xmlBufferContent(bufferPtr) << '\n';
+      xmlBufferEmpty(bufferPtr);
+    }
+    xmlBufferFree(bufferPtr);
+    break;
+  }
 
-	xmlXPathContextPtr context = NULL;
-	xmlXPathObjectPtr result = NULL;
+  case XPATH_BOOLEAN:
+    sstream << !!obj->boolval;
+    break;
 
-	context = xmlXPathNewContext ( docPtr );
-	if ( !context )
-	{
-		xmlFreeDoc ( docPtr );
-		xmlFreeParserCtxt ( ctxt );
-		return false;
-	}
+  case XPATH_NUMBER:
+    switch (xmlXPathIsInf(obj->floatval)) {
+    case 1:
+      sstream << wxString(_("Infinity")).utf8_str();
+      break;
+    case -1:
+      sstream << wxString(_("-Infinity")).utf8_str();
+      break;
+    default:
+      if (xmlXPathIsNaN(obj->floatval))
+        sstream << wxString(_("NaN")).utf8_str();
+      else
+        sstream << obj->floatval;
+      break;
+    }
+    break;
 
-	// enable namespace prefixes
-	xmlXPathRegisterNs ( context, ( xmlChar * ) "xhtml", ( xmlChar * ) "http://www.w3.org/1999/xhtml" );
-	// add others as necessary!
+  case XPATH_STRING:
+    sstream << obj->stringval;
+    break;
 
-	result = xmlXPathEvalExpression (
-			// Since the encoding of the buffer is UTF-8
-			( const xmlChar * ) ( const char * ) xpath.utf8_str (),
-			context );
+  case XPATH_POINT:
+    xmlBufferPtr bufferPtr;
+    bufferPtr = xmlBufferCreate();
+    if (bufferPtr == NULL)
+      break;
+    xmlNodeDump(bufferPtr, NULL, (xmlNodePtr)obj->user, 1 /*level*/,
+                TRUE /*format*/);
+    sstream << xmlBufferContent(bufferPtr);
+    xmlBufferFree(bufferPtr);
+    break;
 
-	bool xpathIsValid = ( result ) ? true : false;
+  case XPATH_RANGE:
+  case XPATH_LOCATIONSET:
+  case XPATH_XSLT_TREE:
+  default:
+    FILE *fp = tmpfile();
+    xmlXPathDebugDumpObject(fp, obj, 0 /*depth*/);
 
-	output = dumpXPathObject ( result );
+    std::string str;
+    long size = ftell(fp);
+    if (size == -1)
+      return str;
 
-	xmlXPathFreeObject ( result );
-	xmlXPathFreeContext ( context );
-	xmlFreeDoc ( docPtr );
-	xmlFreeParserCtxt ( ctxt );
+    str.resize(size + 1);
+    if (str.capacity() != (size_t)size + 1)
+      return str;
+    rewind(fp);
+    size_t read = fread((char *)str.c_str(), 1, str.capacity(), fp);
+    str[size] = '\0';
+    fclose(fp);
 
-	return xpathIsValid;
+    return read == str.capacity() ? str : sstream.str();
+  }
+
+  return sstream.str();
 }
 
-std::string WrapLibxml::dumpXPathObject ( xmlXPathObjectPtr obj )
-{
-	std::stringstream sstream;
-	if ( !obj )
-		return sstream.str();
-
-	switch ( obj->type )
-	{
-	case XPATH_NODESET:
-	{
-		if ( xmlXPathNodeSetIsEmpty ( obj->nodesetval ) )
-			break;
-
-		xmlBufferPtr bufferPtr = xmlBufferCreate();
-		if ( bufferPtr == NULL )
-			break;
-
-		xmlNodeSetPtr nodeset = obj->nodesetval;
-		for ( int i = 0; i < nodeset->nodeNr; i++ )
-		{
-			xmlNodePtr node = nodeset->nodeTab[i];
-			if ( !node )
-				break;
-			xmlNodeDump ( bufferPtr, NULL, node, 0/*level*/, TRUE/*format*/ );
-
-			sstream << ( const char * ) xmlBufferContent ( bufferPtr )
-					<< '\n';
-			xmlBufferEmpty ( bufferPtr );
-		}
-		xmlBufferFree ( bufferPtr );
-		break;
-	}
-
-	case XPATH_BOOLEAN:
-		sstream << !!obj->boolval;
-		break;
-
-	case XPATH_NUMBER:
-		switch ( xmlXPathIsInf ( obj->floatval ) )
-		{
-		case 1:
-			sstream << wxString ( _("Infinity") ).utf8_str();
-			break;
-		case -1:
-			sstream << wxString ( _("-Infinity") ).utf8_str();
-			break;
-		default:
-			if ( xmlXPathIsNaN ( obj->floatval ) )
-				sstream << wxString ( _("NaN") ).utf8_str();
-			else
-				sstream << obj->floatval;
-			break;
-		}
-		break;
-
-	case XPATH_STRING:
-		sstream << obj->stringval;
-		break;
-
-	case XPATH_POINT:
-		xmlBufferPtr bufferPtr;
-		bufferPtr = xmlBufferCreate();
-		if ( bufferPtr == NULL )
-			break;
-		xmlNodeDump ( bufferPtr, NULL, ( xmlNodePtr ) obj->user,
-				1/*level*/, TRUE/*format*/ );
-		sstream << xmlBufferContent ( bufferPtr );
-		xmlBufferFree ( bufferPtr );
-		break;
-
-	case XPATH_RANGE:
-	case XPATH_LOCATIONSET:
-	case XPATH_XSLT_TREE:
-	default:
-		FILE *fp = tmpfile();
-		xmlXPathDebugDumpObject ( fp, obj, 0/*depth*/ );
-
-		std::string str;
-		long size = ftell ( fp );
-		if ( size == -1 )
-			return str;
-
-		str.resize ( size + 1 );
-		if ( str.capacity() != ( size_t ) size + 1 )
-			return str;
-		rewind ( fp );
-		size_t read = fread ( ( char * ) str.c_str(), 1, str.capacity(), fp );
-		str[size] = '\0';
-		fclose ( fp );
-
-		return read == str.capacity() ? str : sstream.str();
-	}
-
-	return sstream.str();
+bool WrapLibxml::xslt(const wxString &styleFileName,
+                      const std::string &utf8DocBuf,
+                      const wxString &docFileName) {
+  return xslt(styleFileName, utf8DocBuf.c_str(), utf8DocBuf.length(),
+              docFileName);
 }
 
-bool WrapLibxml::xslt (
-    const wxString &styleFileName,
-    const std::string &utf8DocBuf,
-    const wxString &docFileName
-)
-{
-	return xslt ( styleFileName, utf8DocBuf.c_str(), utf8DocBuf.length(),
-			docFileName );
+bool WrapLibxml::xslt(const wxString &styleFileName,
+                      const wxString &docFileName) {
+  return xslt(styleFileName, NULL, 0, docFileName);
 }
 
-bool WrapLibxml::xslt (
-    const wxString &styleFileName,
-    const wxString &docFileName
-)
-{
-	return xslt ( styleFileName, NULL, 0, docFileName );
+bool WrapLibxml::xslt(const wxString &styleFileName, const char *utf8DocBuf,
+                      size_t utf8DocBufSize, const wxString &docFileName) {
+  output = "";
+
+  bool ret = false;
+
+  xsltStylesheetPtr cur = NULL;
+  xmlParserCtxtPtr ctxt = NULL;
+  xmlDocPtr doc = NULL, res = NULL;
+
+  do {
+    cur = xsltParseStylesheetFile((const xmlChar *)CONV(styleFileName));
+    if (!cur) {
+      nonParserError = _("Cannot parse stylesheet");
+      return false;
+    }
+
+    ctxt = xmlNewParserCtxt();
+    if (!ctxt) {
+      nonParserError = _("Cannot create a parser context");
+      break;
+    }
+
+    int flags = XML_PARSE_NOENT | XML_PARSE_DTDLOAD;
+    if (!netAccess)
+      flags |= XML_PARSE_NONET;
+    if (utf8DocBuf != NULL) {
+      xmlChar *url = xmlFileNameToURL(docFileName);
+      doc = xmlCtxtReadMemory(ctxt, utf8DocBuf, utf8DocBufSize,
+                              (const char *)url, "UTF-8", flags);
+      xmlFree(url);
+    } else
+      doc = xmlCtxtReadFile(ctxt, CONV(docFileName), NULL, flags);
+    if (!doc)
+      break;
+
+    res = xsltApplyStylesheet(cur, doc, NULL);
+    if (!res) {
+      nonParserError = _("Cannot apply stylesheet");
+      break;
+    }
+
+    xmlChar *buf = NULL;
+    int size;
+    xmlDocDumpFormatMemoryEnc(res, &buf, &size, "UTF-8", 1);
+    if (buf) {
+      output.append((char *)buf, size);
+      xmlFree(buf);
+    }
+
+    // ensure entity warnings are treated as errors
+    ret = !xmlGetLastError();
+
+  } while (false);
+
+  xmlFreeDoc(doc);
+  xmlFreeParserCtxt(ctxt);
+  xmlFreeDoc(res);
+  xsltFreeStylesheet(cur);
+
+  return ret;
 }
 
-bool WrapLibxml::xslt (
-    const wxString &styleFileName,
-    const char *utf8DocBuf,
-    size_t utf8DocBufSize,
-    const wxString &docFileName
-)
-{
-	output = "";
+bool WrapLibxml::bufferWellFormed(const std::string &buffer) {
+  xmlParserCtxtPtr ctxt = xmlNewParserCtxt();
+  if (!ctxt) {
+    nonParserError = _("Cannot create a parser context");
+    return false;
+  }
 
-	bool ret = false;
+  int flags = XML_PARSE_DTDLOAD;
+  if (!netAccess)
+    flags |= XML_PARSE_NONET;
+  xmlDocPtr docPtr = xmlCtxtReadMemory(ctxt, buffer.c_str(), buffer.size(), "",
+                                       "UTF-8", flags);
+  bool returnValue = (docPtr) ? true : false;
 
-	xsltStylesheetPtr cur = NULL;
-	xmlParserCtxtPtr ctxt = NULL;
-	xmlDocPtr doc = NULL, res = NULL;
+  xmlFreeDoc(docPtr);
+  xmlFreeParserCtxt(ctxt);
 
-	do {
-		cur = xsltParseStylesheetFile ( ( const xmlChar * )
-				CONV ( styleFileName ) );
-		if ( !cur )
-		{
-			nonParserError = _("Cannot parse stylesheet");
-			return false;
-		}
-
-		ctxt = xmlNewParserCtxt();
-		if ( !ctxt )
-		{
-			nonParserError = _("Cannot create a parser context");
-			break;
-		}
-
-		int flags = XML_PARSE_NOENT | XML_PARSE_DTDLOAD;
-		if ( !netAccess )
-			flags |= XML_PARSE_NONET;
-		if ( utf8DocBuf != NULL )
-		{
-			xmlChar *url = xmlFileNameToURL ( docFileName );
-			doc = xmlCtxtReadMemory ( ctxt, utf8DocBuf, utf8DocBufSize,
-					( const char * ) url, "UTF-8", flags );
-			xmlFree ( url );
-		}
-		else
-			doc = xmlCtxtReadFile ( ctxt, CONV ( docFileName ), NULL, flags );
-		if ( !doc )
-			break;
-
-		res = xsltApplyStylesheet ( cur, doc, NULL );
-		if ( !res )
-		{
-			nonParserError = _("Cannot apply stylesheet");
-			break;
-		}
-
-		xmlChar *buf = NULL;
-		int size;
-		xmlDocDumpFormatMemoryEnc ( res, &buf, &size, "UTF-8", 1 );
-		if ( buf )
-		{
-			output.append ( ( char * ) buf, size );
-			xmlFree ( buf );
-		}
-
-		// ensure entity warnings are treated as errors
-		ret = !xmlGetLastError();
-
-	} while ( false );
-
-	xmlFreeDoc ( doc );
-	xmlFreeParserCtxt ( ctxt );
-	xmlFreeDoc ( res );
-	xsltFreeStylesheet ( cur );
-
-	return ret;
+  return returnValue;
 }
 
-bool WrapLibxml::bufferWellFormed ( const std::string& buffer )
-{
-	xmlParserCtxtPtr ctxt = xmlNewParserCtxt();
-	if ( !ctxt )
-	{
-		nonParserError = _("Cannot create a parser context");
-		return false;
-	}
-
-	int flags = XML_PARSE_DTDLOAD;
-	if ( !netAccess )
-		flags |= XML_PARSE_NONET;
-	xmlDocPtr docPtr = xmlCtxtReadMemory ( ctxt, buffer.c_str(), buffer.size(),
-			"", "UTF-8", flags );
-	bool returnValue = ( docPtr ) ? true : false;
-
-	xmlFreeDoc ( docPtr );
-	xmlFreeParserCtxt ( ctxt );
-
-	return returnValue;
+int WrapLibxml::saveEncoding(const std::string &utf8Buffer,
+                             const wxString &fileNameSource,
+                             const wxString &fileNameDestination,
+                             wxMemoryBuffer *outputBuffer,
+                             const wxString &encoding) {
+  return saveEncoding(utf8Buffer.c_str(), utf8Buffer.length(), fileNameSource,
+                      fileNameDestination, outputBuffer, encoding);
 }
 
-int WrapLibxml::saveEncoding (
-    const std::string &utf8Buffer,
-    const wxString &fileNameSource,
-    const wxString &fileNameDestination,
-    wxMemoryBuffer *outputBuffer,
-    const wxString &encoding )
-{
-	return saveEncoding ( utf8Buffer.c_str(), utf8Buffer.length(),
-			fileNameSource, fileNameDestination, outputBuffer, encoding );
+int WrapLibxml::saveEncoding(const wxString &fileNameSource,
+                             const wxString &fileNameDestination,
+                             const wxString &encoding) {
+  return saveEncoding(NULL, 0, fileNameSource, fileNameDestination, NULL,
+                      encoding);
 }
 
-int WrapLibxml::saveEncoding (
-    const wxString &fileNameSource,
-    const wxString &fileNameDestination,
-    const wxString &encoding )
-{
-	return saveEncoding ( NULL, 0, fileNameSource, fileNameDestination,
-			NULL, encoding );
+int WrapLibxml::saveEncoding(const char *utf8Buffer, size_t utf8BufferSize,
+                             const wxString &fileNameSource,
+                             const wxString &fileNameDestination,
+                             wxMemoryBuffer *outputBuffer,
+                             const wxString &encoding) {
+  xmlParserCtxtPtr ctxt = xmlNewParserCtxt();
+  if (!ctxt) {
+    nonParserError = _("Cannot create a parser context");
+    return -1;
+  }
+
+  xmlDocPtr docPtr;
+  // Don't load DTD because additional namespace declarations will be added
+  // to every element when processing a docbook XML
+  int flags = XML_PARSE_PEDANTIC /*| XML_PARSE_DTDLOAD | XML_PARSE_DTDVALID*/;
+  if (!netAccess)
+    flags |= XML_PARSE_NONET;
+  if (utf8Buffer != NULL) {
+    xmlChar *url = xmlFileNameToURL(fileNameSource);
+    docPtr = xmlCtxtReadMemory(ctxt, utf8Buffer, utf8BufferSize,
+                               (const char *)url, "UTF-8", flags);
+    xmlFree(url);
+  } else
+    docPtr = xmlCtxtReadFile(ctxt, CONV(fileNameSource), NULL, flags);
+  if (!docPtr) {
+    xmlFreeParserCtxt(ctxt);
+    return -1;
+  }
+
+  int result;
+  if (outputBuffer == NULL) {
+    result =
+        xmlSaveFileEnc(CONV(fileNameDestination), docPtr, encoding.utf8_str());
+  } else {
+    xmlChar *buffer;
+    xmlDocDumpFormatMemoryEnc(docPtr, &buffer, &result, encoding.utf8_str(), 1);
+    outputBuffer->AppendData(buffer, result);
+    xmlFree(buffer);
+  }
+
+  xmlFreeDoc(docPtr);
+  xmlFreeParserCtxt(ctxt);
+
+  return result;
 }
 
-int WrapLibxml::saveEncoding (
-    const char *utf8Buffer,
-    size_t utf8BufferSize,
-    const wxString &fileNameSource,
-    const wxString &fileNameDestination,
-    wxMemoryBuffer *outputBuffer,
-    const wxString &encoding )
-{
-	xmlParserCtxtPtr ctxt = xmlNewParserCtxt();
-	if ( !ctxt )
-	{
-		nonParserError = _("Cannot create a parser context");
-		return -1;
-	}
+wxString WrapLibxml::getLastError() {
+  xmlErrorPtr err = xmlGetLastError();
 
-	xmlDocPtr docPtr;
-	// Don't load DTD because additional namespace declarations will be added
-	// to every element when processing a docbook XML
-	int flags = XML_PARSE_PEDANTIC /*| XML_PARSE_DTDLOAD | XML_PARSE_DTDVALID*/;
-	if ( !netAccess )
-		flags |= XML_PARSE_NONET;
-	if ( utf8Buffer != NULL )
-	{
-		xmlChar *url = xmlFileNameToURL ( fileNameSource );
-		docPtr = xmlCtxtReadMemory ( ctxt, utf8Buffer, utf8BufferSize,
-				( const char * ) url, "UTF-8", flags );
-		xmlFree ( url );
-	}
-	else
-		docPtr = xmlCtxtReadFile ( ctxt, CONV ( fileNameSource ), NULL, flags );
-	if ( !docPtr )
-	{
-		xmlFreeParserCtxt ( ctxt );
-		return -1;
-	}
+  if (!err)
+    return nonParserError;
 
-	int result;
-	if ( outputBuffer == NULL )
-	{
-		result = xmlSaveFileEnc (
-				CONV ( fileNameDestination ),
-				docPtr,
-				encoding.utf8_str() );
-	}
-	else
-	{
-		xmlChar *buffer;
-		xmlDocDumpFormatMemoryEnc ( docPtr, &buffer, &result,
-				encoding.utf8_str(), 1 );
-		outputBuffer->AppendData ( buffer, result );
-		xmlFree ( buffer );
-	}
+  wxString error(err->message, wxConvLocal);
+  if (err->int2)
+    return wxString::Format(_("Error at line %d, column %d: %s"), err->line,
+                            err->int2, error.c_str());
 
-	xmlFreeDoc ( docPtr );
-	xmlFreeParserCtxt ( ctxt );
-
-	return result;
+  return wxString::Format(_("Error at line %d: %s"), err->line, error.c_str());
 }
 
-wxString WrapLibxml::getLastError()
-{
-	xmlErrorPtr err = xmlGetLastError();
+std::pair< int, int > WrapLibxml::getErrorPosition() {
+  xmlErrorPtr err = xmlGetLastError();
+  if (!err)
+    return std::make_pair(1, 1);
 
-	if ( !err )
-		return nonParserError;
-
-	wxString error ( err->message, wxConvLocal );
-	if ( err->int2 )
-		return wxString::Format ( _("Error at line %d, column %d: %s"),
-				err->line, err->int2, error.c_str() );
-
-	return wxString::Format ( _("Error at line %d: %s"),
-			err->line, error.c_str() );
+  return std::make_pair(err->line, err->int2);
 }
 
-std::pair<int, int> WrapLibxml::getErrorPosition()
-{
-	xmlErrorPtr err = xmlGetLastError();
-	if ( !err )
-		return std::make_pair ( 1, 1 );
+std::string WrapLibxml::getOutput() { return output; }
 
-	return std::make_pair (
-	           err->line,
-	           err->int2 );
-}
-
-std::string WrapLibxml::getOutput()
-{
-	return output;
-}
-
-wxString WrapLibxml::catalogResolve
-    ( const wxString &publicId
-    , const wxString &systemId
-    )
-{
-	// According to 7.1.2. Resolution of External Identifiers
-	// from http://www.oasis-open.org/committees/entity/spec-2001-08-06.html,
-	// our catalog may not be used if the system catalog, which is specified
-	// in a delegateSystem entry, is out of date, such as the catalog for
-	// resolving public ID "-//OASIS//DTD DocBook XML V5.0//EN"
-	char *s = ( char * ) xmlACatalogResolve ( ::catalog,
-			( const xmlChar * ) ( const char *) publicId.utf8_str(),
-			( const xmlChar * ) ( const char *) systemId.utf8_str() );
-	if ( s == NULL )
-	{
+wxString WrapLibxml::catalogResolve(const wxString &publicId,
+                                    const wxString &systemId) {
+  // According to 7.1.2. Resolution of External Identifiers
+  // from http://www.oasis-open.org/committees/entity/spec-2001-08-06.html,
+  // our catalog may not be used if the system catalog, which is specified
+  // in a delegateSystem entry, is out of date, such as the catalog for
+  // resolving public ID "-//OASIS//DTD DocBook XML V5.0//EN"
+  char *s = (char *)xmlACatalogResolve(
+      ::catalog, (const xmlChar *)(const char *)publicId.utf8_str(),
+      (const xmlChar *)(const char *)systemId.utf8_str());
+  if (s == NULL) {
 #ifndef __WXMSW__
-		s = ( char * ) xmlCatalogResolve (
-				( const xmlChar * ) ( const char *) publicId.utf8_str(),
-				( const xmlChar * ) ( const char *) systemId.utf8_str() );
-		if ( s == NULL )
+    s = (char *)xmlCatalogResolve(
+        (const xmlChar *)(const char *)publicId.utf8_str(),
+        (const xmlChar *)(const char *)systemId.utf8_str());
+    if (s == NULL)
 #endif
-			return wxEmptyString;
-	}
+      return wxEmptyString;
+  }
 
-	wxString url ( s, wxConvUTF8 );
-	xmlFree ( s );
+  wxString url(s, wxConvUTF8);
+  xmlFree(s);
 
-	wxFileName file = URLToFileName ( url );
-	if ( file.IsFileReadable() )
-		return file.GetFullPath();
+  wxFileName file = URLToFileName(url);
+  if (file.IsFileReadable())
+    return file.GetFullPath();
 
-	return url;
+  return url;
 }
 
-wxString WrapLibxml::FileNameToURL ( const wxString &fileName )
-{
-	xmlChar *s = xmlFileNameToURL ( fileName );
-	if ( !s )
-		return wxEmptyString;
+wxString WrapLibxml::FileNameToURL(const wxString &fileName) {
+  xmlChar *s = xmlFileNameToURL(fileName);
+  if (!s)
+    return wxEmptyString;
 
-	wxString url = wxString::FromUTF8 ( ( char * ) s );
-	xmlFree ( s );
+  wxString url = wxString::FromUTF8((char *)s);
+  xmlFree(s);
 
-	return url;
+  return url;
 }
 
-xmlChar *WrapLibxml::xmlFileNameToURL ( const wxString &fileName )
-{
-	if ( fileName.empty() )
-		return NULL;
+xmlChar *WrapLibxml::xmlFileNameToURL(const wxString &fileName) {
+  if (fileName.empty())
+    return NULL;
 
-	wxFileName fn ( fileName );
-	fn.Normalize();
-	wxString url = fn.GetFullPath();
+  wxFileName fn(fileName);
+  fn.Normalize();
+  wxString url = fn.GetFullPath();
 
-	return xmlPathToURI ( ( xmlChar * ) ( const char * ) url.utf8_str() );
+  return xmlPathToURI((xmlChar *)(const char *)url.utf8_str());
 }
 
-wxFileName WrapLibxml::URLToFileName ( const wxString &url )
-{
-#if wxCHECK_VERSION(2,9,0)
-	return wxFileSystem::URLToFileName ( url );
+wxFileName WrapLibxml::URLToFileName(const wxString &url) {
+#if wxCHECK_VERSION(2, 9, 0)
+  return wxFileSystem::URLToFileName(url);
 #else
-	xmlURIPtr uri = xmlParseURI ( url.utf8_str() );
-	if ( !uri )
-		return wxFileName ( url );
+  xmlURIPtr uri = xmlParseURI(url.utf8_str());
+  if (!uri)
+    return wxFileName(url);
 
-	do {
-		if ( uri->scheme != NULL && strcmp (uri->scheme, "file" ) )
-			break;
+  do {
+    if (uri->scheme != NULL && strcmp(uri->scheme, "file"))
+      break;
 #ifdef _MSC_VER
-		if ( uri->server && stricmp ( uri->server, "localhost") )
-			break;
+    if (uri->server && stricmp(uri->server, "localhost"))
+      break;
 #else
-		if ( uri->server && strcasecmp ( uri->server, "localhost") )
-			break;
+    if (uri->server && strcasecmp(uri->server, "localhost"))
+      break;
 #endif
-		if ( uri->path == NULL || !*uri->path )
-			break;
+    if (uri->path == NULL || !*uri->path)
+      break;
 
-		char *path = uri->path;
-		// Does it begin with "/C:" ?
-		if ( *path == '/' && wxIsalpha ( path[1] ) && path[2] == ':')
-			path++;
+    char *path = uri->path;
+    // Does it begin with "/C:" ?
+    if (*path == '/' && wxIsalpha(path[1]) && path[2] == ':')
+      path++;
 
-		wxFileName file ( wxString ( path, wxConvUTF8 ) );
+    wxFileName file(wxString(path, wxConvUTF8));
 
-		xmlFreeURI ( uri );
+    xmlFreeURI(uri);
 
-		return file;
+    return file;
 
-	} while ( false );
+  } while (false);
 
-	xmlFreeURI ( uri );
+  xmlFreeURI(uri);
 
-	return wxFileName(url);
+  return wxFileName(url);
 #endif // wxCHECK_VERSION(2,9,0)
 }

@@ -25,27 +25,22 @@
 
 using namespace std;
 
-class ContextMatch
-{
-	public:
-		string prelog;
-		string match;
-		string postlog;
-		string replace;
-		string report;
-		size_t elementCount;
-		int offset;
-		bool tentative;
+class ContextMatch {
+public:
+  string prelog;
+  string match;
+  string postlog;
+  string replace;
+  string report;
+  size_t elementCount;
+  int offset;
+  bool tentative;
 };
 
-class ContextHandler
-{
-	public:
-		static ContextMatch getContext (
-		    const char *s,
-		    int len,
-		    const char *origin,
-		    int context );
+class ContextHandler {
+public:
+  static ContextMatch getContext(const char *s, int len, const char *origin,
+                                 int context);
 };
 
 #endif

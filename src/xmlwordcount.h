@@ -25,23 +25,22 @@
 #include <memory>
 #include "wrapexpat.h"
 
-struct WordCountData : public ParserData
-{
-	std::string buffer;
-	size_t wordCount;
+struct WordCountData : public ParserData {
+  std::string buffer;
+  size_t wordCount;
 };
 
-class XmlWordCount : public WrapExpat
-{
-	public:
-		XmlWordCount ( const char *encoding = NULL );
-		virtual ~XmlWordCount();
+class XmlWordCount : public WrapExpat {
+public:
+  XmlWordCount(const char *encoding = NULL);
+  virtual ~XmlWordCount();
 
-		int getWordCount();
-	private:
-		std::auto_ptr<WordCountData> wcd;
-		static void XMLCALL characterdata ( void *data, const XML_Char *s, int len );
-		static void XMLCALL end ( void *data, const XML_Char *el );
+  int getWordCount();
+
+private:
+  std::auto_ptr< WordCountData > wcd;
+  static void XMLCALL characterdata(void *data, const XML_Char *s, int len);
+  static void XMLCALL end(void *data, const XML_Char *el);
 };
 
 #endif

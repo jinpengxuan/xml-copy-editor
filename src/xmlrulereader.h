@@ -32,65 +32,61 @@
 
 using namespace std;
 
-class RuleData : public ParserData
-{
-	public:
-		RuleData (
-		    boost::shared_ptr<StringSet<char> > dictionaryParameter,
-		    boost::shared_ptr<StringSet<char> > passiveDictionaryParameter,
-		    boost::shared_ptr<vector<boost::shared_ptr<Rule> > > ruleVectorParameter );
-		~RuleData();
+class RuleData : public ParserData {
+public:
+  RuleData(boost::shared_ptr< StringSet< char > > dictionaryParameter,
+           boost::shared_ptr< StringSet< char > > passiveDictionaryParameter,
+           boost::shared_ptr< vector< boost::shared_ptr< Rule > > >
+               ruleVectorParameter);
+  ~RuleData();
 
-		XML_Parser p;
-		string title, find, replace, report, include, exclude, term;
-		string incorrectPatternReport;
-		bool matchcase, cipher, adjustcase, tentative, passive;
-		bool dictionaryFound;
-		int ruleCount;
-		vector<string> excludeVector;
-		vector<string> includeVector;
-		boost::shared_ptr<StringSet<char> > dictionary, passiveDictionary;
-		boost::shared_ptr<vector<boost::shared_ptr<Rule> > > ruleVector;
-		void initialiseAttributes();
+  XML_Parser p;
+  string title, find, replace, report, include, exclude, term;
+  string incorrectPatternReport;
+  bool matchcase, cipher, adjustcase, tentative, passive;
+  bool dictionaryFound;
+  int ruleCount;
+  vector< string > excludeVector;
+  vector< string > includeVector;
+  boost::shared_ptr< StringSet< char > > dictionary, passiveDictionary;
+  boost::shared_ptr< vector< boost::shared_ptr< Rule > > > ruleVector;
+  void initialiseAttributes();
 };
 
-class XmlRuleReader : public WrapExpat
-{
-	public:
-		XmlRuleReader (
-		    boost::shared_ptr<StringSet<char> > dictionary,
-		    boost::shared_ptr<StringSet<char> > passiveDictionary,
-		    boost::shared_ptr<vector<boost::shared_ptr<Rule> > > ruleVector );
-		virtual ~XmlRuleReader();
+class XmlRuleReader : public WrapExpat {
+public:
+  XmlRuleReader(
+      boost::shared_ptr< StringSet< char > > dictionary,
+      boost::shared_ptr< StringSet< char > > passiveDictionary,
+      boost::shared_ptr< vector< boost::shared_ptr< Rule > > > ruleVector);
+  virtual ~XmlRuleReader();
 
-		enum
-		{
-			STATE_UNKNOWN,
-			STATE_IN_RULE,
-			STATE_IN_FIND,
-			STATE_IN_REPLACE,
-			STATE_IN_REPORT,
-			STATE_IN_INCLUDE,
-			STATE_IN_EXCLUDE,
-			STATE_IN_TITLE,
-			STATE_IN_TERM
-		};
+  enum {
+    STATE_UNKNOWN,
+    STATE_IN_RULE,
+    STATE_IN_FIND,
+    STATE_IN_REPLACE,
+    STATE_IN_REPORT,
+    STATE_IN_INCLUDE,
+    STATE_IN_EXCLUDE,
+    STATE_IN_TITLE,
+    STATE_IN_TERM
+  };
 
-		int getRuleCount();
-		string getIncorrectPatternReport();
-		void getExcludeVector ( vector<string> &v );
-		void getIncludeVector ( vector<string> &v );
-	private:
-		std::auto_ptr<RuleData> ud;
-		boost::shared_ptr<StringSet<char> > dictionary, passiveDictionary;
-		boost::shared_ptr<vector<boost::shared_ptr<Rule> > > ruleVector;
+  int getRuleCount();
+  string getIncorrectPatternReport();
+  void getExcludeVector(vector< string > &v);
+  void getIncludeVector(vector< string > &v);
 
-		static void XMLCALL start (
-		    void *data,
-		    const XML_Char *el,
-		    const XML_Char **attr );
-		static void XMLCALL end ( void *data, const XML_Char *el );
-		static void XMLCALL characterdata ( void *data, const XML_Char *s, int len );
+private:
+  std::auto_ptr< RuleData > ud;
+  boost::shared_ptr< StringSet< char > > dictionary, passiveDictionary;
+  boost::shared_ptr< vector< boost::shared_ptr< Rule > > > ruleVector;
+
+  static void XMLCALL start(void *data, const XML_Char *el,
+                            const XML_Char **attr);
+  static void XMLCALL end(void *data, const XML_Char *el);
+  static void XMLCALL characterdata(void *data, const XML_Char *s, int len);
 };
 
 #endif

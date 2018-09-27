@@ -26,28 +26,24 @@
 #include <memory>
 #include "wrapexpat.h"
 
-struct XslLocatorData : public ParserData
-{
-	std::string xslLocation;
-	XML_Parser parser;
+struct XslLocatorData : public ParserData {
+  std::string xslLocation;
+  XML_Parser parser;
 };
 
-class XslLocator : public WrapExpat
-{
-	public:
-		XslLocator ( const char * encoding = NULL );
-		virtual ~XslLocator();
-		std::string getXslLocation();
-	private:
-		std::auto_ptr<XslLocatorData> d;
-		static void XMLCALL starthandler (
-		    void *data,
-		    const XML_Char *el,
-		    const XML_Char **attr );
-		static void XMLCALL processingInstructionHandler (
-		    void *userData,
-		    const XML_Char *target,
-		    const XML_Char *data );
+class XslLocator : public WrapExpat {
+public:
+  XslLocator(const char *encoding = NULL);
+  virtual ~XslLocator();
+  std::string getXslLocation();
+
+private:
+  std::auto_ptr< XslLocatorData > d;
+  static void XMLCALL starthandler(void *data, const XML_Char *el,
+                                   const XML_Char **attr);
+  static void XMLCALL processingInstructionHandler(void *userData,
+                                                   const XML_Char *target,
+                                                   const XML_Char *data);
 };
 
 #endif

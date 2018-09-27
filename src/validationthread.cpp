@@ -31,68 +31,55 @@ extern wxCriticalSection xmlcopyeditorCriticalSection;
 
 DEFINE_EVENT_TYPE(wxEVT_COMMAND_VALIDATION_COMPLETED);
 
-ValidationThread::ValidationThread (
-	wxEvtHandler *handler,
-	const char *utf8Buffer,
-	const wxString &system )
-	: wxThread ( wxTHREAD_JOINABLE )
-	, mStopping ( false )
-{
-	if ( utf8Buffer == NULL )
-	{
-		throw;
-	}
+ValidationThread::ValidationThread(wxEvtHandler *handler,
+                                   const char *utf8Buffer,
+                                   const wxString &system)
+    : wxThread(wxTHREAD_JOINABLE), mStopping(false) {
+  if (utf8Buffer == NULL) {
+    throw;
+  }
 
-	myEventHandler = handler;
-	myBuffer = utf8Buffer;
-	mySystem = system;
-	myIsSucceeded = false;
+  myEventHandler = handler;
+  myBuffer = utf8Buffer;
+  mySystem = system;
+  myIsSucceeded = false;
 }
 
-void *ValidationThread::Entry()
-{
-	std::auto_ptr<WrapXerces> validator ( new WrapXerces() );
-	
-	if ( TestDestroy()  )
-	{
-		myBuffer.clear();
-		return NULL;
-	}
+void *ValidationThread::Entry() {
+  std::auto_ptr< WrapXerces > validator(new WrapXerces());
 
-	myIsSucceeded = validator->validateMemory (
-		myBuffer.c_str(),
-		myBuffer.size(),
-		mySystem,
-		this,
-		// Don't be too harsh to new created documents, which may haven't
-		// associated any schema yet
-		/*forceCheckGrammar*/false,
-		wxTextBuffer::GetEOL() );
+  if (TestDestroy()) {
+    myBuffer.clear();
+    return NULL;
+  }
 
-	myBuffer.clear();
+  myIsSucceeded = validator->validateMemory(
+      myBuffer.c_str(), myBuffer.size(), mySystem, this,
+      // Don't be too harsh to new created documents, which may haven't
+      // associated any schema yet
+      /*forceCheckGrammar*/ false, wxTextBuffer::GetEOL());
 
-	if ( TestDestroy() )
-	{
-		return NULL;
-	}
+  myBuffer.clear();
 
-	wxCriticalSectionLocker locker ( xmlcopyeditorCriticalSection );
+  if (TestDestroy()) {
+    return NULL;
+  }
 
-	myPosition = validator->getErrorPosition();
-	myMessage = validator->getLastError();
+  wxCriticalSectionLocker locker(xmlcopyeditorCriticalSection);
 
-	if ( !TestDestroy() )
-	{
-		wxCommandEvent event ( wxEVT_COMMAND_VALIDATION_COMPLETED );
-		wxPostEvent ( myEventHandler, event );
-	}
+  myPosition = validator->getErrorPosition();
+  myMessage = validator->getLastError();
 
-	return NULL;
+  if (!TestDestroy()) {
+    wxCommandEvent event(wxEVT_COMMAND_VALIDATION_COMPLETED);
+    wxPostEvent(myEventHandler, event);
+  }
+
+  return NULL;
 }
 
-void ValidationThread::PendingDelete ()
-{
-	Cancel();
+void ValidationThread::PendingDelete() {
+  Cancel();
 
-	ThreadReaper::get().add ( this );
+  ThreadReaper::get().add(this);
 }

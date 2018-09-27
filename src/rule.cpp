@@ -23,45 +23,20 @@
 
 using namespace std;
 
-Rule::Rule (
-    const string& pattern,
-    bool matchCase,
-    const string& replace,
-    const int arrayLength ) : WrapRegex (
-		        pattern,
-		        matchCase,
-		        replace,
-		        arrayLength )
-{
-	adjustCaseAttribute = tentativeAttribute = false;
+Rule::Rule(const string &pattern, bool matchCase, const string &replace,
+           const int arrayLength)
+    : WrapRegex(pattern, matchCase, replace, arrayLength) {
+  adjustCaseAttribute = tentativeAttribute = false;
 }
 
-bool Rule::getAdjustCaseAttribute()
-{
-	return adjustCaseAttribute;
-}
+bool Rule::getAdjustCaseAttribute() { return adjustCaseAttribute; }
 
-bool Rule::getTentativeAttribute()
-{
-	return tentativeAttribute;
-}
+bool Rule::getTentativeAttribute() { return tentativeAttribute; }
 
-string Rule::getReport()
-{
-	return reportString;
-}
+string Rule::getReport() { return reportString; }
 
-void Rule::setAdjustCaseAttribute ( bool b )
-{
-	adjustCaseAttribute = b;
-}
+void Rule::setAdjustCaseAttribute(bool b) { adjustCaseAttribute = b; }
 
-void Rule::setTentativeAttribute ( bool b )
-{
-	tentativeAttribute = b;
-}
+void Rule::setTentativeAttribute(bool b) { tentativeAttribute = b; }
 
-void Rule::setReport ( string &s )
-{
-	reportString = s;
-}
+void Rule::setReport(string &s) { reportString = s; }

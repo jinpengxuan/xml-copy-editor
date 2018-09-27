@@ -26,39 +26,38 @@
 
 class XmlDoc;
 
-class MyPrintout: public wxPrintout
-{
+class MyPrintout : public wxPrintout {
 public:
-	MyPrintout ( XmlDoc *doc, const wxString &title );
-	virtual ~MyPrintout();
+  MyPrintout(XmlDoc *doc, const wxString &title);
+  virtual ~MyPrintout();
 
-	virtual void OnPreparePrinting();
+  virtual void OnPreparePrinting();
 
-	virtual void OnBeginPrinting();
-	virtual void OnEndPrinting();
+  virtual void OnBeginPrinting();
+  virtual void OnEndPrinting();
 
-	virtual bool HasPage ( int nPage );
-	virtual bool OnPrintPage ( int nPage );
-	virtual void GetPageInfo ( int *minPage, int *maxPage, int *pageFrom
-			, int *pageTo );
+  virtual bool HasPage(int nPage);
+  virtual bool OnPrintPage(int nPage);
+  virtual void GetPageInfo(int *minPage, int *maxPage, int *pageFrom,
+                           int *pageTo);
 
-	static wxPageSetupDialogData &GetPageData();
-
-protected:
-	void SetupDC();
-
-	int CalcMaxPage();
-
-	// Returns the height of the header
-	int PrintHeader();
-	// Returns the height of the footer
-	int PrintFooter();
+  static wxPageSetupDialogData &GetPageData();
 
 protected:
-	XmlDoc *mDoc;
-	int mMinPage, mMaxPage; // 1 based
-	std::vector<int> mStartPositions; // Start positions of each page
-	wxRect mPrintRect, mPageRect;
+  void SetupDC();
+
+  int CalcMaxPage();
+
+  // Returns the height of the header
+  int PrintHeader();
+  // Returns the height of the footer
+  int PrintFooter();
+
+protected:
+  XmlDoc *mDoc;
+  int mMinPage, mMaxPage;             // 1 based
+  std::vector< int > mStartPositions; // Start positions of each page
+  wxRect mPrintRect, mPageRect;
 };
 
 #endif /* MYPRINTOUT_H_ */

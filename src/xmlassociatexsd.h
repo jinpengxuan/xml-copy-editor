@@ -29,41 +29,28 @@
 #include <memory>
 #include "wrapexpat.h"
 
-struct AssociateXsdData : public ParserData
-{
-	std::string buffer;//, namespaceAttribute;
-	wxString path;
-	size_t depth;
-	std::map<std::string, std::string> namespaceMap;
+struct AssociateXsdData : public ParserData {
+  std::string buffer; //, namespaceAttribute;
+  wxString path;
+  size_t depth;
+  std::map< std::string, std::string > namespaceMap;
 };
 
-class XmlAssociateXsd : public WrapExpat
-{
-	public:
-		XmlAssociateXsd (
-		    const wxString &path = wxEmptyString,
-		    const char *encoding = NULL,
-		    size_t size = BUFSIZ );
-		virtual ~XmlAssociateXsd();
-		std::string getBuffer()
-		{
-			return d->buffer;
-		}
-	private:
-		std::auto_ptr<AssociateXsdData> d;
-		std::string encoding;
-		std::map<std::string, std::string> namespaceMap;
-		static void XMLCALL start (
-		    void *data,
-		    const XML_Char *el,
-		    const XML_Char **attr );
-		static void XMLCALL end (
-		    void *data,
-		    const XML_Char *el );
-		static void XMLCALL defaulthandler (
-		    void *data,
-		    const XML_Char *s,
-		    int len );
+class XmlAssociateXsd : public WrapExpat {
+public:
+  XmlAssociateXsd(const wxString &path = wxEmptyString,
+                  const char *encoding = NULL, size_t size = BUFSIZ);
+  virtual ~XmlAssociateXsd();
+  std::string getBuffer() { return d->buffer; }
+
+private:
+  std::auto_ptr< AssociateXsdData > d;
+  std::string encoding;
+  std::map< std::string, std::string > namespaceMap;
+  static void XMLCALL start(void *data, const XML_Char *el,
+                            const XML_Char **attr);
+  static void XMLCALL end(void *data, const XML_Char *el);
+  static void XMLCALL defaulthandler(void *data, const XML_Char *s, int len);
 };
 
 #endif

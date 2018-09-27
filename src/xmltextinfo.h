@@ -23,43 +23,27 @@
 
 #include "wrapexpat.h"
 
-class XmlTextInfo : public WrapExpat
-{
+class XmlTextInfo : public WrapExpat {
 public:
-	XmlTextInfo
-		( const wxString &path
-		, const char *encoding = NULL
-		);
-	virtual ~XmlTextInfo();
+  XmlTextInfo(const wxString &path, const char *encoding = NULL);
+  virtual ~XmlTextInfo();
 
 private:
-	static void XMLCALL startdoctypehandler
-		( void *userData
-		, const XML_Char *doctypeName
-		, const XML_Char *sysid
-		, const XML_Char *pubid
-		, int has_internal_subset
-		);
-	static void XMLCALL processinghandler
-		( void *data
-		, const XML_Char *target
-		, const XML_Char *datastring
-		);
-	static void XMLCALL start
-		( void *data
-		, const XML_Char *el
-		, const XML_Char **attr
-		);
-	static void XMLCALL defaulthandler
-		( void *data
-		, const XML_Char *s
-		, int len
-		);
+  static void XMLCALL startdoctypehandler(void *userData,
+                                          const XML_Char *doctypeName,
+                                          const XML_Char *sysid,
+                                          const XML_Char *pubid,
+                                          int has_internal_subset);
+  static void XMLCALL processinghandler(void *data, const XML_Char *target,
+                                        const XML_Char *datastring);
+  static void XMLCALL start(void *data, const XML_Char *el,
+                            const XML_Char **attr);
+  static void XMLCALL defaulthandler(void *data, const XML_Char *s, int len);
 
 public:
-	wxString mDocTypeName;
-	wxString mDtdFile, mXsdFile, mXslFile;
-	wxString mEOL;
+  wxString mDocTypeName;
+  wxString mDtdFile, mXsdFile, mXslFile;
+  wxString mEOL;
 };
 
 #endif /* XMLASSOCIATEINFO_H_ */

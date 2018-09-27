@@ -21,60 +21,53 @@
 #include "myhtmlpane.h"
 #include "xmlcopyeditor.h"
 
-BEGIN_EVENT_TABLE ( MyHtmlPane, wxHtmlWindow )
+BEGIN_EVENT_TABLE(MyHtmlPane, wxHtmlWindow)
 END_EVENT_TABLE()
 
-MyHtmlPane::MyHtmlPane (
-    wxWindow *parent,
-    wxWindowID id,
-    const wxPoint& position,
-    const wxSize& size ) : wxHtmlWindow ( parent, id, position, size )
-{
+MyHtmlPane::MyHtmlPane(wxWindow *parent, wxWindowID id, const wxPoint &position,
+                       const wxSize &size)
+    : wxHtmlWindow(parent, id, position, size) {}
+
+bool MyHtmlPane::OnCellClicked(wxHtmlCell *cell, wxCoord x, wxCoord y,
+                               const wxMouseEvent &event) {
+  if (mLastFile.empty())
+    return false;
+
+  wxHtmlContainerCell *parent = cell->GetParent();
+  if (!parent)
+    return false;
+
+  // Expect "FatalError at line 6, column 0:"
+  wxString msg;
+  wxHtmlCell *p = parent->GetFirstChild();
+  for (; p != NULL; p = p->GetNext())
+    msg << p->ConvertToText(NULL);
+
+  const static wxString anchor = _T(" at line ");
+  size_t pos = msg.find(anchor);
+  if (pos == wxString::npos)
+    return false;
+  pos += anchor.length();
+
+  size_t comma = msg.find(',', pos);
+  if (comma == wxString::npos)
+    return false;
+  msg = msg.Mid(pos, comma - pos);
+
+  wxChar *psz = NULL;
+  int line = wxStrtoul(msg, &psz, 10);
+  if (line <= 0)
+    return false;
+
+  MyFrame *frame = (MyFrame *)wxTheApp->GetTopWindow();
+  XmlDoc *doc = frame->getActiveDocument();
+  if ((!doc) || !frame->activateTab(mLastFile))
+    return false;
+
+  doc->GotoLine(line - 1);
+  doc->SetFocus();
+
+  return true;
 }
 
-bool MyHtmlPane::OnCellClicked(wxHtmlCell *cell, wxCoord x, wxCoord y, const wxMouseEvent& event)
-{
-	if ( mLastFile.empty() )
-		return false;
-
-	wxHtmlContainerCell *parent = cell->GetParent();
-	if (!parent)
-		return false;
-
-	// Expect "FatalError at line 6, column 0:"
-	wxString msg;
-	wxHtmlCell *p = parent->GetFirstChild();
-	for (; p != NULL; p = p->GetNext() )
-		msg << p->ConvertToText ( NULL );
-
-	const static wxString anchor = _T(" at line ");
-	size_t pos = msg.find ( anchor );
-	if ( pos == wxString::npos )
-		return false;
-	pos += anchor.length();
-
-	size_t comma = msg.find ( ',', pos );
-	if ( comma == wxString::npos )
-		return false;
-	msg = msg.Mid ( pos, comma - pos);
-
-	wxChar *psz = NULL;
-	int line = wxStrtoul ( msg, &psz, 10 );
-	if ( line <= 0 )
-		return false;
-
-	MyFrame *frame = ( MyFrame * ) wxTheApp->GetTopWindow();
-	XmlDoc *doc = frame->getActiveDocument();
-	if ( ( !doc ) || !frame->activateTab ( mLastFile ) )
-		return false;
-
-	doc->GotoLine ( line - 1 );
-	doc->SetFocus();
-
-	return true;
-}
-
-void MyHtmlPane::setLastFile ( const wxString &file )
-{
-	mLastFile = file;
-}
+void MyHtmlPane::setLastFile(const wxString &file) { mLastFile = file; }

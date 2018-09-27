@@ -27,23 +27,22 @@
 
 class XmlDoc;
 
-class LocationPanel : public wxPanel
-{
-	public:
-		LocationPanel ( wxWindow *parent, int id );
-		void update (
-		    XmlDoc *docParameter = NULL,
-		    const wxString& parent = wxEmptyString );
-		void OnSysColourChanged ( wxSysColourChangedEvent &event );
-	private:
-		void indentStructure ( wxString& structure );
-		MyFrame *parentWindow;
-		wxBoxSizer *sizer;
-		wxTextCtrl *edit;
-		wxStyledTextCtrl *structureEdit;
-		wxString parent;
+class LocationPanel : public wxPanel {
+public:
+  LocationPanel(wxWindow *parent, int id);
+  void update(XmlDoc *docParameter = NULL,
+              const wxString &parent = wxEmptyString);
+  void OnSysColourChanged(wxSysColourChangedEvent &event);
 
-		DECLARE_EVENT_TABLE()
+private:
+  void indentStructure(wxString &structure);
+  MyFrame *parentWindow;
+  wxBoxSizer *sizer;
+  wxTextCtrl *edit;
+  wxStyledTextCtrl *structureEdit;
+  wxString parent;
+
+  DECLARE_EVENT_TABLE()
 };
 
 #endif
