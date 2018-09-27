@@ -21,8 +21,6 @@
 #ifndef XMLCOPYEDITOR_H
 #define XMLCOPYEDITOR_H
 
-#define wxDEBUG_LEVEL 0
-
 #ifdef __WXOSX__
 #define wxMAC_USE_NATIVE_TOOLBAR 1
 #endif

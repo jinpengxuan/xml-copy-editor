@@ -782,7 +782,7 @@ MyFrame::MyFrame(const wxString &title, wxFileConfig *configParameter,
   // Initialize Xerces-C++
   WrapXerces::Init(libxmlNetAccess);
 
-#if _XERCES_VERSION >= 30100 && wxDEBUG_LEVEL > 0
+#if _XERCES_VERSION >= 30100 && wxDEBUG_LEVEL > 1
   if (XMLPlatformUtils::fgSSE2ok && xercescSSE2Warning && wxTheApp->argc == 1) {
     xercescSSE2Warning =
         wxMessageBox(
