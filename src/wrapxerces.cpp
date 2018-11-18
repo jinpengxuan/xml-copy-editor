@@ -20,6 +20,7 @@
 
 #include "wrapxerces.h"
 #include "pathresolver.h"
+#include "xercesnetaccessor.h"
 
 #include <xercesc/parsers/XercesDOMParser.hpp>
 #include <xercesc/sax2/XMLReaderFactory.hpp>
@@ -46,10 +47,16 @@ void WrapXerces::Init ( bool enableNetAccess ) throw()
 		Initializer ()
 		{
 			XMLPlatformUtils::Initialize();
+
 			mOriginalNetAccessor = XMLPlatformUtils::fgNetAccessor;
+			if ( mOriginalNetAccessor != NULL )
+			{
+				mOriginalNetAccessor = new XercesNetAccessor ( mOriginalNetAccessor );
+			}
 		}
 		~Initializer()
 		{
+			delete mOriginalNetAccessor;
 			XMLPlatformUtils::Terminate();
 		}
 	} dummy;
