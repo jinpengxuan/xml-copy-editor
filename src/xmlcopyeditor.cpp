@@ -3570,7 +3570,7 @@ void MyFrame::saveAs()
 		return;
 
 	wxString defaultFile, defaultDir;
-	defaultFile = doc->getFullFileName();
+	defaultFile = doc->getShortFileName();
 	defaultDir = doc->getDirectory();
 	if ( defaultDir.empty() )
 		defaultDir = mLastDir;
