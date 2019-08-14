@@ -226,7 +226,9 @@ MyApp::MyApp()
 	, config ( new wxFileConfig ( _T ( "xmlcopyeditor" ) ) )
 #endif
 {
+#if wxCHECK_VERSION(2,9,0)
 	wxDisableAsserts();
+#endif
 
 #if defined ( __WXGTK__ ) && !defined ( __WXDEBUG__ )
 	int fdnull = open ( "/dev/null", O_WRONLY, 0 );
@@ -3914,7 +3916,7 @@ void MyFrame::OnValidateSchema ( wxCommandEvent& event )
 		getRawText ( doc, rawBuffer );
 		XmlSchemaLocator xsl ( "UTF-8" );
 		xsl.parse ( rawBuffer.c_str() );
-		if ( ( xsl.getSchemaLocation() ) . empty() )
+		if ( ( xsl.getSchemaLocation() ).empty() )
 		{
 			OnValidateDTD ( event );
 			return;

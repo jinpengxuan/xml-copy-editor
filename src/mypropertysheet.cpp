@@ -189,7 +189,7 @@ MyPropertySheet::MyPropertySheet (
 	for ( ; t != translations.end(); ++t )
 	{
 		index = languageBox->Append ( wxGetTranslation ( ( **t ).Description ),
-		                              ( void* )( **t ).Language );
+		                              ( void* ) ( wxIntPtr ) ( **t ).Language );
 		if (lang == ( **t ).Language)
 			languageBox->SetSelection ( index );
 	}
