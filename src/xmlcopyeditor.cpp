@@ -947,14 +947,6 @@ MyFrame::MyFrame (
 	stylePosition = aboutPosition = wxDefaultPosition;
 	styleSize = wxSize ( 720, 540 );
 
-	showTopBars (
-#ifndef __WXOSX__
-		toolbarVisible
-#else
-		false
-#endif
-	);
-
 	long style = wxAUI_NB_TOP |
 	             wxAUI_NB_TAB_SPLIT |
 	             wxAUI_NB_TAB_MOVE |
@@ -1065,6 +1057,14 @@ MyFrame::MyFrame (
 #endif
 
 	manager.Update();
+
+	showTopBars (
+#ifndef __WXOSX__
+		toolbarVisible
+#else
+		false
+#endif
+	);
 
 	wxAcceleratorEntry entry ( wxACCEL_CTRL, WXK_F4, wxID_CLOSE );
 	wxAcceleratorTable accel ( 1, &entry );
