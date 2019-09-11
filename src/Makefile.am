@@ -13,25 +13,70 @@ pixmapdir = /usr/share/pixmaps
 applicationsdir = /usr/share/applications
 
 # the application source, library search path, and link libraries
-xmlcopyeditor_SOURCES = aboutdialog.cpp associatedialog.cpp binaryfile.cpp \
-	casehandler.cpp catalogresolver.cpp commandpanel.cpp \
-	contexthandler.cpp dtd2schema.cpp exportdialog.cpp \
-	findreplacepanel.cpp getword.cpp globalreplacedialog.cpp \
-	housestyle.cpp housestylereader.cpp housestylewriter.cpp \
-	insertpanel.cpp locationpanel.cpp mp3album.cpp myhtmlpane.cpp \
-	myipc.cpp mynotebook.cpp mypropertysheet.cpp nocasecompare.cpp \
-	pathresolver.cpp readfile.cpp replace.cpp rule.cpp styledialog.cpp \
-	threadreaper.cpp validationthread.cpp wrapaspell.cpp wrapdaisy.cpp \
-	wrapexpat.cpp wraplibxml.cpp wrapregex.cpp wraptempfilename.cpp \
-	wrapxerces.cpp xercescatalogresolver.cpp xmlassociatedtd.cpp \
-	xmlassociatexsd.cpp xmlassociatexsl.cpp xmlcopyeditor.cpp \
-	xmlcopyimg.cpp xmlctrl.cpp xmldoc.cpp xmlencodinghandler.cpp \
-	xmlencodingspy.cpp xmlfilterreader.cpp xmlparseschemans.cpp \
-	xmlprodnote.cpp xmlpromptgenerator.cpp xmlrulereader.cpp \
-	xmlschemagenerator.cpp xmlschemalocator.cpp xmlshallowvalidator.cpp \
-	xmlsuppressprodnote.cpp xmltextinfo.cpp xmlutf8reader.cpp \
-	xmlwordcount.cpp xsllocator.cpp \
-	xmlcopyeditor.spec xmlcopyeditor.png custom.xpm
+xmlcopyeditor_SOURCES = aboutdialog.cpp \
+	associatedialog.cpp \
+	binaryfile.cpp \
+	casehandler.cpp \
+	catalogresolver.cpp \
+	commandpanel.cpp \
+	contexthandler.cpp \
+	dtd2schema.cpp \
+	exportdialog.cpp \
+	findreplacepanel.cpp \
+	getword.cpp \
+	globalreplacedialog.cpp \
+	housestyle.cpp \
+	housestylereader.cpp \
+	housestylewriter.cpp \
+	insertpanel.cpp \
+	locationpanel.cpp \
+	mp3album.cpp \
+	myhtmlpane.cpp \
+	myipc.cpp \
+	mynotebook.cpp \
+	mypropertysheet.cpp \
+	nocasecompare.cpp \
+	pathresolver.cpp \
+	readfile.cpp \
+	replace.cpp \
+	rule.cpp \
+	styledialog.cpp \
+	threadreaper.cpp \
+	validationthread.cpp \
+	wrapaspell.cpp \
+	wrapdaisy.cpp \
+	wrapexpat.cpp \
+	wraplibxml.cpp \
+	wrapregex.cpp \
+	wraptempfilename.cpp \
+	wrapxerces.cpp \
+	xercescatalogresolver.cpp \
+	xercesnetaccessor.cpp \
+	xmlassociatedtd.cpp \
+	xmlassociatexsd.cpp \
+	xmlassociatexsl.cpp \
+	xmlcopyeditor.cpp \
+	xmlcopyimg.cpp \
+	xmlctrl.cpp \
+	xmldoc.cpp \
+	xmlencodinghandler.cpp \
+	xmlencodingspy.cpp \
+	xmlfilterreader.cpp \
+	xmlparseschemans.cpp \
+	xmlprodnote.cpp \
+	xmlpromptgenerator.cpp \
+	xmlrulereader.cpp \
+	xmlschemagenerator.cpp \
+	xmlschemalocator.cpp \
+	xmlshallowvalidator.cpp \
+	xmlsuppressprodnote.cpp \
+	xmltextinfo.cpp \
+	xmlutf8reader.cpp \
+	xmlwordcount.cpp \
+	xsllocator.cpp \
+	xmlcopyeditor.spec \
+	xmlcopyeditor.png \
+	custom.xpm
 
 xmlcopyeditor_LDADD = $(WX_LIBS) \
 	-lexpat -lxslt -lxml2 -lpcre -lxerces-c $(ASPELL_LIBS) $(ENCHANT_LIBS) $(GTK2_LIBS)

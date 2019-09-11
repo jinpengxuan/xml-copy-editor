@@ -68,17 +68,17 @@ am_xmlcopyeditor_OBJECTS = aboutdialog.$(OBJEXT) \
 	wrapdaisy.$(OBJEXT) wrapexpat.$(OBJEXT) wraplibxml.$(OBJEXT) \
 	wrapregex.$(OBJEXT) wraptempfilename.$(OBJEXT) \
 	wrapxerces.$(OBJEXT) xercescatalogresolver.$(OBJEXT) \
-	xmlassociatedtd.$(OBJEXT) xmlassociatexsd.$(OBJEXT) \
-	xmlassociatexsl.$(OBJEXT) xmlcopyeditor.$(OBJEXT) \
-	xmlcopyimg.$(OBJEXT) xmlctrl.$(OBJEXT) xmldoc.$(OBJEXT) \
-	xmlencodinghandler.$(OBJEXT) xmlencodingspy.$(OBJEXT) \
-	xmlfilterreader.$(OBJEXT) xmlparseschemans.$(OBJEXT) \
-	xmlprodnote.$(OBJEXT) xmlpromptgenerator.$(OBJEXT) \
-	xmlrulereader.$(OBJEXT) xmlschemagenerator.$(OBJEXT) \
-	xmlschemalocator.$(OBJEXT) xmlshallowvalidator.$(OBJEXT) \
-	xmlsuppressprodnote.$(OBJEXT) xmltextinfo.$(OBJEXT) \
-	xmlutf8reader.$(OBJEXT) xmlwordcount.$(OBJEXT) \
-	xsllocator.$(OBJEXT)
+	xercesnetaccessor.$(OBJEXT) xmlassociatedtd.$(OBJEXT) \
+	xmlassociatexsd.$(OBJEXT) xmlassociatexsl.$(OBJEXT) \
+	xmlcopyeditor.$(OBJEXT) xmlcopyimg.$(OBJEXT) xmlctrl.$(OBJEXT) \
+	xmldoc.$(OBJEXT) xmlencodinghandler.$(OBJEXT) \
+	xmlencodingspy.$(OBJEXT) xmlfilterreader.$(OBJEXT) \
+	xmlparseschemans.$(OBJEXT) xmlprodnote.$(OBJEXT) \
+	xmlpromptgenerator.$(OBJEXT) xmlrulereader.$(OBJEXT) \
+	xmlschemagenerator.$(OBJEXT) xmlschemalocator.$(OBJEXT) \
+	xmlshallowvalidator.$(OBJEXT) xmlsuppressprodnote.$(OBJEXT) \
+	xmltextinfo.$(OBJEXT) xmlutf8reader.$(OBJEXT) \
+	xmlwordcount.$(OBJEXT) xsllocator.$(OBJEXT)
 xmlcopyeditor_OBJECTS = $(am_xmlcopyeditor_OBJECTS)
 am__DEPENDENCIES_1 =
 xmlcopyeditor_DEPENDENCIES = $(am__DEPENDENCIES_1) \
@@ -287,25 +287,70 @@ pixmapdir = /usr/share/pixmaps
 applicationsdir = /usr/share/applications
 
 # the application source, library search path, and link libraries
-xmlcopyeditor_SOURCES = aboutdialog.cpp associatedialog.cpp binaryfile.cpp \
-	casehandler.cpp catalogresolver.cpp commandpanel.cpp \
-	contexthandler.cpp dtd2schema.cpp exportdialog.cpp \
-	findreplacepanel.cpp getword.cpp globalreplacedialog.cpp \
-	housestyle.cpp housestylereader.cpp housestylewriter.cpp \
-	insertpanel.cpp locationpanel.cpp mp3album.cpp myhtmlpane.cpp \
-	myipc.cpp mynotebook.cpp mypropertysheet.cpp nocasecompare.cpp \
-	pathresolver.cpp readfile.cpp replace.cpp rule.cpp styledialog.cpp \
-	threadreaper.cpp validationthread.cpp wrapaspell.cpp wrapdaisy.cpp \
-	wrapexpat.cpp wraplibxml.cpp wrapregex.cpp wraptempfilename.cpp \
-	wrapxerces.cpp xercescatalogresolver.cpp xmlassociatedtd.cpp \
-	xmlassociatexsd.cpp xmlassociatexsl.cpp xmlcopyeditor.cpp \
-	xmlcopyimg.cpp xmlctrl.cpp xmldoc.cpp xmlencodinghandler.cpp \
-	xmlencodingspy.cpp xmlfilterreader.cpp xmlparseschemans.cpp \
-	xmlprodnote.cpp xmlpromptgenerator.cpp xmlrulereader.cpp \
-	xmlschemagenerator.cpp xmlschemalocator.cpp xmlshallowvalidator.cpp \
-	xmlsuppressprodnote.cpp xmltextinfo.cpp xmlutf8reader.cpp \
-	xmlwordcount.cpp xsllocator.cpp \
-	xmlcopyeditor.spec xmlcopyeditor.png custom.xpm
+xmlcopyeditor_SOURCES = aboutdialog.cpp \
+	associatedialog.cpp \
+	binaryfile.cpp \
+	casehandler.cpp \
+	catalogresolver.cpp \
+	commandpanel.cpp \
+	contexthandler.cpp \
+	dtd2schema.cpp \
+	exportdialog.cpp \
+	findreplacepanel.cpp \
+	getword.cpp \
+	globalreplacedialog.cpp \
+	housestyle.cpp \
+	housestylereader.cpp \
+	housestylewriter.cpp \
+	insertpanel.cpp \
+	locationpanel.cpp \
+	mp3album.cpp \
+	myhtmlpane.cpp \
+	myipc.cpp \
+	mynotebook.cpp \
+	mypropertysheet.cpp \
+	nocasecompare.cpp \
+	pathresolver.cpp \
+	readfile.cpp \
+	replace.cpp \
+	rule.cpp \
+	styledialog.cpp \
+	threadreaper.cpp \
+	validationthread.cpp \
+	wrapaspell.cpp \
+	wrapdaisy.cpp \
+	wrapexpat.cpp \
+	wraplibxml.cpp \
+	wrapregex.cpp \
+	wraptempfilename.cpp \
+	wrapxerces.cpp \
+	xercescatalogresolver.cpp \
+	xercesnetaccessor.cpp \
+	xmlassociatedtd.cpp \
+	xmlassociatexsd.cpp \
+	xmlassociatexsl.cpp \
+	xmlcopyeditor.cpp \
+	xmlcopyimg.cpp \
+	xmlctrl.cpp \
+	xmldoc.cpp \
+	xmlencodinghandler.cpp \
+	xmlencodingspy.cpp \
+	xmlfilterreader.cpp \
+	xmlparseschemans.cpp \
+	xmlprodnote.cpp \
+	xmlpromptgenerator.cpp \
+	xmlrulereader.cpp \
+	xmlschemagenerator.cpp \
+	xmlschemalocator.cpp \
+	xmlshallowvalidator.cpp \
+	xmlsuppressprodnote.cpp \
+	xmltextinfo.cpp \
+	xmlutf8reader.cpp \
+	xmlwordcount.cpp \
+	xsllocator.cpp \
+	xmlcopyeditor.spec \
+	xmlcopyeditor.png \
+	custom.xpm
 
 xmlcopyeditor_LDADD = $(WX_LIBS) \
 	-lexpat -lxslt -lxml2 -lpcre -lxerces-c $(ASPELL_LIBS) $(ENCHANT_LIBS) $(GTK2_LIBS)
@@ -483,6 +528,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/wraptempfilename.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/wrapxerces.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xercescatalogresolver.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xercesnetaccessor.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xmlassociatedtd.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xmlassociatexsd.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/xmlassociatexsl.Po@am__quote@

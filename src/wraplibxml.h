@@ -21,6 +21,8 @@
 #ifndef WRAPLIBXML_H
 #define WRAPLIBXML_H
 
+#include <wx/wx.h>
+#include <wx/filename.h>
 #include <string>
 #include <utility>
 #include <libxml/parser.h>
@@ -36,8 +38,6 @@
 #include <libxslt/xsltInternals.h>
 #include <libxslt/transform.h>
 #include <libxslt/xsltutils.h>
-#include <wx/wx.h>
-#include <wx/filename.h>
 
 class WrapLibxml
 {

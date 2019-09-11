@@ -4,7 +4,7 @@
 		<cconfiguration id="cdt.managedbuild.config.gnu.mingw.exe.debug.747771716">
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="cdt.managedbuild.config.gnu.mingw.exe.debug.747771716" moduleId="org.eclipse.cdt.core.settings" name="DebugWx-x86">
 				<macros>
-					<stringMacro name="BOOSTINC" type="VALUE_TEXT" value="D:/boost_1_55_0"/>
+					<stringMacro name="BOOSTINC" type="VALUE_TEXT" value="E:/lib/boost_1_70_0"/>
 					<stringMacro name="WXWIDGETS" type="VALUE_TEXT" value="E:/wxWidgets"/>
 					<stringMacro name="WXVER" type="VALUE_TEXT" value="31"/>
 				</macros>
@@ -89,13 +89,15 @@
 									<listOptionValue builtIn="false" value="ws2_32"/>
 									<listOptionValue builtIn="false" value="expat"/>
 									<listOptionValue builtIn="false" value="pthread"/>
+									<listOptionValue builtIn="false" value="oleacc"/>
+									<listOptionValue builtIn="false" value="shlwapi"/>
+									<listOptionValue builtIn="false" value="uxtheme"/>
+									<listOptionValue builtIn="false" value="version"/>
 								</option>
 								<option id="gnu.cpp.link.option.paths.1556491407" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
 									<listOptionValue builtIn="false" value="${WXWIDGETS}/lib/gcc_dll32"/>
 								</option>
-								<option id="gnu.cpp.link.option.userobjs.598298270" name="Other objects" superClass="gnu.cpp.link.option.userobjs" valueType="userObjs">
-									<listOptionValue builtIn="false" value="${ConfigName}/xmlcopyeditor_rc.o"/>
-								</option>
+								<option id="gnu.cpp.link.option.userobjs.598298270" name="Other objects" superClass="gnu.cpp.link.option.userobjs" valueType="userObjs"/>
 								<option id="gnu.cpp.link.option.flags.1824716786" name="Linker flags" superClass="gnu.cpp.link.option.flags" value="-mwindows" valueType="string"/>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.405462048" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
@@ -117,8 +119,9 @@
 		<cconfiguration id="cdt.managedbuild.config.gnu.mingw.exe.release.710071756">
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="cdt.managedbuild.config.gnu.mingw.exe.release.710071756" moduleId="org.eclipse.cdt.core.settings" name="ReleaseWx28-x86">
 				<macros>
+					<stringMacro name="BOOSTINC" type="VALUE_TEXT" value="E:/lib/boost_1_70_0"/>
 					<stringMacro name="WXWIDGETS" type="VALUE_TEXT" value="E:/wxWidgets-2.8.12"/>
-					<stringMacro name="BOOSTINC" type="VALUE_TEXT" value="D:/boost_1_55_0"/>
+					<stringMacro name="WXVER" type="VALUE_TEXT" value="28"/>
 				</macros>
 				<externalSettings/>
 				<extensions>
@@ -162,15 +165,15 @@
 							<tool id="cdt.managedbuild.tool.gnu.c.linker.mingw.exe.release.580131824" name="MinGW C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.mingw.exe.release"/>
 							<tool id="cdt.managedbuild.tool.gnu.cpp.linker.mingw.exe.release.1322526705" name="MinGW C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.mingw.exe.release">
 								<option id="gnu.cpp.link.option.libs.1763201887" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs" valueType="libs">
-									<listOptionValue builtIn="false" value="wxmsw28u_richtext"/>
-									<listOptionValue builtIn="false" value="wxmsw28u_html"/>
-									<listOptionValue builtIn="false" value="wxmsw28u_aui"/>
-									<listOptionValue builtIn="false" value="wxmsw28u_adv"/>
-									<listOptionValue builtIn="false" value="wxmsw28u_stc"/>
-									<listOptionValue builtIn="false" value="wxmsw28u_core"/>
-									<listOptionValue builtIn="false" value="wxbase28u_xml"/>
-									<listOptionValue builtIn="false" value="wxbase28u_net"/>
-									<listOptionValue builtIn="false" value="wxbase28u"/>
+									<listOptionValue builtIn="false" value="wxmsw${WXVER}u_richtext"/>
+									<listOptionValue builtIn="false" value="wxmsw${WXVER}u_html"/>
+									<listOptionValue builtIn="false" value="wxmsw${WXVER}u_aui"/>
+									<listOptionValue builtIn="false" value="wxmsw${WXVER}u_adv"/>
+									<listOptionValue builtIn="false" value="wxmsw${WXVER}u_stc"/>
+									<listOptionValue builtIn="false" value="wxmsw${WXVER}u_core"/>
+									<listOptionValue builtIn="false" value="wxbase${WXVER}u_xml"/>
+									<listOptionValue builtIn="false" value="wxbase${WXVER}u_net"/>
+									<listOptionValue builtIn="false" value="wxbase${WXVER}u"/>
 									<listOptionValue builtIn="false" value="wxtiff"/>
 									<listOptionValue builtIn="false" value="wxjpeg"/>
 									<listOptionValue builtIn="false" value="wxpng"/>
@@ -203,9 +206,7 @@
 								<option id="gnu.cpp.link.option.paths.161756907" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
 									<listOptionValue builtIn="false" value="${WXWIDGETS}/lib/gcc_lib32"/>
 								</option>
-								<option id="gnu.cpp.link.option.userobjs.30870315" name="Other objects" superClass="gnu.cpp.link.option.userobjs" valueType="userObjs">
-									<listOptionValue builtIn="false" value="${ConfigName}/xmlcopyeditor_rc.o"/>
-								</option>
+								<option id="gnu.cpp.link.option.userobjs.30870315" name="Other objects" superClass="gnu.cpp.link.option.userobjs" valueType="userObjs"/>
 								<option id="gnu.cpp.link.option.flags.1247614174" name="Linker flags" superClass="gnu.cpp.link.option.flags" value="-mwindows" valueType="string"/>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.1542313773" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
@@ -227,8 +228,9 @@
 		<cconfiguration id="cdt.managedbuild.config.gnu.mingw.exe.debug.747771716.2136330833">
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="cdt.managedbuild.config.gnu.mingw.exe.debug.747771716.2136330833" moduleId="org.eclipse.cdt.core.settings" name="DebugStatic">
 				<macros>
+					<stringMacro name="BOOSTINC" type="VALUE_TEXT" value="E:/lib/boost_1_70_0"/>
 					<stringMacro name="WXWIDGETS" type="VALUE_TEXT" value="E:/wxWidgets"/>
-					<stringMacro name="BOOSTINC" type="VALUE_TEXT" value="D:/boost_1_55_0"/>
+					<stringMacro name="WXVER" type="VALUE_TEXT" value="31"/>
 				</macros>
 				<externalSettings/>
 				<extensions>
@@ -313,13 +315,15 @@
 									<listOptionValue builtIn="false" value="ws2_32"/>
 									<listOptionValue builtIn="false" value="expat"/>
 									<listOptionValue builtIn="false" value="pthread"/>
+									<listOptionValue builtIn="false" value="oleacc"/>
+									<listOptionValue builtIn="false" value="shlwapi"/>
+									<listOptionValue builtIn="false" value="uxtheme"/>
+									<listOptionValue builtIn="false" value="version"/>
 								</option>
 								<option id="gnu.cpp.link.option.paths.180439967" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
 									<listOptionValue builtIn="false" value="${WXWIDGETS}/lib/gcc_lib"/>
 								</option>
-								<option id="gnu.cpp.link.option.userobjs.1860038596" name="Other objects" superClass="gnu.cpp.link.option.userobjs" valueType="userObjs">
-									<listOptionValue builtIn="false" value="${ConfigName}/xmlcopyeditor_rc.o"/>
-								</option>
+								<option id="gnu.cpp.link.option.userobjs.1860038596" name="Other objects" superClass="gnu.cpp.link.option.userobjs" valueType="userObjs"/>
 								<option id="gnu.cpp.link.option.flags.664246901" name="Linker flags" superClass="gnu.cpp.link.option.flags" value="-mwindows -static" valueType="string"/>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.274152161" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
@@ -341,8 +345,9 @@
 		<cconfiguration id="cdt.managedbuild.config.gnu.mingw.exe.debug.747771716.73095692">
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="cdt.managedbuild.config.gnu.mingw.exe.debug.747771716.73095692" moduleId="org.eclipse.cdt.core.settings" name="DebugWx28-x86">
 				<macros>
+					<stringMacro name="BOOSTINC" type="VALUE_TEXT" value="E:/lib/boost_1_70_0"/>
 					<stringMacro name="WXWIDGETS" type="VALUE_TEXT" value="E:/wxWidgets-2.8.12"/>
-					<stringMacro name="BOOSTINC" type="VALUE_TEXT" value="D:/boost_1_55_0"/>
+					<stringMacro name="WXVER" type="VALUE_TEXT" value="28"/>
 				</macros>
 				<externalSettings/>
 				<extensions>
@@ -387,15 +392,15 @@
 							<tool id="cdt.managedbuild.tool.gnu.c.linker.mingw.exe.debug.264046671" name="MinGW C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.mingw.exe.debug"/>
 							<tool id="cdt.managedbuild.tool.gnu.cpp.linker.mingw.exe.debug.306395199" name="MinGW C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.mingw.exe.debug">
 								<option id="gnu.cpp.link.option.libs.387120188" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs" valueType="libs">
-									<listOptionValue builtIn="false" value="wxmsw28ud_richtext"/>
-									<listOptionValue builtIn="false" value="wxmsw28ud_html"/>
-									<listOptionValue builtIn="false" value="wxmsw28ud_aui"/>
-									<listOptionValue builtIn="false" value="wxmsw28ud_adv"/>
-									<listOptionValue builtIn="false" value="wxmsw28ud_stc"/>
-									<listOptionValue builtIn="false" value="wxmsw28ud_core"/>
-									<listOptionValue builtIn="false" value="wxbase28ud_xml"/>
-									<listOptionValue builtIn="false" value="wxbase28ud_net"/>
-									<listOptionValue builtIn="false" value="wxbase28ud"/>
+									<listOptionValue builtIn="false" value="wxmsw${WXVER}ud_richtext"/>
+									<listOptionValue builtIn="false" value="wxmsw${WXVER}ud_html"/>
+									<listOptionValue builtIn="false" value="wxmsw${WXVER}ud_aui"/>
+									<listOptionValue builtIn="false" value="wxmsw${WXVER}ud_adv"/>
+									<listOptionValue builtIn="false" value="wxmsw${WXVER}ud_stc"/>
+									<listOptionValue builtIn="false" value="wxmsw${WXVER}ud_core"/>
+									<listOptionValue builtIn="false" value="wxbase${WXVER}ud_xml"/>
+									<listOptionValue builtIn="false" value="wxbase${WXVER}ud_net"/>
+									<listOptionValue builtIn="false" value="wxbase${WXVER}ud"/>
 									<listOptionValue builtIn="false" value="wxtiffd"/>
 									<listOptionValue builtIn="false" value="wxjpegd"/>
 									<listOptionValue builtIn="false" value="wxpngd"/>
@@ -428,9 +433,7 @@
 								<option id="gnu.cpp.link.option.paths.98833783" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
 									<listOptionValue builtIn="false" value="${WXWIDGETS}/lib/gcc_dll32"/>
 								</option>
-								<option id="gnu.cpp.link.option.userobjs.49628189" name="Other objects" superClass="gnu.cpp.link.option.userobjs" valueType="userObjs">
-									<listOptionValue builtIn="false" value="${ConfigName}/xmlcopyeditor_rc.o"/>
-								</option>
+								<option id="gnu.cpp.link.option.userobjs.49628189" name="Other objects" superClass="gnu.cpp.link.option.userobjs" valueType="userObjs"/>
 								<option id="gnu.cpp.link.option.flags.475734253" name="Linker flags" superClass="gnu.cpp.link.option.flags" value="-mwindows" valueType="string"/>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.231921830" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
@@ -452,7 +455,7 @@
 		<cconfiguration id="cdt.managedbuild.config.gnu.mingw.exe.release.710071756.384493523">
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="cdt.managedbuild.config.gnu.mingw.exe.release.710071756.384493523" moduleId="org.eclipse.cdt.core.settings" name="ReleaseWx-x86">
 				<macros>
-					<stringMacro name="BOOSTINC" type="VALUE_TEXT" value="D:/boost_1_55_0"/>
+					<stringMacro name="BOOSTINC" type="VALUE_TEXT" value="E:/lib/boost_1_70_0"/>
 					<stringMacro name="WXWIDGETS" type="VALUE_TEXT" value="E:/wxWidgets"/>
 					<stringMacro name="WXVER" type="VALUE_TEXT" value="31"/>
 				</macros>
@@ -536,13 +539,15 @@
 									<listOptionValue builtIn="false" value="wsock32"/>
 									<listOptionValue builtIn="false" value="expat"/>
 									<listOptionValue builtIn="false" value="pthread"/>
+									<listOptionValue builtIn="false" value="oleacc"/>
+									<listOptionValue builtIn="false" value="shlwapi"/>
+									<listOptionValue builtIn="false" value="uxtheme"/>
+									<listOptionValue builtIn="false" value="version"/>
 								</option>
 								<option id="gnu.cpp.link.option.paths.1874533391" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
 									<listOptionValue builtIn="false" value="${WXWIDGETS}/lib/gcc_lib32"/>
 								</option>
-								<option id="gnu.cpp.link.option.userobjs.367914151" name="Other objects" superClass="gnu.cpp.link.option.userobjs" valueType="userObjs">
-									<listOptionValue builtIn="false" value="${ConfigName}/xmlcopyeditor_rc.o"/>
-								</option>
+								<option id="gnu.cpp.link.option.userobjs.367914151" name="Other objects" superClass="gnu.cpp.link.option.userobjs" valueType="userObjs"/>
 								<option id="gnu.cpp.link.option.flags.89495341" name="Linker flags" superClass="gnu.cpp.link.option.flags" value="-mwindows" valueType="string"/>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.926332437" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
@@ -564,7 +569,7 @@
 		<cconfiguration id="cdt.managedbuild.config.gnu.mingw.exe.debug.747771716.1860829555">
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="cdt.managedbuild.config.gnu.mingw.exe.debug.747771716.1860829555" moduleId="org.eclipse.cdt.core.settings" name="DebugWx-x64">
 				<macros>
-					<stringMacro name="BOOSTINC" type="VALUE_TEXT" value="D:/boost_1_55_0"/>
+					<stringMacro name="BOOSTINC" type="VALUE_TEXT" value="E:/lib/boost_1_70_0"/>
 					<stringMacro name="WXWIDGETS" type="VALUE_TEXT" value="E:/wxWidgets"/>
 					<stringMacro name="WXVER" type="VALUE_TEXT" value="31"/>
 				</macros>
@@ -649,13 +654,15 @@
 									<listOptionValue builtIn="false" value="ws2_32"/>
 									<listOptionValue builtIn="false" value="expat"/>
 									<listOptionValue builtIn="false" value="pthread"/>
+									<listOptionValue builtIn="false" value="oleacc"/>
+									<listOptionValue builtIn="false" value="shlwapi"/>
+									<listOptionValue builtIn="false" value="uxtheme"/>
+									<listOptionValue builtIn="false" value="version"/>
 								</option>
 								<option id="gnu.cpp.link.option.paths.612008086" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
 									<listOptionValue builtIn="false" value="${WXWIDGETS}/lib/gcc_dll64"/>
 								</option>
-								<option id="gnu.cpp.link.option.userobjs.409319367" name="Other objects" superClass="gnu.cpp.link.option.userobjs" valueType="userObjs">
-									<listOptionValue builtIn="false" value="${ConfigName}/xmlcopyeditor_rc.o"/>
-								</option>
+								<option id="gnu.cpp.link.option.userobjs.409319367" name="Other objects" superClass="gnu.cpp.link.option.userobjs" valueType="userObjs"/>
 								<option id="gnu.cpp.link.option.flags.428449658" name="Linker flags" superClass="gnu.cpp.link.option.flags" value="-mwindows" valueType="string"/>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.644702385" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
@@ -677,8 +684,9 @@
 		<cconfiguration id="cdt.managedbuild.config.gnu.mingw.exe.release.710071756.1627034107">
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="cdt.managedbuild.config.gnu.mingw.exe.release.710071756.1627034107" moduleId="org.eclipse.cdt.core.settings" name="ReleaseWx28-x64">
 				<macros>
+					<stringMacro name="BOOSTINC" type="VALUE_TEXT" value="E:/lib/boost_1_70_0"/>
 					<stringMacro name="WXWIDGETS" type="VALUE_TEXT" value="E:/wxWidgets-2.8.12"/>
-					<stringMacro name="BOOSTINC" type="VALUE_TEXT" value="D:/boost_1_55_0"/>
+					<stringMacro name="WXVER" type="VALUE_TEXT" value="28"/>
 				</macros>
 				<externalSettings/>
 				<extensions>
@@ -723,15 +731,15 @@
 							<tool id="cdt.managedbuild.tool.gnu.c.linker.mingw.exe.release.1491860293" name="MinGW C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.mingw.exe.release"/>
 							<tool id="cdt.managedbuild.tool.gnu.cpp.linker.mingw.exe.release.75261412" name="MinGW C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.mingw.exe.release">
 								<option id="gnu.cpp.link.option.libs.716102194" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs" valueType="libs">
-									<listOptionValue builtIn="false" value="wxmsw28u_richtext"/>
-									<listOptionValue builtIn="false" value="wxmsw28u_html"/>
-									<listOptionValue builtIn="false" value="wxmsw28u_aui"/>
-									<listOptionValue builtIn="false" value="wxmsw28u_adv"/>
-									<listOptionValue builtIn="false" value="wxmsw28u_stc"/>
-									<listOptionValue builtIn="false" value="wxmsw28u_core"/>
-									<listOptionValue builtIn="false" value="wxbase28u_xml"/>
-									<listOptionValue builtIn="false" value="wxbase28u_net"/>
-									<listOptionValue builtIn="false" value="wxbase28u"/>
+									<listOptionValue builtIn="false" value="wxmsw${WXVER}u_richtext"/>
+									<listOptionValue builtIn="false" value="wxmsw${WXVER}u_html"/>
+									<listOptionValue builtIn="false" value="wxmsw${WXVER}u_aui"/>
+									<listOptionValue builtIn="false" value="wxmsw${WXVER}u_adv"/>
+									<listOptionValue builtIn="false" value="wxmsw${WXVER}u_stc"/>
+									<listOptionValue builtIn="false" value="wxmsw${WXVER}u_core"/>
+									<listOptionValue builtIn="false" value="wxbase${WXVER}u_xml"/>
+									<listOptionValue builtIn="false" value="wxbase${WXVER}u_net"/>
+									<listOptionValue builtIn="false" value="wxbase${WXVER}u"/>
 									<listOptionValue builtIn="false" value="wxtiff"/>
 									<listOptionValue builtIn="false" value="wxjpeg"/>
 									<listOptionValue builtIn="false" value="wxpng"/>
@@ -764,9 +772,7 @@
 								<option id="gnu.cpp.link.option.paths.940746985" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
 									<listOptionValue builtIn="false" value="${WXWIDGETS}/lib/gcc_lib64"/>
 								</option>
-								<option id="gnu.cpp.link.option.userobjs.350391064" name="Other objects" superClass="gnu.cpp.link.option.userobjs" valueType="userObjs">
-									<listOptionValue builtIn="false" value="${ConfigName}/xmlcopyeditor_rc.o"/>
-								</option>
+								<option id="gnu.cpp.link.option.userobjs.350391064" name="Other objects" superClass="gnu.cpp.link.option.userobjs" valueType="userObjs"/>
 								<option id="gnu.cpp.link.option.flags.25328215" name="Linker flags" superClass="gnu.cpp.link.option.flags" value="-mwindows" valueType="string"/>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.1248188546" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
@@ -788,8 +794,9 @@
 		<cconfiguration id="cdt.managedbuild.config.gnu.mingw.exe.debug.747771716.73095692.895241768">
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="cdt.managedbuild.config.gnu.mingw.exe.debug.747771716.73095692.895241768" moduleId="org.eclipse.cdt.core.settings" name="DebugWx28-x64">
 				<macros>
+					<stringMacro name="BOOSTINC" type="VALUE_TEXT" value="E:/lib/boost_1_70_0"/>
 					<stringMacro name="WXWIDGETS" type="VALUE_TEXT" value="E:/wxWidgets-2.8.12"/>
-					<stringMacro name="BOOSTINC" type="VALUE_TEXT" value="D:/boost_1_55_0"/>
+					<stringMacro name="WXVER" type="VALUE_TEXT" value="28"/>
 				</macros>
 				<externalSettings/>
 				<extensions>
@@ -834,15 +841,15 @@
 							<tool id="cdt.managedbuild.tool.gnu.c.linker.mingw.exe.debug.1966193798" name="MinGW C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.mingw.exe.debug"/>
 							<tool id="cdt.managedbuild.tool.gnu.cpp.linker.mingw.exe.debug.1872853143" name="MinGW C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.mingw.exe.debug">
 								<option id="gnu.cpp.link.option.libs.958677503" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs" valueType="libs">
-									<listOptionValue builtIn="false" value="wxmsw28ud_richtext"/>
-									<listOptionValue builtIn="false" value="wxmsw28ud_html"/>
-									<listOptionValue builtIn="false" value="wxmsw28ud_aui"/>
-									<listOptionValue builtIn="false" value="wxmsw28ud_adv"/>
-									<listOptionValue builtIn="false" value="wxmsw28ud_stc"/>
-									<listOptionValue builtIn="false" value="wxmsw28ud_core"/>
-									<listOptionValue builtIn="false" value="wxbase28ud_xml"/>
-									<listOptionValue builtIn="false" value="wxbase28ud_net"/>
-									<listOptionValue builtIn="false" value="wxbase28ud"/>
+									<listOptionValue builtIn="false" value="wxmsw${WXVER}ud_richtext"/>
+									<listOptionValue builtIn="false" value="wxmsw${WXVER}ud_html"/>
+									<listOptionValue builtIn="false" value="wxmsw${WXVER}ud_aui"/>
+									<listOptionValue builtIn="false" value="wxmsw${WXVER}ud_adv"/>
+									<listOptionValue builtIn="false" value="wxmsw${WXVER}ud_stc"/>
+									<listOptionValue builtIn="false" value="wxmsw${WXVER}ud_core"/>
+									<listOptionValue builtIn="false" value="wxbase${WXVER}ud_xml"/>
+									<listOptionValue builtIn="false" value="wxbase${WXVER}ud_net"/>
+									<listOptionValue builtIn="false" value="wxbase${WXVER}ud"/>
 									<listOptionValue builtIn="false" value="wxtiffd"/>
 									<listOptionValue builtIn="false" value="wxjpegd"/>
 									<listOptionValue builtIn="false" value="wxpngd"/>
@@ -875,9 +882,7 @@
 								<option id="gnu.cpp.link.option.paths.88058921" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
 									<listOptionValue builtIn="false" value="${WXWIDGETS}/lib/gcc_dll64"/>
 								</option>
-								<option id="gnu.cpp.link.option.userobjs.862751691" name="Other objects" superClass="gnu.cpp.link.option.userobjs" valueType="userObjs">
-									<listOptionValue builtIn="false" value="${ConfigName}/xmlcopyeditor_rc.o"/>
-								</option>
+								<option id="gnu.cpp.link.option.userobjs.862751691" name="Other objects" superClass="gnu.cpp.link.option.userobjs" valueType="userObjs"/>
 								<option id="gnu.cpp.link.option.flags.51438079" name="Linker flags" superClass="gnu.cpp.link.option.flags" value="-mwindows" valueType="string"/>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.1089287949" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
@@ -899,7 +904,7 @@
 		<cconfiguration id="cdt.managedbuild.config.gnu.mingw.exe.release.710071756.384493523.2075568512">
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="cdt.managedbuild.config.gnu.mingw.exe.release.710071756.384493523.2075568512" moduleId="org.eclipse.cdt.core.settings" name="ReleaseWx-x64">
 				<macros>
-					<stringMacro name="BOOSTINC" type="VALUE_TEXT" value="D:/boost_1_55_0"/>
+					<stringMacro name="BOOSTINC" type="VALUE_TEXT" value="E:/lib/boost_1_70_0"/>
 					<stringMacro name="WXWIDGETS" type="VALUE_TEXT" value="E:/wxWidgets"/>
 					<stringMacro name="WXVER" type="VALUE_TEXT" value="31"/>
 				</macros>
@@ -983,13 +988,15 @@
 									<listOptionValue builtIn="false" value="wsock32"/>
 									<listOptionValue builtIn="false" value="expat"/>
 									<listOptionValue builtIn="false" value="pthread"/>
+									<listOptionValue builtIn="false" value="oleacc"/>
+									<listOptionValue builtIn="false" value="shlwapi"/>
+									<listOptionValue builtIn="false" value="uxtheme"/>
+									<listOptionValue builtIn="false" value="version"/>
 								</option>
 								<option id="gnu.cpp.link.option.paths.603574797" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
 									<listOptionValue builtIn="false" value="${WXWIDGETS}/lib/gcc_lib64"/>
 								</option>
-								<option id="gnu.cpp.link.option.userobjs.757025701" name="Other objects" superClass="gnu.cpp.link.option.userobjs" valueType="userObjs">
-									<listOptionValue builtIn="false" value="${ConfigName}/xmlcopyeditor_rc.o"/>
-								</option>
+								<option id="gnu.cpp.link.option.userobjs.757025701" name="Other objects" superClass="gnu.cpp.link.option.userobjs" valueType="userObjs"/>
 								<option id="gnu.cpp.link.option.flags.811260943" name="Linker flags" superClass="gnu.cpp.link.option.flags" value="-mwindows" valueType="string"/>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.1346695762" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
@@ -1068,4 +1075,5 @@
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfileC"/>
 		</scannerConfigBuildInfo>
 	</storageModule>
+	<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>
 </cproject>
