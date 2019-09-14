@@ -56,7 +56,10 @@ void WrapXerces::Init ( bool enableNetAccess ) throw()
 		}
 		~Initializer()
 		{
-			delete mOriginalNetAccessor;
+			if ( mOriginalNetAccessor != NULL ) {
+				XMLPlatformUtils::fgNetAccessor = ( ( XercesNetAccessor * ) mOriginalNetAccessor )->getNetAccessor();
+				delete mOriginalNetAccessor;
+			}
 			XMLPlatformUtils::Terminate();
 		}
 	} dummy;

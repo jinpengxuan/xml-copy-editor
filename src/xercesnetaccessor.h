@@ -30,6 +30,8 @@ class XercesNetAccessor : public XMLNetAccessor
 public:
 	XercesNetAccessor ( XMLNetAccessor *netAccesor );
 
+	XMLNetAccessor *getNetAccessor() const { return mNetAccessor; }
+
 	virtual const XMLCh *getId() const;
 
 	virtual BinInputStream *makeNew ( const XMLURL &urlSrc,
