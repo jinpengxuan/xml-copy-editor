@@ -21,16 +21,41 @@
 #include "myipc.h"
 #include "xmlcopyeditor.h"
 #include "pathresolver.h"
-#ifdef HAVE_GTK2
-#include <gtk/gtk.h>
 
-guint32 XTimeNow()
+#if defined ( __WXGTK__ ) && !defined ( __NO_GTK__ )
+
+#include <gtk/gtk.h>
+#include <gtk/gtkx.h>
+
+void MyRaiseWindow ( wxTopLevelWindow *wnd )
 {
-	struct timespec ts;
-	clock_gettime ( CLOCK_MONOTONIC, &ts );
-	return ts.tv_sec * 1000 + ts.tv_nsec / 1000000;
+	GtkWidget *widget = wnd->GetHandle();
+	if ( !widget )
+		return;
+
+	GdkWindow *gwnd = gtk_widget_get_window ( widget );
+	if ( !gwnd )
+		return;
+
+	// The default time GDK_CURRENT_TIME doesn't work.
+	// https://github.com/GNOME/gtk/blob/96b37f4eb8ec0e7598534a83816be7c013fd1c9b/gtk/gtkwindow.c#L7521
+	// https://github.com/wxWidgets/wxWidgets/blob/dfc6cdc06355fa46ffc3725079a653324c45b974/src/gtk/toplevel.cpp#L1103
+	// If a file is changed (not saved) in the editor, when it is opened
+	// again from the command line, a dialog that prompts the user to save
+	// the file pops up. After the dialog is closed, opening files from the
+	// command line is unable to bring the editor to the front.
+	gtk_window_present_with_time ( GTK_WINDOW ( widget ),
+		gdk_x11_get_server_time ( gwnd ) );
 }
-#endif // HAVE_GTK2
+
+#else // __WXGTK__
+
+void MyRaiseWindow ( wxTopLevelWindow *wnd )
+{
+	wnd->Raise();
+}
+
+#endif // __WXGTK__
 
 MyServerConnection *server_connection = 0;
 MyClientConnection *client_connection = 0;
@@ -73,6 +98,7 @@ bool MyServerConnection::OnPoke (
 	frame = ( MyFrame * ) wxTheApp->GetTopWindow();
 	if ( !frame )
 		return false;
+
 	if ( item == ( wxString ) IPC_NO_FILE )
 	{
 		;
@@ -91,24 +117,15 @@ bool MyServerConnection::OnPoke (
 #endif
 		event.SetString ( item );
 		wxPostEvent ( frame->GetEventHandler(), event );
-		//frame->addToFileQueue ( ( wxString& ) item ); // prevent event loop problems
 	}
-#ifndef __WXMSW__
-#ifdef HAVE_GTK2
-	// Processes mostly cannot raise their own windows.
-	// http://osdir.com/ml/gnome.gaim.devel/2004-12/msg00077.html
-	GtkWidget *widget = frame->GetHandle();
-	GdkWindow *window = gtk_widget_get_window ( widget );
-	gdk_x11_window_set_user_time ( window,
-		//XTimeNow() ); // This works too.
-		gdk_x11_get_server_time ( window ) );
-	//gdk_window_show ( window );
-	//gdk_window_raise ( window );
-	//gtk_window_present ( GTK_WINDOW ( widget ) );
-#endif // HAVE_GTK2
+
+	if ( frame->IsIconized() )
+	{
+		frame->Iconize ( false );
+	}
 	frame->Show();
-	frame->Raise();
-#endif // __WXMSW__
+	MyRaiseWindow ( frame );
+
 	return true;
 }
 
@@ -121,31 +138,6 @@ IPCData *MyServerConnection::OnRequest
 {
 	if ( size == NULL )
 		return NULL;
-
-	if ( item == IPC_FRAME_WND )
-	{
-		if ( !mFrameWnd )
-		{
-			wxWindow *window = wxTheApp->GetTopWindow();
-			if ( window )
-			{
-#ifdef HAVE_GTK2
-				GtkWidget *wnd = window->GetHandle();
-				if ( wnd )
-				{
-					GdkWindow *gwnd = gtk_widget_get_window ( wnd );
-					if ( gwnd )
-						mFrameWnd = GDK_WINDOW_XID ( gwnd );
-				}
-#else
-				mFrameWnd = window->GetHandle();
-#endif
-			}
-		}
-		*size = sizeof mFrameWnd;
-		return ( IPCData * ) &mFrameWnd;
-	}
-
 	*size = 0;
 	return NULL;
 }
@@ -218,39 +210,6 @@ bool MyClient::talkToServer ( int argc, const wxChar * const *argv )
 			break;
 	}
 
-	if ( !data )
-		return false;
-
-	// Bring the window to front
-#ifdef __WXMSW__
- 	if ( size == sizeof ( HWND ) )
-	{
-		HWND hwnd = * ( const HWND * )data;
-		if ( ::IsIconic ( hwnd ) )
-			::ShowWindow ( hwnd, SW_RESTORE );
-		else
-			::SetForegroundWindow ( hwnd );
-	}
-#elif defined ( __WXGTK__x ) // It doesn't work
-	if ( size == sizeof ( GdkNativeWindow ) )
-	{
-		GdkNativeWindow xWnd = * ( GdkNativeWindow * ) data;
-		GdkWindow *window = gdk_window_foreign_new ( xWnd );
-		if ( window )
-		{
-			gdk_x11_window_set_user_time ( window,
-				XTimeNow() );
-				//gdk_x11_get_server_time ( window ) );
-			gdk_window_show ( window );
-			gdk_window_raise ( window );
-			gdk_window_unref ( window );
-			//GtkWidget *widget;
-			//gdk_window_get_user_data(window, (void**)&widget);
-			//printf ("widget: %p\n",widget);
-			//gtk_window_present ( GTK_WINDOW ( widget ) );
-		}
-	}
-#endif // __WXMSW__
-
 	return true;
 }
+

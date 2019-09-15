@@ -146,8 +146,10 @@ AC_SUBST(ASPELL_LIBS)
 # Check gtk
 # This has to match the one wxWidgets linked with
 # It is needed to make single-instance-check work
-PKG_CHECK_MODULES([GTK2], [gtk+-2.0], [AC_DEFINE([HAVE_GTK2], [1], [Define if gtk+-2.0 exist.])]
-	#, [PKG_CHECK_MODULES(GTK, [gtk+-3.0], [AC_MSG_RESULT([gtk+-3.0])])]
+PKG_CHECK_MODULES(GTK, [gtk+-2.0], [AC_MSG_RESULT([gtk+-2.0])]
+	, [PKG_CHECK_MODULES(GTK, [gtk+-3.0], [AC_MSG_RESULT([gtk+-3.0])]
+		, [CXXFLAGS="$CXXFLAGS -D__NO_GTK__"]
+	)]
 )
 #AC_SUBST(GTK2_CFLAGS)
 #AC_SUBST(GTK2_LIBS)
@@ -169,7 +171,7 @@ echo "Debug         Enabled"
 else
 echo "Debug         Disabled"
 fi
-if [[ "$GTK2_LIBS" = "" ]]; then
+if [[ "$GTK_LIBS" = "" ]]; then
 echo "GTK           No. There will be problems when single instance is enabled."
 fi
 

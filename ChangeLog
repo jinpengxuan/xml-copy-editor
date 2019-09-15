@@ -1,6 +1,9 @@
-1.2.1.5 2018/09/23
+# Version number followed by the release date
+
+1.2.1.5
   + Fixed #221 Patch for building with C++11 (Roger Leigh)
   + Added Mac port
+  * Update the iconized frame window when opening files from the command line
 
 1.2.1.4
   + Feature #171 Fold element does not fold following whitespace

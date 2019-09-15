@@ -6135,6 +6135,7 @@ void MyFrame::OnIconize ( wxIconizeEvent& event )
 #endif
 		return;
 	restoreFocusToNotebook = true;
+	manager.Update();
 }
 
 void MyFrame::OnKeyPressed ( wxKeyEvent& event )
