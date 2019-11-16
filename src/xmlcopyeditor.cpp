@@ -4432,7 +4432,7 @@ void MyFrame::OnVisibilityState ( wxCommandEvent& event )
 void MyFrame::OnFeedback ( wxCommandEvent& event )
 {
 	wxString forumUrl =
-	    _T ( "https://sourceforge.net/forum/forum.php?forum_id=475215" );
+	    _T ( "https://sourceforge.net/p/xml-copy-editor/discussion/475215/" );
 	wxLaunchDefaultBrowser ( forumUrl );
 }
 

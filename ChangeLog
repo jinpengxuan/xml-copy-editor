@@ -1,7 +1,8 @@
 # Version number followed by the release date
 
 1.2.1.5
-  + Fixed #221 Patch for building with C++11 (Roger Leigh)
+  * Bug #227 Dead Link: Help > Forum
+  * Bug #221 Patch for building with C++11 (Roger Leigh)
   + Added Mac port
   * Update the iconized frame window when opening files from the command line
 
