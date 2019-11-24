@@ -807,7 +807,9 @@ MyFrame::MyFrame (
 
 		lastSymbol = config->Read( _T( "lastSymbol" ), _T ( "*" ) );
 
+#if defined(XERCES_HAVE_SSE2_INTRINSIC) && defined(__WXDEBUG__)
 		xercescSSE2Warning = config->Read ( _T ( "xercescSSE2Warning" ), true );
+#endif
 	}
 	else // config not found
 	{
@@ -858,7 +860,10 @@ MyFrame::MyFrame (
             exportEpub = exportRtf = exportDoc = exportFullDaisy = true;
 
 		lastSymbol = _T( "*" );
+
+#if defined(XERCES_HAVE_SSE2_INTRINSIC) && defined(__WXDEBUG__)
 		xercescSSE2Warning = true;
+#endif
 	}
 
 	largeFileProperties.completion = false;
@@ -888,24 +893,23 @@ MyFrame::MyFrame (
 	// Initialize Xerces-C++
 	WrapXerces::Init ( libxmlNetAccess );
 
-#if _XERCES_VERSION >= 30100 && wxDEBUG_LEVEL > 0
-	if ( XMLPlatformUtils::fgSSE2ok
-		&& xercescSSE2Warning
-		&& wxTheApp->argc == 1 )
+#if defined(XERCES_HAVE_SSE2_INTRINSIC) && defined(__WXDEBUG__)
+	if ( xercescSSE2Warning && wxTheApp->argc == 1 )
 	{
 		xercescSSE2Warning = wxMessageBox (
-			_ ("SSE2 is enabled in Xerces-C++ library. Xerces-C++ didn't "\
-			   "use them in a thread-safe way. It may cause program crashes "\
-			   "(segmentation faults).\n\n"\
+			_ ("SSE2 is enabled in Xerces-C++ library. SSE2 should be "\
+			   "checked at run time rather than compile time. The program " \
+			   "may crash (segmentation fault) on a machine that " \
+			   "doesn't support SSE2.\n\n"\
 			   "If it happens, please try compiling Xerces-C++ with SSE2 "\
 			   "disabled.\n\n"\
 			   "OK:\tShow this warning next time\n"\
 			   "Cancel:\tDisable the warning\n"),
-			_ ("SSE2 problem in Xerces-C++"),
+			_ ("SSE2 is checked at compile time"),
 			wxOK | wxCANCEL | wxICON_WARNING
 		) == wxOK;
 	}
-#endif // _XERCES_VERSION >= 30101
+#endif // XERCES_HAVE_SSE2_INTRINSIC
 
 	size_t findFlags = 0;
 	findFlags |= wxFR_DOWN;
@@ -1165,7 +1169,10 @@ MyFrame::~MyFrame()
 	config->Write ( _T ( "unlimitedUndo" ), unlimitedUndo );
 
 	config->Write ( _T ( "lastSymbol" ), lastSymbol );
+
+#if defined(XERCES_HAVE_SSE2_INTRINSIC) && defined(__WXDEBUG__)
 	config->Write ( _T ( "xercescSSE2Warning" ), xercescSSE2Warning );
+#endif
 
 	manager.UnInit();
 	wxTheClipboard->Flush();

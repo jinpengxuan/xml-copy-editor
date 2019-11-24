@@ -60,6 +60,7 @@
 #include "myhtmlpane.h"
 #include "xmlencodinghandler.h"
 #include <wx/aui/framemanager.h>
+#include <xercesc/util/XercesDefs.hpp>
 
 enum
 {
@@ -483,6 +484,9 @@ class MyFrame : public wxFrame
 		showFullPathOnFrame,
 		findRegex,
 		commandSync,
+#if defined(XERCES_HAVE_SSE2_INTRINSIC) && defined(__WXDEBUG__)
+		xercescSSE2Warning,
+#endif
 		exportQuiet,
 		exportMp3Album,
 		exportSuppressOptional,
@@ -490,8 +494,7 @@ class MyFrame : public wxFrame
 		exportEpub,
 		exportRtf,
 		exportDoc,
-		exportFullDaisy,
-		xercescSSE2Warning;
+		exportFullDaisy;
 		wxBitmap newBitmap,
 		new16Bitmap,
 		openBitmap,
