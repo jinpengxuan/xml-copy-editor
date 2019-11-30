@@ -226,7 +226,7 @@ MyApp::MyApp()
 	, config ( new wxFileConfig ( _T ( "xmlcopyeditor" ) ) )
 #endif
 {
-#if wxCHECK_VERSION(2,9,0)
+#if wxCHECK_VERSION(2,9,0) && !defined ( __WXDEBUG__ )
 	wxDisableAsserts();
 #endif
 

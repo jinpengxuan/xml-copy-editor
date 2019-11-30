@@ -98,6 +98,8 @@ AC_ARG_ENABLE(debug,
 [
   debugbuild="y"
   CXXFLAGS="${CXXFLAGS} -ggdb -O0"
+], [
+  CXXFLAGS="${CXXFLAGS} -DNDEBUG -DwxDEBUG_LEVEL=0"
 ])
 
 # Check pcre is available

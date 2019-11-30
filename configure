@@ -16686,6 +16686,10 @@ if test "${enable_debug+set}" = set; then :
   debugbuild="y"
   CXXFLAGS="${CXXFLAGS} -ggdb -O0"
 
+else
+
+  CXXFLAGS="${CXXFLAGS} -DNDEBUG -DwxDEBUG_LEVEL=0"
+
 fi
 
 
