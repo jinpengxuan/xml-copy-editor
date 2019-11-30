@@ -135,7 +135,7 @@ CommandPanel::CommandPanel (
 	bottomSizer->Add ( outputSizer, 0, wxLEFT | wxRIGHT | wxALIGN_CENTER_VERTICAL, sizerOffset );
 
 	mainSizer = new wxBoxSizer ( wxVERTICAL );
-	mainSizer->Add ( commandEdit, 0, wxLEFT | wxRIGHT | wxALIGN_CENTER_VERTICAL | wxEXPAND, sizerOffset );
+	mainSizer->Add ( commandEdit, 0, wxLEFT | wxRIGHT | wxEXPAND, sizerOffset );
 	mainSizer->Add ( bottomSizer );
 
 
