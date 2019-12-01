@@ -93,7 +93,7 @@ bool WrapDaisy::run (
     fileIn.Replace ( _T("\\"), _T("/") );
     stylesheet.Replace ( _T("\\"), _T("/") );
 
-    std::auto_ptr<wxProgressDialog> pd ( new wxProgressDialog (
+    boost::scoped_ptr<wxProgressDialog> pd ( new wxProgressDialog (
         _ ( "Export in progress" ),
         _ ( "Initializing..." ),
         100,
@@ -186,7 +186,7 @@ bool WrapDaisy::run (
             return false;
         }
 
-    	auto_ptr<XmlSuppressProdnote> xsp ( new XmlSuppressProdnote() );
+    	boost::scoped_ptr<XmlSuppressProdnote> xsp ( new XmlSuppressProdnote() );
     	if ( !xsp->parse ( output.c_str() ) )
     	{
             frame->newDocument ( output );
@@ -212,7 +212,7 @@ bool WrapDaisy::run (
             return false;
         }
 
-    	auto_ptr<XmlProdnote> xp ( new XmlProdnote() );
+    	boost::scoped_ptr<XmlProdnote> xp ( new XmlProdnote() );
     	if ( !xp->parse ( output.c_str() ) )
     	{
             frame->newDocument ( output );
@@ -298,7 +298,7 @@ bool WrapDaisy::run (
         return false;
     }
 
-	auto_ptr<XmlCopyImg> xci (
+	boost::scoped_ptr<XmlCopyImg> xci (
         new XmlCopyImg ( blankImage, imagesDir, mediaDir, path )
     );
 	if ( !xci->parse ( output.c_str() ) )
@@ -744,7 +744,7 @@ bool WrapDaisy::run (
         _T("z3986") + wxFileName::GetPathSeparator();
     fileWithSmilAttribs = folderWithSmilFile + fn.GetFullName();
 
-	auto_ptr<Mp3Album> ma ( new Mp3Album() );
+	boost::scoped_ptr<Mp3Album> ma ( new Mp3Album() );
 	
 	BinaryFile *binaryfile;
 	binaryfile = new BinaryFile ( fileWithSmilAttribs );

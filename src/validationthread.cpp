@@ -20,11 +20,11 @@
 
 #include <wx/wx.h>
 #include <wx/textbuf.h>
+#include <boost/scoped_ptr.hpp>
 #include "xmlctrl.h"
 #include "validationthread.h"
 #include "wrapxerces.h"
 #include <stdexcept>
-#include <memory>
 #include "threadreaper.h"
 
 extern wxCriticalSection xmlcopyeditorCriticalSection;
@@ -51,7 +51,7 @@ ValidationThread::ValidationThread (
 
 void *ValidationThread::Entry()
 {
-	std::auto_ptr<WrapXerces> validator ( new WrapXerces() );
+	boost::scoped_ptr<WrapXerces> validator ( new WrapXerces() );
 	
 	if ( TestDestroy()  )
 	{

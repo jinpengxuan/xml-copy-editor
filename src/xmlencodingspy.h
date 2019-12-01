@@ -23,7 +23,7 @@
 
 #include <expat.h>
 #include <string>
-#include <memory>
+#include <boost/scoped_ptr.hpp>
 #include "wrapexpat.h"
 
 struct EncodingData : public ParserData
@@ -42,7 +42,7 @@ class XmlEncodingSpy : public WrapExpat
 			return d->encoding;
 		}
 	private:
-		std::auto_ptr<EncodingData> d;
+		boost::scoped_ptr<EncodingData> d;
 		static void XMLCALL xmldeclhandler (
 		    void *data,
 		    const XML_Char *version,

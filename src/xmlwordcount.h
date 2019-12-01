@@ -22,7 +22,7 @@
 #define XML_WORD_COUNT_H
 
 #include <string>
-#include <memory>
+#include <boost/scoped_ptr.hpp>
 #include "wrapexpat.h"
 
 struct WordCountData : public ParserData
@@ -39,7 +39,7 @@ class XmlWordCount : public WrapExpat
 
 		int getWordCount();
 	private:
-		std::auto_ptr<WordCountData> wcd;
+		boost::scoped_ptr<WordCountData> wcd;
 		static void XMLCALL characterdata ( void *data, const XML_Char *s, int len );
 		static void XMLCALL end ( void *data, const XML_Char *el );
 };

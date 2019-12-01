@@ -2137,14 +2137,10 @@ void MyFrame::OnFind ( wxCommandEvent& WXUNUSED ( event ) )
 	return;
 #endif
 
-	if ( findDialog.get() )
-	{
-		findDialog = std::auto_ptr<wxFindReplaceDialog> ( 0 );
-	}
-	findDialog = ( std::auto_ptr<wxFindReplaceDialog> ( new wxFindReplaceDialog (
+	findDialog.reset ( new wxFindReplaceDialog (
 	                   this,
 	                   &findData,
-	                   _ ( "Find" ) ) ) );
+	                   _ ( "Find" ) ) );
 	findDialog->Show();
 }
 
@@ -2155,7 +2151,7 @@ void MyFrame::OnImportMSWord ( wxCommandEvent& event )
 	return;
 #endif
 
-	std::auto_ptr<wxFileDialog> fd ( new wxFileDialog (
+	boost::scoped_ptr<wxFileDialog> fd ( new wxFileDialog (
 	                                     this,
 	                                     _ ( "Import Microsoft Word Document" ),
 	                                     mLastDir,
@@ -2192,7 +2188,7 @@ void MyFrame::OnExport ( wxCommandEvent& event )
     wxString testDir = applicationDir + wxFileName::GetPathSeparator() + _T ( "daisy" );
     bool downloadLink = !wxDirExists ( testDir );
 
-    std::auto_ptr<ExportDialog> ed ( new ExportDialog (
+    boost::scoped_ptr<ExportDialog> ed ( new ExportDialog (
         this,
         exportStylesheet,
         exportFolder,
@@ -2326,7 +2322,7 @@ void MyFrame::importMSWord ( const wxString& path )
 
 	if ( result != 5 ) // Word 2003 or later
 	{
-		std::auto_ptr<WrapLibxml> prettyPrinter ( new WrapLibxml ( libxmlNetAccess ) );
+		boost::scoped_ptr<WrapLibxml> prettyPrinter ( new WrapLibxml ( libxmlNetAccess ) );
 		prettyPrinter->parse ( tempFileName.wideName(), true );
 		buffer = prettyPrinter->getOutput();
 		displayBuffer = wxString ( buffer.c_str(), wxConvUTF8, buffer.size() );
@@ -2386,7 +2382,7 @@ void MyFrame::OnExportMSWord ( wxCommandEvent& event )
 		return;
 	}
 
-	std::auto_ptr<wxFileDialog> fd ( new wxFileDialog (
+	boost::scoped_ptr<wxFileDialog> fd ( new wxFileDialog (
 	                                     this,
 	                                     _ ( "Export Microsoft Word Document" ),
 	                                     _T ( "" ),
@@ -2615,7 +2611,7 @@ void MyFrame::OnOptions ( wxCommandEvent& WXUNUSED ( event ) )
 #else
 	( _ ( "Preferences" ) );
 #endif
-	std::auto_ptr<MyPropertySheet> mpsd ( new MyPropertySheet (
+	boost::scoped_ptr<MyPropertySheet> mpsd ( new MyPropertySheet (
 	                                          this,
 	                                          properties,
 	                                          applicationDir,
@@ -2711,11 +2707,7 @@ void MyFrame::OnFindReplace ( wxCommandEvent& WXUNUSED ( event ) )
 #endif
 
 
-	if ( findDialog.get() )
-	{
-		findDialog = std::auto_ptr<wxFindReplaceDialog> ( 0 );
-	}
-	findDialog = std::auto_ptr<wxFindReplaceDialog> ( new wxFindReplaceDialog (
+	findDialog.reset ( new wxFindReplaceDialog (
 	                 this,
 	                 &findData,
 	                 _ ( "Find and Replace" ),
@@ -2729,7 +2721,7 @@ void MyFrame::OnGlobalReplace ( wxCommandEvent& event )
 		return;
 
 	size_t flags = findData.GetFlags();
-	std::auto_ptr<GlobalReplaceDialog> grd ( new GlobalReplaceDialog (
+	boost::scoped_ptr<GlobalReplaceDialog> grd ( new GlobalReplaceDialog (
 	            this,
 	            findData.GetFindString(),
 	            findData.GetReplaceString(),
@@ -2797,7 +2789,7 @@ void MyFrame::OnGlobalReplace ( wxCommandEvent& event )
 		{
 			try
 			{
-				std::auto_ptr<WrapRegex> wr ( new WrapRegex (
+				boost::scoped_ptr<WrapRegex> wr ( new WrapRegex (
 				                                  ( const char * ) findData.GetFindString().mb_str ( wxConvUTF8 ),
 				                                  flags & wxFR_MATCHCASE,
 				                                  ( const char * ) findData.GetReplaceString().mb_str ( wxConvUTF8 ) ) );
@@ -3271,7 +3263,7 @@ bool MyFrame::openFile ( const wxString &file, bool largeFile )
 
 	// NOW parse the document, but don't create a UTF-8 copy
 	statusProgress ( _T ( "Parsing document..." ) );
-	std::auto_ptr<WrapExpat> we ( new WrapExpat() );
+	boost::scoped_ptr<WrapExpat> we ( new WrapExpat() );
 
 	// omit XML declaration
 	if ( !isUtf8 && finalBufferLen > 5 &&
@@ -3449,7 +3441,7 @@ void MyFrame::OnSpelling ( wxCommandEvent& event )
 	getRawText ( doc, rawBufferUtf8 );
 	bool success = true; // always true for now: well-formedness not req'd 
 
-	auto_ptr<StyleDialog> sd ( new StyleDialog (
+	boost::scoped_ptr<StyleDialog> sd ( new StyleDialog (
 	                               this,
 	                               wxICON ( appicon ),
 	                               rawBufferUtf8,
@@ -3582,7 +3574,7 @@ void MyFrame::saveAs()
 	if ( defaultDir.empty() )
 		defaultDir = mLastDir;
 
-	auto_ptr<wxFileDialog> fd ( new wxFileDialog (
+	boost::scoped_ptr<wxFileDialog> fd ( new wxFileDialog (
 	                                this,
 	                                _ ( "Save As" ),
 	                                defaultDir,
@@ -3794,7 +3786,7 @@ void MyFrame::OnValidateDTD ( wxCommandEvent& event )
 	doc->clearErrorIndicators();
 	statusProgress ( _ ( "DTD Validation in progress..." ) );
 
-	auto_ptr<WrapLibxml> wl ( new WrapLibxml ( libxmlNetAccess ) );
+	boost::scoped_ptr<WrapLibxml> wl ( new WrapLibxml ( libxmlNetAccess ) );
 	wxString fname = doc->getFullFileName();
 	if ( !wl->validate ( doc->myGetTextRaw(), fname ) )
 	{
@@ -3868,7 +3860,7 @@ void MyFrame::validateRelaxNG (
 	doc->clearErrorIndicators();
 	statusProgress ( _ ( "RELAX NG validation in progress..." ) );
 
-	auto_ptr<WrapLibxml> wl ( new WrapLibxml ( libxmlNetAccess ) );
+	boost::scoped_ptr<WrapLibxml> wl ( new WrapLibxml ( libxmlNetAccess ) );
 	if ( !wl->validateRelaxNG ( schemaUrl, doc->myGetTextRaw(), fileName ) )
 	{
 		wxString wideError = wl->getLastError();
@@ -3936,7 +3928,7 @@ void MyFrame::OnValidateSchema ( wxCommandEvent& event )
 
 	wxString fileName = doc->getFullFileName();
 	std::string utf8Buffer = doc->myGetTextRaw();
-	std::auto_ptr<WrapXerces> validator ( new WrapXerces() );
+	boost::scoped_ptr<WrapXerces> validator ( new WrapXerces() );
 	int severity;
 	wxString message;
 	if ( validator->validateMemory ( utf8Buffer.c_str(), utf8Buffer.size(),
@@ -4040,7 +4032,7 @@ void MyFrame::OnXPath ( wxCommandEvent& event )
 	if ( ( doc = getActiveDocument() ) == NULL )
 		return;
 
-	auto_ptr<wxTextEntryDialog> dlg ( new wxTextEntryDialog (
+	boost::scoped_ptr<wxTextEntryDialog> dlg ( new wxTextEntryDialog (
 	                                      this,
 	                                      _ ( "Enter XPath:" ),
 	                                      _ ( "Evaluate XPath" ),
@@ -4055,7 +4047,7 @@ void MyFrame::OnXPath ( wxCommandEvent& event )
 	std::string utf8Buffer;
 	getRawText ( doc, utf8Buffer );
 
-	auto_ptr<WrapLibxml> wl ( new WrapLibxml ( libxmlNetAccess ) );
+	boost::scoped_ptr<WrapLibxml> wl ( new WrapLibxml ( libxmlNetAccess ) );
 	bool success = wl->xpath ( xpathExpression, utf8Buffer,
 			doc->getFullFileName() );
 
@@ -4182,7 +4174,7 @@ void MyFrame::OnXslt ( wxCommandEvent& event )
 	}
 	statusProgress ( _ ( "XSL transformation in progress..." ) );
 
-	auto_ptr<WrapLibxml> wl ( new WrapLibxml ( libxmlNetAccess ) );
+	boost::scoped_ptr<WrapLibxml> wl ( new WrapLibxml ( libxmlNetAccess ) );
 	wxString fileName = doc->getFullFileName();
 	if ( !wl->xslt ( path, rawBufferUtf8, fileName ) )
 	{
@@ -4222,7 +4214,7 @@ void MyFrame::OnPrettyPrint ( wxCommandEvent& event )
 	statusProgress ( _ ( "Pretty-printing in progress..." ) );
 
 	wxString fileName = doc->getFullFileName();
-	auto_ptr<WrapLibxml> wl ( new WrapLibxml ( libxmlNetAccess ) );
+	boost::scoped_ptr<WrapLibxml> wl ( new WrapLibxml ( libxmlNetAccess ) );
 	for ( int i = 0; i < 2; i++ ) // perform two iterations
 	{
 
@@ -4279,7 +4271,7 @@ void MyFrame::OnEncoding ( wxCommandEvent& event )
 
 	int res;
 	wxMemoryBuffer output;
-	std::auto_ptr<WrapLibxml> wl ( new WrapLibxml ( libxmlNetAccess ) );
+	boost::scoped_ptr<WrapLibxml> wl ( new WrapLibxml ( libxmlNetAccess ) );
 	res = wl->saveEncoding ( doc->myGetTextRaw(), doc->getFullFileName(),
 			wxEmptyString, &output, scd.GetStringSelection() );
 	if ( res == -1 )
@@ -4290,7 +4282,7 @@ void MyFrame::OnEncoding ( wxCommandEvent& event )
 		return;
 	}
 
-	std::auto_ptr<XmlUtf8Reader> xur ( new XmlUtf8Reader (
+	boost::scoped_ptr<XmlUtf8Reader> xur ( new XmlUtf8Reader (
 	                                       false,
 	                                       expandInternalEntities,
 	                                       output.GetDataLen() ) );
@@ -4759,7 +4751,7 @@ bool MyFrame::saveFile ( XmlDoc *doc, wxString& fileName, bool checkLastModified
 			}
 			else // all other encodings handled by Libxml
 			{
-				auto_ptr<WrapLibxml> wl ( new WrapLibxml ( libxmlNetAccess ) );
+				boost::scoped_ptr<WrapLibxml> wl ( new WrapLibxml ( libxmlNetAccess ) );
 				int result = wl->saveEncoding ( utf8Buffer,
 						doc->getFullFileName(), fileName, NULL, wideEncoding );
 				if ( result == -1 )

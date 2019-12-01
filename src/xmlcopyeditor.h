@@ -51,9 +51,9 @@
 #include <string>
 #include <set>
 #include <map>
-#include <memory>
 #include <vector>
 #include <stdexcept>
+#include <boost/scoped_ptr.hpp>
 #include "xmldoc.h"
 #include "myhtmlpane.h"
 #include "xmlencodinghandler.h"
@@ -199,7 +199,7 @@ class MyApp : public wxApp
 		MyServer *server;
 		bool singleInstanceCheck;
 		int lang;
-		std::auto_ptr<wxFileConfig> config;
+		boost::scoped_ptr<wxFileConfig> config;
 };
 
 // forward declarations
@@ -374,9 +374,9 @@ class MyFrame : public wxFrame
 #ifndef __WXDEBUG__
 		wxLogNull logTarget;
 #endif
-		std::auto_ptr<wxHtmlEasyPrinting> htmlPrinting;
-		std::auto_ptr<wxFindReplaceDialog> findDialog;
-		std::auto_ptr<wxHtmlHelpController> helpController;
+		boost::scoped_ptr<wxHtmlEasyPrinting> htmlPrinting;
+		boost::scoped_ptr<wxFindReplaceDialog> findDialog;
+		boost::scoped_ptr<wxHtmlHelpController> helpController;
 
 		wxBoxSizer *frameSizer;
 		wxMenuBar *menuBar;

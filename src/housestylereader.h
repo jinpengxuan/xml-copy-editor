@@ -25,8 +25,7 @@
 #include <map>
 #include <set>
 #include <vector>
-#include <memory>
-#include <expat.h>
+#include <boost/scoped_ptr.hpp>
 #include "wrapexpat.h"
 
 using namespace std;
@@ -50,7 +49,7 @@ class HouseStyleReader : public WrapExpat
 		virtual ~HouseStyleReader();
 		void getNodeVector ( vector<pair<string, unsigned> > &v );
 	private:
-		std::auto_ptr<HouseStyleReaderData> ud;
+		boost::scoped_ptr<HouseStyleReaderData> ud;
 		enum
 		{
 			STATE_UNKNOWN,

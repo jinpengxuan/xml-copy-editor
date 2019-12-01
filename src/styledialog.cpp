@@ -385,7 +385,7 @@ StyleDialog::~StyleDialog()
 
 void StyleDialog::OnColumnClick ( wxListEvent& event )
 {
-	std::auto_ptr<SortData> data ( new SortData );
+	boost::scoped_ptr<SortData> data ( new SortData );
 	data->column = event.GetColumn();
 	data->table = table;
 	table->SortItems ( MyCompareFunction, ( wxIntPtr ) data.get() );
@@ -457,7 +457,7 @@ void StyleDialog::OnReport ( wxCommandEvent& event )
 
 	wxString separator = wxFileName::GetPathSeparator();
 
-	std::auto_ptr<HouseStyle> hs ( new HouseStyle (
+	boost::scoped_ptr<HouseStyle> hs ( new HouseStyle (
 					   (type == ID_TYPE_SPELL) ? HS_TYPE_SPELL : HS_TYPE_STYLE,
 	                                   bufferUtf8,
 	                                   ruleSetDirectory,

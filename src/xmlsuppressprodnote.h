@@ -25,7 +25,7 @@
 #include <vector>
 #include <expat.h>
 #include <string>
-#include <memory>
+#include <boost/scoped_ptr.hpp>
 #include "wrapexpat.h"
 
 struct SuppressProdnoteData : public ParserData
@@ -53,7 +53,7 @@ class XmlSuppressProdnote : public WrapExpat
 			return d->encoding;
 		}
 	private:
-		std::auto_ptr<SuppressProdnoteData> d;
+		boost::scoped_ptr<SuppressProdnoteData> d;
 		std::string encoding, element, attribute;
 		static void XMLCALL xmldeclhandler (
 		    void *data,

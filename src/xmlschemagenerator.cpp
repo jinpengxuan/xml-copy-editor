@@ -20,8 +20,8 @@
 
 #include "xmlschemagenerator.h"
 #include "wrapxerces.h"
-#include <memory>
 #include <algorithm>
+#include <boost/scoped_ptr.hpp>
 #include <xercesc/framework/MemBufInputSource.hpp>
 #include <xercesc/parsers/XercesDOMParser.hpp>
 #include <xercesc/dom/DOMNamedNodeMap.hpp>
@@ -54,7 +54,7 @@ const wxString &XmlSchemaGenerator::generate (
 	mSchema.Clear();
 
 	XercesCatalogResolver catalogResolver;
-	std::auto_ptr<XercesDOMParser> parser ( new XercesDOMParser() );
+	boost::scoped_ptr<XercesDOMParser> parser ( new XercesDOMParser() );
 	parser->setDoNamespaces ( true );
 	parser->setDoSchema ( true );
 	parser->setValidationSchemaFullChecking ( false );

@@ -24,7 +24,7 @@
 #include <set>
 #include <string>
 #include <vector>
-#include <expat.h>
+#include <boost/scoped_ptr.hpp>
 #include <boost/shared_ptr.hpp>
 #include "wrapexpat.h"
 #include "rule.h"
@@ -81,7 +81,7 @@ class XmlRuleReader : public WrapExpat
 		void getExcludeVector ( vector<string> &v );
 		void getIncludeVector ( vector<string> &v );
 	private:
-		std::auto_ptr<RuleData> ud;
+		boost::scoped_ptr<RuleData> ud;
 		boost::shared_ptr<StringSet<char> > dictionary, passiveDictionary;
 		boost::shared_ptr<vector<boost::shared_ptr<Rule> > > ruleVector;
 

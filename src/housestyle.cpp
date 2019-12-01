@@ -137,7 +137,7 @@ void HouseStyle::collectRules ( const std::string& fileName,
 	if ( !ReadFile::run ( filePath, buffer ) )
 		return;
 
-	std::auto_ptr<XmlRuleReader> xrr ( new XmlRuleReader (
+	boost::scoped_ptr<XmlRuleReader> xrr ( new XmlRuleReader (
 	                                       dictionary,
 	                                       passiveDictionary,
 	                                       ruleVector ) );

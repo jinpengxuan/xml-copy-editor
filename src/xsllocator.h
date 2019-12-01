@@ -23,7 +23,7 @@
 
 #include <expat.h>
 #include <string>
-#include <memory>
+#include <boost/scoped_ptr.hpp>
 #include "wrapexpat.h"
 
 struct XslLocatorData : public ParserData
@@ -39,7 +39,7 @@ class XslLocator : public WrapExpat
 		virtual ~XslLocator();
 		std::string getXslLocation();
 	private:
-		std::auto_ptr<XslLocatorData> d;
+		boost::scoped_ptr<XslLocatorData> d;
 		static void XMLCALL starthandler (
 		    void *data,
 		    const XML_Char *el,

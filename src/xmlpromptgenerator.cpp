@@ -307,7 +307,7 @@ int XmlPromptGenerator::parseGrammar
 
 	Grammar *rootGrammar;
 	try {
-		std::auto_ptr<InputSource> source ( WrapXerces::resolveEntity
+		boost::scoped_ptr<InputSource> source ( WrapXerces::resolveEntity
 				( publicId , systemId , baseFileName ) );
 		if ( !source.get() )
 		{

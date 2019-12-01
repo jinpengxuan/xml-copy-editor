@@ -24,7 +24,7 @@
 #include <vector>
 #include <expat.h>
 #include <string>
-#include <memory>
+#include <boost/scoped_ptr.hpp>
 #include "xmltextinfo.h"
 
 struct DtdData : public ParserData
@@ -49,7 +49,7 @@ class XmlAssociateDtd : public WrapExpat
 			return d->buffer;
 		}
 	private:
-		std::auto_ptr<DtdData> d;
+		boost::scoped_ptr<DtdData> d;
 		const XmlTextInfo &mInfo;
 		static void XMLCALL start (
 		    void *data,

@@ -23,7 +23,7 @@
 
 #include <expat.h>
 #include <string>
-#include <memory>
+#include <boost/scoped_ptr.hpp>
 #include "wrapexpat.h"
 
 struct SchemaLocatorData
@@ -39,7 +39,7 @@ class XmlSchemaLocator : public WrapExpat
 		virtual ~XmlSchemaLocator();
 		std::string getSchemaLocation();
 	private:
-		std::auto_ptr<SchemaLocatorData> d;
+		boost::scoped_ptr<SchemaLocatorData> d;
 		static void XMLCALL starthandler (
 		    void *data,
 		    const XML_Char *el,

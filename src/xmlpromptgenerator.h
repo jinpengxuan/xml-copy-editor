@@ -26,8 +26,8 @@
 #include <wx/event.h>
 #include <map>
 #include <set>
-#include <memory>
 #include <string>
+#include <boost/scoped_ptr.hpp>
 #include "wrapexpat.h"
 #include "parserdata.h"
 #include <xercesc/validators/common/ContentSpecNode.hpp>
@@ -102,7 +102,7 @@ class XmlPromptGenerator : public WrapExpat, public wxThread
 			return d->elementStructureMap;
 		}
 	private:
-		std::auto_ptr<PromptGeneratorData> d;
+		boost::scoped_ptr<PromptGeneratorData> d;
 		static void XMLCALL starthandler (
 		    void *data,
 		    const XML_Char *el,

@@ -18,7 +18,7 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
-#include <memory>
+#include <boost/scoped_ptr.hpp>
 #include "associatedialog.h"
 #include "wraplibxml.h"
 
@@ -168,7 +168,7 @@ void AssociateDialog::OnBrowse ( wxCommandEvent& e )
 	wxString dir = fileName.GetPath();
 	if ( dir.empty() && mLastDir )
 		dir = *mLastDir;
-	std::auto_ptr<wxFileDialog> fd ( new wxFileDialog (
+	boost::scoped_ptr<wxFileDialog> fd ( new wxFileDialog (
 	                                     this,
 	                                     _ ( "Select " ) + type,
 	                                     dir,

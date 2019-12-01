@@ -18,7 +18,7 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
-#include <memory>
+#include <boost/scoped_ptr.hpp>
 #include "globalreplacedialog.h"
 #include "wrapregex.h"
 
@@ -115,7 +115,7 @@ void GlobalReplaceDialog::OnOk ( wxCommandEvent& e )
 	{
 		try
 		{
-			std::auto_ptr<WrapRegex> wr ( new WrapRegex (
+			boost::scoped_ptr<WrapRegex> wr ( new WrapRegex (
 			                                  findUtf8,
 			                                  matchCase,
 			                                  replaceUtf8 ) );

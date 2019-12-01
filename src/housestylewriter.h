@@ -23,8 +23,7 @@
 
 #include <set>
 #include <string>
-#include <memory>
-#include <expat.h>
+#include <boost/scoped_ptr.hpp>
 #include "wrapexpat.h"
 #include "wrapregex.h"
 #include "contexthandler.h"
@@ -45,7 +44,7 @@ class HouseStyleWriter : public WrapExpat
 		~HouseStyleWriter();
 		string getOutput();
 	private:
-		std::auto_ptr<HouseStyleWriterData> hswd;
+		boost::scoped_ptr<HouseStyleWriterData> hswd;
 		enum
 		{
 			STATE_UNKNOWN,

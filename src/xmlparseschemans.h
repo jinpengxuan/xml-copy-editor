@@ -24,7 +24,7 @@
 #include <vector>
 #include <expat.h>
 #include <string>
-#include <memory>
+#include <boost/scoped_ptr.hpp>
 #include "wrapexpat.h"
 
 struct ParseSchemaNsData : public ParserData
@@ -43,7 +43,7 @@ class XmlParseSchemaNs : public WrapExpat
 			return d->attributeVector;
 		}
 	private:
-		std::auto_ptr<ParseSchemaNsData> d;
+		boost::scoped_ptr<ParseSchemaNsData> d;
 		static void XMLCALL start (
 		    void *data,
 		    const XML_Char *el,

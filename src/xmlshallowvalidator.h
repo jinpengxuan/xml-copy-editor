@@ -26,8 +26,7 @@
 #include <set>
 #include <vector>
 #include <utility>
-#include <memory>
-#include <expat.h>
+#include <boost/scoped_ptr.hpp>
 #include "wrapexpat.h"
 
 struct XmlShallowValidatorData : public ParserData
@@ -67,7 +66,7 @@ class XmlShallowValidator : public WrapExpat
 		std::vector<std::pair<int, int> > getPositionVector();
 		bool getOverrideFailure();
 	private:
-		std::auto_ptr<XmlShallowValidatorData> vd;
+		boost::scoped_ptr<XmlShallowValidatorData> vd;
 		static void XMLCALL start ( void *data, const XML_Char *el, const XML_Char **attr );
 		static void XMLCALL end ( void *data, const XML_Char *el );
 		static void XMLCALL skippedentity ( void *data, const XML_Char *entityName,

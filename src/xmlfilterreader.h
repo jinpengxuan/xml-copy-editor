@@ -25,8 +25,7 @@
 #include <vector>
 #include <map>
 #include <set>
-#include <memory>
-#include <expat.h>
+#include <boost/scoped_ptr.hpp>
 #include "wrapexpat.h"
 
 using namespace std;
@@ -64,7 +63,7 @@ class XmlFilterReader : public WrapExpat
 		void getIncludeVector ( vector<string> &v );
 		void getFilterMap ( map<string, map<string, set<string> > > &m );
 	private:
-		std::auto_ptr<FilterData> fd;
+		boost::scoped_ptr<FilterData> fd;
 		static void XMLCALL start ( void *data, const XML_Char *el, const XML_Char **attr );
 		static void XMLCALL end ( void *data, const XML_Char *el );
 		static void XMLCALL characterdata ( void *data, const XML_Char *s, int len );

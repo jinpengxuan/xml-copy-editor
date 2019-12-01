@@ -42,7 +42,7 @@ XmlAssociateXsd::XmlAssociateXsd (
 	XML_SetDefaultHandlerExpand ( p, defaulthandler );
 	XML_SetUserData ( p, this );
 
-	std::auto_ptr<XmlParseSchemaNs> parser ( new XmlParseSchemaNs() );
+	boost::scoped_ptr<XmlParseSchemaNs> parser ( new XmlParseSchemaNs() );
 	std::string normalisedPath, buffer;
 	normalisedPath = path.mb_str ( wxConvLocal );
 	if ( !ReadFile::run ( normalisedPath, buffer ) )

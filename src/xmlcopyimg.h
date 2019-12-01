@@ -24,7 +24,7 @@
 #include <vector>
 #include <expat.h>
 #include <string>
-#include <memory>
+#include <boost/scoped_ptr.hpp>
 #include "wrapexpat.h"
 
 struct ImgData : public ParserData
@@ -56,7 +56,7 @@ class XmlCopyImg : public WrapExpat
 			return d->encoding;
 		}
 	private:
-		std::auto_ptr<ImgData> d;
+		boost::scoped_ptr<ImgData> d;
 		std::string encoding, element, attribute;
 		static void XMLCALL xmldeclhandler (
 		    void *data,

@@ -33,6 +33,7 @@
 #include <sstream>
 #include <utility>
 #include <stdexcept>
+#include <boost/scoped_ptr.hpp>
 #include <boost/static_assert.hpp>
 
 using namespace xercesc;
@@ -94,7 +95,7 @@ bool WrapXerces::validateMemory (
 	const wxChar *messageEOL /*= _T("[br]")*/)
 {
 #if 0 // Test DOM parser
-	std::auto_ptr<XercesDOMParser> parser ( new XercesDOMParser() );
+	boost::scoped_ptr<XercesDOMParser> parser ( new XercesDOMParser() );
 
 	parser->setDoNamespaces(true);
 	parser->setExitOnFirstFatalError(true);
@@ -105,7 +106,7 @@ bool WrapXerces::validateMemory (
 	parser->setValidationSchemaFullChecking(true);
 	parser->setCreateCommentNodes(false);
 #else
-	std::auto_ptr<SAX2XMLReader> parser ( XMLReaderFactory::createXMLReader() );
+	boost::scoped_ptr<SAX2XMLReader> parser ( XMLReaderFactory::createXMLReader() );
 
 	parser->setFeature ( XMLUni::fgSAX2CoreNameSpaces, true );
 	parser->setFeature ( XMLUni::fgSAX2CoreValidation, true );
@@ -125,7 +126,7 @@ bool WrapXerces::validateMemory (
 
 	mySAX2Handler.setEOL ( messageEOL );
 
-	std::auto_ptr<InputSource> source;
+	boost::scoped_ptr<InputSource> source;
 	if ( utf8Buffer != NULL )
 	{
 		source.reset ( new MemBufInputSource ( (XMLByte*) utf8Buffer, len,

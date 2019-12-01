@@ -24,8 +24,8 @@
 #include <vector>
 #include <expat.h>
 #include <string>
-#include <memory>
 #include <utility>
+#include <boost/scoped_ptr.hpp>
 #include "wrapexpat.h"
 
 struct Mp3AlbumData : public ParserData
@@ -44,7 +44,7 @@ class Mp3Album : public WrapExpat
 		void getFileNameVector ( std::vector<std::pair<std::string, std::string> >& v );
 		std::string getAlbumTitle();
 	private:
-		std::auto_ptr<Mp3AlbumData> d;
+		boost::scoped_ptr<Mp3AlbumData> d;
 		static void XMLCALL start ( void *data, const XML_Char *el, const XML_Char **attr );
 		static void XMLCALL end ( void *data, const XML_Char *el );
 		static void XMLCALL characterdata ( void *data, const XML_Char *s, int len );

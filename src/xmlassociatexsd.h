@@ -26,7 +26,7 @@
 #include <expat.h>
 #include <string>
 #include <map>
-#include <memory>
+#include <boost/scoped_ptr.hpp>
 #include "wrapexpat.h"
 
 struct AssociateXsdData : public ParserData
@@ -50,7 +50,7 @@ class XmlAssociateXsd : public WrapExpat
 			return d->buffer;
 		}
 	private:
-		std::auto_ptr<AssociateXsdData> d;
+		boost::scoped_ptr<AssociateXsdData> d;
 		std::string encoding;
 		std::map<std::string, std::string> namespaceMap;
 		static void XMLCALL start (

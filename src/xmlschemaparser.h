@@ -23,6 +23,7 @@
 
 #include <expat.h>
 #include <string>
+#include <boost/scoped_ptr.hpp>
 #include "wrapexpat.h"
 #include "xmlpromptgenerator.h"
 
@@ -51,7 +52,7 @@ public:
         STATE_CHOICE
     };
 private:
-    std::auto_ptr<SchemaParserData> d;
+    boost::scoped_ptr<SchemaParserData> d;
     static void XMLCALL starthandler (
         void *data,
         const XML_Char *el,

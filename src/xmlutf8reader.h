@@ -24,7 +24,7 @@
 #include <vector>
 #include <expat.h>
 #include <string>
-#include <memory>
+#include <boost/scoped_ptr.hpp>
 #include "wrapexpat.h"
 
 struct UtfData : public ParserData
@@ -51,7 +51,7 @@ class XmlUtf8Reader : public WrapExpat
 			return d->encoding;
 		}
 	private:
-		std::auto_ptr<UtfData> d;
+		boost::scoped_ptr<UtfData> d;
 		std::string encoding;
 		static void XMLCALL xmldeclhandler (
 		    void *data,
