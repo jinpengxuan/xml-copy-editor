@@ -1,5 +1,5 @@
 build:
-	`wx-config --cxx --cxxflags --libs all` -I /usr/include -I /usr/local/include -I /usr/include/libxml2 -I ../src -lxml2 -lxslt -laspell.15 -lxerces-c -lpcre -o xmlcopyeditor ../src/*.cpp
+	`/usr/local/bin/wx-config --linkdeps --cxx --cxxflags --libs all` -L /usr/local/lib -I /usr/local/Cellar/libxml2/2.9.7/include/libxml2 -I /usr/include -I /usr/local/include -I /usr/include/libxml2 -I ../src -liconv -lexpat -lxml2 -lxslt -laspell.15 -lxerces-c -lpcre -o xmlcopyeditor ../src/*.cpp
 bundle: Info.plist xmlcopyeditor version.plist InfoPlist.strings xmlcopyeditor.icns
 	SetFile -t APPL xmlcopyeditor
 	-mkdir xmlcopyeditor.app
@@ -27,14 +27,14 @@ bundle: Info.plist xmlcopyeditor version.plist InfoPlist.strings xmlcopyeditor.i
 	cp -R ../src/xsl xmlcopyeditor.app/Contents/SharedSupport/
 	cp xmlcopyeditor.icns xmlcopyeditor.app/Contents/Resources/
 	# process xmlcopyeditor
-	for DYLIB in lib/libxml2.2 lib/libxslt.1 lib/libpcre.0 local/lib/libaspell.15 local/lib/libxerces-c-3.1 local/lib/libpng15.15 local/lib/libjpeg.8 local/lib/libtiff.5 lib/libexpat.1 lib/libz.1 lib/libiconv.2; do BASENAME=`basename /usr/$${DYLIB}.dylib`; echo "relinking $${BASENAME}"; cp /usr/$${DYLIB}.dylib xmlcopyeditor.app/Contents/Frameworks/; install_name_tool -change /usr/$${DYLIB}.dylib @executable_path/../Frameworks/$${BASENAME} xmlcopyeditor.app/Contents/MacOS/xmlcopyeditor; done
+	for DYLIB in lib/libxml2.2 lib/libxslt.1 lib/libpcre.0 local/lib/libaspell.15 local/lib/libxerces-c-3.2 local/lib/libpng15.15 local/lib/libjpeg.8 local/lib/libtiff.5 lib/libexpat.1 lib/libz.1 lib/libiconv.2; do BASENAME=`basename /usr/$${DYLIB}.dylib`; echo "relinking $${BASENAME}"; cp /usr/$${DYLIB}.dylib xmlcopyeditor.app/Contents/Frameworks/; install_name_tool -change /usr/$${DYLIB}.dylib @executable_path/../Frameworks/$${BASENAME} xmlcopyeditor.app/Contents/MacOS/xmlcopyeditor; done
 	chmod +w xmlcopyeditor.app/Contents/Frameworks/*.dylib
 	#process libtiff
 	for DYLIB in local/lib/libjpeg.8 lib/libz.1; do BASENAME=`basename /usr/$${DYLIB}.dylib`; echo "relinking $${BASENAME}"; install_name_tool -change /usr/$${DYLIB}.dylib @executable_path/../Frameworks/$${BASENAME} xmlcopyeditor.app/Contents/Frameworks/libtiff.5.dylib; done
 	#process libxslt
 	for DYLIB in lib/libxml2.2; do BASENAME=`basename /usr/$${DYLIB}.dylib`; echo "relinking $${BASENAME}"; install_name_tool -change /usr/$${DYLIB}.dylib @executable_path/../Frameworks/$${BASENAME} xmlcopyeditor.app/Contents/Frameworks/libxslt.1.dylib; done
 	#process libxerces-c
-	for DYLIB in lib/libcurl.4; do BASENAME=`basename /usr/$${DYLIB}.dylib`; echo "relinking $${BASENAME}"; cp /usr/$${DYLIB}.dylib xmlcopyeditor.app/Contents/Frameworks/; install_name_tool -change /usr/$${DYLIB}.dylib @executable_path/../Frameworks/$${BASENAME} xmlcopyeditor.app/Contents/Frameworks/libxerces-c-3.1.dylib; done
+	for DYLIB in lib/libcurl.4; do BASENAME=`basename /usr/$${DYLIB}.dylib`; echo "relinking $${BASENAME}"; cp /usr/$${DYLIB}.dylib xmlcopyeditor.app/Contents/Frameworks/; install_name_tool -change /usr/$${DYLIB}.dylib @executable_path/../Frameworks/$${BASENAME} xmlcopyeditor.app/Contents/Frameworks/libxerces-c-3.2.dylib; done
 	#process libcurl
 	for DYLIB in lib/libcrypto.35 lib/libssl.35 lib/libapple_nghttp2; do BASENAME=`basename /usr/$${DYLIB}.dylib`; echo "relinking $${BASENAME}"; cp /usr/$${DYLIB}.dylib xmlcopyeditor.app/Contents/Frameworks/; install_name_tool -change /usr/$${DYLIB}.dylib @executable_path/../Frameworks/$${BASENAME} xmlcopyeditor.app/Contents/Frameworks/libcurl.4.dylib; done
 dmg:
