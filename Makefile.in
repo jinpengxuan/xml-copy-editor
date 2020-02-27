@@ -160,7 +160,7 @@ CSCOPE = cscope
 DIST_SUBDIRS = $(SUBDIRS)
 am__DIST_COMMON = $(srcdir)/Makefile.in AUTHORS COPYING ChangeLog \
 	INSTALL NEWS TODO compile config.guess config.rpath config.sub \
-	depcomp install-sh ltmain.sh missing
+	install-sh ltmain.sh missing
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 distdir = $(PACKAGE)-$(VERSION)
 top_distdir = $(distdir)
@@ -296,6 +296,10 @@ USE_NLS = @USE_NLS@
 VERSION = @VERSION@
 WX_LIBS = @WX_LIBS@
 XGETTEXT = @XGETTEXT@
+XML2_CFLAGS = @XML2_CFLAGS@
+XML2_LIBS = @XML2_LIBS@
+XSLT_CFLAGS = @XSLT_CFLAGS@
+XSLT_LIBS = @XSLT_LIBS@
 abs_builddir = @abs_builddir@
 abs_srcdir = @abs_srcdir@
 abs_top_builddir = @abs_top_builddir@

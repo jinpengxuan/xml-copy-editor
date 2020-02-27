@@ -639,6 +639,10 @@ GTK_CFLAGS
 ASPELL_LIBS
 ENCHANT_LIBS
 ENCHANT_CFLAGS
+XSLT_LIBS
+XSLT_CFLAGS
+XML2_LIBS
+XML2_CFLAGS
 PKG_CONFIG_LIBDIR
 PKG_CONFIG_PATH
 PKG_CONFIG
@@ -835,6 +839,10 @@ CXXCPP
 PKG_CONFIG
 PKG_CONFIG_PATH
 PKG_CONFIG_LIBDIR
+XML2_CFLAGS
+XML2_LIBS
+XSLT_CFLAGS
+XSLT_LIBS
 ENCHANT_CFLAGS
 ENCHANT_LIBS
 GTK_CFLAGS
@@ -1515,6 +1523,10 @@ Some influential environment variables:
               directories to add to pkg-config's search path
   PKG_CONFIG_LIBDIR
               path overriding pkg-config's built-in search path
+  XML2_CFLAGS C compiler flags for XML2, overriding pkg-config
+  XML2_LIBS   linker flags for XML2, overriding pkg-config
+  XSLT_CFLAGS C compiler flags for XSLT, overriding pkg-config
+  XSLT_LIBS   linker flags for XSLT, overriding pkg-config
   ENCHANT_CFLAGS
               C compiler flags for ENCHANT, overriding pkg-config
   ENCHANT_LIBS
@@ -16596,187 +16608,6 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
 
 
 
-CPPFLAGS="$CPPFLAGS -Wall -g -fexceptions"
-CXXFLAGS?=
-
-WXCONFIG=wx-config
-LIBXMLCONFIG=xml2-config
-LIBXSLTCONFIG=xslt-config
-
-
-# Check whether --with-wx-config was given.
-if test "${with_wx_config+set}" = set; then :
-  withval=$with_wx_config;
-    if test "$withval" != "yes" -a "$withval" != ""; then
-        WXCONFIG=$withval
-    fi
-
-fi
-
-
-wxversion=0
-
-
-
-# Call WXTEST func
-
-
-	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking wxWidgets version" >&5
-$as_echo_n "checking wxWidgets version... " >&6; }
-	if wxversion=`$WXCONFIG --version`; then
-		{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $wxversion" >&5
-$as_echo "$wxversion" >&6; }
-	else
-		{ $as_echo "$as_me:${as_lineno-$LINENO}: result: not found" >&5
-$as_echo "not found" >&6; }
-		as_fn_error $? "wxWidgets is required. Try --with-wx-config." "$LINENO" 5
-	fi
-
-# Verify minimus requires
-vers=`echo $wxversion | $AWK 'BEGIN { FS = "."; } { printf "% d", ($1 * 1000 + $2) * 1000 + $3;}'`
-if test -n "$vers" && test "$vers" -ge 2008000; then
-	WX_CPPFLAGS="`$WXCONFIG --cppflags`"
-	WX_CXXFLAGS="`$WXCONFIG --cxxflags | sed -e 's/-fno-exceptions//'`"
-	WX_LIBS="`$WXCONFIG --unicode --libs std stc aui richtext`"
-else
-	as_fn_error $? "wxWidgets 2.8.0 or newer is required" "$LINENO" 5
-fi
-
-# Check for libxml2
-libxmlversion=0
-
-
-
-# Call XML2 TEST func
-
-
-	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking libxml2" >&5
-$as_echo_n "checking libxml2... " >&6; }
-	if libxmlversion=`$LIBXMLCONFIG --version`; then
-		{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $libxmlversion" >&5
-$as_echo "$libxmlversion" >&6; }
-	else
-		{ $as_echo "$as_me:${as_lineno-$LINENO}: result: not found" >&5
-$as_echo "not found" >&6; }
-		as_fn_error $? "libxml2." "$LINENO" 5
-	fi
-
-# Check for libxslt
-libxsltversion=0
-
-
-
-# Call XSLT TEST func
-
-
-	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking libxslt" >&5
-$as_echo_n "checking libxslt... " >&6; }
-	if libxsltversion=`$LIBXSLTCONFIG --version`; then
-		{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $libxsltversion" >&5
-$as_echo "$libxsltversion" >&6; }
-	else
-		{ $as_echo "$as_me:${as_lineno-$LINENO}: result: not found" >&5
-$as_echo "not found" >&6; }
-		as_fn_error $? "libxslt" "$LINENO" 5
-	fi
-
-# Check whether --enable-debug was given.
-if test "${enable_debug+set}" = set; then :
-  enableval=$enable_debug;
-  debugbuild="y"
-  CXXFLAGS="${CXXFLAGS} -ggdb -O0"
-
-else
-
-  CXXFLAGS="${CXXFLAGS} -DNDEBUG -DwxDEBUG_LEVEL=0"
-
-fi
-
-
-# Check pcre is available
-ac_fn_c_check_header_mongrel "$LINENO" "pcre.h" "ac_cv_header_pcre_h" "$ac_includes_default"
-if test "x$ac_cv_header_pcre_h" = xyes; then :
-
-else
-  as_fn_error $? "PCRE headers not found" "$LINENO" 5
-fi
-
-
-
-# Check boost::shared_ptr is available
-ac_ext=cpp
-ac_cpp='$CXXCPP $CPPFLAGS'
-ac_compile='$CXX -c $CXXFLAGS $CPPFLAGS conftest.$ac_ext >&5'
-ac_link='$CXX -o conftest$ac_exeext $CXXFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
-ac_compiler_gnu=$ac_cv_cxx_compiler_gnu
-
-
-ac_fn_cxx_check_header_mongrel "$LINENO" "boost/shared_ptr.hpp" "ac_cv_header_boost_shared_ptr_hpp" "$ac_includes_default"
-if test "x$ac_cv_header_boost_shared_ptr_hpp" = xyes; then :
-
-else
-  as_fn_error $? "boost headers not found" "$LINENO" 5
-fi
-
-
-
-# Check xercesc is available
-ac_ext=cpp
-ac_cpp='$CXXCPP $CPPFLAGS'
-ac_compile='$CXX -c $CXXFLAGS $CPPFLAGS conftest.$ac_ext >&5'
-ac_link='$CXX -o conftest$ac_exeext $CXXFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
-ac_compiler_gnu=$ac_cv_cxx_compiler_gnu
-
-ac_fn_cxx_check_header_mongrel "$LINENO" "xercesc/util/PlatformUtils.hpp" "ac_cv_header_xercesc_util_PlatformUtils_hpp" "$ac_includes_default"
-if test "x$ac_cv_header_xercesc_util_PlatformUtils_hpp" = xyes; then :
-
-else
-  as_fn_error $? "Xerces-C headers not found" "$LINENO" 5
-fi
-
-
-
-# Check unicode strings used in xercesc
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if we support the unicode strings used in xercesc" >&5
-$as_echo_n "checking if we support the unicode strings used in xercesc... " >&6; }
-cat confdefs.h - <<_ACEOF >conftest.$ac_ext
-/* end confdefs.h.  */
-
-	#include <boost/static_assert.hpp>
-	#include <xercesc/util/XMLChar.hpp>
-
-	int main() {
-		BOOST_STATIC_ASSERT(sizeof(XMLCh) == 1 || sizeof(XMLCh) == 2 || sizeof(XMLCh) == 4);
-		return 0;
-	}
-
-_ACEOF
-if ac_fn_cxx_try_compile "$LINENO"; then :
-  { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
-$as_echo "yes" >&6; }
-else
-  as_fn_error $? "no" "$LINENO" 5
-
-fi
-rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
-
-# Check expat is available
-ac_ext=cpp
-ac_cpp='$CXXCPP $CPPFLAGS'
-ac_compile='$CXX -c $CXXFLAGS $CPPFLAGS conftest.$ac_ext >&5'
-ac_link='$CXX -o conftest$ac_exeext $CXXFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
-ac_compiler_gnu=$ac_cv_cxx_compiler_gnu
-
-ac_fn_cxx_check_header_mongrel "$LINENO" "expat.h" "ac_cv_header_expat_h" "$ac_includes_default"
-if test "x$ac_cv_header_expat_h" = xyes; then :
-
-else
-  as_fn_error $? "Expat headers not found" "$LINENO" 5
-fi
-
-
-
-# Check enchant is available
 
 
 
@@ -16897,6 +16728,331 @@ $as_echo "no" >&6; }
 		PKG_CONFIG=""
 	fi
 fi
+
+CPPFLAGS="$CPPFLAGS -Wall -g -fexceptions"
+CXXFLAGS?=
+
+WXCONFIG=wx-config
+
+
+# Check whether --with-wx-config was given.
+if test "${with_wx_config+set}" = set; then :
+  withval=$with_wx_config;
+    if test "$withval" != "yes" -a "$withval" != ""; then
+        WXCONFIG=$withval
+    fi
+
+fi
+
+
+wxversion=0
+
+
+
+# Call WXTEST func
+
+
+	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking wxWidgets version" >&5
+$as_echo_n "checking wxWidgets version... " >&6; }
+	if wxversion=`$WXCONFIG --version`; then
+		{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $wxversion" >&5
+$as_echo "$wxversion" >&6; }
+	else
+		{ $as_echo "$as_me:${as_lineno-$LINENO}: result: not found" >&5
+$as_echo "not found" >&6; }
+		as_fn_error $? "wxWidgets is required. Try --with-wx-config." "$LINENO" 5
+	fi
+
+# Verify minimus requires
+vers=`echo $wxversion | $AWK 'BEGIN { FS = "."; } { printf "% d", ($1 * 1000 + $2) * 1000 + $3;}'`
+if test -n "$vers" && test "$vers" -ge 2008000; then
+	WX_CPPFLAGS="`$WXCONFIG --cppflags`"
+	WX_CXXFLAGS="`$WXCONFIG --cxxflags | sed -e 's/-fno-exceptions//'`"
+	WX_LIBS="`$WXCONFIG --unicode --libs std stc aui richtext`"
+else
+	as_fn_error $? "wxWidgets 2.8.0 or newer is required" "$LINENO" 5
+fi
+
+
+pkg_failed=no
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for XML2" >&5
+$as_echo_n "checking for XML2... " >&6; }
+
+if test -n "$XML2_CFLAGS"; then
+    pkg_cv_XML2_CFLAGS="$XML2_CFLAGS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"libxml-2.0\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "libxml-2.0") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_XML2_CFLAGS=`$PKG_CONFIG --cflags "libxml-2.0" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+if test -n "$XML2_LIBS"; then
+    pkg_cv_XML2_LIBS="$XML2_LIBS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"libxml-2.0\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "libxml-2.0") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_XML2_LIBS=`$PKG_CONFIG --libs "libxml-2.0" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+
+
+
+if test $pkg_failed = yes; then
+   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+
+if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
+        _pkg_short_errors_supported=yes
+else
+        _pkg_short_errors_supported=no
+fi
+        if test $_pkg_short_errors_supported = yes; then
+	        XML2_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "libxml-2.0" 2>&1`
+        else
+	        XML2_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "libxml-2.0" 2>&1`
+        fi
+	# Put the nasty error message in config.log where it belongs
+	echo "$XML2_PKG_ERRORS" >&5
+
+	as_fn_error $? "Package requirements (libxml-2.0) were not met:
+
+$XML2_PKG_ERRORS
+
+Consider adjusting the PKG_CONFIG_PATH environment variable if you
+installed software in a non-standard prefix.
+
+Alternatively, you may set the environment variables XML2_CFLAGS
+and XML2_LIBS to avoid the need to call pkg-config.
+See the pkg-config man page for more details." "$LINENO" 5
+elif test $pkg_failed = untried; then
+     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+	{ { $as_echo "$as_me:${as_lineno-$LINENO}: error: in \`$ac_pwd':" >&5
+$as_echo "$as_me: error: in \`$ac_pwd':" >&2;}
+as_fn_error $? "The pkg-config script could not be found or is too old.  Make sure it
+is in your PATH or set the PKG_CONFIG environment variable to the full
+path to pkg-config.
+
+Alternatively, you may set the environment variables XML2_CFLAGS
+and XML2_LIBS to avoid the need to call pkg-config.
+See the pkg-config man page for more details.
+
+To get pkg-config, see <http://pkg-config.freedesktop.org/>.
+See \`config.log' for more details" "$LINENO" 5; }
+else
+	XML2_CFLAGS=$pkg_cv_XML2_CFLAGS
+	XML2_LIBS=$pkg_cv_XML2_LIBS
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+
+fi
+
+pkg_failed=no
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for XSLT" >&5
+$as_echo_n "checking for XSLT... " >&6; }
+
+if test -n "$XSLT_CFLAGS"; then
+    pkg_cv_XSLT_CFLAGS="$XSLT_CFLAGS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"libxslt\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "libxslt") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_XSLT_CFLAGS=`$PKG_CONFIG --cflags "libxslt" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+if test -n "$XSLT_LIBS"; then
+    pkg_cv_XSLT_LIBS="$XSLT_LIBS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"libxslt\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "libxslt") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_XSLT_LIBS=`$PKG_CONFIG --libs "libxslt" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+
+
+
+if test $pkg_failed = yes; then
+   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+
+if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
+        _pkg_short_errors_supported=yes
+else
+        _pkg_short_errors_supported=no
+fi
+        if test $_pkg_short_errors_supported = yes; then
+	        XSLT_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "libxslt" 2>&1`
+        else
+	        XSLT_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "libxslt" 2>&1`
+        fi
+	# Put the nasty error message in config.log where it belongs
+	echo "$XSLT_PKG_ERRORS" >&5
+
+	as_fn_error $? "Package requirements (libxslt) were not met:
+
+$XSLT_PKG_ERRORS
+
+Consider adjusting the PKG_CONFIG_PATH environment variable if you
+installed software in a non-standard prefix.
+
+Alternatively, you may set the environment variables XSLT_CFLAGS
+and XSLT_LIBS to avoid the need to call pkg-config.
+See the pkg-config man page for more details." "$LINENO" 5
+elif test $pkg_failed = untried; then
+     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+	{ { $as_echo "$as_me:${as_lineno-$LINENO}: error: in \`$ac_pwd':" >&5
+$as_echo "$as_me: error: in \`$ac_pwd':" >&2;}
+as_fn_error $? "The pkg-config script could not be found or is too old.  Make sure it
+is in your PATH or set the PKG_CONFIG environment variable to the full
+path to pkg-config.
+
+Alternatively, you may set the environment variables XSLT_CFLAGS
+and XSLT_LIBS to avoid the need to call pkg-config.
+See the pkg-config man page for more details.
+
+To get pkg-config, see <http://pkg-config.freedesktop.org/>.
+See \`config.log' for more details" "$LINENO" 5; }
+else
+	XSLT_CFLAGS=$pkg_cv_XSLT_CFLAGS
+	XSLT_LIBS=$pkg_cv_XSLT_LIBS
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+
+fi
+
+# Check whether --enable-debug was given.
+if test "${enable_debug+set}" = set; then :
+  enableval=$enable_debug;
+  debugbuild="y"
+  CXXFLAGS="${CXXFLAGS} -ggdb -O0"
+
+else
+
+  CXXFLAGS="${CXXFLAGS} -DNDEBUG -DwxDEBUG_LEVEL=0"
+
+fi
+
+
+# Check pcre is available
+ac_fn_c_check_header_mongrel "$LINENO" "pcre.h" "ac_cv_header_pcre_h" "$ac_includes_default"
+if test "x$ac_cv_header_pcre_h" = xyes; then :
+
+else
+  as_fn_error $? "PCRE headers not found" "$LINENO" 5
+fi
+
+
+
+# Check boost::shared_ptr is available
+ac_ext=cpp
+ac_cpp='$CXXCPP $CPPFLAGS'
+ac_compile='$CXX -c $CXXFLAGS $CPPFLAGS conftest.$ac_ext >&5'
+ac_link='$CXX -o conftest$ac_exeext $CXXFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
+ac_compiler_gnu=$ac_cv_cxx_compiler_gnu
+
+
+ac_fn_cxx_check_header_mongrel "$LINENO" "boost/shared_ptr.hpp" "ac_cv_header_boost_shared_ptr_hpp" "$ac_includes_default"
+if test "x$ac_cv_header_boost_shared_ptr_hpp" = xyes; then :
+
+else
+  as_fn_error $? "boost headers not found" "$LINENO" 5
+fi
+
+
+
+# Check xercesc is available
+ac_ext=cpp
+ac_cpp='$CXXCPP $CPPFLAGS'
+ac_compile='$CXX -c $CXXFLAGS $CPPFLAGS conftest.$ac_ext >&5'
+ac_link='$CXX -o conftest$ac_exeext $CXXFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
+ac_compiler_gnu=$ac_cv_cxx_compiler_gnu
+
+ac_fn_cxx_check_header_mongrel "$LINENO" "xercesc/util/PlatformUtils.hpp" "ac_cv_header_xercesc_util_PlatformUtils_hpp" "$ac_includes_default"
+if test "x$ac_cv_header_xercesc_util_PlatformUtils_hpp" = xyes; then :
+
+else
+  as_fn_error $? "Xerces-C headers not found" "$LINENO" 5
+fi
+
+
+
+# Check unicode strings used in xercesc
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking if we support the unicode strings used in xercesc" >&5
+$as_echo_n "checking if we support the unicode strings used in xercesc... " >&6; }
+cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+	#include <boost/static_assert.hpp>
+	#include <xercesc/util/XMLChar.hpp>
+
+	int main() {
+		BOOST_STATIC_ASSERT(sizeof(XMLCh) == 1 || sizeof(XMLCh) == 2 || sizeof(XMLCh) == 4);
+		return 0;
+	}
+
+_ACEOF
+if ac_fn_cxx_try_compile "$LINENO"; then :
+  { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+else
+  as_fn_error $? "no" "$LINENO" 5
+
+fi
+rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
+
+# Check expat is available
+ac_ext=cpp
+ac_cpp='$CXXCPP $CPPFLAGS'
+ac_compile='$CXX -c $CXXFLAGS $CPPFLAGS conftest.$ac_ext >&5'
+ac_link='$CXX -o conftest$ac_exeext $CXXFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
+ac_compiler_gnu=$ac_cv_cxx_compiler_gnu
+
+ac_fn_cxx_check_header_mongrel "$LINENO" "expat.h" "ac_cv_header_expat_h" "$ac_includes_default"
+if test "x$ac_cv_header_expat_h" = xyes; then :
+
+else
+  as_fn_error $? "Expat headers not found" "$LINENO" 5
+fi
+
+
+
+# Check enchant is available
 
 pkg_failed=no
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking for ENCHANT" >&5

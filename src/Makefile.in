@@ -140,7 +140,7 @@ xmlcopyeditor_OBJECTS = $(am_xmlcopyeditor_OBJECTS)
 am__DEPENDENCIES_1 =
 xmlcopyeditor_DEPENDENCIES = $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
-	$(am__DEPENDENCIES_1)
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
 am__v_lt_0 = --silent
@@ -329,6 +329,10 @@ USE_NLS = @USE_NLS@
 VERSION = @VERSION@
 WX_LIBS = @WX_LIBS@
 XGETTEXT = @XGETTEXT@
+XML2_CFLAGS = @XML2_CFLAGS@
+XML2_LIBS = @XML2_LIBS@
+XSLT_CFLAGS = @XSLT_CFLAGS@
+XSLT_LIBS = @XSLT_LIBS@
 abs_builddir = @abs_builddir@
 abs_srcdir = @abs_srcdir@
 abs_top_builddir = @abs_top_builddir@
@@ -462,7 +466,8 @@ xmlcopyeditor_LDADD = $(WX_LIBS) \
 	$(ASPELL_LIBS) \
 	$(ENCHANT_LIBS) \
 	$(GTK_LIBS) \
-	-lexpat -lxslt -lxml2 -lpcre -lxerces-c
+	$(XSLT_LIBS) \
+	-lexpat -lpcre -lxerces-c
 
 nobase_dist_xmlcopyeditor_DATA = $(srcdir)/catalog/catalog \
 	$(srcdir)/dtd/*.* \
@@ -511,7 +516,7 @@ EXTRA_DIST = \
 	$(srcdir)/xmlcopyeditor.rc \
 	$(srcdir)/xmlschemaparser.cpp
 
-AM_CPPFLAGS = -I/usr/include/libxml2 $(ENCHANT_CFLAGS) $(GTK_CFLAGS)
+AM_CPPFLAGS = $(XML2_CFLAGS) $(ENCHANT_CFLAGS) $(GTK_CFLAGS)
 all: all-am
 
 .SUFFIXES:
