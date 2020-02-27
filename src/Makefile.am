@@ -82,7 +82,8 @@ xmlcopyeditor_LDADD = $(WX_LIBS) \
 	$(ASPELL_LIBS) \
 	$(ENCHANT_LIBS) \
 	$(GTK_LIBS) \
-	-lexpat -lxslt -lxml2 -lpcre -lxerces-c
+	$(XSLT_LIBS) \
+	-lexpat -lpcre -lxerces-c
 
 nobase_dist_xmlcopyeditor_DATA = $(srcdir)/catalog/catalog \
 	$(srcdir)/dtd/*.* \
@@ -132,5 +133,5 @@ EXTRA_DIST = \
 	$(srcdir)/xmlcopyeditor.rc \
 	$(srcdir)/xmlschemaparser.cpp
 
-AM_CPPFLAGS = -I/usr/include/libxml2 $(ENCHANT_CFLAGS) $(GTK_CFLAGS)
+AM_CPPFLAGS = $(XML2_CFLAGS) $(ENCHANT_CFLAGS) $(GTK_CFLAGS)
 

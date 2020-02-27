@@ -17,12 +17,12 @@ AC_PROG_INSTALL
 AC_LIBTOOL_DLOPEN
 AC_PROG_LIBTOOL
 
+PKG_PROG_PKG_CONFIG
+
 CPPFLAGS="$CPPFLAGS -Wall -g -fexceptions"
 CXXFLAGS?=
 
 WXCONFIG=wx-config
-LIBXMLCONFIG=xml2-config
-LIBXSLTCONFIG=xslt-config
 
 AC_ARG_WITH(wx-config,
 [[  --with-wx-config=FILE     Use the given path to wx-config when determining
@@ -59,39 +59,8 @@ else
 	AC_MSG_ERROR([wxWidgets 2.8.0 or newer is required])
 fi
 
-# Check for libxml2
-libxmlversion=0
-
-AC_DEFUN([LIBXML2TEST],
-[
-	AC_REQUIRE([AC_PROG_AWK])
-	AC_MSG_CHECKING([libxml2])
-	if libxmlversion=`$LIBXMLCONFIG --version`; then
-		AC_MSG_RESULT([$libxmlversion])
-	else
-		AC_MSG_RESULT([not found])
-		AC_MSG_ERROR([libxml2.])
-	fi])
-
-# Call XML2 TEST func
-LIBXML2TEST
-
-# Check for libxslt
-libxsltversion=0
-
-AC_DEFUN([LIBXSLTTEST],
-[
-	AC_REQUIRE([AC_PROG_AWK])
-	AC_MSG_CHECKING([libxslt])
-	if libxsltversion=`$LIBXSLTCONFIG --version`; then
-		AC_MSG_RESULT([$libxsltversion])
-	else
-		AC_MSG_RESULT([not found])
-		AC_MSG_ERROR([libxslt])
-	fi])
-
-# Call XSLT TEST func
-LIBXSLTTEST
+PKG_CHECK_MODULES([XML2], [libxml-2.0])
+PKG_CHECK_MODULES([XSLT], [libxslt])
 
 AC_ARG_ENABLE(debug,
 [  --enable-debug,  Enable debug build],
