@@ -25,7 +25,7 @@
 #if defined ( __WXGTK__ ) && !defined ( __NO_GTK__ )
 
 #include <gtk/gtk.h>
-#include <gtk/gtkx.h>
+#include <gdk/gdkx.h>
 
 void MyRaiseWindow ( wxTopLevelWindow *wnd )
 {
