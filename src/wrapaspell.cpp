@@ -51,6 +51,7 @@ WrapAspell::WrapAspell (
 #endif
 	
 	aspell_config_replace ( spell_config, "lang", lang.mb_str() );
+	aspell_config_replace ( spell_config, "encoding", "utf-8" );
 	AspellCanHaveError * possible_err = new_aspell_speller ( spell_config );
 	spell_checker = 0;
 	if ( aspell_error_number ( possible_err ) != 0)
