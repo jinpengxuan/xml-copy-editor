@@ -311,7 +311,8 @@ int XmlPromptGenerator::parseGrammar
 				( publicId , systemId , baseFileName ) );
 		if ( !source.get() )
 		{
-			wxLogError ( _T("Cann't open '%s'"), systemId.c_str() );
+			if ( !( publicId.empty() && systemId.empty() ) )
+				wxLogError ( _T("Cann't open '%s'"), systemId.c_str() );
 			return XML_STATUS_ERROR;
 		}
 
