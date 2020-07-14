@@ -114,14 +114,29 @@ PKG_CHECK_MODULES(ENCHANT, [enchant], [CXXFLAGS="$CXXFLAGS -DUSE_ENCHANT"],
 
 AC_SUBST(ASPELL_LIBS)
 
-# Check gtk
-# This has to match the one wxWidgets linked with
-# It is needed to make single-instance-check work
-PKG_CHECK_MODULES(GTK, [gtk+-2.0], [AC_MSG_RESULT([gtk+-2.0])]
-	, [PKG_CHECK_MODULES(GTK, [gtk+-3.0], [AC_MSG_RESULT([gtk+-3.0])]
-		, [CXXFLAGS="$CXXFLAGS -D__NO_GTK__"]
-	)]
+AC_MSG_CHECKING([the GTK version to use])
+AC_ARG_WITH([gtk],
+	[AS_HELP_STRING([--with-gtk=2.0|3.0],
+		[the GTK version to compile against [default: 3.0].
+		It has to match the one that wxWidgets linked with.
+		GTK is needed to make single-instance-check work.
+		]
+	)],
+	[AS_CASE(["$with_gtk"],
+		[2.0|3.0], [],
+		[AC_MSG_ERROR([invalid GTK version specified])]
+	)],
+	[with_gtk=3.0]
 )
+AC_MSG_RESULT([$with_gtk])
+AS_CASE(["$with_gtk"],
+	[2.0], [PKG_CHECK_MODULES(GTK, [gtk+-2.0],
+		[], [CXXFLAGS="$CXXFLAGS -D__NO_GTK__"])],
+	[3.0], [PKG_CHECK_MODULES(GTK, [gtk+-3.0],
+		[], [CXXFLAGS="$CXXFLAGS -D__NO_GTK__"])],
+	[]
+)
+
 #AC_SUBST(GTK2_CFLAGS)
 #AC_SUBST(GTK2_LIBS)
 
