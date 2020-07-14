@@ -7,6 +7,7 @@
   * Bug #221 Patch for building with C++11 (Roger Leigh)
   + Added Mac port
   * Update the iconized frame window when opening files from the command line
+  * Fix supporting for filenames with non-ASCII characters
 
 1.2.1.4
   + Feature #171 Fold element does not fold following whitespace

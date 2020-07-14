@@ -796,7 +796,7 @@ xmlChar *WrapLibxml::xmlFileNameToURL ( const wxString &fileName )
 
 wxFileName WrapLibxml::URLToFileName ( const wxString &url )
 {
-#if wxCHECK_VERSION(2,9,0)
+#if wxCHECK_VERSION(2,9,0) && !wxCHECK_VERSION(3,0,0)
 	return wxFileSystem::URLToFileName ( url );
 #else
 	xmlURIPtr uri = xmlParseURI ( url.utf8_str() );
