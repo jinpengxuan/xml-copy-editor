@@ -18,6 +18,7 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
+#include <wx/wx.h>
 #include <wx/utils.h>
 #include "commandpanel.h"
 #include "xmlcopyeditor.h"
