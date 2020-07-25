@@ -3139,7 +3139,11 @@ bool MyFrame::openFile ( const wxString &file, bool largeFile )
 		es.parse ( docBuffer, docBufferLen );
 		encoding = es.getEncoding();
 		if ( encoding.empty() )  // Expat couldn't parse file (e.g. UTF-32)
+		{
 			encoding = getApproximateEncoding ( docBuffer, docBufferLen );
+			if ( encoding.empty() )
+				encoding = "UTF-8";
+		}
 	}
 
 	// convert buffer if not UTF-8

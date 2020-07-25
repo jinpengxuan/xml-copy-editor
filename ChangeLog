@@ -1,6 +1,7 @@
 # Version number followed by the release date
 
 1.2.1.5
+  * Use the same default encoding to read and write file (Bug #234)
   * Only show SSE2 warning in debug build
   * Bug #228 Misleading translation when file was changed externally, may lead to data loss
   * Bug #227 Dead Link: Help > Forum
