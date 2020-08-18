@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<application>
-  <id type="desktop">xmlcopyeditor.desktop</id>
-  <licence>CC0</licence>
+<component type="desktop-application">
+  <id>xmlcopyeditor.desktop</id>
+  <project_licence>GPL-2.0+</project_licence>
+  <name>XML Copy Editor</name>
+  <summary>fast, free, validating XML editor</summary>
+
   <description>
-    <_p>
-      fast, free, validating XML editor
-    </_p>
     <_p>
       XML Copy Editor is an XML editor focusing on editing document markup
       languages like DITA, DocBook, WordprocessingML. Features: DTD/XML
@@ -15,9 +15,10 @@
       Spelling and style check with built-in spell/style checker.
     </_p>
   </description>
+
   <screenshots>
     <_screenshot type="default" width="640" height="387">https://a.fsdn.com/con/app/proj/xml-copy-editor/screenshots/151221.jpg</_screenshot>
   </screenshots>
   <url type="homepage">http://xml-copy-editor.sourceforge.net/</url>
   <updatecontact>zaneuji_at_users.sf.net</updatecontact>
-</application>
+</component>

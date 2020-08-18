@@ -312,7 +312,7 @@ NULL =
 desktopdir = $(datadir)/applications
 desktop_in_files = xmlcopyeditor.desktop.in
 desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
-appdatadir = $(datadir)/appdata
+appdatadir = $(datadir)/metainfo
 appdata_in_files = xmlcopyeditor.appdata.xml.in
 appdata_DATA = $(appdata_in_files:.xml.in=.xml)
 man_MANS = xmlcopyeditor.1

@@ -1,5 +1,5 @@
 ;
-; Copyright 2012-2014 Zane U. Ji.
+; Copyright 2012-2020 Zane U. Ji.
 ;
 ; This file is part of Xml Copy Editor.
 ;
@@ -18,13 +18,26 @@
 ; Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ;
 
+#define OSArchitecture "x64"
+;#define OSArchitecture "x86"
+
 #define MyAppName "XML Copy Editor"
-#define MyAppVersion GetFileVersion(".\ReleaseWx28-x86\XmlCopyEditor.exe")
 #define MyAppPublisher "Zane U. Ji"
 #define MyAppURL "https://sourceforge.net/projects/xml-copy-editor/"
-#define MyAppDir32 "ReleaseWx28-x86"
 #define MyAppExeName "xmlcopyeditor.exe"
-#define MinGW32 "D:\MinGW32"
+#if OSArchitecture == "x64"
+  #define MyAppVersion GetFileVersion(".\ReleaseWx-x64\XmlCopyEditor.exe")
+  #define MyAppDir "ReleaseWx-x64"
+  #define MinGW "D:\msys64\mingw64"
+  #define GccExceptionHandling "seh"
+  #define DllNameSuffix "-x64"
+#else
+  #define MyAppVersion GetFileVersion(".\ReleaseWx-x86\XmlCopyEditor.exe")
+  #define MyAppDir "ReleaseWx-x86"
+  #define MinGW "D:\msys64\mingw32"
+  #define GccExceptionHandling "dw2"
+  #define DllNameSuffix ""
+#endif
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
@@ -45,9 +58,18 @@ LicenseFile=.\copying\xmlcopyeditor\copying.txt
 ;SetupIconFile=.\res\appicon.ico
 Compression=lzma
 SolidCompression=yes
-PrivilegesRequired=none
+PrivilegesRequired=lowest
+PrivilegesRequiredOverridesAllowed=dialog
+#if "x64" == OSArchitecture
+  ; "ArchitecturesInstallIn64BitMode=x64" requests that the install be
+  ; done in "64-bit mode" on x64, meaning it should use the native
+  ; 64-bit Program Files directory and the 64-bit view of the registry.
+  ; On all other architectures it will install in "32-bit mode".
+  ArchitecturesInstallIn64BitMode=x64
+  ArchitecturesAllowed=x64
+#endif
 OutputDir=..
-OutputBaseFilename=xmlcopyeditor-{#MyAppVersion}-x86-install
+OutputBaseFilename=xmlcopyeditor-{#MyAppVersion}-{#OSArchitecture}-install
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
@@ -92,21 +114,33 @@ Root: HKCR; Subkey: ".xlf"; ValueType: string; ValueData: "Software\SourceForge 
 
 [Files]
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
-Source: ".\{#MyAppDir32}\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#MinGW32}\bin\libgcc_s_sjlj-1.dll"; DestDir: "{app}"
-Source: "{#MinGW32}\bin\libstdc++-6.dll"; DestDir: "{app}"
-Source: "{#MinGW32}\bin\libwinpthread-1.dll"; DestDir: "{app}"
-Source: "{#MinGW32}\i686-w64-mingw32\bin\libaspell-15.dll"; DestDir: "{app}"
-Source: "{#MinGW32}\i686-w64-mingw32\bin\libcurl-4.dll"; DestDir: "{app}"
-Source: "{#MinGW32}\i686-w64-mingw32\bin\libeay32.dll"; DestDir: "{app}"
-Source: "{#MinGW32}\i686-w64-mingw32\bin\libexpat-1.dll"; DestDir: "{app}"
-Source: "{#MinGW32}\i686-w64-mingw32\bin\libiconv-2.dll"; DestDir: "{app}"
-Source: "{#MinGW32}\i686-w64-mingw32\bin\libpcre-1.dll"; DestDir: "{app}"
-Source: "{#MinGW32}\i686-w64-mingw32\bin\libxml2-2.dll"; DestDir: "{app}"
-Source: "{#MinGW32}\i686-w64-mingw32\bin\libxslt-1.dll"; DestDir: "{app}"
-Source: "{#MinGW32}\i686-w64-mingw32\bin\ssleay32.dll"; DestDir: "{app}"
-Source: "{#MinGW32}\i686-w64-mingw32\bin\zlib1.dll"; DestDir: "{app}"
-Source: "{#MinGW32}\i686-w64-mingw32\bin\curl-ca-bundle.crt"; DestDir: "{app}"; Flags: ignoreversion
+Source: ".\{#MyAppDir}\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
+Source: "{#MinGW}\bin\libaspell-15.dll"; DestDir: "{app}"
+Source: "{#MinGW}\bin\libbrotlicommon.dll"; DestDir: "{app}"
+Source: "{#MinGW}\bin\libbrotlidec.dll"; DestDir: "{app}"
+Source: "{#MinGW}\bin\libcrypto-1_1{#DllNameSuffix}.dll"; DestDir: "{app}"
+Source: "{#MinGW}\bin\libcurl-4.dll"; DestDir: "{app}"
+Source: "{#MinGW}\bin\libexpat-1.dll"; DestDir: "{app}"
+Source: "{#MinGW}\bin\libgcc_s_{#GccExceptionHandling}-1.dll"; DestDir: "{app}"
+Source: "{#MinGW}\bin\libiconv-2.dll"; DestDir: "{app}"
+Source: "{#MinGW}\bin\libicudt67.dll"; DestDir: "{app}"
+Source: "{#MinGW}\bin\libicuuc67.dll"; DestDir: "{app}"
+Source: "{#MinGW}\bin\libidn2-0.dll"; DestDir: "{app}"
+Source: "{#MinGW}\bin\libintl-8.dll"; DestDir: "{app}"
+Source: "{#MinGW}\bin\liblzma-5.dll"; DestDir: "{app}"
+Source: "{#MinGW}\bin\libnghttp2-14.dll"; DestDir: "{app}"
+Source: "{#MinGW}\bin\libpcre-1.dll"; DestDir: "{app}"
+Source: "{#MinGW}\bin\libpsl-5.dll"; DestDir: "{app}"
+Source: "{#MinGW}\bin\libssh2-1.dll"; DestDir: "{app}"
+Source: "{#MinGW}\bin\libssl-1_1{#DllNameSuffix}.dll"; DestDir: "{app}"
+Source: "{#MinGW}\bin\libstdc++-6.dll"; DestDir: "{app}"
+Source: "{#MinGW}\bin\libunistring-2.dll"; DestDir: "{app}"
+Source: "{#MinGW}\bin\libwinpthread-1.dll"; DestDir: "{app}"
+Source: "{#MinGW}\bin\libxerces-c-3-2.dll"; DestDir: "{app}"
+Source: "{#MinGW}\bin\libxml2-2.dll"; DestDir: "{app}"
+Source: "{#MinGW}\bin\libxslt-1.dll"; DestDir: "{app}"
+Source: "{#MinGW}\bin\zlib1.dll"; DestDir: "{app}"
+Source: "{#MinGW}\ssl\certs/ca-bundle.trust.crt"; DestDir: "{app}"; DestName: "curl-ca-bundle.crt"; Flags: ignoreversion
 Source: ".\aspell\*"; DestDir: "{app}\aspell"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: ".\bin\*"; DestDir: "{app}\bin"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: ".\catalog\*"; DestDir: "{app}\catalog"; Flags: ignoreversion recursesubdirs createallsubdirs
@@ -184,7 +218,7 @@ end;
 
 function IsAdmin(): Boolean;
 begin
-	Result := IsAdminLoggedOn or IsPowerUserLoggedOn;
+	Result := IsAdminInstallMode or IsPowerUserLoggedOn;
 end;
 
 function DefDirRoot(Param: String): String;

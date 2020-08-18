@@ -1,21 +1,20 @@
 Source: xmlcopyeditor
 Section: editors
-Priority: extra
+Priority: optional
 Maintainer: Zane U. Ji <zaneuji@users.sf.net>
-Build-Depends: debhelper (>= 8.0.0), autotools-dev, x11proto-composite-dev,
-  x11proto-randr-dev, libxfixes-dev, libxerces-c-dev, libglib2.0-0,
-  libxdmcp-dev, mime-support, gettext, file, libxinerama-dev, intltool,
-  libcairo2-dev, libxcb1-dev, libxcb-render0-dev, libxi-dev, libgtk2.0-dev,
-  mawk, libgdk-pixbuf2.0-dev, libglib2.0-dev, libatk1.0-dev,
-  libxml-parser-perl, libcroco3, libx11-dev, perl-modules, libpopt0, libxml2,
-  pkg-config, libpcre3-dev, libwxgtk2.8-dev, libfreetype6-dev, x11proto-kb-dev,
-  x11proto-damage-dev, libfontconfig1-dev, x11proto-xinerama-dev,
-  libexpat1-dev, libxml2-dev, libpthread-stubs0-dev, libxext-dev,
-  libxrandr-dev, libxau-dev, libenchant-dev, libpixman-1-dev,
-  libxcomposite-dev, libxrender-dev, libboost1.48-dev, libpng12-dev,
-  libunistring0, libegl1-mesa-lts-saucy, libmagic1, x11proto-render-dev,
-  libexpat1, libxcb-shm0-dev, libpcre3, libpango1.0-dev,
-  libgl1-mesa-glx-lts-saucy, libxcursor-dev, libxdamage-dev, libxslt1-dev, cpio
+Build-Depends: debhelper (>= 8.0.0), autotools-dev, cpio, file, gettext,
+  intltool, libatk1.0-dev, libboost-dev, libcairo2-dev, libcroco3,
+  libenchant-dev, libexpat1, libexpat1-dev, libfontconfig1-dev,
+  libfreetype6-dev, libgdk-pixbuf2.0-dev, libglib2.0-0, libglib2.0-dev,
+  libgtk-3-dev, libmagic1, libpango1.0-dev, libpcre3, libpcre3-dev,
+  libpixman-1-dev, libpopt0, libpthread-stubs0-dev, libwxgtk3.0-gtk3-dev,
+  libx11-dev, libxau-dev, libxcb-render0-dev, libxcb-shm0-dev, libxcb1-dev,
+  libxcomposite-dev, libxcursor-dev, libxdamage-dev, libxdmcp-dev,
+  libxerces-c-dev, libxext-dev, libxfixes-dev, libxi-dev, libxinerama-dev,
+  libxml-parser-perl, libxml2, libxml2-dev, libxrandr-dev, libxrender-dev,
+  libxslt1-dev, mawk, mime-support, perl-modules, pkg-config,
+  x11proto-composite-dev, x11proto-damage-dev, x11proto-kb-dev,
+  x11proto-randr-dev, x11proto-render-dev, x11proto-xinerama-dev
 Standards-Version: 3.9.2
 Homepage: http://xml-copy-editor.sourceforge.net/
 Vcs-Git: git://git.code.sf.net/p/xml-copy-editor/code
