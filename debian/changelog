@@ -1,3 +1,22 @@
+xmlcopyeditor (1.3.0.0-1) unstable; urgency=low
+
+  * Link against wxWidgets 3.0
+  * SSE2 compatible CPUs are required (xerces-c++)
+  * Use the same default encoding to read and write files (Bug #234)
+  * Only show SSE2 warning in debug build
+  * Bug #228 Misleading translation when file was changed externally, may lead
+    to data loss
+  * Bug #227 Dead Link: Help > Forum
+  * Bug #221 Patch for building with C++11 (Roger Leigh)
+  + Added Mac port
+  * Update the iconized frame window when opening files from the command line
+  * Fix supporting for filenames with non-ASCII characters
+  + Feature #171 Fold element does not fold following whitespace
+  + Feature #170 I did a small patch that allows SPACE to trigger
+    autocompletion on any space (Thanassis Tsiodras)
+
+ -- Zane U. Ji <zaneuji@users.sf.net>  Tue, 18 Aug 2020 22:15:48 +0800
+
 xmlcopyeditor (1.2.1.3-1) unstable; urgency=low
 
   * Fixed problems with new documents
@@ -5,7 +24,8 @@ xmlcopyeditor (1.2.1.3-1) unstable; urgency=low
   * Bug #211 Tag-completion remains on-top when XML-Copy-Editor looses focus
   * Keep the original format when associating a DTD/schema/XSL
   + Added a manual
-  - Stopped installing copyright notices of components that are not installed by us
+  - Stopped installing copyright notices of components that are not installed
+    by us
   + Feature #169 Close current tab with Ctrl+W
 
  -- Zane U. Ji <zaneuji@users.sf.net>  Sat, 06 Sep 2014 09:47:43 +0800

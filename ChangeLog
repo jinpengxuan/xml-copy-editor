@@ -1,7 +1,11 @@
 # Version number followed by the release date
 
+1.3.0.0 2020/08/15
+  * Link against wxWidgets 3.0
+  * SSE2 compatible CPUs are required (xerces-c++)
+
 1.2.1.5
-  * Use the same default encoding to read and write file (Bug #234)
+  * Use the same default encoding to read and write files (Bug #234)
   * Only show SSE2 warning in debug build
   * Bug #228 Misleading translation when file was changed externally, may lead to data loss
   * Bug #227 Dead Link: Help > Forum
