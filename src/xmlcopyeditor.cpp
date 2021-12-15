@@ -3980,7 +3980,7 @@ void MyFrame::OnCreateSchema ( wxCommandEvent& event )
 	getRawText ( doc, rawBufferUtf8 );
 
 	const static wxString types[] = { _ ( "W3C Schema" ), _ ( "DTD" ) };
-	const static wxString message = _ ( "Please choose a shema type");
+	const static wxString message = _ ( "Please choose a schema type");
 	wxSingleChoiceDialog dlg ( this, message, _ ( "Schema type" ),
 			( int ) sizeof ( types ) / sizeof ( types[0] ), types );
 	int ret = dlg.ShowModal();
