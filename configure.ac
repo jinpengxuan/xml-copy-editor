@@ -1,4 +1,4 @@
-AC_INIT([xmlcopyeditor], [1.3.0.0])
+AC_INIT([xmlcopyeditor], [1.3.1.0])
 AC_CONFIG_SRCDIR([src/xmlcopyeditor.cpp])
 AC_CONFIG_MACRO_DIR([m4])
 
@@ -14,8 +14,8 @@ IT_PROG_INTLTOOL(0.40.0)
 
 AC_PROG_CXX
 AC_PROG_INSTALL
-AC_LIBTOOL_DLOPEN
-AC_PROG_LIBTOOL
+
+LT_INIT
 
 PKG_PROG_PKG_CONFIG
 
@@ -145,7 +145,8 @@ CXXFLAGS="$CXXFLAGS $WX_CXXFLAGS"
 
 AC_SUBST(WX_LIBS)
 
-AC_OUTPUT(Makefile data/Makefile m4/Makefile po/Makefile.in src/Makefile)
+AC_CONFIG_FILES([Makefile data/Makefile m4/Makefile po/Makefile.in src/Makefile])
+AC_OUTPUT
 
 dnl Summarized output
 echo
