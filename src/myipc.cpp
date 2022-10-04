@@ -44,8 +44,10 @@ void MyRaiseWindow ( wxTopLevelWindow *wnd )
 	// again from the command line, a dialog that prompts the user to save
 	// the file pops up. After the dialog is closed, opening files from the
 	// command line is unable to bring the editor to the front.
-	gtk_window_present_with_time ( GTK_WINDOW ( widget ),
-		gdk_x11_get_server_time ( gwnd ) );
+	guint32 time = GDK_IS_X11_WINDOW ( gwnd ) // GDK_BACKEND=x11?
+					? gdk_x11_get_server_time ( gwnd )
+					: GDK_CURRENT_TIME;
+	gtk_window_present_with_time ( GTK_WINDOW ( widget ), time );
 }
 
 #else // __WXGTK__
