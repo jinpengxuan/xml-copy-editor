@@ -666,6 +666,8 @@ GTK_CFLAGS
 ASPELL_LIBS
 ENCHANT_LIBS
 ENCHANT_CFLAGS
+PCRE2_LIBS
+PCRE2_CFLAGS
 XSLT_LIBS
 XSLT_CFLAGS
 XML2_LIBS
@@ -872,6 +874,8 @@ XML2_CFLAGS
 XML2_LIBS
 XSLT_CFLAGS
 XSLT_LIBS
+PCRE2_CFLAGS
+PCRE2_LIBS
 ENCHANT_CFLAGS
 ENCHANT_LIBS
 GTK_CFLAGS
@@ -1556,6 +1560,9 @@ Some influential environment variables:
   XML2_LIBS   linker flags for XML2, overriding pkg-config
   XSLT_CFLAGS C compiler flags for XSLT, overriding pkg-config
   XSLT_LIBS   linker flags for XSLT, overriding pkg-config
+  PCRE2_CFLAGS
+              C compiler flags for PCRE2, overriding pkg-config
+  PCRE2_LIBS  linker flags for PCRE2, overriding pkg-config
   ENCHANT_CFLAGS
               C compiler flags for ENCHANT, overriding pkg-config
   ENCHANT_LIBS
@@ -17801,14 +17808,97 @@ fi
 
 
 # Check pcre is available
-ac_fn_c_check_header_compile "$LINENO" "pcre.h" "ac_cv_header_pcre_h" "$ac_includes_default"
-if test "x$ac_cv_header_pcre_h" = xyes
-then :
 
-else $as_nop
-  as_fn_error $? "PCRE headers not found" "$LINENO" 5
+pkg_failed=no
+{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for libpcre2-8" >&5
+printf %s "checking for libpcre2-8... " >&6; }
+
+if test -n "$PCRE2_CFLAGS"; then
+    pkg_cv_PCRE2_CFLAGS="$PCRE2_CFLAGS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { printf "%s\n" "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"libpcre2-8\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "libpcre2-8") 2>&5
+  ac_status=$?
+  printf "%s\n" "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_PCRE2_CFLAGS=`$PKG_CONFIG --cflags "libpcre2-8" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+if test -n "$PCRE2_LIBS"; then
+    pkg_cv_PCRE2_LIBS="$PCRE2_LIBS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { printf "%s\n" "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"libpcre2-8\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "libpcre2-8") 2>&5
+  ac_status=$?
+  printf "%s\n" "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_PCRE2_LIBS=`$PKG_CONFIG --libs "libpcre2-8" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
 fi
 
+
+
+if test $pkg_failed = yes; then
+        { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: no" >&5
+printf "%s\n" "no" >&6; }
+
+if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
+        _pkg_short_errors_supported=yes
+else
+        _pkg_short_errors_supported=no
+fi
+        if test $_pkg_short_errors_supported = yes; then
+	        PCRE2_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "libpcre2-8" 2>&1`
+        else
+	        PCRE2_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "libpcre2-8" 2>&1`
+        fi
+	# Put the nasty error message in config.log where it belongs
+	echo "$PCRE2_PKG_ERRORS" >&5
+
+	as_fn_error $? "Package requirements (libpcre2-8) were not met:
+
+$PCRE2_PKG_ERRORS
+
+Consider adjusting the PKG_CONFIG_PATH environment variable if you
+installed software in a non-standard prefix.
+
+Alternatively, you may set the environment variables PCRE2_CFLAGS
+and PCRE2_LIBS to avoid the need to call pkg-config.
+See the pkg-config man page for more details." "$LINENO" 5
+elif test $pkg_failed = untried; then
+        { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: no" >&5
+printf "%s\n" "no" >&6; }
+	{ { printf "%s\n" "$as_me:${as_lineno-$LINENO}: error: in \`$ac_pwd':" >&5
+printf "%s\n" "$as_me: error: in \`$ac_pwd':" >&2;}
+as_fn_error $? "The pkg-config script could not be found or is too old.  Make sure it
+is in your PATH or set the PKG_CONFIG environment variable to the full
+path to pkg-config.
+
+Alternatively, you may set the environment variables PCRE2_CFLAGS
+and PCRE2_LIBS to avoid the need to call pkg-config.
+See the pkg-config man page for more details.
+
+To get pkg-config, see <http://pkg-config.freedesktop.org/>.
+See \`config.log' for more details" "$LINENO" 5; }
+else
+	PCRE2_CFLAGS=$pkg_cv_PCRE2_CFLAGS
+	PCRE2_LIBS=$pkg_cv_PCRE2_LIBS
+        { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+printf "%s\n" "yes" >&6; }
+
+fi
 
 # Check boost::shared_ptr is available
 ac_ext=cpp

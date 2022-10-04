@@ -32,8 +32,7 @@ class Rule : public WrapRegex
 		Rule (
 		    const string& pattern,
 		    bool matchCase,
-		    const string& replace = "",
-		    const int arrayLength = 60 );
+		    const string& replace = "");
 		bool getAdjustCaseAttribute();
 		bool getTentativeAttribute();
 		string getReport();

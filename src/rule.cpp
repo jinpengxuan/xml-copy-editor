@@ -26,12 +26,11 @@ using namespace std;
 Rule::Rule (
     const string& pattern,
     bool matchCase,
-    const string& replace,
-    const int arrayLength ) : WrapRegex (
+    const string& replace
+	) : WrapRegex (
 		        pattern,
 		        matchCase,
-		        replace,
-		        arrayLength )
+		        replace )
 {
 	adjustCaseAttribute = tentativeAttribute = false;
 }

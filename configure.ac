@@ -72,8 +72,7 @@ AC_ARG_ENABLE(debug,
 ])
 
 # Check pcre is available
-AC_CHECK_HEADER(pcre.h, ,
-	AC_MSG_ERROR([PCRE headers not found]))
+PKG_CHECK_MODULES([PCRE2], [libpcre2-8])
 
 # Check boost::shared_ptr is available
 AC_LANG(C++)

@@ -21,10 +21,14 @@
 #ifndef WRAPREGEX_H
 #define WRAPREGEX_H
 
+#ifndef PCRE2_CODE_UNIT_WIDTH
+#define PCRE2_CODE_UNIT_WIDTH 8
+#endif
+
 #include <iostream>
 #include <string>
 #include <vector>
-#include <pcre.h>
+#include <pcre2.h>
 #include <boost/utility.hpp>
 #include "contexthandler.h"
 
@@ -36,8 +40,7 @@ class WrapRegex : private boost::noncopyable
 		WrapRegex (
 		    const string& pattern,
 		    bool matchCase,
-		    const string& replaceParameter = "",
-		    const int arrayLengthParameter = 60 );
+		    const string& replaceParameter = "" );
 		virtual ~WrapRegex();
 		string replaceGlobal (
 		    const string& buffer,
@@ -49,13 +52,12 @@ class WrapRegex : private boost::noncopyable
 		    int context = 0 );
 	private:
 		string replace;
-		const int arrayLength;
 		int returnValue;
 		bool disabled;
 
-		pcre *patternStructure;
-		pcre_extra *patternExtraStructure;
-		int *matchArray;
+		pcre2_code *patternCode;
+		pcre2_match_data *patternMatchData;
+		pcre2_match_context *patternMatchContext;
 
 		string getInterpolatedString_ ( const char *buffer,
 		    const char *source );

@@ -31,40 +31,39 @@ using namespace std;
 WrapRegex::WrapRegex (
     const string& pattern,
     bool matchCase,
-    const string& replaceParameter,
-    const int arrayLengthParameter ) :
+    const string& replaceParameter ) :
 		replace ( replaceParameter ),
-		arrayLength ( arrayLengthParameter ),
 		returnValue ( 0 )
 {
 	if ( pattern.empty() || pattern == ".*" )
 	{
 		disabled = true;
-		matchArray = NULL;
-		patternStructure = NULL;
-		patternExtraStructure = NULL;
+		patternCode = NULL;
+		patternMatchData = NULL;
+		patternMatchContext = NULL;
 		return;
 	}
 	disabled = false;
 
-	matchArray = new int[arrayLength];
-
 	// compile
-	int optionsFlag = ( matchCase ) ? PCRE_UTF8 : PCRE_CASELESS | PCRE_UTF8;
-	const char *errorPointer;
-	int errorOffset;
+	uint32_t optionsFlag = ( matchCase ? 0 : PCRE2_CASELESS ) | PCRE2_UTF | PCRE2_NO_UTF_CHECK;
+	int errorCode;
+	PCRE2_SIZE errorOffset;
 
-	if ( ( patternStructure = pcre_compile (
-	                              pattern.c_str(),
-	                              optionsFlag,
-	                              &errorPointer,
-	                              &errorOffset,
-	                              NULL ) ) == NULL )
+	if ( ( patternCode = pcre2_compile (
+		(PCRE2_SPTR)pattern.c_str(), // pattern
+		PCRE2_ZERO_TERMINATED, // pattern is zero-terminated
+		optionsFlag, // options
+		&errorCode, // error number
+		&errorOffset, // error offset
+		NULL ) ) == NULL ) // default compile context
 	{
-		throw runtime_error ( errorPointer );
+		char buf[256];
+		pcre2_get_error_message ( errorCode, (PCRE2_UCHAR *)buf, sizeof(buf) );
+		throw runtime_error ( string(buf) );
 	}
-
-	patternExtraStructure = pcre_study ( patternStructure, 0, &errorPointer );
+	patternMatchData = pcre2_match_data_create_from_pattern ( patternCode, NULL );
+	patternMatchContext = pcre2_match_context_create ( NULL );
 }
 
 WrapRegex::~WrapRegex()
@@ -72,9 +71,9 @@ WrapRegex::~WrapRegex()
 	if ( disabled )
 		return;
 
-	pcre_free ( patternStructure );
-	pcre_free ( patternExtraStructure );
-	delete[] matchArray;
+	pcre2_match_data_free ( patternMatchData );
+	pcre2_code_free ( patternCode );
+	pcre2_match_context_free ( patternMatchContext );
 }
 
 int WrapRegex::matchPatternGlobal (
@@ -108,18 +107,18 @@ string WrapRegex::replaceGlobal (
 	string output, match;
 
 	output.reserve ( buffer.size() );
-	while ( ( returnValue = pcre_exec (
-	                            patternStructure,
-	                            patternExtraStructure,
-	                            s,
-	                            strlen ( s ),
-	                            0,
-	                            0,
-	                            matchArray,
-	                            arrayLength ) ) >= 0 )
+	while ( ( returnValue = pcre2_match (
+		patternCode, // compiled pattern
+		(PCRE2_SPTR)s, // subject string
+		strlen ( s ), // length of the subject
+		0, // start at offset 0 in the subject
+		0, // default options
+		patternMatchData, // block where results will be stored
+		patternMatchContext ) ) >= 0 ) // match context
 	{
 		++ ( *matchCount );
 
+		PCRE2_SIZE *matchArray = pcre2_get_ovector_pointer ( patternMatchData );
 		output.append ( s, matchArray[0] );
 
 		match.clear();
@@ -150,18 +149,18 @@ int WrapRegex::matchPatternGlobal_ (
 	matchcount = 0;
 	offset = 0;
 
-	while ( ( returnValue = pcre_exec (
-	                            patternStructure,
-	                            patternExtraStructure,
-	                            s,
-	                            buflen,
-	                            offset,
-	                            0,
-	                            matchArray,
-	                            arrayLength ) ) >= 0 )
+	while ( ( returnValue = pcre2_match (
+		patternCode, // compiled pattern
+		(PCRE2_SPTR)s, // subject string
+		buflen, // length of the subject
+		offset, // start at this offset in the subject
+		0, // default options
+		patternMatchData, // block where results will be stored
+		patternMatchContext ) ) >= 0 ) // match context
 	{
 		++matchcount;
 
+		PCRE2_SIZE *matchArray = pcre2_get_ovector_pointer ( patternMatchData );
 		if ( context )
 		{
 			match = ContextHandler::getContext (
@@ -255,11 +254,17 @@ string WrapRegex::getSubpattern_ ( const char *s, unsigned subpattern )
 	if ( disabled )
 		return "";
 
-	const char *sub;
-	int ret = pcre_get_substring ( s, matchArray, returnValue, subpattern, &sub );
-	if ( ret == PCRE_ERROR_NOSUBSTRING || ret == PCRE_ERROR_NOMEMORY )
+	char *sub = NULL;
+	size_t sublen;
+	int ret = pcre2_substring_get_bynumber (
+		patternMatchData,
+		subpattern,
+		(PCRE2_UCHAR **)sub,
+		&sublen
+	);
+	if ( ret == PCRE2_ERROR_NOMATCH || ret == PCRE2_ERROR_BADDATA )
 		return "";
 	string subString ( sub );
-	pcre_free_substring ( sub );
+	pcre2_substring_free ( (PCRE2_UCHAR *)sub );
 	return subString;
 }
