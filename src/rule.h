@@ -24,7 +24,7 @@
 #include <string>
 #include "wrapregex.h"
 
-using namespace std;
+using std::string;
 
 class Rule : public WrapRegex
 {

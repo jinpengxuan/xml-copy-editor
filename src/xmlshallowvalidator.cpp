@@ -28,6 +28,8 @@
 #include <set>
 #include "xmlshallowvalidator.h"
 
+using std::make_pair;
+
 XmlShallowValidator::XmlShallowValidator (
     std::map<wxString, std::set<wxString> > &elementMap,
     std::map<wxString, std::map<wxString, std::set<wxString> > >

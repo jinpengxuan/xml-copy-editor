@@ -32,7 +32,8 @@
 #include <boost/utility.hpp>
 #include "contexthandler.h"
 
-using namespace std;
+using std::vector;
+using std::string;
 
 class WrapRegex : private boost::noncopyable
 {

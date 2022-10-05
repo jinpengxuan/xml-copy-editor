@@ -46,7 +46,7 @@ void XMLCALL XmlParseSchemaNs::start ( void *data,
 
 	while ( *attr )
 	{
-		d->attributeVector.push_back ( make_pair ( *attr, * ( attr + 1 ) ) );
+		d->attributeVector.push_back ( std::make_pair ( *attr, * ( attr + 1 ) ) );
 		attr += 2;
 	}
 	XML_StopParser ( d->p, false );

@@ -21,6 +21,8 @@
 #include <cstring>
 #include "xmlencodinghandler.h"
 
+using std::make_pair;
+
 bool XmlEncodingHandler::hasDeclaration ( const std::string& utf8 )
 {
 	size_t len = utf8.size();

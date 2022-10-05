@@ -145,9 +145,9 @@ void HouseStyle::collectRules ( const std::string& fileName,
 	{
 		std::string report = xrr->getIncorrectPatternReport();
 		if ( report != "" )
-			throw runtime_error ( report.c_str() );
+			throw std::runtime_error ( report.c_str() );
 		else
-			throw runtime_error ( ( const char * ) xrr->getLastError().utf8_str() );
+			throw std::runtime_error ( ( const char * ) xrr->getLastError().utf8_str() );
 	}
 
 	// add current file to exclude set

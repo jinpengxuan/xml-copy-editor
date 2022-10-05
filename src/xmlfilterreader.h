@@ -28,7 +28,10 @@
 #include <boost/scoped_ptr.hpp>
 #include "wrapexpat.h"
 
-using namespace std;
+using std::map;
+using std::vector;
+using std::set;
+using std::string;
 
 struct FilterData : public ParserData
 {

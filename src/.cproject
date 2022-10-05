@@ -32,6 +32,7 @@
 								<option id="gnu.cpp.compiler.mingw.exe.debug.option.debugging.level.693304093" name="Debug Level" superClass="gnu.cpp.compiler.mingw.exe.debug.option.debugging.level" useByScannerDiscovery="false" value="gnu.cpp.compiler.debugging.level.max" valueType="enumerated"/>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.cpp.compiler.option.include.paths.334981297" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="${BOOSTINC}"/>
+									<listOptionValue builtIn="false" value="${MINGW_HOME}/include/libxml2"/>
 									<listOptionValue builtIn="false" value="${WXWIDGETS}/include"/>
 									<listOptionValue builtIn="false" value="${WXWIDGETS}/contrib/include"/>
 									<listOptionValue builtIn="false" value="${WX_SETUP}"/>
@@ -74,6 +75,7 @@
 									<listOptionValue builtIn="false" value="curl"/>
 									<listOptionValue builtIn="false" value="aspell"/>
 									<listOptionValue builtIn="false" value="iconv"/>
+									<listOptionValue builtIn="false" value="imm32"/>
 									<listOptionValue builtIn="false" value="kernel32"/>
 									<listOptionValue builtIn="false" value="user32"/>
 									<listOptionValue builtIn="false" value="gdi32"/>
@@ -134,7 +136,7 @@
 				</extensions>
 			</storageModule>
 			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
-				<configuration artifactName="${ProjName}-" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe,org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release" cleanCommand="rm -rf" description="" errorParsers="org.eclipse.cdt.core.GASErrorParser;org.eclipse.cdt.core.GLDErrorParser;org.eclipse.cdt.core.GCCErrorParser" id="cdt.managedbuild.config.gnu.mingw.exe.release.710071756" name="ReleaseWx28-x86" parent="cdt.managedbuild.config.gnu.mingw.exe.release" postbuildStep="strip -o ${ProjName}.exe ${ProjName}-.exe" prebuildStep="">
+				<configuration artifactName="${ProjName}" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe,org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release" cleanCommand="rm -rf" description="" errorParsers="org.eclipse.cdt.core.GASErrorParser;org.eclipse.cdt.core.GLDErrorParser;org.eclipse.cdt.core.GCCErrorParser" id="cdt.managedbuild.config.gnu.mingw.exe.release.710071756" name="ReleaseWx28-x86" parent="cdt.managedbuild.config.gnu.mingw.exe.release" postbuildStep="" prebuildStep="">
 					<folderInfo id="cdt.managedbuild.config.gnu.mingw.exe.release.710071756." name="/" resourcePath="">
 						<toolChain id="cdt.managedbuild.toolchain.gnu.mingw.exe.release.1386364382" name="MinGW GCC" superClass="cdt.managedbuild.toolchain.gnu.mingw.exe.release">
 							<targetPlatform id="cdt.managedbuild.target.gnu.platform.mingw.exe.release.1941985969" name="Debug Platform" superClass="cdt.managedbuild.target.gnu.platform.mingw.exe.release"/>
@@ -148,9 +150,10 @@
 								<option id="gnu.cpp.compiler.mingw.exe.release.option.debugging.level.1567946828" name="Debug Level" superClass="gnu.cpp.compiler.mingw.exe.release.option.debugging.level" useByScannerDiscovery="false" value="gnu.cpp.compiler.debugging.level.none" valueType="enumerated"/>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.cpp.compiler.option.include.paths.1851942004" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="${BOOSTINC}"/>
+									<listOptionValue builtIn="false" value="${MINGW_HOME}/include/libxml2"/>
 									<listOptionValue builtIn="false" value="${WXWIDGETS}/include"/>
 									<listOptionValue builtIn="false" value="${WXWIDGETS}/contrib/include"/>
-									<listOptionValue builtIn="false" value="${WXWIDGETS}/lib/gcc_lib64/mswu"/>
+									<listOptionValue builtIn="false" value="${WX_SETUP}"/>
 								</option>
 								<option id="gnu.cpp.compiler.option.other.other.1853611325" name="Other flags" superClass="gnu.cpp.compiler.option.other.other" useByScannerDiscovery="false" value="-c -fmessage-length=0" valueType="string"/>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.cpp.compiler.option.preprocessor.def.1550164037" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" useByScannerDiscovery="false" valueType="definedSymbols">
@@ -189,6 +192,7 @@
 									<listOptionValue builtIn="false" value="curl"/>
 									<listOptionValue builtIn="false" value="aspell"/>
 									<listOptionValue builtIn="false" value="iconv"/>
+									<listOptionValue builtIn="false" value="imm32"/>
 									<listOptionValue builtIn="false" value="kernel32"/>
 									<listOptionValue builtIn="false" value="user32"/>
 									<listOptionValue builtIn="false" value="gdi32"/>
@@ -210,7 +214,7 @@
 									<listOptionValue builtIn="false" value="${WXWIDGETS}/lib/gcc_lib64"/>
 								</option>
 								<option id="gnu.cpp.link.option.userobjs.30870315" name="Other objects" superClass="gnu.cpp.link.option.userobjs"/>
-								<option id="gnu.cpp.link.option.flags.1247614174" name="Linker flags" superClass="gnu.cpp.link.option.flags" value="-mwindows" valueType="string"/>
+								<option id="gnu.cpp.link.option.flags.1247614174" name="Linker flags" superClass="gnu.cpp.link.option.flags" value="-mwindows -s" valueType="string"/>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.1542313773" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
 									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
@@ -259,9 +263,10 @@
 								<option id="gnu.cpp.compiler.mingw.exe.debug.option.debugging.level.413996427" name="Debug Level" superClass="gnu.cpp.compiler.mingw.exe.debug.option.debugging.level" useByScannerDiscovery="false" value="gnu.cpp.compiler.debugging.level.max" valueType="enumerated"/>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.cpp.compiler.option.include.paths.1178895973" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="${BOOSTINC}"/>
+									<listOptionValue builtIn="false" value="${MINGW_HOME}/include/libxml2"/>
 									<listOptionValue builtIn="false" value="${WXWIDGETS}/include"/>
 									<listOptionValue builtIn="false" value="${WXWIDGETS}/contrib/include"/>
-									<listOptionValue builtIn="false" value="${WXWIDGETS}/lib/gcc_lib/mswud"/>
+									<listOptionValue builtIn="false" value="${WX_SETUP}"/>
 								</option>
 								<option id="gnu.cpp.compiler.option.other.other.215453894" name="Other flags" superClass="gnu.cpp.compiler.option.other.other" useByScannerDiscovery="false" value="-c -fmessage-length=0" valueType="string"/>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.cpp.compiler.option.preprocessor.def.2034622010" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" useByScannerDiscovery="false" valueType="definedSymbols">
@@ -302,6 +307,7 @@
 									<listOptionValue builtIn="false" value="curl"/>
 									<listOptionValue builtIn="false" value="aspell"/>
 									<listOptionValue builtIn="false" value="iconv"/>
+									<listOptionValue builtIn="false" value="imm32"/>
 									<listOptionValue builtIn="false" value="kernel32"/>
 									<listOptionValue builtIn="false" value="user32"/>
 									<listOptionValue builtIn="false" value="gdi32"/>
@@ -376,9 +382,10 @@
 								<option id="gnu.cpp.compiler.mingw.exe.debug.option.debugging.level.563391868" name="Debug Level" superClass="gnu.cpp.compiler.mingw.exe.debug.option.debugging.level" useByScannerDiscovery="false" value="gnu.cpp.compiler.debugging.level.max" valueType="enumerated"/>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.cpp.compiler.option.include.paths.1934118017" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="${BOOSTINC}"/>
+									<listOptionValue builtIn="false" value="${MINGW_HOME}/include/libxml2"/>
 									<listOptionValue builtIn="false" value="${WXWIDGETS}/include"/>
 									<listOptionValue builtIn="false" value="${WXWIDGETS}/contrib/include"/>
-									<listOptionValue builtIn="false" value="${WXWIDGETS}/lib/gcc_dll32/mswud"/>
+									<listOptionValue builtIn="false" value="${WX_SETUP}"/>
 								</option>
 								<option id="gnu.cpp.compiler.option.other.other.1296274158" name="Other flags" superClass="gnu.cpp.compiler.option.other.other" useByScannerDiscovery="false" value="-c -fmessage-length=0 -Wno-unused-local-typedefs" valueType="string"/>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.cpp.compiler.option.preprocessor.def.511915901" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" useByScannerDiscovery="false" valueType="definedSymbols">
@@ -417,6 +424,7 @@
 									<listOptionValue builtIn="false" value="curl"/>
 									<listOptionValue builtIn="false" value="aspell"/>
 									<listOptionValue builtIn="false" value="iconv"/>
+									<listOptionValue builtIn="false" value="imm32"/>
 									<listOptionValue builtIn="false" value="kernel32"/>
 									<listOptionValue builtIn="false" value="user32"/>
 									<listOptionValue builtIn="false" value="gdi32"/>
@@ -459,10 +467,10 @@
 		<cconfiguration id="cdt.managedbuild.config.gnu.mingw.exe.release.710071756.384493523">
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="cdt.managedbuild.config.gnu.mingw.exe.release.710071756.384493523" moduleId="org.eclipse.cdt.core.settings" name="ReleaseWx-x86">
 				<macros>
-					<stringMacro name="WXVER" type="VALUE_TEXT" value="3.0"/>
+					<stringMacro name="WXVER" type="VALUE_TEXT" value="3.1"/>
 					<stringMacro name="BOOSTINC" type="VALUE_TEXT" value="E:/lib/boost_1_72_0"/>
-					<stringMacro name="WXWIDGETS" type="VALUE_TEXT" value="D:/msys64/mingw32/include/wx-3.0"/>
-					<stringMacro name="WX_SETUP" type="VALUE_TEXT" value="D:/msys64/mingw32/lib/wx/include/msw-unicode-static-3.0"/>
+					<stringMacro name="WXWIDGETS" type="VALUE_TEXT" value="${MINGW_HOME}/include/wx-3.1"/>
+					<stringMacro name="WX_SETUP" type="VALUE_TEXT" value="${MINGW_HOME}/lib/wx/include/msw-unicode-static-3.1"/>
 				</macros>
 				<externalSettings/>
 				<extensions>
@@ -473,7 +481,7 @@
 				</extensions>
 			</storageModule>
 			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
-				<configuration artifactName="${ProjName}-" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe,org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release" cleanCommand="rm -rf" description="" errorParsers="org.eclipse.cdt.core.GASErrorParser;org.eclipse.cdt.core.GLDErrorParser;org.eclipse.cdt.core.GCCErrorParser" id="cdt.managedbuild.config.gnu.mingw.exe.release.710071756.384493523" name="ReleaseWx-x86" parent="cdt.managedbuild.config.gnu.mingw.exe.release" postbuildStep="strip -o ${ProjName}.exe ${ProjName}-.exe" prebuildStep="">
+				<configuration artifactName="${ProjName}" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe,org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release" cleanCommand="rm -rf" description="" errorParsers="org.eclipse.cdt.core.GASErrorParser;org.eclipse.cdt.core.GLDErrorParser;org.eclipse.cdt.core.GCCErrorParser" id="cdt.managedbuild.config.gnu.mingw.exe.release.710071756.384493523" name="ReleaseWx-x86" parent="cdt.managedbuild.config.gnu.mingw.exe.release" postbuildStep="" prebuildStep="">
 					<folderInfo id="cdt.managedbuild.config.gnu.mingw.exe.release.710071756.384493523." name="/" resourcePath="">
 						<toolChain id="cdt.managedbuild.toolchain.gnu.mingw.exe.release.1523176033" name="MinGW GCC" superClass="cdt.managedbuild.toolchain.gnu.mingw.exe.release">
 							<targetPlatform id="cdt.managedbuild.target.gnu.platform.mingw.exe.release.1727143624" name="Debug Platform" superClass="cdt.managedbuild.target.gnu.platform.mingw.exe.release"/>
@@ -487,6 +495,7 @@
 								<option id="gnu.cpp.compiler.mingw.exe.release.option.debugging.level.363888818" name="Debug Level" superClass="gnu.cpp.compiler.mingw.exe.release.option.debugging.level" useByScannerDiscovery="false" value="gnu.cpp.compiler.debugging.level.none" valueType="enumerated"/>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.cpp.compiler.option.include.paths.456227121" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="${BOOSTINC}"/>
+									<listOptionValue builtIn="false" value="${MINGW_HOME}/include/libxml2"/>
 									<listOptionValue builtIn="false" value="${WXWIDGETS}"/>
 									<listOptionValue builtIn="false" value="${WXWIDGETS}/include"/>
 									<listOptionValue builtIn="false" value="${WXWIDGETS}/contrib/include"/>
@@ -531,6 +540,7 @@
 									<listOptionValue builtIn="false" value="curl"/>
 									<listOptionValue builtIn="false" value="aspell"/>
 									<listOptionValue builtIn="false" value="iconv"/>
+									<listOptionValue builtIn="false" value="imm32"/>
 									<listOptionValue builtIn="false" value="kernel32"/>
 									<listOptionValue builtIn="false" value="user32"/>
 									<listOptionValue builtIn="false" value="gdi32"/>
@@ -553,10 +563,10 @@
 									<listOptionValue builtIn="false" value="version"/>
 								</option>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.cpp.link.option.paths.1874533391" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
-									<listOptionValue builtIn="false" value="${WXWIDGETS}/lib/gcc_lib64"/>
+									<listOptionValue builtIn="false" value="${WXWIDGETS}/lib/gcc_lib32"/>
 								</option>
 								<option id="gnu.cpp.link.option.userobjs.367914151" name="Other objects" superClass="gnu.cpp.link.option.userobjs"/>
-								<option id="gnu.cpp.link.option.flags.89495341" name="Linker flags" superClass="gnu.cpp.link.option.flags" value="-mwindows" valueType="string"/>
+								<option id="gnu.cpp.link.option.flags.89495341" name="Linker flags" superClass="gnu.cpp.link.option.flags" value="-mwindows -s" valueType="string"/>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.926332437" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
 									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
@@ -577,10 +587,10 @@
 		<cconfiguration id="cdt.managedbuild.config.gnu.mingw.exe.debug.747771716.1860829555">
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="cdt.managedbuild.config.gnu.mingw.exe.debug.747771716.1860829555" moduleId="org.eclipse.cdt.core.settings" name="DebugWx-x64">
 				<macros>
-					<stringMacro name="WXVER" type="VALUE_TEXT" value=""/>
+					<stringMacro name="WXVER" type="VALUE_TEXT" value="31"/>
 					<stringMacro name="BOOSTINC" type="VALUE_TEXT" value="E:/lib/boost_1_72_0"/>
-					<stringMacro name="WXWIDGETS" type="VALUE_TEXT" value="D:/msys64/mingw64/include/wx-3.0"/>
-					<stringMacro name="WX_SETUP" type="VALUE_TEXT" value="D:/msys64/mingw64/include/wx-3.0"/>
+					<stringMacro name="WXWIDGETS" type="VALUE_TEXT" value="E:/wxWidgets"/>
+					<stringMacro name="WX_SETUP" type="VALUE_TEXT" value="E:/wxWidgets/lib/gcc_dll64/mswud"/>
 				</macros>
 				<externalSettings/>
 				<extensions>
@@ -605,6 +615,7 @@
 								<option id="gnu.cpp.compiler.mingw.exe.debug.option.debugging.level.1661238691" name="Debug Level" superClass="gnu.cpp.compiler.mingw.exe.debug.option.debugging.level" useByScannerDiscovery="false" value="gnu.cpp.compiler.debugging.level.max" valueType="enumerated"/>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.cpp.compiler.option.include.paths.1436489844" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="${BOOSTINC}"/>
+									<listOptionValue builtIn="false" value="${MINGW_HOME}/include/libxml2"/>
 									<listOptionValue builtIn="false" value="${WXWIDGETS}"/>
 									<listOptionValue builtIn="false" value="${WXWIDGETS}/include"/>
 									<listOptionValue builtIn="false" value="${WXWIDGETS}/contrib/include"/>
@@ -648,6 +659,7 @@
 									<listOptionValue builtIn="false" value="curl"/>
 									<listOptionValue builtIn="false" value="aspell"/>
 									<listOptionValue builtIn="false" value="iconv"/>
+									<listOptionValue builtIn="false" value="imm32"/>
 									<listOptionValue builtIn="false" value="kernel32"/>
 									<listOptionValue builtIn="false" value="user32"/>
 									<listOptionValue builtIn="false" value="gdi32"/>
@@ -697,6 +709,7 @@
 					<stringMacro name="WXVER" type="VALUE_TEXT" value="28"/>
 					<stringMacro name="BOOSTINC" type="VALUE_TEXT" value="E:/lib/boost_1_72_0"/>
 					<stringMacro name="WXWIDGETS" type="VALUE_TEXT" value="E:/wxWidgets-2.8.12"/>
+					<stringMacro name="WX_SETUP" type="VALUE_TEXT" value="E:/wxWidgets-2.8.12/lib/gcc_lib64/mswu"/>
 				</macros>
 				<externalSettings/>
 				<extensions>
@@ -707,7 +720,7 @@
 				</extensions>
 			</storageModule>
 			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
-				<configuration artifactName="${ProjName}-" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe,org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release" cleanCommand="rm -rf" description="" errorParsers="org.eclipse.cdt.core.GASErrorParser;org.eclipse.cdt.core.GLDErrorParser;org.eclipse.cdt.core.GCCErrorParser" id="cdt.managedbuild.config.gnu.mingw.exe.release.710071756.1627034107" name="ReleaseWx28-x64" parent="cdt.managedbuild.config.gnu.mingw.exe.release" postbuildStep="strip -o ${ProjName}.exe ${ProjName}-.exe" prebuildStep="">
+				<configuration artifactName="${ProjName}" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe,org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release" cleanCommand="rm -rf" description="" errorParsers="org.eclipse.cdt.core.GASErrorParser;org.eclipse.cdt.core.GLDErrorParser;org.eclipse.cdt.core.GCCErrorParser" id="cdt.managedbuild.config.gnu.mingw.exe.release.710071756.1627034107" name="ReleaseWx28-x64" parent="cdt.managedbuild.config.gnu.mingw.exe.release" postbuildStep="" prebuildStep="">
 					<folderInfo id="cdt.managedbuild.config.gnu.mingw.exe.release.710071756.1627034107." name="/" resourcePath="">
 						<toolChain id="cdt.managedbuild.toolchain.gnu.mingw.exe.release.1134942942" name="MinGW GCC" superClass="cdt.managedbuild.toolchain.gnu.mingw.exe.release">
 							<targetPlatform id="cdt.managedbuild.target.gnu.platform.mingw.exe.release.774622965" name="Debug Platform" superClass="cdt.managedbuild.target.gnu.platform.mingw.exe.release"/>
@@ -721,9 +734,10 @@
 								<option id="gnu.cpp.compiler.mingw.exe.release.option.debugging.level.632123797" name="Debug Level" superClass="gnu.cpp.compiler.mingw.exe.release.option.debugging.level" useByScannerDiscovery="false" value="gnu.cpp.compiler.debugging.level.none" valueType="enumerated"/>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.cpp.compiler.option.include.paths.1512722089" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="${BOOSTINC}"/>
+									<listOptionValue builtIn="false" value="${MINGW_HOME}/include/libxml2"/>
 									<listOptionValue builtIn="false" value="${WXWIDGETS}/include"/>
 									<listOptionValue builtIn="false" value="${WXWIDGETS}/contrib/include"/>
-									<listOptionValue builtIn="false" value="${WXWIDGETS}/lib/gcc_lib64/mswu"/>
+									<listOptionValue builtIn="false" value="${WX_SETUP}"/>
 								</option>
 								<option id="gnu.cpp.compiler.option.other.other.824254524" name="Other flags" superClass="gnu.cpp.compiler.option.other.other" useByScannerDiscovery="false" value="-c -fmessage-length=0" valueType="string"/>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.cpp.compiler.option.preprocessor.def.1196350857" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" useByScannerDiscovery="false" valueType="definedSymbols">
@@ -763,6 +777,7 @@
 									<listOptionValue builtIn="false" value="curl"/>
 									<listOptionValue builtIn="false" value="aspell"/>
 									<listOptionValue builtIn="false" value="iconv"/>
+									<listOptionValue builtIn="false" value="imm32"/>
 									<listOptionValue builtIn="false" value="kernel32"/>
 									<listOptionValue builtIn="false" value="user32"/>
 									<listOptionValue builtIn="false" value="gdi32"/>
@@ -784,7 +799,7 @@
 									<listOptionValue builtIn="false" value="${WXWIDGETS}/lib/gcc_lib64"/>
 								</option>
 								<option id="gnu.cpp.link.option.userobjs.350391064" name="Other objects" superClass="gnu.cpp.link.option.userobjs" useByScannerDiscovery="false"/>
-								<option id="gnu.cpp.link.option.flags.25328215" name="Linker flags" superClass="gnu.cpp.link.option.flags" useByScannerDiscovery="false" value="-mwindows" valueType="string"/>
+								<option id="gnu.cpp.link.option.flags.25328215" name="Linker flags" superClass="gnu.cpp.link.option.flags" useByScannerDiscovery="false" value="-mwindows -s" valueType="string"/>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.1248188546" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
 									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
@@ -808,6 +823,7 @@
 					<stringMacro name="WXVER" type="VALUE_TEXT" value="28"/>
 					<stringMacro name="BOOSTINC" type="VALUE_TEXT" value="E:/lib/boost_1_72_0"/>
 					<stringMacro name="WXWIDGETS" type="VALUE_TEXT" value="E:/wxWidgets-2.8.12"/>
+					<stringMacro name="WX_SETUP" type="VALUE_TEXT" value="E:/wxWidgets-2.8.12/lib/gcc_dll64/mswud"/>
 				</macros>
 				<externalSettings/>
 				<extensions>
@@ -832,9 +848,10 @@
 								<option id="gnu.cpp.compiler.mingw.exe.debug.option.debugging.level.977322640" name="Debug Level" superClass="gnu.cpp.compiler.mingw.exe.debug.option.debugging.level" useByScannerDiscovery="false" value="gnu.cpp.compiler.debugging.level.max" valueType="enumerated"/>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.cpp.compiler.option.include.paths.1796312879" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="${BOOSTINC}"/>
+									<listOptionValue builtIn="false" value="${MINGW_HOME}/include/libxml2"/>
 									<listOptionValue builtIn="false" value="${WXWIDGETS}/include"/>
 									<listOptionValue builtIn="false" value="${WXWIDGETS}/contrib/include"/>
-									<listOptionValue builtIn="false" value="${WXWIDGETS}/lib/gcc_dll64/mswud"/>
+									<listOptionValue builtIn="false" value="${WX_SETUP}"/>
 								</option>
 								<option id="gnu.cpp.compiler.option.other.other.273333438" name="Other flags" superClass="gnu.cpp.compiler.option.other.other" useByScannerDiscovery="false" value="-c -fmessage-length=0 -Wno-unused-local-typedefs" valueType="string"/>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.cpp.compiler.option.preprocessor.def.1297621113" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" useByScannerDiscovery="false" valueType="definedSymbols">
@@ -873,6 +890,7 @@
 									<listOptionValue builtIn="false" value="curl"/>
 									<listOptionValue builtIn="false" value="aspell"/>
 									<listOptionValue builtIn="false" value="iconv"/>
+									<listOptionValue builtIn="false" value="imm32"/>
 									<listOptionValue builtIn="false" value="kernel32"/>
 									<listOptionValue builtIn="false" value="user32"/>
 									<listOptionValue builtIn="false" value="gdi32"/>
@@ -915,10 +933,10 @@
 		<cconfiguration id="cdt.managedbuild.config.gnu.mingw.exe.release.710071756.384493523.2075568512">
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="cdt.managedbuild.config.gnu.mingw.exe.release.710071756.384493523.2075568512" moduleId="org.eclipse.cdt.core.settings" name="ReleaseWx-x64">
 				<macros>
-					<stringMacro name="WXVER" type="VALUE_TEXT" value="3.0"/>
-					<stringMacro name="BOOSTINC" type="VALUE_TEXT" value="E:/lib/boost_1_72_0"/>
-					<stringMacro name="WXWIDGETS" type="VALUE_TEXT" value="D:/msys64/mingw64/include/wx-3.0"/>
-					<stringMacro name="WX_SETUP" type="VALUE_TEXT" value="D:/msys64/mingw64/lib/wx/include/msw-unicode-static-3.0"/>
+					<stringMacro name="WXVER" type="VALUE_TEXT" value="3.1"/>
+					<stringMacro name="BOOSTINC" type="VALUE_TEXT" value="${MINGW_HOME}/include"/>
+					<stringMacro name="WXWIDGETS" type="VALUE_TEXT" value="${MINGW_HOME}/include/wx-3.1"/>
+					<stringMacro name="WX_SETUP" type="VALUE_TEXT" value="${MINGW_HOME}/lib/wx/include/msw-unicode-static-3.1"/>
 				</macros>
 				<externalSettings/>
 				<extensions>
@@ -929,7 +947,7 @@
 				</extensions>
 			</storageModule>
 			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
-				<configuration artifactName="${ProjName}-" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe,org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release" cleanCommand="rm -rf" description="" errorParsers="org.eclipse.cdt.core.GASErrorParser;org.eclipse.cdt.core.GLDErrorParser;org.eclipse.cdt.core.GCCErrorParser" id="cdt.managedbuild.config.gnu.mingw.exe.release.710071756.384493523.2075568512" name="ReleaseWx-x64" parent="cdt.managedbuild.config.gnu.mingw.exe.release" postbuildStep="strip -o ${ProjName}.exe ${ProjName}-.exe" prebuildStep="">
+				<configuration artifactName="${ProjName}" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe,org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release" cleanCommand="rm -rf" description="" errorParsers="org.eclipse.cdt.core.GASErrorParser;org.eclipse.cdt.core.GLDErrorParser;org.eclipse.cdt.core.GCCErrorParser" id="cdt.managedbuild.config.gnu.mingw.exe.release.710071756.384493523.2075568512" name="ReleaseWx-x64" parent="cdt.managedbuild.config.gnu.mingw.exe.release" postbuildStep="" prebuildStep="">
 					<folderInfo id="cdt.managedbuild.config.gnu.mingw.exe.release.710071756.384493523.2075568512." name="/" resourcePath="">
 						<toolChain id="cdt.managedbuild.toolchain.gnu.mingw.exe.release.1887368198" name="MinGW GCC" superClass="cdt.managedbuild.toolchain.gnu.mingw.exe.release">
 							<targetPlatform binaryParser="org.eclipse.cdt.core.PE" id="cdt.managedbuild.target.gnu.platform.mingw.exe.release.1472743801" name="Debug Platform" superClass="cdt.managedbuild.target.gnu.platform.mingw.exe.release"/>
@@ -943,6 +961,7 @@
 								<option id="gnu.cpp.compiler.mingw.exe.release.option.debugging.level.1696315543" name="Debug Level" superClass="gnu.cpp.compiler.mingw.exe.release.option.debugging.level" useByScannerDiscovery="false" value="gnu.cpp.compiler.debugging.level.none" valueType="enumerated"/>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.cpp.compiler.option.include.paths.1865470924" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="${BOOSTINC}"/>
+									<listOptionValue builtIn="false" value="${MINGW_HOME}/include/libxml2"/>
 									<listOptionValue builtIn="false" value="${WXWIDGETS}"/>
 									<listOptionValue builtIn="false" value="${WXWIDGETS}/include"/>
 									<listOptionValue builtIn="false" value="${WXWIDGETS}/contrib/include"/>
@@ -987,6 +1006,7 @@
 									<listOptionValue builtIn="false" value="curl"/>
 									<listOptionValue builtIn="false" value="aspell"/>
 									<listOptionValue builtIn="false" value="iconv"/>
+									<listOptionValue builtIn="false" value="imm32"/>
 									<listOptionValue builtIn="false" value="kernel32"/>
 									<listOptionValue builtIn="false" value="user32"/>
 									<listOptionValue builtIn="false" value="gdi32"/>
@@ -1012,7 +1032,7 @@
 									<listOptionValue builtIn="false" value=""/>
 								</option>
 								<option id="gnu.cpp.link.option.userobjs.757025701" name="Other objects" superClass="gnu.cpp.link.option.userobjs" useByScannerDiscovery="false"/>
-								<option id="gnu.cpp.link.option.flags.811260943" name="Linker flags" superClass="gnu.cpp.link.option.flags" useByScannerDiscovery="false" value="-mwindows" valueType="string"/>
+								<option id="gnu.cpp.link.option.flags.811260943" name="Linker flags" superClass="gnu.cpp.link.option.flags" useByScannerDiscovery="false" value="-mwindows -s" valueType="string"/>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.1346695762" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
 									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
@@ -1033,7 +1053,7 @@
 		<cconfiguration id="cdt.managedbuild.config.gnu.mingw.exe.debug.747771716.1860829555.157862900">
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="cdt.managedbuild.config.gnu.mingw.exe.debug.747771716.1860829555.157862900" moduleId="org.eclipse.cdt.core.settings" name="DebugWx-Linux">
 				<macros>
-					<stringMacro name="WXVER" type="VALUE_TEXT" value="30"/>
+					<stringMacro name="WXVER" type="VALUE_TEXT" value="3.0"/>
 					<stringMacro name="BOOSTINC" type="VALUE_TEXT" value="E:/lib/boost_1_72_0"/>
 					<stringMacro name="WXWIDGETS" type="VALUE_TEXT" value="/usr/include/wx-3.0"/>
 					<stringMacro name="WX_SETUP" type="VALUE_TEXT" value="/usr/lib/x86_64-linux-gnu/wx/include/gtk3-unicode-3.0"/>
@@ -1095,15 +1115,15 @@
 							<tool id="cdt.managedbuild.tool.gnu.c.linker.base.54805592" name="GCC C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.base"/>
 							<tool id="cdt.managedbuild.tool.gnu.cpp.linker.base.345525417" name="GCC C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.base">
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="gnu.cpp.link.option.libs.1611962448" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs" valueType="libs">
-									<listOptionValue builtIn="false" value="wx_gtk3u_richtext-3.0"/>
-									<listOptionValue builtIn="false" value="wx_gtk3u_html-3.0"/>
-									<listOptionValue builtIn="false" value="wx_gtk3u_aui-3.0"/>
-									<listOptionValue builtIn="false" value="wx_gtk3u_adv-3.0"/>
-									<listOptionValue builtIn="false" value="wx_gtk3u_stc-3.0"/>
-									<listOptionValue builtIn="false" value="wx_gtk3u_core-3.0"/>
-									<listOptionValue builtIn="false" value="wx_baseu_xml-3.0"/>
-									<listOptionValue builtIn="false" value="wx_baseu_net-3.0"/>
-									<listOptionValue builtIn="false" value="wx_baseu-3.0"/>
+									<listOptionValue builtIn="false" value="wx_gtk3u_richtext-${WXVER}"/>
+									<listOptionValue builtIn="false" value="wx_gtk3u_html-${WXVER}"/>
+									<listOptionValue builtIn="false" value="wx_gtk3u_aui-${WXVER}"/>
+									<listOptionValue builtIn="false" value="wx_gtk3u_adv-${WXVER}"/>
+									<listOptionValue builtIn="false" value="wx_gtk3u_stc-${WXVER}"/>
+									<listOptionValue builtIn="false" value="wx_gtk3u_core-${WXVER}"/>
+									<listOptionValue builtIn="false" value="wx_baseu_xml-${WXVER}"/>
+									<listOptionValue builtIn="false" value="wx_baseu_net-${WXVER}"/>
+									<listOptionValue builtIn="false" value="wx_baseu-${WXVER}"/>
 									<listOptionValue builtIn="false" value="xslt"/>
 									<listOptionValue builtIn="false" value="xml2"/>
 									<listOptionValue builtIn="false" value="pcre2-8"/>
@@ -1155,17 +1175,13 @@
 	<storageModule moduleId="refreshScope" versionNumber="2">
 		<configuration configurationName="DebugWx-x86"/>
 		<configuration configurationName="DebugWx-x64"/>
-		<configuration configurationName="ReleaseWx"/>
 		<configuration configurationName="ReleaseWx-x86"/>
 		<configuration configurationName="ReleaseWx-x64"/>
 		<configuration configurationName="DebugStatic"/>
-		<configuration configurationName="DebugWx"/>
-		<configuration configurationName="ReleaseWx28"/>
-		<configuration configurationName="ReleaseWx28-x86"/>
-		<configuration configurationName="ReleaseWx28-x64"/>
-		<configuration configurationName="DebugWx28"/>
 		<configuration configurationName="DebugWx28-x86"/>
 		<configuration configurationName="DebugWx28-x64"/>
+		<configuration configurationName="ReleaseWx28-x86"/>
+		<configuration configurationName="ReleaseWx28-x64"/>
 		<configuration configurationName="DebugWx-Linux"/>
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>

@@ -281,7 +281,9 @@ bool MyApp::OnInit()
 		case wxLANGUAGE_SPANISH_GUATEMALA:
 		case wxLANGUAGE_SPANISH_HONDURAS:
 		case wxLANGUAGE_SPANISH_MEXICAN:
+#if !wxCHECK_VERSION(3, 1, 6)
 		case wxLANGUAGE_SPANISH_MODERN:
+#endif
 		case wxLANGUAGE_SPANISH_NICARAGUA:
 		case wxLANGUAGE_SPANISH_PANAMA:
 		case wxLANGUAGE_SPANISH_PARAGUAY:
@@ -415,7 +417,7 @@ bool MyApp::OnInit()
 		wxMessageBox ( error, _ ( "Error" ), wxOK | wxICON_ERROR );
 		return false;
 	}
-	catch ( exception &e )
+	catch ( std::exception &e )
 	{
 		const char *what;
 		what = e.what();
@@ -470,7 +472,7 @@ bool MyApp::OnExceptionInMainLoop()
 		throw;
 	}
 #ifdef __WXMSW__
-	catch ( bad_alloc& )
+	catch ( std::bad_alloc& )
 	{
 		::MessageBox (
 		    NULL,
@@ -480,7 +482,7 @@ bool MyApp::OnExceptionInMainLoop()
 		return true;
 	}
 #endif
-	catch ( exception &e )
+	catch ( std::exception &e )
 	{
 		const char *what;
 		what = e.what();
@@ -2229,7 +2231,7 @@ void MyFrame::OnExport ( wxCommandEvent& event )
 
 	WrapTempFileName tempFileName ( doc->getFullFileName() );
 
-	ofstream rawBufferStream ( tempFileName.name().c_str() );
+	std::ofstream rawBufferStream ( tempFileName.name().c_str() );
 	if ( !rawBufferStream )
 		return;
 	rawBufferStream << rawBufferUtf8;
@@ -4846,7 +4848,7 @@ bool MyFrame::saveRawUtf8 (
     bool ignoreEncoding,
     bool isXml )
 {
-	ofstream ofs ( fileNameLocal.c_str(), std::ios::out | std::ios::binary );
+	std::ofstream ofs ( fileNameLocal.c_str(), std::ios::out | std::ios::binary );
 	if ( !ofs )
 		return false;
 
@@ -5141,7 +5143,7 @@ wxMenuBar *MyFrame::getMenuBar()
 		while ( id <= ID_VALIDATE_PRESET9 && !rngFile.empty() )
 		{
 			rngUrl = WrapLibxml::FileNameToURL ( rngFile );
-			validationPresetMap.insert ( make_pair ( id, rngUrl ) );
+			validationPresetMap.insert ( std::make_pair ( id, rngUrl ) );
 			wxFileName::SplitPath ( rngFile, NULL, NULL, &displayName, NULL );
 			displayName.Replace ( _T ( ".rng" ), _T ( "" ) );
 			shortcutString.Printf ( _ ( "\tCtrl+%i" ), ( id - ID_VALIDATE_PRESET1 ) + 1 );

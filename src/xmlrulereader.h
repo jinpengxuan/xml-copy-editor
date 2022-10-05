@@ -30,7 +30,8 @@
 #include "rule.h"
 #include "stringset.h"
 
-using namespace std;
+using std::vector;
+using std::string;
 
 class RuleData : public ParserData
 {

@@ -28,7 +28,7 @@ WrapExpat::WrapExpat ( const char *encoding, bool nameSpaceAware )
 {
 	p = ( nameSpaceAware ) ? XML_ParserCreateNS ( encoding, ( XML_Char ) ':' ) : XML_ParserCreate ( encoding );
 	if ( p == 0 )
-		throw runtime_error ( "WrapExpat::WrapExpat" );
+		throw std::runtime_error ( "WrapExpat::WrapExpat" );
 }
 
 WrapExpat::~WrapExpat()
@@ -64,7 +64,7 @@ bool WrapExpat::parse ( const string &buffer, bool isFinal )
 
 pair<int, int> WrapExpat::getErrorPosition()
 {
-	return make_pair (
+	return std::make_pair (
 	           XML_GetCurrentLineNumber ( p ),// - 1,
 	           XML_GetCurrentColumnNumber ( p ) );
 }
@@ -74,10 +74,10 @@ wxString WrapExpat::getLastError()
 	if ( !p )
 		return _ ( "Unable to create parser instance" );
 
-	stringstream ss;
+	std::stringstream ss;
 	ss << "Error at line ";
 	ss << XML_GetCurrentLineNumber ( p );
-	ss << ", column " << XML_GetCurrentColumnNumber ( p ) + 1 << ":" << endl;
+	ss << ", column " << XML_GetCurrentColumnNumber ( p ) + 1 << ":" << std::endl;
 	ss << XML_ErrorString ( XML_GetErrorCode ( p ) );
 	return wxString ( ss.str().c_str(), wxConvUTF8 );
 }

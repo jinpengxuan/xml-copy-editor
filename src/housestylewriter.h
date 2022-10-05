@@ -28,7 +28,9 @@
 #include "wrapregex.h"
 #include "contexthandler.h"
 
-using namespace std;
+using std::vector;
+using std::set;
+using std::string;
 
 struct HouseStyleWriterData : public ParserData
 {

@@ -28,7 +28,8 @@
 #include <utility>
 #include "parserdata.h"
 
-using namespace std;
+using std::pair;
+using std::string;
 
 class WrapExpat
 {

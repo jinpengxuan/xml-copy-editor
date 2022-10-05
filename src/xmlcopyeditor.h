@@ -402,7 +402,6 @@ class MyFrame : public wxFrame
 		std::map<int, wxString> validationPresetMap;
 #ifdef __WXMSW__
 		struct MyCompare
-				: public std::binary_function<wxString, wxString, bool>
 		{
 			bool operator() ( const wxString &x, const wxString &y ) const
 			{
