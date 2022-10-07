@@ -140,8 +140,16 @@ IPCData *MyServerConnection::OnRequest
 {
 	if ( size == NULL )
 		return NULL;
+
+#if wxUSE_DDE_FOR_IPC
+	// wxDDEConnection::Request validates the return data
+	const static char data[] = "Data";
+	*size = 1;
+	return data;
+#else
 	*size = 0;
 	return NULL;
+#endif
 }
 
 bool MyServerConnection::OnStartAdvise ( const wxString& WXUNUSED ( topic ),
