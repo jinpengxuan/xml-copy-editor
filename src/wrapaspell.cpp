@@ -60,8 +60,9 @@ WrapAspell::WrapAspell (
 	spell_checker = 0;
 	if ( aspell_error_number ( possible_err ) != 0)
 	{
-		puts ( aspell_error_message ( possible_err ) );
-		throw;
+		const char *error = aspell_error_message ( possible_err );
+		wxLogError ( error );
+		throw error;
 	}
 	else
 		spell_checker = to_aspell_speller ( possible_err ); 

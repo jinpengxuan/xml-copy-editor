@@ -1,6 +1,7 @@
 # Version number followed by the release date
 
 1.3.1.0
+  * Keep running when spell checking fails
   + Support libenchant-2
   * Fix a DDE error on Windows (Bug #236)
   * gdk_x11_get_server_time crashes when an invalid window is passed
