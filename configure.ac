@@ -104,11 +104,18 @@ AC_LANG(C++)
 AC_CHECK_HEADER(expat.h, ,
 	AC_MSG_ERROR([Expat headers not found]))
 
-# Check enchant is available
-PKG_CHECK_MODULES(ENCHANT, [enchant], [CXXFLAGS="$CXXFLAGS -DUSE_ENCHANT"], 
-	# otherwise Check ASPELL is available
-	  [AC_CHECK_HEADER(aspell.h, [ASPELL_LIBS="-laspell"],
-		AC_MSG_ERROR([Aspell headers not found]))]
+# Check enchant-2
+PKG_CHECK_MODULES(ENCHANT, [enchant-2],
+	[AC_DEFINE([USE_ENCHANT]),
+		AC_DEFINE([HAVE_LIBENCHANT_2])
+	],
+	# Check enchant
+	PKG_CHECK_MODULES(ENCHANT, [enchant],
+		[AC_DEFINE([USE_ENCHANT])],
+		# otherwise Check ASPELL is available
+		[AC_CHECK_HEADER(aspell.h, [ASPELL_LIBS="-laspell"],
+			AC_MSG_ERROR([Aspell headers not found]))]
+	)
 )
 
 AC_SUBST(ASPELL_LIBS)

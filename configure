@@ -1563,10 +1563,6 @@ Some influential environment variables:
   PCRE2_CFLAGS
               C compiler flags for PCRE2, overriding pkg-config
   PCRE2_LIBS  linker flags for PCRE2, overriding pkg-config
-  ENCHANT_CFLAGS
-              C compiler flags for ENCHANT, overriding pkg-config
-  ENCHANT_LIBS
-              linker flags for ENCHANT, overriding pkg-config
   GTK_CFLAGS  C compiler flags for GTK, overriding pkg-config
   GTK_LIBS    linker flags for GTK, overriding pkg-config
 
@@ -17973,7 +17969,71 @@ else $as_nop
 fi
 
 
-# Check enchant is available
+# Check enchant-2
+
+pkg_failed=no
+{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for enchant-2" >&5
+printf %s "checking for enchant-2... " >&6; }
+
+if test -n "$ENCHANT_CFLAGS"; then
+    pkg_cv_ENCHANT_CFLAGS="$ENCHANT_CFLAGS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { printf "%s\n" "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"enchant-2\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "enchant-2") 2>&5
+  ac_status=$?
+  printf "%s\n" "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_ENCHANT_CFLAGS=`$PKG_CONFIG --cflags "enchant-2" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+if test -n "$ENCHANT_LIBS"; then
+    pkg_cv_ENCHANT_LIBS="$ENCHANT_LIBS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { printf "%s\n" "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"enchant-2\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "enchant-2") 2>&5
+  ac_status=$?
+  printf "%s\n" "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_ENCHANT_LIBS=`$PKG_CONFIG --libs "enchant-2" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+
+
+
+if test $pkg_failed = yes; then
+        { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: no" >&5
+printf "%s\n" "no" >&6; }
+
+if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
+        _pkg_short_errors_supported=yes
+else
+        _pkg_short_errors_supported=no
+fi
+        if test $_pkg_short_errors_supported = yes; then
+	        ENCHANT_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "enchant-2" 2>&1`
+        else
+	        ENCHANT_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "enchant-2" 2>&1`
+        fi
+	# Put the nasty error message in config.log where it belongs
+	echo "$ENCHANT_PKG_ERRORS" >&5
+
+	# Check enchant
+	  ENCHANT_CFLAGS
+              C compiler flags for ENCHANT, overriding pkg-config
+  ENCHANT_LIBS
+              linker flags for ENCHANT, overriding pkg-config
 
 pkg_failed=no
 { printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for enchant" >&5
@@ -18034,7 +18094,7 @@ fi
 	echo "$ENCHANT_PKG_ERRORS" >&5
 
 	# otherwise Check ASPELL is available
-	  ac_fn_cxx_check_header_compile "$LINENO" "aspell.h" "ac_cv_header_aspell_h" "$ac_includes_default"
+		ac_fn_cxx_check_header_compile "$LINENO" "aspell.h" "ac_cv_header_aspell_h" "$ac_includes_default"
 if test "x$ac_cv_header_aspell_h" = xyes
 then :
   ASPELL_LIBS="-laspell"
@@ -18047,7 +18107,7 @@ elif test $pkg_failed = untried; then
         { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: no" >&5
 printf "%s\n" "no" >&6; }
 	# otherwise Check ASPELL is available
-	  ac_fn_cxx_check_header_compile "$LINENO" "aspell.h" "ac_cv_header_aspell_h" "$ac_includes_default"
+		ac_fn_cxx_check_header_compile "$LINENO" "aspell.h" "ac_cv_header_aspell_h" "$ac_includes_default"
 if test "x$ac_cv_header_aspell_h" = xyes
 then :
   ASPELL_LIBS="-laspell"
@@ -18061,7 +18121,119 @@ else
 	ENCHANT_LIBS=$pkg_cv_ENCHANT_LIBS
         { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: yes" >&5
 printf "%s\n" "yes" >&6; }
-	CXXFLAGS="$CXXFLAGS -DUSE_ENCHANT"
+	printf "%s\n" "#define USE_ENCHANT 1" >>confdefs.h
+
+fi
+
+elif test $pkg_failed = untried; then
+        { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: no" >&5
+printf "%s\n" "no" >&6; }
+	# Check enchant
+	  ENCHANT_CFLAGS
+              C compiler flags for ENCHANT, overriding pkg-config
+  ENCHANT_LIBS
+              linker flags for ENCHANT, overriding pkg-config
+
+pkg_failed=no
+{ printf "%s\n" "$as_me:${as_lineno-$LINENO}: checking for enchant" >&5
+printf %s "checking for enchant... " >&6; }
+
+if test -n "$ENCHANT_CFLAGS"; then
+    pkg_cv_ENCHANT_CFLAGS="$ENCHANT_CFLAGS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { printf "%s\n" "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"enchant\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "enchant") 2>&5
+  ac_status=$?
+  printf "%s\n" "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_ENCHANT_CFLAGS=`$PKG_CONFIG --cflags "enchant" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+if test -n "$ENCHANT_LIBS"; then
+    pkg_cv_ENCHANT_LIBS="$ENCHANT_LIBS"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { printf "%s\n" "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"enchant\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "enchant") 2>&5
+  ac_status=$?
+  printf "%s\n" "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_ENCHANT_LIBS=`$PKG_CONFIG --libs "enchant" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+
+
+
+if test $pkg_failed = yes; then
+        { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: no" >&5
+printf "%s\n" "no" >&6; }
+
+if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
+        _pkg_short_errors_supported=yes
+else
+        _pkg_short_errors_supported=no
+fi
+        if test $_pkg_short_errors_supported = yes; then
+	        ENCHANT_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "enchant" 2>&1`
+        else
+	        ENCHANT_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "enchant" 2>&1`
+        fi
+	# Put the nasty error message in config.log where it belongs
+	echo "$ENCHANT_PKG_ERRORS" >&5
+
+	# otherwise Check ASPELL is available
+		ac_fn_cxx_check_header_compile "$LINENO" "aspell.h" "ac_cv_header_aspell_h" "$ac_includes_default"
+if test "x$ac_cv_header_aspell_h" = xyes
+then :
+  ASPELL_LIBS="-laspell"
+else $as_nop
+  as_fn_error $? "Aspell headers not found" "$LINENO" 5
+fi
+
+
+elif test $pkg_failed = untried; then
+        { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: no" >&5
+printf "%s\n" "no" >&6; }
+	# otherwise Check ASPELL is available
+		ac_fn_cxx_check_header_compile "$LINENO" "aspell.h" "ac_cv_header_aspell_h" "$ac_includes_default"
+if test "x$ac_cv_header_aspell_h" = xyes
+then :
+  ASPELL_LIBS="-laspell"
+else $as_nop
+  as_fn_error $? "Aspell headers not found" "$LINENO" 5
+fi
+
+
+else
+	ENCHANT_CFLAGS=$pkg_cv_ENCHANT_CFLAGS
+	ENCHANT_LIBS=$pkg_cv_ENCHANT_LIBS
+        { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+printf "%s\n" "yes" >&6; }
+	printf "%s\n" "#define USE_ENCHANT 1" >>confdefs.h
+
+fi
+
+else
+	ENCHANT_CFLAGS=$pkg_cv_ENCHANT_CFLAGS
+	ENCHANT_LIBS=$pkg_cv_ENCHANT_LIBS
+        { printf "%s\n" "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+printf "%s\n" "yes" >&6; }
+	printf "%s\n" "#define USE_ENCHANT 1" >>confdefs.h
+,
+		printf "%s\n" "#define HAVE_LIBENCHANT_2 1" >>confdefs.h
+
+
 fi
 
 

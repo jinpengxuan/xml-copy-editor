@@ -40,9 +40,13 @@ WrapAspell::WrapAspell (
 )
 {
 #ifdef USE_ENCHANT
+#ifdef HAVE_LIBENCHANT_2
+	spell_broker = new enchant::Broker();
+#else // HAVE_LIBENCHANT_2
 	spell_broker = enchant::Broker::instance();
+#endif // HAVE_LIBENCHANT_2
 	spell_checker = spell_broker->request_dict( std::string ( lang.mb_str() ) );
-#else
+#else // HAVE_LIBENCHANT
 	spell_config = new_aspell_config();
 	
 #ifdef __WXMSW__
@@ -68,7 +72,10 @@ WrapAspell::~WrapAspell()
 { 
 #ifdef USE_ENCHANT
 	delete spell_checker;
-#else
+#ifdef HAVE_LIBENCHANT_2
+	delete spell_broker;
+#endif
+#else // USE_ENCHANT
 	delete_aspell_speller ( spell_checker ); 
 	delete_aspell_config ( spell_config );
 #endif
