@@ -123,13 +123,14 @@ Source: "{#MinGW}\bin\libcurl-4.dll"; DestDir: "{app}"
 Source: "{#MinGW}\bin\libexpat-1.dll"; DestDir: "{app}"
 Source: "{#MinGW}\bin\libgcc_s_{#GccExceptionHandling}-1.dll"; DestDir: "{app}"
 Source: "{#MinGW}\bin\libiconv-2.dll"; DestDir: "{app}"
-Source: "{#MinGW}\bin\libicudt67.dll"; DestDir: "{app}"
-Source: "{#MinGW}\bin\libicuuc67.dll"; DestDir: "{app}"
+Source: "{#MinGW}\bin\libicudt71.dll"; DestDir: "{app}"
+Source: "{#MinGW}\bin\libicuuc71.dll"; DestDir: "{app}"
 Source: "{#MinGW}\bin\libidn2-0.dll"; DestDir: "{app}"
 Source: "{#MinGW}\bin\libintl-8.dll"; DestDir: "{app}"
 Source: "{#MinGW}\bin\liblzma-5.dll"; DestDir: "{app}"
 Source: "{#MinGW}\bin\libnghttp2-14.dll"; DestDir: "{app}"
 Source: "{#MinGW}\bin\libpcre2-8-0.dll"; DestDir: "{app}"
+Source: "{#MinGW}\bin\libpng16-16.dll"; DestDir: "{app}"
 Source: "{#MinGW}\bin\libpsl-5.dll"; DestDir: "{app}"
 Source: "{#MinGW}\bin\libssh2-1.dll"; DestDir: "{app}"
 Source: "{#MinGW}\bin\libssl-1_1{#DllNameSuffix}.dll"; DestDir: "{app}"
@@ -139,8 +140,9 @@ Source: "{#MinGW}\bin\libwinpthread-1.dll"; DestDir: "{app}"
 Source: "{#MinGW}\bin\libxerces-c-3-2.dll"; DestDir: "{app}"
 Source: "{#MinGW}\bin\libxml2-2.dll"; DestDir: "{app}"
 Source: "{#MinGW}\bin\libxslt-1.dll"; DestDir: "{app}"
+Source: "{#MinGW}\bin\libzstd.dll"; DestDir: "{app}"
 Source: "{#MinGW}\bin\zlib1.dll"; DestDir: "{app}"
-Source: "{#MinGW}\ssl\certs/ca-bundle.trust.crt"; DestDir: "{app}"; DestName: "curl-ca-bundle.crt"; Flags: ignoreversion
+Source: "{#MinGW}\ssl\certs\ca-bundle.trust.crt"; DestDir: "{app}"; DestName: "curl-ca-bundle.crt"; Flags: ignoreversion
 Source: ".\aspell\*"; DestDir: "{app}\aspell"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: ".\bin\*"; DestDir: "{app}\bin"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: ".\catalog\*"; DestDir: "{app}\catalog"; Flags: ignoreversion recursesubdirs createallsubdirs
